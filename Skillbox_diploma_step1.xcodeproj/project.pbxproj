@@ -1,0 +1,669 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		39D92BF8E629D2DC57861562 /* Pods_Skillbox_diploma_step1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81F31CAF70AC4A84052C9309 /* Pods_Skillbox_diploma_step1.framework */; };
+		472F288725A7319500CE1481 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F288625A7319500CE1481 /* AppDelegate.swift */; };
+		472F288925A7319500CE1481 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F288825A7319500CE1481 /* SceneDelegate.swift */; };
+		472F288B25A7319500CE1481 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F288A25A7319500CE1481 /* ViewController.swift */; };
+		472F288E25A7319500CE1481 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472F288C25A7319500CE1481 /* Main.storyboard */; };
+		472F289025A7319500CE1481 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 472F288F25A7319500CE1481 /* Assets.xcassets */; };
+		472F289325A7319500CE1481 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472F289125A7319500CE1481 /* LaunchScreen.storyboard */; };
+		472F289E25A7319600CE1481 /* Skillbox_diploma_step1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F289D25A7319600CE1481 /* Skillbox_diploma_step1Tests.swift */; };
+		472F28A925A7319600CE1481 /* Skillbox_diploma_step1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F28A825A7319600CE1481 /* Skillbox_diploma_step1UITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		472F289A25A7319600CE1481 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 472F287B25A7319500CE1481 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 472F288225A7319500CE1481;
+			remoteInfo = Skillbox_diploma_step1;
+		};
+		472F28A525A7319600CE1481 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 472F287B25A7319500CE1481 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 472F288225A7319500CE1481;
+			remoteInfo = Skillbox_diploma_step1;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		472F288325A7319500CE1481 /* Skillbox_diploma_step1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Skillbox_diploma_step1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		472F288625A7319500CE1481 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		472F288825A7319500CE1481 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		472F288A25A7319500CE1481 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		472F288D25A7319500CE1481 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		472F288F25A7319500CE1481 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		472F289225A7319500CE1481 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		472F289425A7319500CE1481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		472F289925A7319600CE1481 /* Skillbox_diploma_step1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Skillbox_diploma_step1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		472F289D25A7319600CE1481 /* Skillbox_diploma_step1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skillbox_diploma_step1Tests.swift; sourceTree = "<group>"; };
+		472F289F25A7319600CE1481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		472F28A425A7319600CE1481 /* Skillbox_diploma_step1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Skillbox_diploma_step1UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		472F28A825A7319600CE1481 /* Skillbox_diploma_step1UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skillbox_diploma_step1UITests.swift; sourceTree = "<group>"; };
+		472F28AA25A7319600CE1481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81F31CAF70AC4A84052C9309 /* Pods_Skillbox_diploma_step1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Skillbox_diploma_step1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0A325522F0629C02EB6BD1B /* Pods-Skillbox_diploma_step1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Skillbox_diploma_step1.release.xcconfig"; path = "Target Support Files/Pods-Skillbox_diploma_step1/Pods-Skillbox_diploma_step1.release.xcconfig"; sourceTree = "<group>"; };
+		A84F03028D7AF34E127981EA /* Pods-Skillbox_diploma_step1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Skillbox_diploma_step1.debug.xcconfig"; path = "Target Support Files/Pods-Skillbox_diploma_step1/Pods-Skillbox_diploma_step1.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		472F288025A7319500CE1481 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39D92BF8E629D2DC57861562 /* Pods_Skillbox_diploma_step1.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		472F289625A7319600CE1481 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		472F28A125A7319600CE1481 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		31919329970A9AADDD112728 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				81F31CAF70AC4A84052C9309 /* Pods_Skillbox_diploma_step1.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		431C5A095B4677F6625F9287 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A84F03028D7AF34E127981EA /* Pods-Skillbox_diploma_step1.debug.xcconfig */,
+				A0A325522F0629C02EB6BD1B /* Pods-Skillbox_diploma_step1.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		472F287A25A7319500CE1481 = {
+			isa = PBXGroup;
+			children = (
+				472F288525A7319500CE1481 /* Skillbox_diploma_step1 */,
+				472F289C25A7319600CE1481 /* Skillbox_diploma_step1Tests */,
+				472F28A725A7319600CE1481 /* Skillbox_diploma_step1UITests */,
+				472F288425A7319500CE1481 /* Products */,
+				431C5A095B4677F6625F9287 /* Pods */,
+				31919329970A9AADDD112728 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		472F288425A7319500CE1481 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				472F288325A7319500CE1481 /* Skillbox_diploma_step1.app */,
+				472F289925A7319600CE1481 /* Skillbox_diploma_step1Tests.xctest */,
+				472F28A425A7319600CE1481 /* Skillbox_diploma_step1UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		472F288525A7319500CE1481 /* Skillbox_diploma_step1 */ = {
+			isa = PBXGroup;
+			children = (
+				472F288625A7319500CE1481 /* AppDelegate.swift */,
+				472F288825A7319500CE1481 /* SceneDelegate.swift */,
+				472F288A25A7319500CE1481 /* ViewController.swift */,
+				472F288C25A7319500CE1481 /* Main.storyboard */,
+				472F288F25A7319500CE1481 /* Assets.xcassets */,
+				472F289125A7319500CE1481 /* LaunchScreen.storyboard */,
+				472F289425A7319500CE1481 /* Info.plist */,
+			);
+			path = Skillbox_diploma_step1;
+			sourceTree = "<group>";
+		};
+		472F289C25A7319600CE1481 /* Skillbox_diploma_step1Tests */ = {
+			isa = PBXGroup;
+			children = (
+				472F289D25A7319600CE1481 /* Skillbox_diploma_step1Tests.swift */,
+				472F289F25A7319600CE1481 /* Info.plist */,
+			);
+			path = Skillbox_diploma_step1Tests;
+			sourceTree = "<group>";
+		};
+		472F28A725A7319600CE1481 /* Skillbox_diploma_step1UITests */ = {
+			isa = PBXGroup;
+			children = (
+				472F28A825A7319600CE1481 /* Skillbox_diploma_step1UITests.swift */,
+				472F28AA25A7319600CE1481 /* Info.plist */,
+			);
+			path = Skillbox_diploma_step1UITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		472F288225A7319500CE1481 /* Skillbox_diploma_step1 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 472F28AD25A7319600CE1481 /* Build configuration list for PBXNativeTarget "Skillbox_diploma_step1" */;
+			buildPhases = (
+				3C78610E5B94E72D7168D886 /* [CP] Check Pods Manifest.lock */,
+				472F287F25A7319500CE1481 /* Sources */,
+				472F288025A7319500CE1481 /* Frameworks */,
+				472F288125A7319500CE1481 /* Resources */,
+				BDA8BC393ED2958FB452244A /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Skillbox_diploma_step1;
+			productName = Skillbox_diploma_step1;
+			productReference = 472F288325A7319500CE1481 /* Skillbox_diploma_step1.app */;
+			productType = "com.apple.product-type.application";
+		};
+		472F289825A7319600CE1481 /* Skillbox_diploma_step1Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 472F28B025A7319600CE1481 /* Build configuration list for PBXNativeTarget "Skillbox_diploma_step1Tests" */;
+			buildPhases = (
+				472F289525A7319600CE1481 /* Sources */,
+				472F289625A7319600CE1481 /* Frameworks */,
+				472F289725A7319600CE1481 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				472F289B25A7319600CE1481 /* PBXTargetDependency */,
+			);
+			name = Skillbox_diploma_step1Tests;
+			productName = Skillbox_diploma_step1Tests;
+			productReference = 472F289925A7319600CE1481 /* Skillbox_diploma_step1Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		472F28A325A7319600CE1481 /* Skillbox_diploma_step1UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 472F28B325A7319600CE1481 /* Build configuration list for PBXNativeTarget "Skillbox_diploma_step1UITests" */;
+			buildPhases = (
+				472F28A025A7319600CE1481 /* Sources */,
+				472F28A125A7319600CE1481 /* Frameworks */,
+				472F28A225A7319600CE1481 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				472F28A625A7319600CE1481 /* PBXTargetDependency */,
+			);
+			name = Skillbox_diploma_step1UITests;
+			productName = Skillbox_diploma_step1UITests;
+			productReference = 472F28A425A7319600CE1481 /* Skillbox_diploma_step1UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		472F287B25A7319500CE1481 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1230;
+				LastUpgradeCheck = 1230;
+				TargetAttributes = {
+					472F288225A7319500CE1481 = {
+						CreatedOnToolsVersion = 12.3;
+					};
+					472F289825A7319600CE1481 = {
+						CreatedOnToolsVersion = 12.3;
+						TestTargetID = 472F288225A7319500CE1481;
+					};
+					472F28A325A7319600CE1481 = {
+						CreatedOnToolsVersion = 12.3;
+						TestTargetID = 472F288225A7319500CE1481;
+					};
+				};
+			};
+			buildConfigurationList = 472F287E25A7319500CE1481 /* Build configuration list for PBXProject "Skillbox_diploma_step1" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 472F287A25A7319500CE1481;
+			productRefGroup = 472F288425A7319500CE1481 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				472F288225A7319500CE1481 /* Skillbox_diploma_step1 */,
+				472F289825A7319600CE1481 /* Skillbox_diploma_step1Tests */,
+				472F28A325A7319600CE1481 /* Skillbox_diploma_step1UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		472F288125A7319500CE1481 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				472F289325A7319500CE1481 /* LaunchScreen.storyboard in Resources */,
+				472F289025A7319500CE1481 /* Assets.xcassets in Resources */,
+				472F288E25A7319500CE1481 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		472F289725A7319600CE1481 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		472F28A225A7319600CE1481 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3C78610E5B94E72D7168D886 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Skillbox_diploma_step1-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BDA8BC393ED2958FB452244A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Skillbox_diploma_step1/Pods-Skillbox_diploma_step1-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Skillbox_diploma_step1/Pods-Skillbox_diploma_step1-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Skillbox_diploma_step1/Pods-Skillbox_diploma_step1-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		472F287F25A7319500CE1481 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				472F288B25A7319500CE1481 /* ViewController.swift in Sources */,
+				472F288725A7319500CE1481 /* AppDelegate.swift in Sources */,
+				472F288925A7319500CE1481 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		472F289525A7319600CE1481 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				472F289E25A7319600CE1481 /* Skillbox_diploma_step1Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		472F28A025A7319600CE1481 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				472F28A925A7319600CE1481 /* Skillbox_diploma_step1UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		472F289B25A7319600CE1481 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 472F288225A7319500CE1481 /* Skillbox_diploma_step1 */;
+			targetProxy = 472F289A25A7319600CE1481 /* PBXContainerItemProxy */;
+		};
+		472F28A625A7319600CE1481 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 472F288225A7319500CE1481 /* Skillbox_diploma_step1 */;
+			targetProxy = 472F28A525A7319600CE1481 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		472F288C25A7319500CE1481 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				472F288D25A7319500CE1481 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		472F289125A7319500CE1481 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				472F289225A7319500CE1481 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		472F28AB25A7319600CE1481 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		472F28AC25A7319600CE1481 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		472F28AE25A7319600CE1481 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A84F03028D7AF34E127981EA /* Pods-Skillbox_diploma_step1.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6VWFU6AND8;
+				INFOPLIST_FILE = Skillbox_diploma_step1/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "roman.sundurov.work.Skillbox-diploma-step1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		472F28AF25A7319600CE1481 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A0A325522F0629C02EB6BD1B /* Pods-Skillbox_diploma_step1.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6VWFU6AND8;
+				INFOPLIST_FILE = Skillbox_diploma_step1/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "roman.sundurov.work.Skillbox-diploma-step1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		472F28B125A7319600CE1481 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6VWFU6AND8;
+				INFOPLIST_FILE = Skillbox_diploma_step1Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "roman.sundurov.work.Skillbox-diploma-step1Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Skillbox_diploma_step1.app/Skillbox_diploma_step1";
+			};
+			name = Debug;
+		};
+		472F28B225A7319600CE1481 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6VWFU6AND8;
+				INFOPLIST_FILE = Skillbox_diploma_step1Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "roman.sundurov.work.Skillbox-diploma-step1Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Skillbox_diploma_step1.app/Skillbox_diploma_step1";
+			};
+			name = Release;
+		};
+		472F28B425A7319600CE1481 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6VWFU6AND8;
+				INFOPLIST_FILE = Skillbox_diploma_step1UITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "roman.sundurov.work.Skillbox-diploma-step1UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Skillbox_diploma_step1;
+			};
+			name = Debug;
+		};
+		472F28B525A7319600CE1481 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6VWFU6AND8;
+				INFOPLIST_FILE = Skillbox_diploma_step1UITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "roman.sundurov.work.Skillbox-diploma-step1UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Skillbox_diploma_step1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		472F287E25A7319500CE1481 /* Build configuration list for PBXProject "Skillbox_diploma_step1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				472F28AB25A7319600CE1481 /* Debug */,
+				472F28AC25A7319600CE1481 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		472F28AD25A7319600CE1481 /* Build configuration list for PBXNativeTarget "Skillbox_diploma_step1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				472F28AE25A7319600CE1481 /* Debug */,
+				472F28AF25A7319600CE1481 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		472F28B025A7319600CE1481 /* Build configuration list for PBXNativeTarget "Skillbox_diploma_step1Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				472F28B125A7319600CE1481 /* Debug */,
+				472F28B225A7319600CE1481 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		472F28B325A7319600CE1481 /* Build configuration list for PBXNativeTarget "Skillbox_diploma_step1UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				472F28B425A7319600CE1481 /* Debug */,
+				472F28B525A7319600CE1481 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 472F287B25A7319500CE1481 /* Project object */;
+}
