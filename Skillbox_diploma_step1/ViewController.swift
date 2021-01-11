@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet var buttonWeekly: UIView!
     @IBOutlet var buttonMonthly: UIView!
     @IBOutlet var buttonYearly: UIView!
+    @IBOutlet var topMenuButtonStrip: UIView!
     
     @IBOutlet var bottomPopInList: UIView!
     
@@ -31,45 +32,21 @@ class ViewController: UIViewController {
     }
     
     func borderForMenuBotton(_ specifyButton: UIView) {
-        func borderRemove(_ specifyButton2: UIView){
-            for view in specifyButton2.subviews{
-                if view.tag == 1 {
-                    view.removeFromSuperview()
-                }
+        UIView.animate(withDuration: 0.3){
+            switch specifyButton {
+            case self.buttonDaily:
+                self.topMenuButtonStrip.frame.origin.x = self.buttonDaily.frame.origin.x + 10
+            case self.buttonWeekly:
+                self.topMenuButtonStrip.frame.origin.x = self.buttonWeekly.frame.origin.x + 10
+            case self.buttonMonthly:
+                self.topMenuButtonStrip.frame.origin.x = self.buttonMonthly.frame.origin.x + 10
+            case self.buttonYearly:
+                self.topMenuButtonStrip.frame.origin.x = self.buttonYearly.frame.origin.x + 10
+            default:
+                print("Error with borderForMenuBotton")
             }
         }
-        
-        func borderCreate(_ specifyButton3: UIView){
-            let bottomBorderYes = UIView(frame: CGRect(x: 0, y: specifyButton.frame.size.height - 3, width: specifyButton.frame.size.width, height: 3))
-            bottomBorderYes.backgroundColor = UIColor(cgColor: CGColor.init(red: 255, green: 255, blue: 255, alpha: 1))
-            bottomBorderYes.tag = 1
-            specifyButton3.addSubview(bottomBorderYes)
-        }
-        switch specifyButton {
-        case buttonDaily:
-            borderCreate(buttonDaily)
-            borderRemove(buttonWeekly)
-            borderRemove(buttonMonthly)
-            borderRemove(buttonYearly)
-        case buttonWeekly:
-            borderRemove(buttonDaily)
-            borderCreate(buttonWeekly)
-            borderRemove(buttonMonthly)
-            borderRemove(buttonYearly)
-        case buttonMonthly:
-            borderRemove(buttonDaily)
-            borderRemove(buttonWeekly)
-            borderCreate(buttonMonthly)
-            borderRemove(buttonYearly)
-        case buttonYearly:
-            borderRemove(buttonDaily)
-            borderRemove(buttonWeekly)
-            borderRemove(buttonMonthly)
-            borderCreate(buttonYearly)
-        default:
-            print("Error with borderForMenuBotton")
-        }
-}
+    }
 
     
 //    -------------------------------------
