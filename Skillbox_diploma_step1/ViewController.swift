@@ -31,7 +31,6 @@ class ViewController: UIViewController {
     }
     
     func borderForMenuBotton(_ specifyButton: UIView) {
-        
         func borderRemove(_ specifyButton2: UIView){
             for view in specifyButton2.subviews{
                 if view.tag == 1 {
@@ -42,12 +41,10 @@ class ViewController: UIViewController {
         
         func borderCreate(_ specifyButton3: UIView){
             let bottomBorderYes = UIView(frame: CGRect(x: 0, y: specifyButton.frame.size.height - 3, width: specifyButton.frame.size.width, height: 3))
-            bottomBorderYes.backgroundColor = UIColor.red
+            bottomBorderYes.backgroundColor = UIColor(cgColor: CGColor.init(red: 255, green: 255, blue: 255, alpha: 1))
             bottomBorderYes.tag = 1
             specifyButton3.addSubview(bottomBorderYes)
         }
-
-        
         switch specifyButton {
         case buttonDaily:
             borderCreate(buttonDaily)

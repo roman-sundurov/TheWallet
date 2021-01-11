@@ -157,6 +157,10 @@
                                         </connections>
                                     </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="0A4-3p-L7F"/>
+                                    <constraint firstAttribute="height" constant="28" id="BgV-Sl-ohn"/>
+                                </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7MB-m0-6NI" userLabel="bottomPopInList">
                                 <rect key="frame" x="10" y="466" width="394" height="430"/>
@@ -165,17 +169,27 @@
                                     <constraint firstAttribute="height" constant="430" id="cvm-BT-hGc"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aLA-sb-VFn" userLabel="strip">
+                                <rect key="frame" x="10" y="121" width="394" height="1"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="h0z-ob-Ke3"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.396078431372549" green="0.73725490196078436" blue="0.74901960784313726" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7MB-m0-6NI" secondAttribute="bottom" constant="-34" id="CUQ-HB-k6o"/>
+                            <constraint firstItem="aLA-sb-VFn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="XXt-ju-TIj"/>
                             <constraint firstItem="7MB-m0-6NI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="YxT-9y-O4Y"/>
+                            <constraint firstAttribute="trailing" secondItem="aLA-sb-VFn" secondAttribute="trailing" constant="10" id="b3M-e4-cUm"/>
                             <constraint firstItem="gmF-FQ-Gvr" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jvK-mm-rLS"/>
                             <constraint firstItem="DR2-zn-3Ey" firstAttribute="top" secondItem="gmF-FQ-Gvr" secondAttribute="bottom" constant="10" id="kmT-ug-d97"/>
                             <constraint firstItem="gmF-FQ-Gvr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="lgo-6U-coF"/>
                             <constraint firstItem="DR2-zn-3Ey" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="td7-1D-oWO"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7MB-m0-6NI" secondAttribute="trailing" constant="10" id="xuk-5Q-ezW"/>
+                            <constraint firstItem="aLA-sb-VFn" firstAttribute="top" secondItem="gmF-FQ-Gvr" secondAttribute="bottom" constant="37" id="z9u-Tx-dn7"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DR2-zn-3Ey" secondAttribute="trailing" constant="10" id="zi7-5k-PCi"/>
                             <constraint firstItem="gmF-FQ-Gvr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zu6-2k-ysM"/>
                         </constraints>
