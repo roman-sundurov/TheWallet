@@ -47,11 +47,20 @@ class ViewController: UIViewController {
             }
         }
     }
+    
 
     
 //    -------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        let redBox = UIView(frame: CGRect(x: 100, y: 100, width: 128, height: 128))
+//        redBox.backgroundColor = .red
+//        redBox.layer.cornerRadius = 25
+//        redBox.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+//        bottomPopInList.addSubview(redBox)
+        bottomPopInList.layer.cornerRadius  = 20
+        bottomPopInList.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
 //        self.buttonMonthly.addSubview
 
@@ -65,4 +74,3 @@ class ViewController: UIViewController {
 
 
 }
-
