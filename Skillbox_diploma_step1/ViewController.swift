@@ -62,7 +62,6 @@ class ViewController: UIViewController {
         }, completion: {isCompleted in })
     }
     
-
     
 //    -------------------------------------
     override func viewDidLoad() {
