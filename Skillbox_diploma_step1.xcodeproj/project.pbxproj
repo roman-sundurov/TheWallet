@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,7 @@
 		472F289325A7319500CE1481 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472F289125A7319500CE1481 /* LaunchScreen.storyboard */; };
 		472F289E25A7319600CE1481 /* Skillbox_diploma_step1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F289D25A7319600CE1481 /* Skillbox_diploma_step1Tests.swift */; };
 		472F28A925A7319600CE1481 /* Skillbox_diploma_step1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F28A825A7319600CE1481 /* Skillbox_diploma_step1UITests.swift */; };
+		47C4FF3525B38B0F00F97498 /* ViewControllerScreen2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4FF3425B38B0F00F97498 /* ViewControllerScreen2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		472F28A425A7319600CE1481 /* Skillbox_diploma_step1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Skillbox_diploma_step1UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		472F28A825A7319600CE1481 /* Skillbox_diploma_step1UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skillbox_diploma_step1UITests.swift; sourceTree = "<group>"; };
 		472F28AA25A7319600CE1481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		47C4FF3425B38B0F00F97498 /* ViewControllerScreen2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerScreen2.swift; sourceTree = "<group>"; };
 		81F31CAF70AC4A84052C9309 /* Pods_Skillbox_diploma_step1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Skillbox_diploma_step1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A325522F0629C02EB6BD1B /* Pods-Skillbox_diploma_step1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Skillbox_diploma_step1.release.xcconfig"; path = "Target Support Files/Pods-Skillbox_diploma_step1/Pods-Skillbox_diploma_step1.release.xcconfig"; sourceTree = "<group>"; };
 		A84F03028D7AF34E127981EA /* Pods-Skillbox_diploma_step1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Skillbox_diploma_step1.debug.xcconfig"; path = "Target Support Files/Pods-Skillbox_diploma_step1/Pods-Skillbox_diploma_step1.debug.xcconfig"; sourceTree = "<group>"; };
@@ -95,7 +97,6 @@
 				A84F03028D7AF34E127981EA /* Pods-Skillbox_diploma_step1.debug.xcconfig */,
 				A0A325522F0629C02EB6BD1B /* Pods-Skillbox_diploma_step1.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -127,6 +128,7 @@
 				472F288625A7319500CE1481 /* AppDelegate.swift */,
 				472F288825A7319500CE1481 /* SceneDelegate.swift */,
 				472F288A25A7319500CE1481 /* ViewController.swift */,
+				47C4FF3425B38B0F00F97498 /* ViewControllerScreen2.swift */,
 				472F288C25A7319500CE1481 /* Main.storyboard */,
 				472F288F25A7319500CE1481 /* Assets.xcassets */,
 				472F289125A7319500CE1481 /* LaunchScreen.storyboard */,
@@ -330,6 +332,7 @@
 				472F288B25A7319500CE1481 /* ViewController.swift in Sources */,
 				472F288725A7319500CE1481 /* AppDelegate.swift in Sources */,
 				472F288925A7319500CE1481 /* SceneDelegate.swift in Sources */,
+				47C4FF3525B38B0F00F97498 /* ViewControllerScreen2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

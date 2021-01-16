@@ -24,19 +24,19 @@ class ViewController: UIViewController {
     
     
     @IBAction func buttonDailyGesture(_ sender: Any) {
-        topMenuHighliter(specifyLabel: labelDaily)
+//        topMenuHighliter(specifyLabel: labelDaily)
         borderForMenuBotton(buttonDaily)
     }
     @IBAction func buttonWeeklyGesture(_ sender: Any) {
-        topMenuHighliter(specifyLabel: labelWeekly)
+//        topMenuHighliter(specifyLabel: labelWeekly)
         borderForMenuBotton(buttonWeekly)
     }
     @IBAction func buttonMonthlyGesture(_ sender: Any) {
-        topMenuHighliter(specifyLabel: labelMothly)
+//        topMenuHighliter(specifyLabel: labelMothly)
         borderForMenuBotton(buttonMonthly)
     }
     @IBAction func buttonYearlyGesture(_ sender: Any) {
-        topMenuHighliter(specifyLabel: labelYearly)
+//        topMenuHighliter(specifyLabel: labelYearly)
         borderForMenuBotton(buttonYearly)
     }
     
