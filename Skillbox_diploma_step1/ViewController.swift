@@ -14,39 +14,59 @@ class ViewController: UIViewController {
     @IBOutlet var buttonMonthly: UIView!
     @IBOutlet var buttonYearly: UIView!
     @IBOutlet var topMenuButtonStrip: UIView!
+    @IBOutlet var labelDaily: UILabel!
+    @IBOutlet var labelWeekly: UILabel!
+    @IBOutlet var labelMothly: UILabel!
+    @IBOutlet var labelYearly: UILabel!
+    
     
     @IBOutlet var bottomPopInList: UIView!
     
     
     @IBAction func buttonDailyGesture(_ sender: Any) {
-        borderForMenuBotton(buttonDaily)
+        borderForMenuBotton(buttonDaily, labelDaily)
     }
     @IBAction func buttonWeeklyGesture(_ sender: Any) {
-        borderForMenuBotton(buttonWeekly)
+        borderForMenuBotton(buttonWeekly, labelWeekly)
     }
     @IBAction func buttonMonthlyGesture(_ sender: Any) {
-        borderForMenuBotton(buttonMonthly)
+        borderForMenuBotton(buttonMonthly, labelMothly)
     }
     @IBAction func buttonYearlyGesture(_ sender: Any) {
-        borderForMenuBotton(buttonYearly)
+        borderForMenuBotton(buttonYearly, labelYearly)
     }
     
-    func borderForMenuBotton(_ specifyButton: UIView) {
-//        UIView.animate(withDuration: 0.3){
-//            switch specifyButton {
-//            case self.buttonDaily:
-//                self.topMenuButtonStrip.frame.origin.x = self.buttonDaily.frame.origin.x + 10
-//            case self.buttonWeekly:
-//                self.topMenuButtonStrip.frame.origin.x = self.buttonWeekly.frame.origin.x + 10
-//            case self.buttonMonthly:
-//                self.topMenuButtonStrip.frame.origin.x = self.buttonMonthly.frame.origin.x + 10
-//            case self.buttonYearly:
-//                self.topMenuButtonStrip.frame.origin.x = self.buttonYearly.frame.origin.x + 10
-//            default:
-//                print("Error with borderForMenuBotton")
-//            }
-//        }
+    func borderForMenuBotton(_ specifyButton: UIView, _ specifyLabel: UILabel) {
+//        self.view.layoutIfNeeded()
+        specifyLabel.font = UIFont.systemFont(ofSize: specifyLabel.font.pointSize, weight: .bold)
+        switch specifyLabel {
+        case labelDaily:
+            labelWeekly.font = UIFont.systemFont(ofSize: labelWeekly.font.pointSize, weight: .medium)
+            labelMothly.font = UIFont.systemFont(ofSize: labelMothly.font.pointSize, weight: .medium)
+            labelYearly.font = UIFont.systemFont(ofSize: labelYearly.font.pointSize, weight: .medium)
+            print("111")
+        case labelWeekly:
+            labelDaily.font = UIFont.systemFont(ofSize: labelDaily.font.pointSize, weight: .medium)
+            labelMothly.font = UIFont.systemFont(ofSize: labelMothly.font.pointSize, weight: .medium)
+            labelYearly.font = UIFont.systemFont(ofSize: labelYearly.font.pointSize, weight: .medium)
+            print("222")
+        case labelMothly:
+            labelDaily.font = UIFont.systemFont(ofSize: labelDaily.font.pointSize, weight: .medium)
+            labelWeekly.font = UIFont.systemFont(ofSize: labelWeekly.font.pointSize, weight: .medium)
+            labelYearly.font = UIFont.systemFont(ofSize: labelYearly.font.pointSize, weight: .medium)
+            print("333")
+        case labelYearly:
+            labelDaily.font = UIFont.systemFont(ofSize: labelDaily.font.pointSize, weight: .medium)
+            labelWeekly.font = UIFont.systemFont(ofSize: labelWeekly.font.pointSize, weight: .medium)
+            labelMothly.font = UIFont.systemFont(ofSize: labelMothly.font.pointSize, weight: .medium)
+            print("444")
+        default:
+            print("Error with higlightLabel")
+        }
+//        self.view.layoutIfNeeded()
+
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+//            self.view.layoutIfNeeded()
             switch specifyButton {
             case self.buttonDaily:
                 self.topMenuButtonStrip.frame.origin.x = self.buttonDaily.frame.origin.x + 10
@@ -60,6 +80,7 @@ class ViewController: UIViewController {
                 print("Error with borderForMenuBotton")
             }
         }, completion: {isCompleted in })
+//        self.view.layoutIfNeeded()
     }
     
     
