@@ -32,7 +32,21 @@ class ViewController: UIViewController {
     }
     
     func borderForMenuBotton(_ specifyButton: UIView) {
-        UIView.animate(withDuration: 0.3){
+//        UIView.animate(withDuration: 0.3){
+//            switch specifyButton {
+//            case self.buttonDaily:
+//                self.topMenuButtonStrip.frame.origin.x = self.buttonDaily.frame.origin.x + 10
+//            case self.buttonWeekly:
+//                self.topMenuButtonStrip.frame.origin.x = self.buttonWeekly.frame.origin.x + 10
+//            case self.buttonMonthly:
+//                self.topMenuButtonStrip.frame.origin.x = self.buttonMonthly.frame.origin.x + 10
+//            case self.buttonYearly:
+//                self.topMenuButtonStrip.frame.origin.x = self.buttonYearly.frame.origin.x + 10
+//            default:
+//                print("Error with borderForMenuBotton")
+//            }
+//        }
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             switch specifyButton {
             case self.buttonDaily:
                 self.topMenuButtonStrip.frame.origin.x = self.buttonDaily.frame.origin.x + 10
@@ -45,7 +59,7 @@ class ViewController: UIViewController {
             default:
                 print("Error with borderForMenuBotton")
             }
-        }
+        }, completion: {isCompleted in })
     }
     
 
