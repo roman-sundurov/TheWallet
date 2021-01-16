@@ -24,20 +24,23 @@ class ViewController: UIViewController {
     
     
     @IBAction func buttonDailyGesture(_ sender: Any) {
-        borderForMenuBotton(buttonDaily, labelDaily)
+        borderForMenuBotton(buttonDaily)
+        topMenuHighliter(specifyLabel: labelDaily)
     }
     @IBAction func buttonWeeklyGesture(_ sender: Any) {
-        borderForMenuBotton(buttonWeekly, labelWeekly)
+        borderForMenuBotton(buttonWeekly)
+        topMenuHighliter(specifyLabel: labelWeekly)
     }
     @IBAction func buttonMonthlyGesture(_ sender: Any) {
-        borderForMenuBotton(buttonMonthly, labelMothly)
+        borderForMenuBotton(buttonMonthly)
+        topMenuHighliter(specifyLabel: labelMothly)
     }
     @IBAction func buttonYearlyGesture(_ sender: Any) {
-        borderForMenuBotton(buttonYearly, labelYearly)
+        borderForMenuBotton(buttonYearly)
+        topMenuHighliter(specifyLabel: labelYearly)
     }
     
-    func borderForMenuBotton(_ specifyButton: UIView, _ specifyLabel: UILabel) {
-//        self.view.layoutIfNeeded()
+    func topMenuHighliter(specifyLabel: UILabel){
         specifyLabel.font = UIFont.systemFont(ofSize: specifyLabel.font.pointSize, weight: .bold)
         switch specifyLabel {
         case labelDaily:
@@ -63,8 +66,9 @@ class ViewController: UIViewController {
         default:
             print("Error with higlightLabel")
         }
-//        self.view.layoutIfNeeded()
-
+    }
+    
+    func borderForMenuBotton(_ specifyButton: UIView) {
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
 //            self.view.layoutIfNeeded()
             switch specifyButton {
@@ -80,7 +84,6 @@ class ViewController: UIViewController {
                 print("Error with borderForMenuBotton")
             }
         }, completion: {isCompleted in })
-//        self.view.layoutIfNeeded()
     }
     
     
