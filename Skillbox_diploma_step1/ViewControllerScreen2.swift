@@ -9,6 +9,8 @@ import UIKit
 
 class ViewControllerScreen2: UIViewController {
 
+    @IBOutlet var tableViewScreen2: UITableView!
+    @IBOutlet var ContainerViewScreen2: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,5 +30,32 @@ class ViewControllerScreen2: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+}
+
+extension ViewControllerScreen2: UITableViewDataSource{
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+
+    
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cellCategory") as! TableViewCellCategory
+//        return cell
+//    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellCategory") as! TableViewCellCategory
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
 
 }
