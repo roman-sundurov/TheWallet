@@ -1,13 +1,13 @@
 //
-//  TableViewCellCategory.swift
+//  TableViewCellHeader.swift
 //  Skillbox_diploma_step1
 //
-//  Created by Roman on 17.01.2021.
+//  Created by Roman on 19.01.2021.
 //
 
 import UIKit
 
-class TableViewCellCategory: UITableViewCell {
+class TableViewCellHeader: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
