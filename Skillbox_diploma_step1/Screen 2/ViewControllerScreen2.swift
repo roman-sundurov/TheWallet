@@ -7,10 +7,34 @@
 
 import UIKit
 
+//protocol protocolChangeCategory {
+//    func changeCategory(tag: Int)
+//}
+
 class ViewControllerScreen2: UIViewController {
 
+    @IBOutlet var screen2SegmentControl: UISegmentedControl!
     @IBOutlet var tableViewScreen2: UITableView!
-    @IBOutlet var ContainerViewScreen2: UIView!
+    @IBOutlet var screen2CurrencyStatus: UIButton!
+    @IBOutlet var constraintContainerBottom: NSLayoutConstraint!
+    
+    
+    @IBSegueAction func sequeToScreen2Container(_ coder: NSCoder) -> ViewControllerScreen2Container? {
+        return <#ViewControllerScreen2Container(coder: coder)#>
+    }
+    
+    @IBAction func screen2SegmentControlAction(_ sender: Any) {
+        switch screen2SegmentControl.selectedSegmentIndex {
+        case 0:
+            print("1")
+        case 1:
+            screen2CurrencyStatus.titleLabel?.text = "-$"
+            screen2CurrencyStatus.titleLabel?.textColor = UIColor.red
+            print("2")
+        default:
+            break
+        }
+    }
     
     struct menuData {
         let name: String
@@ -24,6 +48,14 @@ class ViewControllerScreen2: UIViewController {
     let menuList2 = menuData(name: "Date", text: "Today")
     let menuList3 = menuData(name: "Category", text: "Cash")
     let menuList4 = menuData(name: "Notes", text: "")
+    
+    
+    
+    @objc func changeCategory(_ tag: Int) {
+//        ContainerViewScreen2.aaa? = 8
+        constraintContainerBottom.constant = 0
+    }
+
     
     
     override func viewDidLoad() {
@@ -46,7 +78,7 @@ class ViewControllerScreen2: UIViewController {
     */
 }
 
-extension ViewControllerScreen2: UITabBarDelegate, UITableViewDataSource{
+extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -70,6 +102,10 @@ extension ViewControllerScreen2: UITabBarDelegate, UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellCategory") as! TableViewCellCategory
             cell.labelCategory.text = menuArray[indexPath.row].name
             cell.labelSelectCategory.text = menuArray[indexPath.row].text
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategory(_:)))
+            cell.isUserInteractionEnabled = true
+            cell.addGestureRecognizer(gesture)
+            cell.tag = indexPath.row
             return cell
         }
     }

@@ -17,10 +17,10 @@
 		472F289325A7319500CE1481 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472F289125A7319500CE1481 /* LaunchScreen.storyboard */; };
 		472F289E25A7319600CE1481 /* Skillbox_diploma_step1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F289D25A7319600CE1481 /* Skillbox_diploma_step1Tests.swift */; };
 		472F28A925A7319600CE1481 /* Skillbox_diploma_step1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F28A825A7319600CE1481 /* Skillbox_diploma_step1UITests.swift */; };
-		4758F52F25B42AB70025AB5F /* ContainerViewScreen2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4758F52E25B42AB70025AB5F /* ContainerViewScreen2.swift */; };
 		47621F9825B644BF0095A52F /* TableViewCellNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47621F9725B644BF0095A52F /* TableViewCellNote.swift */; };
 		47C4FF3525B38B0F00F97498 /* ViewControllerScreen2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4FF3425B38B0F00F97498 /* ViewControllerScreen2.swift */; };
 		47CB73C325B4364700638185 /* TableViewCellCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB73C225B4364700638185 /* TableViewCellCategory.swift */; };
+		47F1759925BA2D320044BD30 /* ViewControllerScreen2Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F1759825BA2D320044BD30 /* ViewControllerScreen2Container.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,10 +56,10 @@
 		472F28A425A7319600CE1481 /* Skillbox_diploma_step1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Skillbox_diploma_step1UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		472F28A825A7319600CE1481 /* Skillbox_diploma_step1UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skillbox_diploma_step1UITests.swift; sourceTree = "<group>"; };
 		472F28AA25A7319600CE1481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4758F52E25B42AB70025AB5F /* ContainerViewScreen2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewScreen2.swift; sourceTree = "<group>"; };
 		47621F9725B644BF0095A52F /* TableViewCellNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellNote.swift; sourceTree = "<group>"; };
 		47C4FF3425B38B0F00F97498 /* ViewControllerScreen2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerScreen2.swift; sourceTree = "<group>"; };
 		47CB73C225B4364700638185 /* TableViewCellCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellCategory.swift; sourceTree = "<group>"; };
+		47F1759825BA2D320044BD30 /* ViewControllerScreen2Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerScreen2Container.swift; sourceTree = "<group>"; };
 		81F31CAF70AC4A84052C9309 /* Pods_Skillbox_diploma_step1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Skillbox_diploma_step1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A325522F0629C02EB6BD1B /* Pods-Skillbox_diploma_step1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Skillbox_diploma_step1.release.xcconfig"; path = "Target Support Files/Pods-Skillbox_diploma_step1/Pods-Skillbox_diploma_step1.release.xcconfig"; sourceTree = "<group>"; };
 		A84F03028D7AF34E127981EA /* Pods-Skillbox_diploma_step1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Skillbox_diploma_step1.debug.xcconfig"; path = "Target Support Files/Pods-Skillbox_diploma_step1/Pods-Skillbox_diploma_step1.debug.xcconfig"; sourceTree = "<group>"; };
@@ -178,7 +178,7 @@
 				4715819225B6FE310047C5D0 /* TableViewCellHeader.swift */,
 				47CB73C225B4364700638185 /* TableViewCellCategory.swift */,
 				47621F9725B644BF0095A52F /* TableViewCellNote.swift */,
-				4758F52E25B42AB70025AB5F /* ContainerViewScreen2.swift */,
+				47F1759825BA2D320044BD30 /* ViewControllerScreen2Container.swift */,
 			);
 			path = "Screen 2";
 			sourceTree = "<group>";
@@ -360,7 +360,7 @@
 				4715819325B6FE310047C5D0 /* TableViewCellHeader.swift in Sources */,
 				472F288B25A7319500CE1481 /* ViewController.swift in Sources */,
 				472F288725A7319500CE1481 /* AppDelegate.swift in Sources */,
-				4758F52F25B42AB70025AB5F /* ContainerViewScreen2.swift in Sources */,
+				47F1759925BA2D320044BD30 /* ViewControllerScreen2Container.swift in Sources */,
 				47CB73C325B4364700638185 /* TableViewCellCategory.swift in Sources */,
 				47621F9825B644BF0095A52F /* TableViewCellNote.swift in Sources */,
 				472F288925A7319500CE1481 /* SceneDelegate.swift in Sources */,

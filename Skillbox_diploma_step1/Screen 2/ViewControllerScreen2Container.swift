@@ -1,13 +1,15 @@
 //
-//  ContainerViewScreen2.swift
+//  ViewControllerScreen2Container.swift
 //  Skillbox_diploma_step1
 //
-//  Created by Roman on 17.01.2021.
+//  Created by Roman on 22.01.2021.
 //
 
 import UIKit
 
-class ContainerViewScreen2: UIViewController {
+class ViewControllerScreen2Container: UIViewController {
+    
+    var spec: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
