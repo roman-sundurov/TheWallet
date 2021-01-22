@@ -7,21 +7,15 @@
 
 import UIKit
 
-//protocol protocolChangeCategory {
-//    func changeCategory(tag: Int)
-//}
 
 class ViewControllerScreen2: UIViewController {
 
+    //объявление Аутлетов
+    
     @IBOutlet var screen2SegmentControl: UISegmentedControl!
     @IBOutlet var tableViewScreen2: UITableView!
     @IBOutlet var screen2CurrencyStatus: UIButton!
     @IBOutlet var constraintContainerBottom: NSLayoutConstraint!
-    
-    
-    @IBSegueAction func sequeToScreen2Container(_ coder: NSCoder) -> ViewControllerScreen2Container? {
-        return <#ViewControllerScreen2Container(coder: coder)#>
-    }
     
     @IBAction func screen2SegmentControlAction(_ sender: Any) {
         switch screen2SegmentControl.selectedSegmentIndex {
@@ -36,6 +30,8 @@ class ViewControllerScreen2: UIViewController {
         }
     }
     
+    //работа с данными на экране
+    
     struct menuData {
         let name: String
         let text: String
@@ -49,13 +45,21 @@ class ViewControllerScreen2: UIViewController {
     let menuList3 = menuData(name: "Category", text: "Cash")
     let menuList4 = menuData(name: "Notes", text: "")
     
+    //рабта с переходом между экранами
     
+    var deligateScreen2Container: protocol_deligate?
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? ViewControllerScreen2Container, segue.identifier == "segueToScreen2Container"{
+            deligateScreen2Container = vc
+            vc.deligateScreen2 = self
+        }
+    }
     
     @objc func changeCategory(_ tag: Int) {
-//        ContainerViewScreen2.aaa? = 8
+        
         constraintContainerBottom.constant = 0
     }
-
     
     
     override func viewDidLoad() {
@@ -63,19 +67,7 @@ class ViewControllerScreen2: UIViewController {
         
         menuArray = [menuList0, menuList1, menuList2, menuList3, menuList4]
         
-        // Do any additional setup after loading the view.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }
 
 extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
@@ -107,6 +99,15 @@ extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
             cell.addGestureRecognizer(gesture)
             cell.tag = indexPath.row
             return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
+        if indexPath.row == 4 {
+            return 200
+        }
+        else{
+            return 50
         }
     }
     

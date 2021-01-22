@@ -7,9 +7,13 @@
 
 import UIKit
 
+protocol protocol_deligate {
+    func change_color(_ new_color: UIColor)
+}
+
 class ViewControllerScreen2Container: UIViewController {
     
-    var spec: Int?
+    var deligateScreen2: UIViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,4 +32,10 @@ class ViewControllerScreen2Container: UIViewController {
     }
     */
 
+}
+
+extension ViewControllerScreen2Container: protocol_deligate {
+    func change_color(_ new_color: UIColor) {
+        self.view.backgroundColor = new_color
+    }
 }

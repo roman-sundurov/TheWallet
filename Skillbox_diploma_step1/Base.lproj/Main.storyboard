@@ -627,7 +627,7 @@
                                     <constraint firstAttribute="height" constant="515" id="SlF-uH-Byv"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="vna-KF-Brs" kind="embed" destinationCreationSelector="sequeToScreen2Container:" id="Has-jM-W8K"/>
+                                    <segue destination="vna-KF-Brs" kind="embed" identifier="segueToScreen2Container" id="Has-jM-W8K"/>
                                 </connections>
                             </containerView>
                         </subviews>
