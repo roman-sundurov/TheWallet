@@ -64,9 +64,12 @@ class ViewControllerScreen2: UIViewController {
     @objc func changeCategory(_ tag: Int) {
 //        conteinerBottom.layer.borderWidth = 3
 //        conteinerBottom.layer.borderColor = UIColor.red.cgColor
-        conteinerBottom.layer.cornerRadius  = 20
-        constraintContainerBottomHeight.constant = CGFloat(50*(screen2MenuArray.count+2))
-        constraintContainerBottomPoint.constant = 50
+        self.conteinerBottom.layer.cornerRadius  = 20
+        self.constraintContainerBottomHeight.constant = CGFloat(50*(self.screen2MenuArray.count+2))
+        
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+            self.constraintContainerBottomPoint.constant = 50
+        }, completion: {isCompleted in })
     }
     
     override func viewDidLoad() {
@@ -80,7 +83,9 @@ class ViewControllerScreen2: UIViewController {
 extension ViewControllerScreen2: protocolScreen2Deligate{
     //закрытие окна
     @objc func closePopupWindow() {
-        constraintContainerBottomPoint.constant = -515
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+            self.constraintContainerBottomPoint.constant = -515
+        }, completion: {isCompleted in })
     }
 }
 
