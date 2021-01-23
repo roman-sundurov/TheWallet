@@ -17,6 +17,8 @@
 		472F289325A7319500CE1481 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472F289125A7319500CE1481 /* LaunchScreen.storyboard */; };
 		472F289E25A7319600CE1481 /* Skillbox_diploma_step1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F289D25A7319600CE1481 /* Skillbox_diploma_step1Tests.swift */; };
 		472F28A925A7319600CE1481 /* Skillbox_diploma_step1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F28A825A7319600CE1481 /* Skillbox_diploma_step1UITests.swift */; };
+		4750EFE725BC2C5C00167A92 /* TableViewCellHeaderScreen2Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EFE625BC2C5C00167A92 /* TableViewCellHeaderScreen2Container.swift */; };
+		4750EFEC25BC2C7F00167A92 /* TableViewCellChangeCategoryScreen2Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EFEB25BC2C7F00167A92 /* TableViewCellChangeCategoryScreen2Container.swift */; };
 		47621F9825B644BF0095A52F /* TableViewCellNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47621F9725B644BF0095A52F /* TableViewCellNote.swift */; };
 		47C4FF3525B38B0F00F97498 /* ViewControllerScreen2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4FF3425B38B0F00F97498 /* ViewControllerScreen2.swift */; };
 		47CB73C325B4364700638185 /* TableViewCellCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB73C225B4364700638185 /* TableViewCellCategory.swift */; };
@@ -56,6 +58,8 @@
 		472F28A425A7319600CE1481 /* Skillbox_diploma_step1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Skillbox_diploma_step1UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		472F28A825A7319600CE1481 /* Skillbox_diploma_step1UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skillbox_diploma_step1UITests.swift; sourceTree = "<group>"; };
 		472F28AA25A7319600CE1481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4750EFE625BC2C5C00167A92 /* TableViewCellHeaderScreen2Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellHeaderScreen2Container.swift; sourceTree = "<group>"; };
+		4750EFEB25BC2C7F00167A92 /* TableViewCellChangeCategoryScreen2Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellChangeCategoryScreen2Container.swift; sourceTree = "<group>"; };
 		47621F9725B644BF0095A52F /* TableViewCellNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellNote.swift; sourceTree = "<group>"; };
 		47C4FF3425B38B0F00F97498 /* ViewControllerScreen2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerScreen2.swift; sourceTree = "<group>"; };
 		47CB73C225B4364700638185 /* TableViewCellCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellCategory.swift; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 				472F288825A7319500CE1481 /* SceneDelegate.swift */,
 				47621F8C25B643C20095A52F /* Screen 1 */,
 				47621F9025B643D80095A52F /* Screen 2 */,
+				4750EFDA25BC24AF00167A92 /* Screen2Container */,
 				472F288C25A7319500CE1481 /* Main.storyboard */,
 				472F288F25A7319500CE1481 /* Assets.xcassets */,
 				472F289125A7319500CE1481 /* LaunchScreen.storyboard */,
@@ -163,6 +168,16 @@
 			path = Skillbox_diploma_step1UITests;
 			sourceTree = "<group>";
 		};
+		4750EFDA25BC24AF00167A92 /* Screen2Container */ = {
+			isa = PBXGroup;
+			children = (
+				47F1759825BA2D320044BD30 /* ViewControllerScreen2Container.swift */,
+				4750EFE625BC2C5C00167A92 /* TableViewCellHeaderScreen2Container.swift */,
+				4750EFEB25BC2C7F00167A92 /* TableViewCellChangeCategoryScreen2Container.swift */,
+			);
+			path = Screen2Container;
+			sourceTree = "<group>";
+		};
 		47621F8C25B643C20095A52F /* Screen 1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,7 +193,6 @@
 				4715819225B6FE310047C5D0 /* TableViewCellHeader.swift */,
 				47CB73C225B4364700638185 /* TableViewCellCategory.swift */,
 				47621F9725B644BF0095A52F /* TableViewCellNote.swift */,
-				47F1759825BA2D320044BD30 /* ViewControllerScreen2Container.swift */,
 			);
 			path = "Screen 2";
 			sourceTree = "<group>";
@@ -357,12 +371,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4750EFEC25BC2C7F00167A92 /* TableViewCellChangeCategoryScreen2Container.swift in Sources */,
 				4715819325B6FE310047C5D0 /* TableViewCellHeader.swift in Sources */,
 				472F288B25A7319500CE1481 /* ViewController.swift in Sources */,
 				472F288725A7319500CE1481 /* AppDelegate.swift in Sources */,
 				47F1759925BA2D320044BD30 /* ViewControllerScreen2Container.swift in Sources */,
 				47CB73C325B4364700638185 /* TableViewCellCategory.swift in Sources */,
 				47621F9825B644BF0095A52F /* TableViewCellNote.swift in Sources */,
+				4750EFE725BC2C5C00167A92 /* TableViewCellHeaderScreen2Container.swift in Sources */,
 				472F288925A7319500CE1481 /* SceneDelegate.swift in Sources */,
 				47C4FF3525B38B0F00F97498 /* ViewControllerScreen2.swift in Sources */,
 			);

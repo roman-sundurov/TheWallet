@@ -1,32 +1,26 @@
 //
-//  TableViewCellCategory.swift
+//  TableViewCellChangeCategoryScreen2Container.swift
 //  Skillbox_diploma_step1
 //
-//  Created by Roman on 17.01.2021.
+//  Created by Roman on 23.01.2021.
 //
 
 import UIKit
 
-class TableViewCellCategory: UITableViewCell {
+class TableViewCellChangeCategoryScreen2Container: UITableViewCell {
     
-    @IBOutlet var labelCategory: UILabel!
-    @IBOutlet var labelSelectCategory: UILabel!
-    @IBOutlet var buttonSelectCategory: UIButton!
+    @IBOutlet var labelChangeCategory: UILabel!
+    @IBOutlet var buttonChangeCategory: UIButton!
     
-//    var tag: Int
-
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-
         // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-//        var deligateContainerViewScreen2: UIView
 
         // Configure the view for the selected state
     }
+
 }
