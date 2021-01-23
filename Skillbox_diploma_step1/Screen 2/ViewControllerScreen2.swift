@@ -18,7 +18,10 @@ class ViewControllerScreen2: UIViewController {
     @IBOutlet var screen2SegmentControl: UISegmentedControl!
     @IBOutlet var tableViewScreen2: UITableView!
     @IBOutlet var screen2CurrencyStatus: UIButton!
-    @IBOutlet var constraintContainerBottom: NSLayoutConstraint!
+    @IBOutlet var constraintContainerBottomPoint: NSLayoutConstraint!
+    @IBOutlet var constraintContainerBottomHeight: NSLayoutConstraint!
+    
+    @IBOutlet var conteinerBottom: UIView!
     
     @IBAction func screen2SegmentControlAction(_ sender: Any) {
         switch screen2SegmentControl.selectedSegmentIndex {
@@ -40,7 +43,7 @@ class ViewControllerScreen2: UIViewController {
         let text: String
     }
     
-    var Screen2MenuArray: [Screen2MenuData] = []
+    var screen2MenuArray: [Screen2MenuData] = []
     
     let Screen2MenuList0 = Screen2MenuData(name: "Header", text: "")
     let Screen2MenuList1 = Screen2MenuData(name: "Category", text: "Select category")
@@ -59,13 +62,17 @@ class ViewControllerScreen2: UIViewController {
     }
     
     @objc func changeCategory(_ tag: Int) {
-        constraintContainerBottom.constant = 0
+//        conteinerBottom.layer.borderWidth = 3
+//        conteinerBottom.layer.borderColor = UIColor.red.cgColor
+        conteinerBottom.layer.cornerRadius  = 20
+        constraintContainerBottomHeight.constant = CGFloat(50*(screen2MenuArray.count+2))
+        constraintContainerBottomPoint.constant = 50
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Screen2MenuArray = [Screen2MenuList0, Screen2MenuList1, Screen2MenuList2, Screen2MenuList3, Screen2MenuList4]
+        screen2MenuArray = [Screen2MenuList0, Screen2MenuList1, Screen2MenuList2, Screen2MenuList3, Screen2MenuList4]
         
     }
 }
@@ -73,7 +80,7 @@ class ViewControllerScreen2: UIViewController {
 extension ViewControllerScreen2: protocolScreen2Deligate{
     //закрытие окна
     @objc func closePopupWindow() {
-        constraintContainerBottom.constant = -515
+        constraintContainerBottomPoint.constant = -515
     }
 }
 
@@ -84,7 +91,7 @@ extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Screen2MenuArray.count
+        return screen2MenuArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -94,13 +101,13 @@ extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
         }
         else if indexPath.row > 3{
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellNote") as! TableViewCellNote
-            cell.textFieldNotes.text = Screen2MenuArray[indexPath.row].text
+            cell.textFieldNotes.text = screen2MenuArray[indexPath.row].text
             return cell
         }
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellCategory") as! TableViewCellCategory
-            cell.labelCategory.text = Screen2MenuArray[indexPath.row].name
-            cell.labelSelectCategory.text = Screen2MenuArray[indexPath.row].text
+            cell.labelCategory.text = screen2MenuArray[indexPath.row].name
+            cell.labelSelectCategory.text = screen2MenuArray[indexPath.row].text
             let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategory(_:)))
             cell.isUserInteractionEnabled = true
             cell.addGestureRecognizer(gesture)

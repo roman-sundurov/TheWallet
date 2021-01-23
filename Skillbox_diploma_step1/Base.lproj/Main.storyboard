@@ -295,7 +295,7 @@
                                     <constraint firstAttribute="trailing" secondItem="VWY-eW-xgb" secondAttribute="trailing" id="y7W-di-vVF"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7MB-m0-6NI" userLabel="bottomPopInList">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7MB-m0-6NI" userLabel="bottomPopInList">
                                 <rect key="frame" x="10" y="323" width="370" height="521"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T9E-30-cZk">
@@ -349,7 +349,6 @@
                                         <viewLayoutGuide key="frameLayoutGuide" id="Nnk-fr-Wuw"/>
                                     </scrollView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="T9E-30-cZk" firstAttribute="leading" secondItem="7MB-m0-6NI" secondAttribute="leading" id="DEC-2Y-4cr"/>
                                     <constraint firstAttribute="bottom" secondItem="T9E-30-cZk" secondAttribute="bottom" id="Qgy-Qd-9sa"/>
@@ -359,7 +358,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" red="0.396078431372549" green="0.73725490196078436" blue="0.74901960784313726" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.39607843139999999" green="0.73725490199999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0fu-iu-rQ4" secondAttribute="trailing" id="1j8-HU-1Mh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7MB-m0-6NI" secondAttribute="bottom" constant="-34" id="CUQ-HB-k6o"/>
@@ -620,10 +619,10 @@
                                     <outlet property="delegate" destination="fcp-GB-FKl" id="ZAd-Y3-Mpa"/>
                                 </connections>
                             </tableView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5gB-3p-wM1" customClass="ContainerViewScreen2" customModule="Skillbox_diploma_step1" customModuleProvider="target">
+                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5gB-3p-wM1">
                                 <rect key="frame" x="10" y="844" width="370" height="515"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="515" id="66l-ZV-alF"/>
+                                    <constraint firstAttribute="height" constant="515" id="WME-ku-wl2"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="vna-KF-Brs" kind="embed" identifier="segueToScreen2Container" id="Has-jM-W8K"/>
@@ -653,7 +652,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="kgp-1m-6eG"/>
                     <connections>
-                        <outlet property="constraintContainerBottom" destination="Lcv-jA-LAE" id="cZ1-5j-uZV"/>
+                        <outlet property="ConteinerBottom" destination="5gB-3p-wM1" id="pIX-7A-1go"/>
+                        <outlet property="constraintContainerBottomHeight" destination="WME-ku-wl2" id="m95-ex-zIr"/>
+                        <outlet property="constraintContainerBottomPoint" destination="Lcv-jA-LAE" id="cZ1-5j-uZV"/>
+                        <outlet property="conteinerBottom" destination="5gB-3p-wM1" id="8RT-dm-Ih1"/>
                         <outlet property="screen2CurrencyStatus" destination="tao-7E-drY" id="ZEg-XT-f2x"/>
                         <outlet property="screen2SegmentControl" destination="TUb-4D-06u" id="QuM-zG-gXw"/>
                         <outlet property="tableViewScreen2" destination="afh-qC-NmX" id="ckJ-Ju-Qpn"/>
@@ -671,9 +673,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="370" height="515"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="I0S-Bf-5wZ">
+                            <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="I0S-Bf-5wZ">
                                 <rect key="frame" x="0.0" y="44" width="370" height="471"/>
-                                <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="sectionIndexBackgroundColor" red="0.39607843139999999" green="0.73725490199999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" id="1UK-TR-vO5" customClass="TableViewCellHeaderScreen2Container" customModule="Skillbox_diploma_step1" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="370" height="43.666667938232422"/>
@@ -688,11 +691,10 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change category" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E3b-Ql-UuP">
                                                             <rect key="frame" x="0.0" y="8.0000000000000018" width="175.66666666666666" height="27.666666666666671"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
-                                                            <nil key="textColor"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="E3b-Ql-UuP" secondAttribute="trailing" id="15d-O0-rsP"/>
                                                         <constraint firstItem="E3b-Ql-UuP" firstAttribute="centerY" secondItem="fLL-fh-TOS" secondAttribute="centerY" id="4mL-aK-CY1"/>
@@ -706,6 +708,7 @@
                                                 <constraint firstItem="fLL-fh-TOS" firstAttribute="centerX" secondItem="MI3-kJ-n4M" secondAttribute="centerX" id="Fa3-ZP-HPw"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.39607843139999999" green="0.73725490199999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellChangeCategory" id="P69-De-spv" customClass="TableViewCellChangeCategoryScreen2Container" customModule="Skillbox_diploma_step1" customModuleProvider="target">
@@ -724,7 +727,7 @@
                                                                 <constraint firstAttribute="width" constant="141" id="bgV-tO-FRq"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                            <color key="textColor" systemColor="opaqueSeparatorColor"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="26H-Ir-tjE">
@@ -740,7 +743,6 @@
                                                             </state>
                                                         </button>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstItem="XPX-QR-eET" firstAttribute="centerY" secondItem="QbF-18-lnB" secondAttribute="centerY" id="Bj8-tX-E1X"/>
                                                         <constraint firstItem="26H-Ir-tjE" firstAttribute="centerY" secondItem="QbF-18-lnB" secondAttribute="centerY" id="OB3-ff-YWS"/>
@@ -756,6 +758,7 @@
                                                 <constraint firstItem="QbF-18-lnB" firstAttribute="leading" secondItem="Ffo-Ay-WXn" secondAttribute="leading" constant="25" id="Xy5-SM-m6e"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.39607843139999999" green="0.73725490199999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
                                         <connections>
                                             <outlet property="buttonChangeCategory" destination="26H-Ir-tjE" id="9DC-se-C7D"/>
@@ -770,12 +773,11 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HFD-3C-oXh"/>
-                        <color key="backgroundColor" systemColor="systemPurpleColor"/>
                         <constraints>
                             <constraint firstItem="HFD-3C-oXh" firstAttribute="trailing" secondItem="I0S-Bf-5wZ" secondAttribute="trailing" id="QzZ-Lj-Ul7"/>
                             <constraint firstItem="I0S-Bf-5wZ" firstAttribute="leading" secondItem="HFD-3C-oXh" secondAttribute="leading" id="RpK-BP-gIh"/>
                             <constraint firstItem="HFD-3C-oXh" firstAttribute="bottom" secondItem="I0S-Bf-5wZ" secondAttribute="bottom" id="e5K-zg-Odq"/>
-                            <constraint firstItem="I0S-Bf-5wZ" firstAttribute="top" secondItem="HFD-3C-oXh" secondAttribute="top" id="hUo-29-PVf"/>
+                            <constraint firstItem="I0S-Bf-5wZ" firstAttribute="top" secondItem="HFD-3C-oXh" secondAttribute="top" id="ydr-gC-es5"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -800,12 +802,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
