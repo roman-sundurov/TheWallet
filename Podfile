@@ -5,5 +5,6 @@ use_frameworks!
 
 target 'Skillbox_diploma_step1' do
 pod 'RealmSwift'
+pod 'SimpleCheckbox'
 
 end

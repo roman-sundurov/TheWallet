@@ -478,7 +478,7 @@
                                             <action selector="screen2SegmentControlAction:" destination="fcp-GB-FKl" eventType="valueChanged" id="fLa-3H-h2V"/>
                                         </connections>
                                     </segmentedControl>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tao-7E-drY">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tao-7E-drY">
                                         <rect key="frame" x="314" y="10" width="66" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="66" id="PYT-Tj-92H"/>
@@ -486,7 +486,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="54"/>
                                         <state key="normal" title="+$">
-                                            <color key="titleColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.14624351259999999" green="0.61100596190000001" blue="0.01177703496" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="TtF-Sw-fS5">
@@ -678,7 +678,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" red="0.39607843139999999" green="0.73725490199999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" id="1UK-TR-vO5" customClass="TableViewCellHeaderScreen2Container" customModule="Skillbox_diploma_step1" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" id="1UK-TR-vO5" customClass="Screen2Container_TableViewCellHeader" customModule="Skillbox_diploma_step1" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="370" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1UK-TR-vO5" id="MI3-kJ-n4M">
@@ -711,7 +711,7 @@
                                         <color key="backgroundColor" red="0.39607843139999999" green="0.73725490199999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellChangeCategory" id="P69-De-spv" customClass="TableViewCellChangeCategoryScreen2Container" customModule="Skillbox_diploma_step1" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellChangeCategory" id="P69-De-spv" customClass="Screen2Container_TableViewCellChangeCategory" customModule="Skillbox_diploma_step1" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="71.666667938232422" width="370" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P69-De-spv" id="Ffo-Ay-WXn">
@@ -721,8 +721,16 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QbF-18-lnB">
                                                     <rect key="frame" x="25" y="0.0" width="320" height="43.666666666666664"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select catagory" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XPX-QR-eET">
-                                                            <rect key="frame" x="0.0" y="10" width="141" height="24"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mXt-2h-8pU" customClass="Checkbox" customModule="SimpleCheckbox">
+                                                            <rect key="frame" x="0.0" y="7" width="30" height="30"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="30" id="IWE-Ec-P9N"/>
+                                                                <constraint firstAttribute="height" constant="30" id="oiK-Ja-9dH"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select catagory" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XPX-QR-eET">
+                                                            <rect key="frame" x="40" y="10" width="141" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="141" id="bgV-tO-FRq"/>
                                                             </constraints>
@@ -730,24 +738,27 @@
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="26H-Ir-tjE">
-                                                            <rect key="frame" x="282" y="10.999999999999998" width="28" height="22.333333333333329"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WvV-OG-r3R">
+                                                            <rect key="frame" x="294" y="7.6666666666666643" width="26" height="26.999999999999986"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="28" id="Bde-JF-Gmn"/>
-                                                                <constraint firstAttribute="height" constant="28" id="sif-rc-k0n"/>
+                                                                <constraint firstAttribute="height" constant="27" id="0Hk-1y-NQH"/>
+                                                                <constraint firstAttribute="width" constant="26" id="DHZ-Qb-uS4"/>
                                                             </constraints>
-                                                            <color key="tintColor" systemColor="secondaryLabelColor"/>
-                                                            <state key="normal">
-                                                                <color key="titleColor" systemColor="opaqueSeparatorColor"/>
-                                                                <imageReference key="backgroundImage" image="arrow.right" catalog="system" symbolScale="default"/>
-                                                            </state>
+                                                            <color key="tintColor" red="1" green="0.99999994039999995" blue="0.99999147649999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <state key="normal" backgroundImage="trash.fill" catalog="system"/>
+                                                            <connections>
+                                                                <action selector="buttonDeleteItem:" destination="P69-De-spv" eventType="touchUpInside" id="XWe-Wb-Ryq"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstItem="mXt-2h-8pU" firstAttribute="leading" secondItem="QbF-18-lnB" secondAttribute="leading" id="B8L-nS-1fK"/>
                                                         <constraint firstItem="XPX-QR-eET" firstAttribute="centerY" secondItem="QbF-18-lnB" secondAttribute="centerY" id="Bj8-tX-E1X"/>
-                                                        <constraint firstItem="26H-Ir-tjE" firstAttribute="centerY" secondItem="QbF-18-lnB" secondAttribute="centerY" id="OB3-ff-YWS"/>
-                                                        <constraint firstItem="XPX-QR-eET" firstAttribute="leading" secondItem="QbF-18-lnB" secondAttribute="leading" id="R3l-Lg-cmW"/>
-                                                        <constraint firstAttribute="trailing" secondItem="26H-Ir-tjE" secondAttribute="trailing" constant="10" id="vZI-o7-g8F"/>
+                                                        <constraint firstItem="mXt-2h-8pU" firstAttribute="centerY" secondItem="QbF-18-lnB" secondAttribute="centerY" id="MSN-HN-CG3"/>
+                                                        <constraint firstAttribute="trailing" secondItem="WvV-OG-r3R" secondAttribute="trailing" id="hxz-TP-gTV"/>
+                                                        <constraint firstItem="WvV-OG-r3R" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XPX-QR-eET" secondAttribute="trailing" constant="10" id="miV-1w-cM5"/>
+                                                        <constraint firstItem="WvV-OG-r3R" firstAttribute="centerY" secondItem="QbF-18-lnB" secondAttribute="centerY" id="pzl-HE-Hkx"/>
+                                                        <constraint firstItem="XPX-QR-eET" firstAttribute="leading" secondItem="mXt-2h-8pU" secondAttribute="trailing" constant="10" id="rUh-yF-Tnd"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -761,7 +772,8 @@
                                         <color key="backgroundColor" red="0.39607843139999999" green="0.73725490199999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
                                         <connections>
-                                            <outlet property="buttonChangeCategory" destination="26H-Ir-tjE" id="9DC-se-C7D"/>
+                                            <outlet property="buttonDeleteItemObject" destination="WvV-OG-r3R" id="GC1-cK-Eth"/>
+                                            <outlet property="checkBoxObject" destination="mXt-2h-8pU" id="lZD-mq-gC1"/>
                                             <outlet property="labelChangeCategory" destination="XPX-QR-eET" id="4Zz-vr-xre"/>
                                         </connections>
                                     </tableViewCell>
@@ -791,6 +803,7 @@
         <image name="graph" width="148" height="103.66666412353516"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="trash.fill" catalog="system" width="121" height="128"/>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

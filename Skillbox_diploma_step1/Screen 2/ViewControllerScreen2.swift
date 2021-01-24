@@ -26,11 +26,11 @@ class ViewControllerScreen2: UIViewController {
     @IBAction func screen2SegmentControlAction(_ sender: Any) {
         switch screen2SegmentControl.selectedSegmentIndex {
         case 0:
-            print("1")
+            screen2CurrencyStatus.setTitle("+$", for: .normal)
+            screen2CurrencyStatus.setTitleColor(UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1)), for: .normal)
         case 1:
-            screen2CurrencyStatus.titleLabel?.text = "-$"
-            screen2CurrencyStatus.titleLabel?.textColor = UIColor.red
-            print("2")
+            screen2CurrencyStatus.setTitle("-$", for: .normal)
+            screen2CurrencyStatus.setTitleColor(UIColor.red, for: .normal)
         default:
             break
         }
@@ -69,6 +69,7 @@ class ViewControllerScreen2: UIViewController {
         
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             self.constraintContainerBottomPoint.constant = 50
+            self.view.layoutIfNeeded()
         }, completion: {isCompleted in })
     }
     
@@ -85,6 +86,7 @@ extension ViewControllerScreen2: protocolScreen2Deligate{
     @objc func closePopupWindow() {
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             self.constraintContainerBottomPoint.constant = -515
+            self.view.layoutIfNeeded()
         }, completion: {isCompleted in })
     }
 }
