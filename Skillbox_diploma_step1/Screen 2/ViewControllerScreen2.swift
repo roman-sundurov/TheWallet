@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol protocolScreen2Deligate {
+protocol protocolScreen2Delegate {
     func closePopupWindow()
 }
 
@@ -52,12 +52,12 @@ class ViewControllerScreen2: UIViewController {
     let Screen2MenuList4 = Screen2MenuData(name: "Notes", text: "")
     
     //рабта с переходом между экранами
-    var deligateScreen2Container: protocolScreen2ContainerDeligate?
+    var delegateScreen2Container: protocolScreen2ContainerDelegate?
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ViewControllerScreen2Container, segue.identifier == "segueToScreen2Container"{
-            deligateScreen2Container = vc
-            vc.deligateScreen2 = self
+            delegateScreen2Container = vc
+            vc.delegateScreen2 = self
         }
     }
     
@@ -81,7 +81,7 @@ class ViewControllerScreen2: UIViewController {
     }
 }
 
-extension ViewControllerScreen2: protocolScreen2Deligate{
+extension ViewControllerScreen2: protocolScreen2Delegate{
     //закрытие окна
     @objc func closePopupWindow() {
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {

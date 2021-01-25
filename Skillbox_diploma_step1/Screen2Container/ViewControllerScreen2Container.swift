@@ -7,26 +7,30 @@
 
 import UIKit
 
-protocol protocolScreen2ContainerDeligate {
+protocol protocolScreen2ContainerDelegate {
     func setTable(_ newStatus: Int)
+    func buttonDeleteItemHandler(_ tag: Int)
+    func checkBoxStatus(_ tag: Int,_ type: Bool)
+    func giveScreen2ContainerMenuArray() -> [Screen2ContainerMenuData]
+    func closeWindows(_ tag: Int)
+}
+
+struct Screen2ContainerMenuData {
+    let name: String
+    let status: Bool
 }
 
 class ViewControllerScreen2Container: UIViewController {
 
-    
-    var deligateScreen2: protocolScreen2Deligate?
+    //объявление делигатов
+    var delegateScreen2: protocolScreen2Delegate?
 
     //работа с данными на экране
-    
-    struct Screen2ContainerMenuData {
-        let name: String
-        let status: Bool
-    }
     
     var screen2ContainerMenuArray: [Screen2ContainerMenuData] = []
     var tableStatus: Int = 0
     
-    //здусь будет обработка данных в зависимости от tableStatus
+    //здесь будет обработка данных в зависимости от tableStatus
     
     let screen2ContainerMenuList0 = Screen2ContainerMenuData(name: "Header", status: false)
     let screen2ContainerMenuList1 = Screen2ContainerMenuData(name: "Rental revenue", status: true)
@@ -35,30 +39,32 @@ class ViewControllerScreen2Container: UIViewController {
     let screen2ContainerMenuList4 = Screen2ContainerMenuData(name: "Food & Restaurants", status: false)
     let screen2ContainerMenuList5 = Screen2ContainerMenuData(name: "Coffee", status: false)
     let screen2ContainerMenuList6 = Screen2ContainerMenuData(name: "Mobile Account", status: false)
-
-    
-    //анимация
-    @objc func closeWindows(_ tag: Int) {
-        deligateScreen2?.closePopupWindow()
-        print("ClosePopup")
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         screen2ContainerMenuArray = [screen2ContainerMenuList0, screen2ContainerMenuList1, screen2ContainerMenuList2, screen2ContainerMenuList3, screen2ContainerMenuList4, screen2ContainerMenuList5, screen2ContainerMenuList6]
-
     }
 }
 
-extension ViewControllerScreen2Container: protocolScreen2ContainerDeligate {
+
+
+
+extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
+    func closeWindows(_ tag: Int) {
+        delegateScreen2?.closePopupWindow()
+        print("ClosePopup from Container")
+    }
+
+    func giveScreen2ContainerMenuArray() -> [Screen2ContainerMenuData] {
+        print (screen2ContainerMenuArray)
+        return screen2ContainerMenuArray
+    }
+    
     func setTable(_ newStatus: Int) {
         tableStatus = newStatus
     }
-}
-
-extension ViewControllerScreen2Container: protocolDataFromContainer {
+    
     func buttonDeleteItemHandler(_ tag: Int) {
         print("data deleted, \(tag)")
         closeWindows(tag)
@@ -88,19 +94,9 @@ extension ViewControllerScreen2Container: UITableViewDelegate, UITableViewDataSo
         }
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellChangeCategory") as! Screen2Container_TableViewCellChangeCategory
-            cell.labelChangeCategory.text = screen2ContainerMenuArray[indexPath.row].name
-            let gesture = UITapGestureRecognizer(target: self, action: #selector(closeWindows(indexPath.row)))
-            cell.isUserInteractionEnabled = true
-            cell.addGestureRecognizer(gesture)
-            cell.deligateScreen2Container = self
-            cell.checkBoxObject.tag = indexPath.row
-            cell.checkBoxObject.checkmarkStyle = .tick
-            cell.checkBoxObject.borderLineWidth = 0
-            cell.checkBoxObject.borderStyle = .circle
-            cell.checkBoxObject.checkmarkSize = 1
-            cell.checkBoxObject.checkmarkColor = .white
-//            cell.tag = indexPath.row
-//            deligateScreen2Container?.change_color(UIColor.blue)
+            cell.delegateScreen2Container = self
+            cell.setTag(tag: indexPath.row)
+            cell.startCell()
             return cell
         }
     }

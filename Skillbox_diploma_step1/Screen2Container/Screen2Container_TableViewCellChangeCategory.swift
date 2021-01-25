@@ -8,9 +8,9 @@
 import UIKit
 import SimpleCheckbox
 
-protocol protocolDataFromContainer: class {
-    func buttonDeleteItemHandler(_ tag: Int)
-    func checkBoxStatus(_ tag: Int,_ type: Bool)
+protocol protocolScreen2Container_TableViewCellChangeCategoryDeligate {
+//    func setTag(tag: Int)
+//    func startCell()
 }
 
 class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
@@ -19,12 +19,18 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     @IBOutlet var buttonDeleteItemObject: UIButton!
     @IBOutlet var checkBoxObject: Checkbox!
     
-    var deligateScreen2Container: protocolDataFromContainer?
+    var delegateScreen2Container: protocolScreen2ContainerDelegate?
+    var specCellTag: Int = 0
     
+    //анимация
+    @objc func closeWindows() {
+        delegateScreen2Container?.closeWindows(specCellTag)
+        print("ClosePopup from ContainerCell")
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        checkBoxObject.addTarget(self, action: #selector(checkboxValueChanged(sender:)), for: .valueChanged)
+        
         // Initialization code
     }
 
@@ -38,16 +44,34 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     
     
     @IBAction func buttonDeleteItem(_ sender: Any) {
-        deligateScreen2Container?.buttonDeleteItemHandler(checkBoxObject.tag)
+        delegateScreen2Container?.buttonDeleteItemHandler(checkBoxObject.tag)
     }
     
     @objc func checkboxValueChanged(sender: Checkbox) {
         switch checkBoxObject.isChecked {
         case true:
-            deligateScreen2Container?.checkBoxStatus(checkBoxObject.tag, true)
+            delegateScreen2Container?.checkBoxStatus(checkBoxObject.tag, true)
         case false:
-            deligateScreen2Container?.checkBoxStatus(checkBoxObject.tag, false)
+            delegateScreen2Container?.checkBoxStatus(checkBoxObject.tag, false)
         }
+    }
+    
+    func startCell() {
+        checkBoxObject.addTarget(self, action: #selector(checkboxValueChanged(sender:)), for: .valueChanged)
+        labelChangeCategory.text = delegateScreen2Container?.giveScreen2ContainerMenuArray()[specCellTag].name
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(closeWindows))
+        isUserInteractionEnabled = true
+        addGestureRecognizer(gesture)
+        checkBoxObject.tag = specCellTag
+        checkBoxObject.checkmarkStyle = .tick
+        checkBoxObject.borderLineWidth = 0
+        checkBoxObject.borderStyle = .circle
+        checkBoxObject.checkmarkSize = 1
+        checkBoxObject.checkmarkColor = .white
+    }
+    
+    func setTag(tag: Int) {
+        specCellTag = tag
     }
 
 }
