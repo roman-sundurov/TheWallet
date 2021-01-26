@@ -8,7 +8,9 @@
 import UIKit
 
 class Screen1TableViewCellHeader: UITableViewCell {
-
+    
+    @IBOutlet var labelHeaderDate: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

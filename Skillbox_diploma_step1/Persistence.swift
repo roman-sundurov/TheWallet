@@ -13,16 +13,18 @@ class ListOfOperations: Object{
     @objc dynamic var category: String = ""
     @objc dynamic var account: String = ""
     @objc dynamic var note: String = ""
+    @objc dynamic var amount: Double = 0
 }
 
 private let realm = try! Realm()
 
-func addOperations(isIncome: Bool, category: String, account: String, note: String){
+func addOperations(isIncome: Bool, category: String, account: String, note: String, amount: Double){
     let operation = ListOfOperations()
     operation.isIncome = isIncome
     operation.category = category
     operation.account = account
     operation.note = note
+    operation.amount = amount
     try! realm.write{
         realm.add(operation)
     }

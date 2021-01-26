@@ -1,5 +1,5 @@
 //
-//  Screen1TableViewCellOperation.swift
+//  Screen1TableViewCellCategory.swift
 //  Skillbox_diploma_step1
 //
 //  Created by Roman on 26.01.2021.
@@ -7,8 +7,12 @@
 
 import UIKit
 
-class Screen1TableViewCellOperation: UITableViewCell {
+class Screen1TableViewCellCategory: UITableViewCell {
 
+    @IBOutlet var viewPictureOfCategory: UIView!
+    @IBOutlet var labelCategory: UILabel!
+    @IBOutlet var labelAmount: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
