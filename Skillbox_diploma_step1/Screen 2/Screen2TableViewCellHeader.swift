@@ -1,5 +1,5 @@
 //
-//  TableViewCellNote.swift
+//  TableViewCellHeader.swift
 //  Skillbox_diploma_step1
 //
 //  Created by Roman on 19.01.2021.
@@ -7,10 +7,8 @@
 
 import UIKit
 
-class TableViewCellNote: UITableViewCell {
+class Screen2TableViewCellHeader: UITableViewCell {
 
-    @IBOutlet var textFieldNotes: UITextField!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -57,7 +57,7 @@ extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
     }
 
     func giveScreen2ContainerMenuArray() -> [Screen2ContainerMenuData] {
-        print (screen2ContainerMenuArray)
+//        print (screen2ContainerMenuArray)
         return screen2ContainerMenuArray
     }
     

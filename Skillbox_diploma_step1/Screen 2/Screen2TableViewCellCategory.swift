@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TableViewCellCategory: UITableViewCell {
+class Screen2TableViewCellCategory: UITableViewCell {
     
     @IBOutlet var labelCategory: UILabel!
     @IBOutlet var labelSelectCategory: UILabel!

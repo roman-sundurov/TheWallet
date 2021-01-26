@@ -103,16 +103,16 @@ extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! TableViewCellHeader
+            let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen2TableViewCellHeader
             return cell
         }
         else if indexPath.row > 3{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellNote") as! TableViewCellNote
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellNote") as! Screen2TableViewCellNote
             cell.textFieldNotes.text = screen2MenuArray[indexPath.row].text
             return cell
         }
         else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellCategory") as! TableViewCellCategory
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellCategory") as! Screen2TableViewCellCategory
             cell.labelCategory.text = screen2MenuArray[indexPath.row].name
             cell.labelSelectCategory.text = screen2MenuArray[indexPath.row].text
             let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategory(_:)))

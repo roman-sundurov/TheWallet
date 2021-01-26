@@ -9,6 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet var tableViewScreen1: UITableView!
     @IBOutlet var buttonDaily: UIView!
     @IBOutlet var buttonWeekly: UIView!
     @IBOutlet var buttonMonthly: UIView!
@@ -73,7 +74,6 @@ class ViewController: UIViewController {
     
     func borderForMenuBotton(_ specifyButton: UIView) {
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
-//            self.view.layoutIfNeeded()
             switch specifyButton {
             case self.buttonDaily:
                 self.topMenuButtonStrip.frame.origin.x = self.buttonDaily.frame.origin.x + 10
@@ -89,27 +89,29 @@ class ViewController: UIViewController {
         }, completion: {isCompleted in })
     }
     
-    
+    func screen1TableUpdate(){
+        let newTableData = getRealmData()
+        print(newTableData)
+    }
     
 //    -------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let redBox = UIView(frame: CGRect(x: 100, y: 100, width: 128, height: 128))
+//        addOperations(isIncome: true, category: "Salary", account: "Debet card", note: "Первая заметка")
+//        addOperations(isIncome: false, category: "Coffee", account: "Cash", note: "Вторая заметка")
+//        addOperations(isIncome: false, category: "Lease payable", account: "Debet card", note: "Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка.")
+        
+        screen1TableUpdate()
+        
+//работа с сохранением даты операции
+//        let calendar = Calendar.current
+//        print(calendar.component(.hour, from: Date()))
+//        print(Date.init())
+        
         bottomPopInList.backgroundColor = .red
-//        redBox.layer.cornerRadius = 25
-//        redBox.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-//        bottomPopInList.addSubview(redBox)
         bottomPopInList.layer.cornerRadius  = 20
         bottomPopInList.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-//        loadViewIfNeeded()
-        
-//        self.buttonMonthly.addSubview
-
-//        screenMain.backgroundColor = UIColor(cgColor: CGColor.init(srgbRed: 0.4, green: 0.74, blue: 0.75, alpha: 1))
-//        @IBDesignable @IBInspectable bottomPopInList
-        
-
         
         // Do any additional setup after loading the view.
     }
