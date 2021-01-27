@@ -339,11 +339,8 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="350" height="48"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DVs-fX-9Um">
-                                                                            <rect key="frame" x="53" y="12" width="95" height="24"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="width" constant="95" id="Ptl-w2-plp"/>
-                                                                            </constraints>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DVs-fX-9Um">
+                                                                            <rect key="frame" x="55" y="12" width="75" height="24"/>
                                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </label>
@@ -366,6 +363,7 @@
                                                                         <constraint firstItem="7mc-Q3-sOj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DVs-fX-9Um" secondAttribute="trailing" constant="10" id="c7B-qR-DuK"/>
                                                                         <constraint firstItem="yjw-O0-22c" firstAttribute="leading" secondItem="46B-Ab-Yrj" secondAttribute="leading" constant="15" id="fwN-7d-jye"/>
                                                                         <constraint firstAttribute="trailing" secondItem="7mc-Q3-sOj" secondAttribute="trailing" constant="15" id="n1i-ZC-1bC"/>
+                                                                        <constraint firstItem="DVs-fX-9Um" firstAttribute="leading" secondItem="yjw-O0-22c" secondAttribute="trailing" constant="10" id="ndc-HT-AHz"/>
                                                                         <constraint firstItem="7mc-Q3-sOj" firstAttribute="centerY" secondItem="46B-Ab-Yrj" secondAttribute="centerY" id="xnE-yg-cMZ"/>
                                                                         <constraint firstItem="yjw-O0-22c" firstAttribute="centerY" secondItem="46B-Ab-Yrj" secondAttribute="centerY" id="zMx-Wr-6Ip"/>
                                                                     </constraints>

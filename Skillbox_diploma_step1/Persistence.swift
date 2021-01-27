@@ -9,22 +9,22 @@ import Foundation
 import RealmSwift
 
 class ListOfOperations: Object{
-    @objc dynamic var isIncome: Bool = true
+    @objc dynamic var amount: Double = 0
     @objc dynamic var category: String = ""
     @objc dynamic var account: String = ""
     @objc dynamic var note: String = ""
-    @objc dynamic var amount: Double = 0
+    @objc dynamic var date: Date = Date.init()
 }
 
 private let realm = try! Realm()
 
-func addOperations(isIncome: Bool, category: String, account: String, note: String, amount: Double){
+func addOperations(amount: Double, category: String, account: String, note: String, date: Date){
     let operation = ListOfOperations()
-    operation.isIncome = isIncome
     operation.category = category
     operation.account = account
     operation.note = note
     operation.amount = amount
+    operation.date = date
     try! realm.write{
         realm.add(operation)
     }

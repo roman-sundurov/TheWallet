@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol protocolScreen2Delegate {
+protocol protocolScreen2Delegate{
     func closePopupWindow()
 }
 

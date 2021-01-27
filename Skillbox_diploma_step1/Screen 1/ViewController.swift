@@ -8,6 +8,12 @@
 import UIKit
 import RealmSwift
 
+protocol protocolScreen1Delegate{
+    func changeOperationsScope(scope: String)
+    func clickToOperation(tag: Int)
+    func findAmountOfHeaders()
+}
+
 class ViewController: UIViewController {
     
 //объявление аутлетов
@@ -90,18 +96,19 @@ class ViewController: UIViewController {
     
 //Работа с базой данных
     class Screen1TableData{
-        var isIncome: Bool
+        var amount: Double
         var category: String
         var account: String
         var note: String
-        var amount: Double
+        var date: Date
         
-        init(isIncome1: Bool, category1: String, account1: String, note1: String, amount1: Double) {
-            self.isIncome = isIncome1
+        init(amount1: Double, category1: String, account1: String, note1: String, date1: Date) {
+            self.amount = amount1
             self.category = category1
             self.account = account1
             self.note = note1
-            self.amount = amount1
+            self.date = date1
+            
         }
     }
     var newTableDataArray: [Screen1TableData] = []
@@ -109,7 +116,7 @@ class ViewController: UIViewController {
     func screen1TableUpdate(){
         let newTableData = getRealmData()
         for n in newTableData{
-            newTableDataArray.append(Screen1TableData(isIncome1: n.isIncome, category1: n.category, account1: n.account, note1: n.note, amount1: n.amount))
+            newTableDataArray.append(Screen1TableData(amount1: n.amount, category1: n.category, account1: n.account, note1: n.note, date1: n.date))
         }
 
         print(newTableData)
@@ -120,16 +127,32 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        addOperations(isIncome: true, category: "Salary", account: "Debet card", note: "Первая заметка")
-//        addOperations(isIncome: false, category: "Coffee", account: "Cash", note: "Вторая заметка")
-//        addOperations(isIncome: false, category: "Lease payable", account: "Debet card", note: "Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка.")
+        
+//Сохранени данных о времени
+    var dateComponents = DateComponents()
+    dateComponents.year = 2021
+    dateComponents.month = 1
+    dateComponents.day = 27
+    dateComponents.timeZone = TimeZone(abbreviation: "MSK") // Japan Standard Time
+    dateComponents.hour = 12
+    dateComponents.minute = 12
+    var userCalendar = Calendar(identifier: .gregorian)
+    var today = userCalendar.date(from: dateComponents)
+        var yesterday = today.
+    var dayBeforeYesterday = DateComponents()
+    dayBeforeYesterday.day = dayBeforeYesterday.day! - 2
+    addOperations(amount: 1200, category: "Salary", account: "Debet card", note: "Первая заметка", date: Date())
+    addOperations(amount: -600, category: "Coffee", account: "Cash", note: "Вторая заметка", date: yesterday.date!)
+    addOperations(amount: -200, category: "Lease payable", account: "Debet card", note: "Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка.", date: dayBeforeYesterday.date!)
+        
+        
         
         screen1TableUpdate()
         
 //работа с сохранением даты операции
 //        let calendar = Calendar.current
 //        print(calendar.component(.hour, from: Date()))
-//        print(Date.init())
+        print(Date.init())
         
         bottomPopInList.backgroundColor = .red
         bottomPopInList.layer.cornerRadius  = 20
@@ -139,6 +162,21 @@ class ViewController: UIViewController {
     }
 }
 
+extension ViewController: protocolScreen1Delegate{
+    func changeOperationsScope(scope: String) {
+        return
+    }
+    
+    func clickToOperation(tag: Int) {
+        return
+    }
+    
+    func findAmountOfHeaders() {
+        return
+    }
+    
+    
+}
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource{
 
@@ -147,18 +185,20 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newTableDataArray.count
+        return newTableDataArray.count + 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var specVarOmitIndex: Int = 0
         if indexPath.row == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
+            cell.labelHeaderDate.text = String(Calendar.current.component(.day, from: Date()))
             return cell
         }
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "operation") as! Screen1TableViewCellCategory
-            cell.labelCategory.text = newTableDataArray[indexPath.row].category
-            cell.labelAmount.text = String(newTableDataArray[indexPath.row].amount)
+            cell.labelCategory.text = newTableDataArray[indexPath.row - 1].category
+            cell.labelAmount.text = String(newTableDataArray[indexPath.row - 1].amount)
 //            let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategory(_:)))
 //            cell.isUserInteractionEnabled = true
 //            cell.addGestureRecognizer(gesture)
@@ -168,12 +208,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        if indexPath.row == 4 {
-            return 200
-        }
-        else{
-            return 50
-        }
+        return 50
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
