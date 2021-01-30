@@ -196,12 +196,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        specVarOmitIndex = 0
+        print("indexPath.row= \(indexPath.row)")
         if indexPath.row == 0{
             specVarOmitIndex = 1
+//            print("indexPath.row= \(indexPath.row)")
         } else if specVarOmitIndex == 0{
-            print("indexPath.row= \(indexPath.row)")
+//            print("indexPath.row= \(indexPath.row)")
             print("constantVarOmitIndex= \(constantVarOmitIndex)")
+            print("spec= \(indexPath.row - constantVarOmitIndex)")
             date1 = Calendar.current.component(.day, from: newTableDataArray[indexPath.row - constantVarOmitIndex].date)
             date2 = Calendar.current.component(.day, from: newTableDataArray[indexPath.row - constantVarOmitIndex - 1].date)
             
@@ -229,14 +231,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
             if newTableDataArray[indexPath.row - constantVarOmitIndex].amount < 0{
                 cell2.labelAmount.textColor = UIColor.red
                 cell2.currencyStatus.textColor = UIColor.red
-//                cell.labelAmount.text = String(newTableDataArray[indexPath.row - 1].amount * -1)
-//                cell.currencyStatus.text = "-$"
             }
             else{
                 cell2.labelAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
                 cell2.currencyStatus.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
-//                cell.labelAmount.text = String(newTableDataArray[indexPath.row - 1].amount)
-//                cell.currencyStatus.text = "$"
             }
 //            let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategory(_:)))
 //            cell.isUserInteractionEnabled = true
