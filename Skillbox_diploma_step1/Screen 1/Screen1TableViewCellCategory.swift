@@ -12,6 +12,7 @@ class Screen1TableViewCellCategory: UITableViewCell {
     @IBOutlet var viewPictureOfCategory: UIView!
     @IBOutlet var labelCategory: UILabel!
     @IBOutlet var labelAmount: UILabel!
+    @IBOutlet var currencyStatus: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

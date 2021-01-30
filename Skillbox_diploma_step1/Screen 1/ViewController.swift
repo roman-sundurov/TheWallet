@@ -29,6 +29,11 @@ class ViewController: UIViewController {
     @IBOutlet var labelYearly: UILabel!
     @IBOutlet var bottomPopInList: UIView!
     
+    var constantVarOmitIndex: Int = 0
+    var specVarOmitIndex: Int = 0
+    var date1: Int = 0
+    var date2: Int = 0
+    
     
 //обработка касаний экрана
     @IBAction func buttonDailyGesture(_ sender: Any) {
@@ -129,23 +134,16 @@ class ViewController: UIViewController {
         
         
 //Сохранени данных о времени
-    var dateComponents = DateComponents()
-    dateComponents.year = 2021
-    dateComponents.month = 1
-    dateComponents.day = 27
-    dateComponents.timeZone = TimeZone(abbreviation: "MSK") // Japan Standard Time
-    dateComponents.hour = 12
-    dateComponents.minute = 12
-    var userCalendar = Calendar(identifier: .gregorian)
-    var today = userCalendar.date(from: dateComponents)
-        var yesterday = today.
-    var dayBeforeYesterday = DateComponents()
-    dayBeforeYesterday.day = dayBeforeYesterday.day! - 2
-    addOperations(amount: 1200, category: "Salary", account: "Debet card", note: "Первая заметка", date: Date())
-    addOperations(amount: -600, category: "Coffee", account: "Cash", note: "Вторая заметка", date: yesterday.date!)
-    addOperations(amount: -200, category: "Lease payable", account: "Debet card", note: "Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка.", date: dayBeforeYesterday.date!)
-        
-        
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+//        let today = formatter.date(from: "2021/01/19 17:45")
+//        let yesterday = formatter.date(from: "2021/01/18 13:15")
+//        let a2DaysBefore = formatter.date(from: "2021/01/16 10:05")
+//
+//        addOperations(amount: 1200, category: "Salary", account: "Debet card", note: "Первая заметка", date: today!)
+//        addOperations(amount: -600, category: "Coffee", account: "Cash", note: "Вторая заметка", date: yesterday!)
+//        addOperations(amount: -200, category: "Lease payable", account: "Debet card", note: "Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка.", date: a2DaysBefore!)
+
         
         screen1TableUpdate()
         
@@ -185,25 +183,67 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newTableDataArray.count + 1
+        var varCount: Int = 0
+        var previousDay: Int = 0
+        for x in newTableDataArray {
+            if Calendar.current.component(.day, from: x.date) != previousDay{
+                varCount = varCount + 1
+                previousDay = Calendar.current.component(.day, from: x.date)
+            }
+        }
+        print("varCount= \(varCount)")
+        return newTableDataArray.count + varCount
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var specVarOmitIndex: Int = 0
+//        specVarOmitIndex = 0
         if indexPath.row == 0{
+            specVarOmitIndex = 1
+        } else if specVarOmitIndex == 0{
+            print("indexPath.row= \(indexPath.row)")
+            print("constantVarOmitIndex= \(constantVarOmitIndex)")
+            date1 = Calendar.current.component(.day, from: newTableDataArray[indexPath.row - constantVarOmitIndex].date)
+            date2 = Calendar.current.component(.day, from: newTableDataArray[indexPath.row - constantVarOmitIndex - 1].date)
+            
+            if date1 != date2{
+                specVarOmitIndex = 1
+            }
+        }
+        
+        if specVarOmitIndex == 1 {
+            print("spec3: ---")
             let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
-            cell.labelHeaderDate.text = String(Calendar.current.component(.day, from: Date()))
+            let formatterPrint = DateFormatter()
+            formatterPrint.dateFormat = "d MMMM"
+            print("777: \(formatterPrint.string(from: newTableDataArray[indexPath.row - constantVarOmitIndex].date))")
+            cell.labelHeaderDate.text = formatterPrint.string(from: newTableDataArray[indexPath.row - constantVarOmitIndex].date)
+            constantVarOmitIndex = constantVarOmitIndex + 1
+            specVarOmitIndex = 2
             return cell
         }
         else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "operation") as! Screen1TableViewCellCategory
-            cell.labelCategory.text = newTableDataArray[indexPath.row - 1].category
-            cell.labelAmount.text = String(newTableDataArray[indexPath.row - 1].amount)
+            print("spec4: ---")
+            let cell2 = tableView.dequeueReusableCell(withIdentifier: "operation") as! Screen1TableViewCellCategory
+            cell2.labelCategory.text = newTableDataArray[indexPath.row - constantVarOmitIndex].category
+            cell2.labelAmount.text = String(newTableDataArray[indexPath.row - constantVarOmitIndex].amount)
+            if newTableDataArray[indexPath.row - constantVarOmitIndex].amount < 0{
+                cell2.labelAmount.textColor = UIColor.red
+                cell2.currencyStatus.textColor = UIColor.red
+//                cell.labelAmount.text = String(newTableDataArray[indexPath.row - 1].amount * -1)
+//                cell.currencyStatus.text = "-$"
+            }
+            else{
+                cell2.labelAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
+                cell2.currencyStatus.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
+//                cell.labelAmount.text = String(newTableDataArray[indexPath.row - 1].amount)
+//                cell.currencyStatus.text = "$"
+            }
 //            let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategory(_:)))
 //            cell.isUserInteractionEnabled = true
 //            cell.addGestureRecognizer(gesture)
 //            cell.tag = indexPath.row
-            return cell
+            specVarOmitIndex = 0
+            return cell2
         }
     }
 
