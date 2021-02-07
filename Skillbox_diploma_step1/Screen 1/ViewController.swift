@@ -118,7 +118,7 @@ class ViewController: UIViewController {
     }
     
 // Работа с таблицей
-    
+    var specialArray: [Int] = []
     func tableNumberOfRowsInSection() -> Int{
         var varCount: Int = 0
         var previousDay: Int = 0
@@ -205,7 +205,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        specialArray = []
         print("indexPath.row= \(indexPath.row)")
+        specialArray.append(constantVarOmitIndex)
+        print("specialArray.count= \(specialArray.count)")
         if indexPath.row == 0{
             specVarOmitIndex = 1
 //            print("indexPath.row= \(indexPath.row)")
@@ -214,24 +217,26 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
             print("constantVarOmitIndex2= \(constantVarOmitIndex)")
             print("spec_amount2= \(indexPath.row - constantVarOmitIndex)")
 
-            
-            date1 = Calendar.current.component(.day, from: newTableDataArray[indexPath.row - constantVarOmitIndex].date)
-            date2 = Calendar.current.component(.day, from: newTableDataArray[indexPath.row - constantVarOmitIndex - 1].date)
+            var aaa: Int = specialArray[indexPath.row]
+            date1 = Calendar.current.component(.day, from: newTableDataArray[indexPath.row - aaa].date)
+            date2 = Calendar.current.component(.day, from: newTableDataArray[indexPath.row - aaa - 1].date)
             
             if date1 != date2{
                 specVarOmitIndex = 1
             }
         }
+        var aaa: Int = specialArray[indexPath.row]
         print("constantVarOmitIndex= \(constantVarOmitIndex)")
-        print("spec_amount= \(indexPath.row - constantVarOmitIndex)")
+        print("spec_amount= \(indexPath.row - aaa)")
         
         if specVarOmitIndex == 1 {
             print("spec3: ---")
             let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
             let formatterPrint = DateFormatter()
             formatterPrint.dateFormat = "d MMMM"
-            print("777: \(formatterPrint.string(from: newTableDataArray[indexPath.row - constantVarOmitIndex].date))")
-            cell.labelHeaderDate.text = formatterPrint.string(from: newTableDataArray[indexPath.row - constantVarOmitIndex].date)
+            var aaa: Int = specialArray[indexPath.row]
+            print("777: \(formatterPrint.string(from: newTableDataArray[indexPath.row - aaa].date))")
+            cell.labelHeaderDate.text = formatterPrint.string(from: newTableDataArray[indexPath.row - aaa].date)
             constantVarOmitIndex = constantVarOmitIndex + 1
             specVarOmitIndex = 2
             return cell
@@ -239,9 +244,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         else {
             print("spec4: ---")
             let cell2 = tableView.dequeueReusableCell(withIdentifier: "operation") as! Screen1TableViewCellCategory
-            cell2.labelCategory.text = newTableDataArray[indexPath.row - constantVarOmitIndex].category
-            cell2.labelAmount.text = String(newTableDataArray[indexPath.row - constantVarOmitIndex].amount)
-            if newTableDataArray[indexPath.row - constantVarOmitIndex].amount < 0{
+            var aaa: Int = specialArray[indexPath.row]
+            cell2.labelCategory.text = newTableDataArray[indexPath.row - aaa].category
+            cell2.labelAmount.text = String(newTableDataArray[indexPath.row - aaa].amount)
+            if newTableDataArray[indexPath.row - aaa].amount < 0{
                 cell2.labelAmount.textColor = UIColor.red
                 cell2.currencyStatus.textColor = UIColor.red
             }
