@@ -13,7 +13,14 @@ class Screen2TableViewCellCategory: UITableViewCell {
     @IBOutlet var labelSelectCategory: UILabel!
     @IBOutlet var buttonSelectCategory: UIButton!
     
-//    var tag: Int
+    var deligateScreen2: protocolScreen2Delegate?
+    var specCellTag: Int = 0
+
+//Анимация
+    @objc func changeCategory(_ tag: Int) {
+        deligateScreen2?.changeCategory(specCellTag)
+        print("ChangeCategory from Screen2")
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,5 +35,17 @@ class Screen2TableViewCellCategory: UITableViewCell {
 //        var deligateContainerViewScreen2: UIView
 
         // Configure the view for the selected state
+    }
+    
+    func startCell() {
+        labelCategory.text = deligateScreen2?.getScreen2MenuArray()[specCellTag].name
+        labelSelectCategory.text = deligateScreen2?.getScreen2MenuArray()[specCellTag].text
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategory(_:)))
+        self.isUserInteractionEnabled = true
+        self.addGestureRecognizer(gesture)
+    }
+    
+    func setTag(tag: Int) {
+        specCellTag = tag
     }
 }

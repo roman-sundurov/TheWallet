@@ -12,6 +12,24 @@ protocol protocolScreen1Delegate{
     func changeOperationsScope(scope: String)
     func clickToOperation(tag: Int)
     func findAmountOfHeaders()
+    func getNewTableDataArray() -> [Screen1TableData]
+    func getArrayForIncrease() -> [Int]
+}
+
+class Screen1TableData{
+    var amount: Double
+    var category: String
+    var account: String
+    var note: String
+    var date: Date
+    
+    init(amount1: Double, category1: String, account1: String, note1: String, date1: Date) {
+        self.amount = amount1
+        self.category = category1
+        self.account = account1
+        self.note = note1
+        self.date = date1
+    }
 }
 
 class ViewController: UIViewController {
@@ -94,24 +112,8 @@ class ViewController: UIViewController {
         }, completion: {isCompleted in })
     }
     
-//Работа с базой данных
-    class Screen1TableData{
-        var amount: Double
-        var category: String
-        var account: String
-        var note: String
-        var date: Date
-        
-        init(amount1: Double, category1: String, account1: String, note1: String, date1: Date) {
-            self.amount = amount1
-            self.category = category1
-            self.account = account1
-            self.note = note1
-            self.date = date1
-        }
-    }
     
-// Работа с таблицей
+// Работа с таблицей и базой данных
     var date1: Int = 0
     var date2: Int = 0
     var arrayForIncrease: [Int] = [0]
@@ -144,14 +146,11 @@ class ViewController: UIViewController {
     
     var newTableDataArray: [Screen1TableData] = []
     func screen1TableUpdate(){
-//        let newTableData = Persistence.shared.getRealmData()
         newTableDataArray = []
         for n in Persistence.shared.getRealmData(){
             newTableDataArray.append(Screen1TableData(amount1: n.amount, category1: n.category, account1: n.account, note1: n.note, date1: n.date))
             print("n: \(n)")
         }
-
-//        print("newTableDataArray: \(newTableDataArray)")
         print("newTableDataArray.count: \(newTableDataArray.count)")
     }
     
@@ -161,15 +160,15 @@ class ViewController: UIViewController {
         
         
 //Сохранени данных о времени
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "yyyy/MM/dd HH:mm"
-//        let today = formatter.date(from: "2021/01/11 17:45")
-//        let yesterday = formatter.date(from: "2021/01/12 13:15")
-//        let a2DaysBefore = formatter.date(from: "2021/01/17 10:05")
-////////
-//        Persistence.shared.addOperations(amount: 1200, category: "Salary", account: "Debet card", note: "Первая заметка", date: today!)
-//        Persistence.shared.addOperations(amount: -600, category: "Coffee", account: "Cash", note: "Вторая заметка", date: yesterday!)
-//        Persistence.shared.addOperations(amount: -200, category: "Lease payable", account: "Debet card", note: "Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка.", date: a2DaysBefore!)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        let today = formatter.date(from: "2021/01/10 17:45")
+        let yesterday = formatter.date(from: "2021/01/11 13:15")
+        let a2DaysBefore = formatter.date(from: "2021/01/15 10:05")
+//////
+        Persistence.shared.addOperations(amount: 1200, category: "Salary", account: "Debet card", note: "Первая заметка", date: today!)
+        Persistence.shared.addOperations(amount: -600, category: "Coffee", account: "Cash", note: "Вторая заметка", date: yesterday!)
+        Persistence.shared.addOperations(amount: -200, category: "Lease payable", account: "Debet card", note: "Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка.", date: a2DaysBefore!)
 
         
         screen1TableUpdate()
@@ -188,6 +187,15 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: protocolScreen1Delegate{
+    
+    func getArrayForIncrease() -> [Int]{
+        return arrayForIncrease
+    }
+    
+    func getNewTableDataArray() -> [Screen1TableData] {
+        return newTableDataArray
+    }
+    
     func changeOperationsScope(scope: String) {
         return
     }
@@ -225,42 +233,24 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         }
         else{
             if indexPath.row == 0 {
-                print("Header1: ---")
                 let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
-                let formatterPrint = DateFormatter()
-                formatterPrint.dateFormat = "d MMMM"
-                print("111: \(formatterPrint.string(from: newTableDataArray[indexPath.row].date))")
-                cell.labelHeaderDate.text = formatterPrint.string(from: newTableDataArray[indexPath.row].date)
+                cell.deligateScreen1 = self
+                cell.setTag(tag: indexPath.row)
+                cell.startCell()
                 return cell
             }
             else if arrayForIncrease[indexPath.row] != arrayForIncrease[indexPath.row - 1] {
-                print("Header2: ---")
                 let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
-                let formatterPrint = DateFormatter()
-                formatterPrint.dateFormat = "d MMMM"
-                print("222: \(formatterPrint.string(from: newTableDataArray[indexPath.row - arrayForIncrease[indexPath.row - 1]].date))")
-                cell.labelHeaderDate.text = formatterPrint.string(from: newTableDataArray[indexPath.row - arrayForIncrease[indexPath.row - 1]].date)
+                cell.deligateScreen1 = self
+                cell.setTag(tag: indexPath.row)
+                cell.startCell2()
                 return cell
             }
             else {
-                print("Simple Cell: ---")
-    //            date1 = Calendar.current.component(.day, from: newTableDataArray[indexPath.row - arrayForIncrease[indexPath.row]].date)
-    //            date2 = Calendar.current.component(.day, from: newTableDataArray[indexPath.row - arrayForIncrease[indexPath.row]-1].date)
                 let cell = tableView.dequeueReusableCell(withIdentifier: "operation") as! Screen1TableViewCellCategory
-                cell.labelCategory.text = newTableDataArray[indexPath.row - arrayForIncrease[indexPath.row]].category
-                cell.labelAmount.text = String(newTableDataArray[indexPath.row - arrayForIncrease[indexPath.row]].amount)
-                if newTableDataArray[indexPath.row - arrayForIncrease[indexPath.row]].amount < 0{
-                    cell.labelAmount.textColor = UIColor.red
-                    cell.currencyStatus.textColor = UIColor.red
-                }
-                else{
-                    cell.labelAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
-                    cell.currencyStatus.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
-                }
-    //            let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategory(_:)))
-    //            cell.isUserInteractionEnabled = true
-    //            cell.addGestureRecognizer(gesture)
-    //            cell.tag = indexPath.row
+                cell.deligateScreen1 = self
+                cell.setTag(tag: indexPath.row)
+                cell.startCell()
                 return cell
             }
         }

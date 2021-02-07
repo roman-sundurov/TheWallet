@@ -9,6 +9,13 @@ import UIKit
 
 protocol protocolScreen2Delegate{
     func closePopupWindow()
+    func getScreen2MenuArray() -> [Screen2MenuData]
+    func changeCategory(_ tag: Int)
+}
+
+struct Screen2MenuData {
+    let name: String
+    let text: String
 }
 
 class ViewControllerScreen2: UIViewController {
@@ -38,11 +45,7 @@ class ViewControllerScreen2: UIViewController {
     
     //работа с данными на экране
     
-    struct Screen2MenuData {
-        let name: String
-        let text: String
-    }
-    
+        
     var screen2MenuArray: [Screen2MenuData] = []
     
     let Screen2MenuList0 = Screen2MenuData(name: "Header", text: "")
@@ -61,7 +64,17 @@ class ViewControllerScreen2: UIViewController {
         }
     }
     
-    @objc func changeCategory(_ tag: Int) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        screen2MenuArray = [Screen2MenuList0, Screen2MenuList1, Screen2MenuList2, Screen2MenuList3, Screen2MenuList4]
+        
+    }
+}
+
+extension ViewControllerScreen2: protocolScreen2Delegate{
+    
+    func changeCategory(_ tag: Int) {
 //        conteinerBottom.layer.borderWidth = 3
 //        conteinerBottom.layer.borderColor = UIColor.red.cgColor
         self.conteinerBottom.layer.cornerRadius  = 20
@@ -73,15 +86,10 @@ class ViewControllerScreen2: UIViewController {
         }, completion: {isCompleted in })
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        screen2MenuArray = [Screen2MenuList0, Screen2MenuList1, Screen2MenuList2, Screen2MenuList3, Screen2MenuList4]
-        
+    func getScreen2MenuArray() -> [Screen2MenuData] {
+        return screen2MenuArray
     }
-}
-
-extension ViewControllerScreen2: protocolScreen2Delegate{
+    
     //закрытие окна
     @objc func closePopupWindow() {
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
@@ -108,17 +116,18 @@ extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
         }
         else if indexPath.row > 3{
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellNote") as! Screen2TableViewCellNote
-            cell.textFieldNotes.text = screen2MenuArray[indexPath.row].text
+            cell.deligateScreen2 = self
+            cell.setTag(tag: indexPath.row)
+            cell.startCell()
+            
+//            cell.textFieldNotes.text = screen2MenuArray[indexPath.row].text
             return cell
         }
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellCategory") as! Screen2TableViewCellCategory
-            cell.labelCategory.text = screen2MenuArray[indexPath.row].name
-            cell.labelSelectCategory.text = screen2MenuArray[indexPath.row].text
-            let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategory(_:)))
-            cell.isUserInteractionEnabled = true
-            cell.addGestureRecognizer(gesture)
-            cell.tag = indexPath.row
+            cell.deligateScreen2 = self
+            cell.setTag(tag: indexPath.row)
+            cell.startCell()
             return cell
         }
     }

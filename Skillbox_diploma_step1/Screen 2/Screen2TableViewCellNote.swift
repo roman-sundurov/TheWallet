@@ -11,6 +11,9 @@ class Screen2TableViewCellNote: UITableViewCell {
 
     @IBOutlet var textFieldNotes: UITextField!
     
+    var deligateScreen2: protocolScreen2Delegate?
+    var specCellTag: Int = 0
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,5 +24,13 @@ class Screen2TableViewCellNote: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    func startCell() {
+        textFieldNotes.text = deligateScreen2?.getScreen2MenuArray()[specCellTag].text
+    }
+    
+    func setTag(tag: Int) {
+        specCellTag = tag
+    }
+    
 }

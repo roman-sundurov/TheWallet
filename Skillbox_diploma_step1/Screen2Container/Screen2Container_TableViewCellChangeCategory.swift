@@ -8,11 +8,6 @@
 import UIKit
 import SimpleCheckbox
 
-protocol protocolScreen2Container_TableViewCellChangeCategoryDeligate {
-//    func setTag(tag: Int)
-//    func startCell()
-}
-
 class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     
     @IBOutlet var labelChangeCategory: UILabel!
