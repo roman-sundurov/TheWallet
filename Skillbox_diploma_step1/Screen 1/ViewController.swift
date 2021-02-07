@@ -29,11 +29,6 @@ class ViewController: UIViewController {
     @IBOutlet var labelYearly: UILabel!
     @IBOutlet var bottomPopInList: UIView!
     
-    var constantVarOmitIndex: Int = 0
-    var specVarOmitIndex: Int = 0
-    var date1: Int = 0
-    var date2: Int = 0
-    
     
 //обработка касаний экрана
     @IBAction func buttonDailyGesture(_ sender: Any) {
@@ -113,24 +108,38 @@ class ViewController: UIViewController {
             self.account = account1
             self.note = note1
             self.date = date1
-            
         }
     }
     
 // Работа с таблицей
-    var specialArray: [Int] = []
+    var date1: Int = 0
+    var date2: Int = 0
+    var arrayForIncrease: [Int] = [0]
     func tableNumberOfRowsInSection() -> Int{
-        var varCount: Int = 0
+        arrayForIncrease = [1]
         var previousDay: Int = 0
+        var counter: Int = 0
         for x in newTableDataArray {
             if Calendar.current.component(.day, from: x.date) != previousDay{
-                varCount = varCount + 1
+                if counter == 0 {
+//                    arrayForIncrease.append(arrayForIncrease.last!)
+//                    arrayForIncrease.append(arrayForIncrease.last! + 1)
+                }
+                else{
+                    arrayForIncrease.append(arrayForIncrease.last!)
+                    arrayForIncrease.append(arrayForIncrease.last! + 1)
+                }
                 previousDay = Calendar.current.component(.day, from: x.date)
             }
+            else {
+                arrayForIncrease.append(arrayForIncrease.last!)
+            }
+            counter += 1
         }
-        print("varCount= \(varCount)")
-        print("newTableDataArray.count= \(newTableDataArray.count)")
-        return newTableDataArray.count + varCount
+        arrayForIncrease.append(arrayForIncrease.last!)
+        print("max inrease= \(arrayForIncrease.last!)")
+        print("arrayForIncrease= \(arrayForIncrease)")
+        return arrayForIncrease.count
     }
     
     var newTableDataArray: [Screen1TableData] = []
@@ -152,12 +161,12 @@ class ViewController: UIViewController {
         
         
 //Сохранени данных о времени
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd HH:mm"
-//        let today = formatter.date(from: "2021/01/19 17:45")
-//        let yesterday = formatter.date(from: "2021/01/18 13:15")
-//        let a2DaysBefore = formatter.date(from: "2021/01/16 10:05")
-//
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+//        let today = formatter.date(from: "2021/01/11 17:45")
+//        let yesterday = formatter.date(from: "2021/01/12 13:15")
+//        let a2DaysBefore = formatter.date(from: "2021/01/17 10:05")
+////////
 //        Persistence.shared.addOperations(amount: 1200, category: "Salary", account: "Debet card", note: "Первая заметка", date: today!)
 //        Persistence.shared.addOperations(amount: -600, category: "Coffee", account: "Cash", note: "Вторая заметка", date: yesterday!)
 //        Persistence.shared.addOperations(amount: -200, category: "Lease payable", account: "Debet card", note: "Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка.", date: a2DaysBefore!)
@@ -205,63 +214,62 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        specialArray = []
         print("indexPath.row= \(indexPath.row)")
-        specialArray.append(constantVarOmitIndex)
-        print("specialArray.count= \(specialArray.count)")
-        if indexPath.row == 0{
-            specVarOmitIndex = 1
-//            print("indexPath.row= \(indexPath.row)")
-        } else if specVarOmitIndex == 0{
-//            print("indexPath.row= \(indexPath.row)")
-            print("constantVarOmitIndex2= \(constantVarOmitIndex)")
-            print("spec_amount2= \(indexPath.row - constantVarOmitIndex)")
-
-            var aaa: Int = specialArray[indexPath.row]
-            date1 = Calendar.current.component(.day, from: newTableDataArray[indexPath.row - aaa].date)
-            date2 = Calendar.current.component(.day, from: newTableDataArray[indexPath.row - aaa - 1].date)
-            
-            if date1 != date2{
-                specVarOmitIndex = 1
-            }
-        }
-        var aaa: Int = specialArray[indexPath.row]
-        print("constantVarOmitIndex= \(constantVarOmitIndex)")
-        print("spec_amount= \(indexPath.row - aaa)")
-        
-        if specVarOmitIndex == 1 {
-            print("spec3: ---")
+        print("arrayForIncrease[indexPath.row]= \(arrayForIncrease[indexPath.row])")
+        if newTableDataArray.isEmpty{
+            print("newTableDataArray is empty")
             let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
-            let formatterPrint = DateFormatter()
-            formatterPrint.dateFormat = "d MMMM"
-            var aaa: Int = specialArray[indexPath.row]
-            print("777: \(formatterPrint.string(from: newTableDataArray[indexPath.row - aaa].date))")
-            cell.labelHeaderDate.text = formatterPrint.string(from: newTableDataArray[indexPath.row - aaa].date)
-            constantVarOmitIndex = constantVarOmitIndex + 1
-            specVarOmitIndex = 2
+            cell.labelHeaderDate.text = "newTableDataArray is empty"
             return cell
+
         }
-        else {
-            print("spec4: ---")
-            let cell2 = tableView.dequeueReusableCell(withIdentifier: "operation") as! Screen1TableViewCellCategory
-            var aaa: Int = specialArray[indexPath.row]
-            cell2.labelCategory.text = newTableDataArray[indexPath.row - aaa].category
-            cell2.labelAmount.text = String(newTableDataArray[indexPath.row - aaa].amount)
-            if newTableDataArray[indexPath.row - aaa].amount < 0{
-                cell2.labelAmount.textColor = UIColor.red
-                cell2.currencyStatus.textColor = UIColor.red
+        else{
+            if indexPath.row == 0 {
+                print("Header1: ---")
+                let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
+                let formatterPrint = DateFormatter()
+                formatterPrint.dateFormat = "d MMMM"
+                print("111: \(formatterPrint.string(from: newTableDataArray[indexPath.row].date))")
+                cell.labelHeaderDate.text = formatterPrint.string(from: newTableDataArray[indexPath.row].date)
+                return cell
             }
-            else{
-                cell2.labelAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
-                cell2.currencyStatus.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
+            else if arrayForIncrease[indexPath.row] != arrayForIncrease[indexPath.row - 1] {
+                print("Header2: ---")
+                let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
+                let formatterPrint = DateFormatter()
+                formatterPrint.dateFormat = "d MMMM"
+                print("222: \(formatterPrint.string(from: newTableDataArray[indexPath.row - arrayForIncrease[indexPath.row - 1]].date))")
+                cell.labelHeaderDate.text = formatterPrint.string(from: newTableDataArray[indexPath.row - arrayForIncrease[indexPath.row - 1]].date)
+                return cell
             }
+            else {
+                print("Simple Cell: ---")
+    //            date1 = Calendar.current.component(.day, from: newTableDataArray[indexPath.row - arrayForIncrease[indexPath.row]].date)
+    //            date2 = Calendar.current.component(.day, from: newTableDataArray[indexPath.row - arrayForIncrease[indexPath.row]-1].date)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "operation") as! Screen1TableViewCellCategory
+                cell.labelCategory.text = newTableDataArray[indexPath.row - arrayForIncrease[indexPath.row]].category
+                cell.labelAmount.text = String(newTableDataArray[indexPath.row - arrayForIncrease[indexPath.row]].amount)
+                if newTableDataArray[indexPath.row - arrayForIncrease[indexPath.row]].amount < 0{
+                    cell.labelAmount.textColor = UIColor.red
+                    cell.currencyStatus.textColor = UIColor.red
+                }
+                else{
+                    cell.labelAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
+                    cell.currencyStatus.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
+                }
+    //            let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategory(_:)))
+    //            cell.isUserInteractionEnabled = true
+    //            cell.addGestureRecognizer(gesture)
+    //            cell.tag = indexPath.row
+                return cell
+            }
+        }
+        
 //            let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategory(_:)))
 //            cell.isUserInteractionEnabled = true
 //            cell.addGestureRecognizer(gesture)
 //            cell.tag = indexPath.row
-            specVarOmitIndex = 0
-            return cell2
-        }
+
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
