@@ -116,16 +116,34 @@ class ViewController: UIViewController {
             
         }
     }
-    var newTableDataArray: [Screen1TableData] = []
     
+// Работа с таблицей
+    
+    func tableNumberOfRowsInSection() -> Int{
+        var varCount: Int = 0
+        var previousDay: Int = 0
+        for x in newTableDataArray {
+            if Calendar.current.component(.day, from: x.date) != previousDay{
+                varCount = varCount + 1
+                previousDay = Calendar.current.component(.day, from: x.date)
+            }
+        }
+        print("varCount= \(varCount)")
+        print("newTableDataArray.count= \(newTableDataArray.count)")
+        return newTableDataArray.count + varCount
+    }
+    
+    var newTableDataArray: [Screen1TableData] = []
     func screen1TableUpdate(){
-        let newTableData = getRealmData()
-        for n in newTableData{
+//        let newTableData = Persistence.shared.getRealmData()
+        newTableDataArray = []
+        for n in Persistence.shared.getRealmData(){
             newTableDataArray.append(Screen1TableData(amount1: n.amount, category1: n.category, account1: n.account, note1: n.note, date1: n.date))
+            print("n: \(n)")
         }
 
-        print(newTableData)
-        print(newTableData.count)
+//        print("newTableDataArray: \(newTableDataArray)")
+        print("newTableDataArray.count: \(newTableDataArray.count)")
     }
     
 //    -------------------------------------
@@ -134,15 +152,15 @@ class ViewController: UIViewController {
         
         
 //Сохранени данных о времени
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
 //        let today = formatter.date(from: "2021/01/19 17:45")
 //        let yesterday = formatter.date(from: "2021/01/18 13:15")
 //        let a2DaysBefore = formatter.date(from: "2021/01/16 10:05")
 //
-//        addOperations(amount: 1200, category: "Salary", account: "Debet card", note: "Первая заметка", date: today!)
-//        addOperations(amount: -600, category: "Coffee", account: "Cash", note: "Вторая заметка", date: yesterday!)
-//        addOperations(amount: -200, category: "Lease payable", account: "Debet card", note: "Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка.", date: a2DaysBefore!)
+//        Persistence.shared.addOperations(amount: 1200, category: "Salary", account: "Debet card", note: "Первая заметка", date: today!)
+//        Persistence.shared.addOperations(amount: -600, category: "Coffee", account: "Cash", note: "Вторая заметка", date: yesterday!)
+//        Persistence.shared.addOperations(amount: -200, category: "Lease payable", account: "Debet card", note: "Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка.", date: a2DaysBefore!)
 
         
         screen1TableUpdate()
@@ -183,16 +201,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var varCount: Int = 0
-        var previousDay: Int = 0
-        for x in newTableDataArray {
-            if Calendar.current.component(.day, from: x.date) != previousDay{
-                varCount = varCount + 1
-                previousDay = Calendar.current.component(.day, from: x.date)
-            }
-        }
-        print("varCount= \(varCount)")
-        return newTableDataArray.count + varCount
+        return tableNumberOfRowsInSection()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -202,8 +211,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
 //            print("indexPath.row= \(indexPath.row)")
         } else if specVarOmitIndex == 0{
 //            print("indexPath.row= \(indexPath.row)")
-            print("constantVarOmitIndex= \(constantVarOmitIndex)")
-            print("spec= \(indexPath.row - constantVarOmitIndex)")
+            print("constantVarOmitIndex2= \(constantVarOmitIndex)")
+            print("spec_amount2= \(indexPath.row - constantVarOmitIndex)")
+
+            
             date1 = Calendar.current.component(.day, from: newTableDataArray[indexPath.row - constantVarOmitIndex].date)
             date2 = Calendar.current.component(.day, from: newTableDataArray[indexPath.row - constantVarOmitIndex - 1].date)
             
@@ -211,6 +222,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
                 specVarOmitIndex = 1
             }
         }
+        print("constantVarOmitIndex= \(constantVarOmitIndex)")
+        print("spec_amount= \(indexPath.row - constantVarOmitIndex)")
         
         if specVarOmitIndex == 1 {
             print("spec3: ---")

@@ -16,28 +16,32 @@ class ListOfOperations: Object{
     @objc dynamic var date: Date = Date.init()
 }
 
-private let realm = try! Realm()
-
-func addOperations(amount: Double, category: String, account: String, note: String, date: Date){
-    let operation = ListOfOperations()
-    operation.category = category
-    operation.account = account
-    operation.note = note
-    operation.amount = amount
-    operation.date = date
-    try! realm.write{
-        realm.add(operation)
-    }
-}
+class Persistence{
     
-func getRealmData() -> Results<ListOfOperations>{
-    let allOperations = realm.objects(ListOfOperations.self)
-    return allOperations
-}
+    static let shared = Persistence()
+    private let realm = try! Realm()
 
-func deleteRealmData(tag: Int){
-    let allOperations = realm.objects(ListOfOperations.self)
-    try! realm.write{
-        realm.delete(allOperations[tag])
+    func addOperations(amount: Double, category: String, account: String, note: String, date: Date){
+        let operation = ListOfOperations()
+        operation.category = category
+        operation.account = account
+        operation.note = note
+        operation.amount = amount
+        operation.date = date
+        try! realm.write{
+            realm.add(operation)
+        }
+    }
+        
+    func getRealmData() -> Results<ListOfOperations>{
+        let allOperations = realm.objects(ListOfOperations.self)
+        return allOperations
+    }
+
+    func deleteRealmData(tag: Int){
+        let allOperations = realm.objects(ListOfOperations.self)
+        try! realm.write{
+            realm.delete(allOperations[tag])
+        }
     }
 }
