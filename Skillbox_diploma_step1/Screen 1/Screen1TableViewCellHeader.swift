@@ -28,7 +28,7 @@ class Screen1TableViewCellHeader: UITableViewCell {
     func startCell() {
         print("Header1: ---")
         let formatterPrint = DateFormatter()
-        formatterPrint.dateFormat = "d MMMM"
+        formatterPrint.dateFormat = "d MMMM YYYY"
         print("111: \(formatterPrint.string(from: deligateScreen1!.getNewTableDataArray()[specCellTag].date))")
         labelHeaderDate.text = formatterPrint.string(from: deligateScreen1!.getNewTableDataArray()[specCellTag].date)
     }
@@ -36,7 +36,7 @@ class Screen1TableViewCellHeader: UITableViewCell {
     func startCell2() {
         print("Header2: ---")
         let formatterPrint = DateFormatter()
-        formatterPrint.dateFormat = "d MMMM"
+        formatterPrint.dateFormat = "d MMMM YYYY"
         let specVar: Int = specCellTag - deligateScreen1!.getArrayForIncrease()[specCellTag - 1]
         print("222: \(formatterPrint.string(from: deligateScreen1!.getNewTableDataArray()[specVar].date))")
         labelHeaderDate.text = formatterPrint.string(from: deligateScreen1!.getNewTableDataArray()[specVar].date)

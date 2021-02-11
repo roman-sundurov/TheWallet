@@ -52,19 +52,24 @@ class ViewController: UIViewController {
     @IBAction func buttonDailyGesture(_ sender: Any) {
 //        topMenuHighliter(specifyLabel: labelDaily)
         borderForMenuBotton(buttonDaily)
+        screen1TableUpdateSorting(days: 1)
     }
     @IBAction func buttonWeeklyGesture(_ sender: Any) {
 //        topMenuHighliter(specifyLabel: labelWeekly)
         borderForMenuBotton(buttonWeekly)
+        screen1TableUpdateSorting(days: 7)
     }
     @IBAction func buttonMonthlyGesture(_ sender: Any) {
 //        topMenuHighliter(specifyLabel: labelMothly)
         borderForMenuBotton(buttonMonthly)
+        screen1TableUpdateSorting(days: 30)
     }
     @IBAction func buttonYearlyGesture(_ sender: Any) {
 //        topMenuHighliter(specifyLabel: labelYearly)
         borderForMenuBotton(buttonYearly)
+        screen1TableUpdateSorting(days: 365)
     }
+
     
 //Компоновка экрана
     func topMenuHighliter(specifyLabel: UILabel){
@@ -117,6 +122,7 @@ class ViewController: UIViewController {
     var date1: Int = 0
     var date2: Int = 0
     var arrayForIncrease: [Int] = [0]
+    
     func tableNumberOfRowsInSection() -> Int{
         arrayForIncrease = [1]
         var previousDay: Int = 0
@@ -144,14 +150,29 @@ class ViewController: UIViewController {
         return arrayForIncrease.count
     }
     
+    var newTableDataArrayOriginal: [Screen1TableData] = []
     var newTableDataArray: [Screen1TableData] = []
+    
     func screen1TableUpdate(){
-        newTableDataArray = []
+        newTableDataArrayOriginal = []
         for n in Persistence.shared.getRealmData(){
-            newTableDataArray.append(Screen1TableData(amount1: n.amount, category1: n.category, account1: n.account, note1: n.note, date1: n.date))
-            print("n: \(n)")
+            newTableDataArrayOriginal.append(Screen1TableData(amount1: n.amount, category1: n.category, account1: n.account, note1: n.note, date1: n.date))
         }
+        newTableDataArray = newTableDataArrayOriginal
+        newTableDataArray.sort(by: { $0.date > $1.date })
         print("newTableDataArray.count: \(newTableDataArray.count)")
+    }
+    
+    func screen1TableUpdateSorting(days: Int){
+        let newTime = Date() - TimeInterval.init(86400 * days)
+        
+//        let gregorian = Calendar(identifier: .gregorian)
+//        let today = gregorian.date(from: gregorian.dateComponents([.day], from: NSDate() as Date))
+//        print("today= \(today)")
+//        gregorian.date(byAdding: .day, value: -dateAfter, to: today!)
+//        print("gregorian= \(gregorian.dateComponents([.day], from: today!))")
+        
+        newTableDataArray = newTableDataArray.filter { $0.date >= newTime }
     }
     
 //    -------------------------------------
@@ -160,15 +181,15 @@ class ViewController: UIViewController {
         
         
 //Сохранени данных о времени
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd HH:mm"
-        let today = formatter.date(from: "2021/01/10 17:45")
-        let yesterday = formatter.date(from: "2021/01/11 13:15")
-        let a2DaysBefore = formatter.date(from: "2021/01/15 10:05")
-//////
-        Persistence.shared.addOperations(amount: 1200, category: "Salary", account: "Debet card", note: "Первая заметка", date: today!)
-        Persistence.shared.addOperations(amount: -600, category: "Coffee", account: "Cash", note: "Вторая заметка", date: yesterday!)
-        Persistence.shared.addOperations(amount: -200, category: "Lease payable", account: "Debet card", note: "Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка.", date: a2DaysBefore!)
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+//        let today = formatter.date(from: "2021/02/10 17:45")
+//        let yesterday = formatter.date(from: "2021/02/11 13:15")
+//        let a2DaysBefore = formatter.date(from: "2021/02/15 10:05")
+////////
+//        Persistence.shared.addOperations(amount: 1200, category: "Salary", account: "Debet card", note: "Первая заметка", date: today!)
+//        Persistence.shared.addOperations(amount: -600, category: "Coffee", account: "Cash", note: "Вторая заметка", date: yesterday!)
+//        Persistence.shared.addOperations(amount: -200, category: "Lease payable", account: "Debet card", note: "Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка.", date: a2DaysBefore!)
 
         
         screen1TableUpdate()
