@@ -692,6 +692,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="EOk-oA-Pj3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="7hO-0B-VtP" firstAttribute="leading" secondItem="EOk-oA-Pj3" secondAttribute="leading" id="5Ob-2t-L3S"/>
                             <constraint firstItem="EOk-oA-Pj3" firstAttribute="trailing" secondItem="7hO-0B-VtP" secondAttribute="trailing" id="6n5-dA-3Yb"/>
@@ -710,6 +711,9 @@
                             <constraint firstItem="7hO-0B-VtP" firstAttribute="top" secondItem="sPN-8l-rqe" secondAttribute="bottom" constant="10" id="uKH-Sa-1cA"/>
                             <constraint firstItem="EOk-oA-Pj3" firstAttribute="trailing" secondItem="kKJ-BS-QlT" secondAttribute="trailing" id="uhj-g0-WYk"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="cCf-gV-VbB" appends="YES" id="Kdd-rc-xCN"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="kgp-1m-6eG"/>
                     <connections>
@@ -723,6 +727,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HMB-Ic-meT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="cCf-gV-VbB">
+                    <connections>
+                        <action selector="areaOutsideHideContainerGesture:" destination="fcp-GB-FKl" id="b20-mO-ADt"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="904.61538461538453" y="114.45497630331754"/>
         </scene>

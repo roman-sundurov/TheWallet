@@ -191,9 +191,6 @@ class ViewController: UIViewController {
             newTableDataArrayOriginal.append(Screen1TableData(amount1: n.amount, category1: n.category, account1: n.account, note1: n.note, date1: n.date))
             print("DataSpec\(String(describing: newTableDataArrayOriginal.last?.date))")
         }
-//        newTableDataArray = newTableDataArrayOriginal
-//        newTableDataArray.sort(by: { $0.date > $1.date })
-//        print("newTableDataArray.count: \(newTableDataArray.count)")
     }
     
     func screen1TableUpdateSorting(days: Int){
@@ -329,7 +326,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
             }
         }
         
-//            let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategory(_:)))
+//            let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategoryOpenPopUp(_:)))
 //            cell.isUserInteractionEnabled = true
 //            cell.addGestureRecognizer(gesture)
 //            cell.tag = indexPath.row

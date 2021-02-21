@@ -16,6 +16,8 @@ class ListOfOperations: Object{
     @objc dynamic var date: Date = Date.init()
 }
 
+
+
 class Persistence{
     
     static let shared = Persistence()

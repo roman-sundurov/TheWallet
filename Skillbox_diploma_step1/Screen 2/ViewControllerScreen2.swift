@@ -8,9 +8,9 @@
 import UIKit
 
 protocol protocolScreen2Delegate{
-    func closePopupWindow()
+    func changeCategoryClosePopUp()
+    func changeCategoryOpenPopUp(_ tag: Int)
     func getScreen2MenuArray() -> [Screen2MenuData]
-    func changeCategory(_ tag: Int)
 }
 
 struct Screen2MenuData {
@@ -27,7 +27,6 @@ class ViewControllerScreen2: UIViewController {
     @IBOutlet var screen2CurrencyStatus: UIButton!
     @IBOutlet var constraintContainerBottomPoint: NSLayoutConstraint!
     @IBOutlet var constraintContainerBottomHeight: NSLayoutConstraint!
-    
     @IBOutlet var conteinerBottom: UIView!
     
     @IBAction func screen2SegmentControlAction(_ sender: Any) {
@@ -43,9 +42,15 @@ class ViewControllerScreen2: UIViewController {
         }
     }
     
-    //работа с данными на экране
+    //обработка касаний экрана
+    @IBAction func areaOutsideHideContainerGesture(_ sender: Any) {
+        if self.constraintContainerBottomHeight.constant > 0 {
+//            changeCategoryClosePopUp()
+        }
+    }
     
-        
+    
+    //работа с данными на экране
     var screen2MenuArray: [Screen2MenuData] = []
     
     let Screen2MenuList0 = Screen2MenuData(name: "Header", text: "")
@@ -56,7 +61,6 @@ class ViewControllerScreen2: UIViewController {
     
     //рабта с переходом между экранами
     var delegateScreen2Container: protocolScreen2ContainerDelegate?
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ViewControllerScreen2Container, segue.identifier == "segueToScreen2Container"{
             delegateScreen2Container = vc
@@ -66,15 +70,15 @@ class ViewControllerScreen2: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         screen2MenuArray = [Screen2MenuList0, Screen2MenuList1, Screen2MenuList2, Screen2MenuList3, Screen2MenuList4]
-        
     }
+
 }
 
 extension ViewControllerScreen2: protocolScreen2Delegate{
     
-    func changeCategory(_ tag: Int) {
+    //окрытие окна changeCategory
+    func changeCategoryOpenPopUp(_ tag: Int) {
 //        conteinerBottom.layer.borderWidth = 3
 //        conteinerBottom.layer.borderColor = UIColor.red.cgColor
         self.conteinerBottom.layer.cornerRadius  = 20
@@ -86,17 +90,18 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
         }, completion: {isCompleted in })
     }
     
-    func getScreen2MenuArray() -> [Screen2MenuData] {
-        return screen2MenuArray
-    }
-    
-    //закрытие окна
-    @objc func closePopupWindow() {
+    //закрытие окна changeCategory
+    @objc func changeCategoryClosePopUp() {
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             self.constraintContainerBottomPoint.constant = -515
             self.view.layoutIfNeeded()
         }, completion: {isCompleted in })
     }
+    
+    func getScreen2MenuArray() -> [Screen2MenuData] {
+        return screen2MenuArray
+    }
+
 }
 
 extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{

@@ -47,7 +47,7 @@ class Screen1TableViewCellCategory: UITableViewCell {
             labelAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
             currencyStatus.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
         }
-        //            let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategory(_:)))
+        //            let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategoryOpenPopUp(_:)))
         //            cell.isUserInteractionEnabled = true
         //            cell.addGestureRecognizer(gesture)
         //            cell.tag = indexPath.row

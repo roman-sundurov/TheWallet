@@ -17,8 +17,8 @@ class Screen2TableViewCellCategory: UITableViewCell {
     var specCellTag: Int = 0
 
 //Анимация
-    @objc func changeCategory(_ tag: Int) {
-        deligateScreen2?.changeCategory(specCellTag)
+    @objc func changeCategoryOpenPopUpFromScreen2(_ tag: Int) {
+        deligateScreen2?.changeCategoryOpenPopUp(specCellTag)
         print("ChangeCategory from Screen2")
     }
 
@@ -40,7 +40,7 @@ class Screen2TableViewCellCategory: UITableViewCell {
     func startCell() {
         labelCategory.text = deligateScreen2?.getScreen2MenuArray()[specCellTag].name
         labelSelectCategory.text = deligateScreen2?.getScreen2MenuArray()[specCellTag].text
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategory(_:)))
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategoryOpenPopUpFromScreen2(_:)))
         self.isUserInteractionEnabled = true
         self.addGestureRecognizer(gesture)
     }

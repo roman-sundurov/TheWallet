@@ -44,15 +44,34 @@ class ViewControllerScreen2Container: UIViewController {
         super.viewDidLoad()
         
         screen2ContainerMenuArray = [screen2ContainerMenuList0, screen2ContainerMenuList1, screen2ContainerMenuList2, screen2ContainerMenuList3, screen2ContainerMenuList4, screen2ContainerMenuList5, screen2ContainerMenuList6]
+        
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        super.touchesBegan(touches, with: event)
+        let touch = touches.first
+        if touch?.view != self.view {
+            print("touch ouside")
+            closeWindows(0)
+        }
+        else {
+            print("touch inside")
+        }
+//        guard let location = touch?.location(in: self.view) else {
+//            print("location is error"); return }
+//        if !self.view.frame.contains(location) {
+//            print("Tapped outside the view")
+//        } else {
+//            print("Tapped inside the view")
+//        }
+    }
+
 }
-
-
 
 
 extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
     func closeWindows(_ tag: Int) {
-        delegateScreen2?.closePopupWindow()
+        delegateScreen2?.changeCategoryClosePopUp()
         print("ClosePopup from Container")
     }
 
