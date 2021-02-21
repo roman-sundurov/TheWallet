@@ -72,7 +72,6 @@ class ViewController: UIViewController {
         screen1TableUpdateSorting(days: 365)
     }
 
-    
 //Компоновка экрана
     func topMenuHighliter(specifyLabel: UILabel){
         specifyLabel.font = UIFont.systemFont(ofSize: specifyLabel.font.pointSize, weight: .bold)
