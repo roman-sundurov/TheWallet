@@ -46,6 +46,8 @@ class ViewController: UIViewController {
     @IBOutlet var labelMothly: UILabel!
     @IBOutlet var labelYearly: UILabel!
     @IBOutlet var bottomPopInList: UIView!
+    @IBOutlet var labelAmountOfIncome: UILabel!
+    @IBOutlet var labelAmountOfExpenses: UILabel!
     
     
 //обработка касаний экрана
@@ -117,6 +119,34 @@ class ViewController: UIViewController {
         }, completion: {isCompleted in })
     }
     
+    func countingIncomesAndExpensive() {
+        var income: Double = 0
+        var expensive: Double = 0
+        for n in newTableDataArray.filter( { $0.amount > 0 } ) {
+            income += n.amount
+        }
+        for n in newTableDataArray.filter( { $0.amount < 0 } ) {
+            expensive += n.amount
+        }
+        
+        if income.truncatingRemainder(dividingBy: 1) == 0 {
+            labelAmountOfIncome.text = "$\(String(format: "%.0f", income))"
+        }
+        else {
+            labelAmountOfIncome.text = "$\(String(format: "%.2f", income))"
+        }
+        if expensive.truncatingRemainder(dividingBy: 1) == 0 {
+            labelAmountOfExpenses.text = "$\(String(format: "%.0f", expensive))"
+        }
+        else {
+            labelAmountOfExpenses.text = "$\(String(format: "%.2f", expensive))"
+        }
+
+
+//        labelAmountOfIncome.text = String(format: "%.0f", income)
+//        labelAmountOfExpenses.text = String(format: "%.0f", expensive)
+    }
+    
     
 // Работа с таблицей и базой данных
     var date1: Int = 0
@@ -124,6 +154,7 @@ class ViewController: UIViewController {
     var arrayForIncrease: [Int] = [0]
     
     func tableNumberOfRowsInSection() -> Int{
+        if newTableDataArray.count == 0 { return 1 }
         arrayForIncrease = [1]
         var previousDay: Int = 0
         var counter: Int = 0
@@ -145,8 +176,9 @@ class ViewController: UIViewController {
             counter += 1
         }
         arrayForIncrease.append(arrayForIncrease.last!)
-        print("max inrease= \(arrayForIncrease.last!)")
-        print("arrayForIncrease= \(arrayForIncrease)")
+//        print("max inrease= \(arrayForIncrease.last!)")
+//        print("arrayForIncrease= \(arrayForIncrease)")
+//        print("newTableDataArray.count= \(newTableDataArray.count)")
         return arrayForIncrease.count
     }
     
@@ -157,14 +189,16 @@ class ViewController: UIViewController {
         newTableDataArrayOriginal = []
         for n in Persistence.shared.getRealmData(){
             newTableDataArrayOriginal.append(Screen1TableData(amount1: n.amount, category1: n.category, account1: n.account, note1: n.note, date1: n.date))
+            print("DataSpec\(String(describing: newTableDataArrayOriginal.last?.date))")
         }
-        newTableDataArray = newTableDataArrayOriginal
-        newTableDataArray.sort(by: { $0.date > $1.date })
-        print("newTableDataArray.count: \(newTableDataArray.count)")
+//        newTableDataArray = newTableDataArrayOriginal
+//        newTableDataArray.sort(by: { $0.date > $1.date })
+//        print("newTableDataArray.count: \(newTableDataArray.count)")
     }
     
     func screen1TableUpdateSorting(days: Int){
         let newTime = Date() - TimeInterval.init(86400 * days)
+        print("newTime= \(newTime)")
         
 //        let gregorian = Calendar(identifier: .gregorian)
 //        let today = gregorian.date(from: gregorian.dateComponents([.day], from: NSDate() as Date))
@@ -172,7 +206,22 @@ class ViewController: UIViewController {
 //        gregorian.date(byAdding: .day, value: -dateAfter, to: today!)
 //        print("gregorian= \(gregorian.dateComponents([.day], from: today!))")
         
-        newTableDataArray = newTableDataArray.filter { $0.date >= newTime }
+//        print("A1: \(newTableDataArray)")
+//        for n in newTableDataArray {
+//            print("A1: \(n.date)")
+//            if n.date >= newTime {
+//                print("Bolshe")
+//            }
+//        }
+        
+        newTableDataArray = newTableDataArrayOriginal
+        newTableDataArray.sort(by: { $0.date > $1.date })
+        print("newTableDataArray.count: \(newTableDataArray.count)")
+    
+        let temporarilyDate = newTableDataArray.filter { $0.date >= newTime }
+        newTableDataArray = temporarilyDate
+        print("A2: \(newTableDataArray)")
+        self.tableViewScreen1.reloadData()
     }
     
 //    -------------------------------------
@@ -193,11 +242,14 @@ class ViewController: UIViewController {
 
         
         screen1TableUpdate()
+//        borderForMenuBotton(buttonYearly)
+        screen1TableUpdateSorting(days: 30)
+        countingIncomesAndExpensive()
         
 //работа с сохранением даты операции
 //        let calendar = Calendar.current
 //        print(calendar.component(.hour, from: Date()))
-        print(Date.init())
+//        print(Date.init())
         
         bottomPopInList.backgroundColor = .red
         bottomPopInList.layer.cornerRadius  = 20
@@ -243,12 +295,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("indexPath.row= \(indexPath.row)")
-        print("arrayForIncrease[indexPath.row]= \(arrayForIncrease[indexPath.row])")
+//        print("indexPath.row= \(indexPath.row)")
+//        print("arrayForIncrease[indexPath.row]= \(arrayForIncrease[indexPath.row])")
         if newTableDataArray.isEmpty{
             print("newTableDataArray is empty")
             let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
-            cell.labelHeaderDate.text = "newTableDataArray is empty"
+            cell.deligateScreen1 = self
+            cell.startCellEmpty()
             return cell
 
         }

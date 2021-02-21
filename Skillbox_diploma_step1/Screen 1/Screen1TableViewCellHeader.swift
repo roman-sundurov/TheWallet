@@ -25,11 +25,17 @@ class Screen1TableViewCellHeader: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func startCellEmpty() {
+        print("HeaderEmpty: ---")
+        labelHeaderDate.text = "No entries yet."
+    }
+
+    
     func startCell() {
         print("Header1: ---")
         let formatterPrint = DateFormatter()
         formatterPrint.dateFormat = "d MMMM YYYY"
-        print("111: \(formatterPrint.string(from: deligateScreen1!.getNewTableDataArray()[specCellTag].date))")
+//        print("111: \(formatterPrint.string(from: deligateScreen1!.getNewTableDataArray()[specCellTag].date))")
         labelHeaderDate.text = formatterPrint.string(from: deligateScreen1!.getNewTableDataArray()[specCellTag].date)
     }
     

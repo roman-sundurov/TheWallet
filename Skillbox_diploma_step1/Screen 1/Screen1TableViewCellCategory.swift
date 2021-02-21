@@ -32,7 +32,13 @@ class Screen1TableViewCellCategory: UITableViewCell {
         print("Simple Cell: ---")
         let specVar: Int = specCellTag - deligateScreen1!.getArrayForIncrease()[specCellTag]
         labelCategory.text = deligateScreen1!.getNewTableDataArray()[specVar].category
-        labelAmount.text = String(deligateScreen1!.getNewTableDataArray()[specVar].amount)
+//        print("aaa: \(deligateScreen1!.getNewTableDataArray()[specVar].amount.truncatingRemainder(dividingBy: 1))")
+        if deligateScreen1!.getNewTableDataArray()[specVar].amount.truncatingRemainder(dividingBy: 1) == 0 {
+            labelAmount.text = String(format: "%.0f", deligateScreen1!.getNewTableDataArray()[specVar].amount)
+        }
+        else {
+            labelAmount.text = String(format: "%.2f", deligateScreen1!.getNewTableDataArray()[specVar].amount)
+        }
         if deligateScreen1!.getNewTableDataArray()[specVar].amount < 0 {
             labelAmount.textColor = UIColor.red
             currencyStatus.textColor = UIColor.red
