@@ -31,7 +31,6 @@ class ViewControllerScreen2Container: UIViewController {
     var tableStatus: Int = 0
     
     //здесь будет обработка данных в зависимости от tableStatus
-    
     let screen2ContainerMenuList0 = Screen2ContainerMenuData(name: "Header", status: false)
     let screen2ContainerMenuList1 = Screen2ContainerMenuData(name: "Rental revenue", status: true)
     let screen2ContainerMenuList2 = Screen2ContainerMenuData(name: "Car", status: false)
@@ -40,31 +39,51 @@ class ViewControllerScreen2Container: UIViewController {
     let screen2ContainerMenuList5 = Screen2ContainerMenuData(name: "Coffee", status: false)
     let screen2ContainerMenuList6 = Screen2ContainerMenuData(name: "Mobile Account", status: false)
     
-    override func viewDidLoad() {
+//    //обработка касаний
+//    @objc func tapHandlerContainerHide(tap: UITapGestureRecognizer){
+//        if tap.state == UIGestureRecognizer.State.ended {
+//            print("Tap ended")
+//            let pointOfTap = tap.location(in: self.view)
+//            if self.view.frame.contains(pointOfTap) {
+//                print("Tap inside Container")
+//            }
+//            else {
+//                print("Tap beyond Container")
+//            }
+//        }
+//    }
+    
+    @objc override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        let tap = UITapGestureRecognizer()
+//        tap.addTarget(self, action: #selector(tapHandlerContainerHide(tap:)))
+//        self.view.addGestureRecognizer(tap)
+        
+//        tapHandlerContainerHide(tap: <#T##UITapGestureRecognizer#>)
         
         screen2ContainerMenuArray = [screen2ContainerMenuList0, screen2ContainerMenuList1, screen2ContainerMenuList2, screen2ContainerMenuList3, screen2ContainerMenuList4, screen2ContainerMenuList5, screen2ContainerMenuList6]
         
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        super.touchesBegan(touches, with: event)
-        let touch = touches.first
-        if touch?.view != self.view {
-            print("touch ouside")
-            closeWindows(0)
-        }
-        else {
-            print("touch inside")
-        }
-//        guard let location = touch?.location(in: self.view) else {
-//            print("location is error"); return }
-//        if !self.view.frame.contains(location) {
-//            print("Tapped outside the view")
-//        } else {
-//            print("Tapped inside the view")
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+////        super.touchesBegan(touches, with: event)
+//        let touch = touches.first
+//        if touch?.view != self.view {
+//            print("touch ouside")
+//            closeWindows(0)
 //        }
-    }
+//        else {
+//            print("touch inside")
+//        }
+////        guard let location = touch?.location(in: self.view) else {
+////            print("location is error"); return }
+////        if !self.view.frame.contains(location) {
+////            print("Tapped outside the view")
+////        } else {
+////            print("Tapped inside the view")
+////        }
+//    }
 
 }
 

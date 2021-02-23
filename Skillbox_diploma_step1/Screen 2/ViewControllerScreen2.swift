@@ -25,9 +25,10 @@ class ViewControllerScreen2: UIViewController {
     @IBOutlet var screen2SegmentControl: UISegmentedControl!
     @IBOutlet var tableViewScreen2: UITableView!
     @IBOutlet var screen2CurrencyStatus: UIButton!
+    @IBOutlet var conteinerBottom: UIView!
+    
     @IBOutlet var constraintContainerBottomPoint: NSLayoutConstraint!
     @IBOutlet var constraintContainerBottomHeight: NSLayoutConstraint!
-    @IBOutlet var conteinerBottom: UIView!
     
     @IBAction func screen2SegmentControlAction(_ sender: Any) {
         switch screen2SegmentControl.selectedSegmentIndex {
@@ -42,10 +43,30 @@ class ViewControllerScreen2: UIViewController {
         }
     }
     
+    //Объявление переменных
+//    let darkBlur = UIBlurEffect(style: .light)
+    let blurView =  UIVisualEffectView(effect: UIBlurEffect(style: .systemMaterialDark))
+
+    
     //обработка касаний экрана
     @IBAction func areaOutsideHideContainerGesture(_ sender: Any) {
         if self.constraintContainerBottomHeight.constant > 0 {
 //            changeCategoryClosePopUp()
+        }
+    }
+    
+    @objc func tapHandlerContainerHide(tap: UITapGestureRecognizer){
+        if tap.state == UIGestureRecognizer.State.ended {
+            print("Tap ended")
+            let pointOfTap = tap.location(in: self.view)
+            let sumPl = self.view.frame.intersection(conteinerBottom.frame)
+            if sumPl.contains(pointOfTap) {
+                print("Tap inside Container")
+            }
+            else {
+                print("Tap beyond Container")
+                changeCategoryClosePopUp()
+            }
         }
     }
     
@@ -68,12 +89,20 @@ class ViewControllerScreen2: UIViewController {
         }
     }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         screen2MenuArray = [Screen2MenuList0, Screen2MenuList1, Screen2MenuList2, Screen2MenuList3, Screen2MenuList4]
+//        conteinerBottom.layer.zPosition = 0
+        self.view.layoutIfNeeded()
+        
     }
 
 }
+
+
+
 
 extension ViewControllerScreen2: protocolScreen2Delegate{
     
@@ -86,14 +115,24 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
         
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             self.constraintContainerBottomPoint.constant = 50
+            let tap = UITapGestureRecognizer()
+            tap.addTarget(self, action: #selector(self.tapHandlerContainerHide(tap:)))
+            self.view.addGestureRecognizer(tap)
+            
+            self.blurView.frame = self.view.frame
+            self.conteinerBottom.layer.zPosition = 1
+            self.view.addSubview(self.blurView)
+            
             self.view.layoutIfNeeded()
         }, completion: {isCompleted in })
+        
     }
     
     //закрытие окна changeCategory
     @objc func changeCategoryClosePopUp() {
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             self.constraintContainerBottomPoint.constant = -515
+            self.blurView.removeFromSuperview()
             self.view.layoutIfNeeded()
         }, completion: {isCompleted in })
     }
