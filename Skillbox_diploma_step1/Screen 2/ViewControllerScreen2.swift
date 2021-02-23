@@ -59,8 +59,7 @@ class ViewControllerScreen2: UIViewController {
         if tap.state == UIGestureRecognizer.State.ended {
             print("Tap ended")
             let pointOfTap = tap.location(in: self.view)
-            let sumPl = self.view.frame.intersection(conteinerBottom.frame)
-            if sumPl.contains(pointOfTap) {
+            if conteinerBottom.frame.contains(pointOfTap) {
                 print("Tap inside Container")
             }
             else {
@@ -94,7 +93,7 @@ class ViewControllerScreen2: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         screen2MenuArray = [Screen2MenuList0, Screen2MenuList1, Screen2MenuList2, Screen2MenuList3, Screen2MenuList4]
-//        conteinerBottom.layer.zPosition = 0
+        conteinerBottom.layer.zPosition = 1
         self.view.layoutIfNeeded()
         
     }
@@ -120,7 +119,6 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
             self.view.addGestureRecognizer(tap)
             
             self.blurView.frame = self.view.frame
-            self.conteinerBottom.layer.zPosition = 1
             self.view.addSubview(self.blurView)
             
             self.view.layoutIfNeeded()
