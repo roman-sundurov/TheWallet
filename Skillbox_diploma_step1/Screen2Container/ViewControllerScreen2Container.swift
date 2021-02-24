@@ -22,15 +22,15 @@ struct Screen2ContainerMenuData {
 
 class ViewControllerScreen2Container: UIViewController {
 
-    //объявление делигатов
+    //MARK: - объявление делигатов
     var delegateScreen2: protocolScreen2Delegate?
 
-    //работа с данными на экране
+    //MARK: - работа с данными на экране
     
     var screen2ContainerMenuArray: [Screen2ContainerMenuData] = []
     var tableStatus: Int = 0
     
-    //здесь будет обработка данных в зависимости от tableStatus
+//Здесь будет обработка данных в зависимости от tableStatus
     let screen2ContainerMenuList0 = Screen2ContainerMenuData(name: "Header", status: false)
     let screen2ContainerMenuList1 = Screen2ContainerMenuData(name: "Rental revenue", status: true)
     let screen2ContainerMenuList2 = Screen2ContainerMenuData(name: "Car", status: false)
@@ -39,7 +39,7 @@ class ViewControllerScreen2Container: UIViewController {
     let screen2ContainerMenuList5 = Screen2ContainerMenuData(name: "Coffee", status: false)
     let screen2ContainerMenuList6 = Screen2ContainerMenuData(name: "Mobile Account", status: false)
     
-//    //обработка касаний
+    //MARK: - обработка касаний
 //    @objc func tapHandlerContainerHide(tap: UITapGestureRecognizer){
 //        if tap.state == UIGestureRecognizer.State.ended {
 //            print("Tap ended")
@@ -53,6 +53,7 @@ class ViewControllerScreen2Container: UIViewController {
 //        }
 //    }
     
+    //MARK: - viewDidLoad
     @objc override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -87,7 +88,7 @@ class ViewControllerScreen2Container: UIViewController {
 
 }
 
-
+//MARK: - extensionProtocol
 extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
     func closeWindows(_ tag: Int) {
         delegateScreen2?.changeCategoryClosePopUp()
@@ -114,7 +115,7 @@ extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
     }
 }
 
-
+//MARK: - extensionProtocol
 extension ViewControllerScreen2Container: UITableViewDelegate, UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {

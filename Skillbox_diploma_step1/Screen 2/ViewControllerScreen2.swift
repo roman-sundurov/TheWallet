@@ -20,12 +20,12 @@ struct Screen2MenuData {
 
 class ViewControllerScreen2: UIViewController {
 
-    //объявление Аутлетов
+    //MARK: - объявление Аутлетов
     
     @IBOutlet var screen2SegmentControl: UISegmentedControl!
     @IBOutlet var tableViewScreen2: UITableView!
     @IBOutlet var screen2CurrencyStatus: UIButton!
-    @IBOutlet var conteinerBottom: UIView!
+    @IBOutlet var containerBottom: UIView!
     
     @IBOutlet var constraintContainerBottomPoint: NSLayoutConstraint!
     @IBOutlet var constraintContainerBottomHeight: NSLayoutConstraint!
@@ -43,9 +43,9 @@ class ViewControllerScreen2: UIViewController {
         }
     }
     
-    //Объявление переменных
+    //MARK: - Объявление переменных
 //    let darkBlur = UIBlurEffect(style: .light)
-    let blurView =  UIVisualEffectView(effect: UIBlurEffect(style: .systemMaterialDark))
+    let blurView =  UIVisualEffectView(effect: UIBlurEffect(style: .dark))
 
     
     //обработка касаний экрана
@@ -59,7 +59,7 @@ class ViewControllerScreen2: UIViewController {
         if tap.state == UIGestureRecognizer.State.ended {
             print("Tap ended")
             let pointOfTap = tap.location(in: self.view)
-            if conteinerBottom.frame.contains(pointOfTap) {
+            if containerBottom.frame.contains(pointOfTap) {
                 print("Tap inside Container")
             }
             else {
@@ -70,7 +70,7 @@ class ViewControllerScreen2: UIViewController {
     }
     
     
-    //работа с данными на экране
+    //MARK: - данныe на экране
     var screen2MenuArray: [Screen2MenuData] = []
     
     let Screen2MenuList0 = Screen2MenuData(name: "Header", text: "")
@@ -79,7 +79,7 @@ class ViewControllerScreen2: UIViewController {
     let Screen2MenuList3 = Screen2MenuData(name: "Category", text: "Cash")
     let Screen2MenuList4 = Screen2MenuData(name: "Notes", text: "")
     
-    //рабта с переходом между экранами
+    //MARK: - переходы между экранами
     var delegateScreen2Container: protocolScreen2ContainerDelegate?
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ViewControllerScreen2Container, segue.identifier == "segueToScreen2Container"{
@@ -88,28 +88,24 @@ class ViewControllerScreen2: UIViewController {
         }
     }
     
-    
-    
+    //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         screen2MenuArray = [Screen2MenuList0, Screen2MenuList1, Screen2MenuList2, Screen2MenuList3, Screen2MenuList4]
-        conteinerBottom.layer.zPosition = 1
+//        containerBottom.layer.zPosition = 1
         self.view.layoutIfNeeded()
         
     }
 
 }
 
-
-
-
 extension ViewControllerScreen2: protocolScreen2Delegate{
     
-    //окрытие окна changeCategory
+    //MARK: - окрытие окна changeCategory
     func changeCategoryOpenPopUp(_ tag: Int) {
-//        conteinerBottom.layer.borderWidth = 3
-//        conteinerBottom.layer.borderColor = UIColor.red.cgColor
-        self.conteinerBottom.layer.cornerRadius  = 20
+//        containerBottom.layer.borderWidth = 3
+//        containerBottom.layer.borderColor = UIColor.red.cgColor
+        self.containerBottom.layer.cornerRadius  = 20
         self.constraintContainerBottomHeight.constant = CGFloat(50*(self.screen2MenuArray.count+2))
         
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
@@ -118,15 +114,28 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
             tap.addTarget(self, action: #selector(self.tapHandlerContainerHide(tap:)))
             self.view.addGestureRecognizer(tap)
             
-            self.blurView.frame = self.view.frame
-            self.view.addSubview(self.blurView)
+//            self.view.addSubview(self.blurView)
+            self.view.insertSubview(self.blurView, belowSubview: self.containerBottom)
+//            self.containerBottom.sendSubviewToBack(self.blurView)
+            
+            self.blurView.backgroundColor = .clear
+            self.blurView.translatesAutoresizingMaskIntoConstraints = false
+//            self.containerBottom.insertSubview(self.blurView, at: 0)
+            
+            NSLayoutConstraint.activate([
+                self.blurView.topAnchor.constraint(equalTo: self.view.topAnchor),
+                self.blurView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                self.blurView.heightAnchor.constraint(equalTo: self.view.heightAnchor),
+                self.blurView.widthAnchor.constraint(equalTo: self.view.widthAnchor)
+            ])
+
             
             self.view.layoutIfNeeded()
         }, completion: {isCompleted in })
         
     }
     
-    //закрытие окна changeCategory
+    //MARK: - закрытие окна changeCategory
     @objc func changeCategoryClosePopUp() {
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             self.constraintContainerBottomPoint.constant = -515
@@ -141,6 +150,7 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
 
 }
 
+//MARK: - extension
 extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {

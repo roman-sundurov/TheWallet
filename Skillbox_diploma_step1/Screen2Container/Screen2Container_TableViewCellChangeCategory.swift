@@ -10,6 +10,7 @@ import SimpleCheckbox
 
 class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     
+    //MARK: - объявление Аутлетов
     @IBOutlet var labelChangeCategory: UILabel!
     @IBOutlet var buttonDeleteItemObject: UIButton!
     @IBOutlet var checkBoxObject: Checkbox!
@@ -17,7 +18,7 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     var delegateScreen2Container: protocolScreen2ContainerDelegate?
     var specCellTag: Int = 0
     
-    //анимация
+    //MARK: - анимация
     @objc func closeWindows() {
         delegateScreen2Container?.closeWindows(specCellTag)
         print("ClosePopup from ContainerCell")
