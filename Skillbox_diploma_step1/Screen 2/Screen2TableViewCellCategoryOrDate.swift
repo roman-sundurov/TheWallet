@@ -1,5 +1,5 @@
 //
-//  TableViewCellCategory.swift
+//  Screen2TableViewCellCategoryOrDate.swift
 //  Skillbox_diploma_step1
 //
 //  Created by Roman on 17.01.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Screen2TableViewCellCategory: UITableViewCell {
+class Screen2TableViewCellCategoryOrDate: UITableViewCell {
     
     @IBOutlet var labelCategory: UILabel!
     @IBOutlet var labelSelectCategory: UILabel!

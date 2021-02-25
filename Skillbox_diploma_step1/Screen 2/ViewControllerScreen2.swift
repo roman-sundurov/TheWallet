@@ -20,7 +20,7 @@ struct Screen2MenuData {
 
 class ViewControllerScreen2: UIViewController {
 
-    //MARK: - объявление Аутлетов
+    //MARK: - объявление Аутлетов и Функций
     
     @IBOutlet var screen2SegmentControl: UISegmentedControl!
     @IBOutlet var tableViewScreen2: UITableView!
@@ -43,12 +43,22 @@ class ViewControllerScreen2: UIViewController {
         }
     }
     
-    //MARK: - Объявление переменных
-//    let darkBlur = UIBlurEffect(style: .light)
     let blurView =  UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-
     
-    //обработка касаний экрана
+    //MARK: - События в таблице
+    var delegateScreen2TableCellNote: protocolScreen2TextViewEditing?
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        delegateScreen2TableCellNote?.textViewDidBeginEditing()
+        print("delegate textViewDidBeginEditing")
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        delegateScreen2TableCellNote?.textViewDidEndEditing()
+        print("delegate textViewDidBeginEditing")
+    }
+    
+    //MARK: - Обработка касаний экрана
     @IBAction func areaOutsideHideContainerGesture(_ sender: Any) {
         if self.constraintContainerBottomHeight.constant > 0 {
 //            changeCategoryClosePopUp()
@@ -76,8 +86,7 @@ class ViewControllerScreen2: UIViewController {
     let Screen2MenuList0 = Screen2MenuData(name: "Header", text: "")
     let Screen2MenuList1 = Screen2MenuData(name: "Category", text: "Select category")
     let Screen2MenuList2 = Screen2MenuData(name: "Date", text: "Today")
-    let Screen2MenuList3 = Screen2MenuData(name: "Category", text: "Cash")
-    let Screen2MenuList4 = Screen2MenuData(name: "Notes", text: "")
+    let Screen2MenuList3 = Screen2MenuData(name: "Notes", text: "")
     
     //MARK: - переходы между экранами
     var delegateScreen2Container: protocolScreen2ContainerDelegate?
@@ -91,9 +100,21 @@ class ViewControllerScreen2: UIViewController {
     //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        screen2MenuArray = [Screen2MenuList0, Screen2MenuList1, Screen2MenuList2, Screen2MenuList3, Screen2MenuList4]
-//        containerBottom.layer.zPosition = 1
+        screen2MenuArray = [Screen2MenuList0, Screen2MenuList1, Screen2MenuList2, Screen2MenuList3]
+        
+        self.view.insertSubview(self.blurView, belowSubview: self.containerBottom)
+        self.blurView.backgroundColor = .clear
+        self.blurView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            self.blurView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.blurView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.blurView.heightAnchor.constraint(equalTo: self.view.heightAnchor),
+            self.blurView.widthAnchor.constraint(equalTo: self.view.widthAnchor)
+        ])
+        self.blurView.isHidden = true
+        
         self.view.layoutIfNeeded()
+        print("screen2MenuArray.count: \(screen2MenuArray.count)")
         
     }
 
@@ -106,30 +127,14 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
 //        containerBottom.layer.borderWidth = 3
 //        containerBottom.layer.borderColor = UIColor.red.cgColor
         self.containerBottom.layer.cornerRadius  = 20
-        self.constraintContainerBottomHeight.constant = CGFloat(50*(self.screen2MenuArray.count+2))
+        self.constraintContainerBottomHeight.constant = CGFloat(50*(self.screen2MenuArray.count+3))
         
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             self.constraintContainerBottomPoint.constant = 50
             let tap = UITapGestureRecognizer()
             tap.addTarget(self, action: #selector(self.tapHandlerContainerHide(tap:)))
             self.view.addGestureRecognizer(tap)
-            
-//            self.view.addSubview(self.blurView)
-            self.view.insertSubview(self.blurView, belowSubview: self.containerBottom)
-//            self.containerBottom.sendSubviewToBack(self.blurView)
-            
-            self.blurView.backgroundColor = .clear
-            self.blurView.translatesAutoresizingMaskIntoConstraints = false
-//            self.containerBottom.insertSubview(self.blurView, at: 0)
-            
-            NSLayoutConstraint.activate([
-                self.blurView.topAnchor.constraint(equalTo: self.view.topAnchor),
-                self.blurView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-                self.blurView.heightAnchor.constraint(equalTo: self.view.heightAnchor),
-                self.blurView.widthAnchor.constraint(equalTo: self.view.widthAnchor)
-            ])
-
-            
+            self.blurView.isHidden = false
             self.view.layoutIfNeeded()
         }, completion: {isCompleted in })
         
@@ -139,7 +144,7 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
     @objc func changeCategoryClosePopUp() {
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             self.constraintContainerBottomPoint.constant = -515
-            self.blurView.removeFromSuperview()
+            self.blurView.isHidden = true
             self.view.layoutIfNeeded()
         }, completion: {isCompleted in })
     }
@@ -162,21 +167,18 @@ extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0{
+        switch indexPath.row {
+        case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen2TableViewCellHeader
             return cell
-        }
-        else if indexPath.row > 3{
+        case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellNote") as! Screen2TableViewCellNote
             cell.deligateScreen2 = self
             cell.setTag(tag: indexPath.row)
             cell.startCell()
-            
-//            cell.textFieldNotes.text = screen2MenuArray[indexPath.row].text
             return cell
-        }
-        else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellCategory") as! Screen2TableViewCellCategory
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellCategoryOrDate") as! Screen2TableViewCellCategoryOrDate
             cell.deligateScreen2 = self
             cell.setTag(tag: indexPath.row)
             cell.startCell()
@@ -184,14 +186,14 @@ extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        if indexPath.row == 4 {
-            return 200
-        }
-        else{
-            return 50
-        }
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
+//        if indexPath.row == 3 {
+//            return 88
+//        }
+//        else{
+//            return 44
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

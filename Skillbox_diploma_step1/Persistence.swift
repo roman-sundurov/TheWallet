@@ -11,22 +11,18 @@ import RealmSwift
 class ListOfOperations: Object{
     @objc dynamic var amount: Double = 0
     @objc dynamic var category: String = ""
-    @objc dynamic var account: String = ""
     @objc dynamic var note: String = ""
     @objc dynamic var date: Date = Date.init()
 }
-
-
 
 class Persistence{
     
     static let shared = Persistence()
     private let realm = try! Realm()
 
-    func addOperations(amount: Double, category: String, account: String, note: String, date: Date){
+    func addOperations(amount: Double, category: String, note: String, date: Date){
         let operation = ListOfOperations()
         operation.category = category
-        operation.account = account
         operation.note = note
         operation.amount = amount
         operation.date = date

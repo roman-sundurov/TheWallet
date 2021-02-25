@@ -19,14 +19,12 @@ protocol protocolScreen1Delegate{
 class Screen1TableData{
     var amount: Double
     var category: String
-    var account: String
     var note: String
     var date: Date
     
-    init(amount1: Double, category1: String, account1: String, note1: String, date1: Date) {
+    init(amount1: Double, category1: String, note1: String, date1: Date) {
         self.amount = amount1
         self.category = category1
-        self.account = account1
         self.note = note1
         self.date = date1
     }
@@ -34,7 +32,7 @@ class Screen1TableData{
 
 class ViewController: UIViewController {
     
-//объявление аутлетов
+    //MARK: - объявление аутлетов
     @IBOutlet var tableViewScreen1: UITableView!
     @IBOutlet var buttonDaily: UIView!
     @IBOutlet var buttonWeekly: UIView!
@@ -50,7 +48,7 @@ class ViewController: UIViewController {
     @IBOutlet var labelAmountOfExpenses: UILabel!
     
     
-//обработка касаний экрана
+    //MARK: - обработка касаний экрана
     @IBAction func buttonDailyGesture(_ sender: Any) {
 //        topMenuHighliter(specifyLabel: labelDaily)
         borderForMenuBotton(buttonDaily)
@@ -72,7 +70,7 @@ class ViewController: UIViewController {
         screen1TableUpdateSorting(days: 365)
     }
 
-//Компоновка экрана
+    //MARK: - Компоновка экрана
     func topMenuHighliter(specifyLabel: UILabel){
         specifyLabel.font = UIFont.systemFont(ofSize: specifyLabel.font.pointSize, weight: .bold)
         switch specifyLabel {
@@ -147,7 +145,8 @@ class ViewController: UIViewController {
     }
     
     
-// Работа с таблицей и базой данных
+    //MARK: - Работа с таблицей и базой данных
+    
     var date1: Int = 0
     var date2: Int = 0
     var arrayForIncrease: [Int] = [0]
@@ -187,7 +186,7 @@ class ViewController: UIViewController {
     func screen1TableUpdate(){
         newTableDataArrayOriginal = []
         for n in Persistence.shared.getRealmData(){
-            newTableDataArrayOriginal.append(Screen1TableData(amount1: n.amount, category1: n.category, account1: n.account, note1: n.note, date1: n.date))
+            newTableDataArrayOriginal.append(Screen1TableData(amount1: n.amount, category1: n.category, note1: n.note, date1: n.date))
             print("DataSpec\(String(describing: newTableDataArrayOriginal.last?.date))")
         }
     }
@@ -195,20 +194,6 @@ class ViewController: UIViewController {
     func screen1TableUpdateSorting(days: Int){
         let newTime = Date() - TimeInterval.init(86400 * days)
         print("newTime= \(newTime)")
-        
-//        let gregorian = Calendar(identifier: .gregorian)
-//        let today = gregorian.date(from: gregorian.dateComponents([.day], from: NSDate() as Date))
-//        print("today= \(today)")
-//        gregorian.date(byAdding: .day, value: -dateAfter, to: today!)
-//        print("gregorian= \(gregorian.dateComponents([.day], from: today!))")
-        
-//        print("A1: \(newTableDataArray)")
-//        for n in newTableDataArray {
-//            print("A1: \(n.date)")
-//            if n.date >= newTime {
-//                print("Bolshe")
-//            }
-//        }
         
         newTableDataArray = newTableDataArrayOriginal
         newTableDataArray.sort(by: { $0.date > $1.date })
@@ -225,16 +210,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         
-//Сохранени данных о времени
+        //MARK: - Сохранени данных о времени
 //        let formatter = DateFormatter()
 //        formatter.dateFormat = "yyyy/MM/dd HH:mm"
-//        let today = formatter.date(from: "2021/02/10 17:45")
-//        let yesterday = formatter.date(from: "2021/02/11 13:15")
-//        let a2DaysBefore = formatter.date(from: "2021/02/15 10:05")
-////////
-//        Persistence.shared.addOperations(amount: 1200, category: "Salary", account: "Debet card", note: "Первая заметка", date: today!)
-//        Persistence.shared.addOperations(amount: -600, category: "Coffee", account: "Cash", note: "Вторая заметка", date: yesterday!)
-//        Persistence.shared.addOperations(amount: -200, category: "Lease payable", account: "Debet card", note: "Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка.", date: a2DaysBefore!)
+//        let today = formatter.date(from: "2021/02/22 17:45")
+//        let yesterday = formatter.date(from: "2021/02/23 13:15")
+//        let a2DaysBefore = formatter.date(from: "2021/02/24 10:05")
+//
+//        Persistence.shared.addOperations(amount: 1200, category: "Salary", note: "Первая заметка", date: today!)
+//        Persistence.shared.addOperations(amount: -600, category: "Coffee", note: "Вторая заметка", date: yesterday!)
+//        Persistence.shared.addOperations(amount: -200, category: "Lease payable", note: "Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка.", date: a2DaysBefore!)
 
         
         screen1TableUpdate()
@@ -242,10 +227,7 @@ class ViewController: UIViewController {
         screen1TableUpdateSorting(days: 30)
         countingIncomesAndExpensive()
         
-//работа с сохранением даты операции
-//        let calendar = Calendar.current
-//        print(calendar.component(.hour, from: Date()))
-//        print(Date.init())
+        //MARK: - работа с сохранением даты операции
         
         bottomPopInList.backgroundColor = .red
         bottomPopInList.layer.cornerRadius  = 20
@@ -254,7 +236,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 }
-
+//MARK: - extensionProtocol
 extension ViewController: protocolScreen1Delegate{
     
     func getArrayForIncrease() -> [Int]{
@@ -280,6 +262,7 @@ extension ViewController: protocolScreen1Delegate{
     
 }
 
+//MARK: - extension
 extension ViewController: UITableViewDelegate, UITableViewDataSource{
 
     func numberOfSections(in tableView: UITableView) -> Int {
