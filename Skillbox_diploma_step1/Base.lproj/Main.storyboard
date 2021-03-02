@@ -668,7 +668,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="108.33333587646484"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" keyboardDismissMode="interactive" text="Placeholder" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="HAo-mj-zoz">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" keyboardDismissMode="interactive" text="Placeholder" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="HAo-mj-zoz">
                                                     <rect key="frame" x="10" y="10" width="370" height="88.333333333333329"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="88" id="vnf-1r-W9O"/>
@@ -677,7 +677,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     <connections>
-                                                        <outlet property="delegate" destination="fcp-GB-FKl" id="jJu-uT-O5s"/>
+                                                        <outlet property="delegate" destination="fcp-GB-FKl" id="e7x-HC-rcV"/>
                                                     </connections>
                                                 </textView>
                                             </subviews>

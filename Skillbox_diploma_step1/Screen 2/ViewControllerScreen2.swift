@@ -18,7 +18,7 @@ struct Screen2MenuData {
     let text: String
 }
 
-class ViewControllerScreen2: UIViewController {
+class ViewControllerScreen2: UIViewController, UITextViewDelegate {
 
     //MARK: - объявление Аутлетов и Функций
     
@@ -44,19 +44,6 @@ class ViewControllerScreen2: UIViewController {
     }
     
     let blurView =  UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-    
-    //MARK: - События в таблице
-    var delegateScreen2TableCellNote: protocolScreen2TextViewEditing?
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        delegateScreen2TableCellNote?.textViewDidBeginEditing()
-        print("delegate textViewDidBeginEditing")
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        delegateScreen2TableCellNote?.textViewDidEndEditing()
-        print("delegate textViewDidBeginEditing")
-    }
     
     //MARK: - Обработка касаний экрана
     @IBAction func areaOutsideHideContainerGesture(_ sender: Any) {
@@ -176,6 +163,7 @@ extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
             cell.deligateScreen2 = self
             cell.setTag(tag: indexPath.row)
             cell.startCell()
+            cell.textViewNotes.delegate = cell
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellCategoryOrDate") as! Screen2TableViewCellCategoryOrDate

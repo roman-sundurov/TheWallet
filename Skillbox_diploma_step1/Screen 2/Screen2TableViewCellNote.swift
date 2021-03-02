@@ -7,18 +7,32 @@
 
 import UIKit
 
-protocol protocolScreen2TextViewEditing {
-    func textViewDidBeginEditing()
-    func textViewDidEndEditing()
-}
-
-class Screen2TableViewCellNote: UITableViewCell {
+class Screen2TableViewCellNote: UITableViewCell, UITextViewDelegate {
 
 //    @IBOutlet var textFieldNotes: UITextField!
     @IBOutlet var textViewNotes: UITextView!
     
     var deligateScreen2: protocolScreen2Delegate?
     var specCellTag: Int = 0
+    
+// MARK: - Работа с Note
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textViewNotes.textColor == UIColor.lightGray {
+            textViewNotes.text = nil
+            textViewNotes.textColor = UIColor.black
+        }
+        print("func textViewDidBeginEditing")
+
+        }
+    
+        func textViewDidEndEditing(_ textView: UITextView) {
+            if textViewNotes.text.isEmpty {
+                textViewNotes.text = "Placeholder"
+                textViewNotes.textColor = UIColor.lightGray
+            }
+            print("func textViewDidEndEditing")
+        }
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -48,23 +62,4 @@ class Screen2TableViewCellNote: UITableViewCell {
     func setTag(tag: Int) {
         specCellTag = tag
     }
-}
-
-extension Screen2TableViewCellNote: protocolScreen2TextViewEditing {
-    func textViewDidBeginEditing() {
-        if textViewNotes.textColor == UIColor.lightGray {
-            textViewNotes.text = nil
-            textViewNotes.textColor = UIColor.black
-        }
-        print("func textViewDidBeginEditing")
-    }
-    
-    func textViewDidEndEditing() {
-        if textViewNotes.text.isEmpty {
-            textViewNotes.text = "Placeholder"
-            textViewNotes.textColor = UIColor.lightGray
-        }
-        print("func textViewDidEndEditing")
-    }
-
 }
