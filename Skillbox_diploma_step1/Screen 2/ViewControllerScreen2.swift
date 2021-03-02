@@ -139,7 +139,6 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
     func getScreen2MenuArray() -> [Screen2MenuData] {
         return screen2MenuArray
     }
-
 }
 
 //MARK: - extension
