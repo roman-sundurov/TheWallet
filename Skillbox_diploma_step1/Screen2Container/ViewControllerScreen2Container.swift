@@ -39,19 +39,6 @@ class ViewControllerScreen2Container: UIViewController {
     let screen2ContainerMenuList5 = Screen2ContainerMenuData(name: "Coffee", status: false)
     let screen2ContainerMenuList6 = Screen2ContainerMenuData(name: "Mobile Account", status: false)
     
-    //MARK: - обработка касаний
-//    @objc func tapHandlerContainerHide(tap: UITapGestureRecognizer){
-//        if tap.state == UIGestureRecognizer.State.ended {
-//            print("Tap ended")
-//            let pointOfTap = tap.location(in: self.view)
-//            if self.view.frame.contains(pointOfTap) {
-//                print("Tap inside Container")
-//            }
-//            else {
-//                print("Tap beyond Container")
-//            }
-//        }
-//    }
     
     //MARK: - viewDidLoad
     @objc override func viewDidLoad() {

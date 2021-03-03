@@ -43,16 +43,31 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         }
     }
     
+    //MARK: - Делегаты и объекты
+    
+    var tapOfChangeCategoryOpenPopUp: UITapGestureRecognizer?
+    var tapOutsideTextViewToGoFromTextView: UITapGestureRecognizer?
+    
     let blurView =  UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    var delegateScreen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate?
     
     //MARK: - Обработка касаний экрана
-    @IBAction func areaOutsideHideContainerGesture(_ sender: Any) {
-        if self.constraintContainerBottomHeight.constant > 0 {
-//            changeCategoryClosePopUp()
+    
+    @objc func handlerOutsideTextViewToGoFrom(tap: UITapGestureRecognizer){
+        if tap.state == UIGestureRecognizer.State.ended {
+                print("Tap TextView ended")
+            let pointOfTap = tap.location(in: self.view)
+            if delegateScreen2TableViewCellNote!.returnView().frame.contains(pointOfTap) {
+                print("Tap outside TextView")
+                delegateScreen2TableViewCellNote!.tapOutsideTextViewEditToHide()
+            }
+            else {
+                print("Tap inside TextView")
+            }
         }
     }
     
-    @objc func tapHandlerContainerHide(tap: UITapGestureRecognizer){
+    @objc func handlerToHideContainer(tap: UITapGestureRecognizer){
         if tap.state == UIGestureRecognizer.State.ended {
             print("Tap ended")
             let pointOfTap = tap.location(in: self.view)
@@ -60,7 +75,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
                 print("Tap inside Container")
             }
             else {
-                print("Tap beyond Container")
+                print("Tap outside Container")
                 changeCategoryClosePopUp()
             }
         }
@@ -103,6 +118,10 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         self.view.layoutIfNeeded()
         print("screen2MenuArray.count: \(screen2MenuArray.count)")
         
+        self.tapOutsideTextViewToGoFromTextView = UITapGestureRecognizer()
+        self.tapOutsideTextViewToGoFromTextView!.addTarget(self, action: #selector(self.handlerOutsideTextViewToGoFrom(tap:)))
+        self.view.addGestureRecognizer(self.tapOutsideTextViewToGoFromTextView!)
+
     }
 
 }
@@ -118,9 +137,9 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
         
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             self.constraintContainerBottomPoint.constant = 50
-            let tap = UITapGestureRecognizer()
-            tap.addTarget(self, action: #selector(self.tapHandlerContainerHide(tap:)))
-            self.view.addGestureRecognizer(tap)
+            self.tapOfChangeCategoryOpenPopUp = UITapGestureRecognizer()
+            self.tapOfChangeCategoryOpenPopUp!.addTarget(self, action: #selector(self.handlerToHideContainer(tap:)))
+            self.view.addGestureRecognizer(self.tapOfChangeCategoryOpenPopUp!)
             self.blurView.isHidden = false
             self.view.layoutIfNeeded()
         }, completion: {isCompleted in })
@@ -132,6 +151,7 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             self.constraintContainerBottomPoint.constant = -515
             self.blurView.isHidden = true
+            self.view.removeGestureRecognizer(self.tapOfChangeCategoryOpenPopUp!)
             self.view.layoutIfNeeded()
         }, completion: {isCompleted in })
     }
@@ -163,6 +183,11 @@ extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
             cell.setTag(tag: indexPath.row)
             cell.startCell()
             cell.textViewNotes.delegate = cell
+            
+            self.delegateScreen2TableViewCellNote = cell
+//            self.tapOutsideTextViewToGoFromTextView = UITapGestureRecognizer()
+//            self.tapOutsideTextViewToGoFromTextView!.addTarget(self, action: #selector(self.handlerOutsideTextViewToGoFrom(tap:)))
+//            cell.textViewNotes.addGestureRecognizer(self.tapOutsideTextViewToGoFromTextView!)
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellCategoryOrDate") as! Screen2TableViewCellCategoryOrDate

@@ -668,7 +668,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="108.33333587646484"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" keyboardDismissMode="interactive" text="Placeholder" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="HAo-mj-zoz">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" keyboardDismissMode="onDrag" text="Placeholder" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="HAo-mj-zoz">
                                                     <rect key="frame" x="10" y="10" width="370" height="88.333333333333329"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="88" id="vnf-1r-W9O"/>
@@ -731,9 +731,6 @@
                             <constraint firstItem="afh-qC-NmX" firstAttribute="leading" secondItem="EOk-oA-Pj3" secondAttribute="leading" id="tp7-gS-icj"/>
                             <constraint firstItem="EOk-oA-Pj3" firstAttribute="trailing" secondItem="kKJ-BS-QlT" secondAttribute="trailing" id="uhj-g0-WYk"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="cCf-gV-VbB" appends="YES" id="Kdd-rc-xCN"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="kgp-1m-6eG"/>
                     <connections>
@@ -746,11 +743,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HMB-Ic-meT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="cCf-gV-VbB">
-                    <connections>
-                        <action selector="areaOutsideHideContainerGesture:" destination="fcp-GB-FKl" id="b20-mO-ADt"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="904.61538461538453" y="114.45497630331754"/>
         </scene>

@@ -7,6 +7,12 @@
 
 import UIKit
 
+protocol protocolScreen2TableViewCellNoteDelegate{
+    func tapOutsideTextViewEditToHide()
+    func returnView() -> UIView
+}
+    
+
 class Screen2TableViewCellNote: UITableViewCell, UITextViewDelegate {
 
 //    @IBOutlet var textFieldNotes: UITextField!
@@ -15,7 +21,7 @@ class Screen2TableViewCellNote: UITableViewCell, UITextViewDelegate {
     var deligateScreen2: protocolScreen2Delegate?
     var specCellTag: Int = 0
     
-// MARK: - Работа с Note
+// MARK: - Работа с Placeholder
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textViewNotes.textColor == UIColor.lightGray {
             textViewNotes.text = nil
@@ -30,8 +36,11 @@ class Screen2TableViewCellNote: UITableViewCell, UITextViewDelegate {
                 textViewNotes.text = "Placeholder"
                 textViewNotes.textColor = UIColor.lightGray
             }
+            textView.resignFirstResponder()
             print("func textViewDidEndEditing")
         }
+    
+    //MARK: - Стандартные функции
     
     
     override func awakeFromNib() {
@@ -56,10 +65,28 @@ class Screen2TableViewCellNote: UITableViewCell, UITextViewDelegate {
         
         textViewNotes.text = "Placeholder"
         textViewNotes.textColor = UIColor.lightGray
-
+        
     }
     
     func setTag(tag: Int) {
         specCellTag = tag
+    }
+}
+
+
+extension Screen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate{
+    
+    func returnView() -> UIView {
+        return self
+    }
+
+    //MARK: - Обработка касаний экрана
+    func tapOutsideTextViewEditToHide(){
+        if textViewNotes.textColor == UIColor.lightGray {
+            textViewNotes.text = nil
+            textViewNotes.textColor = UIColor.black
+        }
+        textViewNotes.endEditing(true)
+        print("textViewDeselect")
     }
 }
