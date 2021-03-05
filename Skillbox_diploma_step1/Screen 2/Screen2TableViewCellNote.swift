@@ -27,18 +27,18 @@ class Screen2TableViewCellNote: UITableViewCell, UITextViewDelegate {
             textViewNotes.text = nil
             textViewNotes.textColor = UIColor.black
         }
-        print("func textViewDidBeginEditing")
+    print("func textViewDidBeginEditing")
 
-        }
+    }
     
-        func textViewDidEndEditing(_ textView: UITextView) {
-            if textViewNotes.text.isEmpty {
-                textViewNotes.text = "Placeholder"
-                textViewNotes.textColor = UIColor.lightGray
-            }
-            textView.resignFirstResponder()
-            print("func textViewDidEndEditing")
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textViewNotes.text.isEmpty {
+            textViewNotes.text = "Placeholder"
+            textViewNotes.textColor = UIColor.lightGray
         }
+        textView.resignFirstResponder()
+        print("func textViewDidEndEditing")
+    }
     
     //MARK: - Стандартные функции
     
@@ -82,10 +82,6 @@ extension Screen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate{
 
     //MARK: - Обработка касаний экрана
     func tapOutsideTextViewEditToHide(){
-        if textViewNotes.textColor == UIColor.lightGray {
-            textViewNotes.text = nil
-            textViewNotes.textColor = UIColor.black
-        }
         textViewNotes.endEditing(true)
         print("textViewDeselect")
     }
