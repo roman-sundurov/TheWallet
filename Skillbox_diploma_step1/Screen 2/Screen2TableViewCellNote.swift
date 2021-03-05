@@ -77,7 +77,7 @@ class Screen2TableViewCellNote: UITableViewCell, UITextViewDelegate {
 extension Screen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate{
     
     func returnView() -> UIView {
-        return self
+        return textViewNotes
     }
 
     //MARK: - Обработка касаний экрана

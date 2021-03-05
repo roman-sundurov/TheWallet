@@ -18,6 +18,7 @@ class Screen2TableViewCellCategoryOrDate: UITableViewCell {
 
 //Анимация
     @objc func changeCategoryOpenPopUpFromScreen2(_ tag: Int) {
+        deligateScreen2?.returnDelegateScreen2TableViewCellNote().tapOutsideTextViewEditToHide()
         deligateScreen2?.changeCategoryOpenPopUp(specCellTag)
         print("ChangeCategory from Screen2")
     }
@@ -32,9 +33,6 @@ class Screen2TableViewCellCategoryOrDate: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-//        var deligateContainerViewScreen2: UIView
-
-        // Configure the view for the selected state
     }
     
     func startCell() {

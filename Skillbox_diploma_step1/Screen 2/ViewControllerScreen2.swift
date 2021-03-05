@@ -11,6 +11,7 @@ protocol protocolScreen2Delegate{
     func changeCategoryClosePopUp()
     func changeCategoryOpenPopUp(_ tag: Int)
     func getScreen2MenuArray() -> [Screen2MenuData]
+    func returnDelegateScreen2TableViewCellNote() -> protocolScreen2TableViewCellNoteDelegate
 }
 
 struct Screen2MenuData {
@@ -58,11 +59,11 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
                 print("Tap TextView ended")
             let pointOfTap = tap.location(in: self.view)
             if delegateScreen2TableViewCellNote!.returnView().frame.contains(pointOfTap) {
-                print("Tap outside TextView")
-                delegateScreen2TableViewCellNote!.tapOutsideTextViewEditToHide()
+                print("Tap inside TextView")
             }
             else {
-                print("Tap inside TextView")
+                print("Tap outside TextView")
+                delegateScreen2TableViewCellNote!.tapOutsideTextViewEditToHide()
             }
         }
     }
@@ -127,6 +128,10 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
 }
 
 extension ViewControllerScreen2: protocolScreen2Delegate{
+    
+    func returnDelegateScreen2TableViewCellNote() -> protocolScreen2TableViewCellNoteDelegate {
+        return delegateScreen2TableViewCellNote!
+    }
     
     //MARK: - окрытие окна changeCategory
     func changeCategoryOpenPopUp(_ tag: Int) {
