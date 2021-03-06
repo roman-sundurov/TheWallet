@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		39D92BF8E629D2DC57861562 /* Pods_Skillbox_diploma_step1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81F31CAF70AC4A84052C9309 /* Pods_Skillbox_diploma_step1.framework */; };
+		4715215025F3A8E600FE585C /* Screen2TableViewCellDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4715214F25F3A8E600FE585C /* Screen2TableViewCellDate.swift */; };
 		4715819325B6FE310047C5D0 /* Screen2TableViewCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4715819225B6FE310047C5D0 /* Screen2TableViewCellHeader.swift */; };
 		472F288725A7319500CE1481 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F288625A7319500CE1481 /* AppDelegate.swift */; };
 		472F288925A7319500CE1481 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F288825A7319500CE1481 /* SceneDelegate.swift */; };
@@ -24,7 +25,7 @@
 		47AC1AA625C0AE45006E7817 /* Screen1TableViewCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1AA525C0AE45006E7817 /* Screen1TableViewCellHeader.swift */; };
 		47AC1AB625C0B7CB006E7817 /* Screen1TableViewCellCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1AB525C0B7CB006E7817 /* Screen1TableViewCellCategory.swift */; };
 		47C4FF3525B38B0F00F97498 /* ViewControllerScreen2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4FF3425B38B0F00F97498 /* ViewControllerScreen2.swift */; };
-		47CB73C325B4364700638185 /* Screen2TableViewCellCategoryOrDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB73C225B4364700638185 /* Screen2TableViewCellCategoryOrDate.swift */; };
+		47CB73C325B4364700638185 /* Screen2TableViewCellCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB73C225B4364700638185 /* Screen2TableViewCellCategory.swift */; };
 		47F1759925BA2D320044BD30 /* ViewControllerScreen2Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F1759825BA2D320044BD30 /* ViewControllerScreen2Container.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4715214F25F3A8E600FE585C /* Screen2TableViewCellDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2TableViewCellDate.swift; sourceTree = "<group>"; };
 		4715819225B6FE310047C5D0 /* Screen2TableViewCellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2TableViewCellHeader.swift; sourceTree = "<group>"; };
 		472F288325A7319500CE1481 /* Skillbox_diploma_step1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Skillbox_diploma_step1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		472F288625A7319500CE1481 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,7 +70,7 @@
 		47AC1AA525C0AE45006E7817 /* Screen1TableViewCellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Screen1TableViewCellHeader.swift; path = "Skillbox_diploma_step1/Screen 1/Screen1TableViewCellHeader.swift"; sourceTree = SOURCE_ROOT; };
 		47AC1AB525C0B7CB006E7817 /* Screen1TableViewCellCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen1TableViewCellCategory.swift; sourceTree = "<group>"; };
 		47C4FF3425B38B0F00F97498 /* ViewControllerScreen2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerScreen2.swift; sourceTree = "<group>"; };
-		47CB73C225B4364700638185 /* Screen2TableViewCellCategoryOrDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2TableViewCellCategoryOrDate.swift; sourceTree = "<group>"; };
+		47CB73C225B4364700638185 /* Screen2TableViewCellCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2TableViewCellCategory.swift; sourceTree = "<group>"; };
 		47F1759825BA2D320044BD30 /* ViewControllerScreen2Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerScreen2Container.swift; sourceTree = "<group>"; };
 		81F31CAF70AC4A84052C9309 /* Pods_Skillbox_diploma_step1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Skillbox_diploma_step1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A325522F0629C02EB6BD1B /* Pods-Skillbox_diploma_step1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Skillbox_diploma_step1.release.xcconfig"; path = "Target Support Files/Pods-Skillbox_diploma_step1/Pods-Skillbox_diploma_step1.release.xcconfig"; sourceTree = "<group>"; };
@@ -200,7 +202,8 @@
 			children = (
 				47C4FF3425B38B0F00F97498 /* ViewControllerScreen2.swift */,
 				4715819225B6FE310047C5D0 /* Screen2TableViewCellHeader.swift */,
-				47CB73C225B4364700638185 /* Screen2TableViewCellCategoryOrDate.swift */,
+				47CB73C225B4364700638185 /* Screen2TableViewCellCategory.swift */,
+				4715214F25F3A8E600FE585C /* Screen2TableViewCellDate.swift */,
 				47621F9725B644BF0095A52F /* Screen2TableViewCellNote.swift */,
 			);
 			path = "Screen 2";
@@ -380,6 +383,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4715215025F3A8E600FE585C /* Screen2TableViewCellDate.swift in Sources */,
 				47AC1AB625C0B7CB006E7817 /* Screen1TableViewCellCategory.swift in Sources */,
 				47AC1A9525C09AC9006E7817 /* Persistence.swift in Sources */,
 				4750EFEC25BC2C7F00167A92 /* Screen2Container_TableViewCellChangeCategory.swift in Sources */,
@@ -388,7 +392,7 @@
 				47AC1AA625C0AE45006E7817 /* Screen1TableViewCellHeader.swift in Sources */,
 				472F288725A7319500CE1481 /* AppDelegate.swift in Sources */,
 				47F1759925BA2D320044BD30 /* ViewControllerScreen2Container.swift in Sources */,
-				47CB73C325B4364700638185 /* Screen2TableViewCellCategoryOrDate.swift in Sources */,
+				47CB73C325B4364700638185 /* Screen2TableViewCellCategory.swift in Sources */,
 				47621F9825B644BF0095A52F /* Screen2TableViewCellNote.swift in Sources */,
 				4750EFE725BC2C5C00167A92 /* Screen2Container_TableViewCellHeader.swift in Sources */,
 				472F288925A7319500CE1481 /* SceneDelegate.swift in Sources */,

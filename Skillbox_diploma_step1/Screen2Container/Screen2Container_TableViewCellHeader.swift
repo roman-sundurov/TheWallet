@@ -1,4 +1,4 @@
-//
+
 //  TableViewCellHeaderScreen2Container.swift
 //  Skillbox_diploma_step1
 //

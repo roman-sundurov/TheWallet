@@ -14,6 +14,7 @@ protocol protocolScreen1Delegate{
     func findAmountOfHeaders()
     func getNewTableDataArray() -> [Screen1TableData]
     func getArrayForIncrease() -> [Int]
+    func screen1AllUpdate()
 }
 
 class Screen1TableData{
@@ -47,30 +48,52 @@ class ViewController: UIViewController {
     @IBOutlet var labelAmountOfIncome: UILabel!
     @IBOutlet var labelAmountOfExpenses: UILabel!
     
+    //MARK: - объявление переменных
     
-    //MARK: - обработка касаний экрана
+    var newTableDataArrayOriginal: [Screen1TableData] = [] //хранение оригинала данных из Realm
+    var newTableDataArray: [Screen1TableData] = [] //хранение модифицированных данных из Realm для конкретного режима отоборажения
+    var arrayForIncrease: [Int] = [0] //показывает количество заголовков с новой датой в таблице, которое предшествует конкретной операции
+    var daysForSorting: Int = 30
+    
+    //MARK: - клики по верхнему меню
+    
+    func changeDaysForSorting(){
+        switch daysForSorting {
+        case 1:
+            print("daysForSorting is 1")
+        case 7:
+            print("daysForSorting is 7")
+        case 30:
+            print("daysForSorting is 30")
+        case 365:
+            print("daysForSorting is 365")
+        default:
+            print("daysForSorting has not recognized in viewDidLoad")
+        }
+        borderForMenuBottom(days: daysForSorting)
+        screen1TableUpdateSorting(days: daysForSorting)
+        daysForSortingRealmUpdate()
+    }
+    
     @IBAction func buttonDailyGesture(_ sender: Any) {
-//        topMenuHighliter(specifyLabel: labelDaily)
-        borderForMenuBotton(buttonDaily)
-        screen1TableUpdateSorting(days: 1)
+        daysForSorting = 1
+        changeDaysForSorting()
     }
     @IBAction func buttonWeeklyGesture(_ sender: Any) {
-//        topMenuHighliter(specifyLabel: labelWeekly)
-        borderForMenuBotton(buttonWeekly)
-        screen1TableUpdateSorting(days: 7)
+        daysForSorting = 7
+        changeDaysForSorting()
     }
     @IBAction func buttonMonthlyGesture(_ sender: Any) {
-//        topMenuHighliter(specifyLabel: labelMothly)
-        borderForMenuBotton(buttonMonthly)
-        screen1TableUpdateSorting(days: 30)
+        daysForSorting = 30
+        changeDaysForSorting()
     }
     @IBAction func buttonYearlyGesture(_ sender: Any) {
-//        topMenuHighliter(specifyLabel: labelYearly)
-        borderForMenuBotton(buttonYearly)
-        screen1TableUpdateSorting(days: 365)
+        daysForSorting = 365
+        changeDaysForSorting()
     }
 
-    //MARK: - Компоновка экрана
+    //MARK: - структура верхнего меню
+    
     func topMenuHighliter(specifyLabel: UILabel){
         specifyLabel.font = UIFont.systemFont(ofSize: specifyLabel.font.pointSize, weight: .bold)
         switch specifyLabel {
@@ -99,21 +122,44 @@ class ViewController: UIViewController {
         }
     }
     
-    func borderForMenuBotton(_ specifyButton: UIView) {
+    func borderForMenuBottom(days: Int) {
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
-            switch specifyButton {
-            case self.buttonDaily:
+            switch days {
+            case 1:
                 self.topMenuButtonStrip.frame.origin.x = self.buttonDaily.frame.origin.x + 10
-            case self.buttonWeekly:
+                print("borderForMenuBottom 1")
+            case 7:
                 self.topMenuButtonStrip.frame.origin.x = self.buttonWeekly.frame.origin.x + 10
-            case self.buttonMonthly:
+                print("borderForMenuBottom 7")
+            case 30:
                 self.topMenuButtonStrip.frame.origin.x = self.buttonMonthly.frame.origin.x + 10
-            case self.buttonYearly:
+                print("borderForMenuBottom 30")
+            case 365:
                 self.topMenuButtonStrip.frame.origin.x = self.buttonYearly.frame.origin.x + 10
+                print("borderForMenuBottom 365")
             default:
                 print("Error with borderForMenuBotton")
             }
         }, completion: {isCompleted in })
+    }
+    
+    func borderForMenuBottomWhenStart(days: Int) {
+        switch days {
+        case 1:
+            self.topMenuButtonStrip.frame.origin.x = self.buttonDaily.frame.origin.x + 10
+            print("borderForMenuBottom 1, when start")
+        case 7:
+            self.topMenuButtonStrip.frame.origin.x = self.buttonWeekly.frame.origin.x + 10
+            print("borderForMenuBottom 7, when start")
+        case 30:
+            self.topMenuButtonStrip.frame.origin.x = self.buttonMonthly.frame.origin.x + 10
+            print("borderForMenuBottom 30, when start")
+        case 365:
+            self.topMenuButtonStrip.frame.origin.x = self.buttonYearly.frame.origin.x + 10
+            print("borderForMenuBottom 365, when start")
+        default:
+            print("Error with borderForMenuBotton")
+        }
     }
     
     func countingIncomesAndExpensive() {
@@ -138,18 +184,10 @@ class ViewController: UIViewController {
         else {
             labelAmountOfExpenses.text = "$\(String(format: "%.2f", expensive))"
         }
-
-
-//        labelAmountOfIncome.text = String(format: "%.0f", income)
-//        labelAmountOfExpenses.text = String(format: "%.0f", expensive)
     }
     
     
-    //MARK: - Работа с таблицей и базой данных
-    
-    var date1: Int = 0
-    var date2: Int = 0
-    var arrayForIncrease: [Int] = [0]
+    //MARK: - Работа с таблицей
     
     func tableNumberOfRowsInSection() -> Int{
         if newTableDataArray.count == 0 { return 1 }
@@ -159,8 +197,6 @@ class ViewController: UIViewController {
         for x in newTableDataArray {
             if Calendar.current.component(.day, from: x.date) != previousDay{
                 if counter == 0 {
-//                    arrayForIncrease.append(arrayForIncrease.last!)
-//                    arrayForIncrease.append(arrayForIncrease.last! + 1)
                 }
                 else{
                     arrayForIncrease.append(arrayForIncrease.last!)
@@ -174,43 +210,42 @@ class ViewController: UIViewController {
             counter += 1
         }
         arrayForIncrease.append(arrayForIncrease.last!)
-//        print("max inrease= \(arrayForIncrease.last!)")
-//        print("arrayForIncrease= \(arrayForIncrease)")
-//        print("newTableDataArray.count= \(newTableDataArray.count)")
         return arrayForIncrease.count
-    }
-    
-    var newTableDataArrayOriginal: [Screen1TableData] = []
-    var newTableDataArray: [Screen1TableData] = []
-    
-    func screen1TableUpdate(){
-        newTableDataArrayOriginal = []
-        for n in Persistence.shared.getRealmData(){
-            newTableDataArrayOriginal.append(Screen1TableData(amount1: n.amount, category1: n.category, note1: n.note, date1: n.date))
-            print("DataSpec\(String(describing: newTableDataArrayOriginal.last?.date))")
-        }
     }
     
     func screen1TableUpdateSorting(days: Int){
         let newTime = Date() - TimeInterval.init(86400 * days)
-        print("newTime= \(newTime)")
+//        print("newTime= \(newTime)")
         
         newTableDataArray = newTableDataArrayOriginal
         newTableDataArray.sort(by: { $0.date > $1.date })
-        print("newTableDataArray.count: \(newTableDataArray.count)")
+//        print("newTableDataArray.count: \(newTableDataArray.count)")
     
         let temporarilyDate = newTableDataArray.filter { $0.date >= newTime }
         newTableDataArray = temporarilyDate
-        print("A2: \(newTableDataArray)")
+//        print("A2: \(newTableDataArray)")
         self.tableViewScreen1.reloadData()
     }
     
-//    -------------------------------------
+    //MARK: - Работа с базой данных
+    
+    func screen1DataReceive(){
+        newTableDataArrayOriginal = []
+        for n in Persistence.shared.getRealmData(){
+            newTableDataArrayOriginal.append(Screen1TableData(amount1: n.amount, category1: n.category, note1: n.note, date1: n.date))
+        }
+        daysForSorting = Persistence.shared.getDaysForSorting()
+    }
+    
+    func daysForSortingRealmUpdate(){
+        Persistence.shared.updateDaysForSorting(daysForSorting: daysForSorting)
+    }
+    
+    //MARK: - ViewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        //MARK: - Сохранени данных о времени
 //        let formatter = DateFormatter()
 //        formatter.dateFormat = "yyyy/MM/dd HH:mm"
 //        let today = formatter.date(from: "2021/02/22 17:45")
@@ -221,13 +256,30 @@ class ViewController: UIViewController {
 //        Persistence.shared.addOperations(amount: -600, category: "Coffee", note: "Вторая заметка", date: yesterday!)
 //        Persistence.shared.addOperations(amount: -200, category: "Lease payable", note: "Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка.", date: a2DaysBefore!)
 
+//        print("topMenuButtonStrip.frame.origin.x = \(topMenuButtonStrip.frame.origin.x)")
+//        print("self.buttonWeekly.frame.origin.x = \(self.buttonWeekly.frame.origin.x)")
+        topMenuButtonStrip.frame.origin.x = 60
+        print("topMenuButtonStrip.frame.origin.x = \(topMenuButtonStrip.frame.origin.x)")
+//        print("self.buttonWeekly.frame.origin.x= \(self.buttonWeekly.frame.origin.x)")
         
-        screen1TableUpdate()
-//        borderForMenuBotton(buttonYearly)
-        screen1TableUpdateSorting(days: 30)
+        screen1DataReceive()
         countingIncomesAndExpensive()
-        
-        //MARK: - работа с сохранением даты операции
+//        switch daysForSorting {
+//        case 1:
+//            print("daysForSorting is 1, when start")
+//        case 7:
+//            print("daysForSorting is 7, when start")
+//        case 30:
+//            print("daysForSorting is 30, when start")
+//        case 365:
+//            print("daysForSorting is 365, when start")
+//        default:
+//            print("daysForSorting has not recognized in viewDidLoad")
+//        }
+//        borderForMenuBottomWhenStart(days: daysForSorting)
+        screen1TableUpdateSorting(days: daysForSorting)
+        self.view.layoutIfNeeded()
+
         
         bottomPopInList.backgroundColor = .red
         bottomPopInList.layer.cornerRadius  = 20
@@ -236,13 +288,21 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 }
-//MARK: - extensionProtocol
+//MARK: - additional protocols
+
 extension ViewController: protocolScreen1Delegate{
+    
+    func screen1AllUpdate() {
+        screen1DataReceive()
+        countingIncomesAndExpensive()
+        changeDaysForSorting()
+    }
+    
     
     func getArrayForIncrease() -> [Int]{
         return arrayForIncrease
     }
-    
+
     func getNewTableDataArray() -> [Screen1TableData] {
         return newTableDataArray
     }
@@ -259,10 +319,9 @@ extension ViewController: protocolScreen1Delegate{
         return
     }
     
-    
 }
 
-//MARK: - extension
+//MARK: - table Functionality
 extension ViewController: UITableViewDelegate, UITableViewDataSource{
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -274,10 +333,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        print("indexPath.row= \(indexPath.row)")
-//        print("arrayForIncrease[indexPath.row]= \(arrayForIncrease[indexPath.row])")
         if newTableDataArray.isEmpty{
-            print("newTableDataArray is empty")
+//            print("newTableDataArray is empty")
             let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
             cell.deligateScreen1 = self
             cell.startCellEmpty()
@@ -307,12 +364,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
                 return cell
             }
         }
-        
-//            let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategoryOpenPopUp(_:)))
-//            cell.isUserInteractionEnabled = true
-//            cell.addGestureRecognizer(gesture)
-//            cell.tag = indexPath.row
-
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{

@@ -608,14 +608,67 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellCategoryOrDate" id="zpz-xv-mHZ" customClass="Screen2TableViewCellCategoryOrDate" customModule="Skillbox_diploma_step1" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellCategory" id="VR3-F6-Huf" customClass="Screen2TableViewCellCategory" customModule="Skillbox_diploma_step1" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72.333332061767578" width="390" height="44.333332061767578"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VR3-F6-Huf" id="hlz-XO-kPc">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="44.333332061767578"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zre-LC-Ow4">
+                                                    <rect key="frame" x="15" y="9.9999999999999982" width="95" height="24.333333333333329"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="95" id="N5T-iv-ikC"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select catagory" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZU-fI-Qjk">
+                                                    <rect key="frame" x="120" y="9.9999999999999982" width="217" height="24.333333333333329"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                    <color key="textColor" systemColor="opaqueSeparatorColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJl-dp-geC">
+                                                    <rect key="frame" x="347" y="11.333333333333334" width="28" height="22.333333333333329"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="28" id="UMZ-jh-iGL"/>
+                                                        <constraint firstAttribute="height" constant="28" id="kae-bE-nrQ"/>
+                                                    </constraints>
+                                                    <color key="tintColor" systemColor="secondaryLabelColor"/>
+                                                    <state key="normal">
+                                                        <color key="titleColor" systemColor="opaqueSeparatorColor"/>
+                                                        <imageReference key="backgroundImage" image="arrow.right" catalog="system" symbolScale="default"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="mJl-dp-geC" firstAttribute="centerY" secondItem="hlz-XO-kPc" secondAttribute="centerY" id="2EI-Oy-DSM"/>
+                                                <constraint firstAttribute="bottom" secondItem="Zre-LC-Ow4" secondAttribute="bottom" constant="10" id="Dee-yK-4i1"/>
+                                                <constraint firstItem="Zre-LC-Ow4" firstAttribute="top" secondItem="hlz-XO-kPc" secondAttribute="top" constant="10" id="QFB-Hq-mNG"/>
+                                                <constraint firstItem="mJl-dp-geC" firstAttribute="leading" secondItem="fZU-fI-Qjk" secondAttribute="trailing" constant="10" id="UW8-YB-F8d"/>
+                                                <constraint firstItem="fZU-fI-Qjk" firstAttribute="top" secondItem="hlz-XO-kPc" secondAttribute="top" constant="10" id="fhH-pI-hOm"/>
+                                                <constraint firstAttribute="trailing" secondItem="mJl-dp-geC" secondAttribute="trailing" constant="15" id="nRv-mU-ixy"/>
+                                                <constraint firstItem="fZU-fI-Qjk" firstAttribute="leading" secondItem="Zre-LC-Ow4" secondAttribute="trailing" constant="10" id="oPg-DX-jHp"/>
+                                                <constraint firstAttribute="bottom" secondItem="fZU-fI-Qjk" secondAttribute="bottom" constant="10" id="uTS-XV-yaT"/>
+                                                <constraint firstItem="Zre-LC-Ow4" firstAttribute="leading" secondItem="hlz-XO-kPc" secondAttribute="leading" constant="15" id="xW3-8w-jVG"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outlet property="buttonSelectCategory" destination="mJl-dp-geC" id="Vfi-zg-rsk"/>
+                                            <outlet property="labelCategory" destination="Zre-LC-Ow4" id="fwF-Qx-cDD"/>
+                                            <outlet property="labelSelectCategory" destination="fZU-fI-Qjk" id="bf1-51-JwT"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellDate" id="zpz-xv-mHZ" customClass="Screen2TableViewCellDate" customModule="Skillbox_diploma_step1" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="116.66666412353516" width="390" height="44.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zpz-xv-mHZ" id="4K5-hq-kUl">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="44.333332061767578"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SSu-PT-DOx">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SSu-PT-DOx">
                                                     <rect key="frame" x="15" y="9.9999999999999982" width="95" height="24.333333333333329"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="95" id="wfY-Ir-Rz6"/>
@@ -656,13 +709,13 @@
                                         </tableViewCellContentView>
                                         <gestureRecognizers/>
                                         <connections>
-                                            <outlet property="buttonSelectCategory" destination="Ip7-Zv-FUs" id="NfC-3i-W2E"/>
-                                            <outlet property="labelCategory" destination="SSu-PT-DOx" id="Zab-5N-alf"/>
-                                            <outlet property="labelSelectCategory" destination="5ww-KI-dSR" id="aos-Tb-s0x"/>
+                                            <outlet property="buttonSelectCategory" destination="Ip7-Zv-FUs" id="TVB-Gr-vgH"/>
+                                            <outlet property="labelCategory" destination="SSu-PT-DOx" id="24k-h6-lzb"/>
+                                            <outlet property="labelSelectCategory" destination="5ww-KI-dSR" id="smC-aP-ubC"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellNote" id="hmy-aS-YRO" customClass="Screen2TableViewCellNote" customModule="Skillbox_diploma_step1" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="116.66666412353516" width="390" height="108.33333587646484"/>
+                                        <rect key="frame" x="0.0" y="160.99999618530273" width="390" height="108.33333587646484"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hmy-aS-YRO" id="Xfm-Y8-Isj">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="108.33333587646484"/>
@@ -811,7 +864,7 @@
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select catagory" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XPX-QR-eET">
-                                                            <rect key="frame" x="40" y="10" width="141" height="24"/>
+                                                            <rect key="frame" x="40" y="10" width="244" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="141" id="bgV-tO-FRq"/>
                                                             </constraints>
@@ -837,7 +890,7 @@
                                                         <constraint firstItem="XPX-QR-eET" firstAttribute="centerY" secondItem="QbF-18-lnB" secondAttribute="centerY" id="Bj8-tX-E1X"/>
                                                         <constraint firstItem="mXt-2h-8pU" firstAttribute="centerY" secondItem="QbF-18-lnB" secondAttribute="centerY" id="MSN-HN-CG3"/>
                                                         <constraint firstAttribute="trailing" secondItem="WvV-OG-r3R" secondAttribute="trailing" id="hxz-TP-gTV"/>
-                                                        <constraint firstItem="WvV-OG-r3R" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XPX-QR-eET" secondAttribute="trailing" constant="10" id="miV-1w-cM5"/>
+                                                        <constraint firstItem="WvV-OG-r3R" firstAttribute="leading" secondItem="XPX-QR-eET" secondAttribute="trailing" constant="10" id="miV-1w-cM5"/>
                                                         <constraint firstItem="WvV-OG-r3R" firstAttribute="centerY" secondItem="QbF-18-lnB" secondAttribute="centerY" id="pzl-HE-Hkx"/>
                                                         <constraint firstItem="XPX-QR-eET" firstAttribute="leading" secondItem="mXt-2h-8pU" secondAttribute="trailing" constant="10" id="rUh-yF-Tnd"/>
                                                     </constraints>

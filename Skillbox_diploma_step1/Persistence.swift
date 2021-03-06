@@ -8,6 +8,12 @@
 import Foundation
 import RealmSwift
 
+class Person: Object{
+    @objc dynamic var name: String = ""
+    @objc dynamic var surname: String = ""
+    @objc dynamic var daysForSorting: Int = 0
+}
+
 class ListOfOperations: Object{
     @objc dynamic var amount: Double = 0
     @objc dynamic var category: String = ""
@@ -19,6 +25,8 @@ class Persistence{
     
     static let shared = Persistence()
     private let realm = try! Realm()
+    
+    //MARK: - торговые операции
 
     func addOperations(amount: Double, category: String, note: String, date: Date){
         let operation = ListOfOperations()
@@ -42,4 +50,32 @@ class Persistence{
             realm.delete(allOperations[tag])
         }
     }
+    
+    //MARK: - личные данные
+    
+    func updateDaysForSorting(daysForSorting: Int){
+        let person = realm.objects(Person.self).first
+        
+        try! realm.write{
+            person!.daysForSorting = daysForSorting
+        }
+    }
+        
+    func getDaysForSorting() -> Int{
+        let person = realm.objects(Person.self).first
+        if person?.daysForSorting != nil {
+            return person!.daysForSorting
+            print("old person returned")
+        }
+        else{
+            print("newPerson added")
+            let newPerson = Person()
+            newPerson.daysForSorting = 30
+            try! realm.write{
+                realm.add(newPerson)
+            }
+            return newPerson.daysForSorting
+        }
+    }
+    
 }

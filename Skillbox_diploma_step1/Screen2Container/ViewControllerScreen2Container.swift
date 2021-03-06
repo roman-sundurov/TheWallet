@@ -44,18 +44,12 @@ class ViewControllerScreen2Container: UIViewController {
     @objc override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let tap = UITapGestureRecognizer()
-//        tap.addTarget(self, action: #selector(tapHandlerContainerHide(tap:)))
-//        self.view.addGestureRecognizer(tap)
-        
-//        tapHandlerContainerHide(tap: <#T##UITapGestureRecognizer#>)
-        
         screen2ContainerMenuArray = [screen2ContainerMenuList0, screen2ContainerMenuList1, screen2ContainerMenuList2, screen2ContainerMenuList3, screen2ContainerMenuList4, screen2ContainerMenuList5, screen2ContainerMenuList6]
         
     }
 }
 
-//MARK: - extensionProtocol
+//MARK: - additional protocols
 extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
     func closeWindows(_ tag: Int) {
         delegateScreen2?.changeCategoryClosePopUp()
@@ -82,7 +76,7 @@ extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
     }
 }
 
-//MARK: - extensionProtocol
+//MARK: - table Functionality
 extension ViewControllerScreen2Container: UITableViewDelegate, UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
