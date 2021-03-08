@@ -47,6 +47,7 @@ class ViewController: UIViewController {
     @IBOutlet var bottomPopInList: UIView!
     @IBOutlet var labelAmountOfIncome: UILabel!
     @IBOutlet var labelAmountOfExpenses: UILabel!
+    @IBOutlet var constraintTopMenuBottomStrip: NSLayoutConstraint!
     
     //MARK: - объявление переменных
     
@@ -126,16 +127,16 @@ class ViewController: UIViewController {
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             switch days {
             case 1:
-                self.topMenuButtonStrip.frame.origin.x = self.buttonDaily.frame.origin.x + 10
+                self.constraintTopMenuBottomStrip.constant = self.buttonDaily.frame.origin.x + 10
                 print("borderForMenuBottom 1")
             case 7:
-                self.topMenuButtonStrip.frame.origin.x = self.buttonWeekly.frame.origin.x + 10
+                self.constraintTopMenuBottomStrip.constant = self.buttonWeekly.frame.origin.x + 10
                 print("borderForMenuBottom 7")
             case 30:
-                self.topMenuButtonStrip.frame.origin.x = self.buttonMonthly.frame.origin.x + 10
+                self.constraintTopMenuBottomStrip.constant = self.buttonMonthly.frame.origin.x + 10
                 print("borderForMenuBottom 30")
             case 365:
-                self.topMenuButtonStrip.frame.origin.x = self.buttonYearly.frame.origin.x + 10
+                self.constraintTopMenuBottomStrip.constant = self.buttonYearly.frame.origin.x + 10
                 print("borderForMenuBottom 365")
             default:
                 print("Error with borderForMenuBotton")
@@ -146,16 +147,16 @@ class ViewController: UIViewController {
     func borderForMenuBottomWhenStart(days: Int) {
         switch days {
         case 1:
-            self.topMenuButtonStrip.frame.origin.x = self.buttonDaily.frame.origin.x + 10
+            self.constraintTopMenuBottomStrip.constant = self.buttonDaily.frame.origin.x + 10
             print("borderForMenuBottom 1, when start")
         case 7:
-            self.topMenuButtonStrip.frame.origin.x = self.buttonWeekly.frame.origin.x + 10
+            self.constraintTopMenuBottomStrip.constant = self.buttonWeekly.frame.origin.x + 10
             print("borderForMenuBottom 7, when start")
         case 30:
-            self.topMenuButtonStrip.frame.origin.x = self.buttonMonthly.frame.origin.x + 10
+            self.constraintTopMenuBottomStrip.constant = self.buttonMonthly.frame.origin.x + 10
             print("borderForMenuBottom 30, when start")
         case 365:
-            self.topMenuButtonStrip.frame.origin.x = self.buttonYearly.frame.origin.x + 10
+            self.constraintTopMenuBottomStrip.constant = self.buttonYearly.frame.origin.x + 10
             print("borderForMenuBottom 365, when start")
         default:
             print("Error with borderForMenuBotton")
@@ -243,12 +244,6 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //        print("topMenuButtonStrip.frame.origin.x = \(topMenuButtonStrip.frame.origin.x)")
-        //        print("self.buttonWeekly.frame.origin.x = \(self.buttonWeekly.frame.origin.x)")
-//                topMenuButtonStrip.frame.origin.x = 60
-//                print("topMenuButtonStrip.frame.origin.x = \(topMenuButtonStrip.frame.origin.x)")
-        //        print("self.buttonWeekly.frame.origin.x= \(self.buttonWeekly.frame.origin.x)")
-        
         
         borderForMenuBottomWhenStart(days: daysForSorting)
         screen1TableUpdateSorting(days: daysForSorting)

@@ -192,9 +192,9 @@
                                     <constraint firstAttribute="trailing" secondItem="DR2-zn-3Ey" secondAttribute="trailing" constant="10" id="3Sy-sI-9Er"/>
                                     <constraint firstItem="aLA-sb-VFn" firstAttribute="top" secondItem="oin-I9-C2d" secondAttribute="bottom" id="CJ4-XI-zo5"/>
                                     <constraint firstAttribute="bottom" secondItem="aLA-sb-VFn" secondAttribute="bottom" constant="10" id="EGh-Gh-SkD"/>
-                                    <constraint firstAttribute="trailing" secondItem="oin-I9-C2d" secondAttribute="trailing" constant="100" id="Vf6-c0-fCn"/>
                                     <constraint firstItem="oin-I9-C2d" firstAttribute="top" secondItem="DR2-zn-3Ey" secondAttribute="bottom" constant="10" id="e99-Q1-RDf"/>
                                     <constraint firstItem="DR2-zn-3Ey" firstAttribute="top" secondItem="0fu-iu-rQ4" secondAttribute="top" id="fl3-h8-EIJ"/>
+                                    <constraint firstItem="oin-I9-C2d" firstAttribute="leading" secondItem="0fu-iu-rQ4" secondAttribute="leading" constant="200" id="ir3-TU-DOM"/>
                                     <constraint firstItem="aLA-sb-VFn" firstAttribute="leading" secondItem="0fu-iu-rQ4" secondAttribute="leading" constant="10" id="qlg-Gb-Fjw"/>
                                     <constraint firstItem="DR2-zn-3Ey" firstAttribute="leading" secondItem="0fu-iu-rQ4" secondAttribute="leading" constant="10" id="xsM-QK-puH"/>
                                 </constraints>
@@ -439,6 +439,7 @@
                         <outlet property="buttonMonthly" destination="cnN-uv-yOB" id="C7n-Bv-d96"/>
                         <outlet property="buttonWeekly" destination="8SJ-cy-bxx" id="ToP-qQ-eFo"/>
                         <outlet property="buttonYearly" destination="EZM-zD-IXz" id="E8R-Fi-wgz"/>
+                        <outlet property="constraintTopMenuBottomStrip" destination="ir3-TU-DOM" id="GQC-hc-fDq"/>
                         <outlet property="labelAmountOfExpenses" destination="MzC-5Z-ueh" id="hFP-dz-Z6S"/>
                         <outlet property="labelAmountOfIncome" destination="Jce-a5-TXM" id="Vw0-CI-Rcm"/>
                         <outlet property="labelDaily" destination="x1e-o1-ksS" id="BmE-1r-rqL"/>
