@@ -432,6 +432,7 @@
                             <constraint firstItem="gmF-FQ-Gvr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zu6-2k-ysM"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="vBF-1v-G7S"/>
                     <connections>
                         <outlet property="bottomPopInList" destination="7MB-m0-6NI" id="n4q-qN-Zk7"/>
                         <outlet property="buttonDaily" destination="M6c-Oi-MPB" id="Ka0-cd-mQZ"/>
@@ -489,12 +490,6 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Done" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9r-dX-8Gj">
-                                        <rect key="frame" x="320" y="1" width="55" height="28"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
-                                        <color key="textColor" red="0.53405213360000003" green="0.80733603239999996" blue="0.81979507210000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTx-8o-Xns">
                                         <rect key="frame" x="15" y="-5" width="72" height="40"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
@@ -505,13 +500,23 @@
                                             <segue destination="BYZ-38-t0r" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="vZY-DS-U2l"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxe-KE-Atx">
+                                        <rect key="frame" x="320" y="-5" width="55" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
+                                        <state key="normal" title="Done">
+                                            <color key="titleColor" red="0.53405213360000003" green="0.80733603239999996" blue="0.81979507210000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="FI7-3Q-I9f"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="nTx-8o-Xns" firstAttribute="leading" secondItem="kKJ-BS-QlT" secondAttribute="leading" constant="15" id="2PG-gJ-Na1"/>
                                     <constraint firstItem="EHj-xF-Jnq" firstAttribute="centerY" secondItem="kKJ-BS-QlT" secondAttribute="centerY" id="DsJ-HX-hCZ"/>
-                                    <constraint firstAttribute="trailing" secondItem="D9r-dX-8Gj" secondAttribute="trailing" constant="15" id="F0z-zD-Iap"/>
                                     <constraint firstAttribute="height" constant="30" id="JTb-oa-3fz"/>
-                                    <constraint firstItem="D9r-dX-8Gj" firstAttribute="centerY" secondItem="kKJ-BS-QlT" secondAttribute="centerY" id="hnX-gd-wBE"/>
+                                    <constraint firstAttribute="trailing" secondItem="cxe-KE-Atx" secondAttribute="trailing" constant="15" id="LDe-eq-2Nh"/>
+                                    <constraint firstItem="cxe-KE-Atx" firstAttribute="centerY" secondItem="kKJ-BS-QlT" secondAttribute="centerY" id="U8t-rg-whr"/>
                                     <constraint firstItem="nTx-8o-Xns" firstAttribute="centerY" secondItem="kKJ-BS-QlT" secondAttribute="centerY" id="tVr-vy-Al0"/>
                                     <constraint firstItem="EHj-xF-Jnq" firstAttribute="centerX" secondItem="kKJ-BS-QlT" secondAttribute="centerX" id="we8-vb-2XO"/>
                                 </constraints>
@@ -932,6 +937,9 @@
             <point key="canvasLocation" x="1666.1538461538462" y="230.68720379146919"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="vZY-DS-U2l"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.right" catalog="system" width="128" height="98"/>
         <image name="graph" width="148" height="103.66666412353516"/>

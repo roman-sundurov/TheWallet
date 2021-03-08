@@ -213,17 +213,15 @@ class ViewController: UIViewController {
         return arrayForIncrease.count
     }
     
+    // Обновление сортировки
     func screen1TableUpdateSorting(days: Int){
         let newTime = Date() - TimeInterval.init(86400 * days)
-//        print("newTime= \(newTime)")
         
         newTableDataArray = newTableDataArrayOriginal
         newTableDataArray.sort(by: { $0.date > $1.date })
-//        print("newTableDataArray.count: \(newTableDataArray.count)")
     
         let temporarilyDate = newTableDataArray.filter { $0.date >= newTime }
         newTableDataArray = temporarilyDate
-//        print("A2: \(newTableDataArray)")
         self.tableViewScreen1.reloadData()
     }
     
@@ -241,7 +239,24 @@ class ViewController: UIViewController {
         Persistence.shared.updateDaysForSorting(daysForSorting: daysForSorting)
     }
     
-    //MARK: - ViewDidLoad
+    //MARK: - viewWillAppear
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //        print("topMenuButtonStrip.frame.origin.x = \(topMenuButtonStrip.frame.origin.x)")
+        //        print("self.buttonWeekly.frame.origin.x = \(self.buttonWeekly.frame.origin.x)")
+//                topMenuButtonStrip.frame.origin.x = 60
+//                print("topMenuButtonStrip.frame.origin.x = \(topMenuButtonStrip.frame.origin.x)")
+        //        print("self.buttonWeekly.frame.origin.x= \(self.buttonWeekly.frame.origin.x)")
+        
+        
+        borderForMenuBottomWhenStart(days: daysForSorting)
+        screen1TableUpdateSorting(days: daysForSorting)
+        self.view.layoutIfNeeded()
+    }
+    
+    
+    //MARK: - viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -255,31 +270,9 @@ class ViewController: UIViewController {
 //        Persistence.shared.addOperations(amount: 1200, category: "Salary", note: "Первая заметка", date: today!)
 //        Persistence.shared.addOperations(amount: -600, category: "Coffee", note: "Вторая заметка", date: yesterday!)
 //        Persistence.shared.addOperations(amount: -200, category: "Lease payable", note: "Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка.", date: a2DaysBefore!)
-
-//        print("topMenuButtonStrip.frame.origin.x = \(topMenuButtonStrip.frame.origin.x)")
-//        print("self.buttonWeekly.frame.origin.x = \(self.buttonWeekly.frame.origin.x)")
-        topMenuButtonStrip.frame.origin.x = 60
-        print("topMenuButtonStrip.frame.origin.x = \(topMenuButtonStrip.frame.origin.x)")
-//        print("self.buttonWeekly.frame.origin.x= \(self.buttonWeekly.frame.origin.x)")
         
         screen1DataReceive()
         countingIncomesAndExpensive()
-//        switch daysForSorting {
-//        case 1:
-//            print("daysForSorting is 1, when start")
-//        case 7:
-//            print("daysForSorting is 7, when start")
-//        case 30:
-//            print("daysForSorting is 30, when start")
-//        case 365:
-//            print("daysForSorting is 365, when start")
-//        default:
-//            print("daysForSorting has not recognized in viewDidLoad")
-//        }
-//        borderForMenuBottomWhenStart(days: daysForSorting)
-        screen1TableUpdateSorting(days: daysForSorting)
-        self.view.layoutIfNeeded()
-
         
         bottomPopInList.backgroundColor = .red
         bottomPopInList.layer.cornerRadius  = 20
