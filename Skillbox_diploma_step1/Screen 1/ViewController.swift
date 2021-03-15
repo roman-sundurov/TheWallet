@@ -15,6 +15,9 @@ protocol protocolScreen1Delegate{
     func getNewTableDataArray() -> [Screen1TableData]
     func getArrayForIncrease() -> [Int]
     func screen1AllUpdate()
+    
+    
+    wwwwww
 }
 
 class Screen1TableData{
