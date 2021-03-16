@@ -15,6 +15,8 @@ protocol protocolScreen1Delegate{
     func getNewTableDataArray() -> [Screen1TableData]
     func getArrayForIncrease() -> [Int]
     func screen1AllUpdate()
+    func addOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date)
+    
 }
 
 class Screen1TableData{
@@ -34,6 +36,7 @@ class Screen1TableData{
 class ViewController: UIViewController {
     
     //MARK: - объявление аутлетов
+    
     @IBOutlet var tableViewScreen1: UITableView!
     @IBOutlet var buttonDaily: UIView!
     @IBOutlet var buttonWeekly: UIView!
@@ -49,7 +52,10 @@ class ViewController: UIViewController {
     @IBOutlet var labelAmountOfExpenses: UILabel!
     @IBOutlet var constraintTopMenuBottomStrip: NSLayoutConstraint!
     
-    //MARK: - объявление переменных
+    
+    //MARK: - делегаты и переменные
+    
+    var delegateScreen2: protocolScreen2Delegate?
     
     var newTableDataArrayOriginal: [Screen1TableData] = [] //хранение оригинала данных из Realm
     var newTableDataArray: [Screen1TableData] = [] //хранение модифицированных данных из Realm для конкретного режима отоборажения
@@ -57,21 +63,23 @@ class ViewController: UIViewController {
     var daysForSorting: Int = 30
     
     
+    //MARK: - переходы
+    
+    @IBAction func buttonToScreen2(_ sender: Any) {
+        performSegue(withIdentifier: "segueToScreen2", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.description as? ViewControllerScreen2, segue.identifier == "segueToScreen2" {
+            delegateScreen2 = vc
+            vc.delegateScreen1 = self
+        }
+    }
+    
+    
     //MARK: - клики
     
     func changeDaysForSorting(){
-//        switch daysForSorting {
-//        case 1:
-//            print("daysForSorting is 1")
-//        case 7:
-//            print("daysForSorting is 7")
-//        case 30:
-//            print("daysForSorting is 30")
-//        case 365:
-//            print("daysForSorting is 365")
-//        default:
-//            print("daysForSorting has not recognized in viewDidLoad")
-//        }
         borderForMenuBottom(days: daysForSorting)
         screen1TableUpdateSorting(days: daysForSorting)
         daysForSortingRealmUpdate()
@@ -93,8 +101,9 @@ class ViewController: UIViewController {
         daysForSorting = 365
         changeDaysForSorting()
     }
+    
 
-    //MARK: - структура верхнего меню
+    //MARK: - верхнее меню
     
     func topMenuHighliter(specifyLabel: UILabel){
         specifyLabel.font = UIFont.systemFont(ofSize: specifyLabel.font.pointSize, weight: .bold)
@@ -170,7 +179,7 @@ class ViewController: UIViewController {
     }
     
     
-    //MARK: - Работа с таблицей
+    //MARK: - нижнее меню
     
     func tableNumberOfRowsInSection() -> Int{
         if newTableDataArray.count == 0 { return 1 }
@@ -208,7 +217,8 @@ class ViewController: UIViewController {
         self.tableViewScreen1.reloadData()
     }
     
-    //MARK: - Работа с базой данных
+    
+    //MARK: - данные
     
     func screen1DataReceive(){
         newTableDataArrayOriginal = []
@@ -222,6 +232,7 @@ class ViewController: UIViewController {
     func daysForSortingRealmUpdate(){
         Persistence.shared.updateDaysForSorting(daysForSorting: daysForSorting)
     }
+    
     
     //MARK: - viewWillAppear
     
@@ -239,16 +250,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "yyyy/MM/dd HH:mm"
-//        let today = formatter.date(from: "2021/02/22 17:45")
-//        let yesterday = formatter.date(from: "2021/02/23 13:15")
-//        let a2DaysBefore = formatter.date(from: "2021/02/24 10:05")
-//
-//        Persistence.shared.addOperations(amount: 1200, category: "Salary", note: "Первая заметка", date: today!)
-//        Persistence.shared.addOperations(amount: -600, category: "Coffee", note: "Вторая заметка", date: yesterday!)
-//        Persistence.shared.addOperations(amount: -200, category: "Lease payable", note: "Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка.", date: a2DaysBefore!)
-        
         screen1AllUpdate()
         
         bottomPopInList.backgroundColor = .red
@@ -258,16 +259,21 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 }
+
+
 //MARK: - additional protocols
 
 extension ViewController: protocolScreen1Delegate{
+    
+    func addOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date) {
+        Persistence.shared.addOperations(amount: newAmount, category: newCategory, note: newNote, date: newDate)
+    }
     
     func screen1AllUpdate() {
         screen1DataReceive()
         countingIncomesAndExpensive()
         changeDaysForSorting()
     }
-    
     
     func getArrayForIncrease() -> [Int]{
         return arrayForIncrease
@@ -290,6 +296,7 @@ extension ViewController: protocolScreen1Delegate{
     }
     
 }
+
 
 //MARK: - table Functionality
 extension ViewController: UITableViewDelegate, UITableViewDataSource{

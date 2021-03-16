@@ -34,6 +34,9 @@
                                             <imageReference key="image" image="plus" catalog="system" symbolScale="large"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="semibold"/>
                                         </state>
+                                        <connections>
+                                            <action selector="buttonToScreen2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aLV-Bd-bXO"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1rV-20-Bop">
                                         <rect key="frame" x="318.33333333333331" y="1.3333333333333357" width="24.666666666666686" height="24.333333333333332"/>
@@ -445,7 +448,7 @@
                         <outlet property="labelYearly" destination="IA8-wU-yCh" id="kzM-sf-JZL"/>
                         <outlet property="tableViewScreen1" destination="Ahz-zl-teV" id="5qR-17-tBk"/>
                         <outlet property="topMenuButtonStrip" destination="oin-I9-C2d" id="qjh-6t-lyy"/>
-                        <segue destination="fcp-GB-FKl" kind="presentation" identifier="segueToScreen2" modalPresentationStyle="fullScreen" id="ABz-lk-sfP"/>
+                        <segue destination="fcp-GB-FKl" kind="presentation" identifier="segueToScreen2" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="ABz-lk-sfP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -495,6 +498,9 @@
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" red="0.53405213360000003" green="0.80733603239999996" blue="0.81979507210000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
+                                        <connections>
+                                            <action selector="buttonCloseScreen2:" destination="fcp-GB-FKl" eventType="touchUpInside" id="5xK-pz-YnQ"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxe-KE-Atx">
                                         <rect key="frame" x="320" y="-5" width="55" height="40"/>
@@ -502,6 +508,9 @@
                                         <state key="normal" title="Done">
                                             <color key="titleColor" red="0.53405213360000003" green="0.80733603239999996" blue="0.81979507210000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
+                                        <connections>
+                                            <action selector="buttonToAddNewOperation:" destination="fcp-GB-FKl" eventType="touchUpInside" id="4bW-hx-OL9"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -791,6 +800,7 @@
                         <outlet property="screen2CurrencyStatus" destination="tao-7E-drY" id="ZEg-XT-f2x"/>
                         <outlet property="screen2SegmentControl" destination="TUb-4D-06u" id="QuM-zG-gXw"/>
                         <outlet property="tableViewScreen2" destination="afh-qC-NmX" id="ckJ-Ju-Qpn"/>
+                        <outlet property="textFieldAmount" destination="TtF-Sw-fS5" id="qYS-Ti-trH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HMB-Ic-meT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -924,6 +934,9 @@
                             <constraint firstItem="I0S-Bf-5wZ" firstAttribute="top" secondItem="HFD-3C-oXh" secondAttribute="top" id="ydr-gC-es5"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableViewContainer" destination="I0S-Bf-5wZ" id="hmG-qj-LkN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fbV-wE-9e3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -8,11 +8,13 @@
 import UIKit
 
 protocol protocolScreen2ContainerDelegate {
-    func setTable(_ newStatus: Int)
+//    func setTable(_ newStatus: Int)
     func buttonDeleteItemHandler(_ tag: Int)
     func checkBoxStatus(_ tag: Int,_ type: Bool)
     func giveScreen2ContainerMenuArray() -> [Screen2ContainerMenuData]
     func closeWindows(_ tag: Int)
+    //функции возврата
+    func returnDelegateScreen2() -> protocolScreen2Delegate
 }
 
 struct Screen2ContainerMenuData {
@@ -22,14 +24,20 @@ struct Screen2ContainerMenuData {
 
 class ViewControllerScreen2Container: UIViewController {
 
-    //MARK: - объявление делигатов
+    //MARK: - аутлеты
+    
+    @IBOutlet var tableViewContainer: UITableView!
+    
+    
+    //MARK: - делегаты и переменные
+    
     var delegateScreen2: protocolScreen2Delegate?
 
-    //MARK: - работа с данными на экране
-    
     var screen2ContainerMenuArray: [Screen2ContainerMenuData] = []
-    var tableStatus: Int = 0
+//    var tableStatus: Int = 0
     
+    
+    //MARK: - данные
 //Здесь будет обработка данных в зависимости от tableStatus
     let screen2ContainerMenuList0 = Screen2ContainerMenuData(name: "Header", status: false)
     let screen2ContainerMenuList1 = Screen2ContainerMenuData(name: "Rental revenue", status: true)
@@ -41,6 +49,7 @@ class ViewControllerScreen2Container: UIViewController {
     
     
     //MARK: - viewDidLoad
+    
     @objc override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,9 +59,16 @@ class ViewControllerScreen2Container: UIViewController {
 }
 
 //MARK: - additional protocols
+
 extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
+    
+    func returnDelegateScreen2() -> protocolScreen2Delegate {
+        return delegateScreen2!
+    }
+    
     func closeWindows(_ tag: Int) {
         delegateScreen2?.changeCategoryClosePopUp()
+        tableViewContainer.reloadData()
         print("ClosePopup from Container")
     }
 
@@ -61,9 +77,9 @@ extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
         return screen2ContainerMenuArray
     }
     
-    func setTable(_ newStatus: Int) {
-        tableStatus = newStatus
-    }
+//    func setTable(_ newStatus: Int) {
+//        tableStatus = newStatus
+//    }
     
     func buttonDeleteItemHandler(_ tag: Int) {
         print("data deleted, \(tag)")

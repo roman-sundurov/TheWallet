@@ -20,6 +20,7 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     
     //MARK: - анимация
     @objc func closeWindows() {
+        delegateScreen2Container?.returnDelegateScreen2().setCategoryInNewOperation(category: labelChangeCategory.text!)
         delegateScreen2Container?.closeWindows(specCellTag)
         print("ClosePopup from ContainerCell")
     }
@@ -64,6 +65,13 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
         checkBoxObject.borderStyle = .circle
         checkBoxObject.checkmarkSize = 1
         checkBoxObject.checkmarkColor = .white
+        
+        if delegateScreen2Container?.returnDelegateScreen2().returnNewOperation().category == delegateScreen2Container?.giveScreen2ContainerMenuArray()[specCellTag].name {
+            checkBoxObject.isChecked = true
+        }
+        else{
+            checkBoxObject.isChecked = false
+        }
     }
     
     func setTag(tag: Int) {

@@ -10,8 +10,16 @@ import UIKit
 protocol protocolScreen2Delegate{
     func changeCategoryClosePopUp()
     func changeCategoryOpenPopUp(_ tag: Int)
+    func tableViewScreen2Update()
+    //функции возврата
     func getScreen2MenuArray() -> [Screen2MenuData]
     func returnDelegateScreen2TableViewCellNote() -> protocolScreen2TableViewCellNoteDelegate
+    func returnNewOperation() -> ListOfOperations
+    //функции обновления newOperation
+    func setAmountInNewOperation(amount: Double)
+    func setCategoryInNewOperation(category: String)
+    func setNoteInNewOperation(note: String)
+    func setDateInNewOperation(date: Date)
 }
 
 struct Screen2MenuData {
@@ -21,15 +29,49 @@ struct Screen2MenuData {
 
 class ViewControllerScreen2: UIViewController, UITextViewDelegate {
 
-    //MARK: - объявление Аутлетов и Функций
+    //MARK: - объявление аутлетов
     
     @IBOutlet var screen2SegmentControl: UISegmentedControl!
     @IBOutlet var tableViewScreen2: UITableView!
     @IBOutlet var screen2CurrencyStatus: UIButton!
     @IBOutlet var containerBottom: UIView!
-    
     @IBOutlet var constraintContainerBottomPoint: NSLayoutConstraint!
     @IBOutlet var constraintContainerBottomHeight: NSLayoutConstraint!
+    @IBOutlet var textFieldAmount: UITextField!
+    
+    
+    //MARK: - делегаты и переменные
+    
+    var tapOfChangeCategoryOpenPopUp: UITapGestureRecognizer?
+    var tapOutsideTextViewToGoFromTextView: UITapGestureRecognizer?
+    let blurView =  UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    var newOperation: ListOfOperations = ListOfOperations()
+    
+    var delegateScreen1: protocolScreen1Delegate?
+    var delegateScreen2Container: protocolScreen2ContainerDelegate?
+    var delegateScreen2TableViewCellCategory: protocolScreen2TableViewCellCategory?
+    var delegateScreen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate?
+    
+    
+    //MARK: - переходы
+    
+    @IBAction func buttonToAddNewOperation(_ sender: Any) {
+//        delegateScreen1?.addOperationInRealm(newAmount: <#T##Double#>, newCategory: <#T##String#>, newNote: <#T##String#>, newDate: <#T##Date#>)
+    }
+    
+    @IBAction func buttonCloseScreen2(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? ViewControllerScreen2Container, segue.identifier == "segueToScreen2Container"{
+            delegateScreen2Container = vc
+            vc.delegateScreen2 = self
+        }
+    }
+    
+    
+    //MARK: - клики
     
     @IBAction func screen2SegmentControlAction(_ sender: Any) {
         delegateScreen2TableViewCellNote!.tapOutsideTextViewEditToHide()
@@ -45,16 +87,6 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         }
     }
     
-    //MARK: - Делегаты и объекты
-    
-    var tapOfChangeCategoryOpenPopUp: UITapGestureRecognizer?
-    var tapOutsideTextViewToGoFromTextView: UITapGestureRecognizer?
-    
-    let blurView =  UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-    var delegateScreen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate?
-    
-    //MARK: - Обработка касаний экрана
-    
     @objc func handlerOutsideTextViewToGoFrom(tap: UITapGestureRecognizer){
         if tap.state == UIGestureRecognizer.State.ended {
                 print("Tap TextView ended")
@@ -63,7 +95,13 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
                 print("Tap inside TextView")
             }
             else {
-                print("Tap outside TextView")
+                if textFieldAmount.frame.contains(pointOfTap){
+                    print("Tap outside TextView and contains in textFieldAmount")
+                }
+                else {
+                    print("Tap outside TextView and contains in textFieldAmount")
+                    textFieldAmount.endEditing(true)
+                }
                 delegateScreen2TableViewCellNote!.tapOutsideTextViewEditToHide()
             }
         }
@@ -84,7 +122,8 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     }
     
     
-    //MARK: - работа с данными
+    //MARK: - данные
+    
     var screen2MenuArray: [Screen2MenuData] = []
     let Screen2MenuList0 = Screen2MenuData(name: "Header", text: "")
     let Screen2MenuList1 = Screen2MenuData(name: "Category", text: "Select category")
@@ -101,19 +140,9 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     //        Persistence.shared.addOperations(amount: -600, category: "Coffee", note: "Вторая заметка", date: yesterday!)
     //        Persistence.shared.addOperations(amount: -200, category: "Lease payable", note: "Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка.", date: a2DaysBefore!)
     
-//    func
-    
-    //MARK: - переходы между экранами
-    var delegateScreen2Container: protocolScreen2ContainerDelegate?
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? ViewControllerScreen2Container, segue.identifier == "segueToScreen2Container"{
-            delegateScreen2Container = vc
-            vc.delegateScreen2 = self
-        }
-    }
-    
     
     //MARK: - viewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         screen2MenuArray = [Screen2MenuList0, Screen2MenuList1, Screen2MenuList2, Screen2MenuList3]
@@ -134,19 +163,59 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         
         self.tapOutsideTextViewToGoFromTextView = UITapGestureRecognizer(target: self, action: #selector(self.handlerOutsideTextViewToGoFrom(tap:)))
         self.view.addGestureRecognizer(self.tapOutsideTextViewToGoFromTextView!)
-
+        
+//        newOperation = ListOfOperations()
     }
-
 }
 
+
 //MARK: - additional protocols
+
 extension ViewControllerScreen2: protocolScreen2Delegate{
+    
+    func tableViewScreen2Update() {
+        print("tableViewScreen2Update activated")
+        if newOperation.category != "" {
+            print("tableViewScreen2Update 222 activated, newOperation.category= \(newOperation.category)")
+            delegateScreen2TableViewCellCategory?.setCategoryText(category: newOperation.category)
+            tableViewScreen2.reloadData()
+            tableViewScreen2.layoutIfNeeded()
+        }
+    }
+    
+    
+    func setAmountInNewOperation(amount: Double) {
+        newOperation.amount = amount
+    }
+    
+    
+    func setCategoryInNewOperation(category: String) {
+        newOperation.category = category
+    }
+    
+    
+    func setNoteInNewOperation(note: String) {
+        newOperation.note = note
+    }
+    
+    
+    func setDateInNewOperation(date: Date) {
+        newOperation.date = date
+    }
+    
+    
+    func returnNewOperation() -> ListOfOperations{
+        return newOperation
+    }
+    
+    
     
     func returnDelegateScreen2TableViewCellNote() -> protocolScreen2TableViewCellNoteDelegate {
         return delegateScreen2TableViewCellNote!
     }
     
-    //MARK:  окрытие окна changeCategory
+    
+    //MARK:  окрытие PopUp-окна
     func changeCategoryOpenPopUp(_ tag: Int) {
 //        containerBottom.layer.borderWidth = 3
 //        containerBottom.layer.borderColor = UIColor.red.cgColor
@@ -163,8 +232,11 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
         
     }
     
-    //MARK: закрытие окна changeCategory
+    
+    //MARK: закрытие PopUp-окна
     @objc func changeCategoryClosePopUp() {
+        tableViewScreen2Update()
+        self.tableViewScreen2Update()
         UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             self.constraintContainerBottomPoint.constant = -515
             self.blurView.isHidden = true
@@ -180,15 +252,18 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
 
 
 //MARK: - table Functionality
+
 extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return screen2MenuArray.count
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
@@ -201,6 +276,8 @@ extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
             cell.deligateScreen2 = self
             cell.setTag(tag: indexPath.row)
             cell.startCell()
+            
+            self.delegateScreen2TableViewCellCategory = cell
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellDate") as! Screen2TableViewCellDate
@@ -221,6 +298,7 @@ extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
         }
     }
     
+    
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
 //        if indexPath.row == 3 {
 //            return 88
@@ -230,8 +308,9 @@ extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
 //        }
 //    }
     
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
+    
 }

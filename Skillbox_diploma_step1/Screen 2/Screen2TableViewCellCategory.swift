@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol protocolScreen2TableViewCellCategory {
+    func setCategoryText(category: String)
+}
+
 class Screen2TableViewCellCategory: UITableViewCell {
     
     @IBOutlet var labelCategory: UILabel!
@@ -46,4 +50,14 @@ class Screen2TableViewCellCategory: UITableViewCell {
     func setTag(tag: Int) {
         specCellTag = tag
     }
+}
+
+extension Screen2TableViewCellCategory: protocolScreen2TableViewCellCategory{
+
+    func setCategoryText(category: String) {
+        labelSelectCategory.text = category
+        print("labelSelectCategory.text= \(labelSelectCategory.text)")
+        print("category= \(category)")
+    }
+
 }
