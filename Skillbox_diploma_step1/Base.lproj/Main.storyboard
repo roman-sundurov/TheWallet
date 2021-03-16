@@ -34,9 +34,6 @@
                                             <imageReference key="image" image="plus" catalog="system" symbolScale="large"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="semibold"/>
                                         </state>
-                                        <connections>
-                                            <segue destination="fcp-GB-FKl" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="vp6-3I-Myz"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1rV-20-Bop">
                                         <rect key="frame" x="318.33333333333331" y="1.3333333333333357" width="24.666666666666686" height="24.333333333333332"/>
@@ -448,6 +445,7 @@
                         <outlet property="labelYearly" destination="IA8-wU-yCh" id="kzM-sf-JZL"/>
                         <outlet property="tableViewScreen1" destination="Ahz-zl-teV" id="5qR-17-tBk"/>
                         <outlet property="topMenuButtonStrip" destination="oin-I9-C2d" id="qjh-6t-lyy"/>
+                        <segue destination="fcp-GB-FKl" kind="presentation" identifier="segueToScreen2" modalPresentationStyle="fullScreen" id="ABz-lk-sfP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -497,9 +495,6 @@
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" red="0.53405213360000003" green="0.80733603239999996" blue="0.81979507210000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
-                                        <connections>
-                                            <segue destination="BYZ-38-t0r" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="vZY-DS-U2l"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxe-KE-Atx">
                                         <rect key="frame" x="320" y="-5" width="55" height="40"/>
@@ -507,9 +502,6 @@
                                         <state key="normal" title="Done">
                                             <color key="titleColor" red="0.53405213360000003" green="0.80733603239999996" blue="0.81979507210000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
-                                        <connections>
-                                            <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="FI7-3Q-I9f"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -938,9 +930,6 @@
             <point key="canvasLocation" x="1666.1538461538462" y="230.68720379146919"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="vZY-DS-U2l"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.right" catalog="system" width="128" height="98"/>
         <image name="graph" width="148" height="103.66666412353516"/>

@@ -165,7 +165,7 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
     
     //MARK: закрытие окна changeCategory
     @objc func changeCategoryClosePopUp() {
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+        UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             self.constraintContainerBottomPoint.constant = -515
             self.blurView.isHidden = true
             self.view.removeGestureRecognizer(self.tapOfChangeCategoryOpenPopUp!)

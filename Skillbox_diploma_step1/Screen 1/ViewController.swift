@@ -15,9 +15,6 @@ protocol protocolScreen1Delegate{
     func getNewTableDataArray() -> [Screen1TableData]
     func getArrayForIncrease() -> [Int]
     func screen1AllUpdate()
-    
-    
-    wwwwww
 }
 
 class Screen1TableData{
@@ -59,21 +56,22 @@ class ViewController: UIViewController {
     var arrayForIncrease: [Int] = [0] //показывает количество заголовков с новой датой в таблице, которое предшествует конкретной операции
     var daysForSorting: Int = 30
     
-    //MARK: - клики по верхнему меню
+    
+    //MARK: - клики
     
     func changeDaysForSorting(){
-        switch daysForSorting {
-        case 1:
-            print("daysForSorting is 1")
-        case 7:
-            print("daysForSorting is 7")
-        case 30:
-            print("daysForSorting is 30")
-        case 365:
-            print("daysForSorting is 365")
-        default:
-            print("daysForSorting has not recognized in viewDidLoad")
-        }
+//        switch daysForSorting {
+//        case 1:
+//            print("daysForSorting is 1")
+//        case 7:
+//            print("daysForSorting is 7")
+//        case 30:
+//            print("daysForSorting is 30")
+//        case 365:
+//            print("daysForSorting is 365")
+//        default:
+//            print("daysForSorting has not recognized in viewDidLoad")
+//        }
         borderForMenuBottom(days: daysForSorting)
         screen1TableUpdateSorting(days: daysForSorting)
         daysForSortingRealmUpdate()
@@ -147,25 +145,6 @@ class ViewController: UIViewController {
         }, completion: {isCompleted in })
     }
     
-    func borderForMenuBottomWhenStart(days: Int) {
-        switch days {
-        case 1:
-            self.constraintTopMenuBottomStrip.constant = self.buttonDaily.frame.origin.x + 10
-            print("borderForMenuBottom 1, when start")
-        case 7:
-            self.constraintTopMenuBottomStrip.constant = self.buttonWeekly.frame.origin.x + 10
-            print("borderForMenuBottom 7, when start")
-        case 30:
-            self.constraintTopMenuBottomStrip.constant = self.buttonMonthly.frame.origin.x + 10
-            print("borderForMenuBottom 30, when start")
-        case 365:
-            self.constraintTopMenuBottomStrip.constant = self.buttonYearly.frame.origin.x + 10
-            print("borderForMenuBottom 365, when start")
-        default:
-            print("Error with borderForMenuBotton")
-        }
-    }
-    
     func countingIncomesAndExpensive() {
         var income: Double = 0
         var expensive: Double = 0
@@ -237,6 +216,7 @@ class ViewController: UIViewController {
             newTableDataArrayOriginal.append(Screen1TableData(amount1: n.amount, category1: n.category, note1: n.note, date1: n.date))
         }
         daysForSorting = Persistence.shared.getDaysForSorting()
+        print("daysForSorting in screen1DataReceive= \(Persistence.shared.getDaysForSorting())")
     }
     
     func daysForSortingRealmUpdate(){
@@ -248,7 +228,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        borderForMenuBottomWhenStart(days: daysForSorting)
+        borderForMenuBottom(days: daysForSorting)
         screen1TableUpdateSorting(days: daysForSorting)
         self.view.layoutIfNeeded()
     }
@@ -269,8 +249,7 @@ class ViewController: UIViewController {
 //        Persistence.shared.addOperations(amount: -600, category: "Coffee", note: "Вторая заметка", date: yesterday!)
 //        Persistence.shared.addOperations(amount: -200, category: "Lease payable", note: "Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка.", date: a2DaysBefore!)
         
-        screen1DataReceive()
-        countingIncomesAndExpensive()
+        screen1AllUpdate()
         
         bottomPopInList.backgroundColor = .red
         bottomPopInList.layer.cornerRadius  = 20

@@ -62,10 +62,10 @@ class Persistence{
     }
         
     func getDaysForSorting() -> Int{
+        print("old person returned")
         let person = realm.objects(Person.self).first
         if person?.daysForSorting != nil {
             return person!.daysForSorting
-            print("old person returned")
         }
         else{
             print("newPerson added")
