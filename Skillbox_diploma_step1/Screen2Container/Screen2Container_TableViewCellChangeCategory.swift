@@ -10,18 +10,23 @@ import SimpleCheckbox
 
 class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     
-    //MARK: - объявление Аутлетов
+    //MARK: - объявление аутлетов
     @IBOutlet var labelChangeCategory: UILabel!
     @IBOutlet var buttonDeleteItemObject: UIButton!
     @IBOutlet var checkBoxObject: Checkbox!
     
+    
+    //MARK: - делегаты и переменные
+    
     var delegateScreen2Container: protocolScreen2ContainerDelegate?
     var specCellTag: Int = 0
     
-    //MARK: - анимация
+    
+    //MARK: - переходы
+    
     @objc func closeWindows() {
-        delegateScreen2Container?.returnDelegateScreen2().setCategoryInNewOperation(category: labelChangeCategory.text!)
-        delegateScreen2Container?.closeWindows(specCellTag)
+        delegateScreen2Container?.returnDelegateScreen2().setCategoryInNewOperation(category: labelChangeCategory.text!) //запись выбранной категории во временную переменную
+        delegateScreen2Container?.closeWindows(specCellTag) //закрытие PopUp-окна
         print("ClosePopup from ContainerCell")
     }
     
