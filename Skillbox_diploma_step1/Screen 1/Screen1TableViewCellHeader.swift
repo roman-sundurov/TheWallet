@@ -11,7 +11,7 @@ class Screen1TableViewCellHeader: UITableViewCell {
     
     @IBOutlet var labelHeaderDate: UILabel!
     
-    var deligateScreen1: protocolScreen1Delegate?
+    var delegateScreen1: protocolScreen1Delegate?
     var specCellTag: Int = 0
     
     override func awakeFromNib() {
@@ -35,17 +35,17 @@ class Screen1TableViewCellHeader: UITableViewCell {
         print("Header1: ---")
         let formatterPrint = DateFormatter()
         formatterPrint.dateFormat = "d MMMM YYYY"
-//        print("111: \(formatterPrint.string(from: deligateScreen1!.getNewTableDataArray()[specCellTag].date))")
-        labelHeaderDate.text = formatterPrint.string(from: deligateScreen1!.getNewTableDataArray()[specCellTag].date)
+//        print("111: \(formatterPrint.string(from: delegateScreen1!.getNewTableDataArray()[specCellTag].date))")
+        labelHeaderDate.text = formatterPrint.string(from: delegateScreen1!.getNewTableDataArray()[specCellTag].date)
     }
     
     func startCell2() {
         print("Header2: ---")
         let formatterPrint = DateFormatter()
         formatterPrint.dateFormat = "d MMMM YYYY"
-        let specVar: Int = specCellTag - deligateScreen1!.getArrayForIncrease()[specCellTag - 1]
-        print("222: \(formatterPrint.string(from: deligateScreen1!.getNewTableDataArray()[specVar].date))")
-        labelHeaderDate.text = formatterPrint.string(from: deligateScreen1!.getNewTableDataArray()[specVar].date)
+        let specVar: Int = specCellTag - delegateScreen1!.getArrayForIncrease()[specCellTag - 1]
+        print("222: \(formatterPrint.string(from: delegateScreen1!.getNewTableDataArray()[specVar].date))")
+        labelHeaderDate.text = formatterPrint.string(from: delegateScreen1!.getNewTableDataArray()[specVar].date)
     }
     
     func setTag(tag: Int) {

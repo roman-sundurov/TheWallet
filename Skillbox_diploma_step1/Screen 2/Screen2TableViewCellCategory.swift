@@ -16,13 +16,13 @@ class Screen2TableViewCellCategory: UITableViewCell {
     @IBOutlet var labelSelectCategory: UILabel!
     @IBOutlet var buttonSelectCategory: UIButton!
     
-    var deligateScreen2: protocolScreen2Delegate?
+    var delegateScreen2: protocolScreen2Delegate?
     var specCellTag: Int = 0
 
 //Анимация
     @objc func changeCategoryOpenPopUpFromScreen2(_ tag: Int) {
-        deligateScreen2?.returnDelegateScreen2TableViewCellNote().tapOutsideTextViewEditToHide()
-        deligateScreen2?.changeCategoryOpenPopUp(specCellTag)
+        delegateScreen2?.returnDelegateScreen2TableViewCellNote().tapOutsideTextViewEditToHide()
+        delegateScreen2?.changeCategoryOpenPopUp(specCellTag)
         print("ChangeCategory from Screen2")
     }
 
@@ -39,13 +39,14 @@ class Screen2TableViewCellCategory: UITableViewCell {
     }
     
     func startCell() {
-        if deligateScreen2?.returnNewOperation().category != "" {
-            labelSelectCategory.text = deligateScreen2?.returnNewOperation().category
+        if delegateScreen2?.returnNewOperation().category != "" {
+            labelSelectCategory.text = delegateScreen2?.returnNewOperation().category
+            labelSelectCategory.textColor = .black
         }
         else{
-            labelSelectCategory.text = deligateScreen2?.getScreen2MenuArray()[specCellTag].text
+            labelSelectCategory.text = delegateScreen2?.getScreen2MenuArray()[specCellTag].text
         }
-        labelCategory.text = deligateScreen2?.getScreen2MenuArray()[specCellTag].name
+        labelCategory.text = delegateScreen2?.getScreen2MenuArray()[specCellTag].name
         let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategoryOpenPopUpFromScreen2(_:)))
         self.isUserInteractionEnabled = true
         self.addGestureRecognizer(gesture)

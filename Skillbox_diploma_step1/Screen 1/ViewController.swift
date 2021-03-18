@@ -313,7 +313,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         if newTableDataArray.isEmpty{
 //            print("newTableDataArray is empty")
             let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
-            cell.deligateScreen1 = self
+            cell.delegateScreen1 = self
             cell.startCellEmpty()
             return cell
 
@@ -321,21 +321,21 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         else{
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
-                cell.deligateScreen1 = self
+                cell.delegateScreen1 = self
                 cell.setTag(tag: indexPath.row)
                 cell.startCell()
                 return cell
             }
             else if arrayForIncrease[indexPath.row] != arrayForIncrease[indexPath.row - 1] {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
-                cell.deligateScreen1 = self
+                cell.delegateScreen1 = self
                 cell.setTag(tag: indexPath.row)
                 cell.startCell2()
                 return cell
             }
             else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "operation") as! Screen1TableViewCellCategory
-                cell.deligateScreen1 = self
+                cell.delegateScreen1 = self
                 cell.setTag(tag: indexPath.row)
                 cell.startCell()
                 return cell

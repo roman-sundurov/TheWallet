@@ -14,7 +14,7 @@ class Screen1TableViewCellCategory: UITableViewCell {
     @IBOutlet var labelAmount: UILabel!
     @IBOutlet var currencyStatus: UILabel!
     
-    var deligateScreen1: protocolScreen1Delegate?
+    var delegateScreen1: protocolScreen1Delegate?
     var specCellTag: Int = 0
     
     override func awakeFromNib() {
@@ -30,16 +30,16 @@ class Screen1TableViewCellCategory: UITableViewCell {
 
     func startCell() {
         print("Simple Cell: ---")
-        let specVar: Int = specCellTag - deligateScreen1!.getArrayForIncrease()[specCellTag]
-        labelCategory.text = deligateScreen1!.getNewTableDataArray()[specVar].category
-//        print("aaa: \(deligateScreen1!.getNewTableDataArray()[specVar].amount.truncatingRemainder(dividingBy: 1))")
-        if deligateScreen1!.getNewTableDataArray()[specVar].amount.truncatingRemainder(dividingBy: 1) == 0 {
-            labelAmount.text = String(format: "%.0f", deligateScreen1!.getNewTableDataArray()[specVar].amount)
+        let specVar: Int = specCellTag - delegateScreen1!.getArrayForIncrease()[specCellTag]
+        labelCategory.text = delegateScreen1!.getNewTableDataArray()[specVar].category
+//        print("aaa: \(delegateScreen1!.getNewTableDataArray()[specVar].amount.truncatingRemainder(dividingBy: 1))")
+        if delegateScreen1!.getNewTableDataArray()[specVar].amount.truncatingRemainder(dividingBy: 1) == 0 {
+            labelAmount.text = String(format: "%.0f", delegateScreen1!.getNewTableDataArray()[specVar].amount)
         }
         else {
-            labelAmount.text = String(format: "%.2f", deligateScreen1!.getNewTableDataArray()[specVar].amount)
+            labelAmount.text = String(format: "%.2f", delegateScreen1!.getNewTableDataArray()[specVar].amount)
         }
-        if deligateScreen1!.getNewTableDataArray()[specVar].amount < 0 {
+        if delegateScreen1!.getNewTableDataArray()[specVar].amount < 0 {
             labelAmount.textColor = UIColor.red
             currencyStatus.textColor = UIColor.red
         }

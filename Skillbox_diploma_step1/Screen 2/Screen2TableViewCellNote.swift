@@ -18,7 +18,7 @@ class Screen2TableViewCellNote: UITableViewCell, UITextViewDelegate {
 //    @IBOutlet var textFieldNotes: UITextField!
     @IBOutlet var textViewNotes: UITextView!
     
-    var deligateScreen2: protocolScreen2Delegate?
+    var delegateScreen2: protocolScreen2Delegate?
     var specCellTag: Int = 0
     
 // MARK: - Работа с Placeholder
@@ -55,7 +55,7 @@ class Screen2TableViewCellNote: UITableViewCell, UITextViewDelegate {
     }
     
     func startCell() {
-        textViewNotes.text = deligateScreen2?.getScreen2MenuArray()[specCellTag].text
+        textViewNotes.text = delegateScreen2?.getScreen2MenuArray()[specCellTag].text
         
         textViewNotes.textContainer.lineBreakMode = .byTruncatingTail
         textViewNotes.layer.borderColor = UIColor.gray.cgColor

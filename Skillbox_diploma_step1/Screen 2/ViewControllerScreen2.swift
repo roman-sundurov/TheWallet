@@ -10,11 +10,12 @@ import UIKit
 protocol protocolScreen2Delegate{
     func changeCategoryClosePopUp()
     func changeCategoryOpenPopUp(_ tag: Int)
-    func tableViewScreen2Update()
+    func tableViewScreen2Update(row: Int)
     //функции возврата
     func getScreen2MenuArray() -> [Screen2MenuData]
     func returnDelegateScreen2TableViewCellNote() -> protocolScreen2TableViewCellNoteDelegate
     func returnNewOperation() -> ListOfOperations
+    func createToolBar() -> UIToolbar
     //функции обновления newOperation
     func setAmountInNewOperation(amount: Double)
     func setCategoryInNewOperation(category: String)
@@ -46,6 +47,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     var tapOutsideTextViewToGoFromTextView: UITapGestureRecognizer?
     let blurView =  UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     var newOperation: ListOfOperations = ListOfOperations()
+    let datePicker = UIDatePicker()
     
     var delegateScreen1: protocolScreen1Delegate?
     var delegateScreen2Container: protocolScreen2ContainerDelegate?
@@ -68,6 +70,27 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
             delegateScreen2Container = vc
             vc.delegateScreen2 = self
         }
+    }
+    
+    
+    //MARK: - DatePicker
+    
+    @objc func donePressed(){
+//        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+
+        newOperation.date = datePicker.date
+        tableViewScreen2Update(row: 2)
+        self.view.endEditing(true)
+    }
+    
+    func createToolBar() -> UIToolbar{
+        let toolbat = UIToolbar()
+        toolbat.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
+        toolbat.setItems([doneButton], animated: true)
+        
+        return toolbat
     }
     
     
@@ -173,10 +196,10 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
 
 extension ViewControllerScreen2: protocolScreen2Delegate{
     
-    func tableViewScreen2Update() {
+    
+    func tableViewScreen2Update(row: Int) {
         print("tableViewScreen2Update activated")
-            
-        let indexPath = IndexPath.init(row: 1, section: 0)
+        let indexPath = IndexPath.init(row: row, section: 0)
         tableViewScreen2.reloadRows(at: [indexPath], with: .fade)
     
     }
@@ -213,7 +236,7 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
     }
     
     
-    //MARK:  окрытие PopUp-окна
+    //MARK: - окрытие PopUp-окна
     func changeCategoryOpenPopUp(_ tag: Int) {
 //        containerBottom.layer.borderWidth = 3
 //        containerBottom.layer.borderColor = UIColor.red.cgColor
@@ -231,9 +254,9 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
     }
     
     
-    //MARK: закрытие PopUp-окна
+    //MARK: - закрытие PopUp-окна
     @objc func changeCategoryClosePopUp() {
-        tableViewScreen2Update()
+        tableViewScreen2Update(row: 1)
 //        self.tableViewScreen2Update()
         UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             self.constraintContainerBottomPoint.constant = -515
@@ -253,17 +276,6 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
 
 extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
     
-//    func collectionView(_ collectionView: UICollectionView,
-//                      didSelectItemAt indexPath: IndexPath) {
-//
-//      // Get selected hero using index path
-//      guard let selectedHero = dataSource.itemIdentifier(for: indexPath) else {
-//          collectionView.deselectItem(at: indexPath, animated: true)
-//          return
-//      }
-//    }
-
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -282,7 +294,7 @@ extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellCategory") as! Screen2TableViewCellCategory
-            cell.deligateScreen2 = self
+            cell.delegateScreen2 = self
             cell.setTag(tag: indexPath.row)
             cell.startCell()
             
@@ -290,14 +302,18 @@ extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellDate") as! Screen2TableViewCellDate
-            cell.deligateScreen2 = self
+            cell.delegateScreen2 = self
+            datePicker.preferredDatePickerStyle = .wheels
+            datePicker.datePickerMode = .date
+            cell.textFieldSelectDate.inputView = datePicker
+            cell.textFieldSelectDate.inputAccessoryView = createToolBar()
             cell.setTag(tag: indexPath.row)
             cell.startCell()
             return cell
         default:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellNote") as! Screen2TableViewCellNote
-            cell.deligateScreen2 = self
+            cell.delegateScreen2 = self
             cell.setTag(tag: indexPath.row)
             cell.startCell()
             cell.textViewNotes.delegate = cell

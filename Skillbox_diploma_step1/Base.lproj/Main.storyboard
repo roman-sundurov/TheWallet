@@ -668,29 +668,23 @@
                                             <outlet property="labelSelectCategory" destination="fZU-fI-Qjk" id="bf1-51-JwT"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellDate" id="zpz-xv-mHZ" customClass="Screen2TableViewCellDate" customModule="Skillbox_diploma_step1" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="116.66666412353516" width="390" height="44.333332061767578"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellDate" rowHeight="44" id="zpz-xv-mHZ" customClass="Screen2TableViewCellDate" customModule="Skillbox_diploma_step1" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="116.66666412353516" width="390" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zpz-xv-mHZ" id="4K5-hq-kUl">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="44.333332061767578"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SSu-PT-DOx">
-                                                    <rect key="frame" x="15" y="9.9999999999999982" width="95" height="24.333333333333329"/>
+                                                    <rect key="frame" x="15" y="10" width="95" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="95" id="wfY-Ir-Rz6"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select catagory" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ww-KI-dSR">
-                                                    <rect key="frame" x="120" y="9.9999999999999982" width="217" height="24.333333333333329"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                    <color key="textColor" systemColor="opaqueSeparatorColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ip7-Zv-FUs">
-                                                    <rect key="frame" x="347" y="11.333333333333334" width="28" height="22.333333333333329"/>
+                                                    <rect key="frame" x="347" y="10.999999999999998" width="28" height="22.333333333333329"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="28" id="Lb8-nh-xup"/>
                                                         <constraint firstAttribute="width" constant="28" id="ZKZ-Gh-Z1C"/>
@@ -701,28 +695,34 @@
                                                         <imageReference key="backgroundImage" image="arrow.right" catalog="system" symbolScale="default"/>
                                                     </state>
                                                 </button>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Today" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pEc-ot-G5Q">
+                                                    <rect key="frame" x="120" y="10" width="217" height="24"/>
+                                                    <color key="textColor" systemColor="opaqueSeparatorColor"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="pEc-ot-G5Q" secondAttribute="bottom" constant="10" id="GnE-Gk-ozo"/>
                                                 <constraint firstAttribute="bottom" secondItem="SSu-PT-DOx" secondAttribute="bottom" constant="10" id="L0x-QG-eLZ"/>
                                                 <constraint firstItem="SSu-PT-DOx" firstAttribute="top" secondItem="4K5-hq-kUl" secondAttribute="top" constant="10" id="O4r-p9-lzX"/>
-                                                <constraint firstItem="5ww-KI-dSR" firstAttribute="top" secondItem="4K5-hq-kUl" secondAttribute="top" constant="10" id="OEu-SI-a0H"/>
-                                                <constraint firstItem="Ip7-Zv-FUs" firstAttribute="leading" secondItem="5ww-KI-dSR" secondAttribute="trailing" constant="10" id="Q3P-qU-yXb"/>
-                                                <constraint firstAttribute="bottom" secondItem="5ww-KI-dSR" secondAttribute="bottom" constant="10" id="abr-uk-7oV"/>
+                                                <constraint firstItem="Ip7-Zv-FUs" firstAttribute="leading" secondItem="pEc-ot-G5Q" secondAttribute="trailing" constant="10" id="VlA-b6-3uY"/>
+                                                <constraint firstItem="pEc-ot-G5Q" firstAttribute="top" secondItem="4K5-hq-kUl" secondAttribute="top" constant="10" id="fSP-WN-dNs"/>
                                                 <constraint firstItem="SSu-PT-DOx" firstAttribute="leading" secondItem="4K5-hq-kUl" secondAttribute="leading" constant="15" id="gvH-ES-amX"/>
-                                                <constraint firstItem="5ww-KI-dSR" firstAttribute="leading" secondItem="SSu-PT-DOx" secondAttribute="trailing" constant="10" id="iCk-wu-fN8"/>
                                                 <constraint firstItem="Ip7-Zv-FUs" firstAttribute="centerY" secondItem="4K5-hq-kUl" secondAttribute="centerY" id="nPB-3S-XAn"/>
+                                                <constraint firstItem="pEc-ot-G5Q" firstAttribute="leading" secondItem="SSu-PT-DOx" secondAttribute="trailing" constant="10" id="wFD-Jl-FcP"/>
                                                 <constraint firstAttribute="trailing" secondItem="Ip7-Zv-FUs" secondAttribute="trailing" constant="15" id="xjB-Xn-y0z"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <gestureRecognizers/>
                                         <connections>
-                                            <outlet property="buttonSelectCategory" destination="Ip7-Zv-FUs" id="TVB-Gr-vgH"/>
-                                            <outlet property="labelCategory" destination="SSu-PT-DOx" id="24k-h6-lzb"/>
-                                            <outlet property="labelSelectCategory" destination="5ww-KI-dSR" id="smC-aP-ubC"/>
+                                            <outlet property="buttonSelectDate" destination="Ip7-Zv-FUs" id="TVB-Gr-vgH"/>
+                                            <outlet property="labelDate" destination="SSu-PT-DOx" id="24k-h6-lzb"/>
+                                            <outlet property="textFieldSelectDate" destination="pEc-ot-G5Q" id="ON8-eT-vMS"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellNote" id="hmy-aS-YRO" customClass="Screen2TableViewCellNote" customModule="Skillbox_diploma_step1" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="160.99999618530273" width="390" height="108.33333587646484"/>
+                                        <rect key="frame" x="0.0" y="160.66666412353516" width="390" height="108.33333587646484"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hmy-aS-YRO" id="Xfm-Y8-Isj">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="108.33333587646484"/>
@@ -881,7 +881,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WvV-OG-r3R">
-                                                            <rect key="frame" x="294" y="7.6666666666666643" width="26" height="26.999999999999986"/>
+                                                            <rect key="frame" x="294" y="7.6666666666666643" width="26" height="27"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="27" id="0Hk-1y-NQH"/>
                                                                 <constraint firstAttribute="width" constant="26" id="DHZ-Qb-uS4"/>
