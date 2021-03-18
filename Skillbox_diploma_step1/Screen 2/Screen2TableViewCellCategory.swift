@@ -8,7 +8,6 @@
 import UIKit
 
 protocol protocolScreen2TableViewCellCategory {
-    func setCategoryText(category: String)
 }
 
 class Screen2TableViewCellCategory: UITableViewCell {
@@ -40,8 +39,13 @@ class Screen2TableViewCellCategory: UITableViewCell {
     }
     
     func startCell() {
+        if deligateScreen2?.returnNewOperation().category != "" {
+            labelSelectCategory.text = deligateScreen2?.returnNewOperation().category
+        }
+        else{
+            labelSelectCategory.text = deligateScreen2?.getScreen2MenuArray()[specCellTag].text
+        }
         labelCategory.text = deligateScreen2?.getScreen2MenuArray()[specCellTag].name
-        labelSelectCategory.text = deligateScreen2?.getScreen2MenuArray()[specCellTag].text
         let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategoryOpenPopUpFromScreen2(_:)))
         self.isUserInteractionEnabled = true
         self.addGestureRecognizer(gesture)
@@ -53,11 +57,5 @@ class Screen2TableViewCellCategory: UITableViewCell {
 }
 
 extension Screen2TableViewCellCategory: protocolScreen2TableViewCellCategory{
-
-    func setCategoryText(category: String) {
-        labelSelectCategory.text = category
-        print("labelSelectCategory.text= \(labelSelectCategory.text)")
-        print("category= \(category)")
-    }
 
 }

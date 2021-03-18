@@ -175,12 +175,10 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
     
     func tableViewScreen2Update() {
         print("tableViewScreen2Update activated")
-        if newOperation.category != "" {
-            print("tableViewScreen2Update 222 activated, newOperation.category= \(newOperation.category)")
-            delegateScreen2TableViewCellCategory?.setCategoryText(category: newOperation.category)
-            tableViewScreen2.reloadData()
-            tableViewScreen2.layoutIfNeeded()
-        }
+            
+        let indexPath = IndexPath.init(row: 1, section: 0)
+        tableViewScreen2.reloadRows(at: [indexPath], with: .fade)
+    
     }
     
     
@@ -236,7 +234,7 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
     //MARK: закрытие PopUp-окна
     @objc func changeCategoryClosePopUp() {
         tableViewScreen2Update()
-        self.tableViewScreen2Update()
+//        self.tableViewScreen2Update()
         UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             self.constraintContainerBottomPoint.constant = -515
             self.blurView.isHidden = true
@@ -254,6 +252,17 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
 //MARK: - table Functionality
 
 extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
+    
+//    func collectionView(_ collectionView: UICollectionView,
+//                      didSelectItemAt indexPath: IndexPath) {
+//
+//      // Get selected hero using index path
+//      guard let selectedHero = dataSource.itemIdentifier(for: indexPath) else {
+//          collectionView.deselectItem(at: indexPath, animated: true)
+//          return
+//      }
+//    }
+
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
