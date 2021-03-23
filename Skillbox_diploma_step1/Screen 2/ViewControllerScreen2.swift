@@ -58,6 +58,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     //MARK: - переходы
     
     @IBAction func buttonToAddNewOperation(_ sender: Any) {
+        print("newOperation.amount= \(newOperation.amount), newOperation.category= \(newOperation.category), newOperation.date= \(newOperation.date), newOperation.note= \(newOperation.note),")
 //        delegateScreen1?.addOperationInRealm(newAmount: <#T##Double#>, newCategory: <#T##String#>, newNote: <#T##String#>, newDate: <#T##Date#>)
     }
     
@@ -110,21 +111,23 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         }
     }
     
-    @objc func handlerOutsideTextViewToGoFrom(tap: UITapGestureRecognizer){
+    @objc func screen2TapHandler(tap: UITapGestureRecognizer){
         if tap.state == UIGestureRecognizer.State.ended {
                 print("Tap TextView ended")
             let pointOfTap = tap.location(in: self.view)
             if delegateScreen2TableViewCellNote!.returnView().frame.contains(pointOfTap) {
-                print("Tap inside TextView")
+                print("Tap inside NoteTextView")
+                newOperation.amount = Double(textFieldAmount.text!) ?? 0
             }
             else {
                 if textFieldAmount.frame.contains(pointOfTap){
-                    print("Tap outside TextView and contains in textFieldAmount")
+                    print("Tap inside TextView and contains in textFieldAmount")
                 }
                 else {
                     print("Tap outside TextView and contains in textFieldAmount")
                     textFieldAmount.endEditing(true)
                 }
+                newOperation.note = (delegateScreen2TableViewCellNote?.returnNote().text)!
                 delegateScreen2TableViewCellNote!.tapOutsideTextViewEditToHide()
             }
         }
@@ -184,7 +187,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         self.view.layoutIfNeeded()
         print("screen2MenuArray.count: \(screen2MenuArray.count)")
         
-        self.tapOutsideTextViewToGoFromTextView = UITapGestureRecognizer(target: self, action: #selector(self.handlerOutsideTextViewToGoFrom(tap:)))
+        self.tapOutsideTextViewToGoFromTextView = UITapGestureRecognizer(target: self, action: #selector(self.screen2TapHandler(tap:)))
         self.view.addGestureRecognizer(self.tapOutsideTextViewToGoFromTextView!)
         
 //        newOperation = ListOfOperations()

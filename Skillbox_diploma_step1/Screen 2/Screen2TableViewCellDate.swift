@@ -65,8 +65,6 @@ class Screen2TableViewCellDate: UITableViewCell {
 
         textFieldSelectDate.tintColor = UIColor.clear //делает курсор бесцветным, но не убирает его
         labelDate.text = delegateScreen2?.getScreen2MenuArray()[specCellTag].name
-//        labelSelectCategory.text = delegateScreen2?.getScreen2MenuArray()[specCellTag].text
-//        let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategoryOpenPopUpFromScreen2(_:)))
         self.isUserInteractionEnabled = true
 //        self.addGestureRecognizer(gesture)
     }

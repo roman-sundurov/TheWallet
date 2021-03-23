@@ -10,6 +10,7 @@ import UIKit
 protocol protocolScreen2TableViewCellNoteDelegate{
     func tapOutsideTextViewEditToHide()
     func returnView() -> UIView
+    func returnNote() -> UITextView
 }
     
 
@@ -22,6 +23,7 @@ class Screen2TableViewCellNote: UITableViewCell, UITextViewDelegate {
     var specCellTag: Int = 0
     
 // MARK: - Работа с Placeholder
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textViewNotes.textColor == UIColor.lightGray {
             textViewNotes.text = nil
@@ -76,13 +78,21 @@ class Screen2TableViewCellNote: UITableViewCell, UITextViewDelegate {
 
 extension Screen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate{
     
+    func returnNote() -> UITextView {
+        return textViewNotes
+    }
+    
+    
     func returnView() -> UIView {
         return textViewNotes
     }
 
+    
     //MARK: - Обработка касаний экрана
+    
     func tapOutsideTextViewEditToHide(){
         textViewNotes.endEditing(true)
         print("textViewDeselect")
     }
+    
 }
