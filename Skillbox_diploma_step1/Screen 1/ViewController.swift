@@ -70,7 +70,7 @@ class ViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.description as? ViewControllerScreen2, segue.identifier == "segueToScreen2" {
+        if let vc = segue.destination as? ViewControllerScreen2, segue.identifier == "segueToScreen2" {
             delegateScreen2 = vc
             vc.delegateScreen1 = self
         }
@@ -227,6 +227,7 @@ class ViewController: UIViewController {
         }
         daysForSorting = Persistence.shared.getDaysForSorting()
         print("daysForSorting in screen1DataReceive= \(Persistence.shared.getDaysForSorting())")
+        print("newTableDataArrayOriginal= \(newTableDataArrayOriginal)")
     }
     
     func daysForSortingRealmUpdate(){
@@ -266,7 +267,9 @@ class ViewController: UIViewController {
 extension ViewController: protocolScreen1Delegate{
     
     func addOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date) {
+        print("addOperationInRealm1")
         Persistence.shared.addOperations(amount: newAmount, category: newCategory, note: newNote, date: newDate)
+        print("addOperationInRealm2")
     }
     
     func screen1AllUpdate() {

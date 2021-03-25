@@ -8,9 +8,8 @@
 import UIKit
 
 protocol protocolScreen2TableViewCellNoteDelegate{
-    func tapOutsideTextViewEditToHide()
-    func returnView() -> UIView
-    func returnNote() -> UITextView
+    func tapOutsideNoteTextViewEditToHide()
+    func returnNoteView() -> UITextView
 }
     
 
@@ -78,19 +77,17 @@ class Screen2TableViewCellNote: UITableViewCell, UITextViewDelegate {
 
 extension Screen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate{
     
-    func returnNote() -> UITextView {
-        return textViewNotes
-    }
-    
-    
-    func returnView() -> UIView {
+    func returnNoteView() -> UITextView {
+//        tapOutsideNoteTextViewEditToHide()
+//        textViewNotes.endEditing(true)
+        print("textViewDeselect")
         return textViewNotes
     }
 
     
     //MARK: - Обработка касаний экрана
     
-    func tapOutsideTextViewEditToHide(){
+    func tapOutsideNoteTextViewEditToHide(){
         textViewNotes.endEditing(true)
         print("textViewDeselect")
     }

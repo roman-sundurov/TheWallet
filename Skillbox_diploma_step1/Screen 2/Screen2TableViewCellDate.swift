@@ -7,10 +7,14 @@
 
 import UIKit
 
+protocol protocolScreen2TableViewCellDateDelegate{
+    func tapOutsideDateTextViewEditToHide()
+    func returnDateView() -> UITextField
+}
+
 class Screen2TableViewCellDate: UITableViewCell {
 
     @IBOutlet var labelDate: UILabel!
-//    @IBOutlet var labelSelectDate: UILabel!
     @IBOutlet var textFieldSelectDate: UITextField!
     @IBOutlet var buttonSelectDate: UIButton!
     
@@ -35,7 +39,7 @@ class Screen2TableViewCellDate: UITableViewCell {
 //
 //    @objc func changeDateOpenDatePicker(_ tag: Int) {
 //        datePickerSelectDate.
-//        delegateScreen2?.returnDelegateScreen2TableViewCellNote().tapOutsideTextViewEditToHide()
+//        delegateScreen2?.returnDelegateScreen2TableViewCellNote().tapOutsideNoteTextViewEditToHide()
 //        delegateScreen2?.changeCategoryOpenPopUp(specCellTag)
 //        print("ChangeCategory from table")
 //    }
@@ -71,5 +75,24 @@ class Screen2TableViewCellDate: UITableViewCell {
     
     func setTag(tag: Int) {
         specCellTag = tag
+    }
+}
+
+extension Screen2TableViewCellDate: protocolScreen2TableViewCellDateDelegate{
+    
+    func returnDateView() -> UITextField {
+//        tapOutsideNoteTextViewEditToHide()
+//        textViewNotes.endEditing(true)
+        print("textViewDeselect")
+        return textFieldSelectDate
+    }
+
+    
+    //MARK: - Обработка касаний экрана
+    
+    func tapOutsideDateTextViewEditToHide(){
+        textFieldSelectDate.endEditing(true)
+//        delegateScreen2?.setDateInNewOperation(date: <#T##Date#>)
+        print("textFieldSelectDateDeselect")
     }
 }

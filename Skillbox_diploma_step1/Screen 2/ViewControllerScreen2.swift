@@ -53,13 +53,27 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     var delegateScreen2Container: protocolScreen2ContainerDelegate?
     var delegateScreen2TableViewCellCategory: protocolScreen2TableViewCellCategory?
     var delegateScreen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate?
+    var delegateScreen2TableViewCellDate: protocolScreen2TableViewCellDateDelegate?
     
     
     //MARK: - переходы
     
     @IBAction func buttonToAddNewOperation(_ sender: Any) {
+        
+        if screen2SegmentControl.selectedSegmentIndex == 0 {
+            setAmountInNewOperation(amount: Double(textFieldAmount.text ?? "0")!)
+        }
+        else if screen2SegmentControl.selectedSegmentIndex == 1 {
+            setAmountInNewOperation(amount: -Double(textFieldAmount.text ?? "0")!)
+        }
+        
+        setDateInNewOperation(date: datePicker.date)
+        setNoteInNewOperation(note: (delegateScreen2TableViewCellNote?.returnNoteView().text!)!)
+        
         print("newOperation.amount= \(newOperation.amount), newOperation.category= \(newOperation.category), newOperation.date= \(newOperation.date), newOperation.note= \(newOperation.note),")
-//        delegateScreen1?.addOperationInRealm(newAmount: <#T##Double#>, newCategory: <#T##String#>, newNote: <#T##String#>, newDate: <#T##Date#>)
+        delegateScreen1?.addOperationInRealm(newAmount: newOperation.amount, newCategory: newOperation.category, newNote: newOperation.note, newDate: newOperation.date)
+        delegateScreen1?.screen1AllUpdate()
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func buttonCloseScreen2(_ sender: Any) {
@@ -78,7 +92,6 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     
     @objc func donePressed(){
 //        formatter.dateFormat = "yyyy/MM/dd HH:mm"
-
         newOperation.date = datePicker.date
         tableViewScreen2Update(row: 2)
         self.view.endEditing(true)
@@ -88,7 +101,8 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         let toolbat = UIToolbar()
         toolbat.sizeToFit()
         
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
+//        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
+        let doneButton = UIBarButtonItem(title: "Установть дату", style: .done, target: nil, action: #selector(donePressed))
         toolbat.setItems([doneButton], animated: true)
         
         return toolbat
@@ -98,14 +112,18 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     //MARK: - клики
     
     @IBAction func screen2SegmentControlAction(_ sender: Any) {
-        delegateScreen2TableViewCellNote!.tapOutsideTextViewEditToHide()
+        textFieldAmount.endEditing(true)
+        delegateScreen2TableViewCellDate?.tapOutsideDateTextViewEditToHide()
+        delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
         switch screen2SegmentControl.selectedSegmentIndex {
         case 0:
             screen2CurrencyStatus.setTitle("+$", for: .normal)
             screen2CurrencyStatus.setTitleColor(UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1)), for: .normal)
+            textFieldAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
         case 1:
             screen2CurrencyStatus.setTitle("-$", for: .normal)
             screen2CurrencyStatus.setTitleColor(UIColor.red, for: .normal)
+            textFieldAmount.textColor = UIColor.red
         default:
             break
         }
@@ -115,21 +133,43 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         if tap.state == UIGestureRecognizer.State.ended {
                 print("Tap TextView ended")
             let pointOfTap = tap.location(in: self.view)
-            if delegateScreen2TableViewCellNote!.returnView().frame.contains(pointOfTap) {
-                print("Tap inside NoteTextView")
-                newOperation.amount = Double(textFieldAmount.text!) ?? 0
+            
+            //Tap inside noteTextView
+            if delegateScreen2TableViewCellNote!.returnNoteView().frame.contains(pointOfTap) {
+                textFieldAmount.endEditing(true)
+                delegateScreen2TableViewCellDate?.tapOutsideDateTextViewEditToHide()
+                print("Tap inside noteTextView")
+            }
+            
+            //Tap inside in dateTextView
+            else if delegateScreen2TableViewCellDate!.returnDateView().frame.contains(pointOfTap) {
+                textFieldAmount.endEditing(true)
+                delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
+                print("Tap inside in dateTextView")
+            }
+            
+            //Tap inside in textFieldAmount
+            else if textFieldAmount.frame.contains(pointOfTap){
+                print("Tap inside in textFieldAmount")
+                delegateScreen2TableViewCellDate?.tapOutsideDateTextViewEditToHide()
+                delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
             }
             else {
-                if textFieldAmount.frame.contains(pointOfTap){
-                    print("Tap inside TextView and contains in textFieldAmount")
-                }
-                else {
-                    print("Tap outside TextView and contains in textFieldAmount")
-                    textFieldAmount.endEditing(true)
-                }
-                newOperation.note = (delegateScreen2TableViewCellNote?.returnNote().text)!
-                delegateScreen2TableViewCellNote!.tapOutsideTextViewEditToHide()
+                
+                //Tap outside noteTextView and dateTextView and textFieldAmount
+                textFieldAmount.endEditing(true)
+                delegateScreen2TableViewCellDate?.tapOutsideDateTextViewEditToHide()
+                delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
+                print("Tap outside noteTextView and dateTextView and textFieldAmount")
             }
+//            tableViewScreen2Update(row: 1)
+//            tableViewScreen2Update(row: 2)
+//            tableViewScreen2Update(row: 3)
+            
+//            tableViewScreen2.reloadData()
+//            newOperation.note = (delegateScreen2TableViewCellNote?.returnNoteView().text)!
+//            print("newOperation.note= \(newOperation.note)")
+//            delegateScreen2TableViewCellNote!.tapOutsideNoteTextViewEditToHide()
         }
     }
     
@@ -204,7 +244,6 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
         print("tableViewScreen2Update activated")
         let indexPath = IndexPath.init(row: row, section: 0)
         tableViewScreen2.reloadRows(at: [indexPath], with: .fade)
-    
     }
     
     
@@ -218,20 +257,19 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
     }
     
     
-    func setNoteInNewOperation(note: String) {
-        newOperation.note = note
+    func setDateInNewOperation(date: Date) {
+        newOperation.date = date
     }
     
     
-    func setDateInNewOperation(date: Date) {
-        newOperation.date = date
+    func setNoteInNewOperation(note: String) {
+        newOperation.note = note
     }
     
     
     func returnNewOperation() -> ListOfOperations{
         return newOperation
     }
-    
     
     
     func returnDelegateScreen2TableViewCellNote() -> protocolScreen2TableViewCellNoteDelegate {
@@ -243,8 +281,11 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
     func changeCategoryOpenPopUp(_ tag: Int) {
 //        containerBottom.layer.borderWidth = 3
 //        containerBottom.layer.borderColor = UIColor.red.cgColor
-        self.containerBottom.layer.cornerRadius  = 20
+        self.containerBottom.layer.cornerRadius = 20
         self.constraintContainerBottomHeight.constant = CGFloat(50*(self.screen2MenuArray.count+3))
+        textFieldAmount.endEditing(true)
+        delegateScreen2TableViewCellDate?.tapOutsideDateTextViewEditToHide()
+        delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
         
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             self.constraintContainerBottomPoint.constant = 50
@@ -312,6 +353,8 @@ extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
             cell.textFieldSelectDate.inputAccessoryView = createToolBar()
             cell.setTag(tag: indexPath.row)
             cell.startCell()
+            
+            self.delegateScreen2TableViewCellDate = cell
             return cell
         default:
             
