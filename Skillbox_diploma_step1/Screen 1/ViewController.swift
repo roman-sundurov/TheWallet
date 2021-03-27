@@ -274,6 +274,7 @@ extension ViewController: protocolScreen1Delegate{
     
     func screen1AllUpdate() {
         screen1DataReceive()
+        screen1TableUpdateSorting(days: daysForSorting)
         countingIncomesAndExpensive()
         changeDaysForSorting()
     }
