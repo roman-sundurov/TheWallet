@@ -60,20 +60,41 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     
     @IBAction func buttonToAddNewOperation(_ sender: Any) {
         
-        if screen2SegmentControl.selectedSegmentIndex == 0 {
-            setAmountInNewOperation(amount: Double(textFieldAmount.text ?? "0")!)
-        }
-        else if screen2SegmentControl.selectedSegmentIndex == 1 {
-            setAmountInNewOperation(amount: -Double(textFieldAmount.text ?? "0")!)
+        if newOperation.category != "" {
+            
+            //set Amount
+            if screen2SegmentControl.selectedSegmentIndex == 0 {
+                setAmountInNewOperation(amount: Double(textFieldAmount.text ?? "0")!)
+            }
+            else if screen2SegmentControl.selectedSegmentIndex == 1 {
+                setAmountInNewOperation(amount: -Double(textFieldAmount.text ?? "0")!)
+            }
+            
+            
+            //set Date
+            if delegateScreen2TableViewCellDate?.returnDateTextField().text == "Today" {
+                let dateNow = Date.init()
+                setDateInNewOperation(date: dateNow)
+            }
+            else {
+                setDateInNewOperation(date: datePicker.date)
+            }
+            
+            
+            //set Note
+            if delegateScreen2TableViewCellNote?.returnNoteView().text! == "Placeholder" {
+                setNoteInNewOperation(note: "")
+            }
+            else {
+                setNoteInNewOperation(note: (delegateScreen2TableViewCellNote?.returnNoteView().text!)!)
+            }
+            
+            print("newOperation.amount= \(newOperation.amount), newOperation.category= \(newOperation.category), newOperation.date= \(newOperation.date), newOperation.note= \(newOperation.note),")
+            delegateScreen1?.addOperationInRealm(newAmount: newOperation.amount, newCategory: newOperation.category, newNote: newOperation.note, newDate: newOperation.date)
+            delegateScreen1?.screen1AllUpdate()
+            dismiss(animated: true, completion: nil)
         }
         
-        setDateInNewOperation(date: datePicker.date)
-        setNoteInNewOperation(note: (delegateScreen2TableViewCellNote?.returnNoteView().text!)!)
-        
-        print("newOperation.amount= \(newOperation.amount), newOperation.category= \(newOperation.category), newOperation.date= \(newOperation.date), newOperation.note= \(newOperation.note),")
-        delegateScreen1?.addOperationInRealm(newAmount: newOperation.amount, newCategory: newOperation.category, newNote: newOperation.note, newDate: newOperation.date)
-        delegateScreen1?.screen1AllUpdate()
-        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func buttonCloseScreen2(_ sender: Any) {
@@ -89,6 +110,11 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     
     
     //MARK: - DatePicker
+    
+    func createDatePicker(){
+        datePicker.preferredDatePickerStyle = .wheels
+        datePicker.datePickerMode = .date
+    }
     
     @objc func donePressed(){
 //        formatter.dateFormat = "yyyy/MM/dd HH:mm"
@@ -110,6 +136,38 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     
     
     //MARK: - клики
+    
+    
+    @IBAction func textFieldAmountEditingDidBegin(_ sender: Any) {
+        if textFieldAmount.textColor == UIColor.opaqueSeparator {
+            textFieldAmount.text = nil
+            
+            switch screen2SegmentControl.selectedSegmentIndex {
+            case 0:
+                textFieldAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
+            case 1:
+                textFieldAmount.textColor = UIColor.red
+            default:
+                break
+            }
+        }
+        print("func textViewDidBeginEditing")
+    }
+    
+    @IBAction func textFieldAmountEditingDidEnd(_ sender: Any) {
+        if textFieldAmount.text == "" {
+            textFieldAmount.text = "0"
+            textFieldAmount.textColor = UIColor.opaqueSeparator
+        }
+        textFieldAmount.resignFirstResponder()
+        print("func textFieldAmountEditingDidEnd")
+    }
+    
+    
+//    @IBAction func textFieldActionEditingChanged(_ sender: Any) {
+//        print("textFieldActionEditingChanged")
+//    }
+    
     
     @IBAction func screen2SegmentControlAction(_ sender: Any) {
         textFieldAmount.endEditing(true)
@@ -142,7 +200,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
             }
             
             //Tap inside in dateTextView
-            else if delegateScreen2TableViewCellDate!.returnDateView().frame.contains(pointOfTap) {
+            else if delegateScreen2TableViewCellDate!.returnDateTextField().frame.contains(pointOfTap) {
                 textFieldAmount.endEditing(true)
                 delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
                 print("Tap inside in dateTextView")
@@ -230,7 +288,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         self.tapOutsideTextViewToGoFromTextView = UITapGestureRecognizer(target: self, action: #selector(self.screen2TapHandler(tap:)))
         self.view.addGestureRecognizer(self.tapOutsideTextViewToGoFromTextView!)
         
-//        newOperation = ListOfOperations()
+        createDatePicker()
     }
 }
 
@@ -347,8 +405,6 @@ extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellDate") as! Screen2TableViewCellDate
             cell.delegateScreen2 = self
-            datePicker.preferredDatePickerStyle = .wheels
-            datePicker.datePickerMode = .date
             cell.textFieldSelectDate.inputView = datePicker
             cell.textFieldSelectDate.inputAccessoryView = createToolBar()
             cell.setTag(tag: indexPath.row)

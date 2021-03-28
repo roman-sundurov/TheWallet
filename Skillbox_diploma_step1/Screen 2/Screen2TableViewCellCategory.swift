@@ -21,7 +21,6 @@ class Screen2TableViewCellCategory: UITableViewCell {
 
 //Анимация
     @objc func changeCategoryOpenPopUpFromScreen2(_ tag: Int) {
-//        delegateScreen2?.returnDelegateScreen2TableViewCellNote().tapOutsideNoteTextViewEditToHide()
         delegateScreen2?.changeCategoryOpenPopUp(specCellTag)
         print("ChangeCategory from Screen2")
     }

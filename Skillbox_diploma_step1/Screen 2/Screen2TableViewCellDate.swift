@@ -9,7 +9,7 @@ import UIKit
 
 protocol protocolScreen2TableViewCellDateDelegate{
     func tapOutsideDateTextViewEditToHide()
-    func returnDateView() -> UITextField
+    func returnDateTextField() -> UITextField
 }
 
 class Screen2TableViewCellDate: UITableViewCell {
@@ -27,22 +27,6 @@ class Screen2TableViewCellDate: UITableViewCell {
 
     //MARK: - переходы
     
-//    @IBAction func datePickerSelectDateHandleAction(_ sender: UIDatePicker) {
-//        print("Данные в DatePicker изменены")
-//        delegateScreen2?.setDateInNewOperation(date: datePickerSelectDate.date)
-//    }
-//
-//    @objc func changeDate(_ tag: Int) {
-//        datePickerSelectDate.
-//        print("ChangeDate from Screen2")
-//    }
-//
-//    @objc func changeDateOpenDatePicker(_ tag: Int) {
-//        datePickerSelectDate.
-//        delegateScreen2?.returnDelegateScreen2TableViewCellNote().tapOutsideNoteTextViewEditToHide()
-//        delegateScreen2?.changeCategoryOpenPopUp(specCellTag)
-//        print("ChangeCategory from table")
-//    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -53,6 +37,13 @@ class Screen2TableViewCellDate: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
     }
+    
+    
+    @objc func startEditing() {
+        textFieldSelectDate.becomeFirstResponder()
+        print("startEditing")
+    }
+    
     
     func startCell() {
         let dateFormatter = DateFormatter()
@@ -70,7 +61,10 @@ class Screen2TableViewCellDate: UITableViewCell {
         textFieldSelectDate.tintColor = UIColor.clear //делает курсор бесцветным, но не убирает его
         labelDate.text = delegateScreen2?.getScreen2MenuArray()[specCellTag].name
         self.isUserInteractionEnabled = true
-//        self.addGestureRecognizer(gesture)
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(startEditing))
+        self.isUserInteractionEnabled = true
+        self.addGestureRecognizer(gesture)
     }
     
     func setTag(tag: Int) {
@@ -78,9 +72,10 @@ class Screen2TableViewCellDate: UITableViewCell {
     }
 }
 
+
 extension Screen2TableViewCellDate: protocolScreen2TableViewCellDateDelegate{
     
-    func returnDateView() -> UITextField {
+    func returnDateTextField() -> UITextField {
 //        tapOutsideNoteTextViewEditToHide()
 //        textViewNotes.endEditing(true)
         print("textViewDeselect")
@@ -92,7 +87,6 @@ extension Screen2TableViewCellDate: protocolScreen2TableViewCellDateDelegate{
     
     func tapOutsideDateTextViewEditToHide(){
         textFieldSelectDate.endEditing(true)
-//        delegateScreen2?.setDateInNewOperation(date: <#T##Date#>)
         print("textFieldSelectDateDeselect")
     }
 }

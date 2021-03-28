@@ -24,7 +24,7 @@ class Screen2TableViewCellNote: UITableViewCell, UITextViewDelegate {
 // MARK: - Работа с Placeholder
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textViewNotes.textColor == UIColor.lightGray {
+        if textViewNotes.textColor == UIColor.opaqueSeparator {
             textViewNotes.text = nil
             textViewNotes.textColor = UIColor.black
         }
@@ -35,7 +35,7 @@ class Screen2TableViewCellNote: UITableViewCell, UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         if textViewNotes.text.isEmpty {
             textViewNotes.text = "Placeholder"
-            textViewNotes.textColor = UIColor.lightGray
+            textViewNotes.textColor = UIColor.opaqueSeparator
         }
         textView.resignFirstResponder()
         print("func textViewDidEndEditing")
@@ -65,7 +65,7 @@ class Screen2TableViewCellNote: UITableViewCell, UITextViewDelegate {
         textViewNotes.layer.cornerRadius  = 10
         
         textViewNotes.text = "Placeholder"
-        textViewNotes.textColor = UIColor.lightGray
+//        textViewNotes.textColor = UIColor.opaqueSeparator //цвет текста уже opaqueSeparator в Storyboard.
         
     }
     

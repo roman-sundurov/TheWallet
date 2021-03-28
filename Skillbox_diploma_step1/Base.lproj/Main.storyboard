@@ -563,14 +563,18 @@
                                             <color key="titleColor" red="0.14624351259999999" green="0.61100596190000001" blue="0.01177703496" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="TtF-Sw-fS5">
+                                    <textField opaque="NO" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="0" borderStyle="roundedRect" textAlignment="right" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="TtF-Sw-fS5">
                                         <rect key="frame" x="163" y="10" width="151" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="N31-3v-c5p"/>
                                         </constraints>
-                                        <color key="textColor" red="0.30840110780000002" green="0.5618229508" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" systemColor="opaqueSeparatorColor"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="42"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" spellCheckingType="no" keyboardType="numberPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                        <connections>
+                                            <action selector="textFieldAmountEditingDidBegin:" destination="fcp-GB-FKl" eventType="editingDidBegin" id="1fb-Rb-cov"/>
+                                            <action selector="textFieldAmountEditingDidEnd:" destination="fcp-GB-FKl" eventType="editingDidEnd" id="tk7-j3-43O"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -881,7 +885,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WvV-OG-r3R">
-                                                            <rect key="frame" x="294" y="7.6666666666666643" width="26" height="27"/>
+                                                            <rect key="frame" x="294" y="7.6666666666666643" width="26" height="26.999999999999986"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="27" id="0Hk-1y-NQH"/>
                                                                 <constraint firstAttribute="width" constant="26" id="DHZ-Qb-uS4"/>
