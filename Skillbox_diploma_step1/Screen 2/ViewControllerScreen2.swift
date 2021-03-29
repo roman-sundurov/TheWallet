@@ -21,6 +21,8 @@ protocol protocolScreen2Delegate{
     func setCategoryInNewOperation(category: String)
     func setNoteInNewOperation(note: String)
     func setDateInNewOperation(date: Date)
+    func showDatePicker()
+    func testAction()
 }
 
 struct Screen2MenuData {
@@ -110,6 +112,22 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     
     
     //MARK: - DatePicker
+    
+    func createAlert() -> UIAlertController {
+        let alert = UIAlertController(title: "Select date", message: nil, preferredStyle: .actionSheet)
+        alert.view.addSubview(datePicker)
+        
+        let alertHeightConstraint = NSLayoutConstraint(item: alert.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: datePicker.frame.height * 1.2)
+        let alertWidthConstraint = NSLayoutConstraint(item: alert.view!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: datePicker.frame.width)
+        
+        let datePickertCentrYConstraint = NSLayoutConstraint(item: datePicker, attribute: .centerY, relatedBy: .equal, toItem: alert, attribute: .centerY, multiplier: 1, constant: 0)
+        
+        alert.view.addConstraint(alertHeightConstraint)
+        alert.view.addConstraint(alertWidthConstraint)
+        datePicker.addConstraint(datePickertCentrYConstraint)
+        return alert
+    }
+    
     
     func createDatePicker(){
         datePicker.preferredDatePickerStyle = .wheels
@@ -269,6 +287,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         screen2MenuArray = [Screen2MenuList0, Screen2MenuList1, Screen2MenuList2, Screen2MenuList3]
         
         self.view.insertSubview(self.blurView, belowSubview: self.containerBottom)
@@ -296,6 +315,15 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
 //MARK: - additional protocols
 
 extension ViewControllerScreen2: protocolScreen2Delegate{
+    
+    func testAction() {
+        self.present(createAlert(), animated: true, completion: nil)
+    }
+    
+    
+    func showDatePicker() {
+        self.view.addSubview(datePicker)
+    }
     
     
     func tableViewScreen2Update(row: Int) {

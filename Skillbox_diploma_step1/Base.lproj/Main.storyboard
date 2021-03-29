@@ -703,7 +703,7 @@
                                                     <rect key="frame" x="120" y="10" width="217" height="24"/>
                                                     <color key="textColor" systemColor="opaqueSeparatorColor"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="yes"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>

@@ -12,6 +12,22 @@ protocol protocolScreen2TableViewCellDateDelegate{
     func returnDateTextField() -> UITextField
 }
 
+//class CustomTextField: UITextField {
+//
+//    override func caretRect(for position: UITextPosition) -> CGRect {
+//        return CGRect.zero
+//    }
+//    selec
+//    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+//        false
+//    }
+//
+//    override func selectionRects(for range: UITextRange) -> [UITextSelectionRect] {
+//    }
+//
+////    override func caretRect(for position: UITextPosition) -> CGRect { .zero }
+//}
+
 class Screen2TableViewCellDate: UITableViewCell {
 
     @IBOutlet var labelDate: UILabel!
@@ -40,7 +56,8 @@ class Screen2TableViewCellDate: UITableViewCell {
     
     
     @objc func startEditing() {
-        textFieldSelectDate.becomeFirstResponder()
+//        textFieldSelectDate.becomeFirstResponder()
+        delegateScreen2?.testAction()
         print("startEditing")
     }
     
@@ -58,12 +75,11 @@ class Screen2TableViewCellDate: UITableViewCell {
             textFieldSelectDate.text = delegateScreen2?.getScreen2MenuArray()[specCellTag].text
         }
 
-        textFieldSelectDate.tintColor = UIColor.clear //делает курсор бесцветным, но не убирает его
+//        textFieldSelectDate.tintColor = UIColor.clear //делает курсор бесцветным, но не убирает его
         labelDate.text = delegateScreen2?.getScreen2MenuArray()[specCellTag].name
         self.isUserInteractionEnabled = true
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(startEditing))
-        self.isUserInteractionEnabled = true
         self.addGestureRecognizer(gesture)
     }
     
@@ -74,6 +90,7 @@ class Screen2TableViewCellDate: UITableViewCell {
 
 
 extension Screen2TableViewCellDate: protocolScreen2TableViewCellDateDelegate{
+    
     
     func returnDateTextField() -> UITextField {
 //        tapOutsideNoteTextViewEditToHide()
