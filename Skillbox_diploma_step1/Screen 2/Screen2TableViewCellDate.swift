@@ -32,6 +32,7 @@ class Screen2TableViewCellDate: UITableViewCell {
 
     @IBOutlet var labelDate: UILabel!
     @IBOutlet var textFieldSelectDate: UITextField!
+    @IBOutlet var labelSelectDate: UILabel!
     @IBOutlet var buttonSelectDate: UIButton!
     
     

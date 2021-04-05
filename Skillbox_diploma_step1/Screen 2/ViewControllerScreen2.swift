@@ -15,7 +15,6 @@ protocol protocolScreen2Delegate{
     func getScreen2MenuArray() -> [Screen2MenuData]
     func returnDelegateScreen2TableViewCellNote() -> protocolScreen2TableViewCellNoteDelegate
     func returnNewOperation() -> ListOfOperations
-    func createToolBar() -> UIToolbar
     //функции обновления newOperation
     func setAmountInNewOperation(amount: Double)
     func setCategoryInNewOperation(category: String)
@@ -114,17 +113,19 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     //MARK: - DatePicker
     
     func createAlert() -> UIAlertController {
-        let alert = UIAlertController(title: "Select date", message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Select date1", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Установть дату", style: .default, handler: { _ in self.donePressed() }))
         alert.view.addSubview(datePicker)
         
-        let alertHeightConstraint = NSLayoutConstraint(item: alert.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: datePicker.frame.height * 1.2)
+        let alertHeightConstraint = NSLayoutConstraint(item: alert.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: datePicker.frame.height + 60)
         let alertWidthConstraint = NSLayoutConstraint(item: alert.view!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: datePicker.frame.width)
         
-        let datePickertCentrYConstraint = NSLayoutConstraint(item: datePicker, attribute: .centerY, relatedBy: .equal, toItem: alert, attribute: .centerY, multiplier: 1, constant: 0)
+//        let datePickertCentrYConstraint = NSLayoutConstraint(item: datePicker, attribute: .centerY, relatedBy: .equal, toItem: alert, attribute: .centerY, multiplier: 1, constant: 0)
         
         alert.view.addConstraint(alertHeightConstraint)
         alert.view.addConstraint(alertWidthConstraint)
-        datePicker.addConstraint(datePickertCentrYConstraint)
+        datePicker.frame.origin.y = 20
+//        datePicker.addConstraint(datePickertCentrYConstraint)
         return alert
     }
     
@@ -134,22 +135,11 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         datePicker.datePickerMode = .date
     }
     
-    @objc func donePressed(){
+    func donePressed(){
 //        formatter.dateFormat = "yyyy/MM/dd HH:mm"
         newOperation.date = datePicker.date
         tableViewScreen2Update(row: 2)
         self.view.endEditing(true)
-    }
-    
-    func createToolBar() -> UIToolbar{
-        let toolbat = UIToolbar()
-        toolbat.sizeToFit()
-        
-//        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
-        let doneButton = UIBarButtonItem(title: "Установть дату", style: .done, target: nil, action: #selector(donePressed))
-        toolbat.setItems([doneButton], animated: true)
-        
-        return toolbat
     }
     
     
@@ -433,8 +423,6 @@ extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellDate") as! Screen2TableViewCellDate
             cell.delegateScreen2 = self
-            cell.textFieldSelectDate.inputView = datePicker
-            cell.textFieldSelectDate.inputAccessoryView = createToolBar()
             cell.setTag(tag: indexPath.row)
             cell.startCell()
             

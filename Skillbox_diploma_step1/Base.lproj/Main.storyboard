@@ -699,22 +699,22 @@
                                                         <imageReference key="backgroundImage" image="arrow.right" catalog="system" symbolScale="default"/>
                                                     </state>
                                                 </button>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Today" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pEc-ot-G5Q">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPm-mx-OQF">
                                                     <rect key="frame" x="120" y="10" width="217" height="24"/>
-                                                    <color key="textColor" systemColor="opaqueSeparatorColor"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="yes"/>
-                                                </textField>
+                                                    <color key="textColor" systemColor="opaqueSeparatorColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="pEc-ot-G5Q" secondAttribute="bottom" constant="10" id="GnE-Gk-ozo"/>
+                                                <constraint firstItem="gPm-mx-OQF" firstAttribute="top" secondItem="4K5-hq-kUl" secondAttribute="top" constant="10" id="2MU-iH-M0p"/>
+                                                <constraint firstAttribute="bottom" secondItem="gPm-mx-OQF" secondAttribute="bottom" constant="10" id="Bev-kg-Una"/>
+                                                <constraint firstItem="Ip7-Zv-FUs" firstAttribute="leading" secondItem="gPm-mx-OQF" secondAttribute="trailing" constant="10" id="DO7-TA-a33"/>
                                                 <constraint firstAttribute="bottom" secondItem="SSu-PT-DOx" secondAttribute="bottom" constant="10" id="L0x-QG-eLZ"/>
+                                                <constraint firstItem="gPm-mx-OQF" firstAttribute="leading" secondItem="SSu-PT-DOx" secondAttribute="trailing" constant="10" id="NyD-bF-gfE"/>
                                                 <constraint firstItem="SSu-PT-DOx" firstAttribute="top" secondItem="4K5-hq-kUl" secondAttribute="top" constant="10" id="O4r-p9-lzX"/>
-                                                <constraint firstItem="Ip7-Zv-FUs" firstAttribute="leading" secondItem="pEc-ot-G5Q" secondAttribute="trailing" constant="10" id="VlA-b6-3uY"/>
-                                                <constraint firstItem="pEc-ot-G5Q" firstAttribute="top" secondItem="4K5-hq-kUl" secondAttribute="top" constant="10" id="fSP-WN-dNs"/>
                                                 <constraint firstItem="SSu-PT-DOx" firstAttribute="leading" secondItem="4K5-hq-kUl" secondAttribute="leading" constant="15" id="gvH-ES-amX"/>
                                                 <constraint firstItem="Ip7-Zv-FUs" firstAttribute="centerY" secondItem="4K5-hq-kUl" secondAttribute="centerY" id="nPB-3S-XAn"/>
-                                                <constraint firstItem="pEc-ot-G5Q" firstAttribute="leading" secondItem="SSu-PT-DOx" secondAttribute="trailing" constant="10" id="wFD-Jl-FcP"/>
                                                 <constraint firstAttribute="trailing" secondItem="Ip7-Zv-FUs" secondAttribute="trailing" constant="15" id="xjB-Xn-y0z"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -722,7 +722,7 @@
                                         <connections>
                                             <outlet property="buttonSelectDate" destination="Ip7-Zv-FUs" id="TVB-Gr-vgH"/>
                                             <outlet property="labelDate" destination="SSu-PT-DOx" id="24k-h6-lzb"/>
-                                            <outlet property="textFieldSelectDate" destination="pEc-ot-G5Q" id="ON8-eT-vMS"/>
+                                            <outlet property="labelSelectDate" destination="gPm-mx-OQF" id="0cW-cj-QLg"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellNote" id="hmy-aS-YRO" customClass="Screen2TableViewCellNote" customModule="Skillbox_diploma_step1" customModuleProvider="target">
