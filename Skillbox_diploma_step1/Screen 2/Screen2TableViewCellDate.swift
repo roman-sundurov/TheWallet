@@ -8,8 +8,7 @@
 import UIKit
 
 protocol protocolScreen2TableViewCellDateDelegate{
-    func tapOutsideDateTextViewEditToHide()
-    func returnDateTextField() -> UITextField
+    func returnDateTextField() -> UILabel
 }
 
 //class CustomTextField: UITextField {
@@ -31,7 +30,6 @@ protocol protocolScreen2TableViewCellDateDelegate{
 class Screen2TableViewCellDate: UITableViewCell {
 
     @IBOutlet var labelDate: UILabel!
-    @IBOutlet var textFieldSelectDate: UITextField!
     @IBOutlet var labelSelectDate: UILabel!
     @IBOutlet var buttonSelectDate: UIButton!
     
@@ -58,7 +56,7 @@ class Screen2TableViewCellDate: UITableViewCell {
     
     @objc func startEditing() {
 //        textFieldSelectDate.becomeFirstResponder()
-        delegateScreen2?.testAction()
+        delegateScreen2?.openDateAlert()
         print("startEditing")
     }
     
@@ -69,11 +67,11 @@ class Screen2TableViewCellDate: UITableViewCell {
         dateFormatter.timeStyle = .none
 
         if delegateScreen2?.returnNewOperation().date != Date.init(timeIntervalSince1970: TimeInterval(0)) {
-            textFieldSelectDate.text = dateFormatter.string(from: delegateScreen2!.returnNewOperation().date)
-            textFieldSelectDate.textColor = .black
+            labelSelectDate.text = dateFormatter.string(from: delegateScreen2!.returnNewOperation().date)
+            labelSelectDate.textColor = .black
         }
         else{
-            textFieldSelectDate.text = delegateScreen2?.getScreen2MenuArray()[specCellTag].text
+            labelSelectDate.text = delegateScreen2?.getScreen2MenuArray()[specCellTag].text
         }
 
 //        textFieldSelectDate.tintColor = UIColor.clear //делает курсор бесцветным, но не убирает его
@@ -93,18 +91,18 @@ class Screen2TableViewCellDate: UITableViewCell {
 extension Screen2TableViewCellDate: protocolScreen2TableViewCellDateDelegate{
     
     
-    func returnDateTextField() -> UITextField {
+    func returnDateTextField() -> UILabel {
 //        tapOutsideNoteTextViewEditToHide()
 //        textViewNotes.endEditing(true)
         print("textViewDeselect")
-        return textFieldSelectDate
+        return labelSelectDate
     }
 
     
     //MARK: - Обработка касаний экрана
     
-    func tapOutsideDateTextViewEditToHide(){
-        textFieldSelectDate.endEditing(true)
-        print("textFieldSelectDateDeselect")
-    }
+//    func tapOutsideDateTextViewEditToHide(){
+//        textFieldSelectDate.endEditing(true)
+//        print("textFieldSelectDateDeselect")
+//    }
 }

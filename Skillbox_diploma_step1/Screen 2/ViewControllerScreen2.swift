@@ -20,8 +20,7 @@ protocol protocolScreen2Delegate{
     func setCategoryInNewOperation(category: String)
     func setNoteInNewOperation(note: String)
     func setDateInNewOperation(date: Date)
-    func showDatePicker()
-    func testAction()
+    func openDateAlert()
 }
 
 struct Screen2MenuData {
@@ -42,19 +41,26 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     @IBOutlet var textFieldAmount: UITextField!
     
     
-    //MARK: - делегаты и переменные
+    //MARK: - делегаты, переменные
     
     var tapOfChangeCategoryOpenPopUp: UITapGestureRecognizer?
+    var tapOfChangeDateOpenDateAlert: UITapGestureRecognizer?
     var tapOutsideTextViewToGoFromTextView: UITapGestureRecognizer?
-    let blurView =  UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-    var newOperation: ListOfOperations = ListOfOperations()
-    let datePicker = UIDatePicker()
     
     var delegateScreen1: protocolScreen1Delegate?
     var delegateScreen2Container: protocolScreen2ContainerDelegate?
     var delegateScreen2TableViewCellCategory: protocolScreen2TableViewCellCategory?
     var delegateScreen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate?
     var delegateScreen2TableViewCellDate: protocolScreen2TableViewCellDateDelegate?
+    
+    
+    //MARK: - объекты
+    
+    let alertDatePicker = UIAlertController(title: "Select date", message: nil, preferredStyle: .actionSheet)
+    let         alertAddNewOperationError = UIAlertController(title: "Добавьте обязательные данные", message: nil, preferredStyle: .alert)
+    let blurView =  UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    var newOperation: ListOfOperations = ListOfOperations()
+    let datePicker = UIDatePicker()
     
     
     //MARK: - переходы
@@ -95,12 +101,17 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
             delegateScreen1?.screen1AllUpdate()
             dismiss(animated: true, completion: nil)
         }
+        else {
+            createAlertAddNewOperations()
+        }
         
     }
+    
     
     @IBAction func buttonCloseScreen2(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ViewControllerScreen2Container, segue.identifier == "segueToScreen2Container"{
@@ -112,21 +123,19 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     
     //MARK: - DatePicker
     
-    func createAlert() -> UIAlertController {
-        let alert = UIAlertController(title: "Select date1", message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Установть дату", style: .default, handler: { _ in self.donePressed() }))
-        alert.view.addSubview(datePicker)
+    func createAlertDatePicker() {
+        alertDatePicker.addAction(UIAlertAction(title: "Установить дату", style: .default, handler: { _ in self.donePressed() }))
+        alertDatePicker.addAction(UIAlertAction(title: "Cancell", style: .cancel, handler: nil ))
+        alertDatePicker.view.addSubview(datePicker)
         
-        let alertHeightConstraint = NSLayoutConstraint(item: alert.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: datePicker.frame.height + 60)
-        let alertWidthConstraint = NSLayoutConstraint(item: alert.view!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: datePicker.frame.width)
-        
-//        let datePickertCentrYConstraint = NSLayoutConstraint(item: datePicker, attribute: .centerY, relatedBy: .equal, toItem: alert, attribute: .centerY, multiplier: 1, constant: 0)
-        
-        alert.view.addConstraint(alertHeightConstraint)
-        alert.view.addConstraint(alertWidthConstraint)
-        datePicker.frame.origin.y = 20
-//        datePicker.addConstraint(datePickertCentrYConstraint)
-        return alert
+        let alertHeightConstraint = NSLayoutConstraint(item: alertDatePicker.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: datePicker.frame.height + 150)
+//        let alertWidthConstraint = NSLayoutConstraint(item: alertDatePicker.view!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: datePicker.frame.width)
+//
+        alertDatePicker.view.addConstraint(alertHeightConstraint)
+//        alertDatePicker.view.addConstraint(alertWidthConstraint)
+//        alertDatePicker.view.frame.width = datePicker.frame.width
+        datePicker.frame.origin.x = (alertDatePicker.view.frame.width - datePicker.frame.width) / 2
+        datePicker.frame.origin.y = 25
     }
     
     
@@ -139,7 +148,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
 //        formatter.dateFormat = "yyyy/MM/dd HH:mm"
         newOperation.date = datePicker.date
         tableViewScreen2Update(row: 2)
-        self.view.endEditing(true)
+//        closeDateAlert()
     }
     
     
@@ -172,14 +181,8 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     }
     
     
-//    @IBAction func textFieldActionEditingChanged(_ sender: Any) {
-//        print("textFieldActionEditingChanged")
-//    }
-    
-    
     @IBAction func screen2SegmentControlAction(_ sender: Any) {
         textFieldAmount.endEditing(true)
-        delegateScreen2TableViewCellDate?.tapOutsideDateTextViewEditToHide()
         delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
         switch screen2SegmentControl.selectedSegmentIndex {
         case 0:
@@ -203,7 +206,6 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
             //Tap inside noteTextView
             if delegateScreen2TableViewCellNote!.returnNoteView().frame.contains(pointOfTap) {
                 textFieldAmount.endEditing(true)
-                delegateScreen2TableViewCellDate?.tapOutsideDateTextViewEditToHide()
                 print("Tap inside noteTextView")
             }
             
@@ -217,25 +219,16 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
             //Tap inside in textFieldAmount
             else if textFieldAmount.frame.contains(pointOfTap){
                 print("Tap inside in textFieldAmount")
-                delegateScreen2TableViewCellDate?.tapOutsideDateTextViewEditToHide()
                 delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
             }
+            
             else {
                 
                 //Tap outside noteTextView and dateTextView and textFieldAmount
                 textFieldAmount.endEditing(true)
-                delegateScreen2TableViewCellDate?.tapOutsideDateTextViewEditToHide()
                 delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
                 print("Tap outside noteTextView and dateTextView and textFieldAmount")
             }
-//            tableViewScreen2Update(row: 1)
-//            tableViewScreen2Update(row: 2)
-//            tableViewScreen2Update(row: 3)
-            
-//            tableViewScreen2.reloadData()
-//            newOperation.note = (delegateScreen2TableViewCellNote?.returnNoteView().text)!
-//            print("newOperation.note= \(newOperation.note)")
-//            delegateScreen2TableViewCellNote!.tapOutsideNoteTextViewEditToHide()
         }
     }
     
@@ -262,15 +255,21 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     let Screen2MenuList2 = Screen2MenuData(name: "Date", text: "Today")
     let Screen2MenuList3 = Screen2MenuData(name: "Notes", text: "")
     
-    //        let formatter = DateFormatter()
-    //        formatter.dateFormat = "yyyy/MM/dd HH:mm"
-    //        let today = formatter.date(from: "2021/02/22 17:45")
-    //        let yesterday = formatter.date(from: "2021/02/23 13:15")
-    //        let a2DaysBefore = formatter.date(from: "2021/02/24 10:05")
-    //
-    //        Persistence.shared.addOperations(amount: 1200, category: "Salary", note: "Первая заметка", date: today!)
-    //        Persistence.shared.addOperations(amount: -600, category: "Coffee", note: "Вторая заметка", date: yesterday!)
-    //        Persistence.shared.addOperations(amount: -200, category: "Lease payable", note: "Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка. Третья очень очень большая заметка.", date: a2DaysBefore!)
+    
+    //MARK: - additional func
+    func createAlertAddNewOperations() {
+        alertAddNewOperationError.addAction(UIAlertAction(title: "Cancell", style: .cancel, handler: nil ))
+        var textFieldAlertAddNewOperations = UITextField.init(frame: CGRect(x: 0, y: 0, width: 300, height: 100))
+        textFieldAlertAddNewOperations.isSelected = false
+        textFieldAlertAddNewOperations.text = "1,2,3"
+        alertAddNewOperationError.view.addSubview(textFieldAlertAddNewOperations)
+        
+        let alertHeightConstraint = NSLayoutConstraint(item: alertDatePicker.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: textFieldAlertAddNewOperations.frame.height)
+
+        alertAddNewOperationError.view.addConstraint(alertHeightConstraint)
+        textFieldAlertAddNewOperations.frame.origin.x = (alertAddNewOperationError.view.frame.width - textFieldAlertAddNewOperations.frame.width) / 2
+        textFieldAlertAddNewOperations.frame.origin.y = 25
+    }
     
     
     //MARK: - viewDidLoad
@@ -298,6 +297,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         self.view.addGestureRecognizer(self.tapOutsideTextViewToGoFromTextView!)
         
         createDatePicker()
+        createAlertDatePicker()
     }
 }
 
@@ -306,13 +306,9 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
 
 extension ViewControllerScreen2: protocolScreen2Delegate{
     
-    func testAction() {
-        self.present(createAlert(), animated: true, completion: nil)
-    }
     
-    
-    func showDatePicker() {
-        self.view.addSubview(datePicker)
+    func getScreen2MenuArray() -> [Screen2MenuData] {
+        return screen2MenuArray
     }
     
     
@@ -354,13 +350,11 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
     
     
     //MARK: - окрытие PopUp-окна
+    
     func changeCategoryOpenPopUp(_ tag: Int) {
-//        containerBottom.layer.borderWidth = 3
-//        containerBottom.layer.borderColor = UIColor.red.cgColor
         self.containerBottom.layer.cornerRadius = 20
         self.constraintContainerBottomHeight.constant = CGFloat(50*(self.screen2MenuArray.count+3))
         textFieldAmount.endEditing(true)
-        delegateScreen2TableViewCellDate?.tapOutsideDateTextViewEditToHide()
         delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
         
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
@@ -375,9 +369,9 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
     
     
     //MARK: - закрытие PopUp-окна
+    
     @objc func changeCategoryClosePopUp() {
         tableViewScreen2Update(row: 1)
-//        self.tableViewScreen2Update()
         UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             self.constraintContainerBottomPoint.constant = -515
             self.blurView.isHidden = true
@@ -386,9 +380,15 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
         }, completion: {isCompleted in })
     }
     
-    func getScreen2MenuArray() -> [Screen2MenuData] {
-        return screen2MenuArray
+    
+    //MARK: - открытие dateAlert
+    
+    func openDateAlert() {
+        self.present(alertDatePicker, animated: true, completion: nil)
+        self.tapOfChangeDateOpenDateAlert = UITapGestureRecognizer(target: self, action: nil)
+        self.view.addGestureRecognizer(self.tapOfChangeDateOpenDateAlert!)
     }
+    
 }
 
 
