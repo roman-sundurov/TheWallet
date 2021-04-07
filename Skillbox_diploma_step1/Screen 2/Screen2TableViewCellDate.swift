@@ -8,14 +8,29 @@
 import UIKit
 
 protocol protocolScreen2TableViewCellDateDelegate{
-    func tapOutsideDateTextViewEditToHide()
-    func returnDateTextField() -> UITextField
+    func returnDateTextField() -> UILabel
 }
+
+//class CustomTextField: UITextField {
+//
+//    override func caretRect(for position: UITextPosition) -> CGRect {
+//        return CGRect.zero
+//    }
+//    selec
+//    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+//        false
+//    }
+//
+//    override func selectionRects(for range: UITextRange) -> [UITextSelectionRect] {
+//    }
+//
+////    override func caretRect(for position: UITextPosition) -> CGRect { .zero }
+//}
 
 class Screen2TableViewCellDate: UITableViewCell {
 
     @IBOutlet var labelDate: UILabel!
-    @IBOutlet var textFieldSelectDate: UITextField!
+    @IBOutlet var labelSelectDate: UILabel!
     @IBOutlet var buttonSelectDate: UIButton!
     
     
@@ -40,7 +55,8 @@ class Screen2TableViewCellDate: UITableViewCell {
     
     
     @objc func startEditing() {
-        textFieldSelectDate.becomeFirstResponder()
+//        textFieldSelectDate.becomeFirstResponder()
+        delegateScreen2?.openAlertDatePicker()
         print("startEditing")
     }
     
@@ -51,19 +67,18 @@ class Screen2TableViewCellDate: UITableViewCell {
         dateFormatter.timeStyle = .none
 
         if delegateScreen2?.returnNewOperation().date != Date.init(timeIntervalSince1970: TimeInterval(0)) {
-            textFieldSelectDate.text = dateFormatter.string(from: delegateScreen2!.returnNewOperation().date)
-            textFieldSelectDate.textColor = .black
+            labelSelectDate.text = dateFormatter.string(from: delegateScreen2!.returnNewOperation().date)
+            labelSelectDate.textColor = .black
         }
         else{
-            textFieldSelectDate.text = delegateScreen2?.getScreen2MenuArray()[specCellTag].text
+            labelSelectDate.text = delegateScreen2?.getScreen2MenuArray()[specCellTag].text
         }
 
-        textFieldSelectDate.tintColor = UIColor.clear //делает курсор бесцветным, но не убирает его
+//        textFieldSelectDate.tintColor = UIColor.clear //делает курсор бесцветным, но не убирает его
         labelDate.text = delegateScreen2?.getScreen2MenuArray()[specCellTag].name
         self.isUserInteractionEnabled = true
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(startEditing))
-        self.isUserInteractionEnabled = true
         self.addGestureRecognizer(gesture)
     }
     
@@ -75,18 +90,19 @@ class Screen2TableViewCellDate: UITableViewCell {
 
 extension Screen2TableViewCellDate: protocolScreen2TableViewCellDateDelegate{
     
-    func returnDateTextField() -> UITextField {
+    
+    func returnDateTextField() -> UILabel {
 //        tapOutsideNoteTextViewEditToHide()
 //        textViewNotes.endEditing(true)
         print("textViewDeselect")
-        return textFieldSelectDate
+        return labelSelectDate
     }
 
     
     //MARK: - Обработка касаний экрана
     
-    func tapOutsideDateTextViewEditToHide(){
-        textFieldSelectDate.endEditing(true)
-        print("textFieldSelectDateDeselect")
-    }
+//    func tapOutsideDateTextViewEditToHide(){
+//        textFieldSelectDate.endEditing(true)
+//        print("textFieldSelectDateDeselect")
+//    }
 }
