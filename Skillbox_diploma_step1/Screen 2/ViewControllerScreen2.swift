@@ -20,7 +20,7 @@ protocol protocolScreen2Delegate{
     func setCategoryInNewOperation(category: String)
     func setNoteInNewOperation(note: String)
     func setDateInNewOperation(date: Date)
-    func openDateAlert()
+    func openAlertDatePicker()
 }
 
 struct Screen2MenuData {
@@ -44,7 +44,6 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     //MARK: - делегаты, переменные
     
     var tapOfChangeCategoryOpenPopUp: UITapGestureRecognizer?
-    var tapOfChangeDateOpenDateAlert: UITapGestureRecognizer?
     var tapOutsideTextViewToGoFromTextView: UITapGestureRecognizer?
     
     var delegateScreen1: protocolScreen1Delegate?
@@ -57,7 +56,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     //MARK: - объекты
     
     let alertDatePicker = UIAlertController(title: "Select date", message: nil, preferredStyle: .actionSheet)
-    let         alertAddNewOperationError = UIAlertController(title: "Добавьте обязательные данные", message: nil, preferredStyle: .alert)
+    let alertErrorAddNewOperation = UIAlertController(title: "Добавьте обязательные данные", message: nil, preferredStyle: .alert)
     let blurView =  UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     var newOperation: ListOfOperations = ListOfOperations()
     let datePicker = UIDatePicker()
@@ -102,7 +101,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
             dismiss(animated: true, completion: nil)
         }
         else {
-            createAlertAddNewOperations()
+            self.present(alertErrorAddNewOperation, animated: true, completion: nil)
         }
         
     }
@@ -121,7 +120,22 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     }
     
     
-    //MARK: - DatePicker
+    //MARK: - Allerts
+    
+    func createAlertAddNewOperations() {
+        alertErrorAddNewOperation.addAction(UIAlertAction(title: "Cancell", style: .cancel, handler: nil ))
+        var textFieldAlertAddNewOperations = UITextField.init(frame: CGRect(x: 0, y: 0, width: 300, height: 100))
+        textFieldAlertAddNewOperations.isSelected = false
+        textFieldAlertAddNewOperations.text = "12 \n 3"
+        alertErrorAddNewOperation.view.addSubview(textFieldAlertAddNewOperations)
+        
+        let alertHeightConstraint = NSLayoutConstraint(item: alertErrorAddNewOperation.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: textFieldAlertAddNewOperations.frame.height + 40)
+
+        alertErrorAddNewOperation.view.addConstraint(alertHeightConstraint)
+        textFieldAlertAddNewOperations.frame.origin.x = (alertErrorAddNewOperation.view.frame.width - textFieldAlertAddNewOperations.frame.width) / 2
+        textFieldAlertAddNewOperations.frame.origin.y = 25
+    }
+    
     
     func createAlertDatePicker() {
         alertDatePicker.addAction(UIAlertAction(title: "Установить дату", style: .default, handler: { _ in self.donePressed() }))
@@ -129,19 +143,18 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         alertDatePicker.view.addSubview(datePicker)
         
         let alertHeightConstraint = NSLayoutConstraint(item: alertDatePicker.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: datePicker.frame.height + 150)
-//        let alertWidthConstraint = NSLayoutConstraint(item: alertDatePicker.view!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: datePicker.frame.width)
-//
         alertDatePicker.view.addConstraint(alertHeightConstraint)
-//        alertDatePicker.view.addConstraint(alertWidthConstraint)
-//        alertDatePicker.view.frame.width = datePicker.frame.width
         datePicker.frame.origin.x = (alertDatePicker.view.frame.width - datePicker.frame.width) / 2
         datePicker.frame.origin.y = 25
     }
     
     
+    //MARK: - DatePicker
+    
     func createDatePicker(){
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .date
+        datePicker.maximumDate = Date.init()
     }
     
     func donePressed(){
@@ -153,7 +166,6 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     
     
     //MARK: - клики
-    
     
     @IBAction func textFieldAmountEditingDidBegin(_ sender: Any) {
         if textFieldAmount.textColor == UIColor.opaqueSeparator {
@@ -256,22 +268,6 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     let Screen2MenuList3 = Screen2MenuData(name: "Notes", text: "")
     
     
-    //MARK: - additional func
-    func createAlertAddNewOperations() {
-        alertAddNewOperationError.addAction(UIAlertAction(title: "Cancell", style: .cancel, handler: nil ))
-        var textFieldAlertAddNewOperations = UITextField.init(frame: CGRect(x: 0, y: 0, width: 300, height: 100))
-        textFieldAlertAddNewOperations.isSelected = false
-        textFieldAlertAddNewOperations.text = "1,2,3"
-        alertAddNewOperationError.view.addSubview(textFieldAlertAddNewOperations)
-        
-        let alertHeightConstraint = NSLayoutConstraint(item: alertDatePicker.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: textFieldAlertAddNewOperations.frame.height)
-
-        alertAddNewOperationError.view.addConstraint(alertHeightConstraint)
-        textFieldAlertAddNewOperations.frame.origin.x = (alertAddNewOperationError.view.frame.width - textFieldAlertAddNewOperations.frame.width) / 2
-        textFieldAlertAddNewOperations.frame.origin.y = 25
-    }
-    
-    
     //MARK: - viewDidLoad
     
     override func viewDidLoad() {
@@ -298,6 +294,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         
         createDatePicker()
         createAlertDatePicker()
+        createAlertAddNewOperations()
     }
 }
 
@@ -305,6 +302,10 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
 //MARK: - additional protocols
 
 extension ViewControllerScreen2: protocolScreen2Delegate{
+    
+    func openAlertDatePicker() {
+        self.present(alertDatePicker, animated: true, completion: nil)
+    }
     
     
     func getScreen2MenuArray() -> [Screen2MenuData] {
@@ -378,15 +379,6 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
             self.view.removeGestureRecognizer(self.tapOfChangeCategoryOpenPopUp!)
             self.view.layoutIfNeeded()
         }, completion: {isCompleted in })
-    }
-    
-    
-    //MARK: - открытие dateAlert
-    
-    func openDateAlert() {
-        self.present(alertDatePicker, animated: true, completion: nil)
-        self.tapOfChangeDateOpenDateAlert = UITapGestureRecognizer(target: self, action: nil)
-        self.view.addGestureRecognizer(self.tapOfChangeDateOpenDateAlert!)
     }
     
 }

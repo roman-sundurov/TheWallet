@@ -56,7 +56,7 @@ class Screen2TableViewCellDate: UITableViewCell {
     
     @objc func startEditing() {
 //        textFieldSelectDate.becomeFirstResponder()
-        delegateScreen2?.openDateAlert()
+        delegateScreen2?.openAlertDatePicker()
         print("startEditing")
     }
     
