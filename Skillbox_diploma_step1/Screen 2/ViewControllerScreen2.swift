@@ -66,7 +66,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     
     @IBAction func buttonToAddNewOperation(_ sender: Any) {
         
-        if newOperation.category != "" {
+        if newOperation.category != "" && textFieldAmount.text != "0" {
             
             //set Amount
             if screen2SegmentControl.selectedSegmentIndex == 0 {
@@ -123,17 +123,30 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     //MARK: - Allerts
     
     func createAlertAddNewOperations() {
-        alertErrorAddNewOperation.addAction(UIAlertAction(title: "Cancell", style: .cancel, handler: nil ))
-        var textFieldAlertAddNewOperations = UITextField.init(frame: CGRect(x: 0, y: 0, width: 300, height: 100))
-        textFieldAlertAddNewOperations.isSelected = false
-        textFieldAlertAddNewOperations.text = "12 \n 3"
-        alertErrorAddNewOperation.view.addSubview(textFieldAlertAddNewOperations)
+        alertErrorAddNewOperation.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil ))
+        let labelAlertAddNewOperations = UILabel.init(frame: CGRect(x: 0, y: 0, width: 180, height: 50))
+//        let labelAlertAddNewOperations = UILabel.init(frame: CGRect()
+        labelAlertAddNewOperations.numberOfLines = 2
+//        labelAlertAddNewOperations.backgroundColor = UIColor.red
+        labelAlertAddNewOperations.text = "Выберите категорию операции и сумму."
         
-        let alertHeightConstraint = NSLayoutConstraint(item: alertErrorAddNewOperation.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: textFieldAlertAddNewOperations.frame.height + 40)
-
-        alertErrorAddNewOperation.view.addConstraint(alertHeightConstraint)
-        textFieldAlertAddNewOperations.frame.origin.x = (alertErrorAddNewOperation.view.frame.width - textFieldAlertAddNewOperations.frame.width) / 2
-        textFieldAlertAddNewOperations.frame.origin.y = 25
+        alertErrorAddNewOperation.view.addSubview(labelAlertAddNewOperations)
+        
+        labelAlertAddNewOperations.translatesAutoresizingMaskIntoConstraints = false
+        alertErrorAddNewOperation.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(item: labelAlertAddNewOperations, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 180))
+        alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(item: labelAlertAddNewOperations, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 50))
+        
+        alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(item: labelAlertAddNewOperations, attribute: .centerX, relatedBy: .equal, toItem: alertErrorAddNewOperation.view, attribute: .centerX, multiplier: 1, constant: 0))
+        alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(item: labelAlertAddNewOperations, attribute: .top, relatedBy: .equal, toItem: alertErrorAddNewOperation.view, attribute: .top, multiplier: 1, constant: 80))
+        alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(item: labelAlertAddNewOperations, attribute: .bottom, relatedBy: .equal, toItem: alertErrorAddNewOperation.view, attribute: .bottom, multiplier: 1, constant: 40))
+        
+        alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(item: alertErrorAddNewOperation.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: labelAlertAddNewOperations.frame.height + 140))
+        
+        print(alertErrorAddNewOperation.view.frame.width)
+        print(labelAlertAddNewOperations.frame.width)
+        
     }
     
     
