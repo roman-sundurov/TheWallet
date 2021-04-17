@@ -362,6 +362,7 @@ extension ViewController: protocolScreen1Delegate{
     
     func actionsOperationsOpenPopUpScreen1(_ tag: Int) {
         containerBottomScreen1.layer.cornerRadius = 20
+        delegateScreen1Container?.startCell(tag: tag)
         
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             self.constraintContainerBottomPoint.constant = 50
@@ -378,7 +379,7 @@ extension ViewController: protocolScreen1Delegate{
     func actionsOperationsClosePopUpScreen1() {
 //        tableViewScreen2Update(row: 1)
         UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
-            self.constraintContainerBottomPoint.constant = -224
+            self.constraintContainerBottomPoint.constant = -311
             self.blurViewScreen1.isHidden = true
             self.view.removeGestureRecognizer(self.tapOfActionsOperationsOpenPopUpScreen1!)
             self.view.layoutIfNeeded()
