@@ -8,8 +8,8 @@
 import UIKit
 
 protocol protocolScreen2Delegate{
-    func changeCategoryClosePopUp()
-    func changeCategoryOpenPopUp(_ tag: Int)
+    func changeCategoryClosePopUpScreen2()
+    func changeCategoryOpenPopUpScreen2(_ tag: Int)
     func tableViewScreen2Update(row: Int)
     //функции возврата
     func getScreen2MenuArray() -> [Screen2MenuData]
@@ -35,7 +35,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     @IBOutlet var screen2SegmentControl: UISegmentedControl!
     @IBOutlet var tableViewScreen2: UITableView!
     @IBOutlet var screen2CurrencyStatus: UIButton!
-    @IBOutlet var containerBottom: UIView!
+    @IBOutlet var containerBottomScreen2: UIView!
     @IBOutlet var constraintContainerBottomPoint: NSLayoutConstraint!
     @IBOutlet var constraintContainerBottomHeight: NSLayoutConstraint!
     @IBOutlet var textFieldAmount: UITextField!
@@ -57,7 +57,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     
     let alertDatePicker = UIAlertController(title: "Select date", message: nil, preferredStyle: .actionSheet)
     let alertErrorAddNewOperation = UIAlertController(title: "Добавьте обязательные данные", message: nil, preferredStyle: .alert)
-    let blurView =  UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    let blurViewScreen2 =  UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     var newOperation: ListOfOperations = ListOfOperations()
     let datePicker = UIDatePicker()
     
@@ -257,16 +257,16 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         }
     }
     
-    @objc func handlerToHideContainer(tap: UITapGestureRecognizer){
+    @objc func handlerToHideContainerScreen2(tap: UITapGestureRecognizer){
         if tap.state == UIGestureRecognizer.State.ended {
             print("Tap ended")
             let pointOfTap = tap.location(in: self.view)
-            if containerBottom.frame.contains(pointOfTap) {
+            if containerBottomScreen2.frame.contains(pointOfTap) {
                 print("Tap inside Container")
             }
             else {
                 print("Tap outside Container")
-                changeCategoryClosePopUp()
+                changeCategoryClosePopUpScreen2()
             }
         }
     }
@@ -288,16 +288,16 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         
         screen2MenuArray = [Screen2MenuList0, Screen2MenuList1, Screen2MenuList2, Screen2MenuList3]
         
-        self.view.insertSubview(self.blurView, belowSubview: self.containerBottom)
-        self.blurView.backgroundColor = .clear
-        self.blurView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.insertSubview(self.blurViewScreen2, belowSubview: self.containerBottomScreen2)
+        self.blurViewScreen2.backgroundColor = .clear
+        self.blurViewScreen2.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            self.blurView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            self.blurView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            self.blurView.heightAnchor.constraint(equalTo: self.view.heightAnchor),
-            self.blurView.widthAnchor.constraint(equalTo: self.view.widthAnchor)
+            self.blurViewScreen2.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.blurViewScreen2.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.blurViewScreen2.heightAnchor.constraint(equalTo: self.view.heightAnchor),
+            self.blurViewScreen2.widthAnchor.constraint(equalTo: self.view.widthAnchor)
         ])
-        self.blurView.isHidden = true
+        self.blurViewScreen2.isHidden = true
         
         self.view.layoutIfNeeded()
         print("screen2MenuArray.count: \(screen2MenuArray.count)")
@@ -365,30 +365,29 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
     
     //MARK: - окрытие PopUp-окна
     
-    func changeCategoryOpenPopUp(_ tag: Int) {
-        self.containerBottom.layer.cornerRadius = 20
+    func changeCategoryOpenPopUpScreen2(_ tag: Int) {
+        self.containerBottomScreen2.layer.cornerRadius = 20
         self.constraintContainerBottomHeight.constant = CGFloat(50*(self.screen2MenuArray.count+3))
         textFieldAmount.endEditing(true)
         delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
         
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             self.constraintContainerBottomPoint.constant = 50
-            self.tapOfChangeCategoryOpenPopUp = UITapGestureRecognizer(target: self, action: #selector(self.handlerToHideContainer(tap:)))
+            self.tapOfChangeCategoryOpenPopUp = UITapGestureRecognizer(target: self, action: #selector(self.handlerToHideContainerScreen2(tap:)))
             self.view.addGestureRecognizer(self.tapOfChangeCategoryOpenPopUp!)
-            self.blurView.isHidden = false
+            self.blurViewScreen2.isHidden = false
             self.view.layoutIfNeeded()
         }, completion: {isCompleted in })
-        
     }
     
     
     //MARK: - закрытие PopUp-окна
     
-    @objc func changeCategoryClosePopUp() {
+    func changeCategoryClosePopUpScreen2() {
         tableViewScreen2Update(row: 1)
         UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             self.constraintContainerBottomPoint.constant = -515
-            self.blurView.isHidden = true
+            self.blurViewScreen2.isHidden = true
             self.view.removeGestureRecognizer(self.tapOfChangeCategoryOpenPopUp!)
             self.view.layoutIfNeeded()
         }, completion: {isCompleted in })

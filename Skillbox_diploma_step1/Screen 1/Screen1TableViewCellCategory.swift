@@ -17,6 +17,12 @@ class Screen1TableViewCellCategory: UITableViewCell {
     var delegateScreen1: protocolScreen1Delegate?
     var specCellTag: Int = 0
     
+//Анимация
+    @objc func actionsOperationsOpenPopUpScreen1(_ tag: Int) {
+        delegateScreen1?.actionsOperationsOpenPopUpScreen1(specCellTag)
+        print("ChangeCategory from Screen2")
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -47,10 +53,9 @@ class Screen1TableViewCellCategory: UITableViewCell {
             labelAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
             currencyStatus.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
         }
-        //            let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategoryOpenPopUp(_:)))
-        //            cell.isUserInteractionEnabled = true
-        //            cell.addGestureRecognizer(gesture)
-        //            cell.tag = indexPath.row
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(actionsOperationsOpenPopUpScreen1(_:)))
+        self.isUserInteractionEnabled = true
+        self.addGestureRecognizer(gesture)
     }
     
     func setTag(tag: Int) {

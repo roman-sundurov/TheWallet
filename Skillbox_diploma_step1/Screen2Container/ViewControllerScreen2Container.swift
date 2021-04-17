@@ -67,7 +67,7 @@ extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
     }
     
     func closeWindows(_ tag: Int) {
-        delegateScreen2?.changeCategoryClosePopUp()
+        delegateScreen2?.changeCategoryClosePopUpScreen2()
         tableViewContainer.reloadData()
         print("ClosePopup from Container")
     }

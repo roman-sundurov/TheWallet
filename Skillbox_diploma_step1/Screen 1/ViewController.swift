@@ -19,7 +19,8 @@ protocol protocolScreen1Delegate{
     func getArrayForIncrease() -> [Int]
     func screen1AllUpdate()
     func addOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date)
-    
+    func actionsOperationsOpenPopUpScreen1(_ tag: Int)
+    func actionsOperationsClosePopUpScreen1()
 }
 
 class Screen1TableData{
@@ -38,7 +39,9 @@ class Screen1TableData{
 
 class ViewController: UIViewController {
     
+    
     //MARK: - объявление аутлетов
+    
     
     @IBOutlet var tableViewScreen1: UITableView!
     @IBOutlet var buttonDaily: UIView!
@@ -54,10 +57,14 @@ class ViewController: UIViewController {
     @IBOutlet var labelAmountOfIncome: UILabel!
     @IBOutlet var labelAmountOfExpenses: UILabel!
     @IBOutlet var constraintTopMenuBottomStrip: NSLayoutConstraint!
+    @IBOutlet var containerBottomScreen1: UIView!
+    @IBOutlet var constraintContainerBottomPoint: NSLayoutConstraint!
     
     
     //MARK: - делегаты и переменные
     
+    
+    var tapOfActionsOperationsOpenPopUpScreen1: UITapGestureRecognizer?
     var delegateScreen2: protocolScreen2Delegate?
     
     var newTableDataArrayOriginal: [Screen1TableData] = [] //хранение оригинала данных из Realm
@@ -66,7 +73,14 @@ class ViewController: UIViewController {
     var daysForSorting: Int = 30
     
     
+    //MARK: - объекты
+    
+    
+    let blurViewScreen1 =  UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    
+    
     //MARK: - переходы
+    
     
     @IBAction func buttonToScreen2(_ sender: Any) {
         performSegue(withIdentifier: "segueToScreen2", sender: nil)
@@ -82,27 +96,50 @@ class ViewController: UIViewController {
     
     //MARK: - клики
     
+    
     func changeDaysForSorting(){
         borderForMenuBottom(days: daysForSorting)
         screen1TableUpdateSorting(days: daysForSorting)
         daysForSortingRealmUpdate()
     }
     
+    
     @IBAction func buttonDailyGesture(_ sender: Any) {
         daysForSorting = 1
         changeDaysForSorting()
     }
+    
+    
     @IBAction func buttonWeeklyGesture(_ sender: Any) {
         daysForSorting = 7
         changeDaysForSorting()
     }
+    
+    
     @IBAction func buttonMonthlyGesture(_ sender: Any) {
         daysForSorting = 30
         changeDaysForSorting()
     }
+    
+    
     @IBAction func buttonYearlyGesture(_ sender: Any) {
         daysForSorting = 365
         changeDaysForSorting()
+    }
+    
+    
+    @objc func handlerToHideContainerScreen1(tap: UITapGestureRecognizer){
+        if tap.state == UIGestureRecognizer.State.ended {
+            print("Tap ended")
+            let pointOfTap = tap.location(in: self.view)
+            if containerBottomScreen1.frame.contains(pointOfTap) {
+                print("Tap inside Container")
+            }
+            else {
+                print("Tap outside Container")
+                actionsOperationsClosePopUpScreen1()
+            }
+        }
     }
     
 
@@ -260,7 +297,17 @@ class ViewController: UIViewController {
         bottomPopInList.layer.cornerRadius  = 20
         bottomPopInList.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
-        // Do any additional setup after loading the view.
+        self.view.insertSubview(self.blurViewScreen1, belowSubview: self.containerBottomScreen1)
+        self.blurViewScreen1.backgroundColor = .clear
+        self.blurViewScreen1.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            self.blurViewScreen1.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.blurViewScreen1.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.blurViewScreen1.heightAnchor.constraint(equalTo: self.view.heightAnchor),
+            self.blurViewScreen1.widthAnchor.constraint(equalTo: self.view.widthAnchor)
+        ])
+        self.blurViewScreen1.isHidden = true
+        
     }
 }
 
@@ -300,6 +347,32 @@ extension ViewController: protocolScreen1Delegate{
     
     func findAmountOfHeaders() {
         return
+    }
+    
+    //MARK: - окрытие PopUp-окна
+    
+    func actionsOperationsOpenPopUpScreen1(_ tag: Int) {
+        self.containerBottomScreen1.layer.cornerRadius = 20
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+            self.constraintContainerBottomPoint.constant = 50
+            self.tapOfActionsOperationsOpenPopUpScreen1 = UITapGestureRecognizer(target: self, action: #selector(self.handlerToHideContainerScreen1(tap:)))
+            self.view.addGestureRecognizer(self.tapOfActionsOperationsOpenPopUpScreen1!)
+            self.blurViewScreen1.isHidden = false
+            self.view.layoutIfNeeded()
+        }, completion: {isCompleted in })
+    }
+    
+    
+    //MARK: - закрытие PopUp-окна
+    
+    func actionsOperationsClosePopUpScreen1() {
+//        tableViewScreen2Update(row: 1)
+        UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+            self.constraintContainerBottomPoint.constant = -224
+            self.blurViewScreen1.isHidden = true
+            self.view.removeGestureRecognizer(self.tapOfActionsOperationsOpenPopUpScreen1!)
+            self.view.layoutIfNeeded()
+        }, completion: {isCompleted in })
     }
     
 }
