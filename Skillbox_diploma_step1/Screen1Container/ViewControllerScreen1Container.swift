@@ -8,10 +8,20 @@
 import UIKit
 
 protocol protocolScreen1ContainerDelegate{
-    
+    func buttonEditOperationHandler(_ tag: Int)
+    func buttonDeleteOperationHandler(_ tag: Int)
 }
 
 class ViewControllerScreen1Container: UIViewController{
+    
+    
+    //MARK: - аутлеты
+    
+    @IBOutlet var labelCategory: UILabel!
+    @IBOutlet var labelAmount: UILabel!
+    @IBOutlet var currencyStatus: UILabel!
+    @IBOutlet var labelDate: UILabel!
+    @IBOutlet var textViewNotes: UITextView!
     
     
     //MARK: - делегаты и переменные
@@ -19,24 +29,34 @@ class ViewControllerScreen1Container: UIViewController{
     var delegateScreen1: protocolScreen1Delegate?
 
     
+    //MARK: - переходы
+    
+    
+    @IBAction func buttonToEditOperation(_ sender: Any) {
+    }
+    
+    
+    @IBAction func buttonToDeleteOperation(_ sender: Any) {
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 }
 
 extension ViewControllerScreen1Container: protocolScreen1ContainerDelegate{
+    func buttonEditOperationHandler(_ tag: Int) {
+        return
+    }
+    
+    func buttonDeleteOperationHandler(_ tag: Int) {
+        return
+    }
+    
     
 }

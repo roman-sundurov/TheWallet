@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Screen1TableViewCellCategory: UITableViewCell {
+class Screen1TableViewCellOperation: UITableViewCell {
 
     @IBOutlet var viewPictureOfCategory: UIView!
     @IBOutlet var labelCategory: UILabel!

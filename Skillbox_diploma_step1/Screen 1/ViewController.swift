@@ -424,7 +424,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
                 return cell
             }
             else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "operation") as! Screen1TableViewCellCategory
+                let cell = tableView.dequeueReusableCell(withIdentifier: "operation") as! Screen1TableViewCellOperation
                 cell.delegateScreen1 = self
                 cell.setTag(tag: indexPath.row)
                 cell.startCell()
