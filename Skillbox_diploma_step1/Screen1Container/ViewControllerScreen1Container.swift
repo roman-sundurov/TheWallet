@@ -7,8 +7,18 @@
 
 import UIKit
 
-class ViewControllerScreen1Container: UIViewController {
+protocol protocolScreen1ContainerDelegate{
+    
+}
 
+class ViewControllerScreen1Container: UIViewController{
+    
+    
+    //MARK: - делегаты и переменные
+    
+    var delegateScreen1: protocolScreen1Delegate?
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,5 +35,8 @@ class ViewControllerScreen1Container: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+}
 
+extension ViewControllerScreen1Container: protocolScreen1ContainerDelegate{
+    
 }

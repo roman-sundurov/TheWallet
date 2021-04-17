@@ -66,6 +66,7 @@ class ViewController: UIViewController {
     
     var tapOfActionsOperationsOpenPopUpScreen1: UITapGestureRecognizer?
     var delegateScreen2: protocolScreen2Delegate?
+    var delegateScreen1Container: protocolScreen1ContainerDelegate?
     
     var newTableDataArrayOriginal: [Screen1TableData] = [] //хранение оригинала данных из Realm
     var newTableDataArray: [Screen1TableData] = [] //хранение модифицированных данных из Realm для конкретного режима отоборажения
@@ -86,9 +87,15 @@ class ViewController: UIViewController {
         performSegue(withIdentifier: "segueToScreen2", sender: nil)
     }
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ViewControllerScreen2, segue.identifier == "segueToScreen2" {
             delegateScreen2 = vc
+            vc.delegateScreen1 = self
+        }
+        
+        if let vc = segue.destination as? ViewControllerScreen1Container, segue.identifier == "segueToScreen1Container"{
+            delegateScreen1Container = vc
             vc.delegateScreen1 = self
         }
     }
@@ -294,7 +301,7 @@ class ViewController: UIViewController {
         screen1AllUpdate()
         
         bottomPopInList.backgroundColor = .red
-        bottomPopInList.layer.cornerRadius  = 20
+        bottomPopInList.layer.cornerRadius = 20
         bottomPopInList.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
         self.view.insertSubview(self.blurViewScreen1, belowSubview: self.containerBottomScreen1)
@@ -307,6 +314,8 @@ class ViewController: UIViewController {
             self.blurViewScreen1.widthAnchor.constraint(equalTo: self.view.widthAnchor)
         ])
         self.blurViewScreen1.isHidden = true
+        
+        self.view.layoutIfNeeded()
         
     }
 }
@@ -352,7 +361,8 @@ extension ViewController: protocolScreen1Delegate{
     //MARK: - окрытие PopUp-окна
     
     func actionsOperationsOpenPopUpScreen1(_ tag: Int) {
-        self.containerBottomScreen1.layer.cornerRadius = 20
+        containerBottomScreen1.layer.cornerRadius = 20
+        
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             self.constraintContainerBottomPoint.constant = 50
             self.tapOfActionsOperationsOpenPopUpScreen1 = UITapGestureRecognizer(target: self, action: #selector(self.handlerToHideContainerScreen1(tap:)))
