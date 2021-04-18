@@ -34,16 +34,22 @@ class ViewControllerScreen1Container: UIViewController{
     var delegateScreen1: protocolScreen1Delegate?
     
     var newTableDataArray: [Screen1TableData] = []
+    var specCellTag: Int = 0
+    var specVar: Int = 0
 
     
     //MARK: - переходы
     
     
     @IBAction func buttonActionToEditOperation(_ sender: Any) {
+        performSegue(withIdentifier: "segueToScreen2ForEdit", sender: nil)
     }
     
     
     @IBAction func buttonActionToDeleteOperation(_ sender: Any) {
+        delegateScreen1?.deleteOperationInRealm(tag: specVar)
+        delegateScreen1?.actionsOperationsClosePopUpScreen1()
+        delegateScreen1?.screen1AllUpdate()
     }
     
     
@@ -76,7 +82,9 @@ extension ViewControllerScreen1Container: protocolScreen1ContainerDelegate{
         
         print(tag)
         print(delegateScreen1!.getArrayForIncrease()[tag])
-        let specVar: Int = tag - delegateScreen1!.getArrayForIncrease()[tag]
+        
+        specCellTag = tag
+        specVar = specCellTag - delegateScreen1!.getArrayForIncrease()[specCellTag]
         
         //Отображения category
         labelCategory.text = delegateScreen1!.getNewTableDataArray()[specVar].category
@@ -107,6 +115,5 @@ extension ViewControllerScreen1Container: protocolScreen1ContainerDelegate{
         //Отображение textViewNotes
         textViewNotes.text = delegateScreen1!.getNewTableDataArray()[specVar].note
     }
-    
     
 }

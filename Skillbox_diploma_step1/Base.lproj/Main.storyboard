@@ -415,7 +415,7 @@
                                     <constraint firstAttribute="trailing" secondItem="T9E-30-cZk" secondAttribute="trailing" id="b60-n7-RJC"/>
                                 </constraints>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uY8-5i-7qy" userLabel="Container Bottom 1">
+                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uY8-5i-7qy" userLabel="Container Bottom 1">
                                 <rect key="frame" x="20" y="844" width="350" height="311"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="311" id="5Up-Lf-0wG"/>
@@ -464,6 +464,7 @@
                         <outlet property="tableViewScreen1" destination="Ahz-zl-teV" id="5qR-17-tBk"/>
                         <outlet property="topMenuButtonStrip" destination="oin-I9-C2d" id="qjh-6t-lyy"/>
                         <segue destination="fcp-GB-FKl" kind="presentation" identifier="segueToScreen2" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="ABz-lk-sfP"/>
+                        <segue destination="fcp-GB-FKl" kind="presentation" identifier="segueToScreen2ForEdit" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="lIe-L2-7Ib"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -488,7 +489,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="131.8840579710145" y="115.84821428571428"/>
+            <point key="canvasLocation" x="131" y="114"/>
         </scene>
         <!--View Controller Screen2-->
         <scene sceneID="RnT-g7-WBF">
@@ -656,7 +657,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJl-dp-geC">
-                                                    <rect key="frame" x="347" y="11.333333333333334" width="28" height="22.333333333333314"/>
+                                                    <rect key="frame" x="347" y="11.333333333333334" width="28" height="22.333333333333329"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="28" id="UMZ-jh-iGL"/>
                                                         <constraint firstAttribute="height" constant="28" id="kae-bE-nrQ"/>
@@ -824,7 +825,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HMB-Ic-meT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="904.61538461538453" y="114.45497630331754"/>
+            <point key="canvasLocation" x="992" y="114"/>
         </scene>
         <!--View Controller Screen2 Container-->
         <scene sceneID="dPn-nb-L4v">
@@ -959,7 +960,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fbV-wE-9e3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="905" y="707"/>
+            <point key="canvasLocation" x="991" y="699"/>
         </scene>
         <!--View Controller Screen1 Container-->
         <scene sceneID="0GC-mc-Lb7">
@@ -1128,6 +1129,9 @@
             <point key="canvasLocation" x="130.76923076923077" y="633.76777251184831"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="lIe-L2-7Ib"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.right" catalog="system" width="128" height="98"/>
         <image name="graph" width="148" height="103.66666412353516"/>

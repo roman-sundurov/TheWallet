@@ -19,6 +19,7 @@ protocol protocolScreen1Delegate{
     func getArrayForIncrease() -> [Int]
     func screen1AllUpdate()
     func addOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date)
+    func deleteOperationInRealm(tag: Int)
     func actionsOperationsOpenPopUpScreen1(_ tag: Int)
     func actionsOperationsClosePopUpScreen1()
 }
@@ -105,9 +106,10 @@ class ViewController: UIViewController {
     
     
     func changeDaysForSorting(){
-        borderForMenuBottom(days: daysForSorting)
+        borderLineForMenu(days: daysForSorting)
         screen1TableUpdateSorting(days: daysForSorting)
         daysForSortingRealmUpdate()
+        countingIncomesAndExpensive()
     }
     
     
@@ -180,20 +182,24 @@ class ViewController: UIViewController {
         }
     }
     
-    func borderForMenuBottom(days: Int) {
+    func borderLineForMenu(days: Int) {
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             switch days {
             case 1:
                 self.constraintTopMenuBottomStrip.constant = self.buttonDaily.frame.origin.x + 10
+                self.topMenuHighliter(specifyLabel: self.labelDaily)
                 print("borderForMenuBottom 1")
             case 7:
                 self.constraintTopMenuBottomStrip.constant = self.buttonWeekly.frame.origin.x + 10
                 print("borderForMenuBottom 7")
+                self.topMenuHighliter(specifyLabel: self.labelWeekly)
             case 30:
                 self.constraintTopMenuBottomStrip.constant = self.buttonMonthly.frame.origin.x + 10
+                self.topMenuHighliter(specifyLabel: self.labelMothly)
                 print("borderForMenuBottom 30")
             case 365:
                 self.constraintTopMenuBottomStrip.constant = self.buttonYearly.frame.origin.x + 10
+                self.topMenuHighliter(specifyLabel: self.labelYearly)
                 print("borderForMenuBottom 365")
             default:
                 print("Error with borderForMenuBotton")
@@ -287,7 +293,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        borderForMenuBottom(days: daysForSorting)
+        borderLineForMenu(days: daysForSorting)
         screen1TableUpdateSorting(days: daysForSorting)
         self.view.layoutIfNeeded()
     }
@@ -324,6 +330,12 @@ class ViewController: UIViewController {
 //MARK: - additional protocols
 
 extension ViewController: protocolScreen1Delegate{
+    
+    func deleteOperationInRealm(tag: Int) {
+        actionsOperationsClosePopUpScreen1()
+        Persistence.shared.deleteRealmData(particularObject: getNewTableDataArray()[tag])
+    }
+    
     
     func addOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date) {
         print("addOperationInRealm1")
