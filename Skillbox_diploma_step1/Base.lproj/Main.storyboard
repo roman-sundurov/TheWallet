@@ -1100,6 +1100,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="4Wv-oe-ogo"/>
                         <color key="backgroundColor" red="0.40000000000000002" green="0.73725490196078436" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="qBi-z5-GjL" firstAttribute="centerX" secondItem="U6t-e2-vEc" secondAttribute="centerX" id="0tn-AT-dP7"/>
