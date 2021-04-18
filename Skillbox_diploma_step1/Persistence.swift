@@ -8,13 +8,14 @@
 import Foundation
 import RealmSwift
 
+
 class Person: Object{
     @objc dynamic var name: String = ""
     @objc dynamic var surname: String = ""
     @objc dynamic var daysForSorting: Int = 0
     @objc dynamic var lastID: Int = -1
-//    @objc dynamic var operations: ListOfOperations?
 }
+
 
 class ListOfOperations: Object{
     @objc dynamic var amount: Double = 0
@@ -24,13 +25,17 @@ class ListOfOperations: Object{
     @objc dynamic var id: Int = 0
 }
 
+
 class Persistence{
+    
     
     static let shared = Persistence()
     private let realm = try! Realm()
     
+    
     //MARK: - торговые операции
 
+    
     func addOperations(amount: Double, category: String, note: String, date: Date){
         let operation = ListOfOperations()
         operation.category = category
@@ -43,11 +48,26 @@ class Persistence{
             realm.objects(Person.self).first!.lastID = operation.id
         }
     }
+    
+    
+    func updateOperations(amount: Double, category: String, note: String, date: Date, idOfObject: Int){
+        print("updateOperations")
+        let particularOperations = realm.objects(ListOfOperations.self).filter("id == \(idOfObject)").first
+        try! realm.write{
+            print("particularOperations.text= \(particularOperations)")
+            particularOperations?.setValue(category, forKey: "category")
+            particularOperations?.setValue(note, forKey: "note")
+            particularOperations?.setValue(amount, forKey: "amount")
+            particularOperations?.setValue(date, forKey: "date")
+        }
+    }
+    
         
     func getRealmData() -> Results<ListOfOperations>{
         let allOperations = realm.objects(ListOfOperations.self)
         return allOperations
     }
+    
 
     func deleteRealmData(idOfObject: Int){
         let particularOperations = realm.objects(ListOfOperations.self).filter("id == \(idOfObject)")
@@ -58,11 +78,9 @@ class Persistence{
         }
     }
     
+    
     //MARK: - личные данные
     
-//    func updateLastID() -> Int {
-//        return realm.objects(Person.self).first!.lastID
-//    }
     
     func updateDaysForSorting(daysForSorting: Int){
         let person = realm.objects(Person.self).first
@@ -71,6 +89,7 @@ class Persistence{
             person!.daysForSorting = daysForSorting
         }
     }
+    
         
     func getDaysForSorting() -> Int{
         print("old person returned")
@@ -88,5 +107,6 @@ class Persistence{
             return newPerson.daysForSorting
         }
     }
+    
     
 }

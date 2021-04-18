@@ -817,6 +817,7 @@
                         <outlet property="constraintContainerBottomHeight" destination="WME-ku-wl2" id="m95-ex-zIr"/>
                         <outlet property="constraintContainerBottomPoint" destination="Lcv-jA-LAE" id="cZ1-5j-uZV"/>
                         <outlet property="containerBottomScreen2" destination="5gB-3p-wM1" id="8RT-dm-Ih1"/>
+                        <outlet property="labelScreen2Header" destination="EHj-xF-Jnq" id="S7S-nN-QGB"/>
                         <outlet property="screen2CurrencyStatus" destination="tao-7E-drY" id="ZEg-XT-f2x"/>
                         <outlet property="screen2SegmentControl" destination="TUb-4D-06u" id="QuM-zG-gXw"/>
                         <outlet property="tableViewScreen2" destination="afh-qC-NmX" id="ckJ-Ju-Qpn"/>

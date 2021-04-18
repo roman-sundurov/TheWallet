@@ -81,6 +81,8 @@ extension Screen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate{
     
     func setNoteViewText(newText: String) {
         textViewNotes.text = newText
+        print("newText= \(newText)")
+        textViewNotes.textColor = UIColor.black
     }
     
     

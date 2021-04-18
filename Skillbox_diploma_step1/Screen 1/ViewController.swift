@@ -19,6 +19,7 @@ protocol protocolScreen1Delegate{
     func getArrayForIncrease() -> [Int]
     func screen1AllUpdate()
     func addOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date)
+    func editOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date, id: Int)
     func deleteOperationInRealm(tag: Int)
     func actionsOperationsOpenPopUpScreen1(_ tag: Int)
     func actionsOperationsClosePopUpScreen1()
@@ -103,12 +104,13 @@ class ViewController: UIViewController {
             vc.delegateScreen1 = self
         }
         if let vc = segue.destination as? ViewControllerScreen2, segue.identifier == "segueToScreen2ForEdit"{
+            vc.screen2StatusEditing = true
             delegateScreen2 = vc
             delegateScreen2?.setAmountInNewOperation(amount: newTableDataArray[tagForEdit].amount)
             delegateScreen2?.setCategoryInNewOperation(category: newTableDataArray[tagForEdit].category)
             delegateScreen2?.setDateInNewOperation(date: newTableDataArray[tagForEdit].date)
             delegateScreen2?.setNoteInNewOperation(note: newTableDataArray[tagForEdit].note)
-            vc.screen2StatusEditing = true
+            delegateScreen2?.setIDInNewOperation(id: tagForEdit)
         }
         
     }
@@ -298,10 +300,7 @@ class ViewController: UIViewController {
     func daysForSortingRealmUpdate(){
         Persistence.shared.updateDaysForSorting(daysForSorting: daysForSorting)
     }
-    
-    
-    //MARK: - viewWillAppear
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -358,9 +357,15 @@ extension ViewController: protocolScreen1Delegate{
     
     
     func addOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date) {
-        print("addOperationInRealm1")
+//        print("addOperationInRealm1")
         Persistence.shared.addOperations(amount: newAmount, category: newCategory, note: newNote, date: newDate)
-        print("addOperationInRealm2")
+//        print("addOperationInRealm2")
+    }
+    
+    
+    func editOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date, id: Int) {
+        print("editOperationInRealm")
+        Persistence.shared.updateOperations(amount: newAmount, category: newCategory, note: newNote, date: newDate, idOfObject: id)
     }
     
     

@@ -19,9 +19,10 @@ protocol protocolScreen2Delegate{
     func setAmountInNewOperation(amount: Double)
     func setCategoryInNewOperation(category: String)
     func setNoteInNewOperation(note: String)
+    func setIDInNewOperation(id: Int)
     func setDateInNewOperation(date: Date)
     func openAlertDatePicker()
-    func screen2StatusisEditing()
+    func screen2StatusIsEditing()
 }
 
 struct Screen2MenuData {
@@ -40,6 +41,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     @IBOutlet var constraintContainerBottomPoint: NSLayoutConstraint!
     @IBOutlet var constraintContainerBottomHeight: NSLayoutConstraint!
     @IBOutlet var textFieldAmount: UITextField!
+    @IBOutlet var labelScreen2Header: UILabel!
     
     
     //MARK: - делегаты, переменные
@@ -72,6 +74,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
             
             //set Amount
             if screen2SegmentControl.selectedSegmentIndex == 0 {
+                print("textFieldAmount.text= \(textFieldAmount.text)")
                 setAmountInNewOperation(amount: Double(textFieldAmount.text ?? "0")!)
             }
             else if screen2SegmentControl.selectedSegmentIndex == 1 {
@@ -98,7 +101,15 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
             }
             
             print("newOperation.amount= \(newOperation.amount), newOperation.category= \(newOperation.category), newOperation.date= \(newOperation.date), newOperation.note= \(newOperation.note),")
-            delegateScreen1?.addOperationInRealm(newAmount: newOperation.amount, newCategory: newOperation.category, newNote: newOperation.note, newDate: newOperation.date)
+            
+            if screen2StatusEditing == true{
+                print("newOperation.amount222= \(newOperation.amount)")
+                delegateScreen1?.editOperationInRealm(newAmount: newOperation.amount, newCategory: newOperation.category, newNote: newOperation.note, newDate: newOperation.date, id: newOperation.id)
+            }
+            else{
+                delegateScreen1?.addOperationInRealm(newAmount: newOperation.amount, newCategory: newOperation.category, newNote: newOperation.note, newDate: newOperation.date)
+            }
+            
             delegateScreen1?.screen1AllUpdate()
             dismiss(animated: true, completion: nil)
         }
@@ -283,7 +294,16 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     let Screen2MenuList3 = Screen2MenuData(name: "Notes", text: "")
     
     
+    //MARK: - viewWillAppear
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        screen2StatusIsEditing()
+    }
+    
+    
     //MARK: - viewDidLoad
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -310,6 +330,10 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         createDatePicker()
         createAlertDatePicker()
         createAlertAddNewOperations()
+        
+        if screen2StatusEditing == true{
+//            screen2StatusIsEditing()
+        }
     }
 }
 
@@ -319,26 +343,44 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
 extension ViewControllerScreen2: protocolScreen2Delegate{
     
     
-    func screen2StatusisEditing() {
-        screen2StatusEditing = true
+    func screen2StatusIsEditing() {
         
         //set Amount
         if newOperation.amount > 0 {
             screen2SegmentControl.selectedSegmentIndex = 0
-            textFieldAmount.text = String(newOperation.amount)
         }
         else if newOperation.amount < 0 {
             screen2SegmentControl.selectedSegmentIndex = 1
-            textFieldAmount.text = String(newOperation.amount)
         }
         
+        if newOperation.amount.truncatingRemainder(dividingBy: 1) == 0 {
+            textFieldAmount.text = "\(String(format: "%.0f", newOperation.amount))"
+        }
+        else {
+            textFieldAmount.text = "\(String(format: "%.2f", newOperation.amount))"
+        }
         
+        switch screen2SegmentControl.selectedSegmentIndex {
+        case 0:
+            screen2CurrencyStatus.setTitle("+$", for: .normal)
+            screen2CurrencyStatus.setTitleColor(UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1)), for: .normal)
+            textFieldAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
+        case 1:
+            screen2CurrencyStatus.setTitle("-$", for: .normal)
+            screen2CurrencyStatus.setTitleColor(UIColor.red, for: .normal)
+            textFieldAmount.textColor = UIColor.red
+        default:
+            break
+        }
+
         //set Date
         datePicker.date = newOperation.date
         
-        
         //set Note
         delegateScreen2TableViewCellNote?.setNoteViewText(newText: self.newOperation.note)
+        print("newOperation.note= \(newOperation.note)")
+
+        labelScreen2Header.text = "Edit"
         
     }
     
@@ -377,6 +419,11 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
     
     func setNoteInNewOperation(note: String) {
         newOperation.note = note
+    }
+    
+    
+    func setIDInNewOperation(id: Int) {
+        newOperation.id = id
     }
     
     

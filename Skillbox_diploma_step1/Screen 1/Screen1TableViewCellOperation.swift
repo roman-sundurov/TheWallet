@@ -38,7 +38,7 @@ class Screen1TableViewCellOperation: UITableViewCell {
         print("Simple Cell: ---")
         let specVar: Int = specCellTag - delegateScreen1!.getArrayForIncrease()[specCellTag]
         labelCategory.text = delegateScreen1!.getNewTableDataArray()[specVar].category
-//        print("aaa: \(delegateScreen1!.getNewTableDataArray()[specVar].amount.truncatingRemainder(dividingBy: 1))")
+
         if delegateScreen1!.getNewTableDataArray()[specVar].amount.truncatingRemainder(dividingBy: 1) == 0 {
             labelAmount.text = String(format: "%.0f", delegateScreen1!.getNewTableDataArray()[specVar].amount)
         }
