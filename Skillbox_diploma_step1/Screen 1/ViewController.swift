@@ -29,12 +29,14 @@ class Screen1TableData{
     var category: String
     var note: String
     var date: Date
+    var id: Int
     
-    init(amount1: Double, category1: String, note1: String, date1: Date) {
+    init(amount1: Double, category1: String, note1: String, date1: Date, id1: Int) {
         self.amount = amount1
         self.category = category1
         self.note = note1
         self.date = date1
+        self.id = id1
     }
 }
 
@@ -276,7 +278,7 @@ class ViewController: UIViewController {
     func screen1DataReceive(){
         newTableDataArrayOriginal = []
         for n in Persistence.shared.getRealmData(){
-            newTableDataArrayOriginal.append(Screen1TableData(amount1: n.amount, category1: n.category, note1: n.note, date1: n.date))
+            newTableDataArrayOriginal.append(Screen1TableData(amount1: n.amount, category1: n.category, note1: n.note, date1: n.date, id1: n.id))
         }
         daysForSorting = Persistence.shared.getDaysForSorting()
         print("daysForSorting in screen1DataReceive= \(Persistence.shared.getDaysForSorting())")
@@ -333,7 +335,7 @@ extension ViewController: protocolScreen1Delegate{
     
     func deleteOperationInRealm(tag: Int) {
         actionsOperationsClosePopUpScreen1()
-        Persistence.shared.deleteRealmData(particularObject: getNewTableDataArray()[tag])
+        Persistence.shared.deleteRealmData(idOfObject: getNewTableDataArray()[tag].id)
     }
     
     
@@ -343,34 +345,42 @@ extension ViewController: protocolScreen1Delegate{
         print("addOperationInRealm2")
     }
     
+    
     func screen1AllUpdate() {
         screen1DataReceive()
         screen1TableUpdateSorting(days: daysForSorting)
         countingIncomesAndExpensive()
         changeDaysForSorting()
+        
     }
     
     func getArrayForIncrease() -> [Int]{
         return arrayForIncrease
     }
+    
 
     func getNewTableDataArray() -> [Screen1TableData] {
         return newTableDataArray
     }
     
+    
     func changeOperationsScope(scope: String) {
         return
     }
+    
     
     func clickToOperation(tag: Int) {
         return
     }
     
+    
     func findAmountOfHeaders() {
         return
     }
     
+    
     //MARK: - окрытие PopUp-окна
+    
     
     func actionsOperationsOpenPopUpScreen1(_ tag: Int) {
         containerBottomScreen1.layer.cornerRadius = 20

@@ -12,8 +12,8 @@ class Person: Object{
     @objc dynamic var name: String = ""
     @objc dynamic var surname: String = ""
     @objc dynamic var daysForSorting: Int = 0
-    @objc dynamic var lastID: Int = 0
-//    @objc
+    @objc dynamic var lastID: Int = -1
+//    @objc dynamic var operations: ListOfOperations?
 }
 
 class ListOfOperations: Object{
@@ -37,8 +37,10 @@ class Persistence{
         operation.note = note
         operation.amount = amount
         operation.date = date
+        operation.id = realm.objects(Person.self).first!.lastID + 1
         try! realm.write{
             realm.add(operation)
+            realm.objects(Person.self).first!.lastID = operation.id
         }
     }
         
@@ -47,18 +49,20 @@ class Persistence{
         return allOperations
     }
 
-    func deleteRealmData(particularObject: ListOfOperations){
-        let allOperations = realm.objects(ListOfOperations.self)
-        var index: Int? = allOperations.index(of: particularObject) ?? nil
-        print("delete data tag= \(index)")
-        if index != nil {
-            try! realm.write{
-//                realm.delete(allOperations[index!])
-            }
+    func deleteRealmData(idOfObject: Int){
+        let particularOperations = realm.objects(ListOfOperations.self).filter("id == \(idOfObject)")
+//        var index: Int? = allOperations.index(of: particularObject) ?? nil
+        print("idOfObject for delete= \(idOfObject)")
+        try! realm.write{
+            realm.delete(particularOperations)
         }
     }
     
     //MARK: - личные данные
+    
+//    func updateLastID() -> Int {
+//        return realm.objects(Person.self).first!.lastID
+//    }
     
     func updateDaysForSorting(daysForSorting: Int){
         let person = realm.objects(Person.self).first
