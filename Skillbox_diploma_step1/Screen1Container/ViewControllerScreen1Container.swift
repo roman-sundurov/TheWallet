@@ -42,7 +42,7 @@ class ViewControllerScreen1Container: UIViewController{
     
     
     @IBAction func buttonActionToEditOperation(_ sender: Any) {
-        performSegue(withIdentifier: "segueToScreen2ForEdit", sender: nil)
+        delegateScreen1?.editOperation(tag: specVar)
     }
     
     

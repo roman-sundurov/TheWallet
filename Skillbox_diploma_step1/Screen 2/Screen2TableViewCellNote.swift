@@ -10,6 +10,7 @@ import UIKit
 protocol protocolScreen2TableViewCellNoteDelegate{
     func tapOutsideNoteTextViewEditToHide()
     func returnNoteView() -> UITextView
+    func setNoteViewText(newText: String)
 }
     
 
@@ -76,6 +77,12 @@ class Screen2TableViewCellNote: UITableViewCell, UITextViewDelegate {
 
 
 extension Screen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate{
+    
+    
+    func setNoteViewText(newText: String) {
+        textViewNotes.text = newText
+    }
+    
     
     func returnNoteView() -> UITextView {
 //        tapOutsideNoteTextViewEditToHide()

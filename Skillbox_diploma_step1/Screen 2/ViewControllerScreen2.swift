@@ -21,6 +21,7 @@ protocol protocolScreen2Delegate{
     func setNoteInNewOperation(note: String)
     func setDateInNewOperation(date: Date)
     func openAlertDatePicker()
+    func screen2StatusisEditing()
 }
 
 struct Screen2MenuData {
@@ -51,6 +52,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     var delegateScreen2TableViewCellCategory: protocolScreen2TableViewCellCategory?
     var delegateScreen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate?
     var delegateScreen2TableViewCellDate: protocolScreen2TableViewCellDateDelegate?
+    var screen2StatusEditing: Bool = false
     
     
     //MARK: - объекты
@@ -315,6 +317,31 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
 //MARK: - additional protocols
 
 extension ViewControllerScreen2: protocolScreen2Delegate{
+    
+    
+    func screen2StatusisEditing() {
+        screen2StatusEditing = true
+        
+        //set Amount
+        if newOperation.amount > 0 {
+            screen2SegmentControl.selectedSegmentIndex = 0
+            textFieldAmount.text = String(newOperation.amount)
+        }
+        else if newOperation.amount < 0 {
+            screen2SegmentControl.selectedSegmentIndex = 1
+            textFieldAmount.text = String(newOperation.amount)
+        }
+        
+        
+        //set Date
+        datePicker.date = newOperation.date
+        
+        
+        //set Note
+        delegateScreen2TableViewCellNote?.setNoteViewText(newText: self.newOperation.note)
+        
+    }
+    
     
     func openAlertDatePicker() {
         self.present(alertDatePicker, animated: true, completion: nil)

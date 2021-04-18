@@ -22,6 +22,7 @@ protocol protocolScreen1Delegate{
     func deleteOperationInRealm(tag: Int)
     func actionsOperationsOpenPopUpScreen1(_ tag: Int)
     func actionsOperationsClosePopUpScreen1()
+    func editOperation(tag: Int)
 }
 
 class Screen1TableData{
@@ -75,6 +76,7 @@ class ViewController: UIViewController {
     var newTableDataArray: [Screen1TableData] = [] //хранение модифицированных данных из Realm для конкретного режима отоборажения
     var arrayForIncrease: [Int] = [0] //показывает количество заголовков с новой датой в таблице, которое предшествует конкретной операции
     var daysForSorting: Int = 30
+    var tagForEdit: Int = 0
     
     
     //MARK: - объекты
@@ -96,11 +98,19 @@ class ViewController: UIViewController {
             delegateScreen2 = vc
             vc.delegateScreen1 = self
         }
-        
         if let vc = segue.destination as? ViewControllerScreen1Container, segue.identifier == "segueToScreen1Container"{
             delegateScreen1Container = vc
             vc.delegateScreen1 = self
         }
+        if let vc = segue.destination as? ViewControllerScreen2, segue.identifier == "segueToScreen2ForEdit"{
+            delegateScreen2 = vc
+            delegateScreen2?.setAmountInNewOperation(amount: newTableDataArray[tagForEdit].amount)
+            delegateScreen2?.setCategoryInNewOperation(category: newTableDataArray[tagForEdit].category)
+            delegateScreen2?.setDateInNewOperation(date: newTableDataArray[tagForEdit].date)
+            delegateScreen2?.setNoteInNewOperation(note: newTableDataArray[tagForEdit].note)
+            vc.screen2StatusEditing = true
+        }
+        
     }
     
     
@@ -332,6 +342,14 @@ class ViewController: UIViewController {
 //MARK: - additional protocols
 
 extension ViewController: protocolScreen1Delegate{
+    
+    
+    func editOperation(tag: Int) {
+        actionsOperationsClosePopUpScreen1()
+        tagForEdit = tag
+        performSegue(withIdentifier: "segueToScreen2ForEdit", sender: nil)
+    }
+    
     
     func deleteOperationInRealm(tag: Int) {
         actionsOperationsClosePopUpScreen1()
