@@ -105,6 +105,7 @@ class ViewController: UIViewController {
         }
         if let vc = segue.destination as? ViewControllerScreen2, segue.identifier == "segueToScreen2ForEdit"{
             vc.screen2StatusEditing = true
+            vc.delegateScreen1 = self
             delegateScreen2 = vc
             delegateScreen2?.setAmountInNewOperation(amount: newTableDataArray[tagForEdit].amount)
             delegateScreen2?.setCategoryInNewOperation(category: newTableDataArray[tagForEdit].category)

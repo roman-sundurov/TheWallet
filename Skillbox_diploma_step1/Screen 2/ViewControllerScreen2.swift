@@ -73,6 +73,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         if newOperation.category != "" && textFieldAmount.text != "0" {
             
             //set Amount
+            print("2. screen2SegmentControl.selectedSegmentIndex= \(screen2SegmentControl.selectedSegmentIndex)")
             if screen2SegmentControl.selectedSegmentIndex == 0 {
                 print("textFieldAmount.text= \(textFieldAmount.text)")
                 setAmountInNewOperation(amount: Double(textFieldAmount.text ?? "0")!)
@@ -298,7 +299,11 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        screen2StatusIsEditing()
+        
+        if screen2StatusEditing == true{
+            screen2StatusIsEditing()
+        }
+        
     }
     
     
@@ -331,9 +336,6 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         createAlertDatePicker()
         createAlertAddNewOperations()
         
-        if screen2StatusEditing == true{
-//            screen2StatusIsEditing()
-        }
     }
 }
 
@@ -344,6 +346,7 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
     
     
     func screen2StatusIsEditing() {
+        print("1. screen2SegmentControl.selectedSegmentIndex= \(screen2SegmentControl.selectedSegmentIndex)")
         
         //set Amount
         if newOperation.amount > 0 {
@@ -351,6 +354,7 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
         }
         else if newOperation.amount < 0 {
             screen2SegmentControl.selectedSegmentIndex = 1
+            newOperation.amount = -newOperation.amount
         }
         
         if newOperation.amount.truncatingRemainder(dividingBy: 1) == 0 {
