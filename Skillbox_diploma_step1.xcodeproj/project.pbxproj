@@ -25,6 +25,7 @@
 		47AC1A9525C09AC9006E7817 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1A9425C09AC9006E7817 /* Persistence.swift */; };
 		47AC1AA625C0AE45006E7817 /* Screen1TableViewCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1AA525C0AE45006E7817 /* Screen1TableViewCellHeader.swift */; };
 		47AC1AB625C0B7CB006E7817 /* Screen1TableViewCellOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1AB525C0B7CB006E7817 /* Screen1TableViewCellOperation.swift */; };
+		47BEBB43262F91D1006FF254 /* Screen2Container_TableViewCellNewCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BEBB42262F91D1006FF254 /* Screen2Container_TableViewCellNewCategory.swift */; };
 		47C4FF3525B38B0F00F97498 /* ViewControllerScreen2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4FF3425B38B0F00F97498 /* ViewControllerScreen2.swift */; };
 		47CB73C325B4364700638185 /* Screen2TableViewCellCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB73C225B4364700638185 /* Screen2TableViewCellCategory.swift */; };
 		47F1759925BA2D320044BD30 /* ViewControllerScreen2Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F1759825BA2D320044BD30 /* ViewControllerScreen2Container.swift */; };
@@ -71,6 +72,7 @@
 		47AC1A9425C09AC9006E7817 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Persistence.swift; path = Skillbox_diploma_step1/Persistence.swift; sourceTree = SOURCE_ROOT; };
 		47AC1AA525C0AE45006E7817 /* Screen1TableViewCellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Screen1TableViewCellHeader.swift; path = "Skillbox_diploma_step1/Screen 1/Screen1TableViewCellHeader.swift"; sourceTree = SOURCE_ROOT; };
 		47AC1AB525C0B7CB006E7817 /* Screen1TableViewCellOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen1TableViewCellOperation.swift; sourceTree = "<group>"; };
+		47BEBB42262F91D1006FF254 /* Screen2Container_TableViewCellNewCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2Container_TableViewCellNewCategory.swift; sourceTree = "<group>"; };
 		47C4FF3425B38B0F00F97498 /* ViewControllerScreen2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerScreen2.swift; sourceTree = "<group>"; };
 		47CB73C225B4364700638185 /* Screen2TableViewCellCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2TableViewCellCategory.swift; sourceTree = "<group>"; };
 		47F1759825BA2D320044BD30 /* ViewControllerScreen2Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerScreen2Container.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				47F1759825BA2D320044BD30 /* ViewControllerScreen2Container.swift */,
 				4750EFE625BC2C5C00167A92 /* Screen2Container_TableViewCellHeader.swift */,
 				4750EFEB25BC2C7F00167A92 /* Screen2Container_TableViewCellChangeCategory.swift */,
+				47BEBB42262F91D1006FF254 /* Screen2Container_TableViewCellNewCategory.swift */,
 			);
 			path = Screen2Container;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 				47AC1AA625C0AE45006E7817 /* Screen1TableViewCellHeader.swift in Sources */,
 				472F288725A7319500CE1481 /* AppDelegate.swift in Sources */,
 				4771587C262AB31E00F27D4B /* ViewControllerScreen1Container.swift in Sources */,
+				47BEBB43262F91D1006FF254 /* Screen2Container_TableViewCellNewCategory.swift in Sources */,
 				47F1759925BA2D320044BD30 /* ViewControllerScreen2Container.swift in Sources */,
 				47CB73C325B4364700638185 /* Screen2TableViewCellCategory.swift in Sources */,
 				47621F9825B644BF0095A52F /* Screen2TableViewCellNote.swift in Sources */,
