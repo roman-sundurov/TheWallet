@@ -26,7 +26,8 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     //MARK: - переходы
     
     @IBAction func buttonDeleteCategoryAction(_ sender: Any) {
-        delegateScreen2Container?.buttonDeleteCategoryHandler(checkBoxObject.tag)
+        delegateScreen2Container?.returnDelegateScreen2().returnDelegateScreen1().deleteCategoryInRealm(id: specCellTag)
+        delegateScreen2Container?.screen2ContainerAddNewCategoryCell()
     }
     
     

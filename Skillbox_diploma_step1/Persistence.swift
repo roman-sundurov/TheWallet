@@ -44,7 +44,7 @@ class Persistence{
     
     //MARK: - категории
     
-    func getRealmDataCategories() -> Results<Category>{
+    func returnRealmDataCategories() -> Results<Category>{
         let allCategories = realm.objects(Category.self)
         return allCategories
     }
@@ -58,6 +58,17 @@ class Persistence{
             realm.add(category)
         }
     }
+    
+    
+    func deleteCategory(idOfObject: Int){
+        let particularCategory = realm.objects(Category.self).filter("id == \(idOfObject)")
+//        var index: Int? = allOperations.index(of: particularObject) ?? nil
+        print("idOfObject for delete= \(idOfObject)")
+        try! realm.write{
+            realm.delete(particularCategory)
+        }
+    }
+
     
     
     //MARK: - операции
@@ -96,7 +107,7 @@ class Persistence{
     }
     
 
-    func deleteRealmData(idOfObject: Int){
+    func deleteOperation(idOfObject: Int){
         let particularOperations = realm.objects(ListOfOperations.self).filter("id == \(idOfObject)")
 //        var index: Int? = allOperations.index(of: particularObject) ?? nil
         print("idOfObject for delete= \(idOfObject)")
@@ -117,7 +128,7 @@ class Persistence{
     }
     
         
-    func getDaysForSorting() -> Int{
+    func returnDaysForSorting() -> Int{
         print("old person returned")
         let person = realm.objects(Person.self).first
         if person?.daysForSorting != nil {

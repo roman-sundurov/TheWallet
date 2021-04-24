@@ -307,7 +307,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     
     func screen2DataReceive(){
         dataArrayOfCategory = []
-        for n in Persistence.shared.getRealmDataCategories(){
+        for n in Persistence.shared.returnRealmDataCategories(){
             dataArrayOfCategory.append(DataOfCategories(name1: n.name))
         }
 //        for n in dataArrayOfCategory {
@@ -324,11 +324,11 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         print("pressesBegan")
-        if screen2StatusEditing == true{
+        if screen2StatusEditing == true && self.constraintContainerBottomPoint.constant != -515{
 //            self.constraintContainerBottomHeight.constant = CGFloat(50*(self.screen2MenuArray.count+3+1))
             self.constraintContainerBottomPoint.constant = 300
         }
-        else {
+        else if self.constraintContainerBottomPoint.constant != -515{
 //            self.constraintContainerBottomHeight.constant = CGFloat(50*(self.screen2MenuArray.count+3))
             self.constraintContainerBottomPoint.constant = 250
         }
@@ -396,7 +396,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
             let keyboardRectangle = keyboardFrame.cgRectValue
             keyboardHeight = keyboardRectangle.height
         }
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+        UIView.animate(withDuration: 10.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             if self.constraintContainerBottomPoint.constant == 50{
                 self.constraintContainerBottomPoint.constant = self.keyboardHeight! + CGFloat.init(20) ?? 300
             }
@@ -405,7 +405,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
 
     @objc func keyboardWillDisappear() {
         print("keyboardWillDisappear")
-            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+            UIView.animate(withDuration: 10.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
                 if self.constraintContainerBottomPoint.constant == self.keyboardHeight! + CGFloat.init(20) ?? 350{
                 self.constraintContainerBottomPoint.constant = 50
             }

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol protocolScreen2ContainerDelegate {
-    func buttonDeleteCategoryHandler(_ tag: Int)
+    func buttonDeleteCategoryHandler()
     func checkBoxStatus(_ tag: Int,_ type: Bool)
     func closeWindows(_ tag: Int)
     func screen2ContainerAddNewCategoryCell()
@@ -73,7 +73,6 @@ extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
             if self.statusEditContainer == true{
                 self.statusEditContainer = false
                 self.delegateScreen2Container_TableViewCellHeader?.buttonOptionsSetColor(color: UIColor.white)
-//                delegateScreen2?.changeCategoyPopUpScreen2Height(status: statusEditContainer)
             }
             else {
                 self.statusEditContainer = true
@@ -100,9 +99,7 @@ extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
     }
 
     
-    func buttonDeleteCategoryHandler(_ tag: Int) {
-        print("data deleted, \(tag)")
-//        closeWindows(tag)
+    func buttonDeleteCategoryHandler() {
     }
     
     

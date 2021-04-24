@@ -24,7 +24,7 @@ protocol protocolScreen1Delegate{
     func deleteOperationInRealm(tag: Int)
     func addCategoryInRealm(newName: String, newIcon: String)
 //    func editCategoryInRealm(name: String, icon: String, id: Int)
-//    func deleteCategoryInRealm(name: String, icon: String, id: Int)
+    func deleteCategoryInRealm(id: Int)
     
     //функции возврата
     func returnNewTableDataArray() -> [dataOfOperations] //возвращает данные, которые отображаются в данный момент
@@ -298,8 +298,8 @@ class ViewController: UIViewController {
         for n in Persistence.shared.getRealmDataOperations(){
             dataArrayOfOperationsOriginal.append(dataOfOperations(amount1: n.amount, category1: n.category, note1: n.note, date1: n.date, id1: n.id))
         }
-        daysForSorting = Persistence.shared.getDaysForSorting()
-        print("daysForSorting in screen1DataReceive= \(Persistence.shared.getDaysForSorting())")
+        daysForSorting = Persistence.shared.returnDaysForSorting()
+        print("daysForSorting in screen1DataReceive= \(Persistence.shared.returnDaysForSorting())")
         print("newTableDataArrayOriginal= \(dataArrayOfOperationsOriginal)")
     }
     
@@ -348,6 +348,11 @@ class ViewController: UIViewController {
 
 extension ViewController: protocolScreen1Delegate{
     
+    func deleteCategoryInRealm(id: Int) {
+        Persistence.shared.deleteCategory(idOfObject: id)
+    }
+    
+    
     func addCategoryInRealm(newName: String, newIcon: String) {
         Persistence.shared.addCategory(name: newName, icon: newIcon)
     }
@@ -362,7 +367,7 @@ extension ViewController: protocolScreen1Delegate{
     
     func deleteOperationInRealm(tag: Int) {
         actionsOperationsClosePopUpScreen1()
-        Persistence.shared.deleteRealmData(idOfObject: returnNewTableDataArray()[tag].id)
+        Persistence.shared.deleteOperation(idOfObject: returnNewTableDataArray()[tag].id)
     }
     
     
