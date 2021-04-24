@@ -13,7 +13,9 @@ class Person: Object{
     @objc dynamic var name: String = ""
     @objc dynamic var surname: String = ""
     @objc dynamic var daysForSorting: Int = 0
-    @objc dynamic var lastID: Int = -1
+    @objc dynamic var lastIdOfOperations: Int = -1
+    @objc dynamic var lastIdOfCategories: Int = -1
+    var listOfCategory = List<Category>()
 }
 
 
@@ -26,6 +28,13 @@ class ListOfOperations: Object{
 }
 
 
+class Category: Object{
+    @objc dynamic var name: String = ""
+    @objc dynamic var icon: String = ""
+    @objc dynamic var id: Int = 0
+}
+
+
 class Persistence{
     
     
@@ -33,7 +42,25 @@ class Persistence{
     private let realm = try! Realm()
     
     
-    //MARK: - торговые операции
+    //MARK: - категории
+    
+    func getRealmDataCategories() -> Results<Category>{
+        let allCategories = realm.objects(Category.self)
+        return allCategories
+    }
+    
+    func addCategory(name: String, icon: String){
+        let category = Category()
+        category.name = name
+        category.icon = icon
+        category.id = realm.objects(Person.self).first!.lastIdOfCategories + 1
+        try! realm.write{
+            realm.add(category)
+        }
+    }
+    
+    
+    //MARK: - операции
 
     
     func addOperations(amount: Double, category: String, note: String, date: Date){
@@ -42,10 +69,10 @@ class Persistence{
         operation.note = note
         operation.amount = amount
         operation.date = date
-        operation.id = realm.objects(Person.self).first!.lastID + 1
+        operation.id = realm.objects(Person.self).first!.lastIdOfOperations + 1
         try! realm.write{
             realm.add(operation)
-            realm.objects(Person.self).first!.lastID = operation.id
+            realm.objects(Person.self).first!.lastIdOfOperations = operation.id
         }
     }
     
@@ -63,7 +90,7 @@ class Persistence{
     }
     
         
-    func getRealmData() -> Results<ListOfOperations>{
+    func getRealmDataOperations() -> Results<ListOfOperations>{
         let allOperations = realm.objects(ListOfOperations.self)
         return allOperations
     }
@@ -80,7 +107,6 @@ class Persistence{
     
     
     //MARK: - личные данные
-    
     
     func updateDaysForSorting(daysForSorting: Int){
         let person = realm.objects(Person.self).first

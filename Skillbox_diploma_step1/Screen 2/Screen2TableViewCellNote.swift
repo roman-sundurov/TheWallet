@@ -57,13 +57,13 @@ class Screen2TableViewCellNote: UITableViewCell, UITextViewDelegate {
     }
     
     func startCell() {
-        textViewNotes.text = delegateScreen2?.getScreen2MenuArray()[specCellTag].text
+        textViewNotes.text = delegateScreen2?.returnScreen2MenuArray()[specCellTag].text
         
         textViewNotes.textContainer.lineBreakMode = .byTruncatingTail
         textViewNotes.layer.borderColor = UIColor.gray.cgColor
         textViewNotes.layer.borderWidth = 2
         
-        textViewNotes.layer.cornerRadius  = 10
+        textViewNotes.layer.cornerRadius = 10
         
         textViewNotes.text = "Placeholder"
 //        textViewNotes.textColor = UIColor.opaqueSeparator //цвет текста уже opaqueSeparator в Storyboard.

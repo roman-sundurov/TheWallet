@@ -10,13 +10,16 @@ import UIKit
 protocol protocolScreen2Delegate{
     func changeCategoryClosePopUpScreen2()
     func changeCategoryOpenPopUpScreen2(_ tag: Int)
-//    func screen2StatusEditContainerChange()
-//    func changeCategoyPopUpScreen2Height(status: Bool)
     func tableViewScreen2Update(row: Int)
+    func screen2DataReceiveUpdate()
+    
     //функции возврата
-    func getScreen2MenuArray() -> [Screen2MenuData]
+    func returnScreen2MenuArray() -> [Screen2MenuData]
     func returnDelegateScreen2TableViewCellNote() -> protocolScreen2TableViewCellNoteDelegate
     func returnNewOperation() -> ListOfOperations
+    func returnDataArrayOfCategory() -> [DataOfCategories]
+    func returnDelegateScreen1() -> protocolScreen1Delegate
+    
     //функции обновления newOperation
     func setAmountInNewOperation(amount: Double)
     func setCategoryInNewOperation(category: String)
@@ -25,13 +28,22 @@ protocol protocolScreen2Delegate{
     func setDateInNewOperation(date: Date)
     func openAlertDatePicker()
     func screen2StatusIsEditingStart()
-//    func setScreen2StatusEditContainer(Bool)
 }
 
 struct Screen2MenuData {
     let name: String
     let text: String
 }
+
+
+class DataOfCategories{
+    var name: String
+    
+    init(name1: String) {
+        self.name = name1
+    }
+}
+
 
 class ViewControllerScreen2: UIViewController, UITextViewDelegate {
 
@@ -49,16 +61,17 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     
     //MARK: - делегаты, переменные
     
-    var tapOfChangeCategoryOpenPopUp: UITapGestureRecognizer?
-    var tapOutsideTextViewToGoFromTextView: UITapGestureRecognizer?
-    
     var delegateScreen1: protocolScreen1Delegate?
     var delegateScreen2Container: protocolScreen2ContainerDelegate?
     var delegateScreen2TableViewCellCategory: protocolScreen2TableViewCellCategory?
     var delegateScreen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate?
     var delegateScreen2TableViewCellDate: protocolScreen2TableViewCellDateDelegate?
     var screen2StatusEditing: Bool = false //показывает, создаётся ли новая операция, или редактируется предыдущая
-    var screen2StatusEditContainer: Bool = false //показывает, находится ли контейнер в режиме редактирования категории, или выбора категории
+    
+    var tapOfChangeCategoryOpenPopUp: UITapGestureRecognizer?
+    var tapOutsideTextViewToGoFromTextView: UITapGestureRecognizer?
+    var dataArrayOfCategory: [DataOfCategories] = [] //хранение оригинала данных из Realm
+    var keyboardHeight: CGFloat? //хранит высоту клавиатуры
     
     
     //MARK: - объекты
@@ -292,11 +305,34 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     
     //MARK: - данные
     
+    func screen2DataReceive(){
+        dataArrayOfCategory = []
+        for n in Persistence.shared.getRealmDataCategories(){
+            dataArrayOfCategory.append(DataOfCategories(name1: n.name))
+        }
+//        for n in dataArrayOfCategory {
+//            print("dataArrayOfCategory= \(n.name)")
+//        }
+    }
+    
     var screen2MenuArray: [Screen2MenuData] = []
-    let Screen2MenuList0 = Screen2MenuData(name: "Header", text: "")
-    let Screen2MenuList1 = Screen2MenuData(name: "Category", text: "Select category")
-    let Screen2MenuList2 = Screen2MenuData(name: "Date", text: "Today")
-    let Screen2MenuList3 = Screen2MenuData(name: "Notes", text: "")
+    let screen2MenuList0 = Screen2MenuData(name: "Header", text: "")
+    let screen2MenuList1 = Screen2MenuData(name: "Category", text: "Select category")
+    let screen2MenuList2 = Screen2MenuData(name: "Date", text: "Today")
+    let screen2MenuList3 = Screen2MenuData(name: "Notes", text: "")
+    
+    
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        print("pressesBegan")
+        if screen2StatusEditing == true{
+//            self.constraintContainerBottomHeight.constant = CGFloat(50*(self.screen2MenuArray.count+3+1))
+            self.constraintContainerBottomPoint.constant = 300
+        }
+        else {
+//            self.constraintContainerBottomHeight.constant = CGFloat(50*(self.screen2MenuArray.count+3))
+            self.constraintContainerBottomPoint.constant = 250
+        }
+    }
     
     
     //MARK: - viewWillAppear
@@ -308,16 +344,26 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
             screen2StatusIsEditingStart()
         }
         
+        super.viewWillAppear(animated)
+            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+    }
+
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
     
-    
-    //MARK: - viewDidLoad
+
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        screen2MenuArray = [Screen2MenuList0, Screen2MenuList1, Screen2MenuList2, Screen2MenuList3]
+        screen2DataReceive()
+        screen2MenuArray = [screen2MenuList0, screen2MenuList1, screen2MenuList2, screen2MenuList3]
         
         self.view.insertSubview(self.blurViewScreen2, belowSubview: self.containerBottomScreen2)
         self.blurViewScreen2.backgroundColor = .clear
@@ -341,12 +387,47 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         createAlertAddNewOperations()
         
     }
+    
+    
+    //MARK: - other functions
+    
+    @objc func keyboardWillAppear(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            keyboardHeight = keyboardRectangle.height
+        }
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+            if self.constraintContainerBottomPoint.constant == 50{
+                self.constraintContainerBottomPoint.constant = self.keyboardHeight! + CGFloat.init(20) ?? 300
+            }
+        }, completion: {isCompleted in })
+    }
+
+    @objc func keyboardWillDisappear() {
+        print("keyboardWillDisappear")
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+                if self.constraintContainerBottomPoint.constant == self.keyboardHeight! + CGFloat.init(20) ?? 350{
+                self.constraintContainerBottomPoint.constant = 50
+            }
+        }, completion: {isCompleted in })
+    }
+    
+    
 }
 
 
 //MARK: - additional protocols
 
 extension ViewControllerScreen2: protocolScreen2Delegate{
+    
+    func screen2DataReceiveUpdate() {
+        screen2DataReceive()
+    }
+    
+    
+    func returnDelegateScreen1() -> protocolScreen1Delegate {
+        return delegateScreen1!
+    }
     
     
     func screen2StatusIsEditingStart() {
@@ -397,9 +478,13 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
         self.present(alertDatePicker, animated: true, completion: nil)
     }
     
-    
-    func getScreen2MenuArray() -> [Screen2MenuData] {
+    func returnScreen2MenuArray() -> [Screen2MenuData] {
         return screen2MenuArray
+    }
+    
+    
+    func returnDataArrayOfCategory() -> [DataOfCategories] {
+        return dataArrayOfCategory
     }
     
     
@@ -482,8 +567,12 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
         UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             self.constraintContainerBottomPoint.constant = -515
             self.blurViewScreen2.isHidden = true
+            self.view.endEditing(true)
             self.view.removeGestureRecognizer(self.tapOfChangeCategoryOpenPopUp!)
             self.view.layoutIfNeeded()
+            if self.delegateScreen2Container?.returnScreen2StatusEditContainer() == true{
+                self.delegateScreen2Container?.returnDelegateScreen2Container_TableViewCellNewCategory().textFieldNewCategoryClear()
+            }
         }, completion: {isCompleted in })
     }
     

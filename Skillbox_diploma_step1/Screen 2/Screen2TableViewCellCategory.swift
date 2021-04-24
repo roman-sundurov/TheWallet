@@ -43,9 +43,9 @@ class Screen2TableViewCellCategory: UITableViewCell {
             labelSelectCategory.textColor = .black
         }
         else{
-            labelSelectCategory.text = delegateScreen2?.getScreen2MenuArray()[specCellTag].text
+            labelSelectCategory.text = delegateScreen2?.returnScreen2MenuArray()[specCellTag].text
         }
-        labelCategory.text = delegateScreen2?.getScreen2MenuArray()[specCellTag].name
+        labelCategory.text = delegateScreen2?.returnScreen2MenuArray()[specCellTag].name
         let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategoryOpenPopUpScreen2FromCellCategory(_:)))
         self.isUserInteractionEnabled = true
         self.addGestureRecognizer(gesture)

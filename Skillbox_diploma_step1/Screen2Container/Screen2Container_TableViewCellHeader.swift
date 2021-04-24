@@ -8,7 +8,7 @@
 import UIKit
 
 protocol protocolScreen2Container_TableViewCellHeader{
-    func setButtonOptionsColor(color: UIColor)
+    func buttonOptionsSetColor(color: UIColor)
 }
 
 class Screen2Container_TableViewCellHeader: UITableViewCell {
@@ -28,7 +28,7 @@ class Screen2Container_TableViewCellHeader: UITableViewCell {
     
     @IBAction func buttonOptionsAction(_ sender: Any) {
 //        buttonOptions.tintColor = UIColor.blue
-        delegateScreen2Container?.screen2ContainerAllUpdate()
+        delegateScreen2Container?.screen2ContainerAddNewCategoryCell()
     }
     
     
@@ -47,8 +47,7 @@ class Screen2Container_TableViewCellHeader: UITableViewCell {
 
 extension Screen2Container_TableViewCellHeader: protocolScreen2Container_TableViewCellHeader{
     
-    
-    func setButtonOptionsColor(color: UIColor) {
+    func buttonOptionsSetColor(color: UIColor) {
         buttonOptions.tintColor = color
     }
     

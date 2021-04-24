@@ -35,17 +35,17 @@ class Screen1TableViewCellHeader: UITableViewCell {
         print("Header1: ---")
         let formatterPrint = DateFormatter()
         formatterPrint.dateFormat = "d MMMM YYYY"
-//        print("111: \(formatterPrint.string(from: delegateScreen1!.getNewTableDataArray()[specCellTag].date))")
-        labelHeaderDate.text = formatterPrint.string(from: delegateScreen1!.getNewTableDataArray()[specCellTag].date)
+//        print("111: \(formatterPrint.string(from: delegateScreen1!.returnNewTableDataArray()[specCellTag].date))")
+        labelHeaderDate.text = formatterPrint.string(from: delegateScreen1!.returnNewTableDataArray()[specCellTag].date)
     }
     
     func startCell2() {
         print("Header2: ---")
         let formatterPrint = DateFormatter()
         formatterPrint.dateFormat = "d MMMM YYYY"
-        let specVar: Int = specCellTag - delegateScreen1!.getArrayForIncrease()[specCellTag - 1]
-        print("222: \(formatterPrint.string(from: delegateScreen1!.getNewTableDataArray()[specVar].date))")
-        labelHeaderDate.text = formatterPrint.string(from: delegateScreen1!.getNewTableDataArray()[specVar].date)
+        let specVar: Int = specCellTag - delegateScreen1!.returnArrayForIncrease()[specCellTag - 1]
+        print("222: \(formatterPrint.string(from: delegateScreen1!.returnNewTableDataArray()[specVar].date))")
+        labelHeaderDate.text = formatterPrint.string(from: delegateScreen1!.returnNewTableDataArray()[specVar].date)
     }
     
     func setTag(tag: Int) {

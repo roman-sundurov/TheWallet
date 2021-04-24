@@ -33,7 +33,7 @@ class ViewControllerScreen1Container: UIViewController{
     
     var delegateScreen1: protocolScreen1Delegate?
     
-    var newTableDataArray: [Screen1TableData] = []
+    var newTableDataArray: [dataOfOperations] = []
     var specCellTag: Int = 0
     var specVar: Int = 0
 
@@ -81,29 +81,29 @@ extension ViewControllerScreen1Container: protocolScreen1ContainerDelegate{
     func startCell(tag: Int) {
         
         print(tag)
-        print(delegateScreen1!.getArrayForIncrease()[tag])
+        print(delegateScreen1!.returnArrayForIncrease()[tag])
         
         specCellTag = tag
-        specVar = specCellTag - delegateScreen1!.getArrayForIncrease()[specCellTag]
+        specVar = specCellTag - delegateScreen1!.returnArrayForIncrease()[specCellTag]
         
         //Отображения category
-        labelCategory.text = delegateScreen1!.getNewTableDataArray()[specVar].category
+        labelCategory.text = delegateScreen1!.returnNewTableDataArray()[specVar].category
 
         // Отображения date
         let formatterPrint = DateFormatter()
         formatterPrint.dateFormat = "d MMMM YYYY"
-        labelDate.text = formatterPrint.string(from: delegateScreen1!.getNewTableDataArray()[specVar].date)
+        labelDate.text = formatterPrint.string(from: delegateScreen1!.returnNewTableDataArray()[specVar].date)
         
         // Отображения amount
-        if delegateScreen1!.getNewTableDataArray()[specVar].amount.truncatingRemainder(dividingBy: 1) == 0 {
-            labelAmount.text = String(format: "%.0f", delegateScreen1!.getNewTableDataArray()[specVar].amount)
+        if delegateScreen1!.returnNewTableDataArray()[specVar].amount.truncatingRemainder(dividingBy: 1) == 0 {
+            labelAmount.text = String(format: "%.0f", delegateScreen1!.returnNewTableDataArray()[specVar].amount)
         }
         else {
-            labelAmount.text = String(format: "%.2f", delegateScreen1!.getNewTableDataArray()[specVar].amount)
+            labelAmount.text = String(format: "%.2f", delegateScreen1!.returnNewTableDataArray()[specVar].amount)
         }
         
         // Отображения currencyStatus
-        if delegateScreen1!.getNewTableDataArray()[specVar].amount < 0 {
+        if delegateScreen1!.returnNewTableDataArray()[specVar].amount < 0 {
             labelAmount.textColor = UIColor.red
             currencyStatus.textColor = UIColor.red
         }
@@ -113,7 +113,7 @@ extension ViewControllerScreen1Container: protocolScreen1ContainerDelegate{
         }
         
         //Отображение textViewNotes
-        textViewNotes.text = delegateScreen1!.getNewTableDataArray()[specVar].note
+        textViewNotes.text = delegateScreen1!.returnNewTableDataArray()[specVar].note
     }
     
 }

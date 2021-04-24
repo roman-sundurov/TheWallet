@@ -71,11 +71,11 @@ class Screen2TableViewCellDate: UITableViewCell {
             labelSelectDate.textColor = .black
         }
         else{
-            labelSelectDate.text = delegateScreen2?.getScreen2MenuArray()[specCellTag].text
+            labelSelectDate.text = delegateScreen2?.returnScreen2MenuArray()[specCellTag].text
         }
 
 //        textFieldSelectDate.tintColor = UIColor.clear //делает курсор бесцветным, но не убирает его
-        labelDate.text = delegateScreen2?.getScreen2MenuArray()[specCellTag].name
+        labelDate.text = delegateScreen2?.returnScreen2MenuArray()[specCellTag].name
         self.isUserInteractionEnabled = true
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(startEditing))

@@ -26,7 +26,7 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     //MARK: - переходы
     
     @IBAction func buttonDeleteCategoryAction(_ sender: Any) {
-        delegateScreen2Container?.buttonDeleteItemHandler(checkBoxObject.tag)
+        delegateScreen2Container?.buttonDeleteCategoryHandler(checkBoxObject.tag)
     }
     
     
@@ -66,7 +66,7 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     
     func startCell() {
         checkBoxObject.addTarget(self, action: #selector(checkboxValueChanged(sender:)), for: .valueChanged)
-        labelChangeCategory.text = delegateScreen2Container?.giveScreen2ContainerMenuArray()[specCellTag].name
+        labelChangeCategory.text = delegateScreen2Container?.returnDelegateScreen2().returnDataArrayOfCategory()[specCellTag].name
         let gesture = UITapGestureRecognizer(target: self, action: #selector(closeWindows))
         isUserInteractionEnabled = true
         addGestureRecognizer(gesture)
@@ -77,12 +77,22 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
         checkBoxObject.checkmarkSize = 1
         checkBoxObject.checkmarkColor = .white
         
-        if delegateScreen2Container?.returnDelegateScreen2().returnNewOperation().category == delegateScreen2Container?.giveScreen2ContainerMenuArray()[specCellTag].name {
+        if delegateScreen2Container?.returnDelegateScreen2().returnNewOperation().category ==  delegateScreen2Container?.returnDelegateScreen2().returnDataArrayOfCategory()[specCellTag].name {
             checkBoxObject.isChecked = true
         }
         else{
             checkBoxObject.isChecked = false
         }
+        
+        if delegateScreen2Container?.returnScreen2StatusEditContainer() == true {
+            buttonDeleteCategory.isHidden = false
+            buttonChangeNameCategory.isHidden = false
+        }
+        else{
+            buttonDeleteCategory.isHidden = true
+            buttonChangeNameCategory.isHidden = true
+        }
+        
     }
     
     func setTag(tag: Int) {

@@ -910,7 +910,7 @@
                                                                 <color key="titleColor" red="0.39941191669999998" green="0.73694282769999997" blue="0.74902564289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             </state>
                                                             <connections>
-                                                                <action selector="buttonActionToEditOperation:" destination="7HG-Be-bHj" eventType="touchUpInside" id="mBs-nG-50T"/>
+                                                                <action selector="buttonAddNewCategoryAction:" destination="P69-De-spv" eventType="touchUpInside" id="Ycc-vn-c9M"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -933,6 +933,7 @@
                                         <color key="backgroundColor" red="0.39607843139999999" green="0.73725490199999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
                                         <connections>
+                                            <outlet property="buttonAddNewCategory" destination="hqL-Q2-sHR" id="PjW-uN-uZm"/>
                                             <outlet property="textFieldNewCategory" destination="oyD-2D-jVU" id="xzd-pw-Pfm"/>
                                         </connections>
                                     </tableViewCell>
@@ -949,13 +950,14 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wpx-2t-Yhe" customClass="Checkbox" customModule="SimpleCheckbox">
                                                             <rect key="frame" x="0.0" y="7" width="30" height="30"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="Tps-Nj-76J"/>
                                                                 <constraint firstAttribute="width" constant="30" id="vVI-Nn-Lje"/>
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select catagory" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBp-sA-5ig">
-                                                            <rect key="frame" x="40" y="10" width="141" height="24"/>
+                                                            <rect key="frame" x="40" y="10" width="238" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="24" id="WsK-zM-9qk"/>
                                                                 <constraint firstAttribute="width" constant="141" id="dT4-9j-NxQ"/>
@@ -996,7 +998,7 @@
                                                         <constraint firstItem="fBp-sA-5ig" firstAttribute="centerY" secondItem="gSX-k7-OJT" secondAttribute="centerY" id="T3Y-o5-o3I"/>
                                                         <constraint firstItem="cdK-Sz-igT" firstAttribute="centerY" secondItem="gSX-k7-OJT" secondAttribute="centerY" id="UVu-ah-tUg"/>
                                                         <constraint firstItem="bRr-4Y-Upt" firstAttribute="centerY" secondItem="gSX-k7-OJT" secondAttribute="centerY" id="YAl-sp-AfX"/>
-                                                        <constraint firstItem="cdK-Sz-igT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fBp-sA-5ig" secondAttribute="trailing" constant="10" id="gCt-JP-FlK"/>
+                                                        <constraint firstItem="cdK-Sz-igT" firstAttribute="leading" relation="lessThanOrEqual" secondItem="fBp-sA-5ig" secondAttribute="trailing" constant="10" id="gCt-JP-FlK"/>
                                                         <constraint firstItem="fBp-sA-5ig" firstAttribute="leading" secondItem="wpx-2t-Yhe" secondAttribute="trailing" constant="10" id="iMk-nk-f1k"/>
                                                     </constraints>
                                                 </view>

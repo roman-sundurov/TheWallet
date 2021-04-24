@@ -7,12 +7,27 @@
 
 import UIKit
 
+protocol protocolScreen2Container_TableViewCellNewCategory{
+    func textFieldNewCategoryClear()
+}
+
 class Screen2Container_TableViewCellNewCategory: UITableViewCell {
     
     
     //MARK: - объявление аутлетов
     
     @IBOutlet var textFieldNewCategory: UITextField!
+    @IBOutlet var buttonAddNewCategory: UIButton!
+    
+    
+    //MARK: - переходы
+    
+    @IBAction func buttonAddNewCategoryAction(_ sender: Any) {
+        if textFieldNewCategory.text != "" {
+            delegateScreen2Container?.returnDelegateScreen2().returnDelegateScreen1().addCategoryInRealm(newName: textFieldNewCategory.text!, newIcon: "")
+        }
+        delegateScreen2Container?.screen2ContainerAddNewCategoryCell()
+    }
     
     
     //MARK: - делегаты и переменные
@@ -22,6 +37,9 @@ class Screen2Container_TableViewCellNewCategory: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        textFieldNewCategory.layer.cornerRadius = 10
+        buttonAddNewCategory.layer.cornerRadius = 10
         // Initialization code
     }
 
@@ -31,4 +49,13 @@ class Screen2Container_TableViewCellNewCategory: UITableViewCell {
         // Configure the view for the selected state
     }
 
+}
+
+extension Screen2Container_TableViewCellNewCategory: protocolScreen2Container_TableViewCellNewCategory{
+    
+    func textFieldNewCategoryClear() {
+        textFieldNewCategory.text = ""
+    }
+    
+    
 }

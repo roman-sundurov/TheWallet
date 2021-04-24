@@ -12,21 +12,26 @@ import UIKit
 import RealmSwift
 
 protocol protocolScreen1Delegate{
-    func changeOperationsScope(scope: String)
-    func clickToOperation(tag: Int)
-    func findAmountOfHeaders()
-    func getNewTableDataArray() -> [Screen1TableData]
-    func getArrayForIncrease() -> [Int]
-    func screen1AllUpdate()
+    func findAmountOfHeaders() //подсчёт заголовков с датами в основнй таблице экрана
+    func screen1AllUpdate() //обновление данных на всэм экрана
+    func actionsOperationsOpenPopUpScreen1(_ tag: Int) //открывает PopUp-окно конкретной операции
+    func actionsOperationsClosePopUpScreen1() //закрывает PopUp-окно конкретной операции
+    func editOperation(tag: Int) //переход в редактирование выбранной операции на втором экране
+    
+    //realm
     func addOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date)
     func editOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date, id: Int)
     func deleteOperationInRealm(tag: Int)
-    func actionsOperationsOpenPopUpScreen1(_ tag: Int)
-    func actionsOperationsClosePopUpScreen1()
-    func editOperation(tag: Int)
+    func addCategoryInRealm(newName: String, newIcon: String)
+//    func editCategoryInRealm(name: String, icon: String, id: Int)
+//    func deleteCategoryInRealm(name: String, icon: String, id: Int)
+    
+    //функции возврата
+    func returnNewTableDataArray() -> [dataOfOperations] //возвращает данные, которые отображаются в данный момент
+    func returnArrayForIncrease() -> [Int] //возвращает инкремент каждой ячейки основной таблице. Показывает количество заголовков до конкретной ячейки.
 }
 
-class Screen1TableData{
+class dataOfOperations{
     var amount: Double
     var category: String
     var note: String
@@ -73,8 +78,8 @@ class ViewController: UIViewController {
     var delegateScreen2: protocolScreen2Delegate?
     var delegateScreen1Container: protocolScreen1ContainerDelegate?
     
-    var newTableDataArrayOriginal: [Screen1TableData] = [] //хранение оригинала данных из Realm
-    var newTableDataArray: [Screen1TableData] = [] //хранение модифицированных данных из Realm для конкретного режима отоборажения
+    var dataArrayOfOperationsOriginal: [dataOfOperations] = [] //хранение оригинала данных из Realm
+    var dataArrayOfOperations: [dataOfOperations] = [] //хранение модифицированных данных из Realm для конкретного режима отоборажения
     var arrayForIncrease: [Int] = [0] //показывает количество заголовков с новой датой в таблице, которое предшествует конкретной операции
     var daysForSorting: Int = 30
     var tagForEdit: Int = 0
@@ -107,10 +112,10 @@ class ViewController: UIViewController {
             vc.screen2StatusEditing = true
             vc.delegateScreen1 = self
             delegateScreen2 = vc
-            delegateScreen2?.setAmountInNewOperation(amount: newTableDataArray[tagForEdit].amount)
-            delegateScreen2?.setCategoryInNewOperation(category: newTableDataArray[tagForEdit].category)
-            delegateScreen2?.setDateInNewOperation(date: newTableDataArray[tagForEdit].date)
-            delegateScreen2?.setNoteInNewOperation(note: newTableDataArray[tagForEdit].note)
+            delegateScreen2?.setAmountInNewOperation(amount: dataArrayOfOperations[tagForEdit].amount)
+            delegateScreen2?.setCategoryInNewOperation(category: dataArrayOfOperations[tagForEdit].category)
+            delegateScreen2?.setDateInNewOperation(date: dataArrayOfOperations[tagForEdit].date)
+            delegateScreen2?.setNoteInNewOperation(note: dataArrayOfOperations[tagForEdit].note)
             delegateScreen2?.setIDInNewOperation(id: tagForEdit)
         }
         
@@ -225,10 +230,10 @@ class ViewController: UIViewController {
     func countingIncomesAndExpensive() {
         var income: Double = 0
         var expensive: Double = 0
-        for n in newTableDataArray.filter( { $0.amount > 0 } ) {
+        for n in dataArrayOfOperations.filter( { $0.amount > 0 } ) {
             income += n.amount
         }
-        for n in newTableDataArray.filter( { $0.amount < 0 } ) {
+        for n in dataArrayOfOperations.filter( { $0.amount < 0 } ) {
             expensive += n.amount
         }
         
@@ -250,11 +255,11 @@ class ViewController: UIViewController {
     //MARK: - нижнее меню
     
     func tableNumberOfRowsInSection() -> Int{
-        if newTableDataArray.count == 0 { return 1 }
+        if dataArrayOfOperations.count == 0 { return 1 }
         arrayForIncrease = [1]
         var previousDay: Int = 0
         var counter: Int = 0
-        for x in newTableDataArray {
+        for x in dataArrayOfOperations {
             if Calendar.current.component(.day, from: x.date) != previousDay{
                 if counter == 0 {
                 }
@@ -277,11 +282,11 @@ class ViewController: UIViewController {
     func screen1TableUpdateSorting(days: Int){
         let newTime = Date() - TimeInterval.init(86400 * days)
         
-        newTableDataArray = newTableDataArrayOriginal
-        newTableDataArray.sort(by: { $0.date > $1.date })
+        dataArrayOfOperations = dataArrayOfOperationsOriginal
+        dataArrayOfOperations.sort(by: { $0.date > $1.date })
     
-        let temporarilyDate = newTableDataArray.filter { $0.date >= newTime }
-        newTableDataArray = temporarilyDate
+        let temporarilyDate = dataArrayOfOperations.filter { $0.date >= newTime }
+        dataArrayOfOperations = temporarilyDate
         self.tableViewScreen1.reloadData()
     }
     
@@ -289,13 +294,13 @@ class ViewController: UIViewController {
     //MARK: - данные
     
     func screen1DataReceive(){
-        newTableDataArrayOriginal = []
-        for n in Persistence.shared.getRealmData(){
-            newTableDataArrayOriginal.append(Screen1TableData(amount1: n.amount, category1: n.category, note1: n.note, date1: n.date, id1: n.id))
+        dataArrayOfOperationsOriginal = []
+        for n in Persistence.shared.getRealmDataOperations(){
+            dataArrayOfOperationsOriginal.append(dataOfOperations(amount1: n.amount, category1: n.category, note1: n.note, date1: n.date, id1: n.id))
         }
         daysForSorting = Persistence.shared.getDaysForSorting()
         print("daysForSorting in screen1DataReceive= \(Persistence.shared.getDaysForSorting())")
-        print("newTableDataArrayOriginal= \(newTableDataArrayOriginal)")
+        print("newTableDataArrayOriginal= \(dataArrayOfOperationsOriginal)")
     }
     
     func daysForSortingRealmUpdate(){
@@ -343,6 +348,10 @@ class ViewController: UIViewController {
 
 extension ViewController: protocolScreen1Delegate{
     
+    func addCategoryInRealm(newName: String, newIcon: String) {
+        Persistence.shared.addCategory(name: newName, icon: newIcon)
+    }
+    
     
     func editOperation(tag: Int) {
         actionsOperationsClosePopUpScreen1()
@@ -353,14 +362,12 @@ extension ViewController: protocolScreen1Delegate{
     
     func deleteOperationInRealm(tag: Int) {
         actionsOperationsClosePopUpScreen1()
-        Persistence.shared.deleteRealmData(idOfObject: getNewTableDataArray()[tag].id)
+        Persistence.shared.deleteRealmData(idOfObject: returnNewTableDataArray()[tag].id)
     }
     
     
     func addOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date) {
-//        print("addOperationInRealm1")
         Persistence.shared.addOperations(amount: newAmount, category: newCategory, note: newNote, date: newDate)
-//        print("addOperationInRealm2")
     }
     
     
@@ -378,23 +385,13 @@ extension ViewController: protocolScreen1Delegate{
         
     }
     
-    func getArrayForIncrease() -> [Int]{
+    func returnArrayForIncrease() -> [Int]{
         return arrayForIncrease
     }
     
 
-    func getNewTableDataArray() -> [Screen1TableData] {
-        return newTableDataArray
-    }
-    
-    
-    func changeOperationsScope(scope: String) {
-        return
-    }
-    
-    
-    func clickToOperation(tag: Int) {
-        return
+    func returnNewTableDataArray() -> [dataOfOperations] {
+        return dataArrayOfOperations
     }
     
     
@@ -460,8 +457,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if newTableDataArray.isEmpty{
-//            print("newTableDataArray is empty")
+        if dataArrayOfOperations.isEmpty{
+//            print("dataArrayOfOperations is empty")
             let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
             cell.delegateScreen1 = self
             cell.startCellEmpty()

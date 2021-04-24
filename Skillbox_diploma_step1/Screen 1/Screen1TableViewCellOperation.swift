@@ -36,16 +36,16 @@ class Screen1TableViewCellOperation: UITableViewCell {
 
     func startCell() {
         print("Simple Cell: ---")
-        let specVar: Int = specCellTag - delegateScreen1!.getArrayForIncrease()[specCellTag]
-        labelCategory.text = delegateScreen1!.getNewTableDataArray()[specVar].category
+        let specVar: Int = specCellTag - delegateScreen1!.returnArrayForIncrease()[specCellTag]
+        labelCategory.text = delegateScreen1!.returnNewTableDataArray()[specVar].category
 
-        if delegateScreen1!.getNewTableDataArray()[specVar].amount.truncatingRemainder(dividingBy: 1) == 0 {
-            labelAmount.text = String(format: "%.0f", delegateScreen1!.getNewTableDataArray()[specVar].amount)
+        if delegateScreen1!.returnNewTableDataArray()[specVar].amount.truncatingRemainder(dividingBy: 1) == 0 {
+            labelAmount.text = String(format: "%.0f", delegateScreen1!.returnNewTableDataArray()[specVar].amount)
         }
         else {
-            labelAmount.text = String(format: "%.2f", delegateScreen1!.getNewTableDataArray()[specVar].amount)
+            labelAmount.text = String(format: "%.2f", delegateScreen1!.returnNewTableDataArray()[specVar].amount)
         }
-        if delegateScreen1!.getNewTableDataArray()[specVar].amount < 0 {
+        if delegateScreen1!.returnNewTableDataArray()[specVar].amount < 0 {
             labelAmount.textColor = UIColor.red
             currencyStatus.textColor = UIColor.red
         }
