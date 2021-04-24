@@ -15,6 +15,7 @@ protocol protocolScreen2ContainerDelegate {
     func closeWindows(_ tag: Int)
     //функции возврата
     func returnDelegateScreen2() -> protocolScreen2Delegate
+    func screen2ContainerAllUpdate()
 }
 
 struct Screen2ContainerMenuData {
@@ -32,6 +33,8 @@ class ViewControllerScreen2Container: UIViewController {
     //MARK: - делегаты и переменные
     
     var delegateScreen2: protocolScreen2Delegate?
+    var delegateScreen2Container_TableViewCellHeader: protocolScreen2Container_TableViewCellHeader?
+    var statusEditContainer: Bool = false
 
     var screen2ContainerMenuArray: [Screen2ContainerMenuData] = []
 //    var tableStatus: Int = 0
@@ -61,6 +64,26 @@ class ViewControllerScreen2Container: UIViewController {
 //MARK: - additional protocols
 
 extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
+    
+    
+    func screen2ContainerAllUpdate() {
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+            
+            if self.statusEditContainer == true{
+                self.statusEditContainer = false
+                self.delegateScreen2Container_TableViewCellHeader?.setButtonOptionsColor(color: UIColor.white)
+//                delegateScreen2?.changeCategoyPopUpScreen2Height(status: statusEditContainer)
+            }
+            else {
+                self.statusEditContainer = true
+                self.delegateScreen2Container_TableViewCellHeader?.setButtonOptionsColor(color: UIColor.systemBlue)
+            }
+            
+            self.tableViewContainer.reloadData()
+            
+        }, completion: {isCompleted in })
+    }
+    
     
     func returnDelegateScreen2() -> protocolScreen2Delegate {
         return delegateScreen2!
@@ -100,18 +123,25 @@ extension ViewControllerScreen2Container: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return screen2ContainerMenuArray.count
+        return statusEditContainer == true ? screen2ContainerMenuArray.count + 1 : screen2ContainerMenuArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen2Container_TableViewCellHeader
+            cell.delegateScreen2Container = self
+            delegateScreen2Container_TableViewCellHeader = cell
+            return cell
+        }
+        else if statusEditContainer == true && indexPath.row == 1{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellNewCategory") as! Screen2Container_TableViewCellNewCategory
+            cell.delegateScreen2Container = self
             return cell
         }
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellChangeCategory") as! Screen2Container_TableViewCellChangeCategory
             cell.delegateScreen2Container = self
-            cell.setTag(tag: indexPath.row)
+            cell.setTag(tag: statusEditContainer == true ? indexPath.row - 1 : indexPath.row)
             cell.startCell()
             return cell
         }

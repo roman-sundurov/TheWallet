@@ -10,6 +10,8 @@ import UIKit
 protocol protocolScreen2Delegate{
     func changeCategoryClosePopUpScreen2()
     func changeCategoryOpenPopUpScreen2(_ tag: Int)
+//    func screen2StatusEditContainerChange()
+//    func changeCategoyPopUpScreen2Height(status: Bool)
     func tableViewScreen2Update(row: Int)
     //функции возврата
     func getScreen2MenuArray() -> [Screen2MenuData]
@@ -22,7 +24,8 @@ protocol protocolScreen2Delegate{
     func setIDInNewOperation(id: Int)
     func setDateInNewOperation(date: Date)
     func openAlertDatePicker()
-    func screen2StatusIsEditing()
+    func screen2StatusIsEditingStart()
+//    func setScreen2StatusEditContainer(Bool)
 }
 
 struct Screen2MenuData {
@@ -54,7 +57,8 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     var delegateScreen2TableViewCellCategory: protocolScreen2TableViewCellCategory?
     var delegateScreen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate?
     var delegateScreen2TableViewCellDate: protocolScreen2TableViewCellDateDelegate?
-    var screen2StatusEditing: Bool = false
+    var screen2StatusEditing: Bool = false //показывает, создаётся ли новая операция, или редактируется предыдущая
+    var screen2StatusEditContainer: Bool = false //показывает, находится ли контейнер в режиме редактирования категории, или выбора категории
     
     
     //MARK: - объекты
@@ -301,7 +305,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         
         if screen2StatusEditing == true{
-            screen2StatusIsEditing()
+            screen2StatusIsEditingStart()
         }
         
     }
@@ -345,7 +349,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
 extension ViewControllerScreen2: protocolScreen2Delegate{
     
     
-    func screen2StatusIsEditing() {
+    func screen2StatusIsEditingStart() {
         print("1. screen2SegmentControl.selectedSegmentIndex= \(screen2SegmentControl.selectedSegmentIndex)")
         
         //set Amount
@@ -439,6 +443,18 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
     func returnDelegateScreen2TableViewCellNote() -> protocolScreen2TableViewCellNoteDelegate {
         return delegateScreen2TableViewCellNote!
     }
+    
+    
+//    func changeCategoyPopUpScreen2Height(status: Bool){
+//        if status == true{
+//            self.constraintContainerBottomHeight.constant = CGFloat(50*(self.screen2MenuArray.count+3+1))
+//            self.constraintContainerBottomPoint.constant = 0
+//        }
+//        else {
+//            self.constraintContainerBottomHeight.constant = CGFloat(50*(self.screen2MenuArray.count+3))
+//            self.constraintContainerBottomPoint.constant = 50
+//        }
+//    }
     
     
     //MARK: - окрытие PopUp-окна

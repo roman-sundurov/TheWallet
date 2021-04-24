@@ -12,7 +12,8 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     
     //MARK: - объявление аутлетов
     @IBOutlet var labelChangeCategory: UILabel!
-    @IBOutlet var buttonDeleteItemObject: UIButton!
+    @IBOutlet var buttonDeleteCategory: UIButton!
+    @IBOutlet var buttonChangeNameCategory: UIButton!
     @IBOutlet var checkBoxObject: Checkbox!
     
     
@@ -23,6 +24,15 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     
     
     //MARK: - переходы
+    
+    @IBAction func buttonDeleteCategoryAction(_ sender: Any) {
+        delegateScreen2Container?.buttonDeleteItemHandler(checkBoxObject.tag)
+    }
+    
+    
+    @IBAction func buttonChangeNameCategoryAction(_ sender: Any) {
+    }
+    
     
     @objc func closeWindows() {
         delegateScreen2Container?.returnDelegateScreen2().setCategoryInNewOperation(category: labelChangeCategory.text!) //запись выбранной категории во временную переменную
@@ -44,10 +54,6 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    
-    @IBAction func buttonDeleteItem(_ sender: Any) {
-        delegateScreen2Container?.buttonDeleteItemHandler(checkBoxObject.tag)
-    }
     
     @objc func checkboxValueChanged(sender: Checkbox) {
         switch checkBoxObject.isChecked {

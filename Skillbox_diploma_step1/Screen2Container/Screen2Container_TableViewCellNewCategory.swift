@@ -11,7 +11,13 @@ class Screen2Container_TableViewCellNewCategory: UITableViewCell {
     
     
     //MARK: - объявление аутлетов
+    
     @IBOutlet var textFieldNewCategory: UITextField!
+    
+    
+    //MARK: - делегаты и переменные
+    
+    var delegateScreen2Container: protocolScreen2ContainerDelegate?
     
 
     override func awakeFromNib() {
