@@ -11,7 +11,7 @@ protocol protocolScreen2ContainerDelegate {
     func buttonDeleteCategoryHandler()
     func checkBoxStatus(_ tag: Int,_ type: Bool)
     func closeWindows(_ tag: Int)
-    func screen2ContainerAddNewCategoryCell()
+    func screen2ContainerRestart()
     
     //функции возврата
     func returnDelegateScreen2() -> protocolScreen2Delegate
@@ -67,7 +67,7 @@ extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
     }
 
     
-    func screen2ContainerAddNewCategoryCell() {
+    func screen2ContainerRestart() {
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             
             if self.statusEditContainer == true{

@@ -28,7 +28,7 @@ class Screen2Container_TableViewCellHeader: UITableViewCell {
     
     @IBAction func buttonOptionsAction(_ sender: Any) {
 //        buttonOptions.tintColor = UIColor.blue
-        delegateScreen2Container?.screen2ContainerAddNewCategoryCell()
+        delegateScreen2Container?.screen2ContainerRestart()
     }
     
     

@@ -56,6 +56,7 @@ class Persistence{
         category.id = realm.objects(Person.self).first!.lastIdOfCategories + 1
         try! realm.write{
             realm.add(category)
+            realm.objects(Person.self).first!.lastIdOfCategories = category.id
         }
     }
     
@@ -63,7 +64,7 @@ class Persistence{
     func deleteCategory(idOfObject: Int){
         let particularCategory = realm.objects(Category.self).filter("id == \(idOfObject)")
 //        var index: Int? = allOperations.index(of: particularObject) ?? nil
-        print("idOfObject for delete= \(idOfObject)")
+        print("idOfObject for deleteCategory= \(idOfObject)")
         try! realm.write{
             realm.delete(particularCategory)
         }

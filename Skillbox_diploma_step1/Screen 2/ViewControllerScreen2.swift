@@ -38,9 +38,13 @@ struct Screen2MenuData {
 
 class DataOfCategories{
     var name: String
-    
-    init(name1: String) {
+    var icon: String
+    var id: Int
+
+    init(name1: String, icon1: String, id1: Int) {
         self.name = name1
+        self.icon = icon1
+        self.id = id1
     }
 }
 
@@ -308,7 +312,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     func screen2DataReceive(){
         dataArrayOfCategory = []
         for n in Persistence.shared.returnRealmDataCategories(){
-            dataArrayOfCategory.append(DataOfCategories(name1: n.name))
+            dataArrayOfCategory.append(DataOfCategories(name1: n.name, icon1: n.icon, id1: n.id))
         }
 //        for n in dataArrayOfCategory {
 //            print("dataArrayOfCategory= \(n.name)")
@@ -398,15 +402,15 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         }
         UIView.animate(withDuration: 10.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             if self.constraintContainerBottomPoint.constant == 50{
-                self.constraintContainerBottomPoint.constant = self.keyboardHeight! + CGFloat.init(20) ?? 300
+                self.constraintContainerBottomPoint.constant = self.keyboardHeight! + CGFloat.init(20)
             }
         }, completion: {isCompleted in })
     }
 
     @objc func keyboardWillDisappear() {
         print("keyboardWillDisappear")
-            UIView.animate(withDuration: 10.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
-                if self.constraintContainerBottomPoint.constant == self.keyboardHeight! + CGFloat.init(20) ?? 350{
+        UIView.animate(withDuration: 10.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+            if self.constraintContainerBottomPoint.constant == self.keyboardHeight! + CGFloat.init(20){
                 self.constraintContainerBottomPoint.constant = 50
             }
         }, completion: {isCompleted in })

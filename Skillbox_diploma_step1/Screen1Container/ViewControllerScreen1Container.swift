@@ -8,8 +8,6 @@
 import UIKit
 
 protocol protocolScreen1ContainerDelegate{
-    func buttonEditOperationHandler(_ tag: Int)
-    func buttonDeleteOperationHandler(_ tag: Int)
     func startCell(tag: Int)
 }
 
@@ -69,14 +67,6 @@ class ViewControllerScreen1Container: UIViewController{
 }
 
 extension ViewControllerScreen1Container: protocolScreen1ContainerDelegate{
-    func buttonEditOperationHandler(_ tag: Int) {
-        return
-    }
-    
-    func buttonDeleteOperationHandler(_ tag: Int) {
-        return
-    }
-    
     
     func startCell(tag: Int) {
         

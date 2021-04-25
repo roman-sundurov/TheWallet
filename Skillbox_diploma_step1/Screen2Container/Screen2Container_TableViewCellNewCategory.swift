@@ -26,7 +26,8 @@ class Screen2Container_TableViewCellNewCategory: UITableViewCell {
         if textFieldNewCategory.text != "" {
             delegateScreen2Container?.returnDelegateScreen2().returnDelegateScreen1().addCategoryInRealm(newName: textFieldNewCategory.text!, newIcon: "")
         }
-        delegateScreen2Container?.screen2ContainerAddNewCategoryCell()
+        delegateScreen2Container?.screen2ContainerRestart()
+        textFieldNewCategoryClear()
     }
     
     
