@@ -27,8 +27,7 @@ class Screen2Container_TableViewCellHeader: UITableViewCell {
     //MARK: - переходы
     
     @IBAction func buttonOptionsAction(_ sender: Any) {
-//        buttonOptions.tintColor = UIColor.blue
-        delegateScreen2Container?.screen2ContainerRestart()
+        delegateScreen2Container?.screen2ContainerNewCategorySwicher()
     }
     
     

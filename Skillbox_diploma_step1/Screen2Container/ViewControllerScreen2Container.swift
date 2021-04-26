@@ -11,7 +11,9 @@ protocol protocolScreen2ContainerDelegate {
     func buttonDeleteCategoryHandler()
     func checkBoxStatus(_ tag: Int,_ type: Bool)
     func closeWindows(_ tag: Int)
-    func screen2ContainerRestart()
+    func screen2ContainerNewCategorySwicher()
+    func screen2ContainerAddNewCategory()
+    func screen2ContainerDeleteCategory(index: Int)
     
     //функции возврата
     func returnDelegateScreen2() -> protocolScreen2Delegate
@@ -32,6 +34,7 @@ class ViewControllerScreen2Container: UIViewController {
     var delegateScreen2Container_TableViewCellHeader: protocolScreen2Container_TableViewCellHeader?
     var delegateScreen2Container_TableViewCellNewCategory: protocolScreen2Container_TableViewCellNewCategory?
     var statusEditContainer: Bool = false
+    var animationNewCategoryInCell = false
     
     
     //MARK: - данные
@@ -65,24 +68,49 @@ extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
     func returnScreen2StatusEditContainer() -> Bool {
         return statusEditContainer
     }
-
     
-    func screen2ContainerRestart() {
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
-            
-            if self.statusEditContainer == true{
-                self.statusEditContainer = false
-                self.delegateScreen2Container_TableViewCellHeader?.buttonOptionsSetColor(color: UIColor.white)
+    
+    func screen2ContainerNewCategorySwicher(){
+        print("AAAA")
+        if delegateScreen2?.returnDataArrayOfCategory().count != 0{
+            if statusEditContainer == true{
+                statusEditContainer = false
+                delegateScreen2Container_TableViewCellHeader?.buttonOptionsSetColor(color: UIColor.white)
+                tableViewContainer.performBatchUpdates({
+                    print("AAAA2")
+                    tableViewContainer.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+                }, completion: { status in self.tableViewContainer.reloadData() })
             }
             else {
-                self.statusEditContainer = true
-                self.delegateScreen2Container_TableViewCellHeader?.buttonOptionsSetColor(color: UIColor.systemBlue)
+                print("BBBB")
+                statusEditContainer = true
+                delegateScreen2Container_TableViewCellHeader?.buttonOptionsSetColor(color: UIColor.systemBlue)
+                tableViewContainer.performBatchUpdates({
+                    print("BBBB2")
+                    tableViewContainer.insertRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+                }, completion: { status in self.tableViewContainer.reloadData() } )
             }
-            
-            self.delegateScreen2!.screen2DataReceiveUpdate()
-            self.tableViewContainer.reloadData()
-            
-        }, completion: {isCompleted in })
+            delegateScreen2!.screen2DataReceiveUpdate()
+        }
+    }
+    
+    
+    func screen2ContainerAddNewCategory(){
+        tableViewContainer.performBatchUpdates({
+            delegateScreen2!.screen2DataReceiveUpdate()
+            var newRowIndex = statusEditContainer == true ? (delegateScreen2?.returnDataArrayOfCategory().count)! + 1 : (delegateScreen2?.returnDataArrayOfCategory().count)!
+            tableViewContainer.insertRows(at: [IndexPath(row: newRowIndex, section: 0)], with: .automatic)
+        }, completion: { status in self.tableViewContainer.reloadData() } )
+    }
+
+    
+    func screen2ContainerDeleteCategory(index: Int) {
+        delegateScreen2!.screen2DataReceiveUpdate()
+        tableViewContainer.performBatchUpdates({
+            print("ZZZ2")
+            tableViewContainer.deleteRows(at: [IndexPath(row: index + 2, section: 0)], with: .left)
+        }, completion: { status in self.tableViewContainer.reloadData() } )
+        
     }
     
     
@@ -125,15 +153,19 @@ extension ViewControllerScreen2Container: UITableViewDelegate, UITableViewDataSo
             return 2
         }
         else if statusEditContainer == true{
-            return delegateScreen2?.returnDataArrayOfCategory().count as! Int + 2
+            print("returnDataArrayOfCategory().count 111= \(delegateScreen2?.returnDataArrayOfCategory().count)")
+            return (delegateScreen2?.returnDataArrayOfCategory().count)! + 2
         }
         else{
-            return delegateScreen2?.returnDataArrayOfCategory().count as! Int + 1
+            print("returnDataArrayOfCategory().count 222= \(delegateScreen2?.returnDataArrayOfCategory().count)")
+            return (delegateScreen2?.returnDataArrayOfCategory().count)! + 1
         }
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("indexPath.rowScreen2= \(indexPath.row)")
+        
         if indexPath.row == 0{
             print("1111")
             let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen2Container_TableViewCellHeader
@@ -145,6 +177,7 @@ extension ViewControllerScreen2Container: UITableViewDelegate, UITableViewDataSo
             print("2222")
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellNewCategory") as! Screen2Container_TableViewCellNewCategory
             cell.delegateScreen2Container = self
+            delegateScreen2Container_TableViewCellHeader?.buttonOptionsSetColor(color: UIColor.systemBlue)
             delegateScreen2Container_TableViewCellNewCategory = cell
             return cell
         }

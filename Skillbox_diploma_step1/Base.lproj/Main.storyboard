@@ -938,14 +938,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellChangeCategory" id="UOL-6e-fL6" customClass="Screen2Container_TableViewCellChangeCategory" customModule="Skillbox_diploma_step1" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="115.33333587646484" width="370" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="115.33333587646484" width="370" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UOL-6e-fL6" id="OJe-yl-j3b">
-                                            <rect key="frame" x="0.0" y="0.0" width="370" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gSX-k7-OJT">
-                                                    <rect key="frame" x="10" y="0.0" width="350" height="43.666666666666664"/>
+                                                    <rect key="frame" x="10" y="0.0" width="350" height="44"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wpx-2t-Yhe" customClass="Checkbox" customModule="SimpleCheckbox">
                                                             <rect key="frame" x="0.0" y="7" width="30" height="30"/>
@@ -956,18 +956,8 @@
                                                                 <constraint firstAttribute="width" constant="30" id="vVI-Nn-Lje"/>
                                                             </constraints>
                                                         </view>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select catagory" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBp-sA-5ig">
-                                                            <rect key="frame" x="40" y="10" width="238" height="24"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="24" id="WsK-zM-9qk"/>
-                                                                <constraint firstAttribute="width" constant="141" id="dT4-9j-NxQ"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
                                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bRr-4Y-Upt">
-                                                            <rect key="frame" x="324" y="7.6666666666666643" width="26" height="26.999999999999986"/>
+                                                            <rect key="frame" x="324" y="8" width="26" height="27"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="27" id="Y3I-c9-eqP"/>
                                                                 <constraint firstAttribute="width" constant="26" id="kzh-CN-lkf"/>
@@ -979,7 +969,7 @@
                                                             </connections>
                                                         </button>
                                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cdK-Sz-igT">
-                                                            <rect key="frame" x="288" y="11.333333333333332" width="26" height="21.999999999999993"/>
+                                                            <rect key="frame" x="288" y="11.666666666666664" width="26" height="22"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="27" id="N8a-Q6-V5Q"/>
                                                                 <constraint firstAttribute="width" constant="26" id="iSU-bL-dsx"/>
@@ -989,17 +979,29 @@
                                                                 <action selector="buttonChangeNameCategoryAction:" destination="UOL-6e-fL6" eventType="touchUpInside" id="kVI-4i-yKO"/>
                                                             </connections>
                                                         </button>
+                                                        <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Select Category" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h5i-Ng-Rfz">
+                                                            <rect key="frame" x="40" y="10" width="238" height="24"/>
+                                                            <color key="backgroundColor" red="0.40000000000000002" green="0.73725490196078436" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="24" id="asc-n5-P8f"/>
+                                                                <constraint firstAttribute="width" constant="141" id="smd-pz-J7I"/>
+                                                            </constraints>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="wpx-2t-Yhe" firstAttribute="leading" secondItem="gSX-k7-OJT" secondAttribute="leading" id="8WN-o5-R6e"/>
                                                         <constraint firstItem="bRr-4Y-Upt" firstAttribute="leading" secondItem="cdK-Sz-igT" secondAttribute="trailing" constant="10" id="ANx-7m-Deh"/>
                                                         <constraint firstAttribute="trailing" secondItem="bRr-4Y-Upt" secondAttribute="trailing" id="K9W-gw-ihv"/>
                                                         <constraint firstItem="wpx-2t-Yhe" firstAttribute="centerY" secondItem="gSX-k7-OJT" secondAttribute="centerY" id="Rg9-co-kWg"/>
-                                                        <constraint firstItem="fBp-sA-5ig" firstAttribute="centerY" secondItem="gSX-k7-OJT" secondAttribute="centerY" id="T3Y-o5-o3I"/>
                                                         <constraint firstItem="cdK-Sz-igT" firstAttribute="centerY" secondItem="gSX-k7-OJT" secondAttribute="centerY" id="UVu-ah-tUg"/>
+                                                        <constraint firstItem="cdK-Sz-igT" firstAttribute="leading" secondItem="h5i-Ng-Rfz" secondAttribute="trailing" constant="10" id="Uaa-6d-Gts"/>
                                                         <constraint firstItem="bRr-4Y-Upt" firstAttribute="centerY" secondItem="gSX-k7-OJT" secondAttribute="centerY" id="YAl-sp-AfX"/>
-                                                        <constraint firstItem="cdK-Sz-igT" firstAttribute="leading" relation="lessThanOrEqual" secondItem="fBp-sA-5ig" secondAttribute="trailing" constant="10" id="gCt-JP-FlK"/>
-                                                        <constraint firstItem="fBp-sA-5ig" firstAttribute="leading" secondItem="wpx-2t-Yhe" secondAttribute="trailing" constant="10" id="iMk-nk-f1k"/>
+                                                        <constraint firstItem="h5i-Ng-Rfz" firstAttribute="centerY" secondItem="gSX-k7-OJT" secondAttribute="centerY" id="haT-pH-TsL"/>
+                                                        <constraint firstAttribute="height" constant="43.670000000000002" id="i7N-rZ-NBL"/>
+                                                        <constraint firstItem="h5i-Ng-Rfz" firstAttribute="leading" secondItem="wpx-2t-Yhe" secondAttribute="trailing" constant="10" id="zph-bl-oDj"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -1010,13 +1012,14 @@
                                                 <constraint firstAttribute="trailing" secondItem="gSX-k7-OJT" secondAttribute="trailing" constant="10" id="vA6-eq-V2z"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.39607843139999999" green="0.73725490199999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.40000000000000002" green="0.73725490196078436" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <gestureRecognizers/>
                                         <connections>
                                             <outlet property="buttonChangeNameCategory" destination="cdK-Sz-igT" id="oHQ-Sa-sf1"/>
                                             <outlet property="buttonDeleteCategory" destination="bRr-4Y-Upt" id="yME-ZX-Wpt"/>
                                             <outlet property="checkBoxObject" destination="wpx-2t-Yhe" id="FC9-jQ-YEO"/>
-                                            <outlet property="labelChangeCategory" destination="fBp-sA-5ig" id="xPm-HN-9Iw"/>
+                                            <outlet property="constaraintCellChangeCategoryHeight" destination="i7N-rZ-NBL" id="G9f-Or-VXh"/>
+                                            <outlet property="textFieldChangeCategory" destination="h5i-Ng-Rfz" id="Gil-Dz-gLL"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

@@ -400,7 +400,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
             let keyboardRectangle = keyboardFrame.cgRectValue
             keyboardHeight = keyboardRectangle.height
         }
-        UIView.animate(withDuration: 10.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             if self.constraintContainerBottomPoint.constant == 50{
                 self.constraintContainerBottomPoint.constant = self.keyboardHeight! + CGFloat.init(20)
             }
@@ -412,7 +412,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     @objc func keyboardWillDisappear(_ notification: Notification) {
         if keyboardHeight != nil{
             print("keyboardWillDisappear")
-            UIView.animate(withDuration: 10.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
                 if self.constraintContainerBottomPoint.constant == self.keyboardHeight! + CGFloat.init(20){
                     self.constraintContainerBottomPoint.constant = 50
                 }

@@ -11,10 +11,11 @@ import SimpleCheckbox
 class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     
     //MARK: - объявление аутлетов
-    @IBOutlet var labelChangeCategory: UILabel!
+    @IBOutlet var textFieldChangeCategory: UITextField!
     @IBOutlet var buttonDeleteCategory: UIButton!
     @IBOutlet var buttonChangeNameCategory: UIButton!
     @IBOutlet var checkBoxObject: Checkbox!
+    @IBOutlet var constaraintCellChangeCategoryHeight: NSLayoutConstraint!
     
     
     //MARK: - делегаты и переменные
@@ -27,7 +28,7 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     
     @IBAction func buttonDeleteCategoryAction(_ sender: Any) {
         delegateScreen2Container?.returnDelegateScreen2().returnDelegateScreen1().deleteCategoryInRealm(tag: specCellTag)
-        delegateScreen2Container?.screen2ContainerRestart()
+        delegateScreen2Container?.screen2ContainerDeleteCategory(index: specCellTag)
     }
     
     
@@ -36,7 +37,7 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     
     
     @objc func closeWindows() {
-        delegateScreen2Container?.returnDelegateScreen2().setCategoryInNewOperation(category: labelChangeCategory.text!) //запись выбранной категории во временную переменную
+        delegateScreen2Container?.returnDelegateScreen2().setCategoryInNewOperation(category: textFieldChangeCategory.text!) //запись выбранной категории во временную переменную
         delegateScreen2Container?.closeWindows(specCellTag) //закрытие PopUp-окна
         print("ClosePopup from ContainerCell")
     }
@@ -67,7 +68,7 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     
     func startCell() {
         checkBoxObject.addTarget(self, action: #selector(checkboxValueChanged(sender:)), for: .valueChanged)
-        labelChangeCategory.text = delegateScreen2Container?.returnDelegateScreen2().returnDataArrayOfCategory()[specCellTag].name
+        textFieldChangeCategory.text = delegateScreen2Container?.returnDelegateScreen2().returnDataArrayOfCategory()[specCellTag].name
         let gesture = UITapGestureRecognizer(target: self, action: #selector(closeWindows))
         isUserInteractionEnabled = true
         addGestureRecognizer(gesture)
@@ -98,6 +99,7 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     
     func setTag(tag: Int) {
         specCellTag = tag
+        print("specCellTag ChangeCategory= \(specCellTag)")
     }
 
 }
