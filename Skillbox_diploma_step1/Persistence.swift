@@ -69,6 +69,16 @@ class Persistence{
             realm.delete(particularCategory)
         }
     }
+    
+    
+    func updateCategory(name: String, icon: String, idOfObject: Int){
+        print("updateCategoy")
+        let particularCategory = realm.objects(Category.self).filter("id == \(idOfObject)")
+        try! realm.write{
+            print("particularOperations.text= \(particularCategory)")
+            particularCategory.setValue(name, forKey: "name")
+        }
+    }
 
     
     

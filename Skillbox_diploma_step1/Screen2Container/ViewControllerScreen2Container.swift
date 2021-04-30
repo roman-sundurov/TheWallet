@@ -71,6 +71,7 @@ extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
     
     
     func screen2ContainerNewCategorySwicher(){
+        delegateScreen2!.screen2DataReceiveUpdate()
         print("AAAA")
         if delegateScreen2?.returnDataArrayOfCategory().count != 0{
             if statusEditContainer == true{
@@ -90,14 +91,13 @@ extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
                     tableViewContainer.insertRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
                 }, completion: { status in self.tableViewContainer.reloadData() } )
             }
-            delegateScreen2!.screen2DataReceiveUpdate()
         }
     }
     
     
     func screen2ContainerAddNewCategory(){
+        delegateScreen2!.screen2DataReceiveUpdate()
         tableViewContainer.performBatchUpdates({
-            delegateScreen2!.screen2DataReceiveUpdate()
             var newRowIndex = statusEditContainer == true ? (delegateScreen2?.returnDataArrayOfCategory().count)! + 1 : (delegateScreen2?.returnDataArrayOfCategory().count)!
             tableViewContainer.insertRows(at: [IndexPath(row: newRowIndex, section: 0)], with: .automatic)
         }, completion: { status in self.tableViewContainer.reloadData() } )
@@ -111,6 +111,15 @@ extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
             tableViewContainer.deleteRows(at: [IndexPath(row: index + 2, section: 0)], with: .left)
         }, completion: { status in self.tableViewContainer.reloadData() } )
         
+    }
+    
+    
+    func screen2ContainerEditNewCategory(index: Int){
+
+        var newRowIndex = statusEditContainer == true ? (delegateScreen2?.returnDataArrayOfCategory().count)! + 1 : (delegateScreen2?.returnDataArrayOfCategory().count)!
+        
+        delegateScreen2!.screen2DataReceiveUpdate()
+        tableViewContainer.reloadData()
     }
     
     

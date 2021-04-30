@@ -976,19 +976,19 @@
                                                             </constraints>
                                                             <state key="normal" backgroundImage="pencil" catalog="system"/>
                                                             <connections>
-                                                                <action selector="buttonChangeNameCategoryAction:" destination="UOL-6e-fL6" eventType="touchUpInside" id="kVI-4i-yKO"/>
+                                                                <action selector="buttonEditNameCategoryAction:" destination="UOL-6e-fL6" eventType="touchUpInside" id="kVI-4i-yKO"/>
                                                             </connections>
                                                         </button>
                                                         <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Select Category" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h5i-Ng-Rfz">
-                                                            <rect key="frame" x="40" y="10" width="238" height="24"/>
+                                                            <rect key="frame" x="40" y="5" width="238" height="34"/>
                                                             <color key="backgroundColor" red="0.40000000000000002" green="0.73725490196078436" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="24" id="asc-n5-P8f"/>
+                                                                <constraint firstAttribute="height" constant="34" id="asc-n5-P8f"/>
                                                                 <constraint firstAttribute="width" constant="141" id="smd-pz-J7I"/>
                                                             </constraints>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                            <textInputTraits key="textInputTraits"/>
+                                                            <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                         </textField>
                                                     </subviews>
                                                     <constraints>
@@ -1019,7 +1019,7 @@
                                             <outlet property="buttonDeleteCategory" destination="bRr-4Y-Upt" id="yME-ZX-Wpt"/>
                                             <outlet property="checkBoxObject" destination="wpx-2t-Yhe" id="FC9-jQ-YEO"/>
                                             <outlet property="constaraintCellChangeCategoryHeight" destination="i7N-rZ-NBL" id="G9f-Or-VXh"/>
-                                            <outlet property="textFieldChangeCategory" destination="h5i-Ng-Rfz" id="Gil-Dz-gLL"/>
+                                            <outlet property="textFieldNameCategory" destination="h5i-Ng-Rfz" id="cgB-6i-Qw9"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

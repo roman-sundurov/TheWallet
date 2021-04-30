@@ -23,7 +23,8 @@ protocol protocolScreen1Delegate{
     func editOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date, id: Int)
     func deleteOperationInRealm(tag: Int)
     func addCategoryInRealm(newName: String, newIcon: String)
-    func deleteCategoryInRealm(tag: Int)
+    func deleteCategoryInRealm(id: Int)
+    func editCategoryInRealm(newName: String, newIcon: String, id: Int)
     
     //функции возврата
     func returnNewTableDataArray() -> [dataOfOperations] //возвращает данные, которые отображаются в данный момент
@@ -347,8 +348,14 @@ class ViewController: UIViewController {
 
 extension ViewController: protocolScreen1Delegate{
     
-    func deleteCategoryInRealm(tag: Int) {
-        Persistence.shared.deleteCategory(idOfObject: delegateScreen2!.returnDataArrayOfCategory()[tag].id)
+    func editCategoryInRealm(newName: String, newIcon: String, id: Int) {
+        print("editCategoryInRealm")
+        Persistence.shared.updateCategory(name: newName, icon: newIcon, idOfObject: id)
+    }
+    
+    
+    func deleteCategoryInRealm(id: Int) {
+        Persistence.shared.deleteCategory(idOfObject: delegateScreen2!.returnDataArrayOfCategory()[id].id)
     }
     
     
