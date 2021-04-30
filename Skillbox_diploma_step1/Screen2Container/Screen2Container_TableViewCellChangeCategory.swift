@@ -13,7 +13,7 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     //MARK: - объявление аутлетов
     @IBOutlet var textFieldNameCategory: UITextField!
     @IBOutlet var buttonDeleteCategory: UIButton!
-    @IBOutlet var buttonChangeNameCategory: UIButton!
+    @IBOutlet var buttonEditNameCategory: UIButton!
     @IBOutlet var checkBoxObject: Checkbox!
     @IBOutlet var constaraintCellChangeCategoryHeight: NSLayoutConstraint!
     
@@ -46,6 +46,11 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
             removeGestureRecognizer(gestureCheckBox!)
             checkBoxObject.isUserInteractionEnabled = false
             print("buttonEditNameCategoryAction1")
+            buttonEditNameCategory.setImage(UIImage.init(systemName: ""), for: .normal) // не работает
+            buttonEditNameCategory.tintColor = UIColor.red
+//            buttonEditNameCategory.titleLabel?.text = "Ok"
+//            buttonEditNameCategory.buttonType = UIButton.ButtonType.
+//            self.layoutIfNeeded()
         }
         else{
             editStatus = false
@@ -57,6 +62,9 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
             addGestureRecognizer(gestureCheckBox!)
             checkBoxObject.isUserInteractionEnabled = true
             print("buttonEditNameCategoryAction2")
+            buttonEditNameCategory.tintColor = UIColor.white
+            
+            delegateScreen2Container?.returnDelegateScreen2().returnDelegateScreen1().editCategoryInRealm(newName: textFieldNameCategory.text!, newIcon: "", id: specCellTag)
         }
     }
     
@@ -108,11 +116,11 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
         
         if delegateScreen2Container?.returnScreen2StatusEditContainer() == true {
             buttonDeleteCategory.isHidden = false
-            buttonChangeNameCategory.isHidden = false
+            buttonEditNameCategory.isHidden = false
         }
         else{
             buttonDeleteCategory.isHidden = true
-            buttonChangeNameCategory.isHidden = true
+            buttonEditNameCategory.isHidden = true
         }
         
     }

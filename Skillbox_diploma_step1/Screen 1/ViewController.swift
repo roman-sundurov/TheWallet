@@ -350,7 +350,7 @@ extension ViewController: protocolScreen1Delegate{
     
     func editCategoryInRealm(newName: String, newIcon: String, id: Int) {
         print("editCategoryInRealm")
-        Persistence.shared.updateCategory(name: newName, icon: newIcon, idOfObject: id)
+        Persistence.shared.updateCategory(name: newName, icon: newIcon, idOfObject: delegateScreen2!.returnDataArrayOfCategory()[id].id)
     }
     
     

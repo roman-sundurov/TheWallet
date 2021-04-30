@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -307,7 +307,7 @@
                                                         <color key="separatorColor" systemColor="separatorColor"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" id="RFQ-xQ-Rlu" customClass="Screen1TableViewCellHeader" customModule="Skillbox_diploma_step1" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28" width="350" height="48"/>
+                                                                <rect key="frame" x="0.0" y="24.333333969116211" width="350" height="48"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RFQ-xQ-Rlu" id="mdA-BI-3Ml">
                                                                     <rect key="frame" x="0.0" y="0.0" width="350" height="48"/>
@@ -330,7 +330,7 @@
                                                                 </connections>
                                                             </tableViewCell>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="operation" id="ydW-iz-Upa" customClass="Screen1TableViewCellOperation" customModule="Skillbox_diploma_step1" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="76" width="350" height="48"/>
+                                                                <rect key="frame" x="0.0" y="72.333333969116211" width="350" height="48"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ydW-iz-Upa" id="46B-Ab-Yrj">
                                                                     <rect key="frame" x="0.0" y="0.0" width="350" height="48"/>
@@ -615,7 +615,7 @@
                                 <color key="separatorColor" systemColor="separatorColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" id="W1S-3K-X9P" customClass="Screen2TableViewCellHeader" customModule="Skillbox_diploma_step1" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="390" height="44.333332061767578"/>
+                                        <rect key="frame" x="0.0" y="24.333333969116211" width="390" height="44.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="W1S-3K-X9P" id="PId-Si-uyN">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="44.333332061767578"/>
@@ -636,7 +636,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellCategory" id="VR3-F6-Huf" customClass="Screen2TableViewCellCategory" customModule="Skillbox_diploma_step1" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72.333332061767578" width="390" height="44.333332061767578"/>
+                                        <rect key="frame" x="0.0" y="68.666666030883789" width="390" height="44.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VR3-F6-Huf" id="hlz-XO-kPc">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="44.333332061767578"/>
@@ -689,7 +689,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellDate" rowHeight="44" id="zpz-xv-mHZ" customClass="Screen2TableViewCellDate" customModule="Skillbox_diploma_step1" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="116.66666412353516" width="390" height="44"/>
+                                        <rect key="frame" x="0.0" y="112.99999809265137" width="390" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zpz-xv-mHZ" id="4K5-hq-kUl">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
@@ -742,7 +742,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellNote" id="hmy-aS-YRO" customClass="Screen2TableViewCellNote" customModule="Skillbox_diploma_step1" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="160.66666412353516" width="390" height="108.33333587646484"/>
+                                        <rect key="frame" x="0.0" y="156.99999809265137" width="390" height="108.33333587646484"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hmy-aS-YRO" id="Xfm-Y8-Isj">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="108.33333587646484"/>
@@ -842,7 +842,7 @@
                                 <color key="sectionIndexBackgroundColor" red="0.39607843139999999" green="0.73725490199999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" id="1UK-TR-vO5" customClass="Screen2Container_TableViewCellHeader" customModule="Skillbox_diploma_step1" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="370" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="24.333333969116211" width="370" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1UK-TR-vO5" id="MI3-kJ-n4M">
                                             <rect key="frame" x="0.0" y="0.0" width="370" height="43.666667938232422"/>
@@ -881,7 +881,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellNewCategory" id="P69-De-spv" customClass="Screen2Container_TableViewCellNewCategory" customModule="Skillbox_diploma_step1" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="71.666667938232422" width="370" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="68.000001907348633" width="370" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P69-De-spv" id="Ffo-Ay-WXn">
                                             <rect key="frame" x="0.0" y="0.0" width="370" height="43.666667938232422"/>
@@ -938,7 +938,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellChangeCategory" id="UOL-6e-fL6" customClass="Screen2Container_TableViewCellChangeCategory" customModule="Skillbox_diploma_step1" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="115.33333587646484" width="370" height="44"/>
+                                        <rect key="frame" x="0.0" y="111.66666984558105" width="370" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UOL-6e-fL6" id="OJe-yl-j3b">
                                             <rect key="frame" x="0.0" y="0.0" width="370" height="44"/>
@@ -969,10 +969,10 @@
                                                             </connections>
                                                         </button>
                                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cdK-Sz-igT">
-                                                            <rect key="frame" x="288" y="11.666666666666664" width="26" height="22"/>
+                                                            <rect key="frame" x="287" y="11.666666666666664" width="27" height="22"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="27" id="N8a-Q6-V5Q"/>
-                                                                <constraint firstAttribute="width" constant="26" id="iSU-bL-dsx"/>
+                                                                <constraint firstAttribute="width" constant="27" id="iSU-bL-dsx"/>
                                                             </constraints>
                                                             <state key="normal" backgroundImage="pencil" catalog="system"/>
                                                             <connections>
@@ -980,7 +980,7 @@
                                                             </connections>
                                                         </button>
                                                         <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Select Category" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h5i-Ng-Rfz">
-                                                            <rect key="frame" x="40" y="5" width="238" height="34"/>
+                                                            <rect key="frame" x="40" y="5" width="237" height="34"/>
                                                             <color key="backgroundColor" red="0.40000000000000002" green="0.73725490196078436" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="34" id="asc-n5-P8f"/>
@@ -1015,8 +1015,8 @@
                                         <color key="backgroundColor" red="0.40000000000000002" green="0.73725490196078436" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <gestureRecognizers/>
                                         <connections>
-                                            <outlet property="buttonChangeNameCategory" destination="cdK-Sz-igT" id="oHQ-Sa-sf1"/>
                                             <outlet property="buttonDeleteCategory" destination="bRr-4Y-Upt" id="yME-ZX-Wpt"/>
+                                            <outlet property="buttonEditNameCategory" destination="cdK-Sz-igT" id="oHQ-Sa-sf1"/>
                                             <outlet property="checkBoxObject" destination="wpx-2t-Yhe" id="FC9-jQ-YEO"/>
                                             <outlet property="constaraintCellChangeCategoryHeight" destination="i7N-rZ-NBL" id="G9f-Or-VXh"/>
                                             <outlet property="textFieldNameCategory" destination="h5i-Ng-Rfz" id="cgB-6i-Qw9"/>
