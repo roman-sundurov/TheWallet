@@ -10,6 +10,7 @@ import UIKit
 protocol protocolScreen2TableViewCellNoteDelegate{
     func tapOutsideNoteTextViewEditToHide()
     func returnNoteView() -> UITextView
+    func setNoteViewText(newText: String)
 }
     
 
@@ -56,13 +57,13 @@ class Screen2TableViewCellNote: UITableViewCell, UITextViewDelegate {
     }
     
     func startCell() {
-        textViewNotes.text = delegateScreen2?.getScreen2MenuArray()[specCellTag].text
+        textViewNotes.text = delegateScreen2?.returnScreen2MenuArray()[specCellTag].text
         
         textViewNotes.textContainer.lineBreakMode = .byTruncatingTail
         textViewNotes.layer.borderColor = UIColor.gray.cgColor
         textViewNotes.layer.borderWidth = 2
         
-        textViewNotes.layer.cornerRadius  = 10
+        textViewNotes.layer.cornerRadius = 10
         
         textViewNotes.text = "Placeholder"
 //        textViewNotes.textColor = UIColor.opaqueSeparator //цвет текста уже opaqueSeparator в Storyboard.
@@ -76,6 +77,14 @@ class Screen2TableViewCellNote: UITableViewCell, UITextViewDelegate {
 
 
 extension Screen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate{
+    
+    
+    func setNoteViewText(newText: String) {
+        textViewNotes.text = newText
+        print("newText= \(newText)")
+        textViewNotes.textColor = UIColor.black
+    }
+    
     
     func returnNoteView() -> UITextView {
 //        tapOutsideNoteTextViewEditToHide()

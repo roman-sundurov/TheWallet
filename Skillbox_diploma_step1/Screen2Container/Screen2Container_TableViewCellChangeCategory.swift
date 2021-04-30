@@ -11,21 +11,66 @@ import SimpleCheckbox
 class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     
     //MARK: - объявление аутлетов
-    @IBOutlet var labelChangeCategory: UILabel!
-    @IBOutlet var buttonDeleteItemObject: UIButton!
+    @IBOutlet var textFieldNameCategory: UITextField!
+    @IBOutlet var buttonDeleteCategory: UIButton!
+    @IBOutlet var buttonEditNameCategory: UIButton!
     @IBOutlet var checkBoxObject: Checkbox!
+    @IBOutlet var constaraintCellChangeCategoryHeight: NSLayoutConstraint!
     
     
     //MARK: - делегаты и переменные
     
     var delegateScreen2Container: protocolScreen2ContainerDelegate?
     var specCellTag: Int = 0
+    var gestureCell: UIGestureRecognizer?
+    var gestureCheckBox: UIGestureRecognizer?
+    var editStatus: Bool = false
     
     
     //MARK: - переходы
     
+    @IBAction func buttonDeleteCategoryAction(_ sender: Any) {
+        delegateScreen2Container?.returnDelegateScreen2().returnDelegateScreen1().deleteCategoryInRealm(id: specCellTag)
+        delegateScreen2Container?.screen2ContainerDeleteCategory(index: specCellTag)
+    }
+    
+    
+    @IBAction func buttonEditNameCategoryAction(_ sender: Any) {
+        if editStatus == false{
+            editStatus = true
+            textFieldNameCategory.backgroundColor = UIColor.white
+            textFieldNameCategory.textColor = UIColor.systemGray
+            textFieldNameCategory.isEnabled = true
+            textFieldNameCategory.becomeFirstResponder()
+            removeGestureRecognizer(gestureCell!)
+            removeGestureRecognizer(gestureCheckBox!)
+            checkBoxObject.isUserInteractionEnabled = false
+            print("buttonEditNameCategoryAction1")
+            buttonEditNameCategory.setImage(UIImage.init(systemName: ""), for: .normal) // не работает
+            buttonEditNameCategory.tintColor = UIColor.red
+//            buttonEditNameCategory.titleLabel?.text = "Ok"
+//            buttonEditNameCategory.buttonType = UIButton.ButtonType.
+//            self.layoutIfNeeded()
+        }
+        else{
+            editStatus = false
+            textFieldNameCategory.backgroundColor = UIColor.clear
+            textFieldNameCategory.textColor = UIColor.white
+            textFieldNameCategory.isEnabled = false
+            textFieldNameCategory.resignFirstResponder()
+            addGestureRecognizer(gestureCell!)
+            addGestureRecognizer(gestureCheckBox!)
+            checkBoxObject.isUserInteractionEnabled = true
+            print("buttonEditNameCategoryAction2")
+            buttonEditNameCategory.tintColor = UIColor.white
+            
+            delegateScreen2Container?.returnDelegateScreen2().returnDelegateScreen1().editCategoryInRealm(newName: textFieldNameCategory.text!, newIcon: "", id: specCellTag)
+        }
+    }
+    
+    
     @objc func closeWindows() {
-        delegateScreen2Container?.returnDelegateScreen2().setCategoryInNewOperation(category: labelChangeCategory.text!) //запись выбранной категории во временную переменную
+        delegateScreen2Container?.returnDelegateScreen2().setCategoryInNewOperation(category: textFieldNameCategory.text!) //запись выбранной категории во временную переменную
         delegateScreen2Container?.closeWindows(specCellTag) //закрытие PopUp-окна
         print("ClosePopup from ContainerCell")
     }
@@ -45,25 +90,14 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     }
     
     
-    @IBAction func buttonDeleteItem(_ sender: Any) {
-        delegateScreen2Container?.buttonDeleteItemHandler(checkBoxObject.tag)
-    }
-    
-    @objc func checkboxValueChanged(sender: Checkbox) {
-        switch checkBoxObject.isChecked {
-        case true:
-            delegateScreen2Container?.checkBoxStatus(checkBoxObject.tag, true)
-        case false:
-            delegateScreen2Container?.checkBoxStatus(checkBoxObject.tag, false)
-        }
-    }
-    
     func startCell() {
-        checkBoxObject.addTarget(self, action: #selector(checkboxValueChanged(sender:)), for: .valueChanged)
-        labelChangeCategory.text = delegateScreen2Container?.giveScreen2ContainerMenuArray()[specCellTag].name
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(closeWindows))
+//        checkBoxObject.addTarget(self, action: #selector(closeWindows), for: .valueChanged)
+        textFieldNameCategory.text = delegateScreen2Container?.returnDelegateScreen2().returnDataArrayOfCategory()[specCellTag].name
+        gestureCell = UITapGestureRecognizer(target: self, action: #selector(closeWindows))
+        gestureCheckBox = UITapGestureRecognizer(target: self, action: #selector(closeWindows))
         isUserInteractionEnabled = true
-        addGestureRecognizer(gesture)
+        addGestureRecognizer(gestureCell!)
+        checkBoxObject.addGestureRecognizer(gestureCheckBox!)
         checkBoxObject.tag = specCellTag
         checkBoxObject.checkmarkStyle = .tick
         checkBoxObject.borderLineWidth = 0
@@ -71,16 +105,29 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
         checkBoxObject.checkmarkSize = 1
         checkBoxObject.checkmarkColor = .white
         
-        if delegateScreen2Container?.returnDelegateScreen2().returnNewOperation().category == delegateScreen2Container?.giveScreen2ContainerMenuArray()[specCellTag].name {
+        textFieldNameCategory.layer.cornerRadius = 10
+        
+        if delegateScreen2Container?.returnDelegateScreen2().returnNewOperation().category ==  delegateScreen2Container?.returnDelegateScreen2().returnDataArrayOfCategory()[specCellTag].name {
             checkBoxObject.isChecked = true
         }
         else{
             checkBoxObject.isChecked = false
         }
+        
+        if delegateScreen2Container?.returnScreen2StatusEditContainer() == true {
+            buttonDeleteCategory.isHidden = false
+            buttonEditNameCategory.isHidden = false
+        }
+        else{
+            buttonDeleteCategory.isHidden = true
+            buttonEditNameCategory.isHidden = true
+        }
+        
     }
     
     func setTag(tag: Int) {
         specCellTag = tag
+        print("specCellTag ChangeCategory= \(specCellTag)")
     }
 
 }
