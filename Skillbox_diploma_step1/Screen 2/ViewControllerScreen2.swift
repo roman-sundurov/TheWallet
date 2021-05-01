@@ -76,7 +76,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     var tapOfChangeCategoryOpenPopUp: UITapGestureRecognizer?
     var tapOutsideTextViewToGoFromTextView: UITapGestureRecognizer?
     var dataArrayOfCategory: [DataOfCategories] = [] //хранение оригинала данных из Realm
-    var keyboardHeight: CGFloat? //хранит высоту клавиатуры
+    var keyboardHeight: CGFloat = 0 //хранит высоту клавиатуры
     
     
     //MARK: - объекты
@@ -334,12 +334,10 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         print("pressesBegan")
         if screen2StatusEditing == true && self.constraintContainerBottomPoint.constant != -515{
-//            self.constraintContainerBottomHeight.constant = CGFloat(50*(self.screen2MenuArray.count+3+1))
             self.constraintContainerBottomPoint.constant = 300
         }
         else if self.constraintContainerBottomPoint.constant != -515{
-//            self.constraintContainerBottomHeight.constant = CGFloat(50*(self.screen2MenuArray.count+3))
-            self.constraintContainerBottomPoint.constant = 250
+//            self.constraintContainerBottomPoint.constant = 250
         }
     }
     
@@ -402,13 +400,14 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     //MARK: - other functions
     
     @objc func keyboardWillAppear(_ notification: Notification) {
+        print("keyboardWillAppear")
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
             let keyboardRectangle = keyboardFrame.cgRectValue
             keyboardHeight = keyboardRectangle.height
         }
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             if self.constraintContainerBottomPoint.constant == 50{
-                self.constraintContainerBottomPoint.constant = self.keyboardHeight! + CGFloat.init(20)
+                self.constraintContainerBottomPoint.constant = self.keyboardHeight + CGFloat.init(20)
             }
             self.view.layoutIfNeeded()
         }, completion: {isCompleted in })
@@ -416,10 +415,11 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
 
     
     @objc func keyboardWillDisappear(_ notification: Notification) {
-        if keyboardHeight != nil{
+        if keyboardHeight != 0{
             print("keyboardWillDisappear")
+            keyboardHeight = 0
             UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
-                if self.constraintContainerBottomPoint.constant == self.keyboardHeight! + CGFloat.init(20){
+                if self.constraintContainerBottomPoint.constant == self.keyboardHeight + CGFloat.init(20){
                     self.constraintContainerBottomPoint.constant = 50
                 }
                 self.view.layoutIfNeeded()
