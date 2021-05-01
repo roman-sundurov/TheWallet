@@ -11,7 +11,7 @@ protocol protocolScreen1ContainerDelegate{
     func startCell(tag: Int)
 }
 
-class ViewControllerScreen1Container: UIViewController{
+class ViewControllerScreen1ContainerOperation: UIViewController{
     
     
     //MARK: - аутлеты
@@ -66,7 +66,7 @@ class ViewControllerScreen1Container: UIViewController{
     
 }
 
-extension ViewControllerScreen1Container: protocolScreen1ContainerDelegate{
+extension ViewControllerScreen1ContainerOperation: protocolScreen1ContainerDelegate{
     
     func startCell(tag: Int) {
         

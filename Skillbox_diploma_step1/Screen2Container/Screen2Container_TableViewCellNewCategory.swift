@@ -25,10 +25,13 @@ class Screen2Container_TableViewCellNewCategory: UITableViewCell {
     @IBAction func buttonAddNewCategoryAction(_ sender: Any) {
         if textFieldNewCategory.text != "" {
             delegateScreen2Container?.returnDelegateScreen2().returnDelegateScreen1().addCategoryInRealm(newName: textFieldNewCategory.text!, newIcon: "")
+            delegateScreen2Container?.screen2ContainerAddNewCategory()
+            textFieldNewCategoryClear()
+            textFieldNewCategory.endEditing(true)
         }
-        delegateScreen2Container?.screen2ContainerAddNewCategory()
-        textFieldNewCategoryClear()
-        textFieldNewCategory.endEditing(true)
+        else{
+            delegateScreen2Container?.returnDelegateScreen2().presentAlertErrorAddNewCategory()
+        }
     }
     
     

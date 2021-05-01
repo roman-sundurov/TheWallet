@@ -50,7 +50,6 @@ class ViewController: UIViewController {
     
     //MARK: - объявление аутлетов
     
-    
     @IBOutlet var tableViewScreen1: UITableView!
     @IBOutlet var buttonDaily: UIView!
     @IBOutlet var buttonWeekly: UIView!
@@ -65,8 +64,9 @@ class ViewController: UIViewController {
     @IBOutlet var labelAmountOfIncome: UILabel!
     @IBOutlet var labelAmountOfExpenses: UILabel!
     @IBOutlet var constraintTopMenuBottomStrip: NSLayoutConstraint!
-    @IBOutlet var containerBottomScreen1: UIView!
+    @IBOutlet var containerBottomOperationScreen1: UIView!
     @IBOutlet var constraintContainerBottomPoint: NSLayoutConstraint!
+    @IBOutlet var containerBottomGraphScreen1: UIView!
     
     
     //MARK: - делегаты и переменные
@@ -74,7 +74,7 @@ class ViewController: UIViewController {
     
     var tapOfActionsOperationsOpenPopUpScreen1: UITapGestureRecognizer?
     var delegateScreen2: protocolScreen2Delegate?
-    var delegateScreen1Container: protocolScreen1ContainerDelegate?
+    private var delegateScreen1Container: protocolScreen1ContainerDelegate?
     
     var dataArrayOfOperationsOriginal: [dataOfOperations] = [] //хранение оригинала данных из Realm
     var dataArrayOfOperations: [dataOfOperations] = [] //хранение модифицированных данных из Realm для конкретного режима отоборажения
@@ -102,7 +102,7 @@ class ViewController: UIViewController {
             delegateScreen2 = vc
             vc.delegateScreen1 = self
         }
-        if let vc = segue.destination as? ViewControllerScreen1Container, segue.identifier == "segueToScreen1Container"{
+        if let vc = segue.destination as? ViewControllerScreen1ContainerOperation, segue.identifier == "segueToScreen1Container"{
             delegateScreen1Container = vc
             vc.delegateScreen1 = self
         }
@@ -159,7 +159,7 @@ class ViewController: UIViewController {
         if tap.state == UIGestureRecognizer.State.ended {
             print("Tap ended")
             let pointOfTap = tap.location(in: self.view)
-            if containerBottomScreen1.frame.contains(pointOfTap) {
+            if containerBottomOperationScreen1.frame.contains(pointOfTap) {
                 print("Tap inside Container")
             }
             else {
@@ -325,7 +325,7 @@ class ViewController: UIViewController {
         bottomPopInList.layer.cornerRadius = 20
         bottomPopInList.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
-        self.view.insertSubview(self.blurViewScreen1, belowSubview: self.containerBottomScreen1)
+        self.view.insertSubview(self.blurViewScreen1, belowSubview: self.containerBottomOperationScreen1)
         self.blurViewScreen1.backgroundColor = .clear
         self.blurViewScreen1.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -413,7 +413,7 @@ extension ViewController: protocolScreen1Delegate{
     
     
     func actionsOperationsOpenPopUpScreen1(_ tag: Int) {
-        containerBottomScreen1.layer.cornerRadius = 20
+        containerBottomOperationScreen1.layer.cornerRadius = 20
         delegateScreen1Container?.startCell(tag: tag)
         
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
