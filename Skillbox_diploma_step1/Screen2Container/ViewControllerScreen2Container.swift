@@ -14,6 +14,7 @@ protocol protocolScreen2ContainerDelegate {
     func screen2ContainerNewCategorySwicher()
     func screen2ContainerAddNewCategory()
     func screen2ContainerDeleteCategory(index: Int)
+    func presentAlertErrorAddNewCategory()
     
     //функции возврата
     func returnDelegateScreen2() -> protocolScreen2Delegate
@@ -37,21 +38,19 @@ class ViewControllerScreen2Container: UIViewController {
     var animationNewCategoryInCell = false
     
     
-    //MARK: - данные
-//Здесь будет обработка данных в зависимости от tableStatus
-//    let screen2ContainerMenuList0 = Screen2ContainerMenuData(name: "Header", status: false)
-//    let screen2ContainerMenuList1 = Screen2ContainerMenuData(name: "Rental revenue", status: true)
-//    let screen2ContainerMenuList2 = Screen2ContainerMenuData(name: "Car", status: false)
-//    let screen2ContainerMenuList3 = Screen2ContainerMenuData(name: "Salary", status: false)
-//    let screen2ContainerMenuList4 = Screen2ContainerMenuData(name: "Food & Restaurants", status: false)
-//    let screen2ContainerMenuList5 = Screen2ContainerMenuData(name: "Coffee", status: false)
-//    let screen2ContainerMenuList6 = Screen2ContainerMenuData(name: "Mobile Account", status: false)
+    //MARK: - объекты
+    
+    let alertErrorAddNewCategory = UIAlertController(title: "Введите название категории", message: nil, preferredStyle: .alert)
+    
     
     
     //MARK: - viewDidLoad
     
     @objc override func viewDidLoad() {
         super.viewDidLoad()
+        
+        alertErrorAddNewCategory.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        
     }
     
 }
@@ -59,6 +58,11 @@ class ViewControllerScreen2Container: UIViewController {
 //MARK: - additional protocols
 
 extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
+    
+    func presentAlertErrorAddNewCategory() {
+        self.present(alertErrorAddNewCategory, animated: true, completion: nil)
+    }
+    
     
     func returnDelegateScreen2Container_TableViewCellNewCategory() -> protocolScreen2Container_TableViewCellNewCategory {
         return delegateScreen2Container_TableViewCellNewCategory!

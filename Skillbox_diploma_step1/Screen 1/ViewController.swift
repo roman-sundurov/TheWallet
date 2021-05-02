@@ -20,7 +20,6 @@ protocol protocolScreen1Delegate{
     func addOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date)
     func editOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date, id: Int)
     func deleteOperationInRealm(tag: Int)
-    func addCategoryInRealm(newName: String, newIcon: String)
     func deleteCategoryInRealm(id: Int)
     func editCategoryInRealm(newName: String, newIcon: String, id: Int)
     
@@ -354,11 +353,6 @@ extension ViewController: protocolScreen1Delegate{
     
     func deleteCategoryInRealm(id: Int) {
         Persistence.shared.deleteCategory(idOfObject: delegateScreen2!.returnDataArrayOfCategory()[id].id)
-    }
-    
-    
-    func addCategoryInRealm(newName: String, newIcon: String) {
-        Persistence.shared.addCategory(name: newName, icon: newIcon)
     }
     
     

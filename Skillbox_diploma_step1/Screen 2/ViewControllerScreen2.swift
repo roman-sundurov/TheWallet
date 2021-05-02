@@ -12,7 +12,6 @@ protocol protocolScreen2Delegate{
     func changeCategoryOpenPopUpScreen2(_ tag: Int)
     func tableViewScreen2Update(row: Int)
     func screen2DataReceiveUpdate()
-    func presentAlertErrorAddNewCategory()
     
     //функции возврата
     func returnScreen2MenuArray() -> [Screen2MenuData]
@@ -83,7 +82,6 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     
     let alertDatePicker = UIAlertController(title: "Select date", message: nil, preferredStyle: .actionSheet)
     let alertErrorAddNewOperation = UIAlertController(title: "Добавьте обязательные данные", message: nil, preferredStyle: .alert)
-    let alertErrorAddNewCategory = UIAlertController(title: "Введите название категории", message: nil, preferredStyle: .alert)
     let blurViewScreen2 =  UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     var newOperation: ListOfOperations = ListOfOperations()
     let datePicker = UIDatePicker()
@@ -158,10 +156,6 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     
     
     //MARK: - Alerts
-    
-    func createAlertAddNewCategory(){
-        alertErrorAddNewCategory.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-    }
     
     
     func createAlertAddNewOperations(){
@@ -392,7 +386,6 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         createDatePicker()
         createAlertDatePicker()
         createAlertAddNewOperations()
-        createAlertAddNewCategory()
         
     }
     
@@ -434,10 +427,6 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
 //MARK: - additional protocols
 
 extension ViewControllerScreen2: protocolScreen2Delegate{
-    
-    func presentAlertErrorAddNewCategory() {
-        self.present(alertErrorAddNewCategory, animated: true, completion: nil)
-    }
     
     
     func screen2DataReceiveUpdate() {
