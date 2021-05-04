@@ -403,7 +403,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         }
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             if self.constraintContainerBottomPoint.constant == 50{
-                self.constraintContainerBottomPoint.constant = self.keyboardHeight + CGFloat.init(50)
+                self.constraintContainerBottomPoint.constant = self.keyboardHeight + CGFloat.init(20)
             }
             self.view.layoutIfNeeded()
         }, completion: {isCompleted in })
@@ -414,9 +414,9 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         if keyboardHeight != 0{
             print("keyboardWillDisappear")
             keyboardHeight = 0
-            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
                 if self.constraintContainerBottomPoint.constant > 50 {
-                    self.constraintContainerBottomPoint.constant = self.keyboardHeight + CGFloat.init(50)
+                    self.constraintContainerBottomPoint.constant = CGFloat.init(50)
                 }
                 self.view.layoutIfNeeded()
             }, completion: {isCompleted in })
