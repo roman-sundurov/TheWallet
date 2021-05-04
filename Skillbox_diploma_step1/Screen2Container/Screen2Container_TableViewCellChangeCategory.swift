@@ -42,8 +42,8 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
             textFieldNameCategory.textColor = UIColor.systemGray
             textFieldNameCategory.isEnabled = true
             textFieldNameCategory.becomeFirstResponder()
-            removeGestureRecognizer(gestureCell!)
-            removeGestureRecognizer(gestureCheckBox!)
+            removeGestureRecognizer(gestureCell!) // не работает
+            removeGestureRecognizer(gestureCheckBox!) // не работает
             checkBoxObject.isUserInteractionEnabled = false
             print("buttonEditNameCategoryAction1")
             buttonEditNameCategory.setImage(UIImage.init(systemName: ""), for: .normal) // не работает

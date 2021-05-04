@@ -325,15 +325,18 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     let screen2MenuList3 = Screen2MenuData(name: "Notes", text: "")
     
     
-    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        print("pressesBegan")
-        if screen2StatusEditing == true && self.constraintContainerBottomPoint.constant != -515{
-            self.constraintContainerBottomPoint.constant = 300
-        }
-        else if self.constraintContainerBottomPoint.constant != -515{
-//            self.constraintContainerBottomPoint.constant = 250
-        }
-    }
+//    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+//        print("pressesBegan")
+//        print("screen2StatusEditing= \(screen2StatusEditing)")
+//        print("self.constraintContainerBottomPoint.constant= \(self.constraintContainerBottomPoint.constant)")
+//
+//        if screen2StatusEditing == true && self.constraintContainerBottomPoint.constant != -515{
+//            self.constraintContainerBottomPoint.constant = 300
+//        }
+//        else if self.constraintContainerBottomPoint.constant != -515{
+////            self.constraintContainerBottomPoint.constant = 250
+//        }
+//    }
     
     
     //MARK: - viewWillAppear
@@ -400,7 +403,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
         }
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             if self.constraintContainerBottomPoint.constant == 50{
-                self.constraintContainerBottomPoint.constant = self.keyboardHeight + CGFloat.init(20)
+                self.constraintContainerBottomPoint.constant = self.keyboardHeight + CGFloat.init(50)
             }
             self.view.layoutIfNeeded()
         }, completion: {isCompleted in })
@@ -412,8 +415,8 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
             print("keyboardWillDisappear")
             keyboardHeight = 0
             UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
-                if self.constraintContainerBottomPoint.constant == self.keyboardHeight + CGFloat.init(20){
-                    self.constraintContainerBottomPoint.constant = 50
+                if self.constraintContainerBottomPoint.constant > 50 {
+                    self.constraintContainerBottomPoint.constant = self.keyboardHeight + CGFloat.init(50)
                 }
                 self.view.layoutIfNeeded()
             }, completion: {isCompleted in })
