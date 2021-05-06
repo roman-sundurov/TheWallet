@@ -577,6 +577,8 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
 }
 
 
+//MARK: - caching press button protocols
+
 extension ViewControllerScreen2: UITextViewDelegate{
     
     //    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
@@ -594,7 +596,7 @@ extension ViewControllerScreen2: UITextViewDelegate{
 }
 
 
-//MARK: - table Functionality
+//MARK: - table Functionality protocols
 
 extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
     
