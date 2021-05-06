@@ -49,7 +49,7 @@ class DataOfCategories{
 }
 
 
-class ViewControllerScreen2: UIViewController, UITextViewDelegate {
+class ViewControllerScreen2: UIViewController {
 
     //MARK: - объявление аутлетов
     
@@ -325,20 +325,6 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     let screen2MenuList3 = Screen2MenuData(name: "Notes", text: "")
     
     
-//    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-//        print("pressesBegan")
-//        print("screen2StatusEditing= \(screen2StatusEditing)")
-//        print("self.constraintContainerBottomPoint.constant= \(self.constraintContainerBottomPoint.constant)")
-//
-//        if screen2StatusEditing == true && self.constraintContainerBottomPoint.constant != -515{
-//            self.constraintContainerBottomPoint.constant = 300
-//        }
-//        else if self.constraintContainerBottomPoint.constant != -515{
-////            self.constraintContainerBottomPoint.constant = 250
-//        }
-//    }
-    
-    
     //MARK: - viewWillAppear
     
     
@@ -588,6 +574,23 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
         }, completion: {isCompleted in })
     }
     
+}
+
+
+extension ViewControllerScreen2: UITextViewDelegate{
+    
+    //    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+    //        print("pressesBegan")
+    //        print("screen2StatusEditing= \(screen2StatusEditing)")
+    //        print("self.constraintContainerBottomPoint.constant= \(self.constraintContainerBottomPoint.constant)")
+    //
+    //        if screen2StatusEditing == true && self.constraintContainerBottomPoint.constant != -515{
+    //            self.constraintContainerBottomPoint.constant = 300
+    //        }
+    //        else if self.constraintContainerBottomPoint.constant != -515{
+    ////            self.constraintContainerBottomPoint.constant = 250
+    //        }
+    //    }
 }
 
 
