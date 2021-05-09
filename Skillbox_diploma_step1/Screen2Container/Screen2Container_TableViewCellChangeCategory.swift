@@ -14,12 +14,13 @@ protocol protocolScreen2Container_TableViewCellChangeCategory{
     func setPermitionToSetCategory(status: Bool)
 }
 
-class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
+class Screen2Container_TableViewCellChangeCategory: UITableViewCell, UITextFieldDelegate {
     
     //MARK: - объявление аутлетов
     @IBOutlet var textFieldNameCategory: UITextField!
     @IBOutlet var buttonDeleteCategory: UIButton!
     @IBOutlet var buttonEditNameCategory: UIButton!
+    @IBOutlet var buttonConfirmNewName: UIButton!
     @IBOutlet var checkBoxObject: Checkbox!
     @IBOutlet var constaraintCellChangeCategoryHeight: NSLayoutConstraint!
     
@@ -42,7 +43,7 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     }
     
     
-    @IBAction func buttonEditNameCategoryAction(_ sender: Any) {
+    @IBAction func buttonsEditNameCategoryAction(_ sender: Any) {
         if editStatus == false{
             editStatus = true
             textFieldNameCategory.backgroundColor = UIColor.white
@@ -53,16 +54,20 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
 //            removeGestureRecognizer(gestureCheckBox!) // не работает
             checkBoxObject.isUserInteractionEnabled = false
             print("buttonEditNameCategoryAction1")
-            buttonEditNameCategory.setImage(UIImage.init(systemName: ""), for: .normal) // не работает
             buttonEditNameCategory.tintColor = UIColor.red
-//            buttonEditNameCategory.titleLabel?.text = "Ok"
-//            buttonEditNameCategory.buttonType = UIButton.ButtonType.
-//            self.layoutIfNeeded()
+            buttonEditNameCategory.isHidden = true
+            buttonConfirmNewName.isHidden = false
             delegateScreen2Container?.setCurrentActiveEditingCell(CategoryID: (delegateScreen2Container?.returnDelegateScreen2().returnDataArrayOfCategory()[specCellTag].id)!)
         }
         else{
             closeEditing()
         }
+    }
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        buttonsEditNameCategoryAction(buttonConfirmNewName)
+        return true
     }
     
     
@@ -122,6 +127,9 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
             buttonEditNameCategory.isHidden = true
         }
         
+        textFieldNameCategory.returnKeyType = .done
+        textFieldNameCategory.delegate = self
+        
     }
     
     
@@ -155,6 +163,8 @@ extension Screen2Container_TableViewCellChangeCategory: protocolScreen2Container
         checkBoxObject.isUserInteractionEnabled = true
         print("buttonEditNameCategoryAction2")
         buttonEditNameCategory.tintColor = UIColor.systemBlue
+        buttonEditNameCategory.isHidden = false
+        buttonConfirmNewName.isHidden = true
         
         delegateScreen2Container?.returnDelegateScreen2().returnDelegateScreen1().editCategoryInRealm(newName: textFieldNameCategory.text!, newIcon: "", id: specCellTag)
         delegateScreen2Container?.setCurrentActiveEditingCell(CategoryID: 0)
