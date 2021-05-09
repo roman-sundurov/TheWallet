@@ -985,7 +985,9 @@
                                                                 <constraint firstAttribute="height" constant="27" id="N8a-Q6-V5Q"/>
                                                                 <constraint firstAttribute="width" constant="27" id="iSU-bL-dsx"/>
                                                             </constraints>
-                                                            <state key="normal" backgroundImage="pencil" catalog="system"/>
+                                                            <state key="normal" backgroundImage="pencil" catalog="system">
+                                                                <color key="titleColor" systemColor="systemBlueColor"/>
+                                                            </state>
                                                             <connections>
                                                                 <action selector="buttonEditNameCategoryAction:" destination="UOL-6e-fL6" eventType="touchUpInside" id="kVI-4i-yKO"/>
                                                             </connections>
@@ -1230,6 +1232,7 @@
                     <view key="view" contentMode="scaleToFill" id="3Yv-NV-gd9">
                         <rect key="frame" x="0.0" y="0.0" width="370" height="521"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="wSg-C4-Wxg"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
@@ -1263,6 +1266,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

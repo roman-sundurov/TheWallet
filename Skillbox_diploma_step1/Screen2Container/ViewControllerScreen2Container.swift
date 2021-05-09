@@ -8,13 +8,13 @@
 import UIKit
 
 protocol protocolScreen2ContainerDelegate {
-    func buttonDeleteCategoryHandler()
     func checkBoxStatus(_ tag: Int,_ type: Bool)
     func closeWindows(_ tag: Int)
     func screen2ContainerNewCategorySwicher()
     func screen2ContainerAddNewCategory()
     func screen2ContainerDeleteCategory(index: Int)
     func presentAlertErrorAddNewCategory()
+    func setCurrentActiveEditingCell(CategoryID: Int)
     
     //функции возврата
     func returnDelegateScreen2() -> protocolScreen2Delegate
@@ -36,6 +36,7 @@ class ViewControllerScreen2Container: UIViewController {
     var delegateScreen2Container_TableViewCellNewCategory: protocolScreen2Container_TableViewCellNewCategory?
     var statusEditContainer: Bool = false
     var animationNewCategoryInCell = false
+    var currentActiveCategoryID: Int = 0
     
     
     //MARK: - объекты
@@ -58,6 +59,41 @@ class ViewControllerScreen2Container: UIViewController {
 //MARK: - additional protocols
 
 extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
+    
+    func setCurrentActiveEditingCell(CategoryID: Int) {
+        currentActiveCategoryID = CategoryID
+        
+        let cells = self.tableViewContainer.visibleCells
+        
+        var n = 0
+        for cell in cells {
+            if n >= 2 {
+                var specCell = cell as! Screen2Container_TableViewCellChangeCategory
+                
+                //Значение "-100" используется, чтобы дать сигнал всем ячейкам свернуть редактирование. Использую его, когда поступает команда свернуть PopUp-окно. Чтобы при следующем появлении оно было без редактирования.
+                if CategoryID == -100 {
+                    specCell.closeEditing()
+                }
+                else{
+                    if CategoryID == 0 {
+                        specCell.setPermitionToSetCategory(status: true)
+                    }
+                    else {
+                        if specCell.returnCategryIdOfCell() != CategoryID{
+                            specCell.closeEditing()
+                            specCell.setPermitionToSetCategory(status: true)
+                        }
+                        else {
+                            specCell.setPermitionToSetCategory(status: false)
+                        }
+                    }
+                }
+            }
+            n += 1
+        }
+        
+    }
+    
     
     func presentAlertErrorAddNewCategory() {
         self.present(alertErrorAddNewCategory, animated: true, completion: nil)
@@ -137,10 +173,6 @@ extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
         tableViewContainer.reloadData()
         delegateScreen2Container_TableViewCellNewCategory?.textFieldNewCategoryClear()
         print("ClosePopup from Container")
-    }
-
-    
-    func buttonDeleteCategoryHandler() {
     }
     
     
