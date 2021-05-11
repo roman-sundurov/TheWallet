@@ -66,6 +66,7 @@ class ViewController: UIViewController {
     @IBOutlet var containerBottomOperationScreen1: UIView!
     @IBOutlet var constraintContainerBottomPoint: NSLayoutConstraint!
     @IBOutlet var containerBottomGraphScreen1: UIView!
+    @IBOutlet var screen1MiniGraph: UIView!
     
     
     //MARK: - делегаты и переменные
@@ -151,6 +152,21 @@ class ViewController: UIViewController {
     @IBAction func buttonYearlyGesture(_ sender: Any) {
         daysForSorting = 365
         changeDaysForSorting()
+    }
+    
+    
+    @objc func switchScreen1GraphContainer(tap: UITapGestureRecognizer){
+        if tap.state == UIGestureRecognizer.State.ended {
+            print("Tap Graph ended")
+//            let pointOfTap = tap.location(in: self.view)
+//            if containerBottomOperationScreen1.frame.contains(pointOfTap) {
+//                print("Tap inside Container")
+//            }
+//            else {
+//                print("Tap outside Container")
+//                actionsOperationsClosePopUpScreen1()
+//            }
+        }
     }
     
     
@@ -335,6 +351,8 @@ class ViewController: UIViewController {
         ])
         self.blurViewScreen1.isHidden = true
         
+        var gesture = UIGestureRecognizer(target: self, action: <#T##Selector?#>)
+        
         self.view.layoutIfNeeded()
         
     }
@@ -403,7 +421,7 @@ extension ViewController: protocolScreen1Delegate{
     }
     
     
-    //MARK: - окрытие PopUp-окна
+    //MARK: - PopUp-окно операции
     
     
     func actionsOperationsOpenPopUpScreen1(_ tag: Int) {
@@ -420,8 +438,6 @@ extension ViewController: protocolScreen1Delegate{
     }
     
     
-    //MARK: - закрытие PopUp-окна
-    
     func actionsOperationsClosePopUpScreen1() {
 //        tableViewScreen2Update(row: 1)
         UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
@@ -433,6 +449,9 @@ extension ViewController: protocolScreen1Delegate{
     }
     
 }
+
+
+//MARK: - PopUp-окна
 
 
 //MARK: - table Functionality

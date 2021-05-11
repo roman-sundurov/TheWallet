@@ -269,14 +269,19 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zd6-bW-CPK" userLabel="lefttPart">
                                         <rect key="frame" x="0.0" y="0.0" width="180" height="200"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="graph" translatesAutoresizingMaskIntoConstraints="NO" id="tv9-gg-AcN">
-                                                <rect key="frame" x="16" y="48.333333333333321" width="148" height="103.66666666666669"/>
-                                            </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ths-aj-OB7">
+                                                <rect key="frame" x="0.0" y="10" width="180" height="180"/>
+                                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="180" id="202-7b-ayZ"/>
+                                                    <constraint firstAttribute="width" constant="180" id="MYg-rn-oIi"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="tv9-gg-AcN" firstAttribute="centerY" secondItem="zd6-bW-CPK" secondAttribute="centerY" id="aAD-4j-w6x"/>
-                                            <constraint firstItem="tv9-gg-AcN" firstAttribute="centerX" secondItem="zd6-bW-CPK" secondAttribute="centerX" id="j6W-tc-8ty"/>
+                                            <constraint firstItem="Ths-aj-OB7" firstAttribute="centerY" secondItem="zd6-bW-CPK" secondAttribute="centerY" id="DZZ-2r-SYc"/>
                                             <constraint firstAttribute="width" constant="180" id="n4k-VJ-C6I"/>
+                                            <constraint firstItem="Ths-aj-OB7" firstAttribute="centerX" secondItem="zd6-bW-CPK" secondAttribute="centerX" id="tzY-jz-YCF"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -427,7 +432,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tkb-Y7-beV" userLabel="Container Bottom Graph">
                                 <rect key="frame" x="-380" y="323" width="370" height="521"/>
                                 <connections>
-                                    <segue destination="cOd-yj-oTb" kind="embed" id="flP-cw-RZ3"/>
+                                    <segue destination="cOd-yj-oTb" kind="embed" identifier="segueToScreen1GraphContainer" id="flP-cw-RZ3"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -472,6 +477,7 @@
                         <outlet property="labelMothly" destination="0g6-AG-eVw" id="bMg-Fk-7aX"/>
                         <outlet property="labelWeekly" destination="M2c-Mq-Y7j" id="Ei7-EA-8zM"/>
                         <outlet property="labelYearly" destination="IA8-wU-yCh" id="kzM-sf-JZL"/>
+                        <outlet property="screen1MiniGraph" destination="Ths-aj-OB7" id="48E-LS-ize"/>
                         <outlet property="tableViewScreen1" destination="Ahz-zl-teV" id="5qR-17-tBk"/>
                         <outlet property="topMenuButtonStrip" destination="oin-I9-C2d" id="qjh-6t-lyy"/>
                         <segue destination="fcp-GB-FKl" kind="presentation" identifier="segueToScreen2" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="ABz-lk-sfP"/>
@@ -1271,7 +1277,6 @@
     <resources>
         <image name="arrow.right" catalog="system" width="128" height="98"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
-        <image name="graph" width="148" height="103.66666412353516"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="plus" catalog="system" width="128" height="113"/>
@@ -1293,6 +1298,9 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
