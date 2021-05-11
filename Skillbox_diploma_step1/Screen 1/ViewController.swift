@@ -351,8 +351,6 @@ class ViewController: UIViewController {
         ])
         self.blurViewScreen1.isHidden = true
         
-        var gesture = UIGestureRecognizer(target: self, action: <#T##Selector?#>)
-        
         self.view.layoutIfNeeded()
         
     }

@@ -297,11 +297,18 @@
                                     <constraint firstAttribute="trailing" secondItem="VWY-eW-xgb" secondAttribute="trailing" id="y7W-di-vVF"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0a3-ee-7ce">
+                                <rect key="frame" x="0.0" y="759" width="390" height="85"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="85" id="YNy-XI-Sif"/>
+                                </constraints>
+                            </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7MB-m0-6NI" userLabel="bottomPopInList">
-                                <rect key="frame" x="10" y="323" width="370" height="521"/>
+                                <rect key="frame" x="10" y="323" width="370" height="419"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T9E-30-cZk">
-                                        <rect key="frame" x="0.0" y="0.0" width="370" height="521"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="370" height="419"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DK8-ZY-0hK">
                                                 <rect key="frame" x="0.0" y="0.0" width="370" height="521"/>
@@ -430,7 +437,7 @@
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tkb-Y7-beV" userLabel="Container Bottom Graph">
-                                <rect key="frame" x="-380" y="323" width="370" height="521"/>
+                                <rect key="frame" x="-380" y="323" width="370" height="419"/>
                                 <connections>
                                     <segue destination="cOd-yj-oTb" kind="embed" identifier="segueToScreen1GraphContainer" id="flP-cw-RZ3"/>
                                 </connections>
@@ -440,8 +447,9 @@
                         <color key="backgroundColor" red="0.39607843139999999" green="0.73725490199999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0fu-iu-rQ4" secondAttribute="trailing" id="1j8-HU-1Mh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="0a3-ee-7ce" secondAttribute="bottom" constant="-34" id="59r-tu-oV1"/>
                             <constraint firstItem="Tkb-Y7-beV" firstAttribute="bottom" secondItem="7MB-m0-6NI" secondAttribute="bottom" id="6wf-Fw-tas"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7MB-m0-6NI" secondAttribute="bottom" constant="-34" id="CUQ-HB-k6o"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7MB-m0-6NI" secondAttribute="bottom" constant="68" id="CUQ-HB-k6o"/>
                             <constraint firstItem="uY8-5i-7qy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="FVk-Zj-aCN"/>
                             <constraint firstItem="GvN-OX-eLc" firstAttribute="top" secondItem="gmF-FQ-Gvr" secondAttribute="bottom" id="I7a-fd-0Ec"/>
                             <constraint firstItem="GvN-OX-eLc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NcC-gP-sub"/>
@@ -453,8 +461,10 @@
                             <constraint firstAttribute="bottom" secondItem="uY8-5i-7qy" secondAttribute="bottom" constant="-311" id="b36-Hu-7yN"/>
                             <constraint firstItem="Tkb-Y7-beV" firstAttribute="top" secondItem="7MB-m0-6NI" secondAttribute="top" id="ci7-f5-Yoh"/>
                             <constraint firstItem="gmF-FQ-Gvr" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jvK-mm-rLS"/>
+                            <constraint firstItem="0a3-ee-7ce" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="kHx-28-p9S"/>
                             <constraint firstItem="gmF-FQ-Gvr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="lgo-6U-coF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="uY8-5i-7qy" secondAttribute="trailing" constant="20" id="mh1-w8-LGa"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0a3-ee-7ce" secondAttribute="trailing" id="sFo-J2-g3p"/>
                             <constraint firstItem="0fu-iu-rQ4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="tLI-BL-QL5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7MB-m0-6NI" secondAttribute="trailing" constant="10" id="xuk-5Q-ezW"/>
                             <constraint firstItem="gmF-FQ-Gvr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zu6-2k-ysM"/>
@@ -1260,7 +1270,7 @@
             <objects>
                 <viewController id="cOd-yj-oTb" customClass="ViewControllerScreen1ContainerGraph" customModule="Skillbox_diploma_step1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Yv-NV-gd9">
-                        <rect key="frame" x="0.0" y="0.0" width="370" height="521"/>
+                        <rect key="frame" x="0.0" y="0.0" width="370" height="419"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="wSg-C4-Wxg"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
