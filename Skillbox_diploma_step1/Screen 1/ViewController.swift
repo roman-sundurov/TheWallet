@@ -59,7 +59,7 @@ class ViewController: UIViewController {
     @IBOutlet var labelWeekly: UILabel!
     @IBOutlet var labelMothly: UILabel!
     @IBOutlet var labelYearly: UILabel!
-    @IBOutlet var bottomPopInList: UIView!
+    @IBOutlet var bottomPopInView: UIView!
     @IBOutlet var labelAmountOfIncome: UILabel!
     @IBOutlet var labelAmountOfExpenses: UILabel!
     @IBOutlet var constraintTopMenuBottomStrip: NSLayoutConstraint!
@@ -67,6 +67,13 @@ class ViewController: UIViewController {
     @IBOutlet var constraintContainerBottomPoint: NSLayoutConstraint!
     @IBOutlet var containerBottomGraphScreen1: UIView!
     @IBOutlet var screen1MiniGraph: UIView!
+    @IBOutlet var screen1BottomMenu: UIView!
+    @IBOutlet var scrollViewFromBottomPopInView: UIScrollView!
+    @IBOutlet var graphFromBottomPopInView: UIView!
+    @IBOutlet var buttonScreen1NewOperation: UIButton!
+    @IBOutlet var buttonScreen1ShowGraph: UIButton!
+    @IBOutlet var buttonScreen1ShowList: UIButton!
+    
     
     
     //MARK: - делегаты и переменные
@@ -74,13 +81,15 @@ class ViewController: UIViewController {
     
     var tapOfActionsOperationsOpenPopUpScreen1: UITapGestureRecognizer?
     var delegateScreen2: protocolScreen2Delegate?
-    private var delegateScreen1Container: protocolScreen1ContainerDelegate?
+    private var delegateScreen1Container: protocolScreen1ContainerOperation?
+    private var delegateScreen1GraphContainer: protocolScreen1GraphContainerGraph?
     
     var dataArrayOfOperationsOriginal: [dataOfOperations] = [] //хранение оригинала данных из Realm
     var dataArrayOfOperations: [dataOfOperations] = [] //хранение модифицированных данных из Realm для конкретного режима отоборажения
     var arrayForIncrease: [Int] = [0] //показывает количество заголовков с новой датой в таблице, которое предшествует конкретной операции
     var daysForSorting: Int = 30
     var tagForEdit: Int = 0
+    var screen1StatusGrapjDisplay = false
     
     
     //MARK: - объекты
@@ -91,12 +100,6 @@ class ViewController: UIViewController {
     
     //MARK: - переходы
     
-    
-    @IBAction func buttonToScreen2(_ sender: Any) {
-        performSegue(withIdentifier: "segueToScreen2", sender: nil)
-    }
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ViewControllerScreen2, segue.identifier == "segueToScreen2" {
             delegateScreen2 = vc
@@ -104,6 +107,10 @@ class ViewController: UIViewController {
         }
         if let vc = segue.destination as? ViewControllerScreen1ContainerOperation, segue.identifier == "segueToScreen1Container"{
             delegateScreen1Container = vc
+            vc.delegateScreen1 = self
+        }
+        if let vc = segue.destination as? ViewControllerScreen1ContainerGraph, segue.identifier == "segueToScreen1GraphContainer"{
+            delegateScreen1GraphContainer = vc
             vc.delegateScreen1 = self
         }
         if let vc = segue.destination as? ViewControllerScreen2, segue.identifier == "segueToScreen2ForEdit"{
@@ -121,6 +128,46 @@ class ViewController: UIViewController {
     
     
     //MARK: - клики
+    
+    
+    @IBAction func buttonActionScreen1NewOperation(_ sender: Any) {
+        performSegue(withIdentifier: "segueToScreen2", sender: nil)
+    }
+    
+    
+    @IBAction func buttonActionScreen1ShowGraph(_ sender: Any) {
+        print("screen1StatusGrapjDisplay= \(screen1StatusGrapjDisplay)")
+        if screen1StatusGrapjDisplay == false {
+            UIView.transition(
+            from: scrollViewFromBottomPopInView,
+            to: graphFromBottomPopInView,
+            duration: 1.0,
+            options: [.transitionFlipFromLeft, .showHideTransitionViews],
+            completion: nil
+          )
+            screen1StatusGrapjDisplay = true
+            buttonScreen1ShowGraph.setImage(UIImage.init(named: "Left-On"), for: .normal)
+            buttonScreen1ShowList.setImage(UIImage.init(named: "Right-Off"), for: .normal)
+        }
+
+    }
+    
+    
+    @IBAction func buttonActionScreen1ShowList(_ sender: Any) {
+        if screen1StatusGrapjDisplay == true {
+            UIView.transition(
+            from: graphFromBottomPopInView,
+            to: scrollViewFromBottomPopInView,
+            duration: 1.0,
+            options: [.transitionFlipFromRight, .showHideTransitionViews],
+            completion: nil
+            )
+            screen1StatusGrapjDisplay = false
+            buttonScreen1ShowGraph.setImage(UIImage.init(named: "Left-Off"), for: .normal)
+            buttonScreen1ShowList.setImage(UIImage.init(named: "Right-On"), for: .normal)
+        }
+//        screen1StatusGrapjDisplay.toggle()
+    }
     
     
     func changeDaysForSorting(){
@@ -265,7 +312,7 @@ class ViewController: UIViewController {
     }
     
     
-    //MARK: - нижнее меню
+    //MARK: - таблица списка операций
     
     func tableNumberOfRowsInSection() -> Int{
         if dataArrayOfOperations.count == 0 { return 1 }
@@ -334,11 +381,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        screen1BottomMenu.screen1Delegate = self
+//        screen1BottomMenu.setScreen1Delegate(vcScreen1: self)
+        
         screen1AllUpdate()
         
-        bottomPopInList.backgroundColor = .red
-        bottomPopInList.layer.cornerRadius = 20
-        bottomPopInList.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        bottomPopInView.backgroundColor = .red
+        bottomPopInView.layer.cornerRadius = 20
+        bottomPopInView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
         self.view.insertSubview(self.blurViewScreen1, belowSubview: self.containerBottomOperationScreen1)
         self.blurViewScreen1.backgroundColor = .clear

@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol protocolScreen1GraphContainerGraph{
+    func startCell()
+}
+
 class ViewControllerScreen1ContainerGraph: UIViewController {
+    
+    var delegateScreen1: ViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,4 +21,12 @@ class ViewControllerScreen1ContainerGraph: UIViewController {
 
     }
 
+}
+
+
+extension ViewControllerScreen1ContainerGraph: protocolScreen1GraphContainerGraph{
+    func startCell() {
+        return
+    }
+    
 }

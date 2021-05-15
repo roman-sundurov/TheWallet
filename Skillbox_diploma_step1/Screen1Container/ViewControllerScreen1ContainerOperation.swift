@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol protocolScreen1ContainerDelegate{
+protocol protocolScreen1ContainerOperation{
     func startCell(tag: Int)
 }
 
@@ -66,7 +66,7 @@ class ViewControllerScreen1ContainerOperation: UIViewController{
     
 }
 
-extension ViewControllerScreen1ContainerOperation: protocolScreen1ContainerDelegate{
+extension ViewControllerScreen1ContainerOperation: protocolScreen1ContainerOperation{
     
     func startCell(tag: Int) {
         
