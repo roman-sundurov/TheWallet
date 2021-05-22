@@ -10,7 +10,9 @@ import UIKit
 @IBDesignable class GraphView: UIView {
     
     // Weekly sample data
-    var graphPoints = [400, -200, 600, -400, 50, 80, -300]
+    var graphPoints: [Double] = [400, -200, 600, -400, 50, 80, -300]
+    var cumulativeNumber: [Double] = []
+    var maxDeviation: Int = 0
     
     private enum Constants{
         static let cornerRadiusSize = CGSize(width: 8.0, height: 8.0)
@@ -23,6 +25,18 @@ import UIKit
     
     
     override func draw(_ rect: CGRect) {
+        
+        //Считается кумулятивные значения в графике
+        for i in graphPoints {
+            if cumulativeNumber.isEmpty {
+                cumulativeNumber.append(i)
+            }
+            else{
+                cumulativeNumber.append(cumulativeNumber.last! + i)
+            }
+        }
+        print("cumulativeNumber= \(cumulativeNumber)")
+        
         
         let width = rect.width
         let height = rect.height
@@ -65,9 +79,13 @@ import UIKit
         let topBoarder = Constants.topBorder
         let bottomBorder = Constants.bottomBorder
         let graphHeight = height - topBoarder - bottomBorder
-        guard let maxValue = graphPoints.max() else { return }
+        guard let maxValue = cumulativeNumber.max() else { return }
+        guard let minValue = cumulativeNumber.min() else { return }
         
-        let columnYPoint = { (graphPoint: Int) -> CGFloat in
+        print("maxValue= \(maxValue)")
+        print("minValue= \(minValue)")
+        
+        let columnYPoint = { (graphPoint: Double) -> CGFloat in
             let yPoint = CGFloat(graphPoint) / CGFloat(maxValue) * graphHeight
             return graphHeight + topBoarder - yPoint //Flip the graph
         }
@@ -84,15 +102,20 @@ import UIKit
         
         // Add points for each item in the graphPoints array
         // at the correct (x, y) for the point
-        
-        var cumulativePlus: Int = graphPoints[0]
         for i in 1..<graphPoints.count {
-            cumulativePlus += graphPoints[i]
-            let nextPoint = CGPoint(x: columnXPoint(i), y: columnYPoint(cumulativePlus))
+            let nextPoint = CGPoint(x: columnXPoint(i), y: columnYPoint(cumulativeNumber[i]))
             graphPath.addLine(to: nextPoint)
         }
-        
         graphPath.stroke()
+    
+        
+        //MARK: - Lines
+        context.saveGState()
+        guard let clippingPath = graphPath.copy() as? UIBezierPath else { return }
+        
+        clippingPath.addLine(to: CGPoint(x: columnXPoint(cumulativeNumber.count-1), y: height))
+        clippingPath.addLine(to: CGPoint(x: columnXPoint(0), y: height))
+        clippingPath.close()
         
     }
     
