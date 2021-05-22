@@ -19,7 +19,7 @@ import UIKit
         static let margin: CGFloat = 20.0
         static let topBorder: CGFloat = 60
         static let bottomBorder: CGFloat = 50
-        static let colorAlpha: CGFloat = 0.3
+        static let colorAlpha: CGFloat = 0.5
         static let circleDiameter: CGFloat = 5.0
     }
     
@@ -36,6 +36,7 @@ import UIKit
             }
         }
         print("cumulativeNumber= \(cumulativeNumber)")
+        print("graphPoints= \(graphPoints)")
         
         
         let width = rect.width
@@ -65,7 +66,7 @@ import UIKit
     
     
         //MARK: - Points
-        
+
         //Calculating the x point
         let margin = Constants.margin
         let graphWidth = width - margin * 2 - 4
@@ -74,49 +75,91 @@ import UIKit
             let spacing = graphWidth / CGFloat(self.graphPoints.count - 1)
             return CGFloat(column) * spacing + margin + 2
         }
-        
+
         //Calculating the y point
         let topBoarder = Constants.topBorder
         let bottomBorder = Constants.bottomBorder
         let graphHeight = height - topBoarder - bottomBorder
         guard let maxValue = cumulativeNumber.max() else { return }
         guard let minValue = cumulativeNumber.min() else { return }
-        
+
         print("maxValue= \(maxValue)")
         print("minValue= \(minValue)")
-        
+
         let columnYPoint = { (graphPoint: Double) -> CGFloat in
             let yPoint = CGFloat(graphPoint) / CGFloat(maxValue) * graphHeight
             return graphHeight + topBoarder - yPoint //Flip the graph
         }
-        
+
         // Draw the line graph
         UIColor.white.setFill()
         UIColor.white.setStroke()
-        
+
         // Set up the points line
         let graphPath = UIBezierPath()
-        
+
         // Go to start of line
         graphPath.move(to: CGPoint(x: columnXPoint(0), y: columnYPoint(graphPoints[0])))
-        
+
         // Add points for each item in the graphPoints array
         // at the correct (x, y) for the point
-        for i in 1..<graphPoints.count {
+        for i in 1..<cumulativeNumber.count {
             let nextPoint = CGPoint(x: columnXPoint(i), y: columnYPoint(cumulativeNumber[i]))
             graphPath.addLine(to: nextPoint)
         }
         graphPath.stroke()
-    
-        
-        //MARK: - Lines
+
+
+        //MARK: - GraphLine
         context.saveGState()
         guard let clippingPath = graphPath.copy() as? UIBezierPath else { return }
-        
+
         clippingPath.addLine(to: CGPoint(x: columnXPoint(cumulativeNumber.count-1), y: height))
         clippingPath.addLine(to: CGPoint(x: columnXPoint(0), y: height))
         clippingPath.close()
+        clippingPath.addClip()
+
+        let highestYPoint = columnYPoint(maxValue)
+        let graphStartPoint = CGPoint(x: margin, y: highestYPoint)
+        print("highestYPoint= \(highestYPoint)")
+        print("bounds.height= \(bounds.height)")
+        let graphEndPoint = CGPoint(x: margin, y: bounds.height)
+
+        context.drawLinearGradient(gradient, start: graphStartPoint, end: graphEndPoint, options: [])
+        context.restoreGState()
+
+        graphPath.lineWidth = 2.0
+        graphPath.stroke()
+
+
+        //MARK: - Circles on top graph
+        for i in 0..<cumulativeNumber.count {
+            var point = CGPoint(x: columnXPoint(i), y: columnYPoint(cumulativeNumber[i]))
+            point.x -= Constants.circleDiameter / 2
+            point.y -= Constants.circleDiameter / 2
+
+            let circle = UIBezierPath(ovalIn: CGRect(origin: point, size: CGSize(width: Constants.circleDiameter, height: Constants.circleDiameter)))
+            circle.fill()
+        }
         
+        
+        //MARK: - Rulers
+        let lineParth = UIBezierPath()
+        
+        lineParth.move(to: CGPoint(x: margin, y: topBoarder))
+        lineParth.addLine(to: CGPoint(x: width-margin, y: topBoarder))
+        
+        lineParth.move(to: CGPoint(x: margin, y: graphHeight / 2 + topBoarder))
+        lineParth.addLine(to: CGPoint(x: width-margin, y: graphHeight / 2 + topBoarder))
+        
+        lineParth.move(to: CGPoint(x: margin, y: height - bottomBorder))
+        lineParth.addLine(to: CGPoint(x: width-margin, y: height - bottomBorder))
+        
+        let color = UIColor(white: 1.0, alpha: Constants.colorAlpha)
+        color.setStroke()
+        
+        lineParth.lineWidth = 1.0
+        lineParth.stroke()
     }
     
 }
