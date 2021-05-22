@@ -82,7 +82,7 @@ class ViewController: UIViewController {
     var tapOfActionsOperationsOpenPopUpScreen1: UITapGestureRecognizer?
     var delegateScreen2: protocolScreen2Delegate?
     private var delegateScreen1Container: protocolScreen1ContainerOperation?
-    private var delegateScreen1GraphContainer: protocolScreen1GraphContainerGraph?
+    private var delegateScreen1GraphContainer: protocolScreen1ContainerGraph?
     
     var dataArrayOfOperationsOriginal: [dataOfOperations] = [] //хранение оригинала данных из Realm
     var dataArrayOfOperations: [dataOfOperations] = [] //хранение модифицированных данных из Realm для конкретного режима отоборажения

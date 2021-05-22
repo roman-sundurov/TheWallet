@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <device id="retina6_0" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Image references" minToolsVersion="12.0"/>
@@ -295,7 +295,6 @@
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="48" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ahz-zl-teV">
                                                         <rect key="frame" x="10" y="20" width="350" height="501"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                        <color key="separatorColor" systemColor="separatorColor"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" id="RFQ-xQ-Rlu" customClass="Screen1TableViewCellHeader" customModule="Skillbox_diploma_step1" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="24.333333969116211" width="350" height="48"/>
@@ -316,6 +315,7 @@
                                                                         <constraint firstItem="HV2-NI-zmt" firstAttribute="leading" secondItem="mdA-BI-3Ml" secondAttribute="leading" constant="15" id="Yhp-b0-FKR"/>
                                                                     </constraints>
                                                                 </tableViewCellContentView>
+                                                                <color key="backgroundColor" name="InterfaceColorWhite"/>
                                                                 <connections>
                                                                     <outlet property="labelHeaderDate" destination="HV2-NI-zmt" id="cTa-kY-TtU"/>
                                                                 </connections>
@@ -364,6 +364,7 @@
                                                                         <constraint firstItem="yjw-O0-22c" firstAttribute="centerY" secondItem="46B-Ab-Yrj" secondAttribute="centerY" id="zMx-Wr-6Ip"/>
                                                                     </constraints>
                                                                 </tableViewCellContentView>
+                                                                <color key="backgroundColor" name="InterfaceColorWhite"/>
                                                                 <connections>
                                                                     <outlet property="currencyStatus" destination="zZh-tN-A21" id="FhE-G9-BOd"/>
                                                                     <outlet property="labelAmount" destination="7mc-Q3-sOj" id="KsM-mf-Xlk"/>
@@ -378,7 +379,7 @@
                                                         </connections>
                                                     </tableView>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" name="InterfaceColorWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="521" id="Fgo-ue-L6w"/>
                                                     <constraint firstAttribute="bottom" secondItem="Ahz-zl-teV" secondAttribute="bottom" id="MeI-E1-ZnC"/>
@@ -461,7 +462,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.87450980392156863" green="0.87058823529411766" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" name="InterfaceColorDownMenu"/>
                                 <constraints>
                                     <constraint firstItem="JOY-f1-nxB" firstAttribute="leading" secondItem="0a3-ee-7ce" secondAttribute="leading" constant="35" id="ELa-RB-grm"/>
                                     <constraint firstItem="JfS-mQ-pnU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Yc1-un-XfY" secondAttribute="trailing" id="Oeo-pL-cCF"/>
@@ -487,7 +488,7 @@
                             </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" red="0.39607843139999999" green="0.73725490199999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="InterfaceColorGreen"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0fu-iu-rQ4" secondAttribute="trailing" id="1j8-HU-1Mh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="0a3-ee-7ce" secondAttribute="bottom" constant="-34" id="59r-tu-oV1"/>
@@ -648,15 +649,16 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="54"/>
                                         <state key="normal" title="+$">
-                                            <color key="titleColor" red="0.14624351259999999" green="0.61100596190000001" blue="0.01177703496" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="titleColor" red="0.14509803921568626" green="0.61176470588235299" blue="0.011764705882352941" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="0" borderStyle="roundedRect" textAlignment="right" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="TtF-Sw-fS5">
                                         <rect key="frame" x="163" y="10" width="151" height="80"/>
+                                        <color key="backgroundColor" name="InterfaceColorWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="N31-3v-c5p"/>
                                         </constraints>
-                                        <color key="textColor" systemColor="opaqueSeparatorColor"/>
+                                        <color key="textColor" red="0.14509803921568626" green="0.61176470588235299" blue="0.011764705882352941" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="42"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" spellCheckingType="no" keyboardType="numberPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                         <connections>
@@ -684,7 +686,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="252" id="0cK-ex-OdT"/>
                                 </constraints>
-                                <color key="separatorColor" systemColor="separatorColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" id="W1S-3K-X9P" customClass="Screen2TableViewCellHeader" customModule="Skillbox_diploma_step1" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="24.333333969116211" width="390" height="44.333332061767578"/>
@@ -706,6 +707,7 @@
                                                 <constraint firstItem="yV5-Cb-IjI" firstAttribute="leading" secondItem="PId-Si-uyN" secondAttribute="leading" constant="15" id="l8y-pJ-D6X"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="InterfaceColorWhite"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellCategory" id="VR3-F6-Huf" customClass="Screen2TableViewCellCategory" customModule="Skillbox_diploma_step1" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="68.666666030883789" width="390" height="44.333332061767578"/>
@@ -753,6 +755,7 @@
                                                 <constraint firstItem="Zre-LC-Ow4" firstAttribute="leading" secondItem="hlz-XO-kPc" secondAttribute="leading" constant="15" id="xW3-8w-jVG"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="InterfaceColorWhite"/>
                                         <gestureRecognizers/>
                                         <connections>
                                             <outlet property="buttonSelectCategory" destination="mJl-dp-geC" id="Vfi-zg-rsk"/>
@@ -806,6 +809,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="Ip7-Zv-FUs" secondAttribute="trailing" constant="15" id="xjB-Xn-y0z"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="InterfaceColorWhite"/>
                                         <gestureRecognizers/>
                                         <connections>
                                             <outlet property="buttonSelectDate" destination="Ip7-Zv-FUs" id="TVB-Gr-vgH"/>
@@ -840,6 +844,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="HAo-mj-zoz" secondAttribute="trailing" constant="10" id="MBR-GI-ZGM"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="InterfaceColorWhite"/>
                                         <connections>
                                             <outlet property="textViewNotes" destination="HAo-mj-zoz" id="3jA-n8-xiV"/>
                                         </connections>
@@ -862,7 +867,7 @@
                             </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="EOk-oA-Pj3"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="InterfaceColorWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="7hO-0B-VtP" firstAttribute="leading" secondItem="EOk-oA-Pj3" secondAttribute="leading" id="5Ob-2t-L3S"/>
@@ -1317,8 +1322,22 @@
                     <view key="view" contentMode="scaleToFill" id="3Yv-NV-gd9">
                         <rect key="frame" x="0.0" y="0.0" width="370" height="426"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TfC-jB-uCS" customClass="GraphView" customModule="Skillbox_diploma_step1" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="370" height="250"/>
+                                <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="Zz5-Qd-48T"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="wSg-C4-Wxg"/>
-                        <color key="backgroundColor" systemColor="systemPinkColor"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="TfC-jB-uCS" firstAttribute="top" secondItem="wSg-C4-Wxg" secondAttribute="top" id="6Ao-Rl-QaD"/>
+                            <constraint firstItem="wSg-C4-Wxg" firstAttribute="trailing" secondItem="TfC-jB-uCS" secondAttribute="trailing" id="EE9-TG-XZe"/>
+                            <constraint firstItem="TfC-jB-uCS" firstAttribute="leading" secondItem="wSg-C4-Wxg" secondAttribute="leading" id="Ppg-bO-Lqx"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nZN-lc-TzZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1341,6 +1360,15 @@
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="InterfaceColorDownMenu">
+            <color red="0.875" green="0.87000000476837158" blue="0.87800002098083496" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="InterfaceColorGreen">
+            <color red="0.43799999356269836" green="0.76700001955032349" blue="0.77799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="InterfaceColorWhite">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
@@ -1355,6 +1383,9 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol protocolScreen1GraphContainerGraph{
+protocol protocolScreen1ContainerGraph{
     func startCell()
 }
 
@@ -24,7 +24,7 @@ class ViewControllerScreen1ContainerGraph: UIViewController {
 }
 
 
-extension ViewControllerScreen1ContainerGraph: protocolScreen1GraphContainerGraph{
+extension ViewControllerScreen1ContainerGraph: protocolScreen1ContainerGraph{
     func startCell() {
         return
     }
