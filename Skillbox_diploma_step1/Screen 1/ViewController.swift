@@ -386,9 +386,13 @@ class ViewController: UIViewController {
         
         screen1AllUpdate()
         
-        bottomPopInView.backgroundColor = .red
-        bottomPopInView.layer.cornerRadius = 20
-        bottomPopInView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+//        bottomPopInView.backgroundColor = .red
+//        bottomPopInView.layer.cornerRadius = 20
+//        bottomPopInView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
+        scrollViewFromBottomPopInView.backgroundColor = .red
+        scrollViewFromBottomPopInView.layer.cornerRadius = 20
+        scrollViewFromBottomPopInView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
         self.view.insertSubview(self.blurViewScreen1, belowSubview: self.containerBottomOperationScreen1)
         self.blurViewScreen1.backgroundColor = .clear
