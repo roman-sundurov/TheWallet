@@ -13,11 +13,15 @@ protocol protocolScreen1ContainerGraph{
 
 class ViewControllerScreen1ContainerGraph: UIViewController {
     
+    @IBOutlet var graphView: GraphView!
     var delegateScreen1: ViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        graphView.layer.cornerRadius = 20
+        graphView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner]
+        graphView.clipsToBounds = true
 
     }
 

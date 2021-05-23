@@ -1432,6 +1432,9 @@
                             <constraint firstItem="TfC-jB-uCS" firstAttribute="leading" secondItem="wSg-C4-Wxg" secondAttribute="leading" id="Ppg-bO-Lqx"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="graphView" destination="TfC-jB-uCS" id="okI-ya-IaK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nZN-lc-TzZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

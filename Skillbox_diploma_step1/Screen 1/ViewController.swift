@@ -381,19 +381,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        screen1BottomMenu.screen1Delegate = self
-//        screen1BottomMenu.setScreen1Delegate(vcScreen1: self)
-        
         screen1AllUpdate()
         
-//        bottomPopInView.backgroundColor = .red
-//        bottomPopInView.layer.cornerRadius = 20
-//        bottomPopInView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        //округление углов на первом экране
+        bottomPopInView.layer.cornerRadius = 20
+        bottomPopInView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
-        scrollViewFromBottomPopInView.backgroundColor = .red
-        scrollViewFromBottomPopInView.layer.cornerRadius = 20
-        scrollViewFromBottomPopInView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        
+        bottomPopInView.clipsToBounds = true
+//        containerBottomGraphScreen1.clipsToBounds = true
+
+        //Добавление Blur-эффекта
         self.view.insertSubview(self.blurViewScreen1, belowSubview: self.containerBottomOperationScreen1)
         self.blurViewScreen1.backgroundColor = .clear
         self.blurViewScreen1.translatesAutoresizingMaskIntoConstraints = false
