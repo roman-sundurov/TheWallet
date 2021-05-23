@@ -26,6 +26,8 @@ protocol protocolScreen1Delegate{
     //функции возврата
     func returnNewTableDataArray() -> [dataOfOperations] //возвращает данные, которые отображаются в данный момент
     func returnArrayForIncrease() -> [Int] //возвращает инкремент каждой ячейки основной таблице. Показывает количество заголовков до конкретной ячейки.
+    func returnDaysForSorting() -> Int
+    func returnGraphData() -> [Date: Double]
 }
 
 class dataOfOperations{
@@ -90,6 +92,7 @@ class ViewController: UIViewController {
     var daysForSorting: Int = 30
     var tagForEdit: Int = 0
     var screen1StatusGrapjDisplay = false
+    var graphData: [Date: Double] = [:]
     
     
     //MARK: - объекты
@@ -319,6 +322,7 @@ class ViewController: UIViewController {
         arrayForIncrease = [1]
         var previousDay: Int = 0
         var counter: Int = 0
+        var cumulativeSumOfDay: Double = 0 //сохраняет кумулятивную сумму операций за каждый день из расчёта
         for x in dataArrayOfOperations {
             if Calendar.current.component(.day, from: x.date) != previousDay{
                 if counter == 0 {
@@ -326,12 +330,17 @@ class ViewController: UIViewController {
                 else{
                     arrayForIncrease.append(arrayForIncrease.last!)
                     arrayForIncrease.append(arrayForIncrease.last! + 1)
+                    graphData.updateValue(cumulativeSumOfDay, forKey: x.date)
                 }
                 previousDay = Calendar.current.component(.day, from: x.date)
+                cumulativeSumOfDay = 0 //при начале нового дня сумма обнуляется
             }
             else {
+                cumulativeSumOfDay += x.amount
                 arrayForIncrease.append(arrayForIncrease.last!)
             }
+            //последняя дата всегда убегает
+            graphData.updateValue(cumulativeSumOfDay, forKey: x.date)
             counter += 1
         }
         arrayForIncrease.append(arrayForIncrease.last!)
@@ -411,6 +420,16 @@ class ViewController: UIViewController {
 //MARK: - additional protocols
 
 extension ViewController: protocolScreen1Delegate{
+    
+    func returnGraphData() -> [Date : Double] {
+        return graphData
+    }
+    
+    
+    func returnDaysForSorting() -> Int {
+        return daysForSorting
+    }
+    
     
     func editCategoryInRealm(newName: String, newIcon: String, id: Int) {
         print("editCategoryInRealm")

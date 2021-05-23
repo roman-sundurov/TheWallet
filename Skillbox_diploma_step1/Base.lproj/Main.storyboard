@@ -1336,7 +1336,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5wu-rL-jz5">
-                                        <rect key="frame" x="340" y="46" width="30" height="29"/>
+                                        <rect key="frame" x="340" y="5" width="30" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="tXI-xQ-WsO"/>
                                         </constraints>
@@ -1412,15 +1412,26 @@
                                             </label>
                                         </subviews>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="in7-n4-I2v">
+                                        <rect key="frame" x="340" y="96" width="30" height="29"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="iFz-Xl-zbP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-Medium" family="Avenir Next Condensed" pointSize="21"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="3Fn-MS-VhK" secondAttribute="bottom" constant="36" id="2mJ-OP-TDU"/>
-                                    <constraint firstItem="5wu-rL-jz5" firstAttribute="top" secondItem="TfC-jB-uCS" secondAttribute="top" constant="46" id="PMG-Zg-0V9"/>
+                                    <constraint firstItem="5wu-rL-jz5" firstAttribute="top" secondItem="TfC-jB-uCS" secondAttribute="top" constant="5" id="PMG-Zg-0V9"/>
                                     <constraint firstAttribute="height" constant="250" id="Zz5-Qd-48T"/>
                                     <constraint firstAttribute="trailing" secondItem="5wu-rL-jz5" secondAttribute="trailing" id="ezo-Ut-0nw"/>
                                     <constraint firstAttribute="trailing" secondItem="3Fn-MS-VhK" secondAttribute="trailing" id="or4-wS-44a"/>
+                                    <constraint firstItem="in7-n4-I2v" firstAttribute="top" secondItem="5wu-rL-jz5" secondAttribute="bottom" constant="62" id="p9p-6L-A56"/>
                                     <constraint firstAttribute="bottom" secondItem="oIb-td-Ixo" secondAttribute="bottom" constant="8" id="qX1-Cz-uA6"/>
                                     <constraint firstItem="oIb-td-Ixo" firstAttribute="centerX" secondItem="TfC-jB-uCS" secondAttribute="centerX" id="toF-pe-oCR"/>
+                                    <constraint firstAttribute="trailing" secondItem="in7-n4-I2v" secondAttribute="trailing" id="xhw-OB-nOA"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1434,6 +1445,7 @@
                     </view>
                     <connections>
                         <outlet property="graphView" destination="TfC-jB-uCS" id="okI-ya-IaK"/>
+                        <outlet property="weeklyStackView" destination="oIb-td-Ixo" id="dZu-IC-15R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nZN-lc-TzZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -7,23 +7,22 @@
 
 import UIKit
 
+protocol protocolGraphView{
+    func setGraphPoints(Points: [Double])
+}
+
 @IBDesignable class GraphView: UIView {
-    
-    
-    //MARK: - объявление аутлетов
-    
-    
-    
     
     // Weekly sample data
     var graphPoints: [Double] = [400, -200, 600, -400, 50, 80, -300]
     var cumulativeNumber: [Double] = []
     var maxDeviation: Int = 0
     
+    
     private enum Constants{
         static let cornerRadiusSize = CGSize(width: 8.0, height: 8.0)
-        static let margin: CGFloat = 30.0
-        static let topBorder: CGFloat = 60
+        static let margin: CGFloat = 40.0
+        static let topBorder: CGFloat = 20
         static let bottomBorder: CGFloat = 50
         static let colorAlpha: CGFloat = 0.5
         static let circleDiameter: CGFloat = 5.0
