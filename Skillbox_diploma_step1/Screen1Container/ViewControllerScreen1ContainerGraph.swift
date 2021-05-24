@@ -8,7 +8,7 @@
 import UIKit
 
 protocol protocolScreen1ContainerGraph{
-    func startCell()
+    func containerGraphUpdate()
 }
 
 class ViewControllerScreen1ContainerGraph: UIViewController {
@@ -28,10 +28,15 @@ class ViewControllerScreen1ContainerGraph: UIViewController {
     //Mark: - Functions
     
     func countFullPointsArray(){
-        for [a:b] in delegateScreen1?.returnGraphData() {
+        print("countFullPointsArray")
+        guard let graphData = delegateScreen1?.returnGraphData() else { return }
+        print("graphData= \(graphData)")
+        for n in graphData {
             print("n= \(n)")
         }
     }
+    
+    
     
     
     //MARK: - viewDidLoad
@@ -49,8 +54,10 @@ class ViewControllerScreen1ContainerGraph: UIViewController {
 
 
 extension ViewControllerScreen1ContainerGraph: protocolScreen1ContainerGraph{
-    func startCell() {
-        return
+    
+    func containerGraphUpdate() {
+        countFullPointsArray()
     }
+    
     
 }

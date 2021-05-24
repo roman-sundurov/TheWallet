@@ -27,8 +27,9 @@ protocol protocolScreen1Delegate{
     func returnNewTableDataArray() -> [dataOfOperations] //возвращает данные, которые отображаются в данный момент
     func returnArrayForIncrease() -> [Int] //возвращает инкремент каждой ячейки основной таблице. Показывает количество заголовков до конкретной ячейки.
     func returnDaysForSorting() -> Int
-    func returnGraphData() -> [Date: Double]
+    func returnGraphData() -> [GraphData]
 }
+
 
 class dataOfOperations{
     var amount: Double
@@ -45,6 +46,13 @@ class dataOfOperations{
         self.id = id1
     }
 }
+    
+    
+struct GraphData {
+    var date: Date
+    var amount: Double
+}
+
 
 class ViewController: UIViewController {
     
@@ -92,11 +100,10 @@ class ViewController: UIViewController {
     var daysForSorting: Int = 30
     var tagForEdit: Int = 0
     var screen1StatusGrapjDisplay = false
-    var graphData: [Date: Double] = [:]
+    var graphDataArray: [GraphData] = []
     
     
     //MARK: - объекты
-    
     
     let blurViewScreen1 =  UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     
@@ -178,6 +185,7 @@ class ViewController: UIViewController {
         screen1TableUpdateSorting(days: daysForSorting)
         daysForSortingRealmUpdate()
         countingIncomesAndExpensive()
+        delegateScreen1GraphContainer?.containerGraphUpdate()
     }
     
     
@@ -322,28 +330,45 @@ class ViewController: UIViewController {
         arrayForIncrease = [1]
         var previousDay: Int = 0
         var counter: Int = 0
-        var cumulativeSumOfDay: Double = 0 //сохраняет кумулятивную сумму операций за каждый день из расчёта
+        
         for x in dataArrayOfOperations {
             if Calendar.current.component(.day, from: x.date) != previousDay{
-                if counter == 0 {
-                }
+                if counter == 0 { break }
                 else{
+                    //Расчёт множителя, который компенсирует наличие header'ов в таблице
                     arrayForIncrease.append(arrayForIncrease.last!)
                     arrayForIncrease.append(arrayForIncrease.last! + 1)
-                    graphData.updateValue(cumulativeSumOfDay, forKey: x.date)
                 }
                 previousDay = Calendar.current.component(.day, from: x.date)
-                cumulativeSumOfDay = 0 //при начале нового дня сумма обнуляется
             }
             else {
-                cumulativeSumOfDay += x.amount
                 arrayForIncrease.append(arrayForIncrease.last!)
             }
-            //последняя дата всегда убегает
-            graphData.updateValue(cumulativeSumOfDay, forKey: x.date)
             counter += 1
         }
         arrayForIncrease.append(arrayForIncrease.last!)
+        
+        
+        //Cохраняет кумулятивную сумму операций за каждый день из расчёта
+        var cumulativeSumOfDay: Double = 0
+        graphDataArray = []
+        //Расчёт данных для графика
+        for x in dataArrayOfOperations {
+            if Calendar.current.component(.day, from: x.date) != previousDay{
+                graphDataArray.append(GraphData(date: x.date, amount: cumulativeSumOfDay))
+                cumulativeSumOfDay = x.amount
+                previousDay = Calendar.current.component(.day, from: x.date)
+            }
+            //Если следующая операция в этот же день
+            else {
+                cumulativeSumOfDay += x.amount
+            }
+        }
+        if previousDay != Calendar.current.component(.day, from: dataArrayOfOperations.last!.date) {
+            graphDataArray.append(GraphData(date: dataArrayOfOperations.last!.date, amount: cumulativeSumOfDay))
+        }
+
+        
         return arrayForIncrease.count
     }
     
@@ -353,6 +378,10 @@ class ViewController: UIViewController {
         
         dataArrayOfOperations = dataArrayOfOperationsOriginal
         dataArrayOfOperations.sort(by: { $0.date > $1.date })
+        
+        graphDataArray = graphDataArray
+            .sorted(by: {$0.date > $1.date})
+            .filter( {$0.date >= newTime} )
     
         let temporarilyDate = dataArrayOfOperations.filter { $0.date >= newTime }
         dataArrayOfOperations = temporarilyDate
@@ -421,8 +450,8 @@ class ViewController: UIViewController {
 
 extension ViewController: protocolScreen1Delegate{
     
-    func returnGraphData() -> [Date : Double] {
-        return graphData
+    func returnGraphData() -> [GraphData] {
+        return graphDataArray
     }
     
     
