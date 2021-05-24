@@ -201,6 +201,7 @@ class ViewControllerScreen2: UIViewController {
     func createDatePicker(){
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .date
+        datePicker.timeZone = TimeZone(secondsFromGMT: 10800) //+3 час(Moscow)
         datePicker.maximumDate = Date.init()
     }
     

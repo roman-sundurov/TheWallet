@@ -24,14 +24,14 @@ protocol protocolScreen1Delegate{
     func editCategoryInRealm(newName: String, newIcon: String, id: Int)
     
     //функции возврата
-    func returnNewTableDataArray() -> [dataOfOperations] //возвращает данные, которые отображаются в данный момент
+    func returnNewTableDataArray() -> [DataOfOperations] //возвращает данные, которые отображаются в данный момент
     func returnArrayForIncrease() -> [Int] //возвращает инкремент каждой ячейки основной таблице. Показывает количество заголовков до конкретной ячейки.
     func returnDaysForSorting() -> Int
     func returnGraphData() -> [GraphData]
 }
 
 
-class dataOfOperations{
+class DataOfOperations{
     var amount: Double
     var category: String
     var note: String
@@ -48,9 +48,14 @@ class dataOfOperations{
 }
     
     
-struct GraphData {
+class GraphData {
     var date: Date
-    var amount: Double
+    var cumulativeAmount: Double
+    
+    init(newDate: Date, newAmount: Double) {
+        date = newDate
+        cumulativeAmount = newAmount
+    }
 }
 
 
@@ -94,13 +99,13 @@ class ViewController: UIViewController {
     private var delegateScreen1Container: protocolScreen1ContainerOperation?
     private var delegateScreen1GraphContainer: protocolScreen1ContainerGraph?
     
-    var dataArrayOfOperationsOriginal: [dataOfOperations] = [] //хранение оригинала данных из Realm
-    var dataArrayOfOperations: [dataOfOperations] = [] //хранение модифицированных данных из Realm для конкретного режима отоборажения
+    var dataArrayOfOperationsOriginal: [DataOfOperations] = [] //хранение оригинала данных из Realm
+    var dataArrayOfOperations: [DataOfOperations] = [] //хранение модифицированных данных из Realm для конкретного режима отоборажения
     var arrayForIncrease: [Int] = [0] //показывает количество заголовков с новой датой в таблице, которое предшествует конкретной операции
+    var graphDataArray: [GraphData] = []
     var daysForSorting: Int = 30
     var tagForEdit: Int = 0
     var screen1StatusGrapjDisplay = false
-    var graphDataArray: [GraphData] = []
     
     
     //MARK: - объекты
@@ -333,8 +338,7 @@ class ViewController: UIViewController {
         
         for x in dataArrayOfOperations {
             if Calendar.current.component(.day, from: x.date) != previousDay{
-                if counter == 0 { break }
-                else{
+                if counter != 0 {
                     //Расчёт множителя, который компенсирует наличие header'ов в таблице
                     arrayForIncrease.append(arrayForIncrease.last!)
                     arrayForIncrease.append(arrayForIncrease.last! + 1)
@@ -349,24 +353,62 @@ class ViewController: UIViewController {
         arrayForIncrease.append(arrayForIncrease.last!)
         
         
+        //-----------------------------------------------------------
+        //Данные для передачи в график
         //Cохраняет кумулятивную сумму операций за каждый день из расчёта
-        var cumulativeSumOfDay: Double = 0
-        graphDataArray = []
-        //Расчёт данных для графика
-        for x in dataArrayOfOperations {
-            if Calendar.current.component(.day, from: x.date) != previousDay{
-                graphDataArray.append(GraphData(date: x.date, amount: cumulativeSumOfDay))
-                cumulativeSumOfDay = x.amount
-                previousDay = Calendar.current.component(.day, from: x.date)
-            }
-            //Если следующая операция в этот же день
-            else {
-                cumulativeSumOfDay += x.amount
+        
+//        let formatterPreviousDate = DateFormatter()
+        //        formatterPreviousDate.dateStyle = .full
+        
+        
+        for n in dataArrayOfOperations{
+            for x in graphDataArray {
+                if n.date == x.date {
+                    graphDataArray.filter({$0.date == n.date}).first?.cumulativeAmount += n.amount
+                }
+                else {
+                    graphDataArray.append(GraphData.init(newDate: n.date, newAmount: n.amount))
+                }
             }
         }
-        if previousDay != Calendar.current.component(.day, from: dataArrayOfOperations.last!.date) {
-            graphDataArray.append(GraphData(date: dataArrayOfOperations.last!.date, amount: cumulativeSumOfDay))
-        }
+        graphDataArray.filter({$0.date > $1.date})
+        
+
+//                if formatterPreviousDate.string(from: x.date) == formatterPreviousDate.string(from: n.){
+//                    return
+//                }
+//            }
+//        }
+        
+        
+//        var cumulativeSumOfDay: Double = 0
+//        counter = 0
+//        var previousAmount: Double = 0
+//        graphDataArray = []
+//
+//        var previousDayNew: Date = Date.init()
+//        let formatterPreviousDate = DateFormatter()
+//        formatterPreviousDate.dateStyle = .full
+//        formatterPreviousDate.timeStyle = .none
+//
+//        //Расчёт данных для графика
+//        for x in dataArrayOfOperations {
+//            if Calendar.current.component(.day, from: x.date) != previousDay{
+//                if counter != 0 {
+//                    graphDataArray.append(GraphData(date: x.date, amount: cumulativeSumOfDay))
+//                }
+//                cumulativeSumOfDay = x.amount
+//                previousDayNew = Calendar.current.component(, from: <#T##Date#>)
+//            }
+//            //Если следующая операция в этот же день
+//            else {
+//                cumulativeSumOfDay += x.amount
+//            }
+//            counter += 1
+//        }
+//        if previousDay != Calendar.current.component(.day, from: dataArrayOfOperations.last!.date) {
+//            graphDataArray.append(GraphData(date: dataArrayOfOperations.last!.date, amount: cumulativeSumOfDay))
+//        }
 
         
         return arrayForIncrease.count
@@ -394,7 +436,7 @@ class ViewController: UIViewController {
     func screen1DataReceive(){
         dataArrayOfOperationsOriginal = []
         for n in Persistence.shared.getRealmDataOperations(){
-            dataArrayOfOperationsOriginal.append(dataOfOperations(amount1: n.amount, category1: n.category, note1: n.note, date1: n.date, id1: n.id))
+            dataArrayOfOperationsOriginal.append(DataOfOperations(amount1: n.amount, category1: n.category, note1: n.note, date1: n.date, id1: n.id))
         }
         daysForSorting = Persistence.shared.returnDaysForSorting()
         print("daysForSorting in screen1DataReceive= \(Persistence.shared.returnDaysForSorting())")
@@ -508,7 +550,7 @@ extension ViewController: protocolScreen1Delegate{
     }
     
 
-    func returnNewTableDataArray() -> [dataOfOperations] {
+    func returnNewTableDataArray() -> [DataOfOperations] {
         return dataArrayOfOperations
     }
     

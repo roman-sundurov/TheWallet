@@ -8,7 +8,7 @@
 import UIKit
 
 protocol protocolGraphView{
-    func setGraphPoints(Points: [Double])
+    func setGraphPoints(points: [Double])
 }
 
 @IBDesignable class GraphView: UIView {
@@ -166,5 +166,17 @@ protocol protocolGraphView{
         lineParth.lineWidth = 1.0
         lineParth.stroke()
     }
+    
+}
+
+
+//MARK: - additional protocols
+
+extension GraphView: protocolGraphView{
+    
+    func setGraphPoints(points: [Double]) {
+        graphPoints = points
+    }
+    
     
 }

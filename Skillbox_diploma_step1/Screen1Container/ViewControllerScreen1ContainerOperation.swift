@@ -31,7 +31,7 @@ class ViewControllerScreen1ContainerOperation: UIViewController{
     
     var delegateScreen1: protocolScreen1Delegate?
     
-    var newTableDataArray: [dataOfOperations] = []
+    var newTableDataArray: [DataOfOperations] = []
     var specCellTag: Int = 0
     var specVar: Int = 0
 
