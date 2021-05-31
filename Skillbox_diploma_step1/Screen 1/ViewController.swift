@@ -28,6 +28,7 @@ protocol protocolScreen1Delegate{
     func returnArrayForIncrease() -> [Int] //возвращает инкремент каждой ячейки основной таблице. Показывает количество заголовков до конкретной ячейки.
     func returnDaysForSorting() -> Int
     func returnGraphData() -> [GraphData]
+    func returnDayOfDate(dateInternal: Date) -> String
 }
 
 
@@ -351,7 +352,6 @@ class ViewController: UIViewController {
             counter += 1
         }
         arrayForIncrease.append(arrayForIncrease.last!)
-        
         graphDataArrayCalculating(dataArrayOfOperationsInternal: dataArrayOfOperations)
         
         return arrayForIncrease.count
@@ -397,12 +397,12 @@ class ViewController: UIViewController {
             else{
                 for x in graphDataArray {
                     print("n.date = \(x.date), x.date= \(n.date)")
-                    if x.date == n.date {
-                        graphDataArray.filter({$0.date == n.date}).first?.cumulativeAmount += n.amount
+                    if returnDayOfDate(dateInternal: x.date) == returnDayOfDate(dateInternal: n.date) {
+                        graphDataArray.filter({returnDayOfDate(dateInternal: $0.date) == returnDayOfDate(dateInternal: n.date)}).first?.cumulativeAmount += n.amount
                         print("33333")
                     }
                 }
-                if (graphDataArray.filter{$0.date == n.date}).isEmpty {
+                if (graphDataArray.filter{returnDayOfDate(dateInternal: $0.date) == returnDayOfDate(dateInternal: n.date)}).isEmpty {
                     print("44444")
                     graphDataArray.append(GraphData.init(newDate: n.date, newAmount: n.amount))
                 }
@@ -413,6 +413,7 @@ class ViewController: UIViewController {
             }
             
         }
+        
         print("dataArrayOfOperations before filter: \(dataArrayOfOperations)")
         print("graphDataArray before filter: \(graphDataArray)")
         graphDataArray.filter{ x in x.date.timeIntervalSince1970 > x.date.timeIntervalSince1970 - (Double(daysForSorting * 86400))}
@@ -480,6 +481,14 @@ class ViewController: UIViewController {
 //MARK: - additional protocols
 
 extension ViewController: protocolScreen1Delegate{
+    
+    func returnDayOfDate(dateInternal: Date) -> String {
+        let formatterPrint = DateFormatter()
+        formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) //+3 час(Moscow)
+        formatterPrint.dateFormat = "d MMMM YYYY"
+        return formatterPrint.string(from: dateInternal)
+    }
+    
     
     func returnGraphData() -> [GraphData] {
         return graphDataArray
