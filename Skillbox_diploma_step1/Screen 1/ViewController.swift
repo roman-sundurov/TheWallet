@@ -352,64 +352,7 @@ class ViewController: UIViewController {
         }
         arrayForIncrease.append(arrayForIncrease.last!)
         
-        
-        //-----------------------------------------------------------
-        //Данные для передачи в график
-        //Cохраняет кумулятивную сумму операций за каждый день из расчёта
-        
-//        let formatterPreviousDate = DateFormatter()
-        //        formatterPreviousDate.dateStyle = .full
-        
-        
-        for n in dataArrayOfOperations{
-            for x in graphDataArray {
-                if n.date == x.date {
-                    graphDataArray.filter({$0.date == n.date}).first?.cumulativeAmount += n.amount
-                }
-                else {
-                    graphDataArray.append(GraphData.init(newDate: n.date, newAmount: n.amount))
-                }
-            }
-        }
-        graphDataArray.filter({$0.date > $1.date})
-        
-
-//                if formatterPreviousDate.string(from: x.date) == formatterPreviousDate.string(from: n.){
-//                    return
-//                }
-//            }
-//        }
-        
-        
-//        var cumulativeSumOfDay: Double = 0
-//        counter = 0
-//        var previousAmount: Double = 0
-//        graphDataArray = []
-//
-//        var previousDayNew: Date = Date.init()
-//        let formatterPreviousDate = DateFormatter()
-//        formatterPreviousDate.dateStyle = .full
-//        formatterPreviousDate.timeStyle = .none
-//
-//        //Расчёт данных для графика
-//        for x in dataArrayOfOperations {
-//            if Calendar.current.component(.day, from: x.date) != previousDay{
-//                if counter != 0 {
-//                    graphDataArray.append(GraphData(date: x.date, amount: cumulativeSumOfDay))
-//                }
-//                cumulativeSumOfDay = x.amount
-//                previousDayNew = Calendar.current.component(, from: <#T##Date#>)
-//            }
-//            //Если следующая операция в этот же день
-//            else {
-//                cumulativeSumOfDay += x.amount
-//            }
-//            counter += 1
-//        }
-//        if previousDay != Calendar.current.component(.day, from: dataArrayOfOperations.last!.date) {
-//            graphDataArray.append(GraphData(date: dataArrayOfOperations.last!.date, amount: cumulativeSumOfDay))
-//        }
-
+        graphDataArrayCalculating(dataArrayOfOperationsInternal: dataArrayOfOperations)
         
         return arrayForIncrease.count
     }
@@ -424,6 +367,7 @@ class ViewController: UIViewController {
         graphDataArray = graphDataArray
             .sorted(by: {$0.date > $1.date})
             .filter( {$0.date >= newTime} )
+        print("graphDataArray when sort: \(graphDataArray)")
     
         let temporarilyDate = dataArrayOfOperations.filter { $0.date >= newTime }
         dataArrayOfOperations = temporarilyDate
@@ -432,6 +376,51 @@ class ViewController: UIViewController {
     
     
     //MARK: - данные
+    
+    func graphDataArrayCalculating(dataArrayOfOperationsInternal: [DataOfOperations]){
+        
+        //-----------------------------------------------------------
+        //Данные для передачи в график
+        //Cохраняет кумулятивную сумму операций за каждый день из расчёта
+        
+//        let formatterPreviousDate = DateFormatter()
+//        formatterPreviousDate.dateStyle = .full
+        
+        graphDataArray = []
+        for n in dataArrayOfOperationsInternal{
+            print("11111")
+            
+            if graphDataArray.isEmpty{
+                graphDataArray.append(GraphData.init(newDate: n.date, newAmount: n.amount))
+                print("22222")
+            }
+            else{
+                for x in graphDataArray {
+                    print("n.date = \(x.date), x.date= \(n.date)")
+                    if x.date == n.date {
+                        graphDataArray.filter({$0.date == n.date}).first?.cumulativeAmount += n.amount
+                        print("33333")
+                    }
+                }
+                if (graphDataArray.filter{$0.date == n.date}).isEmpty {
+                    print("44444")
+                    graphDataArray.append(GraphData.init(newDate: n.date, newAmount: n.amount))
+                }
+                else{
+                    print("55555")
+                }
+                
+            }
+            
+        }
+        print("dataArrayOfOperations before filter: \(dataArrayOfOperations)")
+        print("graphDataArray before filter: \(graphDataArray)")
+        graphDataArray.filter{ x in x.date.timeIntervalSince1970 > x.date.timeIntervalSince1970 - (Double(daysForSorting * 86400))}
+        graphDataArray.sort(by: {$0.date > $1.date})
+        print("graphDataArray after sort: \(graphDataArray)")
+
+    }
+    
     
     func screen1DataReceive(){
         dataArrayOfOperationsOriginal = []

@@ -32,7 +32,7 @@ class ViewControllerScreen1ContainerGraph: UIViewController {
         guard let graphData = delegateScreen1?.returnGraphData() else { return }
         print("graphData= \(graphData)")
         for n in graphData {
-            print("n= \(n)")
+            print("n= \(n.date)")
         }
     }
     
