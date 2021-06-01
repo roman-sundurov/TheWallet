@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol protocolScreen1ContainerDelegate{
+protocol protocolScreen1ContainerOperation{
     func startCell(tag: Int)
 }
 
-class ViewControllerScreen1Container: UIViewController{
+class ViewControllerScreen1ContainerOperation: UIViewController{
     
     
     //MARK: - аутлеты
@@ -31,7 +31,7 @@ class ViewControllerScreen1Container: UIViewController{
     
     var delegateScreen1: protocolScreen1Delegate?
     
-    var newTableDataArray: [dataOfOperations] = []
+    var newTableDataArray: [DataOfOperations] = []
     var specCellTag: Int = 0
     var specVar: Int = 0
 
@@ -66,7 +66,7 @@ class ViewControllerScreen1Container: UIViewController{
     
 }
 
-extension ViewControllerScreen1Container: protocolScreen1ContainerDelegate{
+extension ViewControllerScreen1ContainerOperation: protocolScreen1ContainerOperation{
     
     func startCell(tag: Int) {
         

@@ -8,12 +8,19 @@
 import UIKit
 import SimpleCheckbox
 
-class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
+protocol protocolScreen2Container_TableViewCellChangeCategory{
+    func returnCategryIdOfCell() -> Int
+    func closeEditing()
+    func setPermitionToSetCategory(status: Bool)
+}
+
+class Screen2Container_TableViewCellChangeCategory: UITableViewCell, UITextFieldDelegate {
     
     //MARK: - объявление аутлетов
     @IBOutlet var textFieldNameCategory: UITextField!
     @IBOutlet var buttonDeleteCategory: UIButton!
     @IBOutlet var buttonEditNameCategory: UIButton!
+    @IBOutlet var buttonConfirmNewName: UIButton!
     @IBOutlet var checkBoxObject: Checkbox!
     @IBOutlet var constaraintCellChangeCategoryHeight: NSLayoutConstraint!
     
@@ -25,6 +32,7 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     var gestureCell: UIGestureRecognizer?
     var gestureCheckBox: UIGestureRecognizer?
     var editStatus: Bool = false
+    var permitionToSetCategory: Bool = true
     
     
     //MARK: - переходы
@@ -35,43 +43,40 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     }
     
     
-    @IBAction func buttonEditNameCategoryAction(_ sender: Any) {
+    @IBAction func buttonsEditNameCategoryAction(_ sender: Any) {
         if editStatus == false{
             editStatus = true
             textFieldNameCategory.backgroundColor = UIColor.white
             textFieldNameCategory.textColor = UIColor.systemGray
             textFieldNameCategory.isEnabled = true
             textFieldNameCategory.becomeFirstResponder()
-            removeGestureRecognizer(gestureCell!)
-            removeGestureRecognizer(gestureCheckBox!)
+//            removeGestureRecognizer(gestureCell!) // не работает
+//            removeGestureRecognizer(gestureCheckBox!) // не работает
             checkBoxObject.isUserInteractionEnabled = false
             print("buttonEditNameCategoryAction1")
-            buttonEditNameCategory.setImage(UIImage.init(systemName: ""), for: .normal) // не работает
             buttonEditNameCategory.tintColor = UIColor.red
-//            buttonEditNameCategory.titleLabel?.text = "Ok"
-//            buttonEditNameCategory.buttonType = UIButton.ButtonType.
-//            self.layoutIfNeeded()
+            buttonEditNameCategory.isHidden = true
+            buttonConfirmNewName.isHidden = false
+            delegateScreen2Container?.setCurrentActiveEditingCell(CategoryID: (delegateScreen2Container?.returnDelegateScreen2().returnDataArrayOfCategory()[specCellTag].id)!)
         }
         else{
-            editStatus = false
-            textFieldNameCategory.backgroundColor = UIColor.clear
-            textFieldNameCategory.textColor = UIColor.white
-            textFieldNameCategory.isEnabled = false
-            textFieldNameCategory.resignFirstResponder()
-            addGestureRecognizer(gestureCell!)
-            addGestureRecognizer(gestureCheckBox!)
-            checkBoxObject.isUserInteractionEnabled = true
-            print("buttonEditNameCategoryAction2")
-            buttonEditNameCategory.tintColor = UIColor.white
-            
-            delegateScreen2Container?.returnDelegateScreen2().returnDelegateScreen1().editCategoryInRealm(newName: textFieldNameCategory.text!, newIcon: "", id: specCellTag)
+            closeEditing()
         }
     }
     
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        buttonsEditNameCategoryAction(buttonConfirmNewName)
+        return true
+    }
+    
+    
     @objc func closeWindows() {
+        if permitionToSetCategory == false { return }
+        
         delegateScreen2Container?.returnDelegateScreen2().setCategoryInNewOperation(category: textFieldNameCategory.text!) //запись выбранной категории во временную переменную
         delegateScreen2Container?.closeWindows(specCellTag) //закрытие PopUp-окна
+        delegateScreen2Container?.setCurrentActiveEditingCell(CategoryID: 100)
         print("ClosePopup from ContainerCell")
     }
     
@@ -91,7 +96,6 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
     
     
     func startCell() {
-//        checkBoxObject.addTarget(self, action: #selector(closeWindows), for: .valueChanged)
         textFieldNameCategory.text = delegateScreen2Container?.returnDelegateScreen2().returnDataArrayOfCategory()[specCellTag].name
         gestureCell = UITapGestureRecognizer(target: self, action: #selector(closeWindows))
         gestureCheckBox = UITapGestureRecognizer(target: self, action: #selector(closeWindows))
@@ -123,11 +127,47 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell {
             buttonEditNameCategory.isHidden = true
         }
         
+        textFieldNameCategory.returnKeyType = .done
+        textFieldNameCategory.delegate = self
+        
     }
+    
     
     func setTag(tag: Int) {
         specCellTag = tag
         print("specCellTag ChangeCategory= \(specCellTag)")
+    }
+    
+}
+
+
+extension Screen2Container_TableViewCellChangeCategory: protocolScreen2Container_TableViewCellChangeCategory{
+    
+    func setPermitionToSetCategory(status: Bool) {
+        permitionToSetCategory = status
+    }
+    
+    func returnCategryIdOfCell() -> Int{
+        return (delegateScreen2Container?.returnDelegateScreen2().returnDataArrayOfCategory()[specCellTag].id)!
+    }
+    
+    
+    func closeEditing(){
+        editStatus = false
+        textFieldNameCategory.backgroundColor = UIColor.clear
+        textFieldNameCategory.textColor = UIColor.white
+        textFieldNameCategory.isEnabled = false
+        textFieldNameCategory.resignFirstResponder()
+//        addGestureRecognizer(gestureCell!)
+//        addGestureRecognizer(gestureCheckBox!)
+        checkBoxObject.isUserInteractionEnabled = true
+        print("buttonEditNameCategoryAction2")
+        buttonEditNameCategory.tintColor = UIColor.systemBlue
+        buttonEditNameCategory.isHidden = false
+        buttonConfirmNewName.isHidden = true
+        
+        delegateScreen2Container?.returnDelegateScreen2().returnDelegateScreen1().editCategoryInRealm(newName: textFieldNameCategory.text!, newIcon: "", id: specCellTag)
+        delegateScreen2Container?.setCurrentActiveEditingCell(CategoryID: 0)
     }
 
 }

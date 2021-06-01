@@ -20,16 +20,21 @@ protocol protocolScreen1Delegate{
     func addOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date)
     func editOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date, id: Int)
     func deleteOperationInRealm(tag: Int)
-    func addCategoryInRealm(newName: String, newIcon: String)
     func deleteCategoryInRealm(id: Int)
     func editCategoryInRealm(newName: String, newIcon: String, id: Int)
     
     //функции возврата
-    func returnNewTableDataArray() -> [dataOfOperations] //возвращает данные, которые отображаются в данный момент
+    func returnNewTableDataArray() -> [DataOfOperations] //возвращает данные, которые отображаются в данный момент
     func returnArrayForIncrease() -> [Int] //возвращает инкремент каждой ячейки основной таблице. Показывает количество заголовков до конкретной ячейки.
+    func returnDaysForSorting() -> Int
+    func returnGraphData() -> [GraphData]
+    func returnDayOfDate(_ dateInternal: Date) -> String
+    func returnMonthOfDate(_ dateInternal: Date) -> String
+    func returnDelegateScreen1GraphContainer() -> protocolScreen1ContainerGraph
 }
 
-class dataOfOperations{
+
+class DataOfOperations{
     var amount: Double
     var category: String
     var note: String
@@ -44,12 +49,23 @@ class dataOfOperations{
         self.id = id1
     }
 }
+    
+    
+class GraphData {
+    var date: Date
+    var amount: Double
+    
+    init(newDate: Date, newAmount: Double) {
+        date = newDate
+        amount = newAmount
+    }
+}
+
 
 class ViewController: UIViewController {
     
     
     //MARK: - объявление аутлетов
-    
     
     @IBOutlet var tableViewScreen1: UITableView!
     @IBOutlet var buttonDaily: UIView!
@@ -61,12 +77,20 @@ class ViewController: UIViewController {
     @IBOutlet var labelWeekly: UILabel!
     @IBOutlet var labelMothly: UILabel!
     @IBOutlet var labelYearly: UILabel!
-    @IBOutlet var bottomPopInList: UIView!
+    @IBOutlet var bottomPopInView: UIView!
     @IBOutlet var labelAmountOfIncome: UILabel!
     @IBOutlet var labelAmountOfExpenses: UILabel!
     @IBOutlet var constraintTopMenuBottomStrip: NSLayoutConstraint!
-    @IBOutlet var containerBottomScreen1: UIView!
+    @IBOutlet var containerBottomOperationScreen1: UIView!
     @IBOutlet var constraintContainerBottomPoint: NSLayoutConstraint!
+    @IBOutlet var screen1MiniGraph: UIView!
+    @IBOutlet var screen1BottomMenu: UIView!
+    @IBOutlet var scrollViewFromBottomPopInView: UIScrollView!
+    @IBOutlet var graphFromBottomPopInView: UIView!
+    @IBOutlet var buttonScreen1NewOperation: UIButton!
+    @IBOutlet var buttonScreen1ShowGraph: UIButton!
+    @IBOutlet var buttonScreen1ShowList: UIButton!
+    
     
     
     //MARK: - делегаты и переменные
@@ -74,36 +98,36 @@ class ViewController: UIViewController {
     
     var tapOfActionsOperationsOpenPopUpScreen1: UITapGestureRecognizer?
     var delegateScreen2: protocolScreen2Delegate?
-    var delegateScreen1Container: protocolScreen1ContainerDelegate?
+    private var delegateScreen1Container: protocolScreen1ContainerOperation?
+    private var delegateScreen1GraphContainer: protocolScreen1ContainerGraph?
     
-    var dataArrayOfOperationsOriginal: [dataOfOperations] = [] //хранение оригинала данных из Realm
-    var dataArrayOfOperations: [dataOfOperations] = [] //хранение модифицированных данных из Realm для конкретного режима отоборажения
+    var dataArrayOfOperationsOriginal: [DataOfOperations] = [] //хранение оригинала данных из Realm
+    var dataArrayOfOperations: [DataOfOperations] = [] //хранение модифицированных данных из Realm для конкретного режима отоборажения
     var arrayForIncrease: [Int] = [0] //показывает количество заголовков с новой датой в таблице, которое предшествует конкретной операции
+    var graphDataArray: [GraphData] = []
     var daysForSorting: Int = 30
     var tagForEdit: Int = 0
+    var screen1StatusGrapjDisplay = false
     
     
     //MARK: - объекты
-    
     
     let blurViewScreen1 =  UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     
     
     //MARK: - переходы
     
-    
-    @IBAction func buttonToScreen2(_ sender: Any) {
-        performSegue(withIdentifier: "segueToScreen2", sender: nil)
-    }
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ViewControllerScreen2, segue.identifier == "segueToScreen2" {
             delegateScreen2 = vc
             vc.delegateScreen1 = self
         }
-        if let vc = segue.destination as? ViewControllerScreen1Container, segue.identifier == "segueToScreen1Container"{
+        if let vc = segue.destination as? ViewControllerScreen1ContainerOperation, segue.identifier == "segueToScreen1Container"{
             delegateScreen1Container = vc
+            vc.delegateScreen1 = self
+        }
+        if let vc = segue.destination as? ViewControllerScreen1ContainerGraph, segue.identifier == "segueToScreen1GraphContainer"{
+            delegateScreen1GraphContainer = vc
             vc.delegateScreen1 = self
         }
         if let vc = segue.destination as? ViewControllerScreen2, segue.identifier == "segueToScreen2ForEdit"{
@@ -123,11 +147,63 @@ class ViewController: UIViewController {
     //MARK: - клики
     
     
+    @IBAction func buttonActionScreen1NewOperation(_ sender: Any) {
+        performSegue(withIdentifier: "segueToScreen2", sender: nil)
+    }
+    
+    
+    @IBAction func buttonActionScreen1ShowGraph(_ sender: Any) {
+        print("screen1StatusGrapjDisplay= \(screen1StatusGrapjDisplay)")
+        if screen1StatusGrapjDisplay == false {
+            
+            //Блокировка показа данных за 1 день в режиме графика
+            if daysForSorting == 1{
+                daysForSorting = 30
+                buttonWeeklyGesture(self)
+            }
+            buttonDaily.isUserInteractionEnabled = false
+            buttonDaily.alpha = 0.3
+            
+            UIView.transition(
+            from: scrollViewFromBottomPopInView,
+            to: graphFromBottomPopInView,
+            duration: 1.0,
+            options: [.transitionFlipFromLeft, .showHideTransitionViews],
+            completion: nil
+          )
+            screen1StatusGrapjDisplay = true
+            buttonScreen1ShowGraph.setImage(UIImage.init(named: "Left-On"), for: .normal)
+            buttonScreen1ShowList.setImage(UIImage.init(named: "Right-Off"), for: .normal)
+        }
+
+    }
+    
+    
+    @IBAction func buttonActionScreen1ShowList(_ sender: Any) {
+        if screen1StatusGrapjDisplay == true {
+            UIView.transition(
+            from: graphFromBottomPopInView,
+            to: scrollViewFromBottomPopInView,
+            duration: 1.0,
+            options: [.transitionFlipFromRight, .showHideTransitionViews],
+            completion: nil
+            )
+            screen1StatusGrapjDisplay = false
+            buttonScreen1ShowGraph.setImage(UIImage.init(named: "Left-Off"), for: .normal)
+            buttonScreen1ShowList.setImage(UIImage.init(named: "Right-On"), for: .normal)
+            buttonDaily.isUserInteractionEnabled = true
+            buttonDaily.alpha = 1
+        }
+//        screen1StatusGrapjDisplay.toggle()
+    }
+    
+    
     func changeDaysForSorting(){
         borderLineForMenu(days: daysForSorting)
         screen1TableUpdateSorting(days: daysForSorting)
         daysForSortingRealmUpdate()
         countingIncomesAndExpensive()
+        delegateScreen1GraphContainer?.containerGraphUpdate()
     }
     
     
@@ -155,11 +231,26 @@ class ViewController: UIViewController {
     }
     
     
+    @objc func switchScreen1GraphContainer(tap: UITapGestureRecognizer){
+        if tap.state == UIGestureRecognizer.State.ended {
+            print("Tap Graph ended")
+//            let pointOfTap = tap.location(in: self.view)
+//            if containerBottomOperationScreen1.frame.contains(pointOfTap) {
+//                print("Tap inside Container")
+//            }
+//            else {
+//                print("Tap outside Container")
+//                actionsOperationsClosePopUpScreen1()
+//            }
+        }
+    }
+    
+    
     @objc func handlerToHideContainerScreen1(tap: UITapGestureRecognizer){
         if tap.state == UIGestureRecognizer.State.ended {
             print("Tap ended")
             let pointOfTap = tap.location(in: self.view)
-            if containerBottomScreen1.frame.contains(pointOfTap) {
+            if containerBottomOperationScreen1.frame.contains(pointOfTap) {
                 print("Tap inside Container")
             }
             else {
@@ -250,18 +341,18 @@ class ViewController: UIViewController {
     }
     
     
-    //MARK: - нижнее меню
+    //MARK: - таблица списка операций
     
     func tableNumberOfRowsInSection() -> Int{
         if dataArrayOfOperations.count == 0 { return 1 }
         arrayForIncrease = [1]
         var previousDay: Int = 0
         var counter: Int = 0
+        
         for x in dataArrayOfOperations {
             if Calendar.current.component(.day, from: x.date) != previousDay{
-                if counter == 0 {
-                }
-                else{
+                if counter != 0 {
+                    //Расчёт множителя, который компенсирует наличие header'ов в таблице
                     arrayForIncrease.append(arrayForIncrease.last!)
                     arrayForIncrease.append(arrayForIncrease.last! + 1)
                 }
@@ -273,6 +364,8 @@ class ViewController: UIViewController {
             counter += 1
         }
         arrayForIncrease.append(arrayForIncrease.last!)
+        graphDataArrayCalculating(dataArrayOfOperationsInternal: dataArrayOfOperations)
+        
         return arrayForIncrease.count
     }
     
@@ -282,6 +375,11 @@ class ViewController: UIViewController {
         
         dataArrayOfOperations = dataArrayOfOperationsOriginal
         dataArrayOfOperations.sort(by: { $0.date > $1.date })
+        
+        graphDataArray = graphDataArray
+            .sorted(by: {$0.date > $1.date})
+            .filter( {$0.date >= newTime} )
+        print("graphDataArray when sort: \(graphDataArray)")
     
         let temporarilyDate = dataArrayOfOperations.filter { $0.date >= newTime }
         dataArrayOfOperations = temporarilyDate
@@ -291,10 +389,57 @@ class ViewController: UIViewController {
     
     //MARK: - данные
     
+    func graphDataArrayCalculating(dataArrayOfOperationsInternal: [DataOfOperations]){
+        
+        //-----------------------------------------------------------
+        //Данные для передачи в график
+        //Cохраняет суммы операций по дням некуммулятивно
+        
+//        let formatterPreviousDate = DateFormatter()
+//        formatterPreviousDate.dateStyle = .full
+        
+        graphDataArray = []
+        for n in dataArrayOfOperationsInternal{
+//            print("11111")
+            
+            if graphDataArray.isEmpty{
+                graphDataArray.append(GraphData.init(newDate: n.date, newAmount: n.amount))
+//                print("22222")
+            }
+            else{
+                
+                for x in graphDataArray {
+//                    print("n.date = \(x.date), x.date= \(n.date)")
+                    if returnDayOfDate(x.date) == returnDayOfDate(n.date) {
+                        graphDataArray.filter({returnDayOfDate($0.date) == returnDayOfDate(n.date)}).first?.amount += n.amount
+//                        print("33333")
+                    }
+                }
+                if (graphDataArray.filter{returnDayOfDate($0.date) == returnDayOfDate(n.date)}).isEmpty {
+//                    print("44444")
+                    graphDataArray.append(GraphData.init(newDate: n.date, newAmount: n.amount))
+                }
+                else{
+//                    print("55555")
+                }
+                
+            }
+            
+        }
+        
+        print("dataArrayOfOperations before filter: \(dataArrayOfOperations)")
+        print("graphDataArray before filter: \(graphDataArray)")
+        graphDataArray.filter{ x in x.date.timeIntervalSince1970 > x.date.timeIntervalSince1970 - (Double(daysForSorting * 86400))}
+        graphDataArray.sort(by: {$0.date > $1.date})
+        print("graphDataArray after sort: \(graphDataArray)")
+
+    }
+    
+    
     func screen1DataReceive(){
         dataArrayOfOperationsOriginal = []
         for n in Persistence.shared.getRealmDataOperations(){
-            dataArrayOfOperationsOriginal.append(dataOfOperations(amount1: n.amount, category1: n.category, note1: n.note, date1: n.date, id1: n.id))
+            dataArrayOfOperationsOriginal.append(DataOfOperations(amount1: n.amount, category1: n.category, note1: n.note, date1: n.date, id1: n.id))
         }
         daysForSorting = Persistence.shared.returnDaysForSorting()
         print("daysForSorting in screen1DataReceive= \(Persistence.shared.returnDaysForSorting())")
@@ -321,11 +466,14 @@ class ViewController: UIViewController {
         
         screen1AllUpdate()
         
-        bottomPopInList.backgroundColor = .red
-        bottomPopInList.layer.cornerRadius = 20
-        bottomPopInList.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        //округление углов на первом экране
+        bottomPopInView.layer.cornerRadius = 20
+        bottomPopInView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
-        self.view.insertSubview(self.blurViewScreen1, belowSubview: self.containerBottomScreen1)
+        bottomPopInView.clipsToBounds = true
+
+        //Добавление Blur-эффекта
+        self.view.insertSubview(self.blurViewScreen1, belowSubview: self.containerBottomOperationScreen1)
         self.blurViewScreen1.backgroundColor = .clear
         self.blurViewScreen1.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -346,6 +494,44 @@ class ViewController: UIViewController {
 
 extension ViewController: protocolScreen1Delegate{
     
+    func returnMonthOfDate(_ dateInternal: Date) -> String {
+        let formatterPrint = DateFormatter()
+        formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) //+3 час(Moscow)
+        formatterPrint.dateFormat = "MMMM YYYY"
+        return formatterPrint.string(from: dateInternal)
+
+    }
+    
+    
+    func returnDayOfDate(_ dateInternal: Date) -> String {
+        let formatterPrint = DateFormatter()
+        formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) //+3 час(Moscow)
+        switch returnDaysForSorting() {
+            case 365:
+                formatterPrint.dateFormat = "MMMM YYYY"
+            default:
+                formatterPrint.dateFormat = "d MMMM YYYY"
+        }
+//        print("formatterPrint.string(from: dateInternal)= \(formatterPrint.string(from: dateInternal))")
+        return formatterPrint.string(from: dateInternal)
+    }
+    
+    
+    func returnDelegateScreen1GraphContainer() -> protocolScreen1ContainerGraph {
+        return delegateScreen1GraphContainer!
+    }
+    
+    
+    func returnGraphData() -> [GraphData] {
+        return graphDataArray
+    }
+    
+    
+    func returnDaysForSorting() -> Int {
+        return daysForSorting
+    }
+    
+    
     func editCategoryInRealm(newName: String, newIcon: String, id: Int) {
         print("editCategoryInRealm")
         Persistence.shared.updateCategory(name: newName, icon: newIcon, idOfObject: delegateScreen2!.returnDataArrayOfCategory()[id].id)
@@ -354,11 +540,6 @@ extension ViewController: protocolScreen1Delegate{
     
     func deleteCategoryInRealm(id: Int) {
         Persistence.shared.deleteCategory(idOfObject: delegateScreen2!.returnDataArrayOfCategory()[id].id)
-    }
-    
-    
-    func addCategoryInRealm(newName: String, newIcon: String) {
-        Persistence.shared.addCategory(name: newName, icon: newIcon)
     }
     
     
@@ -399,7 +580,7 @@ extension ViewController: protocolScreen1Delegate{
     }
     
 
-    func returnNewTableDataArray() -> [dataOfOperations] {
+    func returnNewTableDataArray() -> [DataOfOperations] {
         return dataArrayOfOperations
     }
     
@@ -409,11 +590,11 @@ extension ViewController: protocolScreen1Delegate{
     }
     
     
-    //MARK: - окрытие PopUp-окна
+    //MARK: - PopUp-окно операции
     
     
     func actionsOperationsOpenPopUpScreen1(_ tag: Int) {
-        containerBottomScreen1.layer.cornerRadius = 20
+        containerBottomOperationScreen1.layer.cornerRadius = 20
         delegateScreen1Container?.startCell(tag: tag)
         
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
@@ -425,8 +606,6 @@ extension ViewController: protocolScreen1Delegate{
         }, completion: {isCompleted in })
     }
     
-    
-    //MARK: - закрытие PopUp-окна
     
     func actionsOperationsClosePopUpScreen1() {
 //        tableViewScreen2Update(row: 1)
@@ -442,6 +621,7 @@ extension ViewController: protocolScreen1Delegate{
 
 
 //MARK: - table Functionality
+
 extension ViewController: UITableViewDelegate, UITableViewDataSource{
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -487,6 +667,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
                 cell.delegateScreen1 = self
                 cell.setTag(tag: indexPath.row)
                 cell.startCell2()
+                return cell
+            }
+            else if indexPath.row == arrayForIncrease.count{
+                let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
+                cell.labelHeaderDate.isHidden = true
                 return cell
             }
             else {

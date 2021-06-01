@@ -8,12 +8,13 @@
 import UIKit
 
 protocol protocolScreen2ContainerDelegate {
-    func buttonDeleteCategoryHandler()
     func checkBoxStatus(_ tag: Int,_ type: Bool)
     func closeWindows(_ tag: Int)
     func screen2ContainerNewCategorySwicher()
     func screen2ContainerAddNewCategory()
     func screen2ContainerDeleteCategory(index: Int)
+    func presentAlertErrorAddNewCategory()
+    func setCurrentActiveEditingCell(CategoryID: Int)
     
     //функции возврата
     func returnDelegateScreen2() -> protocolScreen2Delegate
@@ -35,23 +36,22 @@ class ViewControllerScreen2Container: UIViewController {
     var delegateScreen2Container_TableViewCellNewCategory: protocolScreen2Container_TableViewCellNewCategory?
     var statusEditContainer: Bool = false
     var animationNewCategoryInCell = false
+    var currentActiveCategoryID: Int = 0
     
     
-    //MARK: - данные
-//Здесь будет обработка данных в зависимости от tableStatus
-//    let screen2ContainerMenuList0 = Screen2ContainerMenuData(name: "Header", status: false)
-//    let screen2ContainerMenuList1 = Screen2ContainerMenuData(name: "Rental revenue", status: true)
-//    let screen2ContainerMenuList2 = Screen2ContainerMenuData(name: "Car", status: false)
-//    let screen2ContainerMenuList3 = Screen2ContainerMenuData(name: "Salary", status: false)
-//    let screen2ContainerMenuList4 = Screen2ContainerMenuData(name: "Food & Restaurants", status: false)
-//    let screen2ContainerMenuList5 = Screen2ContainerMenuData(name: "Coffee", status: false)
-//    let screen2ContainerMenuList6 = Screen2ContainerMenuData(name: "Mobile Account", status: false)
+    //MARK: - объекты
+    
+    let alertErrorAddNewCategory = UIAlertController(title: "Введите название категории", message: nil, preferredStyle: .alert)
+    
     
     
     //MARK: - viewDidLoad
     
     @objc override func viewDidLoad() {
         super.viewDidLoad()
+        
+        alertErrorAddNewCategory.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        
     }
     
 }
@@ -59,6 +59,46 @@ class ViewControllerScreen2Container: UIViewController {
 //MARK: - additional protocols
 
 extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
+    
+    func setCurrentActiveEditingCell(CategoryID: Int) {
+        currentActiveCategoryID = CategoryID
+        
+        let cells = self.tableViewContainer.visibleCells
+        
+        var n = 0
+        for cell in cells {
+            if n >= 2 {
+                var specCell = cell as! Screen2Container_TableViewCellChangeCategory
+                
+                //Значение "-100" используется, чтобы дать сигнал всем ячейкам свернуть редактирование. Использую его, когда поступает команда свернуть PopUp-окно. Чтобы при следующем появлении оно было без редактирования.
+                if CategoryID == -100 {
+                    specCell.closeEditing()
+                }
+                else{
+                    if CategoryID == 0 {
+                        specCell.setPermitionToSetCategory(status: true)
+                    }
+                    else {
+                        if specCell.returnCategryIdOfCell() != CategoryID{
+                            specCell.closeEditing()
+                            specCell.setPermitionToSetCategory(status: true)
+                        }
+                        else {
+                            specCell.setPermitionToSetCategory(status: false)
+                        }
+                    }
+                }
+            }
+            n += 1
+        }
+        
+    }
+    
+    
+    func presentAlertErrorAddNewCategory() {
+        self.present(alertErrorAddNewCategory, animated: true, completion: nil)
+    }
+    
     
     func returnDelegateScreen2Container_TableViewCellNewCategory() -> protocolScreen2Container_TableViewCellNewCategory {
         return delegateScreen2Container_TableViewCellNewCategory!
@@ -133,10 +173,6 @@ extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
         tableViewContainer.reloadData()
         delegateScreen2Container_TableViewCellNewCategory?.textFieldNewCategoryClear()
         print("ClosePopup from Container")
-    }
-
-    
-    func buttonDeleteCategoryHandler() {
     }
     
     

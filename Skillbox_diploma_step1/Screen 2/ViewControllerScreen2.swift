@@ -49,7 +49,7 @@ class DataOfCategories{
 }
 
 
-class ViewControllerScreen2: UIViewController, UITextViewDelegate {
+class ViewControllerScreen2: UIViewController {
 
     //MARK: - объявление аутлетов
     
@@ -66,16 +66,16 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     //MARK: - делегаты, переменные
     
     var delegateScreen1: protocolScreen1Delegate?
-    var delegateScreen2Container: protocolScreen2ContainerDelegate?
-    var delegateScreen2TableViewCellCategory: protocolScreen2TableViewCellCategory?
-    var delegateScreen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate?
-    var delegateScreen2TableViewCellDate: protocolScreen2TableViewCellDateDelegate?
+    private var delegateScreen2Container: protocolScreen2ContainerDelegate?
+    private var delegateScreen2TableViewCellCategory: protocolScreen2TableViewCellCategory?
+    private var delegateScreen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate?
+    private var delegateScreen2TableViewCellDate: protocolScreen2TableViewCellDateDelegate?
     var screen2StatusEditing: Bool = false //показывает, создаётся ли новая операция, или редактируется предыдущая
     
     var tapOfChangeCategoryOpenPopUp: UITapGestureRecognizer?
     var tapOutsideTextViewToGoFromTextView: UITapGestureRecognizer?
     var dataArrayOfCategory: [DataOfCategories] = [] //хранение оригинала данных из Realm
-    var keyboardHeight: CGFloat? //хранит высоту клавиатуры
+    var keyboardHeight: CGFloat = 0 //хранит высоту клавиатуры
     
     
     //MARK: - объекты
@@ -155,19 +155,18 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     }
     
     
-    //MARK: - Allerts
+    //MARK: - Alerts
     
-    func createAlertAddNewOperations() {
+    
+    func createAlertAddNewOperations(){
         alertErrorAddNewOperation.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil ))
+        
         let labelAlertAddNewOperations = UILabel.init(frame: CGRect(x: 0, y: 0, width: 180, height: 50))
-//        let labelAlertAddNewOperations = UILabel.init(frame: CGRect()
         labelAlertAddNewOperations.numberOfLines = 2
-//        labelAlertAddNewOperations.backgroundColor = UIColor.red
         labelAlertAddNewOperations.text = "Выберите категорию операции и сумму."
-        
         alertErrorAddNewOperation.view.addSubview(labelAlertAddNewOperations)
-        
         labelAlertAddNewOperations.translatesAutoresizingMaskIntoConstraints = false
+        
         alertErrorAddNewOperation.view.translatesAutoresizingMaskIntoConstraints = false
         
         alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(item: labelAlertAddNewOperations, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 180))
@@ -202,6 +201,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     func createDatePicker(){
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .date
+        datePicker.timeZone = TimeZone(secondsFromGMT: 10800) //+3 час(Moscow)
         datePicker.maximumDate = Date.init()
     }
     
@@ -326,19 +326,6 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     let screen2MenuList3 = Screen2MenuData(name: "Notes", text: "")
     
     
-    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        print("pressesBegan")
-        if screen2StatusEditing == true && self.constraintContainerBottomPoint.constant != -515{
-//            self.constraintContainerBottomHeight.constant = CGFloat(50*(self.screen2MenuArray.count+3+1))
-            self.constraintContainerBottomPoint.constant = 300
-        }
-        else if self.constraintContainerBottomPoint.constant != -515{
-//            self.constraintContainerBottomHeight.constant = CGFloat(50*(self.screen2MenuArray.count+3))
-            self.constraintContainerBottomPoint.constant = 250
-        }
-    }
-    
-    
     //MARK: - viewWillAppear
     
     
@@ -396,13 +383,14 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
     //MARK: - other functions
     
     @objc func keyboardWillAppear(_ notification: Notification) {
+        print("keyboardWillAppear")
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
             let keyboardRectangle = keyboardFrame.cgRectValue
             keyboardHeight = keyboardRectangle.height
         }
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
             if self.constraintContainerBottomPoint.constant == 50{
-                self.constraintContainerBottomPoint.constant = self.keyboardHeight! + CGFloat.init(20)
+                self.constraintContainerBottomPoint.constant = self.keyboardHeight + CGFloat.init(20)
             }
             self.view.layoutIfNeeded()
         }, completion: {isCompleted in })
@@ -410,11 +398,12 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
 
     
     @objc func keyboardWillDisappear(_ notification: Notification) {
-        if keyboardHeight != nil{
+        if keyboardHeight != 0{
             print("keyboardWillDisappear")
-            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
-                if self.constraintContainerBottomPoint.constant == self.keyboardHeight! + CGFloat.init(20){
-                    self.constraintContainerBottomPoint.constant = 50
+            keyboardHeight = 0
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+                if self.constraintContainerBottomPoint.constant > 50 {
+                    self.constraintContainerBottomPoint.constant = CGFloat.init(50)
                 }
                 self.view.layoutIfNeeded()
             }, completion: {isCompleted in })
@@ -428,6 +417,7 @@ class ViewControllerScreen2: UIViewController, UITextViewDelegate {
 //MARK: - additional protocols
 
 extension ViewControllerScreen2: protocolScreen2Delegate{
+    
     
     func screen2DataReceiveUpdate() {
         screen2DataReceive()
@@ -588,7 +578,26 @@ extension ViewControllerScreen2: protocolScreen2Delegate{
 }
 
 
-//MARK: - table Functionality
+//MARK: - caching press button protocols
+
+extension ViewControllerScreen2: UITextViewDelegate{
+    
+    //    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+    //        print("pressesBegan")
+    //        print("screen2StatusEditing= \(screen2StatusEditing)")
+    //        print("self.constraintContainerBottomPoint.constant= \(self.constraintContainerBottomPoint.constant)")
+    //
+    //        if screen2StatusEditing == true && self.constraintContainerBottomPoint.constant != -515{
+    //            self.constraintContainerBottomPoint.constant = 300
+    //        }
+    //        else if self.constraintContainerBottomPoint.constant != -515{
+    ////            self.constraintContainerBottomPoint.constant = 250
+    //        }
+    //    }
+}
+
+
+//MARK: - table Functionality protocols
 
 extension ViewControllerScreen2: UITableViewDelegate, UITableViewDataSource{
     

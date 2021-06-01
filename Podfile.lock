@@ -1,9 +1,9 @@
 PODS:
-  - Realm (10.7.2):
-    - Realm/Headers (= 10.7.2)
-  - Realm/Headers (10.7.2)
-  - RealmSwift (10.7.2):
-    - Realm (= 10.7.2)
+  - Realm (10.7.6):
+    - Realm/Headers (= 10.7.6)
+  - Realm/Headers (10.7.6)
+  - RealmSwift (10.7.6):
+    - Realm (= 10.7.6)
   - SimpleCheckbox (2.1.0)
 
 DEPENDENCIES:
@@ -17,8 +17,8 @@ SPEC REPOS:
     - SimpleCheckbox
 
 SPEC CHECKSUMS:
-  Realm: e523da9ade306c5ae87e85dc09fdef148d3e1cc1
-  RealmSwift: 4f6758c3adbdcc87f7b7777107226532a077f61c
+  Realm: ed860452717c8db8f4bf832b6807f7f2ce708839
+  RealmSwift: e31c4ddbcc42ac879313d656b86f9ca539f6f4f4
   SimpleCheckbox: ddcd433ab8c3a8f57300bebda13151a8f302c7f9
 
 PODFILE CHECKSUM: ab8ca575baf05466f9f4c9a448cbdae9bab08bdd

@@ -34,6 +34,7 @@ class Screen1TableViewCellHeader: UITableViewCell {
     func startCell() {
         print("Header1: ---")
         let formatterPrint = DateFormatter()
+        formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) //+3 час(Moscow)
         formatterPrint.dateFormat = "d MMMM YYYY"
 //        print("111: \(formatterPrint.string(from: delegateScreen1!.returnNewTableDataArray()[specCellTag].date))")
         labelHeaderDate.text = formatterPrint.string(from: delegateScreen1!.returnNewTableDataArray()[specCellTag].date)
