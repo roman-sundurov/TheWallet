@@ -9,6 +9,7 @@ import UIKit
 
 protocol protocolScreen1ContainerGraph{
     func containerGraphUpdate()
+    func setGraphIndicators(min: String, middle: String, max: String)
 }
 
 class ViewControllerScreen1ContainerGraph: UIViewController {
@@ -18,7 +19,11 @@ class ViewControllerScreen1ContainerGraph: UIViewController {
     
     @IBOutlet var graphView: GraphView!
     @IBOutlet var weeklyStackView: UIStackView!
-   
+    @IBOutlet var monthlyStackView: UIStackView!
+    @IBOutlet var minIndicatorLabel: UILabel!
+    @IBOutlet var middleIndicatorLabel: UILabel!
+    @IBOutlet var maxIndicatorLabel: UILabel!
+    
     
     //MARK: - делегаты и переменные
     
@@ -73,12 +78,59 @@ class ViewControllerScreen1ContainerGraph: UIViewController {
             }
             
         }
+        
+        
+//        if graphData.count > 0{
+//            print("1111")
+//            if graphDataFinal.isEmpty {
+//                graphDataFinal.append(GraphData(newDate: Date(), newAmount: graphData.first!.amount))
+//            }
+//
+//            //Проверка заполнения оставшихся дней. Если запись пуста - ставим 0.
+//            var x: Int = 1
+//
+//            for n in 1..<(delegateScreen1?.returnDaysForSorting())!{
+//                print("2222")
+//
+//                var dateForSorting: Date = { () -> Date in
+//                    if self.delegateScreen1?.returnDaysForSorting() == 30 {
+//                        return Calendar.current.date(byAdding: .month, value: -n, to: Date())!
+//                    }
+//                    else {
+//                        return Calendar.current.date(byAdding: .day, value: -n, to: Date())!
+//                    }
+//                }()
+//
+//                if graphData.count >= x+1{
+//                    print("3333")
+//                    if delegateScreen1?.returnDayOfDate(graphData[x].date) != delegateScreen1?.returnDayOfDate(dateForSorting) {
+//                        print("4444")
+//                        graphDataFinal.append(GraphData(newDate: dateForSorting, newAmount: 0))
+//                    }
+//                    else{
+//                        print("5555")
+//                        graphDataFinal.append(GraphData(newDate: dateForSorting, newAmount: graphData[x].amount))
+//                        x += 1
+//
+//                    }
+//                }
+//                else{
+//                    print("5555")
+//                    graphDataFinal.append(GraphData(newDate: dateForSorting, newAmount: 0))
+//                    x += 1
+//                }
+//
+//            }
+//
+//        }
+
 
 
         for n in graphDataFinal {
             print("n.cumulativeAmount= \(n.amount), n.date= \(n.date)")
         }
         
+        graphView.setDeligateScreen1ContainerGraph(deligate: self)
         graphView.setGraphPoints(data: graphDataFinal)
         graphView.setNeedsDisplay()
     }
@@ -102,8 +154,28 @@ class ViewControllerScreen1ContainerGraph: UIViewController {
 
 extension ViewControllerScreen1ContainerGraph: protocolScreen1ContainerGraph{
     
+    func setGraphIndicators(min: String, middle: String, max: String) {
+        minIndicatorLabel.text = min
+        middleIndicatorLabel.text = middle
+        maxIndicatorLabel.text = max
+    }
+    
+    
     func containerGraphUpdate() {
         countFullPointsArray()
+
+        switch delegateScreen1?.returnDaysForSorting() {
+            case 365:
+                weeklyStackView.isHidden = true
+                monthlyStackView.isHidden = false
+            case 30:
+                weeklyStackView.isHidden = true
+                monthlyStackView.isHidden = true
+            default:
+                weeklyStackView.isHidden = false
+                monthlyStackView.isHidden = true
+        }
+        
     }
     
     

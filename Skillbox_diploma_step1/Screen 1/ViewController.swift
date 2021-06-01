@@ -29,6 +29,7 @@ protocol protocolScreen1Delegate{
     func returnDaysForSorting() -> Int
     func returnGraphData() -> [GraphData]
     func returnDayOfDate(_ dateInternal: Date) -> String
+    func returnMonthOfDate(_ dateInternal: Date) -> String
     func returnDelegateScreen1GraphContainer() -> protocolScreen1ContainerGraph
 }
 
@@ -154,6 +155,15 @@ class ViewController: UIViewController {
     @IBAction func buttonActionScreen1ShowGraph(_ sender: Any) {
         print("screen1StatusGrapjDisplay= \(screen1StatusGrapjDisplay)")
         if screen1StatusGrapjDisplay == false {
+            
+            //Блокировка показа данных за 1 день в режиме графика
+            if daysForSorting == 1{
+                daysForSorting = 30
+                buttonWeeklyGesture(self)
+            }
+            buttonDaily.isUserInteractionEnabled = false
+            buttonDaily.alpha = 0.3
+            
             UIView.transition(
             from: scrollViewFromBottomPopInView,
             to: graphFromBottomPopInView,
@@ -181,6 +191,8 @@ class ViewController: UIViewController {
             screen1StatusGrapjDisplay = false
             buttonScreen1ShowGraph.setImage(UIImage.init(named: "Left-Off"), for: .normal)
             buttonScreen1ShowList.setImage(UIImage.init(named: "Right-On"), for: .normal)
+            buttonDaily.isUserInteractionEnabled = true
+            buttonDaily.alpha = 1
         }
 //        screen1StatusGrapjDisplay.toggle()
     }
@@ -395,6 +407,7 @@ class ViewController: UIViewController {
 //                print("22222")
             }
             else{
+                
                 for x in graphDataArray {
 //                    print("n.date = \(x.date), x.date= \(n.date)")
                     if returnDayOfDate(x.date) == returnDayOfDate(n.date) {
@@ -481,16 +494,31 @@ class ViewController: UIViewController {
 
 extension ViewController: protocolScreen1Delegate{
     
-    func returnDelegateScreen1GraphContainer() -> protocolScreen1ContainerGraph {
-        return delegateScreen1GraphContainer!
+    func returnMonthOfDate(_ dateInternal: Date) -> String {
+        let formatterPrint = DateFormatter()
+        formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) //+3 час(Moscow)
+        formatterPrint.dateFormat = "MMMM YYYY"
+        return formatterPrint.string(from: dateInternal)
+
     }
     
     
     func returnDayOfDate(_ dateInternal: Date) -> String {
         let formatterPrint = DateFormatter()
         formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) //+3 час(Moscow)
-        formatterPrint.dateFormat = "d MMMM YYYY"
+        switch returnDaysForSorting() {
+            case 365:
+                formatterPrint.dateFormat = "MMMM YYYY"
+            default:
+                formatterPrint.dateFormat = "d MMMM YYYY"
+        }
+//        print("formatterPrint.string(from: dateInternal)= \(formatterPrint.string(from: dateInternal))")
         return formatterPrint.string(from: dateInternal)
+    }
+    
+    
+    func returnDelegateScreen1GraphContainer() -> protocolScreen1ContainerGraph {
+        return delegateScreen1GraphContainer!
     }
     
     
@@ -592,10 +620,8 @@ extension ViewController: protocolScreen1Delegate{
 }
 
 
-//MARK: - PopUp-окна
-
-
 //MARK: - table Functionality
+
 extension ViewController: UITableViewDelegate, UITableViewDataSource{
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -641,6 +667,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
                 cell.delegateScreen1 = self
                 cell.setTag(tag: indexPath.row)
                 cell.startCell2()
+                return cell
+            }
+            else if indexPath.row == arrayForIncrease.count{
+                let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
+                cell.labelHeaderDate.isHidden = true
                 return cell
             }
             else {

@@ -8,10 +8,13 @@
 import UIKit
 
 protocol protocolGraphView{
+    func setDeligateScreen1ContainerGraph(deligate: protocolScreen1ContainerGraph)
     func setGraphPoints(data: [GraphData])
 }
 
 @IBDesignable class GraphView: UIView {
+    
+    var deligateScreen1ContainerGraph: protocolScreen1ContainerGraph?
     
     // Weekly sample data
     var graphPoints: [Double] = []
@@ -21,7 +24,7 @@ protocol protocolGraphView{
     
     private enum Constants{
         static let cornerRadiusSize = CGSize(width: 8.0, height: 8.0)
-        static let margin: CGFloat = 40.0
+        static let margin: CGFloat = 45.0
         static let topBorder: CGFloat = 20
         static let bottomBorder: CGFloat = 50
         static let colorAlpha: CGFloat = 0.5
@@ -99,9 +102,23 @@ protocol protocolGraphView{
         let graphHeight = height - topBoarder - bottomBorder
         guard let maxValue = cumulativeNumber.max() else { return }
         guard let minValue = cumulativeNumber.min() else { return }
+        
 
         print("maxValue= \(maxValue)")
         print("minValue= \(minValue)")
+        
+        let cleverString = { (original: Double) -> String in
+            if original > 1000 { return "\(String(format: "%.1f", original / 1000))k" }
+            else { return String(format: "%.0f", original) }
+        }
+        
+        let maxValue2: String = cleverString(maxValue)
+        let minValue2: String = cleverString(minValue)
+        let middleValue2: String = cleverString( (maxValue + minValue) / 2 )
+        
+//        print("maxValue2= \(maxValue2)")
+        
+        deligateScreen1ContainerGraph?.setGraphIndicators(min: minValue2, middle: middleValue2, max: maxValue2)
         
         var distanceSumOfMinMax = { (min: Double, max: Double) -> Double in
             if max >= 0 && min >= 0 {
@@ -202,6 +219,11 @@ protocol protocolGraphView{
 //MARK: - additional protocols
 
 extension GraphView: protocolGraphView{
+    
+    func setDeligateScreen1ContainerGraph(deligate: protocolScreen1ContainerGraph) {
+        deligateScreen1ContainerGraph = deligate
+    }
+    
     
     func setGraphPoints(data: [GraphData]) {
         var internalPoints: [Double] = []
