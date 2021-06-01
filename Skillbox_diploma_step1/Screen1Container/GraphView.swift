@@ -45,12 +45,12 @@ protocol protocolGraphView{
             }
         }
         
-//        //убираем нули с начала графика, чтобы было правильно масштабирование.
-//        for n in 0..<cumulativeNumber.count {
-//            if cumulativeNumber[n] == 0 {
-//                cumulativeNumber[n] = cumulativeNumber.filter( {$0 != 0} ).first ?? 0
-//            }
-//        }
+        //убираем нули с начала графика, чтобы было правильно масштабирование.
+        for n in 0..<cumulativeNumber.count {
+            if cumulativeNumber[n] == 0 {
+                cumulativeNumber[n] = cumulativeNumber.filter( {$0 != 0} ).first ?? 0
+            }
+        }
         
         print("cumulativeNumber= \(cumulativeNumber)")
         print("graphPoints= \(graphPoints)")
@@ -116,10 +116,12 @@ protocol protocolGraphView{
             return 0
         }
         print("distanceSumOfMinMax= \(distanceSumOfMinMax(minValue, maxValue))")
+//        print("graphHeight + topBoarder= \(graphHeight + topBoarder)")
 
         let columnYPoint = { (graphPoint: Double) -> CGFloat in
-            let yPoint = CGFloat(abs(graphPoint)) / CGFloat(distanceSumOfMinMax(minValue, maxValue)) * graphHeight
-            print("graphHeight + topBoarder - yPoint= \(graphHeight + topBoarder - yPoint)")
+            let yPoint = CGFloat(abs(graphPoint-minValue)) / CGFloat(distanceSumOfMinMax(minValue, maxValue)) * graphHeight
+//            print("yPoint= \(yPoint)")
+//            print("graphHeight + topBoarder - yPoint= \(graphHeight + topBoarder - yPoint)")
             return graphHeight + topBoarder - yPoint //Flip the graph
         }
 
