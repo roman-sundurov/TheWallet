@@ -28,7 +28,8 @@ protocol protocolScreen1Delegate{
     func returnArrayForIncrease() -> [Int] //возвращает инкремент каждой ячейки основной таблице. Показывает количество заголовков до конкретной ячейки.
     func returnDaysForSorting() -> Int
     func returnGraphData() -> [GraphData]
-    func returnDayOfDate(dateInternal: Date) -> String
+    func returnDayOfDate(_ dateInternal: Date) -> String
+    func returnDelegateScreen1GraphContainer() -> protocolScreen1ContainerGraph
 }
 
 
@@ -51,11 +52,11 @@ class DataOfOperations{
     
 class GraphData {
     var date: Date
-    var cumulativeAmount: Double
+    var amount: Double
     
     init(newDate: Date, newAmount: Double) {
         date = newDate
-        cumulativeAmount = newAmount
+        amount = newAmount
     }
 }
 
@@ -81,7 +82,6 @@ class ViewController: UIViewController {
     @IBOutlet var constraintTopMenuBottomStrip: NSLayoutConstraint!
     @IBOutlet var containerBottomOperationScreen1: UIView!
     @IBOutlet var constraintContainerBottomPoint: NSLayoutConstraint!
-    @IBOutlet var containerBottomGraphScreen1: UIView!
     @IBOutlet var screen1MiniGraph: UIView!
     @IBOutlet var screen1BottomMenu: UIView!
     @IBOutlet var scrollViewFromBottomPopInView: UIScrollView!
@@ -381,33 +381,33 @@ class ViewController: UIViewController {
         
         //-----------------------------------------------------------
         //Данные для передачи в график
-        //Cохраняет кумулятивную сумму операций за каждый день из расчёта
+        //Cохраняет суммы операций по дням некуммулятивно
         
 //        let formatterPreviousDate = DateFormatter()
 //        formatterPreviousDate.dateStyle = .full
         
         graphDataArray = []
         for n in dataArrayOfOperationsInternal{
-            print("11111")
+//            print("11111")
             
             if graphDataArray.isEmpty{
                 graphDataArray.append(GraphData.init(newDate: n.date, newAmount: n.amount))
-                print("22222")
+//                print("22222")
             }
             else{
                 for x in graphDataArray {
-                    print("n.date = \(x.date), x.date= \(n.date)")
-                    if returnDayOfDate(dateInternal: x.date) == returnDayOfDate(dateInternal: n.date) {
-                        graphDataArray.filter({returnDayOfDate(dateInternal: $0.date) == returnDayOfDate(dateInternal: n.date)}).first?.cumulativeAmount += n.amount
-                        print("33333")
+//                    print("n.date = \(x.date), x.date= \(n.date)")
+                    if returnDayOfDate(x.date) == returnDayOfDate(n.date) {
+                        graphDataArray.filter({returnDayOfDate($0.date) == returnDayOfDate(n.date)}).first?.amount += n.amount
+//                        print("33333")
                     }
                 }
-                if (graphDataArray.filter{returnDayOfDate(dateInternal: $0.date) == returnDayOfDate(dateInternal: n.date)}).isEmpty {
-                    print("44444")
+                if (graphDataArray.filter{returnDayOfDate($0.date) == returnDayOfDate(n.date)}).isEmpty {
+//                    print("44444")
                     graphDataArray.append(GraphData.init(newDate: n.date, newAmount: n.amount))
                 }
                 else{
-                    print("55555")
+//                    print("55555")
                 }
                 
             }
@@ -458,7 +458,6 @@ class ViewController: UIViewController {
         bottomPopInView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
         bottomPopInView.clipsToBounds = true
-//        containerBottomGraphScreen1.clipsToBounds = true
 
         //Добавление Blur-эффекта
         self.view.insertSubview(self.blurViewScreen1, belowSubview: self.containerBottomOperationScreen1)
@@ -482,7 +481,12 @@ class ViewController: UIViewController {
 
 extension ViewController: protocolScreen1Delegate{
     
-    func returnDayOfDate(dateInternal: Date) -> String {
+    func returnDelegateScreen1GraphContainer() -> protocolScreen1ContainerGraph {
+        return delegateScreen1GraphContainer!
+    }
+    
+    
+    func returnDayOfDate(_ dateInternal: Date) -> String {
         let formatterPrint = DateFormatter()
         formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) //+3 час(Moscow)
         formatterPrint.dateFormat = "d MMMM YYYY"

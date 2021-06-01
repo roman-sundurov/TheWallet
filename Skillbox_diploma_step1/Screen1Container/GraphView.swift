@@ -8,13 +8,13 @@
 import UIKit
 
 protocol protocolGraphView{
-    func setGraphPoints(points: [Double])
+    func setGraphPoints(data: [GraphData])
 }
 
 @IBDesignable class GraphView: UIView {
     
     // Weekly sample data
-    var graphPoints: [Double] = [400, -200, 600, -400, 50, 80, -300]
+    var graphPoints: [Double] = []
     var cumulativeNumber: [Double] = []
     var maxDeviation: Int = 0
     
@@ -32,14 +32,26 @@ protocol protocolGraphView{
     override func draw(_ rect: CGRect) {
         
         //Считается кумулятивные значения в графике
+        cumulativeNumber = []
+        graphPoints.reverse()
+        
         for i in graphPoints {
             if cumulativeNumber.isEmpty {
-                cumulativeNumber.append(i)
+                cumulativeNumber.append(0)
             }
             else{
+//                cumulativeNumber.insert(cumulativeNumber.first! - i, at: 0)
                 cumulativeNumber.append(cumulativeNumber.last! + i)
             }
         }
+        
+//        //убираем нули с начала графика, чтобы было правильно масштабирование.
+//        for n in 0..<cumulativeNumber.count {
+//            if cumulativeNumber[n] == 0 {
+//                cumulativeNumber[n] = cumulativeNumber.filter( {$0 != 0} ).first ?? 0
+//            }
+//        }
+        
         print("cumulativeNumber= \(cumulativeNumber)")
         print("graphPoints= \(graphPoints)")
         
@@ -90,9 +102,24 @@ protocol protocolGraphView{
 
         print("maxValue= \(maxValue)")
         print("minValue= \(minValue)")
+        
+        var distanceSumOfMinMax = { (min: Double, max: Double) -> Double in
+            if max >= 0 && min >= 0 {
+                return max - min
+            }
+            else if max >= 0 && min < 0 {
+                return max + abs(min)
+            }
+            else if max < 0 && min < 0 {
+                return abs(min) - abs(max)
+            }
+            return 0
+        }
+        print("distanceSumOfMinMax= \(distanceSumOfMinMax(minValue, maxValue))")
 
         let columnYPoint = { (graphPoint: Double) -> CGFloat in
-            let yPoint = CGFloat(graphPoint) / CGFloat(maxValue) * graphHeight
+            let yPoint = CGFloat(abs(graphPoint)) / CGFloat(distanceSumOfMinMax(minValue, maxValue)) * graphHeight
+            print("graphHeight + topBoarder - yPoint= \(graphHeight + topBoarder - yPoint)")
             return graphHeight + topBoarder - yPoint //Flip the graph
         }
 
@@ -104,7 +131,7 @@ protocol protocolGraphView{
         let graphPath = UIBezierPath()
 
         // Go to start of line
-        graphPath.move(to: CGPoint(x: columnXPoint(0), y: columnYPoint(graphPoints[0])))
+        graphPath.move(to: CGPoint(x: columnXPoint(0), y: columnYPoint(cumulativeNumber[0])))
 
         // Add points for each item in the graphPoints array
         // at the correct (x, y) for the point
@@ -174,8 +201,13 @@ protocol protocolGraphView{
 
 extension GraphView: protocolGraphView{
     
-    func setGraphPoints(points: [Double]) {
-        graphPoints = points
+    func setGraphPoints(data: [GraphData]) {
+        var internalPoints: [Double] = []
+        for n in data {
+            internalPoints.append(n.amount)
+        }
+        graphPoints = internalPoints
+        
     }
     
     

@@ -31,30 +31,56 @@ class ViewControllerScreen1ContainerGraph: UIViewController {
         print("countFullPointsArray")
         guard let graphData = delegateScreen1?.returnGraphData() else { return }
         print("graphData= \(graphData)")
-        
-        var graphData2: [GraphData]
-        
-        //Заполнение gthдней, в которых не было операций
-        
-        //Проверка наличия операция сегодня. Если нет проставляется значение ближайшей записи.
-        if delegateScreen1?.returnDayOfDate(dateInternal: graphData[0].date) != delegateScreen1?.returnDayOfDate(dateInternal: Date()){
-            graphData2.insert(GraphData(newDate: Date(), newAmount: graphData.first!.cumulativeAmount), at: 0)
+        for n in graphData {
+            print("graphData_n.cumulativeAmount= \(n.amount), graphData_n.date= \(n.date)")
         }
         
-        //Проверка заполнения оставшихся дней. Если запись пуста - ставим предыдущую.
-        for x in graphData {
+        var graphDataFinal: [GraphData] = []
+        
+        //Заполнение дней, в которых не было операций
+        //Проверка наличия операция сегодня. Если нет проставляется 0.
+        if graphData.count > 0{
+            print("1111")
+            if graphDataFinal.isEmpty {
+                graphDataFinal.append(GraphData(newDate: Date(), newAmount: graphData.first!.amount))
+            }
+        
+            //Проверка заполнения оставшихся дней. Если запись пуста - ставим 0.
+            var x: Int = 1
+            
             for n in 1..<(delegateScreen1?.returnDaysForSorting())!{
+                print("2222")
+                
+                if graphData.count >= x+1{
+                    print("3333")
+                    if delegateScreen1?.returnDayOfDate(graphData[x].date) != delegateScreen1?.returnDayOfDate(Calendar.current.date(byAdding: .day, value: -n, to: Date())!) {
+                        print("4444")
+                        graphDataFinal.append(GraphData(newDate: Calendar.current.date(byAdding: .day, value: -n, to: Date())!, newAmount: 0))
+                    }
+                    else{
+                        print("5555")
+                        graphDataFinal.append(GraphData(newDate: Calendar.current.date(byAdding: .day, value: -n, to: Date())!, newAmount: graphData[x].amount))
+                        x += 1
+
+                    }
+                }
+                else{
+                    print("5555")
+                    graphDataFinal.append(GraphData(newDate: Calendar.current.date(byAdding: .day, value: -n, to: Date())!, newAmount: 0))
+                    x += 1
+                }
                 
             }
-
+            
         }
 
 
-        for n in graphData2 {
-            print("n= \(n.cumulativeAmount)")
+        for n in graphDataFinal {
+            print("n.cumulativeAmount= \(n.amount), n.date= \(n.date)")
         }
         
-//        delegateScreen1.setGraphPo
+        graphView.setGraphPoints(data: graphDataFinal)
+        graphView.setNeedsDisplay()
     }
     
     

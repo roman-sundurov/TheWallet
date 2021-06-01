@@ -290,10 +290,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="370" height="426"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DK8-ZY-0hK">
-                                                <rect key="frame" x="0.0" y="0.0" width="370" height="521"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="370" height="426"/>
                                                 <subviews>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="48" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ahz-zl-teV">
-                                                        <rect key="frame" x="10" y="20" width="350" height="501"/>
+                                                        <rect key="frame" x="10" y="20" width="350" height="376"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" id="RFQ-xQ-Rlu" customClass="Screen1TableViewCellHeader" customModule="Skillbox_diploma_step1" customModuleProvider="target">
@@ -381,8 +381,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" name="InterfaceColorWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="521" id="Fgo-ue-L6w"/>
-                                                    <constraint firstAttribute="bottom" secondItem="Ahz-zl-teV" secondAttribute="bottom" id="MeI-E1-ZnC"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Ahz-zl-teV" secondAttribute="bottom" constant="30" id="MeI-E1-ZnC"/>
                                                     <constraint firstItem="Ahz-zl-teV" firstAttribute="leading" secondItem="DK8-ZY-0hK" secondAttribute="leading" constant="10" id="TWa-1s-va0"/>
                                                     <constraint firstItem="Ahz-zl-teV" firstAttribute="top" secondItem="DK8-ZY-0hK" secondAttribute="top" constant="20" id="XUY-wo-CJD"/>
                                                     <constraint firstAttribute="trailing" secondItem="Ahz-zl-teV" secondAttribute="trailing" constant="10" id="ioG-gM-fJh"/>
@@ -392,6 +391,7 @@
                                         <constraints>
                                             <constraint firstItem="DK8-ZY-0hK" firstAttribute="top" secondItem="2yX-Fy-H7y" secondAttribute="top" id="0x6-Vr-7ZB"/>
                                             <constraint firstItem="DK8-ZY-0hK" firstAttribute="bottom" secondItem="2yX-Fy-H7y" secondAttribute="bottom" id="J2s-aA-R2H"/>
+                                            <constraint firstItem="DK8-ZY-0hK" firstAttribute="height" secondItem="T9E-30-cZk" secondAttribute="height" id="Wqc-72-f5F"/>
                                             <constraint firstItem="DK8-ZY-0hK" firstAttribute="leading" secondItem="2yX-Fy-H7y" secondAttribute="leading" id="XN5-ln-Jv9"/>
                                             <constraint firstItem="DK8-ZY-0hK" firstAttribute="trailing" secondItem="2yX-Fy-H7y" secondAttribute="trailing" id="aQ6-cS-vSp"/>
                                             <constraint firstItem="DK8-ZY-0hK" firstAttribute="width" secondItem="Nnk-fr-Wuw" secondAttribute="width" id="p8C-RG-00w"/>
@@ -522,7 +522,6 @@
                         <outlet property="buttonYearly" destination="EZM-zD-IXz" id="E8R-Fi-wgz"/>
                         <outlet property="constraintContainerBottomPoint" destination="b36-Hu-7yN" id="rCz-ZS-vHX"/>
                         <outlet property="constraintTopMenuBottomStrip" destination="ir3-TU-DOM" id="GQC-hc-fDq"/>
-                        <outlet property="containerBottomGraphScreen1" destination="Tkb-Y7-beV" id="VwM-SY-Tk6"/>
                         <outlet property="containerBottomOperationScreen1" destination="uY8-5i-7qy" id="6De-Oc-bYF"/>
                         <outlet property="graphFromBottomPopInView" destination="Tkb-Y7-beV" id="zNv-SR-FWv"/>
                         <outlet property="labelAmountOfExpenses" destination="MzC-5Z-ueh" id="hFP-dz-Z6S"/>
@@ -910,7 +909,7 @@
             <objects>
                 <viewController id="vna-KF-Brs" customClass="ViewControllerScreen2Container" customModule="Skillbox_diploma_step1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QS4-AS-IaU">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="370" height="515"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="I0S-Bf-5wZ">
@@ -1153,7 +1152,7 @@
             <objects>
                 <viewController id="7HG-Be-bHj" customClass="ViewControllerScreen1ContainerOperation" customModule="Skillbox_diploma_step1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U6t-e2-vEc">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="350" height="311"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qBi-z5-GjL">
@@ -1320,7 +1319,7 @@
             <objects>
                 <viewController id="cOd-yj-oTb" customClass="ViewControllerScreen1ContainerGraph" customModule="Skillbox_diploma_step1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Yv-NV-gd9">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="370" height="426"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TfC-jB-uCS" customClass="GraphView" customModule="Skillbox_diploma_step1" customModuleProvider="target">
