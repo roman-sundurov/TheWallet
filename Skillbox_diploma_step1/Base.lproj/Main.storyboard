@@ -114,7 +114,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zd6-bW-CPK" userLabel="lefttPart">
                                         <rect key="frame" x="0.0" y="0.0" width="180" height="200"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ths-aj-OB7">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ths-aj-OB7" customClass="Screen1RoundedGraph" customModule="Skillbox_diploma_step1" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="10" width="180" height="180"/>
                                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                 <constraints>
