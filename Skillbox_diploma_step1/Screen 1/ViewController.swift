@@ -83,7 +83,7 @@ class ViewController: UIViewController {
     @IBOutlet var constraintTopMenuBottomStrip: NSLayoutConstraint!
     @IBOutlet var containerBottomOperationScreen1: UIView!
     @IBOutlet var constraintContainerBottomPoint: NSLayoutConstraint!
-    @IBOutlet var screen1MiniGraph: UIView!
+    @IBOutlet var screen1MiniGraph: Screen1RoundedGraph!
     @IBOutlet var screen1BottomMenu: UIView!
     @IBOutlet var scrollViewFromBottomPopInView: UIScrollView!
     @IBOutlet var graphFromBottomPopInView: UIView!
@@ -463,6 +463,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        screen1MiniGraph.setDelegateScreen1RoundedGraph(delegate: self)
         
         screen1AllUpdate()
         

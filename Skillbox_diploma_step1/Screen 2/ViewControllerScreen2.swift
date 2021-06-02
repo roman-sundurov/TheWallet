@@ -126,6 +126,7 @@ class ViewControllerScreen2: UIViewController {
             
             if screen2StatusEditing == true{
                 print("newOperation.amount222= \(newOperation.amount)")
+                print("newOperation.date222= \(newOperation.date)")
                 delegateScreen1?.editOperationInRealm(newAmount: newOperation.amount, newCategory: newOperation.category, newNote: newOperation.note, newDate: newOperation.date, id: newOperation.id)
             }
             else{
