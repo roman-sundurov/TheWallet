@@ -14,7 +14,7 @@ protocol protocolScreen1RoundedGraph {
 @IBDesignable class Screen1RoundedGraph: UIView {
     
     private enum Constants{
-        static let lineWidth: CGFloat = 5.0
+        static let lineWidth: CGFloat = 25.0
         static let arcWidth: CGFloat = 76
     }
     
@@ -31,19 +31,30 @@ protocol protocolScreen1RoundedGraph {
     
     override func draw(_ rect: CGRect) {
         
-        var localData = deligateScreen1?.returnDataArrayOfOperations()
+        let localData = deligateScreen1?.returnIncomesExpenses()
+        var incomesExpensesRatio: Double = 1
         
+        incomesExpensesRatio = localData!.isEmpty ? 0 : localData!["income"]! / (localData!["income"]! - localData!["expensive"]!)
+        
+        print("incomesExpensesRatio= \(incomesExpensesRatio)")
         
         let center = CGPoint(x: bounds.width/2, y: bounds.height/2)
         let radius = max(bounds.width, bounds.height)
         
-        let startAngle: CGFloat = .pi / 2
+        let startAngleIncome: CGFloat = .pi / 2
+        let startAngleExpenses: CGFloat = .pi * 2 * CGFloat(incomesExpensesRatio) + startAngleIncome
         
-        let path = UIBezierPath(arcCenter: center, radius: radius/2-Constants.arcWidth/2, startAngle: startAngle, endAngle: .pi * 3 / 2, clockwise: true)
+        let pathIncome = UIBezierPath(arcCenter: center, radius: radius/2-Constants.arcWidth/2, startAngle: startAngleIncome, endAngle: startAngleExpenses, clockwise: true)
         
-        path.lineWidth = Constants.lineWidth
+        pathIncome.lineWidth = Constants.lineWidth
         incomesColor.setStroke()
-        path.stroke()
+        pathIncome.stroke()
+        
+        let pathExpenses = UIBezierPath(arcCenter: center, radius: radius/2-Constants.arcWidth/2, startAngle: startAngleExpenses, endAngle: startAngleIncome, clockwise: true)
+        pathExpenses.lineWidth = Constants.lineWidth
+        expensesColor.setStroke()
+        pathExpenses.stroke()
+
     }
     
     

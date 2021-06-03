@@ -31,7 +31,7 @@ protocol protocolScreen1Delegate{
     func returnDayOfDate(_ dateInternal: Date) -> String
     func returnMonthOfDate(_ dateInternal: Date) -> String
     func returnDelegateScreen1GraphContainer() -> protocolScreen1ContainerGraph
-    func returnIncomeExpenses() -> [Double]
+    func returnIncomesExpenses() -> [String : Double]
 }
 
 
@@ -499,8 +499,8 @@ class ViewController: UIViewController {
 
 extension ViewController: protocolScreen1Delegate{
     
-    func returnIncomeExpenses() -> [Double] {
-        return [income, expensive]
+    func returnIncomesExpenses() -> [String : Double] {
+        return ["income" : income, "expensive" : expensive]
     }
     
     
@@ -582,6 +582,7 @@ extension ViewController: protocolScreen1Delegate{
         screen1TableUpdateSorting(days: daysForSorting)
         countingIncomesAndExpensive()
         changeDaysForSorting()
+        screen1MiniGraph.setNeedsDisplay()
         
     }
     
