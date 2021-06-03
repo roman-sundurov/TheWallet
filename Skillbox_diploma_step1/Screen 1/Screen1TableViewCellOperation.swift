@@ -37,15 +37,15 @@ class Screen1TableViewCellOperation: UITableViewCell {
     func startCell() {
         print("Simple Cell: ---")
         let specVar: Int = specCellTag - delegateScreen1!.returnArrayForIncrease()[specCellTag]
-        labelCategory.text = delegateScreen1!.returnNewTableDataArray()[specVar].category
+        labelCategory.text = delegateScreen1!.returnDataArrayOfOperations()[specVar].category
 
-        if delegateScreen1!.returnNewTableDataArray()[specVar].amount.truncatingRemainder(dividingBy: 1) == 0 {
-            labelAmount.text = String(format: "%.0f", delegateScreen1!.returnNewTableDataArray()[specVar].amount)
+        if delegateScreen1!.returnDataArrayOfOperations()[specVar].amount.truncatingRemainder(dividingBy: 1) == 0 {
+            labelAmount.text = String(format: "%.0f", delegateScreen1!.returnDataArrayOfOperations()[specVar].amount)
         }
         else {
-            labelAmount.text = String(format: "%.2f", delegateScreen1!.returnNewTableDataArray()[specVar].amount)
+            labelAmount.text = String(format: "%.2f", delegateScreen1!.returnDataArrayOfOperations()[specVar].amount)
         }
-        if delegateScreen1!.returnNewTableDataArray()[specVar].amount < 0 {
+        if delegateScreen1!.returnDataArrayOfOperations()[specVar].amount < 0 {
             labelAmount.textColor = UIColor.red
             currencyStatus.textColor = UIColor.red
         }

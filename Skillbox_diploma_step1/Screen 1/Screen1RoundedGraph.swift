@@ -21,7 +21,7 @@ protocol protocolScreen1RoundedGraph {
     
     //MARK: - делегаты и переменные
     
-    var deligateScreen1ContainerGraph: protocolScreen1Delegate?
+    var deligateScreen1: protocolScreen1Delegate?
     
     var incomesColor: UIColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
     var expensesColor: UIColor = UIColor.red
@@ -30,6 +30,9 @@ protocol protocolScreen1RoundedGraph {
     //MARK: - draw()
     
     override func draw(_ rect: CGRect) {
+        
+        var localData = deligateScreen1?.returnDataArrayOfOperations()
+        
         
         let center = CGPoint(x: bounds.width/2, y: bounds.height/2)
         let radius = max(bounds.width, bounds.height)
@@ -52,7 +55,7 @@ protocol protocolScreen1RoundedGraph {
 extension Screen1RoundedGraph: protocolScreen1RoundedGraph{
     
     func setDelegateScreen1RoundedGraph(delegate: protocolScreen1Delegate) {
-        deligateScreen1ContainerGraph = delegate
+        deligateScreen1 = delegate
     }
     
     

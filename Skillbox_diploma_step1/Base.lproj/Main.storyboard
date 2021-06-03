@@ -525,7 +525,7 @@
                         <outlet property="containerBottomOperationScreen1" destination="uY8-5i-7qy" id="6De-Oc-bYF"/>
                         <outlet property="graphFromBottomPopInView" destination="Tkb-Y7-beV" id="zNv-SR-FWv"/>
                         <outlet property="labelAmountOfExpenses" destination="MzC-5Z-ueh" id="hFP-dz-Z6S"/>
-                        <outlet property="labelAmountOfIncome" destination="Jce-a5-TXM" id="Vw0-CI-Rcm"/>
+                        <outlet property="labelAmountOfIncomes" destination="Jce-a5-TXM" id="Vw0-CI-Rcm"/>
                         <outlet property="labelDaily" destination="x1e-o1-ksS" id="BmE-1r-rqL"/>
                         <outlet property="labelMothly" destination="0g6-AG-eVw" id="bMg-Fk-7aX"/>
                         <outlet property="labelWeekly" destination="M2c-Mq-Y7j" id="Ei7-EA-8zM"/>
