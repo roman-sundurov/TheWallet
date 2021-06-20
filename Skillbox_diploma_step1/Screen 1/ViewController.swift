@@ -22,6 +22,7 @@ protocol protocolScreen1Delegate{
     func deleteOperationInRealm(tag: Int)
     func deleteCategoryInRealm(id: Int)
     func editCategoryInRealm(newName: String, newIcon: String, id: Int)
+    func miniGraphStarterBackground(status: Bool)
     
     //функции возврата
     func returnDataArrayOfOperations() -> [DataOfOperations] //возвращает данные, которые отображаются в данный момент
@@ -91,6 +92,7 @@ class ViewController: UIViewController {
     @IBOutlet var buttonScreen1NewOperation: UIButton!
     @IBOutlet var buttonScreen1ShowGraph: UIButton!
     @IBOutlet var buttonScreen1ShowList: UIButton!
+    @IBOutlet var miniGraphStarterBackground: UIView!
     
     
     
@@ -499,8 +501,18 @@ class ViewController: UIViewController {
 
 extension ViewController: protocolScreen1Delegate{
     
+    func miniGraphStarterBackground(status: Bool) {
+        miniGraphStarterBackground.isHidden = status
+    }
+    
+    
     func returnIncomesExpenses() -> [String : Double] {
-        return ["income" : income, "expensive" : expensive]
+        if income != 0 || expensive != 0 {
+            print("income= \(income), expensive= \(expensive)")
+            return ["income" : income, "expensive" : expensive]
+        } else {
+            return [:]
+        }
     }
     
     
