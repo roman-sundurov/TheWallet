@@ -143,7 +143,7 @@ class ViewController: UIViewController {
             delegateScreen2?.setCategoryInNewOperation(category: dataArrayOfOperations[tagForEdit].category)
             delegateScreen2?.setDateInNewOperation(date: dataArrayOfOperations[tagForEdit].date)
             delegateScreen2?.setNoteInNewOperation(note: dataArrayOfOperations[tagForEdit].note)
-            delegateScreen2?.setIDInNewOperation(id: tagForEdit)
+            delegateScreen2?.setIDInNewOperation(id: dataArrayOfOperations[tagForEdit].id)
         }
         
     }
