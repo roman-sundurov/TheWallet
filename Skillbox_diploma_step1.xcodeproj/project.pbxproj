@@ -18,6 +18,8 @@
 		472F289325A7319500CE1481 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472F289125A7319500CE1481 /* LaunchScreen.storyboard */; };
 		472F289E25A7319600CE1481 /* Skillbox_diploma_step1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F289D25A7319600CE1481 /* Skillbox_diploma_step1Tests.swift */; };
 		472F28A925A7319600CE1481 /* Skillbox_diploma_step1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F28A825A7319600CE1481 /* Skillbox_diploma_step1UITests.swift */; };
+		4736308927B5D461002D1426 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 4736308827B5D461002D1426 /* Realm */; };
+		4736308B27B5D461002D1426 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4736308A27B5D461002D1426 /* RealmSwift */; };
 		4750EFE725BC2C5C00167A92 /* Screen2Container_TableViewCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EFE625BC2C5C00167A92 /* Screen2Container_TableViewCellHeader.swift */; };
 		4750EFEC25BC2C7F00167A92 /* Screen2Container_TableViewCellChangeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EFEB25BC2C7F00167A92 /* Screen2Container_TableViewCellChangeCategory.swift */; };
 		475D711A26509A0F009D917A /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475D711926509A0F009D917A /* GraphView.swift */; };
@@ -30,8 +32,6 @@
 		47BEBB43262F91D1006FF254 /* Screen2Container_TableViewCellNewCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BEBB42262F91D1006FF254 /* Screen2Container_TableViewCellNewCategory.swift */; };
 		47C4FF3525B38B0F00F97498 /* ViewControllerScreen2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4FF3425B38B0F00F97498 /* ViewControllerScreen2.swift */; };
 		47CB73C325B4364700638185 /* Screen2TableViewCellCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB73C225B4364700638185 /* Screen2TableViewCellCategory.swift */; };
-		47DEE40726B762A9003079DD /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 47DEE40626B762A9003079DD /* Realm */; };
-		47DEE40926B762A9003079DD /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 47DEE40826B762A9003079DD /* RealmSwift */; };
 		47DEE40C26B762C2003079DD /* SimpleCheckbox in Frameworks */ = {isa = PBXBuildFile; productRef = 47DEE40B26B762C2003079DD /* SimpleCheckbox */; };
 		47F1759925BA2D320044BD30 /* ViewControllerScreen2Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F1759825BA2D320044BD30 /* ViewControllerScreen2Container.swift */; };
 /* End PBXBuildFile section */
@@ -91,9 +91,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47DEE40926B762A9003079DD /* RealmSwift in Frameworks */,
+				4736308B27B5D461002D1426 /* RealmSwift in Frameworks */,
+				4736308927B5D461002D1426 /* Realm in Frameworks */,
 				47DEE40C26B762C2003079DD /* SimpleCheckbox in Frameworks */,
-				47DEE40726B762A9003079DD /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +221,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 472F28AD25A7319600CE1481 /* Build configuration list for PBXNativeTarget "Skillbox_diploma_step1" */;
 			buildPhases = (
+				4736308E27B692B3002D1426 /* ShellScript */,
 				472F287F25A7319500CE1481 /* Sources */,
 				472F288025A7319500CE1481 /* Frameworks */,
 				472F288125A7319500CE1481 /* Resources */,
@@ -231,9 +232,9 @@
 			);
 			name = Skillbox_diploma_step1;
 			packageProductDependencies = (
-				47DEE40626B762A9003079DD /* Realm */,
-				47DEE40826B762A9003079DD /* RealmSwift */,
 				47DEE40B26B762C2003079DD /* SimpleCheckbox */,
+				4736308827B5D461002D1426 /* Realm */,
+				4736308A27B5D461002D1426 /* RealmSwift */,
 			);
 			productName = Skillbox_diploma_step1;
 			productReference = 472F288325A7319500CE1481 /* Skillbox_diploma_step1.app */;
@@ -307,8 +308,8 @@
 			);
 			mainGroup = 472F287A25A7319500CE1481;
 			packageReferences = (
-				47DEE40526B762A9003079DD /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				47DEE40A26B762C2003079DD /* XCRemoteSwiftPackageReference "SimpleCheckbox" */,
+				4736308727B5D461002D1426 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 472F288425A7319500CE1481 /* Products */;
 			projectDirPath = "";
@@ -347,6 +348,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4736308E27B692B3002D1426 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PATH=/opt/homebrew/bin:$PATH\nif [ -f ~/com.raywenderlich.swiftlint.yml ]; then\n  if which swiftlint >/dev/null; then\n    swiftlint --no-cache --config ~/com.raywenderlich.swiftlint.yml\n  fi\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		472F287F25A7319500CE1481 /* Sources */ = {
@@ -706,12 +727,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		47DEE40526B762A9003079DD /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+		4736308727B5D461002D1426 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-cocoa.git";
+			repositoryURL = "https://github.com/realm/realm-swift";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 10.11.0;
+				minimumVersion = 10.22.0;
 			};
 		};
 		47DEE40A26B762C2003079DD /* XCRemoteSwiftPackageReference "SimpleCheckbox" */ = {
@@ -725,14 +746,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		47DEE40626B762A9003079DD /* Realm */ = {
+		4736308827B5D461002D1426 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 47DEE40526B762A9003079DD /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			package = 4736308727B5D461002D1426 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = Realm;
 		};
-		47DEE40826B762A9003079DD /* RealmSwift */ = {
+		4736308A27B5D461002D1426 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 47DEE40526B762A9003079DD /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			package = 4736308727B5D461002D1426 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
 		47DEE40B26B762C2003079DD /* SimpleCheckbox */ = {

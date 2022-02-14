@@ -66,7 +66,7 @@ class Screen2Container_TableViewCellChangeCategory: UITableViewCell, UITextField
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        buttonsEditNameCategoryAction(buttonConfirmNewName)
+        buttonsEditNameCategoryAction(buttonConfirmNewName!)
         return true
     }
     

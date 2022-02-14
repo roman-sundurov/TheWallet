@@ -120,7 +120,7 @@ protocol protocolGraphView{
         
         deligateScreen1ContainerGraph?.setGraphIndicators(min: minValue2, middle: middleValue2, max: maxValue2)
         
-        var distanceSumOfMinMax = { (min: Double, max: Double) -> Double in
+      let distanceSumOfMinMax = { (min: Double, max: Double) -> Double in
             if max >= 0 && min >= 0 {
                 return max - min
             }

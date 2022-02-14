@@ -68,7 +68,7 @@ extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
         var n = 0
         for cell in cells {
             if n >= 2 {
-                var specCell = cell as! Screen2Container_TableViewCellChangeCategory
+                let specCell = cell as! Screen2Container_TableViewCellChangeCategory
                 
                 //Значение "-100" используется, чтобы дать сигнал всем ячейкам свернуть редактирование. Использую его, когда поступает команда свернуть PopUp-окно. Чтобы при следующем появлении оно было без редактирования.
                 if CategoryID == -100 {
@@ -138,7 +138,7 @@ extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
     func screen2ContainerAddNewCategory(){
         delegateScreen2!.screen2DataReceiveUpdate()
         tableViewContainer.performBatchUpdates({
-            var newRowIndex = statusEditContainer == true ? (delegateScreen2?.returnDataArrayOfCategory().count)! + 1 : (delegateScreen2?.returnDataArrayOfCategory().count)!
+          let newRowIndex = statusEditContainer == true ? (delegateScreen2?.returnDataArrayOfCategory().count)! + 1 : (delegateScreen2?.returnDataArrayOfCategory().count)!
             tableViewContainer.insertRows(at: [IndexPath(row: newRowIndex, section: 0)], with: .automatic)
         }, completion: { status in self.tableViewContainer.reloadData() } )
     }
@@ -154,13 +154,13 @@ extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
     }
     
     
-    func screen2ContainerEditNewCategory(index: Int){
-
-        var newRowIndex = statusEditContainer == true ? (delegateScreen2?.returnDataArrayOfCategory().count)! + 1 : (delegateScreen2?.returnDataArrayOfCategory().count)!
-        
-        delegateScreen2!.screen2DataReceiveUpdate()
-        tableViewContainer.reloadData()
-    }
+//    func screen2ContainerEditNewCategory(index: Int){
+//
+//        var newRowIndex = statusEditContainer == true ? (delegateScreen2?.returnDataArrayOfCategory().count)! + 1 : (delegateScreen2?.returnDataArrayOfCategory().count)!
+//
+//        delegateScreen2!.screen2DataReceiveUpdate()
+//        tableViewContainer.reloadData()
+//    }
     
     
     func returnDelegateScreen2() -> protocolScreen2Delegate {
@@ -198,11 +198,11 @@ extension ViewControllerScreen2Container: UITableViewDelegate, UITableViewDataSo
             return 2
         }
         else if statusEditContainer == true{
-            print("returnDataArrayOfCategory().count 111= \(delegateScreen2?.returnDataArrayOfCategory().count)")
+            print("returnDataArrayOfCategory().count 111= \(String(describing: delegateScreen2?.returnDataArrayOfCategory().count)  )")
             return (delegateScreen2?.returnDataArrayOfCategory().count)! + 2
         }
         else{
-            print("returnDataArrayOfCategory().count 222= \(delegateScreen2?.returnDataArrayOfCategory().count)")
+            print("returnDataArrayOfCategory().count 222= \(String(describing: delegateScreen2?.returnDataArrayOfCategory().count))")
             return (delegateScreen2?.returnDataArrayOfCategory().count)! + 1
         }
     }

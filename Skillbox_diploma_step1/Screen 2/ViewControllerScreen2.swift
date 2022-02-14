@@ -96,7 +96,8 @@ class ViewControllerScreen2: UIViewController {
             //set Amount
             print("2. screen2SegmentControl.selectedSegmentIndex= \(screen2SegmentControl.selectedSegmentIndex)")
             if screen2SegmentControl.selectedSegmentIndex == 0 {
-                print("textFieldAmount.text= \(textFieldAmount.text)")
+                print("textFieldAmount.text= \(textFieldAmount.text as Optional)")
+//                print("description of i: \(i as Optional)")
                 setAmountInNewOperation(amount: Double(textFieldAmount.text ?? "0")!)
             }
             else if screen2SegmentControl.selectedSegmentIndex == 1 {
@@ -167,18 +168,18 @@ class ViewControllerScreen2: UIViewController {
         labelAlertAddNewOperations.text = "Выберите категорию операции и сумму."
         alertErrorAddNewOperation.view.addSubview(labelAlertAddNewOperations)
         labelAlertAddNewOperations.translatesAutoresizingMaskIntoConstraints = false
-        
+
         alertErrorAddNewOperation.view.translatesAutoresizingMaskIntoConstraints = false
-        
+
         alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(item: labelAlertAddNewOperations, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 180))
         alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(item: labelAlertAddNewOperations, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 50))
-        
+
         alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(item: labelAlertAddNewOperations, attribute: .centerX, relatedBy: .equal, toItem: alertErrorAddNewOperation.view, attribute: .centerX, multiplier: 1, constant: 0))
         alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(item: labelAlertAddNewOperations, attribute: .top, relatedBy: .equal, toItem: alertErrorAddNewOperation.view, attribute: .top, multiplier: 1, constant: 80))
         alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(item: labelAlertAddNewOperations, attribute: .bottom, relatedBy: .equal, toItem: alertErrorAddNewOperation.view, attribute: .bottom, multiplier: 1, constant: 40))
-        
-        alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(item: alertErrorAddNewOperation.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: labelAlertAddNewOperations.frame.height + 140))
-        
+
+      alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(item: alertErrorAddNewOperation.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: labelAlertAddNewOperations.frame.height + 140))
+
         print(alertErrorAddNewOperation.view.frame.width)
         print(labelAlertAddNewOperations.frame.width)
         

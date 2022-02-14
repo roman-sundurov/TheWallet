@@ -103,7 +103,7 @@ class Persistence{
         print("updateOperations")
         let particularOperations = realm.objects(ListOfOperations.self).filter("id == \(idOfObject)").first
         try! realm.write{
-            print("particularOperations.text= \(particularOperations)")
+          print("particularOperations.text= \(String(describing: particularOperations))")
             particularOperations?.setValue(category, forKey: "category")
             particularOperations?.setValue(note, forKey: "note")
             particularOperations?.setValue(amount, forKey: "amount")
