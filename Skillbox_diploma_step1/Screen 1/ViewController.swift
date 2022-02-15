@@ -94,7 +94,6 @@ class ViewController: UIViewController {
 
 
   // MARK: - делегаты и переменные
-
   var income: Double = 0
   var expensive: Double = 0
 
@@ -105,8 +104,10 @@ class ViewController: UIViewController {
 
   // хранение оригинала данных из Realm
   var dataArrayOfOperationsOriginal: [DataOfOperations] = []
+
   // хранение модифицированных данных из Realm для конкретного режима отоборажения
   var dataArrayOfOperations: [DataOfOperations] = []
+
   // показывает количество заголовков с новой датой в таблице, которое предшествует конкретной операции
   var arrayForIncrease: [Int] = [0]
   var graphDataArray: [GraphData] = []
@@ -116,12 +117,10 @@ class ViewController: UIViewController {
 
 
   // MARK: - объекты
-
   let blurViewScreen1 = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
 
 
   // MARK: - переходы
-
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let vewController = segue.destination as? ViewControllerScreen2,
        segue.identifier == "segueToScreen2" {
@@ -152,7 +151,6 @@ class ViewController: UIViewController {
 
 
   // MARK: - клики
-
   @IBAction func buttonActionScreen1NewOperation(_ sender: Any) {
     performSegue(withIdentifier: "segueToScreen2", sender: nil)
   }
@@ -403,283 +401,281 @@ class ViewController: UIViewController {
     }
 
     print("dataArrayOfOperations before filter: \(dataArrayOfOperations)")
-    graphDataArray.sort { $0.date > $1.date}
+    graphDataArray.sort { $0.date > $1.date }
     print("graphDataArray after sort: \(graphDataArray)")
   }
 
 
-    func screen1DataReceive(){
-        dataArrayOfOperationsOriginal = []
-        for n in Persistence.shared.getRealmDataOperations(){
-            dataArrayOfOperationsOriginal.append(DataOfOperations(amount1: n.amount, category1: n.category, note1: n.note, date1: n.date, id1: n.id))
-        }
-        daysForSorting = Persistence.shared.returnDaysForSorting()
-        print("daysForSorting in screen1DataReceive= \(Persistence.shared.returnDaysForSorting())")
-        print("newTableDataArrayOriginal= \(dataArrayOfOperationsOriginal)")
+  func screen1DataReceive() {
+    dataArrayOfOperationsOriginal = []
+    for operation in Persistence.shared.getRealmDataOperations() {
+      dataArrayOfOperationsOriginal.append(DataOfOperations(
+        amount1: operation.amount,
+        category1: operation.category,
+        note1: operation.note,
+        date1: operation.date,
+        id1: operation.id
+      ))
     }
-    
-    func daysForSortingRealmUpdate(){
-        Persistence.shared.updateDaysForSorting(daysForSorting: daysForSorting)
-    }
+    daysForSorting = Persistence.shared.returnDaysForSorting()
+    print("daysForSorting in screen1DataReceive= \(Persistence.shared.returnDaysForSorting())")
+    print("newTableDataArrayOriginal= \(dataArrayOfOperationsOriginal)")
+  }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        borderLineForMenu(days: daysForSorting)
-        screen1TableUpdateSorting(days: daysForSorting)
+
+  func daysForSortingRealmUpdate() {
+    Persistence.shared.updateDaysForSorting(daysForSorting: daysForSorting)
+  }
+
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    borderLineForMenu(days: daysForSorting)
+    screen1TableUpdateSorting(days: daysForSorting)
+    self.view.layoutIfNeeded()
+  }
+
+
+  // MARK: - viewDidLoad
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+
+    screen1MiniGraph.setDelegateScreen1RoundedGraph(delegate: self)
+    screen1AllUpdate()
+
+    // округление углов на первом экране
+    bottomPopInView.layer.cornerRadius = 20
+    bottomPopInView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+
+    bottomPopInView.clipsToBounds = true
+
+    // Добавление Blur-эффекта
+    self.view.insertSubview(self.blurViewScreen1, belowSubview: self.containerBottomOperationScreen1)
+    self.blurViewScreen1.backgroundColor = .clear
+    self.blurViewScreen1.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      self.blurViewScreen1.topAnchor.constraint(equalTo: self.view.topAnchor),
+      self.blurViewScreen1.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+      self.blurViewScreen1.heightAnchor.constraint(equalTo: self.view.heightAnchor),
+      self.blurViewScreen1.widthAnchor.constraint(equalTo: self.view.widthAnchor)
+    ])
+    self.blurViewScreen1.isHidden = true
+
+    self.view.layoutIfNeeded()
+  }
+}
+
+
+// MARK: - additional protocols
+extension ViewController: protocolScreen1Delegate {
+  func miniGraphStarterBackground(status: Bool) {
+    miniGraphStarterBackground.isHidden = status
+  }
+
+
+  func returnIncomesExpenses() -> [String: Double] {
+    if income != 0 || expensive != 0 {
+      print("income= \(income), expensive= \(expensive)")
+      return ["income": income, "expensive": expensive]
+    } else {
+      return [:]
+    }
+  }
+
+
+  func returnMonthOfDate(_ dateInternal: Date) -> String {
+    let formatterPrint = DateFormatter()
+    formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) // +3 час(Moscow)
+    formatterPrint.dateFormat = "MMMM YYYY"
+    return formatterPrint.string(from: dateInternal)
+  }
+
+
+  func returnDayOfDate(_ dateInternal: Date) -> String {
+    let formatterPrint = DateFormatter()
+    formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) // +3 час(Moscow)
+    switch returnDaysForSorting() {
+    case 365:
+      formatterPrint.dateFormat = "MMMM YYYY"
+    default:
+      formatterPrint.dateFormat = "d MMMM YYYY"
+    }
+    return formatterPrint.string(from: dateInternal)
+  }
+
+
+  func returnDelegateScreen1GraphContainer() -> protocolScreen1ContainerGraph {
+    return delegateScreen1GraphContainer!
+  }
+
+
+  func returnGraphData() -> [GraphData] {
+    return graphDataArray
+  }
+
+
+  func returnDaysForSorting() -> Int {
+    return daysForSorting
+  }
+
+
+  func editCategoryInRealm(newName: String, newIcon: String, id: Int) {
+    print("editCategoryInRealm")
+    Persistence.shared.updateCategory(
+      name: newName,
+      icon: newIcon,
+      idOfObject: delegateScreen2!.returnDataArrayOfCategory()[id].id)
+  }
+
+
+  func deleteCategoryInRealm(id: Int) {
+    Persistence.shared.deleteCategory(idOfObject: delegateScreen2!.returnDataArrayOfCategory()[id].id)
+  }
+
+
+  func editOperation(tag: Int) {
+    actionsOperationsClosePopUpScreen1()
+    tagForEdit = tag
+    performSegue(withIdentifier: "segueToScreen2ForEdit", sender: nil)
+  }
+
+
+  func deleteOperationInRealm(tag: Int) {
+    actionsOperationsClosePopUpScreen1()
+    Persistence.shared.deleteOperation(idOfObject: returnDataArrayOfOperations()[tag].id)
+  }
+
+
+  func addOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date) {
+    Persistence.shared.addOperations(amount: newAmount, category: newCategory, note: newNote, date: newDate)
+  }
+
+
+  func editOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date, id: Int) {
+    print("editOperationInRealm")
+    Persistence.shared.updateOperations(
+      amount: newAmount,
+      category: newCategory,
+      note: newNote,
+      date: newDate,
+      idOfObject: id)
+  }
+
+
+  func screen1AllUpdate() {
+    screen1DataReceive()
+    screen1TableUpdateSorting(days: daysForSorting)
+    countingIncomesAndExpensive()
+    changeDaysForSorting()
+    screen1MiniGraph.setNeedsDisplay()
+  }
+
+  func returnArrayForIncrease() -> [Int] {
+    return arrayForIncrease
+  }
+
+
+  func returnDataArrayOfOperations() -> [DataOfOperations] {
+    return dataArrayOfOperations
+  }
+
+
+  func findAmountOfHeaders() {
+    return
+  }
+
+
+  // MARK: - PopUp-окно операции
+  func actionsOperationsOpenPopUpScreen1(_ tag: Int) {
+    containerBottomOperationScreen1.layer.cornerRadius = 20
+    delegateScreen1Container?.startCell(tag: tag)
+
+    UIView.animate(
+      withDuration: 0.3,
+      delay: 0,
+      usingSpringWithDamping: 0.8,
+      initialSpringVelocity: 0,
+      options: UIView.AnimationOptions(),
+      animations: {
+        self.constraintContainerBottomPoint.constant = 50
+        self.tapOfActionsOperationsOpenPopUpScreen1 = UITapGestureRecognizer(
+          target: self,
+          action: #selector(self.handlerToHideContainerScreen1(tap:)))
+        self.view.addGestureRecognizer(self.tapOfActionsOperationsOpenPopUpScreen1!)
+        self.blurViewScreen1.isHidden = false
         self.view.layoutIfNeeded()
-    }
-    
-    
-    //MARK: - viewDidLoad
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        screen1MiniGraph.setDelegateScreen1RoundedGraph(delegate: self)
-        
-        screen1AllUpdate()
-        
-        //округление углов на первом экране
-        bottomPopInView.layer.cornerRadius = 20
-        bottomPopInView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        
-        bottomPopInView.clipsToBounds = true
+      },
+      completion: { _ in })
+  }
 
-        //Добавление Blur-эффекта
-        self.view.insertSubview(self.blurViewScreen1, belowSubview: self.containerBottomOperationScreen1)
-        self.blurViewScreen1.backgroundColor = .clear
-        self.blurViewScreen1.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            self.blurViewScreen1.topAnchor.constraint(equalTo: self.view.topAnchor),
-            self.blurViewScreen1.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            self.blurViewScreen1.heightAnchor.constraint(equalTo: self.view.heightAnchor),
-            self.blurViewScreen1.widthAnchor.constraint(equalTo: self.view.widthAnchor)
-        ])
+
+  func actionsOperationsClosePopUpScreen1() {
+    UIView.animate(
+      withDuration: 0,
+      delay: 0,
+      usingSpringWithDamping: 0,
+      initialSpringVelocity: 0,
+      options: UIView.AnimationOptions(),
+      animations: {
+        self.constraintContainerBottomPoint.constant = -311
         self.blurViewScreen1.isHidden = true
-        
+        self.view.removeGestureRecognizer(self.tapOfActionsOperationsOpenPopUpScreen1!)
         self.view.layoutIfNeeded()
-        
-    }
+      },
+      completion: { _ in })
+  }
 }
 
 
-//MARK: - additional protocols
-
-extension ViewController: protocolScreen1Delegate{
-    
-    func miniGraphStarterBackground(status: Bool) {
-        miniGraphStarterBackground.isHidden = status
-    }
-    
-    
-    func returnIncomesExpenses() -> [String : Double] {
-        if income != 0 || expensive != 0 {
-            print("income= \(income), expensive= \(expensive)")
-            return ["income" : income, "expensive" : expensive]
-        } else {
-            return [:]
-        }
-    }
-    
-    
-    func returnMonthOfDate(_ dateInternal: Date) -> String {
-        let formatterPrint = DateFormatter()
-        formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) //+3 час(Moscow)
-        formatterPrint.dateFormat = "MMMM YYYY"
-        return formatterPrint.string(from: dateInternal)
-
-    }
-    
-    
-    func returnDayOfDate(_ dateInternal: Date) -> String {
-        let formatterPrint = DateFormatter()
-        formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) //+3 час(Moscow)
-        switch returnDaysForSorting() {
-            case 365:
-                formatterPrint.dateFormat = "MMMM YYYY"
-            default:
-                formatterPrint.dateFormat = "d MMMM YYYY"
-        }
-//        print("formatterPrint.string(from: dateInternal)= \(formatterPrint.string(from: dateInternal))")
-        return formatterPrint.string(from: dateInternal)
-    }
-    
-    
-    func returnDelegateScreen1GraphContainer() -> protocolScreen1ContainerGraph {
-        return delegateScreen1GraphContainer!
-    }
-    
-    
-    func returnGraphData() -> [GraphData] {
-        return graphDataArray
-    }
-    
-    
-    func returnDaysForSorting() -> Int {
-        return daysForSorting
-    }
-    
-    
-    func editCategoryInRealm(newName: String, newIcon: String, id: Int) {
-        print("editCategoryInRealm")
-        Persistence.shared.updateCategory(name: newName, icon: newIcon, idOfObject: delegateScreen2!.returnDataArrayOfCategory()[id].id)
-    }
-    
-    
-    func deleteCategoryInRealm(id: Int) {
-        Persistence.shared.deleteCategory(idOfObject: delegateScreen2!.returnDataArrayOfCategory()[id].id)
-    }
-    
-    
-    func editOperation(tag: Int) {
-        actionsOperationsClosePopUpScreen1()
-        tagForEdit = tag
-        performSegue(withIdentifier: "segueToScreen2ForEdit", sender: nil)
-    }
-    
-    
-    func deleteOperationInRealm(tag: Int) {
-        actionsOperationsClosePopUpScreen1()
-        Persistence.shared.deleteOperation(idOfObject: returnDataArrayOfOperations()[tag].id)
-    }
-    
-    
-    func addOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date) {
-        Persistence.shared.addOperations(amount: newAmount, category: newCategory, note: newNote, date: newDate)
-    }
-    
-    
-    func editOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date, id: Int) {
-        print("editOperationInRealm")
-        Persistence.shared.updateOperations(amount: newAmount, category: newCategory, note: newNote, date: newDate, idOfObject: id)
-    }
-    
-    
-    func screen1AllUpdate() {
-        screen1DataReceive()
-        screen1TableUpdateSorting(days: daysForSorting)
-        countingIncomesAndExpensive()
-        changeDaysForSorting()
-        screen1MiniGraph.setNeedsDisplay()
-        
-    }
-    
-    func returnArrayForIncrease() -> [Int]{
-        return arrayForIncrease
-    }
-    
-
-    func returnDataArrayOfOperations() -> [DataOfOperations] {
-        return dataArrayOfOperations
-    }
-    
-    
-    func findAmountOfHeaders() {
-        return
-    }
-    
-    
-    //MARK: - PopUp-окно операции
-    
-    
-    func actionsOperationsOpenPopUpScreen1(_ tag: Int) {
-        containerBottomOperationScreen1.layer.cornerRadius = 20
-        delegateScreen1Container?.startCell(tag: tag)
-        
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
-            self.constraintContainerBottomPoint.constant = 50
-            self.tapOfActionsOperationsOpenPopUpScreen1 = UITapGestureRecognizer(target: self, action: #selector(self.handlerToHideContainerScreen1(tap:)))
-            self.view.addGestureRecognizer(self.tapOfActionsOperationsOpenPopUpScreen1!)
-            self.blurViewScreen1.isHidden = false
-            self.view.layoutIfNeeded()
-        }, completion: {isCompleted in })
-    }
-    
-    
-    func actionsOperationsClosePopUpScreen1() {
-//        tableViewScreen2Update(row: 1)
-        UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
-            self.constraintContainerBottomPoint.constant = -311
-            self.blurViewScreen1.isHidden = true
-            self.view.removeGestureRecognizer(self.tapOfActionsOperationsOpenPopUpScreen1!)
-            self.view.layoutIfNeeded()
-        }, completion: {isCompleted in })
-    }
-    
-}
+// MARK: - table Functionality
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return 1
+  }
 
 
-//MARK: - table Functionality
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return tableNumberOfRowsInSection()
+  }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource{
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    if dataArrayOfOperations.isEmpty {
+      let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
+      cell.delegateScreen1 = self
+      cell.startCellEmpty()
+      return cell
+    } else {
+      if indexPath.row == 0 {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
+        cell.delegateScreen1 = self
+        cell.setTag(tag: indexPath.row)
+        cell.startCell()
+        return cell
+      } else if arrayForIncrease[indexPath.row] != arrayForIncrease[indexPath.row - 1] {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
+        cell.delegateScreen1 = self
+        cell.setTag(tag: indexPath.row)
+        cell.startCell2()
+        return cell
+      } else if indexPath.row == arrayForIncrease.count {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
+        cell.labelHeaderDate.isHidden = true
+        return cell
+      } else {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "operation") as! Screen1TableViewCellOperation
+        cell.delegateScreen1 = self
+        cell.setTag(tag: indexPath.row)
+        cell.startCell()
+        return cell
+      }
     }
-    
-    
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-////            objects.remove(at: indexPath.row)
-////            tableView.deleteRows(at: [indexPath], with: .fade)
-//            print("editingStyle == .delete")
-//        } else if editingStyle == .insert {
-//            print("editingStyle == .insert")
-//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-//        }
-//    }
-    
+  }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableNumberOfRowsInSection()
-    }
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 50
+  }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if dataArrayOfOperations.isEmpty{
-//            print("dataArrayOfOperations is empty")
-            let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
-            cell.delegateScreen1 = self
-            cell.startCellEmpty()
-            return cell
-
-        }
-        else{
-            if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
-                cell.delegateScreen1 = self
-                cell.setTag(tag: indexPath.row)
-                cell.startCell()
-                return cell
-            }
-            else if arrayForIncrease[indexPath.row] != arrayForIncrease[indexPath.row - 1] {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
-                cell.delegateScreen1 = self
-                cell.setTag(tag: indexPath.row)
-                cell.startCell2()
-                return cell
-            }
-            else if indexPath.row == arrayForIncrease.count{
-                let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
-                cell.labelHeaderDate.isHidden = true
-                return cell
-            }
-            else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "operation") as! Screen1TableViewCellOperation
-                cell.delegateScreen1 = self
-                cell.setTag(tag: indexPath.row)
-                cell.startCell()
-                return cell
-            }
-        }
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        return 50
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
+  }
 }
