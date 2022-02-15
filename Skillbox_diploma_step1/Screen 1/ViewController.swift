@@ -65,386 +65,349 @@ class GraphData {
 
 
 class ViewController: UIViewController {
-    // MARK: - объявление аутлетов
-    
-    @IBOutlet var tableViewScreen1: UITableView!
-    @IBOutlet var buttonDaily: UIView!
-    @IBOutlet var buttonWeekly: UIView!
-    @IBOutlet var buttonMonthly: UIView!
-    @IBOutlet var buttonYearly: UIView!
-    @IBOutlet var topMenuButtonStrip: UIView!
-    @IBOutlet var labelDaily: UILabel!
-    @IBOutlet var labelWeekly: UILabel!
-    @IBOutlet var labelMothly: UILabel!
-    @IBOutlet var labelYearly: UILabel!
-    @IBOutlet var bottomPopInView: UIView!
-    @IBOutlet var labelAmountOfIncomes: UILabel!
-    @IBOutlet var labelAmountOfExpenses: UILabel!
-    @IBOutlet var constraintTopMenuBottomStrip: NSLayoutConstraint!
-    @IBOutlet var containerBottomOperationScreen1: UIView!
-    @IBOutlet var constraintContainerBottomPoint: NSLayoutConstraint!
-    @IBOutlet var screen1MiniGraph: Screen1RoundedGraph!
-    @IBOutlet var screen1BottomMenu: UIView!
-    @IBOutlet var scrollViewFromBottomPopInView: UIScrollView!
-    @IBOutlet var graphFromBottomPopInView: UIView!
-    @IBOutlet var buttonScreen1NewOperation: UIButton!
-    @IBOutlet var buttonScreen1ShowGraph: UIButton!
-    @IBOutlet var buttonScreen1ShowList: UIButton!
-    @IBOutlet var miniGraphStarterBackground: UIView!
+  //
+  // MARK: - объявление аутлетов
+  @IBOutlet var tableViewScreen1: UITableView!
+  @IBOutlet var buttonDaily: UIView!
+  @IBOutlet var buttonWeekly: UIView!
+  @IBOutlet var buttonMonthly: UIView!
+  @IBOutlet var buttonYearly: UIView!
+  @IBOutlet var topMenuButtonStrip: UIView!
+  @IBOutlet var labelDaily: UILabel!
+  @IBOutlet var labelWeekly: UILabel!
+  @IBOutlet var labelMothly: UILabel!
+  @IBOutlet var labelYearly: UILabel!
+  @IBOutlet var bottomPopInView: UIView!
+  @IBOutlet var labelAmountOfIncomes: UILabel!
+  @IBOutlet var labelAmountOfExpenses: UILabel!
+  @IBOutlet var constraintTopMenuBottomStrip: NSLayoutConstraint!
+  @IBOutlet var containerBottomOperationScreen1: UIView!
+  @IBOutlet var constraintContainerBottomPoint: NSLayoutConstraint!
+  @IBOutlet var screen1MiniGraph: Screen1RoundedGraph!
+  @IBOutlet var screen1BottomMenu: UIView!
+  @IBOutlet var scrollViewFromBottomPopInView: UIScrollView!
+  @IBOutlet var graphFromBottomPopInView: UIView!
+  @IBOutlet var buttonScreen1NewOperation: UIButton!
+  @IBOutlet var buttonScreen1ShowGraph: UIButton!
+  @IBOutlet var buttonScreen1ShowList: UIButton!
+  @IBOutlet var miniGraphStarterBackground: UIView!
 
 
-    // MARK: - делегаты и переменные
+  // MARK: - делегаты и переменные
 
-    var income: Double = 0
-    var expensive: Double = 0
+  var income: Double = 0
+  var expensive: Double = 0
 
-    var tapOfActionsOperationsOpenPopUpScreen1: UITapGestureRecognizer?
-    var delegateScreen2: protocolScreen2Delegate?
-    private var delegateScreen1Container: protocolScreen1ContainerOperation?
-    private var delegateScreen1GraphContainer: protocolScreen1ContainerGraph?
+  var tapOfActionsOperationsOpenPopUpScreen1: UITapGestureRecognizer?
+  var delegateScreen2: protocolScreen2Delegate?
+  private var delegateScreen1Container: protocolScreen1ContainerOperation?
+  private var delegateScreen1GraphContainer: protocolScreen1ContainerGraph?
 
-    // хранение оригинала данных из Realm
-    var dataArrayOfOperationsOriginal: [DataOfOperations] = []
-    // хранение модифицированных данных из Realm для конкретного режима отоборажения
-    var dataArrayOfOperations: [DataOfOperations] = []
-    // показывает количество заголовков с новой датой в таблице, которое предшествует конкретной операции
-    var arrayForIncrease: [Int] = [0]
-    var graphDataArray: [GraphData] = []
-    var daysForSorting: Int = 30
-    var tagForEdit: Int = 0
-    var screen1StatusGrapjDisplay = false
-
-
-    // MARK: - объекты
-
-    let blurViewScreen1 = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+  // хранение оригинала данных из Realm
+  var dataArrayOfOperationsOriginal: [DataOfOperations] = []
+  // хранение модифицированных данных из Realm для конкретного режима отоборажения
+  var dataArrayOfOperations: [DataOfOperations] = []
+  // показывает количество заголовков с новой датой в таблице, которое предшествует конкретной операции
+  var arrayForIncrease: [Int] = [0]
+  var graphDataArray: [GraphData] = []
+  var daysForSorting: Int = 30
+  var tagForEdit: Int = 0
+  var screen1StatusGrapjDisplay = false
 
 
-    // MARK: - переходы
+  // MARK: - объекты
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-      if let vewController = segue.destination as? ViewControllerScreen2,
-         segue.identifier == "segueToScreen2" {
-        delegateScreen2 = vewController
-        vewController.delegateScreen1 = self
-      }
-      if let viewController = segue.destination as? ViewControllerScreen1ContainerOperation,
-         segue.identifier == "segueToScreen1Container"{
-        delegateScreen1Container = viewController
-        viewController.delegateScreen1 = self
-      }
-      if let viewController = segue.destination as? ViewControllerScreen1ContainerGraph,
-         segue.identifier == "segueToScreen1GraphContainer" {
-        delegateScreen1GraphContainer = viewController
-        viewController.delegateScreen1 = self
-      }
-      if let viewController = segue.destination as? ViewControllerScreen2, segue.identifier == "segueToScreen2ForEdit"{
-        viewController.screen2StatusEditing = true
-        viewController.delegateScreen1 = self
-        delegateScreen2 = viewController
-        delegateScreen2?.setAmountInNewOperation(amount: dataArrayOfOperations[tagForEdit].amount)
-        delegateScreen2?.setCategoryInNewOperation(category: dataArrayOfOperations[tagForEdit].category)
-        delegateScreen2?.setDateInNewOperation(date: dataArrayOfOperations[tagForEdit].date)
-        delegateScreen2?.setNoteInNewOperation(note: dataArrayOfOperations[tagForEdit].note)
-        delegateScreen2?.setIDInNewOperation(id: dataArrayOfOperations[tagForEdit].id)
-      }
+  let blurViewScreen1 = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+
+
+  // MARK: - переходы
+
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if let vewController = segue.destination as? ViewControllerScreen2,
+       segue.identifier == "segueToScreen2" {
+      delegateScreen2 = vewController
+      vewController.delegateScreen1 = self
     }
-
-
-    // MARK: - клики
-
-    @IBAction func buttonActionScreen1NewOperation(_ sender: Any) {
-        performSegue(withIdentifier: "segueToScreen2", sender: nil)
+    if let viewController = segue.destination as? ViewControllerScreen1ContainerOperation,
+       segue.identifier == "segueToScreen1Container"{
+      delegateScreen1Container = viewController
+      viewController.delegateScreen1 = self
     }
-
-    @IBAction func buttonActionScreen1ShowGraph(_ sender: Any) {
-        print("screen1StatusGrapjDisplay= \(screen1StatusGrapjDisplay)")
-        if screen1StatusGrapjDisplay == false {
-          // Блокировка показа данных за 1 день в режиме графика
-          if daysForSorting == 1 {
-            daysForSorting = 30
-            buttonWeeklyGesture(self)
-          }
-          buttonDaily.isUserInteractionEnabled = false
-          buttonDaily.alpha = 0.3
-
-          UIView.transition(
-          from: scrollViewFromBottomPopInView,
-          to: graphFromBottomPopInView,
-          duration: 1.0,
-          options: [.transitionFlipFromLeft, .showHideTransitionViews],
-          completion: nil
-        )
-          screen1StatusGrapjDisplay = true
-          buttonScreen1ShowGraph.setImage(UIImage.init(named: "Left-On"), for: .normal)
-          buttonScreen1ShowList.setImage(UIImage.init(named: "Right-Off"), for: .normal)
-      }
+    if let viewController = segue.destination as? ViewControllerScreen1ContainerGraph,
+       segue.identifier == "segueToScreen1GraphContainer" {
+      delegateScreen1GraphContainer = viewController
+      viewController.delegateScreen1 = self
     }
-
-
-    @IBAction func buttonActionScreen1ShowList(_ sender: Any) {
-      if screen1StatusGrapjDisplay == true {
-          UIView.transition(
-          from: graphFromBottomPopInView,
-          to: scrollViewFromBottomPopInView,
-          duration: 1.0,
-          options: [.transitionFlipFromRight, .showHideTransitionViews],
-          completion: nil
-          )
-          screen1StatusGrapjDisplay = false
-          buttonScreen1ShowGraph.setImage(UIImage.init(named: "Left-Off"), for: .normal)
-          buttonScreen1ShowList.setImage(UIImage.init(named: "Right-On"), for: .normal)
-          buttonDaily.isUserInteractionEnabled = true
-          buttonDaily.alpha = 1
-      }
-//        screen1StatusGrapjDisplay.toggle()
+    if let viewController = segue.destination as? ViewControllerScreen2, segue.identifier == "segueToScreen2ForEdit"{
+      viewController.screen2StatusEditing = true
+      viewController.delegateScreen1 = self
+      delegateScreen2 = viewController
+      delegateScreen2?.setAmountInNewOperation(amount: dataArrayOfOperations[tagForEdit].amount)
+      delegateScreen2?.setCategoryInNewOperation(category: dataArrayOfOperations[tagForEdit].category)
+      delegateScreen2?.setDateInNewOperation(date: dataArrayOfOperations[tagForEdit].date)
+      delegateScreen2?.setNoteInNewOperation(note: dataArrayOfOperations[tagForEdit].note)
+      delegateScreen2?.setIDInNewOperation(id: dataArrayOfOperations[tagForEdit].id)
     }
+  }
 
 
-    func changeDaysForSorting() {
-      borderLineForMenu(days: daysForSorting)
-      screen1TableUpdateSorting(days: daysForSorting)
-      daysForSortingRealmUpdate()
-      countingIncomesAndExpensive()
-      delegateScreen1GraphContainer?.containerGraphUpdate()
-    }
+  // MARK: - клики
 
+  @IBAction func buttonActionScreen1NewOperation(_ sender: Any) {
+    performSegue(withIdentifier: "segueToScreen2", sender: nil)
+  }
 
-    @IBAction func buttonDailyGesture(_ sender: Any) {
-      daysForSorting = 1
-      changeDaysForSorting()
-    }
-
-
-    @IBAction func buttonWeeklyGesture(_ sender: Any) {
-      daysForSorting = 7
-      changeDaysForSorting()
-    }
-
-
-    @IBAction func buttonMonthlyGesture(_ sender: Any) {
+  @IBAction func buttonActionScreen1ShowGraph(_ sender: Any) {
+    print("screen1StatusGrapjDisplay= \(screen1StatusGrapjDisplay)")
+    if screen1StatusGrapjDisplay == false {
+      // Блокировка показа данных за 1 день в режиме графика
+      if daysForSorting == 1 {
         daysForSorting = 30
-        changeDaysForSorting()
+        buttonWeeklyGesture(self)
+      }
+      buttonDaily.isUserInteractionEnabled = false
+      buttonDaily.alpha = 0.3
+
+      UIView.transition(
+      from: scrollViewFromBottomPopInView,
+      to: graphFromBottomPopInView,
+      duration: 1.0,
+      options: [.transitionFlipFromLeft, .showHideTransitionViews],
+      completion: nil
+    )
+      screen1StatusGrapjDisplay = true
+      buttonScreen1ShowGraph.setImage(UIImage.init(named: "Left-On"), for: .normal)
+      buttonScreen1ShowList.setImage(UIImage.init(named: "Right-Off"), for: .normal)
+    }
+  }
+
+
+  @IBAction func buttonActionScreen1ShowList(_ sender: Any) {
+    if screen1StatusGrapjDisplay == true {
+      UIView.transition(
+      from: graphFromBottomPopInView,
+      to: scrollViewFromBottomPopInView,
+      duration: 1.0,
+      options: [.transitionFlipFromRight, .showHideTransitionViews],
+      completion: nil
+      )
+      screen1StatusGrapjDisplay = false
+      buttonScreen1ShowGraph.setImage(UIImage.init(named: "Left-Off"), for: .normal)
+      buttonScreen1ShowList.setImage(UIImage.init(named: "Right-On"), for: .normal)
+      buttonDaily.isUserInteractionEnabled = true
+      buttonDaily.alpha = 1
+    }
+  }
+
+
+  func changeDaysForSorting() {
+    borderLineForMenu(days: daysForSorting)
+    screen1TableUpdateSorting(days: daysForSorting)
+    daysForSortingRealmUpdate()
+    countingIncomesAndExpensive()
+    delegateScreen1GraphContainer?.containerGraphUpdate()
+  }
+
+
+  @IBAction func buttonDailyGesture(_ sender: Any) {
+    daysForSorting = 1
+    changeDaysForSorting()
+  }
+
+
+  @IBAction func buttonWeeklyGesture(_ sender: Any) {
+    daysForSorting = 7
+    changeDaysForSorting()
+  }
+
+
+  @IBAction func buttonMonthlyGesture(_ sender: Any) {
+    daysForSorting = 30
+    changeDaysForSorting()
+  }
+
+
+  @IBAction func buttonYearlyGesture(_ sender: Any) {
+    daysForSorting = 365
+    changeDaysForSorting()
+  }
+
+
+  @objc func switchScreen1GraphContainer(tap: UITapGestureRecognizer) {
+    if tap.state == UIGestureRecognizer.State.ended {
+      print("Tap Graph ended")
+    }
+  }
+
+
+  @objc func handlerToHideContainerScreen1(tap: UITapGestureRecognizer) {
+    if tap.state == UIGestureRecognizer.State.ended {
+      print("Tap ended")
+      let pointOfTap = tap.location(in: self.view)
+      if containerBottomOperationScreen1.frame.contains(pointOfTap) {
+        print("Tap inside Container")
+      } else {
+        print("Tap outside Container")
+        actionsOperationsClosePopUpScreen1()
+      }
+    }
+  }
+
+
+  // MARK: - верхнее меню
+
+  func topMenuHighliter(specifyLabel: UILabel) {
+    specifyLabel.font = UIFont.systemFont(ofSize: specifyLabel.font.pointSize, weight: .bold)
+    switch specifyLabel {
+    case labelDaily:
+      labelWeekly.font = UIFont.systemFont(ofSize: labelWeekly.font.pointSize, weight: .medium)
+      labelMothly.font = UIFont.systemFont(ofSize: labelMothly.font.pointSize, weight: .medium)
+      labelYearly.font = UIFont.systemFont(ofSize: labelYearly.font.pointSize, weight: .medium)
+      print("111")
+    case labelWeekly:
+      labelDaily.font = UIFont.systemFont(ofSize: labelDaily.font.pointSize, weight: .medium)
+      labelMothly.font = UIFont.systemFont(ofSize: labelMothly.font.pointSize, weight: .medium)
+      labelYearly.font = UIFont.systemFont(ofSize: labelYearly.font.pointSize, weight: .medium)
+      print("222")
+    case labelMothly:
+      labelDaily.font = UIFont.systemFont(ofSize: labelDaily.font.pointSize, weight: .medium)
+      labelWeekly.font = UIFont.systemFont(ofSize: labelWeekly.font.pointSize, weight: .medium)
+      labelYearly.font = UIFont.systemFont(ofSize: labelYearly.font.pointSize, weight: .medium)
+      print("333")
+    case labelYearly:
+      labelDaily.font = UIFont.systemFont(ofSize: labelDaily.font.pointSize, weight: .medium)
+      labelWeekly.font = UIFont.systemFont(ofSize: labelWeekly.font.pointSize, weight: .medium)
+      labelMothly.font = UIFont.systemFont(ofSize: labelMothly.font.pointSize, weight: .medium)
+      print("444")
+    default:
+      print("Error with higlightLabel")
+    }
+  }
+
+  func borderLineForMenu(days: Int) {
+    UIView.animate(
+      withDuration: 0.3,
+      delay: 0,
+      usingSpringWithDamping: 0.8,
+      initialSpringVelocity: 0,
+      options: UIView.AnimationOptions(),
+      animations: {
+        switch days {
+        case 1:
+          self.constraintTopMenuBottomStrip.constant = self.buttonDaily.frame.origin.x + 10
+          self.topMenuHighliter(specifyLabel: self.labelDaily)
+          print("borderForMenuBottom 1")
+        case 7:
+          self.constraintTopMenuBottomStrip.constant = self.buttonWeekly.frame.origin.x + 10
+          print("borderForMenuBottom 7")
+          self.topMenuHighliter(specifyLabel: self.labelWeekly)
+        case 30:
+          self.constraintTopMenuBottomStrip.constant = self.buttonMonthly.frame.origin.x + 10
+          self.topMenuHighliter(specifyLabel: self.labelMothly)
+          print("borderForMenuBottom 30")
+        case 365:
+          self.constraintTopMenuBottomStrip.constant = self.buttonYearly.frame.origin.x + 10
+          self.topMenuHighliter(specifyLabel: self.labelYearly)
+          print("borderForMenuBottom 365")
+        default:
+          print("Error with borderForMenuBotton")
+        }
+      }, completion: { _ in })
+  }
+
+  func countingIncomesAndExpensive() {
+    income = 0
+    expensive = 0
+    for data in dataArrayOfOperations.filter({ $0.amount > 0 }) {
+      income += data.amount
+    }
+    for data in dataArrayOfOperations.filter({ $0.amount < 0 }) {
+      expensive += data.amount
     }
 
-
-    @IBAction func buttonYearlyGesture(_ sender: Any) {
-        daysForSorting = 365
-        changeDaysForSorting()
+    if income.truncatingRemainder(dividingBy: 1) == 0 {
+      labelAmountOfIncomes.text = "$\(String(format: "%.0f", income))"
+    } else {
+      labelAmountOfIncomes.text = "$\(String(format: "%.2f", income))"
     }
+    if expensive.truncatingRemainder(dividingBy: 1) == 0 {
+      labelAmountOfExpenses.text = "$\(String(format: "%.0f", expensive))"
+    } else {
+      labelAmountOfExpenses.text = "$\(String(format: "%.2f", expensive))"
+    }
+  }
 
 
-    @objc func switchScreen1GraphContainer(tap: UITapGestureRecognizer) {
-      if tap.state == UIGestureRecognizer.State.ended {
-        print("Tap Graph ended")
-//            let pointOfTap = tap.location(in: self.view)
-//            if containerBottomOperationScreen1.frame.contains(pointOfTap) {
-//                print("Tap inside Container")
-//            }
-//            else {
-//                print("Tap outside Container")
-//                actionsOperationsClosePopUpScreen1()
-//            }
+  // MARK: - таблица списка операций
+
+  func tableNumberOfRowsInSection() -> Int {
+    if dataArrayOfOperations.isEmpty { return 1 }
+    arrayForIncrease = [1]
+    var previousDay: Int = 0
+    var counter: Int = 0
+
+    for x in dataArrayOfOperations {
+      if Calendar.current.component(.day, from: x.date) != previousDay {
+        if counter != 0 {
+          // Расчёт множителя, который компенсирует наличие header'ов в таблице
+          arrayForIncrease.append(arrayForIncrease.last!)
+          arrayForIncrease.append(arrayForIncrease.last! + 1)
+        }
+        previousDay = Calendar.current.component(.day, from: x.date)
+      } else {
+        arrayForIncrease.append(arrayForIncrease.last!)
+      }
+      counter += 1
+    }
+    arrayForIncrease.append(arrayForIncrease.last!)
+    graphDataArrayCalculating(dataArrayOfOperationsInternal: dataArrayOfOperations)
+    return arrayForIncrease.count
+  }
+
+  // Обновление сортировки
+  func screen1TableUpdateSorting(days: Int) {
+    let newTime = Date() - TimeInterval.init(86400 * days)
+    dataArrayOfOperations = dataArrayOfOperationsOriginal
+    dataArrayOfOperations.sort { $0.date > $1.date }
+
+    graphDataArray = graphDataArray
+      .sorted { $0.date > $1.date }
+      .filter { $0.date >= newTime }
+    print("graphDataArray when sort: \(graphDataArray)")
+
+    let temporarilyDate = dataArrayOfOperations.filter { $0.date >= newTime }
+    dataArrayOfOperations = temporarilyDate
+    self.tableViewScreen1.reloadData()
+  }
+
+  // MARK: - данные
+
+  func graphDataArrayCalculating(dataArrayOfOperationsInternal: [DataOfOperations]) {
+    // Данные для передачи в график
+    // Cохраняет суммы операций по дням некуммулятивно
+    graphDataArray = []
+    for data in dataArrayOfOperationsInternal {
+      if graphDataArray.isEmpty {
+        graphDataArray.append(GraphData.init(newDate: data.date, newAmount: data.amount))
+      } else {
+        for x in graphDataArray {
+          if returnDayOfDate(x.date) == returnDayOfDate(data.date) {
+            graphDataArray.filter { returnDayOfDate($0.date) == returnDayOfDate(data.date) }
+              .first?.amount += data.amount
+          }
+        }
+        if (graphDataArray.filter { returnDayOfDate($0.date) == returnDayOfDate(data.date) }).isEmpty {
+          graphDataArray.append(GraphData.init(newDate: data.date, newAmount: data.amount))
+        }
       }
     }
 
-
-    @objc func handlerToHideContainerScreen1(tap: UITapGestureRecognizer) {
-        if tap.state == UIGestureRecognizer.State.ended {
-            print("Tap ended")
-            let pointOfTap = tap.location(in: self.view)
-            if containerBottomOperationScreen1.frame.contains(pointOfTap) {
-                print("Tap inside Container")
-            }
-            else {
-                print("Tap outside Container")
-                actionsOperationsClosePopUpScreen1()
-            }
-        }
-    }
+    print("dataArrayOfOperations before filter: \(dataArrayOfOperations)")
+    graphDataArray.sort { $0.date > $1.date}
+    print("graphDataArray after sort: \(graphDataArray)")
+  }
 
 
-    //MARK: - верхнее меню
-
-    func topMenuHighliter(specifyLabel: UILabel){
-        specifyLabel.font = UIFont.systemFont(ofSize: specifyLabel.font.pointSize, weight: .bold)
-        switch specifyLabel {
-        case labelDaily:
-            labelWeekly.font = UIFont.systemFont(ofSize: labelWeekly.font.pointSize, weight: .medium)
-            labelMothly.font = UIFont.systemFont(ofSize: labelMothly.font.pointSize, weight: .medium)
-            labelYearly.font = UIFont.systemFont(ofSize: labelYearly.font.pointSize, weight: .medium)
-            print("111")
-        case labelWeekly:
-            labelDaily.font = UIFont.systemFont(ofSize: labelDaily.font.pointSize, weight: .medium)
-            labelMothly.font = UIFont.systemFont(ofSize: labelMothly.font.pointSize, weight: .medium)
-            labelYearly.font = UIFont.systemFont(ofSize: labelYearly.font.pointSize, weight: .medium)
-            print("222")
-        case labelMothly:
-            labelDaily.font = UIFont.systemFont(ofSize: labelDaily.font.pointSize, weight: .medium)
-            labelWeekly.font = UIFont.systemFont(ofSize: labelWeekly.font.pointSize, weight: .medium)
-            labelYearly.font = UIFont.systemFont(ofSize: labelYearly.font.pointSize, weight: .medium)
-            print("333")
-        case labelYearly:
-            labelDaily.font = UIFont.systemFont(ofSize: labelDaily.font.pointSize, weight: .medium)
-            labelWeekly.font = UIFont.systemFont(ofSize: labelWeekly.font.pointSize, weight: .medium)
-            labelMothly.font = UIFont.systemFont(ofSize: labelMothly.font.pointSize, weight: .medium)
-            print("444")
-        default:
-            print("Error with higlightLabel")
-        }
-    }
-
-    func borderLineForMenu(days: Int) {
-        UIView.animate(withDuration: 0.3,
-                       delay: 0,
-                       usingSpringWithDamping: 0.8,
-                       initialSpringVelocity: 0,
-                       options: UIView.AnimationOptions(),
-                       animations: {
-          switch days {
-          case 1:
-              self.constraintTopMenuBottomStrip.constant = self.buttonDaily.frame.origin.x + 10
-              self.topMenuHighliter(specifyLabel: self.labelDaily)
-              print("borderForMenuBottom 1")
-          case 7:
-              self.constraintTopMenuBottomStrip.constant = self.buttonWeekly.frame.origin.x + 10
-              print("borderForMenuBottom 7")
-              self.topMenuHighliter(specifyLabel: self.labelWeekly)
-          case 30:
-              self.constraintTopMenuBottomStrip.constant = self.buttonMonthly.frame.origin.x + 10
-              self.topMenuHighliter(specifyLabel: self.labelMothly)
-              print("borderForMenuBottom 30")
-          case 365:
-              self.constraintTopMenuBottomStrip.constant = self.buttonYearly.frame.origin.x + 10
-              self.topMenuHighliter(specifyLabel: self.labelYearly)
-              print("borderForMenuBottom 365")
-          default:
-              print("Error with borderForMenuBotton")
-          }
-      }, completion: {isCompleted in })
-    }
-    
-    func countingIncomesAndExpensive() {
-        income = 0
-        expensive = 0
-        for n in dataArrayOfOperations.filter( { $0.amount > 0 } ) {
-            income += n.amount
-        }
-        for n in dataArrayOfOperations.filter( { $0.amount < 0 } ) {
-            expensive += n.amount
-        }
-        
-        if income.truncatingRemainder(dividingBy: 1) == 0 {
-            labelAmountOfIncomes.text = "$\(String(format: "%.0f", income))"
-        }
-        else {
-            labelAmountOfIncomes.text = "$\(String(format: "%.2f", income))"
-        }
-        if expensive.truncatingRemainder(dividingBy: 1) == 0 {
-            labelAmountOfExpenses.text = "$\(String(format: "%.0f", expensive))"
-        }
-        else {
-            labelAmountOfExpenses.text = "$\(String(format: "%.2f", expensive))"
-        }
-    }
-    
-    
-    //MARK: - таблица списка операций
-    
-    func tableNumberOfRowsInSection() -> Int{
-        if dataArrayOfOperations.count == 0 { return 1 }
-        arrayForIncrease = [1]
-        var previousDay: Int = 0
-        var counter: Int = 0
-        
-        for x in dataArrayOfOperations {
-            if Calendar.current.component(.day, from: x.date) != previousDay{
-                if counter != 0 {
-                    //Расчёт множителя, который компенсирует наличие header'ов в таблице
-                    arrayForIncrease.append(arrayForIncrease.last!)
-                    arrayForIncrease.append(arrayForIncrease.last! + 1)
-                }
-                previousDay = Calendar.current.component(.day, from: x.date)
-            }
-            else {
-                arrayForIncrease.append(arrayForIncrease.last!)
-            }
-            counter += 1
-        }
-        arrayForIncrease.append(arrayForIncrease.last!)
-        graphDataArrayCalculating(dataArrayOfOperationsInternal: dataArrayOfOperations)
-        
-        return arrayForIncrease.count
-    }
-    
-    // Обновление сортировки
-    func screen1TableUpdateSorting(days: Int){
-        let newTime = Date() - TimeInterval.init(86400 * days)
-        
-        dataArrayOfOperations = dataArrayOfOperationsOriginal
-        dataArrayOfOperations.sort(by: { $0.date > $1.date })
-        
-        graphDataArray = graphDataArray
-            .sorted(by: {$0.date > $1.date})
-            .filter( {$0.date >= newTime} )
-        print("graphDataArray when sort: \(graphDataArray)")
-    
-        let temporarilyDate = dataArrayOfOperations.filter { $0.date >= newTime }
-        dataArrayOfOperations = temporarilyDate
-        self.tableViewScreen1.reloadData()
-    }
-    
-    
-    //MARK: - данные
-    
-    func graphDataArrayCalculating(dataArrayOfOperationsInternal: [DataOfOperations]){
-        
-        //-----------------------------------------------------------
-        //Данные для передачи в график
-        //Cохраняет суммы операций по дням некуммулятивно
-        
-//        let formatterPreviousDate = DateFormatter()
-//        formatterPreviousDate.dateStyle = .full
-        
-        graphDataArray = []
-        for n in dataArrayOfOperationsInternal{
-//            print("11111")
-            
-            if graphDataArray.isEmpty{
-                graphDataArray.append(GraphData.init(newDate: n.date, newAmount: n.amount))
-//                print("22222")
-            }
-            else{
-                
-                for x in graphDataArray {
-//                    print("n.date = \(x.date), x.date= \(n.date)")
-                    if returnDayOfDate(x.date) == returnDayOfDate(n.date) {
-                        graphDataArray.filter({returnDayOfDate($0.date) == returnDayOfDate(n.date)}).first?.amount += n.amount
-//                        print("33333")
-                    }
-                }
-                if (graphDataArray.filter{returnDayOfDate($0.date) == returnDayOfDate(n.date)}).isEmpty {
-//                    print("44444")
-                    graphDataArray.append(GraphData.init(newDate: n.date, newAmount: n.amount))
-                }
-                else{
-//                    print("55555")
-                }
-                
-            }
-            
-        }
-        
-        print("dataArrayOfOperations before filter: \(dataArrayOfOperations)")
-//        print("222graphDataArray before filter: \(graphDataArray)")
-//        graphDataArray = graphDataArray.filter{ x in x.date.timeIntervalSince1970 > x.date.timeIntervalSince1970 - (Double(daysForSorting * 86400))}
-//        print("222graphDataArray after filter: \(graphDataArray)")
-        graphDataArray.sort(by: {$0.date > $1.date})
-        print("graphDataArray after sort: \(graphDataArray)")
-
-    }
-    
-    
     func screen1DataReceive(){
         dataArrayOfOperationsOriginal = []
         for n in Persistence.shared.getRealmDataOperations(){
