@@ -7,412 +7,461 @@
 
 import UIKit
 
-protocol protocolScreen2Delegate{
-    func changeCategoryClosePopUpScreen2()
-    func changeCategoryOpenPopUpScreen2(_ tag: Int)
-    func tableViewScreen2Update(row: Int)
-    func screen2DataReceiveUpdate()
-    
-    //функции возврата
-    func returnScreen2MenuArray() -> [Screen2MenuData]
-    func returnDelegateScreen2TableViewCellNote() -> protocolScreen2TableViewCellNoteDelegate
-    func returnNewOperation() -> ListOfOperations
-    func returnDataArrayOfCategory() -> [DataOfCategories]
-    func returnDelegateScreen1() -> protocolScreen1Delegate
-    
-    //функции обновления newOperation
-    func setAmountInNewOperation(amount: Double)
-    func setCategoryInNewOperation(category: String)
-    func setNoteInNewOperation(note: String)
-    func setIDInNewOperation(id: Int)
-    func setDateInNewOperation(date: Date)
-    func openAlertDatePicker()
-    func screen2StatusIsEditingStart()
+protocol protocolScreen2Delegate {
+  func changeCategoryClosePopUpScreen2()
+  func changeCategoryOpenPopUpScreen2(_ tag: Int)
+  func tableViewScreen2Update(row: Int)
+  func screen2DataReceiveUpdate()
+
+  // функции возврата
+  func returnScreen2MenuArray() -> [Screen2MenuData]
+  func returnDelegateScreen2TableViewCellNote() -> protocolScreen2TableViewCellNoteDelegate
+  func returnNewOperation() -> ListOfOperations
+  func returnDataArrayOfCategory() -> [DataOfCategories]
+  func returnDelegateScreen1() -> protocolScreen1Delegate
+
+  // функции обновления newOperation
+  func setAmountInNewOperation(amount: Double)
+  func setCategoryInNewOperation(category: String)
+  func setNoteInNewOperation(note: String)
+  func setIDInNewOperation(id: Int)
+  func setDateInNewOperation(date: Date)
+  func openAlertDatePicker()
+  func screen2StatusIsEditingStart()
 }
 
 struct Screen2MenuData {
-    let name: String
-    let text: String
+  let name: String
+  let text: String
 }
 
 
-class DataOfCategories{
-    var name: String
-    var icon: String
-    var id: Int
+class DataOfCategories {
+  var name: String
+  var icon: String
+  var id: Int
 
-    init(name1: String, icon1: String, id1: Int) {
-        self.name = name1
-        self.icon = icon1
-        self.id = id1
-    }
+  init(name1: String, icon1: String, id1: Int) {
+    self.name = name1
+    self.icon = icon1
+    self.id = id1
+  }
 }
 
 
 class ViewControllerScreen2: UIViewController {
+  // MARK: - объявление аутлетов
 
-    //MARK: - объявление аутлетов
-    
-    @IBOutlet var screen2SegmentControl: UISegmentedControl!
-    @IBOutlet var tableViewScreen2: UITableView!
-    @IBOutlet var screen2CurrencyStatus: UIButton!
-    @IBOutlet var containerBottomScreen2: UIView!
-    @IBOutlet var constraintContainerBottomPoint: NSLayoutConstraint!
-    @IBOutlet var constraintContainerBottomHeight: NSLayoutConstraint!
-    @IBOutlet var textFieldAmount: UITextField!
-    @IBOutlet var labelScreen2Header: UILabel!
-    
-    
-    //MARK: - делегаты, переменные
-    
-    var delegateScreen1: protocolScreen1Delegate?
-    private var delegateScreen2Container: protocolScreen2ContainerDelegate?
-    private var delegateScreen2TableViewCellCategory: protocolScreen2TableViewCellCategory?
-    private var delegateScreen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate?
-    private var delegateScreen2TableViewCellDate: protocolScreen2TableViewCellDateDelegate?
-    var screen2StatusEditing: Bool = false //показывает, создаётся ли новая операция, или редактируется предыдущая
-    
-    var tapOfChangeCategoryOpenPopUp: UITapGestureRecognizer?
-    var tapOutsideTextViewToGoFromTextView: UITapGestureRecognizer?
-    var dataArrayOfCategory: [DataOfCategories] = [] //хранение оригинала данных из Realm
-    var keyboardHeight: CGFloat = 0 //хранит высоту клавиатуры
-    
-    
-    //MARK: - объекты
-    
-    let alertDatePicker = UIAlertController(title: "Select date", message: nil, preferredStyle: .actionSheet)
-    let alertErrorAddNewOperation = UIAlertController(title: "Добавьте обязательные данные", message: nil, preferredStyle: .alert)
-    let blurViewScreen2 =  UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-    var newOperation: ListOfOperations = ListOfOperations()
-    let datePicker = UIDatePicker()
-    
-    
-    //MARK: - переходы
-    
-    @IBAction func buttonToAddNewOperation(_ sender: Any) {
-        
-        if newOperation.category != "" && textFieldAmount.text != "0" {
-            
-            //set Amount
-            print("2. screen2SegmentControl.selectedSegmentIndex= \(screen2SegmentControl.selectedSegmentIndex)")
-            if screen2SegmentControl.selectedSegmentIndex == 0 {
-                print("textFieldAmount.text= \(textFieldAmount.text as Optional)")
+  @IBOutlet var screen2SegmentControl: UISegmentedControl!
+  @IBOutlet var tableViewScreen2: UITableView!
+  @IBOutlet var screen2CurrencyStatus: UIButton!
+  @IBOutlet var containerBottomScreen2: UIView!
+  @IBOutlet var constraintContainerBottomPoint: NSLayoutConstraint!
+  @IBOutlet var constraintContainerBottomHeight: NSLayoutConstraint!
+  @IBOutlet var textFieldAmount: UITextField!
+  @IBOutlet var labelScreen2Header: UILabel!
+
+  // MARK: - делегаты, переменные
+  var delegateScreen1: protocolScreen1Delegate?
+  private var delegateScreen2Container: protocolScreen2ContainerDelegate?
+  private var delegateScreen2TableViewCellCategory: protocolScreen2TableViewCellCategory?
+  private var delegateScreen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate?
+  private var delegateScreen2TableViewCellDate: protocolScreen2TableViewCellDateDelegate?
+  var screen2StatusEditing = false // показывает, создаётся ли новая операция, или редактируется предыдущая
+
+  var tapOfChangeCategoryOpenPopUp: UITapGestureRecognizer?
+  var tapOutsideTextViewToGoFromTextView: UITapGestureRecognizer?
+  var dataArrayOfCategory: [DataOfCategories] = [] // хранение оригинала данных из Realm
+  var keyboardHeight: CGFloat = 0 // хранит высоту клавиатуры
+
+  // MARK: - объекты
+  let alertDatePicker = UIAlertController(title: "Select date", message: nil, preferredStyle: .actionSheet)
+  let alertErrorAddNewOperation = UIAlertController(
+    title: "Добавьте обязательные данные",
+    message: nil,
+    preferredStyle: .alert
+  )
+  let blurViewScreen2 = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+  var newOperation = ListOfOperations()
+  let datePicker = UIDatePicker()
+
+  // MARK: - переходы
+  @IBAction func buttonToAddNewOperation(_ sender: Any) {
+    if !newOperation.category.isEmpty && textFieldAmount.text != "0" {
+      // set Amount
+      print("2. screen2SegmentControl.selectedSegmentIndex= \(screen2SegmentControl.selectedSegmentIndex)")
+      if screen2SegmentControl.selectedSegmentIndex == 0 {
+        print("textFieldAmount.text= \(textFieldAmount.text as Optional)")
 //                print("description of i: \(i as Optional)")
-                setAmountInNewOperation(amount: Double(textFieldAmount.text ?? "0")!)
-            }
-            else if screen2SegmentControl.selectedSegmentIndex == 1 {
-                setAmountInNewOperation(amount: -Double(textFieldAmount.text ?? "0")!)
-            }
-            
-            
-            //set Date
-            if delegateScreen2TableViewCellDate?.returnDateTextField().text == "Today" {
-                let dateNow = Date.init()
-                setDateInNewOperation(date: dateNow)
-            }
-            else {
-                setDateInNewOperation(date: datePicker.date)
-            }
-            
-            
-            //set Note
-            if delegateScreen2TableViewCellNote?.returnNoteView().text! == "Placeholder" {
-                setNoteInNewOperation(note: "")
-            }
-            else {
-                setNoteInNewOperation(note: (delegateScreen2TableViewCellNote?.returnNoteView().text!)!)
-            }
-            
-            print("newOperation.amount= \(newOperation.amount), newOperation.category= \(newOperation.category), newOperation.date= \(newOperation.date), newOperation.note= \(newOperation.note),")
-            
-            if screen2StatusEditing == true{
-                print("newOperation.amount222= \(newOperation.amount)")
-                print("newOperation.date222= \(newOperation.date)")
-                delegateScreen1?.editOperationInRealm(newAmount: newOperation.amount, newCategory: newOperation.category, newNote: newOperation.note, newDate: newOperation.date, id: newOperation.id)
-            }
-            else{
-                delegateScreen1?.addOperationInRealm(newAmount: newOperation.amount, newCategory: newOperation.category, newNote: newOperation.note, newDate: newOperation.date)
-            }
-            
-            delegateScreen1?.screen1AllUpdate()
-            dismiss(animated: true, completion: nil)
-        }
-        else {
-            self.present(alertErrorAddNewOperation, animated: true, completion: nil)
-        }
-        
-    }
-    
-    
-    @IBAction func buttonCloseScreen2(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? ViewControllerScreen2Container, segue.identifier == "segueToScreen2Container"{
-            delegateScreen2Container = vc
-            vc.delegateScreen2 = self
-        }
-    }
-    
-    
-    //MARK: - Alerts
-    
-    
-    func createAlertAddNewOperations(){
-        alertErrorAddNewOperation.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil ))
-        
-        let labelAlertAddNewOperations = UILabel.init(frame: CGRect(x: 0, y: 0, width: 180, height: 50))
-        labelAlertAddNewOperations.numberOfLines = 2
-        labelAlertAddNewOperations.text = "Выберите категорию операции и сумму."
-        alertErrorAddNewOperation.view.addSubview(labelAlertAddNewOperations)
-        labelAlertAddNewOperations.translatesAutoresizingMaskIntoConstraints = false
+        setAmountInNewOperation(amount: Double(textFieldAmount.text ?? "0")!)
+      } else if screen2SegmentControl.selectedSegmentIndex == 1 {
+        setAmountInNewOperation(amount: -Double(textFieldAmount.text ?? "0")!)
+      }
 
-        alertErrorAddNewOperation.view.translatesAutoresizingMaskIntoConstraints = false
+      // set Date
+      if delegateScreen2TableViewCellDate?.returnDateTextField().text == "Today" {
+        let dateNow = Date.init()
+        setDateInNewOperation(date: dateNow)
+      } else {
+        setDateInNewOperation(date: datePicker.date)
+      }
 
-        alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(item: labelAlertAddNewOperations, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 180))
-        alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(item: labelAlertAddNewOperations, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 50))
+      // set Note
+      if delegateScreen2TableViewCellNote?.returnNoteView().text! == "Placeholder" {
+        setNoteInNewOperation(note: "")
+      } else {
+        setNoteInNewOperation(note: (delegateScreen2TableViewCellNote?.returnNoteView().text!)!)
+      }
 
-        alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(item: labelAlertAddNewOperations, attribute: .centerX, relatedBy: .equal, toItem: alertErrorAddNewOperation.view, attribute: .centerX, multiplier: 1, constant: 0))
-        alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(item: labelAlertAddNewOperations, attribute: .top, relatedBy: .equal, toItem: alertErrorAddNewOperation.view, attribute: .top, multiplier: 1, constant: 80))
-        alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(item: labelAlertAddNewOperations, attribute: .bottom, relatedBy: .equal, toItem: alertErrorAddNewOperation.view, attribute: .bottom, multiplier: 1, constant: 40))
+      print("newOperation.amount= \(newOperation.amount), newOperation.category= \(newOperation.category), newOperation.date= \(newOperation.date), newOperation.note= \(newOperation.note),")
 
-      alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(item: alertErrorAddNewOperation.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: labelAlertAddNewOperations.frame.height + 140))
+      if screen2StatusEditing == true {
+        print("newOperation.amount222= \(newOperation.amount)")
+        print("newOperation.date222= \(newOperation.date)")
+        delegateScreen1?.editOperationInRealm(
+          newAmount: newOperation.amount,
+          newCategory: newOperation.category,
+          newNote: newOperation.note,
+          newDate: newOperation.date,
+          id: newOperation.id
+        )
+      } else {
+        delegateScreen1?.addOperationInRealm(
+          newAmount: newOperation.amount,
+          newCategory: newOperation.category,
+          newNote: newOperation.note,
+          newDate: newOperation.date
+        )
+      }
 
-        print(alertErrorAddNewOperation.view.frame.width)
-        print(labelAlertAddNewOperations.frame.width)
-        
+      delegateScreen1?.screen1AllUpdate()
+      dismiss(animated: true, completion: nil)
+    } else {
+      self.present(alertErrorAddNewOperation, animated: true, completion: nil)
     }
-    
-    
-    func createAlertDatePicker() {
-        alertDatePicker.addAction(UIAlertAction(title: "Установить дату", style: .default, handler: { _ in self.donePressed() }))
-        alertDatePicker.addAction(UIAlertAction(title: "Cancell", style: .cancel, handler: nil ))
-        alertDatePicker.view.addSubview(datePicker)
-        
-        let alertHeightConstraint = NSLayoutConstraint(item: alertDatePicker.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: datePicker.frame.height + 150)
-        alertDatePicker.view.addConstraint(alertHeightConstraint)
-        datePicker.frame.origin.x = (alertDatePicker.view.frame.width - datePicker.frame.width) / 2
-        datePicker.frame.origin.y = 25
+  }
+
+
+  @IBAction func buttonCloseScreen2(_ sender: Any) {
+    dismiss(animated: true, completion: nil)
+  }
+
+
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if let viewController = segue.destination as? ViewControllerScreen2Container, segue.identifier == "segueToScreen2Container"{
+        delegateScreen2Container = viewController
+        viewController.delegateScreen2 = self
     }
-    
-    
-    //MARK: - DatePicker
-    
-    func createDatePicker(){
-        datePicker.preferredDatePickerStyle = .wheels
-        datePicker.datePickerMode = .date
-        datePicker.timeZone = TimeZone(secondsFromGMT: 10800) //+3 час(Moscow)
-        datePicker.maximumDate = Date.init()
+  }
+
+
+  // MARK: - Alerts
+  func createAlertAddNewOperations() {
+    alertErrorAddNewOperation.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil ))
+
+    let labelAlertAddNewOperations = UILabel.init(frame: CGRect(x: 0, y: 0, width: 180, height: 50))
+    labelAlertAddNewOperations.numberOfLines = 2
+    labelAlertAddNewOperations.text = "Выберите категорию операции и сумму."
+    alertErrorAddNewOperation.view.addSubview(labelAlertAddNewOperations)
+    labelAlertAddNewOperations.translatesAutoresizingMaskIntoConstraints = false
+
+    alertErrorAddNewOperation.view.translatesAutoresizingMaskIntoConstraints = false
+
+    alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(
+      item: labelAlertAddNewOperations,
+      attribute: .width, relatedBy: .equal,
+      toItem: nil,
+      attribute: .notAnAttribute,
+      multiplier: 1.0,
+      constant: 180)
+    )
+    alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(
+      item: labelAlertAddNewOperations,
+      attribute: .height,
+      relatedBy: .equal,
+      toItem: nil,
+      attribute: .notAnAttribute,
+      multiplier: 1.0,
+      constant: 50)
+    )
+
+    alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(
+      item: labelAlertAddNewOperations,
+      attribute: .centerX,
+      relatedBy: .equal,
+      toItem: alertErrorAddNewOperation.view,
+      attribute: .centerX,
+      multiplier: 1,
+      constant: 0)
+    )
+    alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(
+      item: labelAlertAddNewOperations,
+      attribute: .top,
+      relatedBy: .equal,
+      toItem: alertErrorAddNewOperation.view,
+      attribute: .top,
+      multiplier: 1,
+      constant: 80)
+    )
+    alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(
+      item: labelAlertAddNewOperations,
+      attribute: .bottom,
+      relatedBy: .equal,
+      toItem: alertErrorAddNewOperation.view,
+      attribute: .bottom,
+      multiplier: 1,
+      constant: 40
+    ))
+
+  alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(
+    item: alertErrorAddNewOperation.view!,
+    attribute: .height,
+    relatedBy: .equal,
+    toItem: nil,
+    attribute: .notAnAttribute,
+    multiplier: 1.0,
+    constant: labelAlertAddNewOperations.frame.height + 140
+  ))
+
+    print(alertErrorAddNewOperation.view.frame.width)
+    print(labelAlertAddNewOperations.frame.width)
+  }
+
+
+  func createAlertDatePicker() {
+    alertDatePicker.addAction(UIAlertAction(
+      title: "Установить дату",
+      style: .default) { _ in self.donePressed() }
+    )
+    alertDatePicker.addAction(UIAlertAction(title: "Cancell", style: .cancel, handler: nil ))
+    alertDatePicker.view.addSubview(datePicker)
+
+    let alertHeightConstraint = NSLayoutConstraint(
+      item: alertDatePicker.view!,
+      attribute: .height,
+      relatedBy: .equal,
+      toItem: nil,
+      attribute: .notAnAttribute,
+      multiplier: 1,
+      constant: datePicker.frame.height + 150)
+    alertDatePicker.view.addConstraint(alertHeightConstraint)
+    datePicker.frame.origin.x = (alertDatePicker.view.frame.width - datePicker.frame.width) / 2
+    datePicker.frame.origin.y = 25
+  }
+
+
+  // MARK: - DatePicker
+  func createDatePicker() {
+    datePicker.preferredDatePickerStyle = .wheels
+    datePicker.datePickerMode = .date
+    datePicker.timeZone = TimeZone(secondsFromGMT: 10800) // +3 час(Moscow)
+    datePicker.maximumDate = Date.init()
+  }
+
+  func donePressed() {
+    newOperation.date = datePicker.date
+    tableViewScreen2Update(row: 2)
+  }
+
+
+  // MARK: - клики
+  @IBAction func textFieldAmountEditingDidBegin(_ sender: Any) {
+    if textFieldAmount.textColor == UIColor.opaqueSeparator {
+      textFieldAmount.text = nil
+      switch screen2SegmentControl.selectedSegmentIndex {
+      case 0:
+        textFieldAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
+      case 1:
+        textFieldAmount.textColor = UIColor.red
+      default:
+        break
+      }
     }
-    
-    func donePressed(){
-//        formatter.dateFormat = "yyyy/MM/dd HH:mm"
-        newOperation.date = datePicker.date
-        tableViewScreen2Update(row: 2)
-//        closeDateAlert()
+    print("func textViewDidBeginEditing")
+  }
+
+  @IBAction func textFieldAmountEditingDidEnd(_ sender: Any) {
+    if textFieldAmount.text == "" {
+      textFieldAmount.text = "0"
+      textFieldAmount.textColor = UIColor.opaqueSeparator
     }
-    
-    
-    //MARK: - клики
-    
-    @IBAction func textFieldAmountEditingDidBegin(_ sender: Any) {
-        if textFieldAmount.textColor == UIColor.opaqueSeparator {
-            textFieldAmount.text = nil
-            
-            switch screen2SegmentControl.selectedSegmentIndex {
-            case 0:
-                textFieldAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
-            case 1:
-                textFieldAmount.textColor = UIColor.red
-            default:
-                break
-            }
-        }
-        print("func textViewDidBeginEditing")
+    textFieldAmount.resignFirstResponder()
+    print("func textFieldAmountEditingDidEnd")
+  }
+
+
+  @IBAction func screen2SegmentControlAction(_ sender: Any) {
+    textFieldAmount.endEditing(true)
+    delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
+    switch screen2SegmentControl.selectedSegmentIndex {
+    case 0:
+      screen2CurrencyStatus.setTitle("+$", for: .normal)
+      screen2CurrencyStatus.setTitleColor(
+        UIColor(
+          cgColor: CGColor.init(
+            srgbRed: 0.165,
+            green: 0.671,
+            blue: 0.014,
+            alpha: 1
+          )),
+        for: .normal)
+      textFieldAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
+    case 1:
+      screen2CurrencyStatus.setTitle("-$", for: .normal)
+      screen2CurrencyStatus.setTitleColor(UIColor.red, for: .normal)
+      textFieldAmount.textColor = UIColor.red
+    default:
+      break
     }
-    
-    @IBAction func textFieldAmountEditingDidEnd(_ sender: Any) {
-        if textFieldAmount.text == "" {
-            textFieldAmount.text = "0"
-            textFieldAmount.textColor = UIColor.opaqueSeparator
-        }
-        textFieldAmount.resignFirstResponder()
-        print("func textFieldAmountEditingDidEnd")
-    }
-    
-    
-    @IBAction func screen2SegmentControlAction(_ sender: Any) {
+  }
+
+  @objc func screen2TapHandler(tap: UITapGestureRecognizer) {
+    if tap.state == UIGestureRecognizer.State.ended {
+          print("Tap TextView ended")
+      let pointOfTap = tap.location(in: self.view)
+
+      // Tap inside noteTextView
+      if delegateScreen2TableViewCellNote!.returnNoteView().frame.contains(pointOfTap) {
+        textFieldAmount.endEditing(true)
+        print("Tap inside noteTextView")
+      }
+
+      // Tap inside in dateTextView
+      else if delegateScreen2TableViewCellDate!.returnDateTextField().frame.contains(pointOfTap) {
         textFieldAmount.endEditing(true)
         delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
-        switch screen2SegmentControl.selectedSegmentIndex {
-        case 0:
-            screen2CurrencyStatus.setTitle("+$", for: .normal)
-            screen2CurrencyStatus.setTitleColor(UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1)), for: .normal)
-            textFieldAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
-        case 1:
-            screen2CurrencyStatus.setTitle("-$", for: .normal)
-            screen2CurrencyStatus.setTitleColor(UIColor.red, for: .normal)
-            textFieldAmount.textColor = UIColor.red
-        default:
-            break
-        }
+        print("Tap inside in dateTextView")
+      }
+
+      // Tap inside in textFieldAmount
+      else if textFieldAmount.frame.contains(pointOfTap) {
+        print("Tap inside in textFieldAmount")
+        delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
+      } else {
+        // Tap outside noteTextView and dateTextView and textFieldAmount
+        textFieldAmount.endEditing(true)
+        delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
+        print("Tap outside noteTextView and dateTextView and textFieldAmount")
+      }
     }
-    
-    @objc func screen2TapHandler(tap: UITapGestureRecognizer){
-        if tap.state == UIGestureRecognizer.State.ended {
-                print("Tap TextView ended")
-            let pointOfTap = tap.location(in: self.view)
-            
-            //Tap inside noteTextView
-            if delegateScreen2TableViewCellNote!.returnNoteView().frame.contains(pointOfTap) {
-                textFieldAmount.endEditing(true)
-                print("Tap inside noteTextView")
-            }
-            
-            //Tap inside in dateTextView
-            else if delegateScreen2TableViewCellDate!.returnDateTextField().frame.contains(pointOfTap) {
-                textFieldAmount.endEditing(true)
-                delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
-                print("Tap inside in dateTextView")
-            }
-            
-            //Tap inside in textFieldAmount
-            else if textFieldAmount.frame.contains(pointOfTap){
-                print("Tap inside in textFieldAmount")
-                delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
-            }
-            
-            else {
-                
-                //Tap outside noteTextView and dateTextView and textFieldAmount
-                textFieldAmount.endEditing(true)
-                delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
-                print("Tap outside noteTextView and dateTextView and textFieldAmount")
-            }
-        }
+  }
+
+  @objc func handlerToHideContainerScreen2(tap: UITapGestureRecognizer) {
+    if tap.state == UIGestureRecognizer.State.ended {
+      print("Tap ended")
+      let pointOfTap = tap.location(in: self.view)
+      if containerBottomScreen2.frame.contains(pointOfTap) {
+        print("Tap inside Container")
+      } else {
+        print("Tap outside Container")
+        changeCategoryClosePopUpScreen2()
+      }
     }
-    
-    @objc func handlerToHideContainerScreen2(tap: UITapGestureRecognizer){
-        if tap.state == UIGestureRecognizer.State.ended {
-            print("Tap ended")
-            let pointOfTap = tap.location(in: self.view)
-            if containerBottomScreen2.frame.contains(pointOfTap) {
-                print("Tap inside Container")
-            }
-            else {
-                print("Tap outside Container")
-                changeCategoryClosePopUpScreen2()
-            }
-        }
-    }
-    
-    
-    //MARK: - данные
-    
-    func screen2DataReceive(){
-        dataArrayOfCategory = []
-        for n in Persistence.shared.returnRealmDataCategories(){
-            dataArrayOfCategory.append(DataOfCategories(name1: n.name, icon1: n.icon, id1: n.id))
-        }
+  }
+
+
+  //MARK: - данные
+
+  func screen2DataReceive(){
+      dataArrayOfCategory = []
+      for n in Persistence.shared.returnRealmDataCategories(){
+          dataArrayOfCategory.append(DataOfCategories(name1: n.name, icon1: n.icon, id1: n.id))
+      }
 //        for n in dataArrayOfCategory {
 //            print("dataArrayOfCategory= \(n.name)")
 //        }
-    }
-    
-    var screen2MenuArray: [Screen2MenuData] = []
-    let screen2MenuList0 = Screen2MenuData(name: "Header", text: "")
-    let screen2MenuList1 = Screen2MenuData(name: "Category", text: "Select category")
-    let screen2MenuList2 = Screen2MenuData(name: "Date", text: "Today")
-    let screen2MenuList3 = Screen2MenuData(name: "Notes", text: "")
-    
-    
-    //MARK: - viewWillAppear
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-        if screen2StatusEditing == true{
-            screen2StatusIsEditingStart()
-        }
-        
-        super.viewWillAppear(animated)
-            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
-    }
+  }
+
+  var screen2MenuArray: [Screen2MenuData] = []
+  let screen2MenuList0 = Screen2MenuData(name: "Header", text: "")
+  let screen2MenuList1 = Screen2MenuData(name: "Category", text: "Select category")
+  let screen2MenuList2 = Screen2MenuData(name: "Date", text: "Today")
+  let screen2MenuList3 = Screen2MenuData(name: "Notes", text: "")
 
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
-    }
-    
+  //MARK: - viewWillAppear
 
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        screen2DataReceive()
-        screen2MenuArray = [screen2MenuList0, screen2MenuList1, screen2MenuList2, screen2MenuList3]
-        
-        self.view.insertSubview(self.blurViewScreen2, belowSubview: self.containerBottomScreen2)
-        self.blurViewScreen2.backgroundColor = .clear
-        self.blurViewScreen2.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            self.blurViewScreen2.topAnchor.constraint(equalTo: self.view.topAnchor),
-            self.blurViewScreen2.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            self.blurViewScreen2.heightAnchor.constraint(equalTo: self.view.heightAnchor),
-            self.blurViewScreen2.widthAnchor.constraint(equalTo: self.view.widthAnchor)
-        ])
-        self.blurViewScreen2.isHidden = true
-        
-        self.view.layoutIfNeeded()
-        print("screen2MenuArray.count: \(screen2MenuArray.count)")
-        
-        self.tapOutsideTextViewToGoFromTextView = UITapGestureRecognizer(target: self, action: #selector(self.screen2TapHandler(tap:)))
-        self.view.addGestureRecognizer(self.tapOutsideTextViewToGoFromTextView!)
-        
-        createDatePicker()
-        createAlertDatePicker()
-        createAlertAddNewOperations()
-        
-    }
-    
-    
-    //MARK: - other functions
-    
-    @objc func keyboardWillAppear(_ notification: Notification) {
-        print("keyboardWillAppear")
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            keyboardHeight = keyboardRectangle.height
-        }
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
-            if self.constraintContainerBottomPoint.constant == 50{
-                self.constraintContainerBottomPoint.constant = self.keyboardHeight + CGFloat.init(20)
-            }
-            self.view.layoutIfNeeded()
-        }, completion: {isCompleted in })
-    }
 
-    
-    @objc func keyboardWillDisappear(_ notification: Notification) {
-        if keyboardHeight != 0{
-            print("keyboardWillDisappear")
-            keyboardHeight = 0
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
-                if self.constraintContainerBottomPoint.constant > 50 {
-                    self.constraintContainerBottomPoint.constant = CGFloat.init(50)
-                }
-                self.view.layoutIfNeeded()
-            }, completion: {isCompleted in })
-        }
-    }
-    
-    
+  override func viewWillAppear(_ animated: Bool) {
+
+      if screen2StatusEditing == true{
+          screen2StatusIsEditingStart()
+      }
+
+      super.viewWillAppear(animated)
+          NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
+          NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
+
+  }
+
+
+  override func viewWillDisappear(_ animated: Bool) {
+      super.viewWillDisappear(animated)
+      NotificationCenter.default.removeObserver(self)
+  }
+
+
+
+
+  override func viewDidLoad() {
+      super.viewDidLoad()
+
+      screen2DataReceive()
+      screen2MenuArray = [screen2MenuList0, screen2MenuList1, screen2MenuList2, screen2MenuList3]
+
+      self.view.insertSubview(self.blurViewScreen2, belowSubview: self.containerBottomScreen2)
+      self.blurViewScreen2.backgroundColor = .clear
+      self.blurViewScreen2.translatesAutoresizingMaskIntoConstraints = false
+      NSLayoutConstraint.activate([
+          self.blurViewScreen2.topAnchor.constraint(equalTo: self.view.topAnchor),
+          self.blurViewScreen2.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+          self.blurViewScreen2.heightAnchor.constraint(equalTo: self.view.heightAnchor),
+          self.blurViewScreen2.widthAnchor.constraint(equalTo: self.view.widthAnchor)
+      ])
+      self.blurViewScreen2.isHidden = true
+
+      self.view.layoutIfNeeded()
+      print("screen2MenuArray.count: \(screen2MenuArray.count)")
+
+      self.tapOutsideTextViewToGoFromTextView = UITapGestureRecognizer(target: self, action: #selector(self.screen2TapHandler(tap:)))
+      self.view.addGestureRecognizer(self.tapOutsideTextViewToGoFromTextView!)
+
+      createDatePicker()
+      createAlertDatePicker()
+      createAlertAddNewOperations()
+
+  }
+
+
+  //MARK: - other functions
+
+  @objc func keyboardWillAppear(_ notification: Notification) {
+      print("keyboardWillAppear")
+      if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
+          let keyboardRectangle = keyboardFrame.cgRectValue
+          keyboardHeight = keyboardRectangle.height
+      }
+      UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+          if self.constraintContainerBottomPoint.constant == 50{
+              self.constraintContainerBottomPoint.constant = self.keyboardHeight + CGFloat.init(20)
+          }
+          self.view.layoutIfNeeded()
+      }, completion: {isCompleted in })
+  }
+
+
+  @objc func keyboardWillDisappear(_ notification: Notification) {
+      if keyboardHeight != 0{
+          print("keyboardWillDisappear")
+          keyboardHeight = 0
+          UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+              if self.constraintContainerBottomPoint.constant > 50 {
+                  self.constraintContainerBottomPoint.constant = CGFloat.init(50)
+              }
+              self.view.layoutIfNeeded()
+          }, completion: {isCompleted in })
+      }
+  }
 }
 
 

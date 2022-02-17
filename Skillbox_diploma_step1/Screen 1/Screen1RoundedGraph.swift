@@ -11,7 +11,8 @@ protocol protocolScreen1RoundedGraph {
   func setDelegateScreen1RoundedGraph(delegate: protocolScreen1Delegate)
 }
 
-@IBDesignable class Screen1RoundedGraph: UIView {
+@IBDesignable
+class Screen1RoundedGraph: UIView {
   private enum Constants {
     static let lineWidth: CGFloat = 25.0
     static let arcWidth: CGFloat = 76

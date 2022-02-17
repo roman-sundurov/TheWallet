@@ -65,7 +65,6 @@ class GraphData {
 
 
 class ViewController: UIViewController {
-  //
   // MARK: - объявление аутлетов
   @IBOutlet var tableViewScreen1: UITableView!
   @IBOutlet var buttonDaily: UIView!
@@ -91,7 +90,6 @@ class ViewController: UIViewController {
   @IBOutlet var buttonScreen1ShowGraph: UIButton!
   @IBOutlet var buttonScreen1ShowList: UIButton!
   @IBOutlet var miniGraphStarterBackground: UIView!
-
 
   // MARK: - делегаты и переменные
   var income: Double = 0
