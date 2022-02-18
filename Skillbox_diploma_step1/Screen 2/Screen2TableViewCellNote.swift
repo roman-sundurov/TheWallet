@@ -15,90 +15,78 @@ protocol protocolScreen2TableViewCellNoteDelegate{
     
 
 class Screen2TableViewCellNote: UITableViewCell, UITextViewDelegate {
-
 //    @IBOutlet var textFieldNotes: UITextField!
-    @IBOutlet var textViewNotes: UITextView!
-    
-    var delegateScreen2: protocolScreen2Delegate?
-    var specCellTag: Int = 0
-    
+  @IBOutlet var textViewNotes: UITextView!
+
+  var delegateScreen2: protocolScreen2Delegate?
+  var specCellTag: Int = 0
+
 // MARK: - Работа с Placeholder
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textViewNotes.textColor == UIColor.opaqueSeparator {
-            textViewNotes.text = nil
-            textViewNotes.textColor = UIColor.black
-        }
+  func textViewDidBeginEditing(_ textView: UITextView) {
+    if textViewNotes.textColor == UIColor.opaqueSeparator {
+      textViewNotes.text = nil
+      textViewNotes.textColor = UIColor.black
+    }
     print("func textViewDidBeginEditing")
+  }
 
+  func textViewDidEndEditing(_ textView: UITextView) {
+    if textViewNotes.text.isEmpty {
+      textViewNotes.text = "Placeholder"
+      textViewNotes.textColor = UIColor.opaqueSeparator
     }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textViewNotes.text.isEmpty {
-            textViewNotes.text = "Placeholder"
-            textViewNotes.textColor = UIColor.opaqueSeparator
-        }
-        textView.resignFirstResponder()
-        print("func textViewDidEndEditing")
-    }
-    
-    //MARK: - Стандартные функции
-    
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    textView.resignFirstResponder()
+    print("func textViewDidEndEditing")
+  }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+  // MARK: - Стандартные функции
+  override func awakeFromNib() {
+    super.awakeFromNib()
+  }
 
-        // Configure the view for the selected state
-    }
-    
-    func startCell() {
-        textViewNotes.text = delegateScreen2?.returnScreen2MenuArray()[specCellTag].text
-        
-        textViewNotes.textContainer.lineBreakMode = .byTruncatingTail
-        textViewNotes.layer.borderColor = UIColor.gray.cgColor
-        textViewNotes.layer.borderWidth = 2
-        
-        textViewNotes.layer.cornerRadius = 10
-        
-        textViewNotes.text = "Placeholder"
-//        textViewNotes.textColor = UIColor.opaqueSeparator //цвет текста уже opaqueSeparator в Storyboard.
-        
-    }
-    
-    func setTag(tag: Int) {
-        specCellTag = tag
-    }
+  override func setSelected(_ selected: Bool, animated: Bool) {
+    super.setSelected(selected, animated: animated)
+  }
+
+  func startCell() {
+    textViewNotes.text = delegateScreen2?.returnScreen2MenuArray()[specCellTag].text
+
+    textViewNotes.textContainer.lineBreakMode = .byTruncatingTail
+    textViewNotes.layer.borderColor = UIColor.gray.cgColor
+    textViewNotes.layer.borderWidth = 2
+
+    textViewNotes.layer.cornerRadius = 10
+
+    textViewNotes.text = "Placeholder"
+//    textViewNotes.textColor = UIColor.opaqueSeparator //цвет текста уже opaqueSeparator в Storyboard.
+
+  }
+
+  func setTag(tag: Int) {
+    specCellTag = tag
+  }
 }
 
 
-extension Screen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate{
-    
-    
-    func setNoteViewText(newText: String) {
-        textViewNotes.text = newText
-        print("newText= \(newText)")
-        textViewNotes.textColor = UIColor.black
-    }
-    
-    
-    func returnNoteView() -> UITextView {
-//        tapOutsideNoteTextViewEditToHide()
-//        textViewNotes.endEditing(true)
-        print("textViewDeselect")
-        return textViewNotes
-    }
+extension Screen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate {
+  func setNoteViewText(newText: String) {
+    textViewNotes.text = newText
+    print("newText= \(newText)")
+    textViewNotes.textColor = UIColor.black
+  }
 
-    
-    //MARK: - Обработка касаний экрана
-    
-    func tapOutsideNoteTextViewEditToHide(){
-        textViewNotes.endEditing(true)
-        print("textViewDeselect")
-    }
-    
+  func returnNoteView() -> UITextView {
+    tapOutsideNoteTextViewEditToHide()
+    textViewNotes.endEditing(true)
+    print("textViewDeselect")
+    return textViewNotes
+  }
+
+
+  // MARK: - Обработка касаний экрана
+
+  func tapOutsideNoteTextViewEditToHide() {
+    textViewNotes.endEditing(true)
+    print("textViewDeselect")
+  }
 }

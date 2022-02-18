@@ -22,7 +22,7 @@ protocol protocolScreen2ContainerDelegate {
     func returnDelegateScreen2Container_TableViewCellNewCategory() -> protocolScreen2Container_TableViewCellNewCategory
 }
 
-class ViewControllerScreen2Container: UIViewController {
+class VCScreen2Container: UIViewController {
 
     //MARK: - объявление аутлетов
     
@@ -58,7 +58,7 @@ class ViewControllerScreen2Container: UIViewController {
 
 //MARK: - additional protocols
 
-extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
+extension VCScreen2Container: protocolScreen2ContainerDelegate {
     
     func setCurrentActiveEditingCell(CategoryID: Int) {
         currentActiveCategoryID = CategoryID
@@ -185,7 +185,7 @@ extension ViewControllerScreen2Container: protocolScreen2ContainerDelegate {
 }
 
 //MARK: - table Functionality
-extension ViewControllerScreen2Container: UITableViewDelegate, UITableViewDataSource{
+extension VCScreen2Container: UITableViewDelegate, UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

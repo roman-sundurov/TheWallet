@@ -24,7 +24,7 @@ class ViewControllerScreen1ContainerGraph: UIViewController {
 
 
   // MARK: - делегаты и переменные
-  var delegateScreen1: ViewController?
+  var delegateScreen1: VCScreen1?
 
   // MARK: - Functions
   func countFullPointsArray() {

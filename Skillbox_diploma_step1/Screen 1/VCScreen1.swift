@@ -64,7 +64,7 @@ class GraphData {
 }
 
 
-class ViewController: UIViewController {
+class VCScreen1: UIViewController {
   // MARK: - объявление аутлетов
   @IBOutlet var tableViewScreen1: UITableView!
   @IBOutlet var buttonDaily: UIView!
@@ -120,7 +120,7 @@ class ViewController: UIViewController {
 
   // MARK: - переходы
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let vewController = segue.destination as? ViewControllerScreen2,
+    if let vewController = segue.destination as? VCScreen2,
        segue.identifier == "segueToScreen2" {
       delegateScreen2 = vewController
       vewController.delegateScreen1 = self
@@ -135,7 +135,7 @@ class ViewController: UIViewController {
       delegateScreen1GraphContainer = viewController
       viewController.delegateScreen1 = self
     }
-    if let viewController = segue.destination as? ViewControllerScreen2, segue.identifier == "segueToScreen2ForEdit"{
+    if let viewController = segue.destination as? VCScreen2, segue.identifier == "segueToScreen2ForEdit"{
       viewController.screen2StatusEditing = true
       viewController.delegateScreen1 = self
       delegateScreen2 = viewController
@@ -465,7 +465,7 @@ class ViewController: UIViewController {
 
 
 // MARK: - additional protocols
-extension ViewController: protocolScreen1Delegate {
+extension VCScreen1: protocolScreen1Delegate {
   func miniGraphStarterBackground(status: Bool) {
     miniGraphStarterBackground.isHidden = status
   }
@@ -626,7 +626,7 @@ extension ViewController: protocolScreen1Delegate {
 
 
 // MARK: - table Functionality
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension VCScreen1: UITableViewDelegate, UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }

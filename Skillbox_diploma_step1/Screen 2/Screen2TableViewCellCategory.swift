@@ -11,51 +11,47 @@ protocol protocolScreen2TableViewCellCategory {
 }
 
 class Screen2TableViewCellCategory: UITableViewCell {
-    
-    @IBOutlet var labelCategory: UILabel!
-    @IBOutlet var labelSelectCategory: UILabel!
-    @IBOutlet var buttonSelectCategory: UIButton!
-    
-    var delegateScreen2: protocolScreen2Delegate?
-    var specCellTag: Int = 0
+  @IBOutlet var labelCategory: UILabel!
+  @IBOutlet var labelSelectCategory: UILabel!
+  @IBOutlet var buttonSelectCategory: UIButton!
 
-//Анимация
-    @objc func changeCategoryOpenPopUpScreen2FromCellCategory(_ tag: Int) {
-        delegateScreen2?.changeCategoryOpenPopUpScreen2(specCellTag)
-        print("ChangeCategory from Screen2")
-    }
+  var delegateScreen2: protocolScreen2Delegate?
+  var specCellTag: Int = 0
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
+// Анимация
+  @objc func changeCategoryOpenPopUpScreen2FromCellCategory(_ tag: Int) {
+    delegateScreen2?.changeCategoryOpenPopUpScreen2(specCellTag)
+    print("ChangeCategory from Screen2")
+  }
 
-        // Initialization code
-    }
+  override func awakeFromNib() {
+    super.awakeFromNib()
+  }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
+  override func setSelected(_ selected: Bool, animated: Bool) {
+    super.setSelected(selected, animated: animated)
+  }
+
+  func startCell() {
+    if delegateScreen2?.returnNewOperation().category != "" {
+      labelSelectCategory.text = delegateScreen2?.returnNewOperation().category
+      labelSelectCategory.textColor = .black
+    } else {
+      labelSelectCategory.text = delegateScreen2?.returnScreen2MenuArray()[specCellTag].text
     }
-    
-    func startCell() {
-        if delegateScreen2?.returnNewOperation().category != "" {
-            labelSelectCategory.text = delegateScreen2?.returnNewOperation().category
-            labelSelectCategory.textColor = .black
-        }
-        else{
-            labelSelectCategory.text = delegateScreen2?.returnScreen2MenuArray()[specCellTag].text
-        }
-        labelCategory.text = delegateScreen2?.returnScreen2MenuArray()[specCellTag].name
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(changeCategoryOpenPopUpScreen2FromCellCategory(_:)))
-        self.isUserInteractionEnabled = true
-        self.addGestureRecognizer(gesture)
-    }
-    
-    func setTag(tag: Int) {
-        specCellTag = tag
-    }
+    labelCategory.text = delegateScreen2?.returnScreen2MenuArray()[specCellTag].name
+    let gesture = UITapGestureRecognizer(
+      target: self,
+      action: #selector(changeCategoryOpenPopUpScreen2FromCellCategory(_:))
+    )
+    self.isUserInteractionEnabled = true
+    self.addGestureRecognizer(gesture)
+  }
+
+  func setTag(tag: Int) {
+    specCellTag = tag
+  }
 }
 
-extension Screen2TableViewCellCategory: protocolScreen2TableViewCellCategory{
-
+extension Screen2TableViewCellCategory: protocolScreen2TableViewCellCategory {
 }
