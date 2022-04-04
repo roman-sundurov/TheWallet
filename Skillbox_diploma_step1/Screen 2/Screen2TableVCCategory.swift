@@ -10,7 +10,7 @@ import UIKit
 protocol protocolScreen2TableViewCellCategory {
 }
 
-class Screen2TableViewCellCategory: UITableViewCell {
+class Screen2TableVCCategory: UITableViewCell {
   @IBOutlet var labelCategory: UILabel!
   @IBOutlet var labelSelectCategory: UILabel!
   @IBOutlet var buttonSelectCategory: UIButton!
@@ -53,5 +53,5 @@ class Screen2TableViewCellCategory: UITableViewCell {
   }
 }
 
-extension Screen2TableViewCellCategory: protocolScreen2TableViewCellCategory {
+extension Screen2TableVCCategory: protocolScreen2TableViewCellCategory {
 }

@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol protocolScreen2TableViewCellDateDelegate{
+protocol protocolScreen2TableVCDateDelegate{
   func returnDateTextField() -> UILabel
 }
 
 
-class Screen2TableViewCellDate: UITableViewCell {
+class Screen2TableVCDate: UITableViewCell {
   @IBOutlet var labelDate: UILabel!
   @IBOutlet var labelSelectDate: UILabel!
   @IBOutlet var buttonSelectDate: UIButton!
@@ -64,7 +64,7 @@ class Screen2TableViewCellDate: UITableViewCell {
 }
 
 
-extension Screen2TableViewCellDate: protocolScreen2TableViewCellDateDelegate {
+extension Screen2TableVCDate: protocolScreen2TableVCDateDelegate {
   func returnDateTextField() -> UILabel {
     print("textViewDeselect")
     return labelSelectDate

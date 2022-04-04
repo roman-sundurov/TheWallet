@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Screen2TableViewCellHeader: UITableViewCell {
+class Screen2TableVCHeader: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
   }

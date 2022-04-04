@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Screen1TableViewCellHeader: UITableViewCell {
+class Screen1TableVCHeader: UITableViewCell {
   @IBOutlet var labelHeaderDate: UILabel!
 
   var delegateScreen1: protocolScreen1Delegate?

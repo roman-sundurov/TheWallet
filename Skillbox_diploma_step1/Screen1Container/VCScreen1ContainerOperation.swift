@@ -11,7 +11,7 @@ protocol protocolScreen1ContainerOperation{
   func startCell(tag: Int)
 }
 
-class ViewControllerScreen1ContainerOperation: UIViewController {
+class VCScreen1ContainerOperation: UIViewController {
   // MARK: - аутлеты
 
   @IBOutlet var labelCategory: UILabel!
@@ -59,7 +59,7 @@ class ViewControllerScreen1ContainerOperation: UIViewController {
 }
 
 
-extension ViewControllerScreen1ContainerOperation: protocolScreen1ContainerOperation {
+extension VCScreen1ContainerOperation: protocolScreen1ContainerOperation {
   func startCell(tag: Int) {
     print(tag)
     print(delegateScreen1!.returnArrayForIncrease()[tag])

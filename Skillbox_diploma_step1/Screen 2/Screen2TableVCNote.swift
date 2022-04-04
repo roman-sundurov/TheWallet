@@ -7,14 +7,13 @@
 
 import UIKit
 
-protocol protocolScreen2TableViewCellNoteDelegate{
-    func tapOutsideNoteTextViewEditToHide()
-    func returnNoteView() -> UITextView
-    func setNoteViewText(newText: String)
+protocol protocolScreen2TableVCNoteDelegate{
+  func tapOutsideNoteTextViewEditToHide()
+  func returnNoteView() -> UITextView
+  func setNoteViewText(newText: String)
 }
-    
 
-class Screen2TableViewCellNote: UITableViewCell, UITextViewDelegate {
+class Screen2TableVCNote: UITableViewCell, UITextViewDelegate {
 //    @IBOutlet var textFieldNotes: UITextField!
   @IBOutlet var textViewNotes: UITextView!
 
@@ -68,7 +67,7 @@ class Screen2TableViewCellNote: UITableViewCell, UITextViewDelegate {
 }
 
 
-extension Screen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate {
+extension Screen2TableVCNote: protocolScreen2TableVCNoteDelegate {
   func setNoteViewText(newText: String) {
     textViewNotes.text = newText
     print("newText= \(newText)")

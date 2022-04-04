@@ -12,7 +12,7 @@ protocol protocolScreen1ContainerGraph {
   func setGraphIndicators(min: String, middle: String, max: String)
 }
 
-class ViewControllerScreen1ContainerGraph: UIViewController {
+class VCScreen1ContainerGraph: UIViewController {
   // MARK: - объявление аутлетов
 
   @IBOutlet var graphView: GraphView!
@@ -115,7 +115,7 @@ class ViewControllerScreen1ContainerGraph: UIViewController {
 }
 
 
-extension ViewControllerScreen1ContainerGraph: protocolScreen1ContainerGraph {
+extension VCScreen1ContainerGraph: protocolScreen1ContainerGraph {
   func setGraphIndicators(min: String, middle: String, max: String) {
     minIndicatorLabel.text = min
     middleIndicatorLabel.text = middle

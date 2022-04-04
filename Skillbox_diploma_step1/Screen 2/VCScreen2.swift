@@ -15,7 +15,7 @@ protocol protocolScreen2Delegate {
 
   // функции возврата
   func returnScreen2MenuArray() -> [Screen2MenuData]
-  func returnDelegateScreen2TableViewCellNote() -> protocolScreen2TableViewCellNoteDelegate
+  func returnDelegateScreen2TableViewCellNote() -> protocolScreen2TableVCNoteDelegate
   func returnNewOperation() -> ListOfOperations
   func returnDataArrayOfCategory() -> [DataOfCategories]
   func returnDelegateScreen1() -> protocolScreen1Delegate
@@ -65,8 +65,8 @@ class VCScreen2: UIViewController {
   var delegateScreen1: protocolScreen1Delegate?
   private var delegateScreen2Container: protocolScreen2ContainerDelegate?
   private var delegateScreen2TableViewCellCategory: protocolScreen2TableViewCellCategory?
-  private var delegateScreen2TableViewCellNote: protocolScreen2TableViewCellNoteDelegate?
-  private var delegateScreen2TableViewCellDate: protocolScreen2TableViewCellDateDelegate?
+  private var delegateScreen2TableViewCellNote: protocolScreen2TableVCNoteDelegate?
+  private var delegateScreen2TableViewCellDate: protocolScreen2TableVCDateDelegate?
   var screen2StatusEditing = false // показывает, создаётся ли новая операция, или редактируется предыдущая
 
   var tapOfChangeCategoryOpenPopUp: UITapGestureRecognizer?
@@ -594,7 +594,7 @@ extension VCScreen2: protocolScreen2Delegate {
   }
 
 
-  func returnDelegateScreen2TableViewCellNote() -> protocolScreen2TableViewCellNoteDelegate {
+  func returnDelegateScreen2TableViewCellNote() -> protocolScreen2TableVCNoteDelegate {
     return delegateScreen2TableViewCellNote!
   }
 
@@ -683,11 +683,11 @@ extension VCScreen2: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     switch indexPath.row {
     case 0:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen2TableViewCellHeader
+      let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen2TableVCHeader
       cell.selectionStyle = UITableViewCell.SelectionStyle.none
       return cell
     case 1:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cellCategory") as! Screen2TableViewCellCategory
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cellCategory") as! Screen2TableVCCategory
       cell.delegateScreen2 = self
       cell.setTag(tag: indexPath.row)
       cell.startCell()
@@ -695,7 +695,7 @@ extension VCScreen2: UITableViewDelegate, UITableViewDataSource {
       self.delegateScreen2TableViewCellCategory = cell
       return cell
     case 2:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cellDate") as! Screen2TableViewCellDate
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cellDate") as! Screen2TableVCDate
       cell.delegateScreen2 = self
       cell.setTag(tag: indexPath.row)
       cell.startCell()
@@ -703,7 +703,7 @@ extension VCScreen2: UITableViewDelegate, UITableViewDataSource {
       self.delegateScreen2TableViewCellDate = cell
       return cell
     default:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cellNote") as! Screen2TableViewCellNote
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cellNote") as! Screen2TableVCNote
       cell.delegateScreen2 = self
       cell.setTag(tag: indexPath.row)
       cell.startCell()

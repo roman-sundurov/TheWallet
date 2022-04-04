@@ -125,12 +125,12 @@ class VCScreen1: UIViewController {
       delegateScreen2 = vewController
       vewController.delegateScreen1 = self
     }
-    if let viewController = segue.destination as? ViewControllerScreen1ContainerOperation,
+    if let viewController = segue.destination as? VCScreen1ContainerOperation,
        segue.identifier == "segueToScreen1Container"{
       delegateScreen1Container = viewController
       viewController.delegateScreen1 = self
     }
-    if let viewController = segue.destination as? ViewControllerScreen1ContainerGraph,
+    if let viewController = segue.destination as? VCScreen1ContainerGraph,
        segue.identifier == "segueToScreen1GraphContainer" {
       delegateScreen1GraphContainer = viewController
       viewController.delegateScreen1 = self
@@ -638,29 +638,29 @@ extension VCScreen1: UITableViewDelegate, UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if dataArrayOfOperations.isEmpty {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
+      let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableVCHeader
       cell.delegateScreen1 = self
       cell.startCellEmpty()
       return cell
     } else {
       if indexPath.row == 0 {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
+        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableVCHeader
         cell.delegateScreen1 = self
         cell.setTag(tag: indexPath.row)
         cell.startCell()
         return cell
       } else if arrayForIncrease[indexPath.row] != arrayForIncrease[indexPath.row - 1] {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
+        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableVCHeader
         cell.delegateScreen1 = self
         cell.setTag(tag: indexPath.row)
         cell.startCell2()
         return cell
       } else if indexPath.row == arrayForIncrease.count {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableViewCellHeader
+        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableVCHeader
         cell.labelHeaderDate.isHidden = true
         return cell
       } else {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "operation") as! Screen1TableViewCellOperation
+        let cell = tableView.dequeueReusableCell(withIdentifier: "operation") as! Screen1TableVCOperation
         cell.delegateScreen1 = self
         cell.setTag(tag: indexPath.row)
         cell.startCell()
