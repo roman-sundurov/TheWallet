@@ -6,11 +6,11 @@
 
 import UIKit
 
-protocol protocolScreen2Container_TableViewCellHeader {
+protocol protocolScreen2ContainerTableVClHeader {
   func buttonOptionsSetColor(color: UIColor)
 }
 
-class Screen2ContainerTVCellHeader: UITableViewCell {
+class Screen2ContainerTableVCellHeader: UITableViewCell {
   // MARK: - аутлеты
 
   @IBOutlet var buttonOptions: UIButton!
@@ -35,7 +35,7 @@ class Screen2ContainerTVCellHeader: UITableViewCell {
   }
 }
 
-extension Screen2ContainerTVCellHeader: protocolScreen2Container_TableViewCellHeader {
+extension Screen2ContainerTableVCellHeader: protocolScreen2ContainerTableVClHeader {
   func buttonOptionsSetColor(color: UIColor) {
     buttonOptions.tintColor = color
   }

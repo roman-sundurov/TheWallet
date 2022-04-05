@@ -54,7 +54,10 @@ class Screen2ContainerTableVCChangeCategory: UITableViewCell, UITextFieldDelegat
       buttonEditNameCategory.tintColor = UIColor.red
       buttonEditNameCategory.isHidden = true
       buttonConfirmNewName.isHidden = false
-      delegateScreen2Container?.setCurrentActiveEditingCell(categoryID: (delegateScreen2Container?.returnDelegateScreen2().returnDataArrayOfCategory()[specCellTag].id)!)
+      delegateScreen2Container?.setCurrentActiveEditingCell(categoryID: (delegateScreen2Container?
+        .returnDelegateScreen2()
+        .returnDataArrayOfCategory()[specCellTag]
+        .id)!)
     } else {
       closeEditing()
     }
@@ -70,7 +73,10 @@ class Screen2ContainerTableVCChangeCategory: UITableViewCell, UITextFieldDelegat
   @objc func closeWindows() {
     if permitionToSetCategory == false { return }
 
-    delegateScreen2Container?.returnDelegateScreen2().setCategoryInNewOperation(category: textFieldNameCategory.text!) // запись выбранной категории во временную переменную
+    // запись выбранной категории во временную переменную
+    delegateScreen2Container?
+      .returnDelegateScreen2()
+      .setCategoryInNewOperation(category: textFieldNameCategory.text!)
     delegateScreen2Container?.closeWindows(specCellTag) // закрытие PopUp-окна
     delegateScreen2Container?.setCurrentActiveEditingCell(categoryID: 100)
     print("ClosePopup from ContainerCell")
@@ -86,77 +92,78 @@ class Screen2ContainerTableVCChangeCategory: UITableViewCell, UITextFieldDelegat
 
 
   func startCell() {
-      textFieldNameCategory.text = delegateScreen2Container?.returnDelegateScreen2().returnDataArrayOfCategory()[specCellTag].name
-      gestureCell = UITapGestureRecognizer(target: self, action: #selector(closeWindows))
-      gestureCheckBox = UITapGestureRecognizer(target: self, action: #selector(closeWindows))
-      isUserInteractionEnabled = true
-      addGestureRecognizer(gestureCell!)
-      checkBoxObject.addGestureRecognizer(gestureCheckBox!)
-      checkBoxObject.tag = specCellTag
-      checkBoxObject.checkmarkStyle = .tick
-      checkBoxObject.borderLineWidth = 0
-      checkBoxObject.borderStyle = .circle
-      checkBoxObject.checkmarkSize = 1
-      checkBoxObject.checkmarkColor = .white
+    textFieldNameCategory.text = delegateScreen2Container?
+      .returnDelegateScreen2()
+      .returnDataArrayOfCategory()[specCellTag]
+      .name
+    gestureCell = UITapGestureRecognizer(target: self, action: #selector(closeWindows))
+    gestureCheckBox = UITapGestureRecognizer(target: self, action: #selector(closeWindows))
+    isUserInteractionEnabled = true
+    addGestureRecognizer(gestureCell!)
+    checkBoxObject.addGestureRecognizer(gestureCheckBox!)
+    checkBoxObject.tag = specCellTag
+    checkBoxObject.checkmarkStyle = .tick
+    checkBoxObject.borderLineWidth = 0
+    checkBoxObject.borderStyle = .circle
+    checkBoxObject.checkmarkSize = 1
+    checkBoxObject.checkmarkColor = .white
 
-      textFieldNameCategory.layer.cornerRadius = 10
+    textFieldNameCategory.layer.cornerRadius = 10
 
-      if delegateScreen2Container?.returnDelegateScreen2().returnNewOperation().category ==  delegateScreen2Container?.returnDelegateScreen2().returnDataArrayOfCategory()[specCellTag].name {
-          checkBoxObject.isChecked = true
-      }
-      else{
-          checkBoxObject.isChecked = false
-      }
+    if delegateScreen2Container?.returnDelegateScreen2().returnNewOperation().category == delegateScreen2Container?
+      .returnDelegateScreen2()
+      .returnDataArrayOfCategory()[specCellTag]
+      .name {
+        checkBoxObject.isChecked = true
+    } else {
+      checkBoxObject.isChecked = false
+    }
 
-      if delegateScreen2Container?.returnScreen2StatusEditContainer() == true {
-          buttonDeleteCategory.isHidden = false
-          buttonEditNameCategory.isHidden = false
-      }
-      else{
-          buttonDeleteCategory.isHidden = true
-          buttonEditNameCategory.isHidden = true
-      }
+    if delegateScreen2Container?.returnScreen2StatusEditContainer() == true {
+    buttonDeleteCategory.isHidden = false
+    buttonEditNameCategory.isHidden = false
+    } else {
+      buttonDeleteCategory.isHidden = true
+      buttonEditNameCategory.isHidden = true
+    }
 
-      textFieldNameCategory.returnKeyType = .done
-      textFieldNameCategory.delegate = self
-
+    textFieldNameCategory.returnKeyType = .done
+    textFieldNameCategory.delegate = self
   }
 
 
   func setTag(tag: Int) {
-      specCellTag = tag
-      print("specCellTag ChangeCategory= \(specCellTag)")
+    specCellTag = tag
+    print("specCellTag ChangeCategory= \(specCellTag)")
   }
 }
 
 
-extension Screen2ContainerTableVCChangeCategory: protocolScreen2Container_TableViewCellChangeCategory{
-    
-    func setPermitionToSetCategory(status: Bool) {
-        permitionToSetCategory = status
-    }
-    
-    func returnCategryIdOfCell() -> Int{
-        return (delegateScreen2Container?.returnDelegateScreen2().returnDataArrayOfCategory()[specCellTag].id)!
-    }
-    
-    
-    func closeEditing(){
-        editStatus = false
-        textFieldNameCategory.backgroundColor = UIColor.clear
-        textFieldNameCategory.textColor = UIColor.white
-        textFieldNameCategory.isEnabled = false
-        textFieldNameCategory.resignFirstResponder()
-//        addGestureRecognizer(gestureCell!)
-//        addGestureRecognizer(gestureCheckBox!)
-        checkBoxObject.isUserInteractionEnabled = true
-        print("buttonEditNameCategoryAction2")
-        buttonEditNameCategory.tintColor = UIColor.systemBlue
-        buttonEditNameCategory.isHidden = false
-        buttonConfirmNewName.isHidden = true
-        
-        delegateScreen2Container?.returnDelegateScreen2().returnDelegateScreen1().editCategoryInRealm(newName: textFieldNameCategory.text!, newIcon: "", id: specCellTag)
-        delegateScreen2Container?.setCurrentActiveEditingCell(categoryID: 0)
-    }
+extension Screen2ContainerTableVCChangeCategory: protocolScreen2Container_TableViewCellChangeCategory {
+  func setPermitionToSetCategory(status: Bool) {
+    permitionToSetCategory = status
+  }
 
+  func returnCategryIdOfCell() -> Int {
+    return (delegateScreen2Container?.returnDelegateScreen2().returnDataArrayOfCategory()[specCellTag].id)!
+  }
+
+  func closeEditing() {
+    editStatus = false
+    textFieldNameCategory.backgroundColor = UIColor.clear
+    textFieldNameCategory.textColor = UIColor.white
+    textFieldNameCategory.isEnabled = false
+    textFieldNameCategory.resignFirstResponder()
+    checkBoxObject.isUserInteractionEnabled = true
+    print("buttonEditNameCategoryAction2")
+    buttonEditNameCategory.tintColor = UIColor.systemBlue
+    buttonEditNameCategory.isHidden = false
+    buttonConfirmNewName.isHidden = true
+
+    delegateScreen2Container?
+      .returnDelegateScreen2()
+      .returnDelegateScreen1()
+      .editCategoryInRealm(newName: textFieldNameCategory.text!, newIcon: "", id: specCellTag)
+    delegateScreen2Container?.setCurrentActiveEditingCell(categoryID: 0)
+  }
 }

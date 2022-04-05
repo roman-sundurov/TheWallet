@@ -19,7 +19,7 @@ protocol protocolScreen2ContainerDelegate {
   // функции возврата
   func returnDelegateScreen2() -> protocolScreen2Delegate
   func returnScreen2StatusEditContainer() -> Bool
-  func returnDelegateScreen2Container_TableViewCellNewCategory() -> protocolScreen2Container_TableViewCellNewCategory
+  func returnDelegateScreen2Container_TableViewCellNewCategory() -> protocolScreen2ContainerTableVCNewCategory
 }
 
 class VCScreen2Container: UIViewController {
@@ -31,8 +31,8 @@ class VCScreen2Container: UIViewController {
   // MARK: - делегаты и переменные
 
   var delegateScreen2: protocolScreen2Delegate?
-  var delegateScreen2ContainerTVCellHeader: protocolScreen2Container_TableViewCellHeader?
-  var delegateScreen2ContainerTVCellNewCategory: protocolScreen2Container_TableViewCellNewCategory?
+  var delegateScreen2ContainerTVCellHeader: protocolScreen2ContainerTableVClHeader?
+  var delegateScreen2ContainerTVCellNewCategory: protocolScreen2ContainerTableVCNewCategory?
   var statusEditContainer = false
   var animationNewCategoryInCell = false
   var currentActiveCategoryID: Int = 0
@@ -95,7 +95,7 @@ extension VCScreen2Container: protocolScreen2ContainerDelegate {
   }
 
 
-  func returnDelegateScreen2Container_TableViewCellNewCategory() -> protocolScreen2Container_TableViewCellNewCategory {
+  func returnDelegateScreen2Container_TableViewCellNewCategory() -> protocolScreen2ContainerTableVCNewCategory {
     return delegateScreen2ContainerTVCellNewCategory!
   }
 
@@ -201,13 +201,13 @@ extension VCScreen2Container: UITableViewDelegate, UITableViewDataSource {
     print("indexPath.rowScreen2= \(indexPath.row)")
     if indexPath.row == 0 {
       print("1111")
-      let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen2ContainerTVCellHeader
+      let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen2ContainerTableVCellHeader
       cell.delegateScreen2Container = self
       delegateScreen2ContainerTVCellHeader = cell
       return cell
     } else if statusEditContainer == true && indexPath.row == 1 {
       print("2222")
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cellNewCategory") as! Screen2Container_TableViewCellNewCategory
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cellNewCategory") as! Screen2ContainerTableVCNewCategory
       cell.delegateScreen2Container = self
       delegateScreen2ContainerTVCellHeader?.buttonOptionsSetColor(color: UIColor.systemBlue)
       delegateScreen2ContainerTVCellNewCategory = cell
