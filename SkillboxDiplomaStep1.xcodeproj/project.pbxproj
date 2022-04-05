@@ -18,8 +18,6 @@
 		472F289325A7319500CE1481 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472F289125A7319500CE1481 /* LaunchScreen.storyboard */; };
 		472F289E25A7319600CE1481 /* Skillbox_diploma_step1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F289D25A7319600CE1481 /* Skillbox_diploma_step1Tests.swift */; };
 		472F28A925A7319600CE1481 /* Skillbox_diploma_step1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F28A825A7319600CE1481 /* Skillbox_diploma_step1UITests.swift */; };
-		4736308927B5D461002D1426 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 4736308827B5D461002D1426 /* Realm */; };
-		4736308B27B5D461002D1426 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4736308A27B5D461002D1426 /* RealmSwift */; };
 		4750EFE725BC2C5C00167A92 /* Screen2ContainerTableVCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EFE625BC2C5C00167A92 /* Screen2ContainerTableVCellHeader.swift */; };
 		4750EFEC25BC2C7F00167A92 /* Screen2ContainerTableVCChangeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EFEB25BC2C7F00167A92 /* Screen2ContainerTableVCChangeCategory.swift */; };
 		475D711A26509A0F009D917A /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475D711926509A0F009D917A /* GraphView.swift */; };
@@ -32,7 +30,6 @@
 		47BEBB43262F91D1006FF254 /* Screen2ContainerTableVCNewCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BEBB42262F91D1006FF254 /* Screen2ContainerTableVCNewCategory.swift */; };
 		47C4FF3525B38B0F00F97498 /* VCScreen2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4FF3425B38B0F00F97498 /* VCScreen2.swift */; };
 		47CB73C325B4364700638185 /* Screen2TableVCCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB73C225B4364700638185 /* Screen2TableVCCategory.swift */; };
-		47DEE40C26B762C2003079DD /* SimpleCheckbox in Frameworks */ = {isa = PBXBuildFile; productRef = 47DEE40B26B762C2003079DD /* SimpleCheckbox */; };
 		47F1759925BA2D320044BD30 /* VCScreen2Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F1759825BA2D320044BD30 /* VCScreen2Container.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,7 +54,7 @@
 		4715214F25F3A8E600FE585C /* Screen2TableVCDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2TableVCDate.swift; sourceTree = "<group>"; };
 		4715819225B6FE310047C5D0 /* Screen2TableVCHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2TableVCHeader.swift; sourceTree = "<group>"; };
 		4729DC3F263DA3AB00CA8B66 /* VCScreen1ContainerGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCScreen1ContainerGraph.swift; sourceTree = "<group>"; };
-		472F288325A7319500CE1481 /* Skillbox_diploma_step1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Skillbox_diploma_step1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		472F288325A7319500CE1481 /* SkillboxDiplomaStep1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillboxDiplomaStep1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		472F288625A7319500CE1481 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		472F288825A7319500CE1481 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		472F288A25A7319500CE1481 /* VCScreen1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCScreen1.swift; sourceTree = "<group>"; };
@@ -65,10 +62,10 @@
 		472F288F25A7319500CE1481 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		472F289225A7319500CE1481 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		472F289425A7319500CE1481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		472F289925A7319600CE1481 /* Skillbox_diploma_step1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Skillbox_diploma_step1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		472F289925A7319600CE1481 /* SkillboxDiplomaStep1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkillboxDiplomaStep1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		472F289D25A7319600CE1481 /* Skillbox_diploma_step1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skillbox_diploma_step1Tests.swift; sourceTree = "<group>"; };
 		472F289F25A7319600CE1481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		472F28A425A7319600CE1481 /* Skillbox_diploma_step1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Skillbox_diploma_step1UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		472F28A425A7319600CE1481 /* SkillboxDiplomaStep1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkillboxDiplomaStep1UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		472F28A825A7319600CE1481 /* Skillbox_diploma_step1UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skillbox_diploma_step1UITests.swift; sourceTree = "<group>"; };
 		472F28AA25A7319600CE1481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4750EFE625BC2C5C00167A92 /* Screen2ContainerTableVCellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2ContainerTableVCellHeader.swift; sourceTree = "<group>"; };
@@ -76,8 +73,8 @@
 		475D711926509A0F009D917A /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		47621F9725B644BF0095A52F /* Screen2TableVCNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2TableVCNote.swift; sourceTree = "<group>"; };
 		4771587B262AB31E00F27D4B /* VCScreen1ContainerOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCScreen1ContainerOperation.swift; sourceTree = "<group>"; };
-		47AC1A9425C09AC9006E7817 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Persistence.swift; path = Skillbox_diploma_step1/Persistence.swift; sourceTree = SOURCE_ROOT; };
-		47AC1AA525C0AE45006E7817 /* Screen1TableVCHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Screen1TableVCHeader.swift; path = "Skillbox_diploma_step1/Screen 1/Screen1TableVCHeader.swift"; sourceTree = SOURCE_ROOT; };
+		47AC1A9425C09AC9006E7817 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Persistence.swift; path = SkillboxDiplomaStep1/Persistence.swift; sourceTree = SOURCE_ROOT; };
+		47AC1AA525C0AE45006E7817 /* Screen1TableVCHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Screen1TableVCHeader.swift; path = SkillboxDiplomaStep1/Screen1/Screen1TableVCHeader.swift; sourceTree = SOURCE_ROOT; };
 		47AC1AB525C0B7CB006E7817 /* Screen1TableVCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen1TableVCOperation.swift; sourceTree = "<group>"; };
 		47B80F772667CA9500032678 /* Screen1RoundedGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen1RoundedGraph.swift; sourceTree = "<group>"; };
 		47BEBB42262F91D1006FF254 /* Screen2ContainerTableVCNewCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2ContainerTableVCNewCategory.swift; sourceTree = "<group>"; };
@@ -91,9 +88,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4736308B27B5D461002D1426 /* RealmSwift in Frameworks */,
-				4736308927B5D461002D1426 /* Realm in Frameworks */,
-				47DEE40C26B762C2003079DD /* SimpleCheckbox in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,9 +111,9 @@
 		472F287A25A7319500CE1481 = {
 			isa = PBXGroup;
 			children = (
-				472F288525A7319500CE1481 /* Skillbox_diploma_step1 */,
-				472F289C25A7319600CE1481 /* Skillbox_diploma_step1Tests */,
-				472F28A725A7319600CE1481 /* Skillbox_diploma_step1UITests */,
+				472F288525A7319500CE1481 /* SkillboxDiplomaStep1 */,
+				472F289C25A7319600CE1481 /* SkillboxDiplomaStep1Tests */,
+				472F28A725A7319600CE1481 /* SkillboxDiplomaStep1UITests */,
 				472F288425A7319500CE1481 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -127,47 +121,47 @@
 		472F288425A7319500CE1481 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				472F288325A7319500CE1481 /* Skillbox_diploma_step1.app */,
-				472F289925A7319600CE1481 /* Skillbox_diploma_step1Tests.xctest */,
-				472F28A425A7319600CE1481 /* Skillbox_diploma_step1UITests.xctest */,
+				472F288325A7319500CE1481 /* SkillboxDiplomaStep1.app */,
+				472F289925A7319600CE1481 /* SkillboxDiplomaStep1Tests.xctest */,
+				472F28A425A7319600CE1481 /* SkillboxDiplomaStep1UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		472F288525A7319500CE1481 /* Skillbox_diploma_step1 */ = {
+		472F288525A7319500CE1481 /* SkillboxDiplomaStep1 */ = {
 			isa = PBXGroup;
 			children = (
 				472F288625A7319500CE1481 /* AppDelegate.swift */,
 				472F288825A7319500CE1481 /* SceneDelegate.swift */,
 				47AC1A9425C09AC9006E7817 /* Persistence.swift */,
-				47621F8C25B643C20095A52F /* Screen 1 */,
+				47621F8C25B643C20095A52F /* Screen1 */,
 				4771587A262AB2E000F27D4B /* Screen1Container */,
-				47621F9025B643D80095A52F /* Screen 2 */,
+				47621F9025B643D80095A52F /* Screen2 */,
 				4750EFDA25BC24AF00167A92 /* Screen2Container */,
 				472F288C25A7319500CE1481 /* Main.storyboard */,
 				472F288F25A7319500CE1481 /* Assets.xcassets */,
 				472F289125A7319500CE1481 /* LaunchScreen.storyboard */,
 				472F289425A7319500CE1481 /* Info.plist */,
 			);
-			path = Skillbox_diploma_step1;
+			path = SkillboxDiplomaStep1;
 			sourceTree = "<group>";
 		};
-		472F289C25A7319600CE1481 /* Skillbox_diploma_step1Tests */ = {
+		472F289C25A7319600CE1481 /* SkillboxDiplomaStep1Tests */ = {
 			isa = PBXGroup;
 			children = (
 				472F289D25A7319600CE1481 /* Skillbox_diploma_step1Tests.swift */,
 				472F289F25A7319600CE1481 /* Info.plist */,
 			);
-			path = Skillbox_diploma_step1Tests;
+			path = SkillboxDiplomaStep1Tests;
 			sourceTree = "<group>";
 		};
-		472F28A725A7319600CE1481 /* Skillbox_diploma_step1UITests */ = {
+		472F28A725A7319600CE1481 /* SkillboxDiplomaStep1UITests */ = {
 			isa = PBXGroup;
 			children = (
 				472F28A825A7319600CE1481 /* Skillbox_diploma_step1UITests.swift */,
 				472F28AA25A7319600CE1481 /* Info.plist */,
 			);
-			path = Skillbox_diploma_step1UITests;
+			path = SkillboxDiplomaStep1UITests;
 			sourceTree = "<group>";
 		};
 		4750EFDA25BC24AF00167A92 /* Screen2Container */ = {
@@ -181,7 +175,7 @@
 			path = Screen2Container;
 			sourceTree = "<group>";
 		};
-		47621F8C25B643C20095A52F /* Screen 1 */ = {
+		47621F8C25B643C20095A52F /* Screen1 */ = {
 			isa = PBXGroup;
 			children = (
 				472F288A25A7319500CE1481 /* VCScreen1.swift */,
@@ -189,10 +183,10 @@
 				47AC1AB525C0B7CB006E7817 /* Screen1TableVCOperation.swift */,
 				47B80F772667CA9500032678 /* Screen1RoundedGraph.swift */,
 			);
-			path = "Screen 1";
+			path = Screen1;
 			sourceTree = "<group>";
 		};
-		47621F9025B643D80095A52F /* Screen 2 */ = {
+		47621F9025B643D80095A52F /* Screen2 */ = {
 			isa = PBXGroup;
 			children = (
 				47C4FF3425B38B0F00F97498 /* VCScreen2.swift */,
@@ -201,7 +195,7 @@
 				4715214F25F3A8E600FE585C /* Screen2TableVCDate.swift */,
 				47621F9725B644BF0095A52F /* Screen2TableVCNote.swift */,
 			);
-			path = "Screen 2";
+			path = Screen2;
 			sourceTree = "<group>";
 		};
 		4771587A262AB2E000F27D4B /* Screen1Container */ = {
@@ -217,9 +211,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		472F288225A7319500CE1481 /* Skillbox_diploma_step1 */ = {
+		472F288225A7319500CE1481 /* SkillboxDiplomaStep1 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 472F28AD25A7319600CE1481 /* Build configuration list for PBXNativeTarget "Skillbox_diploma_step1" */;
+			buildConfigurationList = 472F28AD25A7319600CE1481 /* Build configuration list for PBXNativeTarget "SkillboxDiplomaStep1" */;
 			buildPhases = (
 				4736308E27B692B3002D1426 /* ShellScript */,
 				472F287F25A7319500CE1481 /* Sources */,
@@ -230,19 +224,16 @@
 			);
 			dependencies = (
 			);
-			name = Skillbox_diploma_step1;
+			name = SkillboxDiplomaStep1;
 			packageProductDependencies = (
-				47DEE40B26B762C2003079DD /* SimpleCheckbox */,
-				4736308827B5D461002D1426 /* Realm */,
-				4736308A27B5D461002D1426 /* RealmSwift */,
 			);
 			productName = Skillbox_diploma_step1;
-			productReference = 472F288325A7319500CE1481 /* Skillbox_diploma_step1.app */;
+			productReference = 472F288325A7319500CE1481 /* SkillboxDiplomaStep1.app */;
 			productType = "com.apple.product-type.application";
 		};
-		472F289825A7319600CE1481 /* Skillbox_diploma_step1Tests */ = {
+		472F289825A7319600CE1481 /* SkillboxDiplomaStep1Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 472F28B025A7319600CE1481 /* Build configuration list for PBXNativeTarget "Skillbox_diploma_step1Tests" */;
+			buildConfigurationList = 472F28B025A7319600CE1481 /* Build configuration list for PBXNativeTarget "SkillboxDiplomaStep1Tests" */;
 			buildPhases = (
 				472F289525A7319600CE1481 /* Sources */,
 				472F289625A7319600CE1481 /* Frameworks */,
@@ -253,14 +244,14 @@
 			dependencies = (
 				472F289B25A7319600CE1481 /* PBXTargetDependency */,
 			);
-			name = Skillbox_diploma_step1Tests;
+			name = SkillboxDiplomaStep1Tests;
 			productName = Skillbox_diploma_step1Tests;
-			productReference = 472F289925A7319600CE1481 /* Skillbox_diploma_step1Tests.xctest */;
+			productReference = 472F289925A7319600CE1481 /* SkillboxDiplomaStep1Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		472F28A325A7319600CE1481 /* Skillbox_diploma_step1UITests */ = {
+		472F28A325A7319600CE1481 /* SkillboxDiplomaStep1UITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 472F28B325A7319600CE1481 /* Build configuration list for PBXNativeTarget "Skillbox_diploma_step1UITests" */;
+			buildConfigurationList = 472F28B325A7319600CE1481 /* Build configuration list for PBXNativeTarget "SkillboxDiplomaStep1UITests" */;
 			buildPhases = (
 				472F28A025A7319600CE1481 /* Sources */,
 				472F28A125A7319600CE1481 /* Frameworks */,
@@ -271,9 +262,9 @@
 			dependencies = (
 				472F28A625A7319600CE1481 /* PBXTargetDependency */,
 			);
-			name = Skillbox_diploma_step1UITests;
+			name = SkillboxDiplomaStep1UITests;
 			productName = Skillbox_diploma_step1UITests;
-			productReference = 472F28A425A7319600CE1481 /* Skillbox_diploma_step1UITests.xctest */;
+			productReference = 472F28A425A7319600CE1481 /* SkillboxDiplomaStep1UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -298,7 +289,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 472F287E25A7319500CE1481 /* Build configuration list for PBXProject "Skillbox_diploma_step1" */;
+			buildConfigurationList = 472F287E25A7319500CE1481 /* Build configuration list for PBXProject "SkillboxDiplomaStep1" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -308,16 +299,16 @@
 			);
 			mainGroup = 472F287A25A7319500CE1481;
 			packageReferences = (
-				47DEE40A26B762C2003079DD /* XCRemoteSwiftPackageReference "SimpleCheckbox" */,
-				4736308727B5D461002D1426 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				4720FE0927FC8E8D008558B2 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				4720FE0A27FC8FC4008558B2 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */,
 			);
 			productRefGroup = 472F288425A7319500CE1481 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				472F288225A7319500CE1481 /* Skillbox_diploma_step1 */,
-				472F289825A7319600CE1481 /* Skillbox_diploma_step1Tests */,
-				472F28A325A7319600CE1481 /* Skillbox_diploma_step1UITests */,
+				472F288225A7319500CE1481 /* SkillboxDiplomaStep1 */,
+				472F289825A7319600CE1481 /* SkillboxDiplomaStep1Tests */,
+				472F28A325A7319600CE1481 /* SkillboxDiplomaStep1UITests */,
 			);
 		};
 /* End PBXProject section */
@@ -417,12 +408,12 @@
 /* Begin PBXTargetDependency section */
 		472F289B25A7319600CE1481 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 472F288225A7319500CE1481 /* Skillbox_diploma_step1 */;
+			target = 472F288225A7319500CE1481 /* SkillboxDiplomaStep1 */;
 			targetProxy = 472F289A25A7319600CE1481 /* PBXContainerItemProxy */;
 		};
 		472F28A625A7319600CE1481 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 472F288225A7319500CE1481 /* Skillbox_diploma_step1 */;
+			target = 472F288225A7319500CE1481 /* SkillboxDiplomaStep1 */;
 			targetProxy = 472F28A525A7319600CE1481 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -570,7 +561,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = Skillbox_diploma_step1/Info.plist;
+				INFOPLIST_FILE = SkillboxDiplomaStep1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -589,7 +580,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = Skillbox_diploma_step1/Info.plist;
+				INFOPLIST_FILE = SkillboxDiplomaStep1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -608,7 +599,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = Skillbox_diploma_step1Tests/Info.plist;
+				INFOPLIST_FILE = SkillboxDiplomaStep1Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -619,7 +610,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Skillbox_diploma_step1.app/Skillbox_diploma_step1";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SkillboxDiplomaStep1.app/SkillboxDiplomaStep1";
 			};
 			name = Debug;
 		};
@@ -630,7 +621,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = Skillbox_diploma_step1Tests/Info.plist;
+				INFOPLIST_FILE = SkillboxDiplomaStep1Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -641,7 +632,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Skillbox_diploma_step1.app/Skillbox_diploma_step1";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SkillboxDiplomaStep1.app/SkillboxDiplomaStep1";
 			};
 			name = Release;
 		};
@@ -651,7 +642,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = Skillbox_diploma_step1UITests/Info.plist;
+				INFOPLIST_FILE = SkillboxDiplomaStep1UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -661,7 +652,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Skillbox_diploma_step1;
+				TEST_TARGET_NAME = SkillboxDiplomaStep1;
 			};
 			name = Debug;
 		};
@@ -671,7 +662,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = Skillbox_diploma_step1UITests/Info.plist;
+				INFOPLIST_FILE = SkillboxDiplomaStep1UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -681,14 +672,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Skillbox_diploma_step1;
+				TEST_TARGET_NAME = SkillboxDiplomaStep1;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		472F287E25A7319500CE1481 /* Build configuration list for PBXProject "Skillbox_diploma_step1" */ = {
+		472F287E25A7319500CE1481 /* Build configuration list for PBXProject "SkillboxDiplomaStep1" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				472F28AB25A7319600CE1481 /* Debug */,
@@ -697,7 +688,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		472F28AD25A7319600CE1481 /* Build configuration list for PBXNativeTarget "Skillbox_diploma_step1" */ = {
+		472F28AD25A7319600CE1481 /* Build configuration list for PBXNativeTarget "SkillboxDiplomaStep1" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				472F28AE25A7319600CE1481 /* Debug */,
@@ -706,7 +697,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		472F28B025A7319600CE1481 /* Build configuration list for PBXNativeTarget "Skillbox_diploma_step1Tests" */ = {
+		472F28B025A7319600CE1481 /* Build configuration list for PBXNativeTarget "SkillboxDiplomaStep1Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				472F28B125A7319600CE1481 /* Debug */,
@@ -715,7 +706,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		472F28B325A7319600CE1481 /* Build configuration list for PBXNativeTarget "Skillbox_diploma_step1UITests" */ = {
+		472F28B325A7319600CE1481 /* Build configuration list for PBXNativeTarget "SkillboxDiplomaStep1UITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				472F28B425A7319600CE1481 /* Debug */,
@@ -727,41 +718,23 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		4736308727B5D461002D1426 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+		4720FE0927FC8E8D008558B2 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.22.0;
+				branch = master;
+				kind = branch;
 			};
 		};
-		47DEE40A26B762C2003079DD /* XCRemoteSwiftPackageReference "SimpleCheckbox" */ = {
+		4720FE0A27FC8FC4008558B2 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/BeauNouvelle/SimpleCheckbox.git";
+			repositoryURL = "https://github.com/BeauNouvelle/SimpleCheckbox";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.2.1;
+				minimumVersion = 2.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		4736308827B5D461002D1426 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4736308727B5D461002D1426 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		4736308A27B5D461002D1426 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4736308727B5D461002D1426 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
-		};
-		47DEE40B26B762C2003079DD /* SimpleCheckbox */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 47DEE40A26B762C2003079DD /* XCRemoteSwiftPackageReference "SimpleCheckbox" */;
-			productName = SimpleCheckbox;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 472F287B25A7319500CE1481 /* Project object */;
 }
