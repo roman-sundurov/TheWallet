@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		470869D627FD6875003EEF7D /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 470869D527FD6875003EEF7D /* Realm */; };
+		470869D827FD6875003EEF7D /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 470869D727FD6875003EEF7D /* RealmSwift */; };
+		470869DB27FD68F2003EEF7D /* SimpleCheckbox in Frameworks */ = {isa = PBXBuildFile; productRef = 470869DA27FD68F2003EEF7D /* SimpleCheckbox */; };
 		4715215025F3A8E600FE585C /* Screen2TableVCDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4715214F25F3A8E600FE585C /* Screen2TableVCDate.swift */; };
 		4715819325B6FE310047C5D0 /* Screen2TableVCHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4715819225B6FE310047C5D0 /* Screen2TableVCHeader.swift */; };
 		4729DC40263DA3AB00CA8B66 /* VCScreen1ContainerGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4729DC3F263DA3AB00CA8B66 /* VCScreen1ContainerGraph.swift */; };
@@ -16,9 +19,9 @@
 		472F288E25A7319500CE1481 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472F288C25A7319500CE1481 /* Main.storyboard */; };
 		472F289025A7319500CE1481 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 472F288F25A7319500CE1481 /* Assets.xcassets */; };
 		472F289325A7319500CE1481 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472F289125A7319500CE1481 /* LaunchScreen.storyboard */; };
-		472F289E25A7319600CE1481 /* Skillbox_diploma_step1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F289D25A7319600CE1481 /* Skillbox_diploma_step1Tests.swift */; };
-		472F28A925A7319600CE1481 /* Skillbox_diploma_step1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F28A825A7319600CE1481 /* Skillbox_diploma_step1UITests.swift */; };
-		4750EFE725BC2C5C00167A92 /* Screen2ContainerTableVCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EFE625BC2C5C00167A92 /* Screen2ContainerTableVCellHeader.swift */; };
+		472F289E25A7319600CE1481 /* SkillboxDiplomaStep1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F289D25A7319600CE1481 /* SkillboxDiplomaStep1Tests.swift */; };
+		472F28A925A7319600CE1481 /* SkillboxDiplomaStep1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F28A825A7319600CE1481 /* SkillboxDiplomaStep1UITests.swift */; };
+		4750EFE725BC2C5C00167A92 /* Screen2ContainerTableVCHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EFE625BC2C5C00167A92 /* Screen2ContainerTableVCHeader.swift */; };
 		4750EFEC25BC2C7F00167A92 /* Screen2ContainerTableVCChangeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EFEB25BC2C7F00167A92 /* Screen2ContainerTableVCChangeCategory.swift */; };
 		475D711A26509A0F009D917A /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475D711926509A0F009D917A /* GraphView.swift */; };
 		47621F9825B644BF0095A52F /* Screen2TableVCNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47621F9725B644BF0095A52F /* Screen2TableVCNote.swift */; };
@@ -63,12 +66,12 @@
 		472F289225A7319500CE1481 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		472F289425A7319500CE1481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		472F289925A7319600CE1481 /* SkillboxDiplomaStep1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkillboxDiplomaStep1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		472F289D25A7319600CE1481 /* Skillbox_diploma_step1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skillbox_diploma_step1Tests.swift; sourceTree = "<group>"; };
+		472F289D25A7319600CE1481 /* SkillboxDiplomaStep1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillboxDiplomaStep1Tests.swift; sourceTree = "<group>"; };
 		472F289F25A7319600CE1481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		472F28A425A7319600CE1481 /* SkillboxDiplomaStep1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkillboxDiplomaStep1UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		472F28A825A7319600CE1481 /* Skillbox_diploma_step1UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skillbox_diploma_step1UITests.swift; sourceTree = "<group>"; };
+		472F28A825A7319600CE1481 /* SkillboxDiplomaStep1UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillboxDiplomaStep1UITests.swift; sourceTree = "<group>"; };
 		472F28AA25A7319600CE1481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4750EFE625BC2C5C00167A92 /* Screen2ContainerTableVCellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2ContainerTableVCellHeader.swift; sourceTree = "<group>"; };
+		4750EFE625BC2C5C00167A92 /* Screen2ContainerTableVCHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2ContainerTableVCHeader.swift; sourceTree = "<group>"; };
 		4750EFEB25BC2C7F00167A92 /* Screen2ContainerTableVCChangeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2ContainerTableVCChangeCategory.swift; sourceTree = "<group>"; };
 		475D711926509A0F009D917A /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		47621F9725B644BF0095A52F /* Screen2TableVCNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2TableVCNote.swift; sourceTree = "<group>"; };
@@ -88,6 +91,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				470869D827FD6875003EEF7D /* RealmSwift in Frameworks */,
+				470869DB27FD68F2003EEF7D /* SimpleCheckbox in Frameworks */,
+				470869D627FD6875003EEF7D /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,7 +155,7 @@
 		472F289C25A7319600CE1481 /* SkillboxDiplomaStep1Tests */ = {
 			isa = PBXGroup;
 			children = (
-				472F289D25A7319600CE1481 /* Skillbox_diploma_step1Tests.swift */,
+				472F289D25A7319600CE1481 /* SkillboxDiplomaStep1Tests.swift */,
 				472F289F25A7319600CE1481 /* Info.plist */,
 			);
 			path = SkillboxDiplomaStep1Tests;
@@ -158,7 +164,7 @@
 		472F28A725A7319600CE1481 /* SkillboxDiplomaStep1UITests */ = {
 			isa = PBXGroup;
 			children = (
-				472F28A825A7319600CE1481 /* Skillbox_diploma_step1UITests.swift */,
+				472F28A825A7319600CE1481 /* SkillboxDiplomaStep1UITests.swift */,
 				472F28AA25A7319600CE1481 /* Info.plist */,
 			);
 			path = SkillboxDiplomaStep1UITests;
@@ -168,7 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				47F1759825BA2D320044BD30 /* VCScreen2Container.swift */,
-				4750EFE625BC2C5C00167A92 /* Screen2ContainerTableVCellHeader.swift */,
+				4750EFE625BC2C5C00167A92 /* Screen2ContainerTableVCHeader.swift */,
 				4750EFEB25BC2C7F00167A92 /* Screen2ContainerTableVCChangeCategory.swift */,
 				47BEBB42262F91D1006FF254 /* Screen2ContainerTableVCNewCategory.swift */,
 			);
@@ -226,6 +232,9 @@
 			);
 			name = SkillboxDiplomaStep1;
 			packageProductDependencies = (
+				470869D527FD6875003EEF7D /* Realm */,
+				470869D727FD6875003EEF7D /* RealmSwift */,
+				470869DA27FD68F2003EEF7D /* SimpleCheckbox */,
 			);
 			productName = Skillbox_diploma_step1;
 			productReference = 472F288325A7319500CE1481 /* SkillboxDiplomaStep1.app */;
@@ -299,8 +308,8 @@
 			);
 			mainGroup = 472F287A25A7319500CE1481;
 			packageReferences = (
-				4720FE0927FC8E8D008558B2 /* XCRemoteSwiftPackageReference "realm-swift" */,
-				4720FE0A27FC8FC4008558B2 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */,
+				470869D427FD6875003EEF7D /* XCRemoteSwiftPackageReference "realm-swift" */,
+				470869D927FD68F2003EEF7D /* XCRemoteSwiftPackageReference "SimpleCheckbox" */,
 			);
 			productRefGroup = 472F288425A7319500CE1481 /* Products */;
 			projectDirPath = "";
@@ -381,7 +390,7 @@
 				47F1759925BA2D320044BD30 /* VCScreen2Container.swift in Sources */,
 				47CB73C325B4364700638185 /* Screen2TableVCCategory.swift in Sources */,
 				47621F9825B644BF0095A52F /* Screen2TableVCNote.swift in Sources */,
-				4750EFE725BC2C5C00167A92 /* Screen2ContainerTableVCellHeader.swift in Sources */,
+				4750EFE725BC2C5C00167A92 /* Screen2ContainerTableVCHeader.swift in Sources */,
 				472F288925A7319500CE1481 /* SceneDelegate.swift in Sources */,
 				47C4FF3525B38B0F00F97498 /* VCScreen2.swift in Sources */,
 			);
@@ -391,7 +400,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				472F289E25A7319600CE1481 /* Skillbox_diploma_step1Tests.swift in Sources */,
+				472F289E25A7319600CE1481 /* SkillboxDiplomaStep1Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,7 +408,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				472F28A925A7319600CE1481 /* Skillbox_diploma_step1UITests.swift in Sources */,
+				472F28A925A7319600CE1481 /* SkillboxDiplomaStep1UITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -718,7 +727,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		4720FE0927FC8E8D008558B2 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+		470869D427FD6875003EEF7D /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift";
 			requirement = {
@@ -726,7 +735,7 @@
 				kind = branch;
 			};
 		};
-		4720FE0A27FC8FC4008558B2 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */ = {
+		470869D927FD68F2003EEF7D /* XCRemoteSwiftPackageReference "SimpleCheckbox" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/BeauNouvelle/SimpleCheckbox";
 			requirement = {
@@ -735,6 +744,24 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		470869D527FD6875003EEF7D /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 470869D427FD6875003EEF7D /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		470869D727FD6875003EEF7D /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 470869D427FD6875003EEF7D /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		470869DA27FD68F2003EEF7D /* SimpleCheckbox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 470869D927FD68F2003EEF7D /* XCRemoteSwiftPackageReference "SimpleCheckbox" */;
+			productName = SimpleCheckbox;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 472F287B25A7319500CE1481 /* Project object */;
 }

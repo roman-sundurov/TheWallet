@@ -1,13 +1,13 @@
 //
-//  Skillbox_diploma_step1UITests.swift
-//  Skillbox_diploma_step1UITests
+//  SkillboxDiplomaStep1UITests.swift
+//  SkillboxDiplomaStep1UITests
 //
 //  Created by Roman on 07.01.2021.
 //
 
 import XCTest
 
-class Skillbox_diploma_step1UITests: XCTestCase {
+class SkillboxDiplomaStep1UITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

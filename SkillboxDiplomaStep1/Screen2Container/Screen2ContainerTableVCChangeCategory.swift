@@ -8,7 +8,7 @@
 import UIKit
 import SimpleCheckbox
 
-protocol protocolScreen2Container_TableViewCellChangeCategory {
+protocol protocolScreen2ContainerTableVCChangeCategory {
   func returnCategryIdOfCell() -> Int
   func closeEditing()
   func setPermitionToSetCategory(status: Bool)
@@ -139,7 +139,7 @@ class Screen2ContainerTableVCChangeCategory: UITableViewCell, UITextFieldDelegat
 }
 
 
-extension Screen2ContainerTableVCChangeCategory: protocolScreen2Container_TableViewCellChangeCategory {
+extension Screen2ContainerTableVCChangeCategory: protocolScreen2ContainerTableVCChangeCategory {
   func setPermitionToSetCategory(status: Bool) {
     permitionToSetCategory = status
   }

@@ -10,7 +10,7 @@ protocol protocolScreen2ContainerTableVClHeader {
   func buttonOptionsSetColor(color: UIColor)
 }
 
-class Screen2ContainerTableVCellHeader: UITableViewCell {
+class Screen2ContainerTableVCHeader: UITableViewCell {
   // MARK: - аутлеты
 
   @IBOutlet var buttonOptions: UIButton!
@@ -35,7 +35,7 @@ class Screen2ContainerTableVCellHeader: UITableViewCell {
   }
 }
 
-extension Screen2ContainerTableVCellHeader: protocolScreen2ContainerTableVClHeader {
+extension Screen2ContainerTableVCHeader: protocolScreen2ContainerTableVClHeader {
   func buttonOptionsSetColor(color: UIColor) {
     buttonOptions.tintColor = color
   }

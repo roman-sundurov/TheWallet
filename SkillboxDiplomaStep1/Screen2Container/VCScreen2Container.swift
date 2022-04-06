@@ -201,7 +201,7 @@ extension VCScreen2Container: UITableViewDelegate, UITableViewDataSource {
     print("indexPath.rowScreen2= \(indexPath.row)")
     if indexPath.row == 0 {
       print("1111")
-      let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen2ContainerTableVCellHeader
+      let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen2ContainerTableVCHeader
       cell.delegateScreen2Container = self
       delegateScreen2ContainerTVCellHeader = cell
       return cell

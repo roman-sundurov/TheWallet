@@ -14,7 +14,7 @@ class Screen1TableVCHeader: UITableViewCell {
   var specCellTag: Int = 0
 
   override func awakeFromNib() {
-    super.awakeFromNib()schemes
+    super.awakeFromNib()
   }
 
   override func setSelected(_ selected: Bool, animated: Bool) {
