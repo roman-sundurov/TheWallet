@@ -340,24 +340,20 @@ class VCScreen1: UIViewController {
     var previousDay: Int = 0
     var counter: Int = 0
 
-    guard let lastElement = arrayForIncrease.last else {
-      return 0
-    }
-
     for x in dataArrayOfOperations {
       if Calendar.current.component(.day, from: x.date) != previousDay {
         if counter != 0 {
           // Расчёт множителя, который компенсирует наличие header'ов в таблице
-          arrayForIncrease.append(lastElement)
-          arrayForIncrease.append(lastElement + 1)
+          arrayForIncrease.append(arrayForIncrease.last!)
+          arrayForIncrease.append(arrayForIncrease.last! + 1)
         }
         previousDay = Calendar.current.component(.day, from: x.date)
       } else {
-        arrayForIncrease.append(lastElement)
+        arrayForIncrease.append(arrayForIncrease.last!)
       }
       counter += 1
     }
-    arrayForIncrease.append(lastElement)
+    arrayForIncrease.append(arrayForIncrease.last!)
     graphDataArrayCalculating(dataArrayOfOperationsInternal: dataArrayOfOperations)
     return arrayForIncrease.count
   }

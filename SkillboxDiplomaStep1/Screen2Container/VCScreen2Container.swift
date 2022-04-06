@@ -108,7 +108,7 @@ extension VCScreen2Container: protocolScreen2ContainerDelegate {
   func screen2ContainerNewCategorySwicher() {
     delegateScreen2!.screen2DataReceiveUpdate()
     print("AAAA")
-    if let value = delegateScreen2?.returnDataArrayOfCategory(), !value.isEmpty {
+    if let value = delegateScreen2?.returnDataArrayOfCategory(), value.isEmpty == false {
       if statusEditContainer == true {
         statusEditContainer = false
         delegateScreen2ContainerTableVCHeader?.buttonOptionsSetColor(color: UIColor.white)
@@ -184,7 +184,7 @@ extension VCScreen2Container: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if let value = delegateScreen2?.returnDataArrayOfCategory(), !value.isEmpty {
+    if let value = delegateScreen2?.returnDataArrayOfCategory(), value.isEmpty {
       statusEditContainer = true
       return 2
     } else if statusEditContainer == true {

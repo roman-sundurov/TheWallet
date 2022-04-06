@@ -47,7 +47,7 @@ class GraphView: UIView {
 
     // убираем нули с начала графика, чтобы было правильно масштабирование.
     for data in 0..<cumulativeNumber.count where cumulativeNumber[data] == 0 {
-      cumulativeNumber[data] = cumulativeNumber.first { $0 != 0 }! // filter( { $0 != 0 } ).first ?? 0
+      cumulativeNumber[data] = cumulativeNumber.first { $0 != 0 } ?? 0 // filter( { $0 != 0 } ).first ?? 0
     }
 
     print("cumulativeNumber= \(cumulativeNumber)")
