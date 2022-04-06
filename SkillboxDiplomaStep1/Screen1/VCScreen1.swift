@@ -120,13 +120,11 @@ class VCScreen1: UIViewController {
 
   // MARK: - переходы
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let vewController = segue.destination as? VCScreen2,
-       segue.identifier == "segueToScreen2" {
+    if let vewController = segue.destination as? VCScreen2, segue.identifier == "segueToScreen2" {
       delegateScreen2 = vewController
       vewController.delegateScreen1 = self
     }
-    if let viewController = segue.destination as? VCScreen1ContainerOperation,
-       segue.identifier == "segueToScreen1Container"{
+    if let viewController = segue.destination as? VCScreen1ContainerOperation, segue.identifier == "segueToScreen1Container" {
       delegateScreen1Container = viewController
       viewController.delegateScreen1 = self
     }
@@ -342,20 +340,24 @@ class VCScreen1: UIViewController {
     var previousDay: Int = 0
     var counter: Int = 0
 
+    guard let lastElement = arrayForIncrease.last else {
+      return 0
+    }
+
     for x in dataArrayOfOperations {
       if Calendar.current.component(.day, from: x.date) != previousDay {
         if counter != 0 {
           // Расчёт множителя, который компенсирует наличие header'ов в таблице
-          arrayForIncrease.append(arrayForIncrease.last!)
-          arrayForIncrease.append(arrayForIncrease.last! + 1)
+          arrayForIncrease.append(lastElement)
+          arrayForIncrease.append(lastElement + 1)
         }
         previousDay = Calendar.current.component(.day, from: x.date)
       } else {
-        arrayForIncrease.append(arrayForIncrease.last!)
+        arrayForIncrease.append(lastElement)
       }
       counter += 1
     }
-    arrayForIncrease.append(arrayForIncrease.last!)
+    arrayForIncrease.append(lastElement)
     graphDataArrayCalculating(dataArrayOfOperationsInternal: dataArrayOfOperations)
     return arrayForIncrease.count
   }
@@ -388,8 +390,10 @@ class VCScreen1: UIViewController {
       } else {
         for x in graphDataArray {
           if returnDayOfDate(x.date) == returnDayOfDate(data.date) {
-            graphDataArray.filter { returnDayOfDate($0.date) == returnDayOfDate(data.date) }
-              .first?.amount += data.amount
+            graphDataArray.first { returnDayOfDate($0.date) == returnDayOfDate(data.date) }?
+              .amount += data.amount
+            // graphDataArray.filter { returnDayOfDate($0.date) == returnDayOfDate(data.date) }
+            //   .first?.amount += data.amount
           }
         }
         if (graphDataArray.filter { returnDayOfDate($0.date) == returnDayOfDate(data.date) }).isEmpty {

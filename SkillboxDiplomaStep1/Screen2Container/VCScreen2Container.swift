@@ -19,7 +19,7 @@ protocol protocolScreen2ContainerDelegate {
   // функции возврата
   func returnDelegateScreen2() -> protocolScreen2Delegate
   func returnScreen2StatusEditContainer() -> Bool
-  func returnDelegateScreen2Container_TableViewCellNewCategory() -> protocolScreen2ContainerTableVCNewCategory
+  func returnDelegateScreen2ContainerTableVCNewCategory() -> protocolScreen2ContainerTableVCNewCategory
 }
 
 class VCScreen2Container: UIViewController {
@@ -31,8 +31,8 @@ class VCScreen2Container: UIViewController {
   // MARK: - делегаты и переменные
 
   var delegateScreen2: protocolScreen2Delegate?
-  var delegateScreen2ContainerTVCellHeader: protocolScreen2ContainerTableVClHeader?
-  var delegateScreen2ContainerTVCellNewCategory: protocolScreen2ContainerTableVCNewCategory?
+  var delegateScreen2ContainerTableVCHeader: protocolScreen2ContainerTableVClHeader?
+  var delegateScreen2ContainerTableVCNewCategory: protocolScreen2ContainerTableVCNewCategory?
   var statusEditContainer = false
   var animationNewCategoryInCell = false
   var currentActiveCategoryID: Int = 0
@@ -95,8 +95,8 @@ extension VCScreen2Container: protocolScreen2ContainerDelegate {
   }
 
 
-  func returnDelegateScreen2Container_TableViewCellNewCategory() -> protocolScreen2ContainerTableVCNewCategory {
-    return delegateScreen2ContainerTVCellNewCategory!
+  func returnDelegateScreen2ContainerTableVCNewCategory() -> protocolScreen2ContainerTableVCNewCategory {
+    return delegateScreen2ContainerTableVCNewCategory!
   }
 
 
@@ -111,15 +111,15 @@ extension VCScreen2Container: protocolScreen2ContainerDelegate {
     if let value = delegateScreen2?.returnDataArrayOfCategory(), !value.isEmpty {
       if statusEditContainer == true {
         statusEditContainer = false
-        delegateScreen2ContainerTVCellHeader?.buttonOptionsSetColor(color: UIColor.white)
+        delegateScreen2ContainerTableVCHeader?.buttonOptionsSetColor(color: UIColor.white)
         tableViewContainer.performBatchUpdates({
           print("AAAA2")
           tableViewContainer.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
-        }, completion: { status in self.tableViewContainer.reloadData() })
+        }, completion: { _ in self.tableViewContainer.reloadData() })
       } else {
         print("BBBB")
         statusEditContainer = true
-        delegateScreen2ContainerTVCellHeader?.buttonOptionsSetColor(color: UIColor.systemBlue)
+        delegateScreen2ContainerTableVCHeader?.buttonOptionsSetColor(color: UIColor.systemBlue)
         tableViewContainer.performBatchUpdates({
           print("BBBB2")
           tableViewContainer.insertRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
@@ -130,13 +130,13 @@ extension VCScreen2Container: protocolScreen2ContainerDelegate {
 
 
   func screen2ContainerAddNewCategory() {
-      delegateScreen2!.screen2DataReceiveUpdate()
-      tableViewContainer.performBatchUpdates({
-        let newRowIndex = statusEditContainer == true ?
-        (delegateScreen2?.returnDataArrayOfCategory().count)! + 1 :
-        (delegateScreen2?.returnDataArrayOfCategory().count)!
-        tableViewContainer.insertRows(at: [IndexPath(row: newRowIndex, section: 0)], with: .automatic)
-      }, completion: { _ in self.tableViewContainer.reloadData() })
+    delegateScreen2!.screen2DataReceiveUpdate()
+    tableViewContainer.performBatchUpdates({
+      let newRowIndex = statusEditContainer == true ?
+      (delegateScreen2?.returnDataArrayOfCategory().count)! + 1 :
+      (delegateScreen2?.returnDataArrayOfCategory().count)!
+      tableViewContainer.insertRows(at: [IndexPath(row: newRowIndex, section: 0)], with: .automatic)
+    }, completion: { _ in self.tableViewContainer.reloadData() })
   }
 
 
@@ -166,7 +166,7 @@ extension VCScreen2Container: protocolScreen2ContainerDelegate {
   func closeWindows(_ tag: Int) {
     delegateScreen2?.changeCategoryClosePopUpScreen2()
     tableViewContainer.reloadData()
-    delegateScreen2ContainerTVCellNewCategory?.textFieldNewCategoryClear()
+    delegateScreen2ContainerTableVCNewCategory?.textFieldNewCategoryClear()
     print("ClosePopup from Container")
   }
 
@@ -203,14 +203,14 @@ extension VCScreen2Container: UITableViewDelegate, UITableViewDataSource {
       print("1111")
       let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen2ContainerTableVCHeader
       cell.delegateScreen2Container = self
-      delegateScreen2ContainerTVCellHeader = cell
+      delegateScreen2ContainerTableVCHeader = cell
       return cell
     } else if statusEditContainer == true && indexPath.row == 1 {
       print("2222")
       let cell = tableView.dequeueReusableCell(withIdentifier: "cellNewCategory") as! Screen2ContainerTableVCNewCategory
       cell.delegateScreen2Container = self
-      delegateScreen2ContainerTVCellHeader?.buttonOptionsSetColor(color: UIColor.systemBlue)
-      delegateScreen2ContainerTVCellNewCategory = cell
+      delegateScreen2ContainerTableVCHeader?.buttonOptionsSetColor(color: UIColor.systemBlue)
+      delegateScreen2ContainerTableVCNewCategory = cell
       return cell
     } else {
       print("3333")

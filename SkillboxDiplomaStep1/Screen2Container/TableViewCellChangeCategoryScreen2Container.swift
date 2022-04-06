@@ -8,19 +8,14 @@
 import UIKit
 
 class TableViewCellChangeCategoryScreen2Container: UITableViewCell {
-    
-    @IBOutlet var labelChangeCategory: UILabel!
-    @IBOutlet var buttonChangeCategory: UIButton!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+  @IBOutlet var labelChangeCategory: UILabel!
+  @IBOutlet var buttonChangeCategory: UIButton!
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+  override func awakeFromNib() {
+    super.awakeFromNib()
+  }
 
-        // Configure the view for the selected state
-    }
-
+  override func setSelected(_ selected: Bool, animated: Bool) {
+    super.setSelected(selected, animated: animated)
+  }
 }

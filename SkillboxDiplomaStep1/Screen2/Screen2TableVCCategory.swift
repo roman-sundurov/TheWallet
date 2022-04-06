@@ -33,7 +33,7 @@ class Screen2TableVCCategory: UITableViewCell {
   }
 
   func startCell() {
-    if delegateScreen2?.returnNewOperation().category != "" {
+    if delegateScreen2?.returnNewOperation().category.isEmpty == false {
       labelSelectCategory.text = delegateScreen2?.returnNewOperation().category
       labelSelectCategory.textColor = .black
     } else {

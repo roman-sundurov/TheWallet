@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol protocolScreen1ContainerOperation{
+protocol protocolScreen1ContainerOperation {
   func startCell(tag: Int)
 }
 

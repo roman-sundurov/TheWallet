@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol protocolScreen2TableVCDateDelegate{
+protocol protocolScreen2TableVCDateDelegate {
   func returnDateTextField() -> UILabel
 }
 

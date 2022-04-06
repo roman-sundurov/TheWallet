@@ -82,7 +82,9 @@ class VCScreen1ContainerGraph: UIViewController {
           }
         } else {
           print("5555")
-          graphDataFinal.append(GraphData(newDate: Calendar.current.date(byAdding: .day, value: -amountOfDay, to: Date())!, newAmount: 0))
+          graphDataFinal.append(GraphData(
+            newDate: Calendar.current.date(byAdding: .day, value: -amountOfDay, to: Date())!,
+            newAmount: 0))
           x += 1
         }
       }

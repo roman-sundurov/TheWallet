@@ -281,7 +281,7 @@ class VCScreen2: UIViewController {
   }
 
   @IBAction func textFieldAmountEditingDidEnd(_ sender: Any) {
-    if textFieldAmount.text == "" {
+    if let textFieldAmountText = textFieldAmount.text, textFieldAmountText.isEmpty {
       textFieldAmount.text = "0"
       textFieldAmount.textColor = UIColor.opaqueSeparator
     }
@@ -317,7 +317,7 @@ class VCScreen2: UIViewController {
 
   @objc func screen2TapHandler(tap: UITapGestureRecognizer) {
     if tap.state == UIGestureRecognizer.State.ended {
-        print("Tap TextView ended")
+      print("Tap TextView ended")
       let pointOfTap = tap.location(in: self.view)
 
       // Tap inside noteTextView
@@ -644,7 +644,9 @@ extension VCScreen2: protocolScreen2Delegate {
         self.view.removeGestureRecognizer(self.tapOfChangeCategoryOpenPopUp!)
         self.view.layoutIfNeeded()
         if self.delegateScreen2Container?.returnScreen2StatusEditContainer() == true {
-          self.delegateScreen2Container?.returnDelegateScreen2Container_TableViewCellNewCategory().textFieldNewCategoryClear()
+          self.delegateScreen2Container?
+            .returnDelegateScreen2ContainerTableVCNewCategory()
+            .textFieldNewCategoryClear()
         }
       },
       completion: { _ in })

@@ -23,7 +23,7 @@ class ListOfOperations: Object {
   @objc dynamic var amount: Double = 0
   @objc dynamic var category: String = ""
   @objc dynamic var note: String = ""
-  @objc dynamic var date: Date = Date.init(timeIntervalSince1970: TimeInterval(0))
+  @objc dynamic var date = Date.init(timeIntervalSince1970: TimeInterval(0))
   @objc dynamic var id: Int = 0
 }
 
