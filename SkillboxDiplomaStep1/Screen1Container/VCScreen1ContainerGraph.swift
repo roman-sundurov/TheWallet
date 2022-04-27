@@ -29,7 +29,7 @@ class VCScreen1ContainerGraph: UIViewController {
   // MARK: - Functions
   func countFullPointsArray() {
     print("countFullPointsArray")
-    guard let graphData = delegateScreen1?.returnGraphData() else { return }
+    let graphData = ViewModelScreen1.shared.returnGraphData()
     print("graphData= \(graphData)")
     for data in graphData {
       print("graphData_n.cumulativeAmount= \(data.amount), graphData_n.date= \(data.date)")
@@ -48,12 +48,12 @@ class VCScreen1ContainerGraph: UIViewController {
       // Проверка заполнения оставшихся дней. Если запись пуста - ставим 0.
       var x: Int = 1
 
-      for amountOfDay in 1..<(delegateScreen1?.returnDaysForSorting())! {
+      for amountOfDay in 1..<(ViewModelScreen1.shared.returnDaysForSorting()) {
         print("2222")
 
         if graphData.count >= x + 1 {
           print("3333")
-          if delegateScreen1?.returnDayOfDate(graphData[x].date) != delegateScreen1?.returnDayOfDate(
+          if ViewModelScreen1.shared.returnDayOfDate(graphData[x].date) != ViewModelScreen1.shared.returnDayOfDate(
             Calendar.current.date(
               byAdding: .day,
               value: -amountOfDay,
@@ -128,7 +128,7 @@ extension VCScreen1ContainerGraph: protocolScreen1ContainerGraph {
   func containerGraphUpdate() {
     countFullPointsArray()
 
-    switch delegateScreen1?.returnDaysForSorting() {
+    switch ViewModelScreen1.shared.returnDaysForSorting() {
     case 365:
       weeklyStackView.isHidden = true
       monthlyStackView.isHidden = false

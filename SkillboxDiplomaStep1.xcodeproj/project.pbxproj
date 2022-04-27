@@ -21,12 +21,14 @@
 		472F289325A7319500CE1481 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472F289125A7319500CE1481 /* LaunchScreen.storyboard */; };
 		472F289E25A7319600CE1481 /* SkillboxDiplomaStep1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F289D25A7319600CE1481 /* SkillboxDiplomaStep1Tests.swift */; };
 		472F28A925A7319600CE1481 /* SkillboxDiplomaStep1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F28A825A7319600CE1481 /* SkillboxDiplomaStep1UITests.swift */; };
+		473549BB2819636200E87139 /* ViewModelScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549BA2819636200E87139 /* ViewModelScreen1.swift */; };
+		473549BD2819CFD600E87139 /* VCScreen1+TableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549BC2819CFD600E87139 /* VCScreen1+TableExtension.swift */; };
 		4750EFE725BC2C5C00167A92 /* Screen2ContainerTableVCHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EFE625BC2C5C00167A92 /* Screen2ContainerTableVCHeader.swift */; };
 		4750EFEC25BC2C7F00167A92 /* Screen2ContainerTableVCChangeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EFEB25BC2C7F00167A92 /* Screen2ContainerTableVCChangeCategory.swift */; };
 		475D711A26509A0F009D917A /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475D711926509A0F009D917A /* GraphView.swift */; };
 		47621F9825B644BF0095A52F /* Screen2TableVCNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47621F9725B644BF0095A52F /* Screen2TableVCNote.swift */; };
 		4771587C262AB31E00F27D4B /* VCScreen1ContainerOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4771587B262AB31E00F27D4B /* VCScreen1ContainerOperation.swift */; };
-		47AC1A9525C09AC9006E7817 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1A9425C09AC9006E7817 /* Persistence.swift */; };
+		47AC1A9525C09AC9006E7817 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1A9425C09AC9006E7817 /* Model.swift */; };
 		47AC1AA625C0AE45006E7817 /* Screen1TableVCHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1AA525C0AE45006E7817 /* Screen1TableVCHeader.swift */; };
 		47AC1AB625C0B7CB006E7817 /* Screen1TableVCOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1AB525C0B7CB006E7817 /* Screen1TableVCOperation.swift */; };
 		47B80F782667CA9500032678 /* Screen1RoundedGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B80F772667CA9500032678 /* Screen1RoundedGraph.swift */; };
@@ -71,13 +73,15 @@
 		472F28A425A7319600CE1481 /* SkillboxDiplomaStep1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkillboxDiplomaStep1UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		472F28A825A7319600CE1481 /* SkillboxDiplomaStep1UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillboxDiplomaStep1UITests.swift; sourceTree = "<group>"; };
 		472F28AA25A7319600CE1481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		473549BA2819636200E87139 /* ViewModelScreen1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelScreen1.swift; sourceTree = "<group>"; };
+		473549BC2819CFD600E87139 /* VCScreen1+TableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VCScreen1+TableExtension.swift"; sourceTree = "<group>"; };
 		4750EFE625BC2C5C00167A92 /* Screen2ContainerTableVCHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2ContainerTableVCHeader.swift; sourceTree = "<group>"; };
 		4750EFEB25BC2C7F00167A92 /* Screen2ContainerTableVCChangeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2ContainerTableVCChangeCategory.swift; sourceTree = "<group>"; };
 		475D711926509A0F009D917A /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		47621F9725B644BF0095A52F /* Screen2TableVCNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2TableVCNote.swift; sourceTree = "<group>"; };
 		4771587B262AB31E00F27D4B /* VCScreen1ContainerOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCScreen1ContainerOperation.swift; sourceTree = "<group>"; };
-		47AC1A9425C09AC9006E7817 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Persistence.swift; path = SkillboxDiplomaStep1/Persistence.swift; sourceTree = SOURCE_ROOT; };
-		47AC1AA525C0AE45006E7817 /* Screen1TableVCHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Screen1TableVCHeader.swift; path = SkillboxDiplomaStep1/Screen1/Screen1TableVCHeader.swift; sourceTree = SOURCE_ROOT; };
+		47AC1A9425C09AC9006E7817 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Model.swift; path = SkillboxDiplomaStep1/Model.swift; sourceTree = SOURCE_ROOT; };
+		47AC1AA525C0AE45006E7817 /* Screen1TableVCHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Screen1TableVCHeader.swift; path = SkillboxDiplomaStep1/Screen1/Controllers/Screen1TableVCHeader.swift; sourceTree = SOURCE_ROOT; };
 		47AC1AB525C0B7CB006E7817 /* Screen1TableVCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen1TableVCOperation.swift; sourceTree = "<group>"; };
 		47B80F772667CA9500032678 /* Screen1RoundedGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen1RoundedGraph.swift; sourceTree = "<group>"; };
 		47BEBB42262F91D1006FF254 /* Screen2ContainerTableVCNewCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2ContainerTableVCNewCategory.swift; sourceTree = "<group>"; };
@@ -139,7 +143,7 @@
 			children = (
 				472F288625A7319500CE1481 /* AppDelegate.swift */,
 				472F288825A7319500CE1481 /* SceneDelegate.swift */,
-				47AC1A9425C09AC9006E7817 /* Persistence.swift */,
+				47AC1A9425C09AC9006E7817 /* Model.swift */,
 				47621F8C25B643C20095A52F /* Screen1 */,
 				4771587A262AB2E000F27D4B /* Screen1Container */,
 				47621F9025B643D80095A52F /* Screen2 */,
@@ -170,6 +174,26 @@
 			path = SkillboxDiplomaStep1UITests;
 			sourceTree = "<group>";
 		};
+		473549B8281961A900E87139 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				473549BA2819636200E87139 /* ViewModelScreen1.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		473549B9281961C800E87139 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				472F288A25A7319500CE1481 /* VCScreen1.swift */,
+				47AC1AA525C0AE45006E7817 /* Screen1TableVCHeader.swift */,
+				47AC1AB525C0B7CB006E7817 /* Screen1TableVCOperation.swift */,
+				47B80F772667CA9500032678 /* Screen1RoundedGraph.swift */,
+				473549BC2819CFD600E87139 /* VCScreen1+TableExtension.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		4750EFDA25BC24AF00167A92 /* Screen2Container */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,10 +208,8 @@
 		47621F8C25B643C20095A52F /* Screen1 */ = {
 			isa = PBXGroup;
 			children = (
-				472F288A25A7319500CE1481 /* VCScreen1.swift */,
-				47AC1AA525C0AE45006E7817 /* Screen1TableVCHeader.swift */,
-				47AC1AB525C0B7CB006E7817 /* Screen1TableVCOperation.swift */,
-				47B80F772667CA9500032678 /* Screen1RoundedGraph.swift */,
+				473549B9281961C800E87139 /* Controllers */,
+				473549B8281961A900E87139 /* ViewModel */,
 			);
 			path = Screen1;
 			sourceTree = "<group>";
@@ -376,7 +398,8 @@
 			files = (
 				4715215025F3A8E600FE585C /* Screen2TableVCDate.swift in Sources */,
 				47AC1AB625C0B7CB006E7817 /* Screen1TableVCOperation.swift in Sources */,
-				47AC1A9525C09AC9006E7817 /* Persistence.swift in Sources */,
+				473549BB2819636200E87139 /* ViewModelScreen1.swift in Sources */,
+				47AC1A9525C09AC9006E7817 /* Model.swift in Sources */,
 				4750EFEC25BC2C7F00167A92 /* Screen2ContainerTableVCChangeCategory.swift in Sources */,
 				4715819325B6FE310047C5D0 /* Screen2TableVCHeader.swift in Sources */,
 				472F288B25A7319500CE1481 /* VCScreen1.swift in Sources */,
@@ -386,6 +409,7 @@
 				4771587C262AB31E00F27D4B /* VCScreen1ContainerOperation.swift in Sources */,
 				47BEBB43262F91D1006FF254 /* Screen2ContainerTableVCNewCategory.swift in Sources */,
 				47B80F782667CA9500032678 /* Screen1RoundedGraph.swift in Sources */,
+				473549BD2819CFD600E87139 /* VCScreen1+TableExtension.swift in Sources */,
 				475D711A26509A0F009D917A /* GraphView.swift in Sources */,
 				47F1759925BA2D320044BD30 /* VCScreen2Container.swift in Sources */,
 				47CB73C325B4364700638185 /* Screen2TableVCCategory.swift in Sources */,

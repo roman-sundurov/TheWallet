@@ -37,10 +37,9 @@ class Screen2ContainerTableVCChangeCategory: UITableViewCell, UITextFieldDelegat
   // MARK: - переходы
 
   @IBAction func buttonDeleteCategoryAction(_ sender: Any) {
-    delegateScreen2Container?.returnDelegateScreen2().returnDelegateScreen1().deleteCategoryInRealm(id: specCellTag)
+    ViewModelScreen1.shared.deleteCategoryInRealm(id: specCellTag)
     delegateScreen2Container?.screen2ContainerDeleteCategory(index: specCellTag)
   }
-
 
   @IBAction func buttonsEditNameCategoryAction(_ sender: Any) {
     if editStatus == false {
@@ -63,12 +62,10 @@ class Screen2ContainerTableVCChangeCategory: UITableViewCell, UITextFieldDelegat
     }
   }
 
-
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     buttonsEditNameCategoryAction(buttonConfirmNewName!)
     return true
   }
-
 
   @objc func closeWindows() {
     if permitionToSetCategory == false { return }
@@ -89,7 +86,6 @@ class Screen2ContainerTableVCChangeCategory: UITableViewCell, UITextFieldDelegat
   override func setSelected(_ selected: Bool, animated: Bool) {
     super.setSelected(selected, animated: animated)
   }
-
 
   func startCell() {
     textFieldNameCategory.text = delegateScreen2Container?
@@ -131,7 +127,6 @@ class Screen2ContainerTableVCChangeCategory: UITableViewCell, UITextFieldDelegat
     textFieldNameCategory.delegate = self
   }
 
-
   func setTag(tag: Int) {
     specCellTag = tag
     print("specCellTag ChangeCategory= \(specCellTag)")
@@ -160,10 +155,7 @@ extension Screen2ContainerTableVCChangeCategory: protocolScreen2ContainerTableVC
     buttonEditNameCategory.isHidden = false
     buttonConfirmNewName.isHidden = true
 
-    delegateScreen2Container?
-      .returnDelegateScreen2()
-      .returnDelegateScreen1()
-      .editCategoryInRealm(newName: textFieldNameCategory.text!, newIcon: "", id: specCellTag)
+    ViewModelScreen1.shared.editCategoryInRealm(newName: textFieldNameCategory.text!, newIcon: "", id: specCellTag)
     delegateScreen2Container?.setCurrentActiveEditingCell(categoryID: 0)
   }
 }

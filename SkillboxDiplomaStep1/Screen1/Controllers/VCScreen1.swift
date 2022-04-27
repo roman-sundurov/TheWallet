@@ -15,52 +15,14 @@ protocol protocolScreen1Delegate {
   func actionsOperationsOpenPopUpScreen1(_ tag: Int) // открывает PopUp-окно конкретной операции
   func actionsOperationsClosePopUpScreen1() // закрывает PopUp-окно конкретной операции
   func editOperation(tag: Int) // переход в редактирование выбранной операции на втором экране
-
-  // realm
-  func addOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date)
-  func editOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date, id: Int)
-  func deleteOperationInRealm(tag: Int)
-  func deleteCategoryInRealm(id: Int)
-  func editCategoryInRealm(newName: String, newIcon: String, id: Int)
   func miniGraphStarterBackground(status: Bool)
 
-  // функции возврата
-  func returnDataArrayOfOperations() -> [DataOfOperations] // возвращает данные, которые отображаются в данный момент
-  func returnArrayForIncrease() -> [Int] // возвращает инкремент каждой ячейки основной таблице. Показывает количество заголовков до конкретной ячейки.
-  func returnDaysForSorting() -> Int
-  func returnGraphData() -> [GraphData]
-  func returnDayOfDate(_ dateInternal: Date) -> String
+  // // функции возврата
   func returnMonthOfDate(_ dateInternal: Date) -> String
   func returnDelegateScreen1GraphContainer() -> protocolScreen1ContainerGraph
   func returnIncomesExpenses() -> [String: Double]
-}
-
-
-class DataOfOperations {
-  var amount: Double
-  var category: String
-  var note: String
-  var date: Date
-  var id: Int
-
-  init(amount1: Double, category1: String, note1: String, date1: Date, id1: Int) {
-    self.amount = amount1
-    self.category = category1
-    self.note = note1
-    self.date = date1
-    self.id = id1
-  }
-}
-
-
-class GraphData {
-  var date: Date
-  var amount: Double
-
-  init(newDate: Date, newAmount: Double) {
-    date = newDate
-    amount = newAmount
-  }
+  // interface update
+  func tableViewReloadData()
 }
 
 
@@ -100,19 +62,9 @@ class VCScreen1: UIViewController {
   private var delegateScreen1Container: protocolScreen1ContainerOperation?
   private var delegateScreen1GraphContainer: protocolScreen1ContainerGraph?
 
-  // хранение оригинала данных из Realm
-  var dataArrayOfOperationsOriginal: [DataOfOperations] = []
-
   // хранение модифицированных данных из Realm для конкретного режима отоборажения
-  var dataArrayOfOperations: [DataOfOperations] = []
-
-  // показывает количество заголовков с новой датой в таблице, которое предшествует конкретной операции
-  var arrayForIncrease: [Int] = [0]
-  var graphDataArray: [GraphData] = []
-  var daysForSorting: Int = 30
   var tagForEdit: Int = 0
   var screen1StatusGrapjDisplay = false
-
 
   // MARK: - объекты
   let blurViewScreen1 = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
@@ -137,6 +89,7 @@ class VCScreen1: UIViewController {
       viewController.screen2StatusEditing = true
       viewController.delegateScreen1 = self
       delegateScreen2 = viewController
+      let dataArrayOfOperations = ViewModelScreen1.shared.returnDataArrayOfOperations()
       delegateScreen2?.setAmountInNewOperation(amount: dataArrayOfOperations[tagForEdit].amount)
       delegateScreen2?.setCategoryInNewOperation(category: dataArrayOfOperations[tagForEdit].category)
       delegateScreen2?.setDateInNewOperation(date: dataArrayOfOperations[tagForEdit].date)
@@ -144,7 +97,6 @@ class VCScreen1: UIViewController {
       delegateScreen2?.setIDInNewOperation(id: dataArrayOfOperations[tagForEdit].id)
     }
   }
-
 
   // MARK: - клики
   @IBAction func buttonActionScreen1NewOperation(_ sender: Any) {
@@ -155,7 +107,9 @@ class VCScreen1: UIViewController {
     print("screen1StatusGrapjDisplay= \(screen1StatusGrapjDisplay)")
     if screen1StatusGrapjDisplay == false {
       // Блокировка показа данных за 1 день в режиме графика
+      var daysForSorting = ViewModelScreen1.shared.returnDaysForSorting()
       if daysForSorting == 1 {
+        ViewModelScreen1.shared.setDaysForSorting(newValue: 30)
         daysForSorting = 30
         buttonWeeklyGesture(self)
       }
@@ -175,7 +129,6 @@ class VCScreen1: UIViewController {
     }
   }
 
-
   @IBAction func buttonActionScreen1ShowList(_ sender: Any) {
     if screen1StatusGrapjDisplay == true {
       UIView.transition(
@@ -193,46 +146,39 @@ class VCScreen1: UIViewController {
     }
   }
 
-
   func changeDaysForSorting() {
-    borderLineForMenu(days: daysForSorting)
-    screen1TableUpdateSorting(days: daysForSorting)
-    daysForSortingRealmUpdate()
+    borderLineForMenu(days: ViewModelScreen1.shared.returnDaysForSorting())
+    ViewModelScreen1.shared.screen1TableUpdateSorting()
+    ViewModelScreen1.shared.daysForSortingRealmUpdate()
     countingIncomesAndExpensive()
     delegateScreen1GraphContainer?.containerGraphUpdate()
   }
 
-
   @IBAction func buttonDailyGesture(_ sender: Any) {
-    daysForSorting = 1
+    ViewModelScreen1.shared.setDaysForSorting(newValue: 1)
     changeDaysForSorting()
   }
-
 
   @IBAction func buttonWeeklyGesture(_ sender: Any) {
-    daysForSorting = 7
+    ViewModelScreen1.shared.setDaysForSorting(newValue: 7)
     changeDaysForSorting()
   }
-
 
   @IBAction func buttonMonthlyGesture(_ sender: Any) {
-    daysForSorting = 30
+    ViewModelScreen1.shared.setDaysForSorting(newValue: 30)
     changeDaysForSorting()
   }
-
 
   @IBAction func buttonYearlyGesture(_ sender: Any) {
-    daysForSorting = 365
+    ViewModelScreen1.shared.setDaysForSorting(newValue: 365)
     changeDaysForSorting()
   }
-
 
   @objc func switchScreen1GraphContainer(tap: UITapGestureRecognizer) {
     if tap.state == UIGestureRecognizer.State.ended {
       print("Tap Graph ended")
     }
   }
-
 
   @objc func handlerToHideContainerScreen1(tap: UITapGestureRecognizer) {
     if tap.state == UIGestureRecognizer.State.ended {
@@ -247,9 +193,7 @@ class VCScreen1: UIViewController {
     }
   }
 
-
   // MARK: - верхнее меню
-
   func topMenuHighliter(specifyLabel: UILabel) {
     specifyLabel.font = UIFont.systemFont(ofSize: specifyLabel.font.pointSize, weight: .bold)
     switch specifyLabel {
@@ -310,6 +254,7 @@ class VCScreen1: UIViewController {
   }
 
   func countingIncomesAndExpensive() {
+    let dataArrayOfOperations = ViewModelScreen1.shared.returnDataArrayOfOperations()
     income = 0
     expensive = 0
     for data in dataArrayOfOperations.filter({ $0.amount > 0 }) {
@@ -331,116 +276,18 @@ class VCScreen1: UIViewController {
     }
   }
 
-
-  // MARK: - таблица списка операций
-
-  func tableNumberOfRowsInSection() -> Int {
-    if dataArrayOfOperations.isEmpty { return 1 }
-    arrayForIncrease = [1]
-    var previousDay: Int = 0
-    var counter: Int = 0
-
-    for x in dataArrayOfOperations {
-      if Calendar.current.component(.day, from: x.date) != previousDay {
-        if counter != 0 {
-          // Расчёт множителя, который компенсирует наличие header'ов в таблице
-          arrayForIncrease.append(arrayForIncrease.last!)
-          arrayForIncrease.append(arrayForIncrease.last! + 1)
-        }
-        previousDay = Calendar.current.component(.day, from: x.date)
-      } else {
-        arrayForIncrease.append(arrayForIncrease.last!)
-      }
-      counter += 1
-    }
-    arrayForIncrease.append(arrayForIncrease.last!)
-    graphDataArrayCalculating(dataArrayOfOperationsInternal: dataArrayOfOperations)
-    return arrayForIncrease.count
-  }
-
-  // Обновление сортировки
-  func screen1TableUpdateSorting(days: Int) {
-    let newTime = Date() - TimeInterval.init(86400 * days)
-    dataArrayOfOperations = dataArrayOfOperationsOriginal
-    dataArrayOfOperations.sort { $0.date > $1.date }
-
-    graphDataArray = graphDataArray
-      .sorted { $0.date > $1.date }
-      .filter { $0.date >= newTime }
-    print("graphDataArray when sort: \(graphDataArray)")
-
-    let temporarilyDate = dataArrayOfOperations.filter { $0.date >= newTime }
-    dataArrayOfOperations = temporarilyDate
-    self.tableViewScreen1.reloadData()
-  }
-
-  // MARK: - данные
-
-  func graphDataArrayCalculating(dataArrayOfOperationsInternal: [DataOfOperations]) {
-    // Данные для передачи в график
-    // Cохраняет суммы операций по дням некуммулятивно
-    graphDataArray = []
-    for data in dataArrayOfOperationsInternal {
-      if graphDataArray.isEmpty {
-        graphDataArray.append(GraphData.init(newDate: data.date, newAmount: data.amount))
-      } else {
-        for x in graphDataArray {
-          if returnDayOfDate(x.date) == returnDayOfDate(data.date) {
-            graphDataArray.first { returnDayOfDate($0.date) == returnDayOfDate(data.date) }?
-              .amount += data.amount
-            // graphDataArray.filter { returnDayOfDate($0.date) == returnDayOfDate(data.date) }
-            //   .first?.amount += data.amount
-          }
-        }
-        if (graphDataArray.filter { returnDayOfDate($0.date) == returnDayOfDate(data.date) }).isEmpty {
-          graphDataArray.append(GraphData.init(newDate: data.date, newAmount: data.amount))
-        }
-      }
-    }
-
-    print("dataArrayOfOperations before filter: \(dataArrayOfOperations)")
-    graphDataArray.sort { $0.date > $1.date }
-    print("graphDataArray after sort: \(graphDataArray)")
-  }
-
-
-  func screen1DataReceive() {
-    dataArrayOfOperationsOriginal = []
-    for operation in Persistence.shared.getRealmDataOperations() {
-      dataArrayOfOperationsOriginal.append(DataOfOperations(
-        amount1: operation.amount,
-        category1: operation.category,
-        note1: operation.note,
-        date1: operation.date,
-        id1: operation.id
-      ))
-    }
-    daysForSorting = Persistence.shared.returnDaysForSorting()
-    print("daysForSorting in screen1DataReceive= \(Persistence.shared.returnDaysForSorting())")
-    print("newTableDataArrayOriginal= \(dataArrayOfOperationsOriginal)")
-  }
-
-
-  func daysForSortingRealmUpdate() {
-    Persistence.shared.updateDaysForSorting(daysForSorting: daysForSorting)
-  }
-
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    borderLineForMenu(days: daysForSorting)
-    screen1TableUpdateSorting(days: daysForSorting)
+    borderLineForMenu(days: ViewModelScreen1.shared.returnDaysForSorting())
+    ViewModelScreen1.shared.screen1TableUpdateSorting()
     self.view.layoutIfNeeded()
   }
 
-
   // MARK: - viewDidLoad
-
   override func viewDidLoad() {
     super.viewDidLoad()
-
     screen1MiniGraph.setDelegateScreen1RoundedGraph(delegate: self)
     screen1AllUpdate()
-
     // округление углов на первом экране
     bottomPopInView.layer.cornerRadius = 20
     bottomPopInView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -463,13 +310,11 @@ class VCScreen1: UIViewController {
   }
 }
 
-
 // MARK: - additional protocols
 extension VCScreen1: protocolScreen1Delegate {
   func miniGraphStarterBackground(status: Bool) {
     miniGraphStarterBackground.isHidden = status
   }
-
 
   func returnIncomesExpenses() -> [String: Double] {
     if income != 0 || expensive != 0 {
@@ -480,7 +325,6 @@ extension VCScreen1: protocolScreen1Delegate {
     }
   }
 
-
   func returnMonthOfDate(_ dateInternal: Date) -> String {
     let formatterPrint = DateFormatter()
     formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) // +3 час(Moscow)
@@ -488,48 +332,9 @@ extension VCScreen1: protocolScreen1Delegate {
     return formatterPrint.string(from: dateInternal)
   }
 
-
-  func returnDayOfDate(_ dateInternal: Date) -> String {
-    let formatterPrint = DateFormatter()
-    formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) // +3 час(Moscow)
-    switch returnDaysForSorting() {
-    case 365:
-      formatterPrint.dateFormat = "MMMM YYYY"
-    default:
-      formatterPrint.dateFormat = "d MMMM YYYY"
-    }
-    return formatterPrint.string(from: dateInternal)
-  }
-
-
   func returnDelegateScreen1GraphContainer() -> protocolScreen1ContainerGraph {
     return delegateScreen1GraphContainer!
   }
-
-
-  func returnGraphData() -> [GraphData] {
-    return graphDataArray
-  }
-
-
-  func returnDaysForSorting() -> Int {
-    return daysForSorting
-  }
-
-
-  func editCategoryInRealm(newName: String, newIcon: String, id: Int) {
-    print("editCategoryInRealm")
-    Persistence.shared.updateCategory(
-      name: newName,
-      icon: newIcon,
-      idOfObject: delegateScreen2!.returnDataArrayOfCategory()[id].id)
-  }
-
-
-  func deleteCategoryInRealm(id: Int) {
-    Persistence.shared.deleteCategory(idOfObject: delegateScreen2!.returnDataArrayOfCategory()[id].id)
-  }
-
 
   func editOperation(tag: Int) {
     actionsOperationsClosePopUpScreen1()
@@ -538,50 +343,17 @@ extension VCScreen1: protocolScreen1Delegate {
   }
 
 
-  func deleteOperationInRealm(tag: Int) {
-    actionsOperationsClosePopUpScreen1()
-    Persistence.shared.deleteOperation(idOfObject: returnDataArrayOfOperations()[tag].id)
-  }
-
-
-  func addOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date) {
-    Persistence.shared.addOperations(amount: newAmount, category: newCategory, note: newNote, date: newDate)
-  }
-
-
-  func editOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date, id: Int) {
-    print("editOperationInRealm")
-    Persistence.shared.updateOperations(
-      amount: newAmount,
-      category: newCategory,
-      note: newNote,
-      date: newDate,
-      idOfObject: id)
-  }
-
-
   func screen1AllUpdate() {
-    screen1DataReceive()
-    screen1TableUpdateSorting(days: daysForSorting)
+    ViewModelScreen1.shared.screen1DataReceive()
+    ViewModelScreen1.shared.screen1TableUpdateSorting()
     countingIncomesAndExpensive()
     changeDaysForSorting()
     screen1MiniGraph.setNeedsDisplay()
   }
 
-  func returnArrayForIncrease() -> [Int] {
-    return arrayForIncrease
-  }
-
-
-  func returnDataArrayOfOperations() -> [DataOfOperations] {
-    return dataArrayOfOperations
-  }
-
-
   func findAmountOfHeaders() {
     return
   }
-
 
   // MARK: - PopUp-окно операции
   func actionsOperationsOpenPopUpScreen1(_ tag: Int) {
@@ -621,59 +393,5 @@ extension VCScreen1: protocolScreen1Delegate {
         self.view.layoutIfNeeded()
       },
       completion: { _ in })
-  }
-}
-
-
-// MARK: - table Functionality
-extension VCScreen1: UITableViewDelegate, UITableViewDataSource {
-  func numberOfSections(in tableView: UITableView) -> Int {
-    return 1
-  }
-
-
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return tableNumberOfRowsInSection()
-  }
-
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    if dataArrayOfOperations.isEmpty {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableVCHeader
-      cell.delegateScreen1 = self
-      cell.startCellEmpty()
-      return cell
-    } else {
-      if indexPath.row == 0 {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableVCHeader
-        cell.delegateScreen1 = self
-        cell.setTag(tag: indexPath.row)
-        cell.startCell()
-        return cell
-      } else if arrayForIncrease[indexPath.row] != arrayForIncrease[indexPath.row - 1] {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableVCHeader
-        cell.delegateScreen1 = self
-        cell.setTag(tag: indexPath.row)
-        cell.startCell2()
-        return cell
-      } else if indexPath.row == arrayForIncrease.count {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableVCHeader
-        cell.labelHeaderDate.isHidden = true
-        return cell
-      } else {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "operation") as! Screen1TableVCOperation
-        cell.delegateScreen1 = self
-        cell.setTag(tag: indexPath.row)
-        cell.startCell()
-        return cell
-      }
-    }
-  }
-
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 50
-  }
-
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    tableView.deselectRow(at: indexPath, animated: true)
   }
 }

@@ -8,6 +8,21 @@
 import Foundation
 import RealmSwift
 
+class DataOfOperations {
+  var amount: Double
+  var category: String
+  var note: String
+  var date: Date
+  var id: Int
+
+  init(amount1: Double, category1: String, note1: String, date1: Date, id1: Int) {
+    self.amount = amount1
+    self.category = category1
+    self.note = note1
+    self.date = date1
+    self.id = id1
+  }
+}
 
 class Person: Object {
   @objc dynamic var name: String = ""
@@ -142,5 +157,15 @@ class Persistence {
       }
       return newPerson.daysForSorting
     }
+  }
+}
+
+class GraphData {
+  var date: Date
+  var amount: Double
+
+  init(newDate: Date, newAmount: Double) {
+    date = newDate
+    amount = newAmount
   }
 }
