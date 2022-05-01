@@ -33,13 +33,13 @@ class Screen2TableVCCategory: UITableViewCell {
   }
 
   func startCell() {
-    if delegateScreen2?.returnNewOperation().category.isEmpty == false {
-      labelSelectCategory.text = delegateScreen2?.returnNewOperation().category
+    if ViewModelScreen2.shared.returnNewOperation().category.isEmpty == false {
+      labelSelectCategory.text = ViewModelScreen2.shared.returnNewOperation().category
       labelSelectCategory.textColor = .black
     } else {
-      labelSelectCategory.text = delegateScreen2?.returnScreen2MenuArray()[specCellTag].text
+      labelSelectCategory.text = ViewModelScreen2.shared.returnScreen2MenuArray()[specCellTag].text
     }
-    labelCategory.text = delegateScreen2?.returnScreen2MenuArray()[specCellTag].name
+    labelCategory.text = ViewModelScreen2.shared.returnScreen2MenuArray()[specCellTag].name
     let gesture = UITapGestureRecognizer(
       target: self,
       action: #selector(changeCategoryOpenPopUpScreen2FromCellCategory(_:))

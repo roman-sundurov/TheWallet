@@ -13,12 +13,14 @@ extension VCScreen1: UITableViewDelegate, UITableViewDataSource {
     return 1
   }
 
-
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    print("ViewModelScreen1.shared.tableNumberOfRowsInSection()= \(ViewModelScreen1.shared.tableNumberOfRowsInSection())")
     return ViewModelScreen1.shared.tableNumberOfRowsInSection()
+    // return 0
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    print("indexPath.row= \(indexPath.row)")
     let arrayForIncrease = ViewModelScreen1.shared.returnArrayForIncrease()
     if ViewModelScreen1.shared.returnDataArrayOfOperations().isEmpty {
       let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableVCHeader
@@ -58,9 +60,5 @@ extension VCScreen1: UITableViewDelegate, UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-  }
-
-  func tableViewReloadData() {
-    self.tableViewScreen1.reloadData()
   }
 }

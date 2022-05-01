@@ -106,9 +106,9 @@ extension VCScreen2Container: protocolScreen2ContainerDelegate {
 
 
   func screen2ContainerNewCategorySwicher() {
-    delegateScreen2!.screen2DataReceiveUpdate()
+    ViewModelScreen2.shared.screen2DataReceive()
     print("AAAA")
-    if let value = delegateScreen2?.returnDataArrayOfCategory(), value.isEmpty == false {
+    if ViewModelScreen2.shared.returnDataArrayOfCategory().isEmpty == false {
       if statusEditContainer == true {
         statusEditContainer = false
         delegateScreen2ContainerTableVCHeader?.buttonOptionsSetColor(color: UIColor.white)
@@ -130,18 +130,18 @@ extension VCScreen2Container: protocolScreen2ContainerDelegate {
 
 
   func screen2ContainerAddNewCategory() {
-    delegateScreen2!.screen2DataReceiveUpdate()
+    ViewModelScreen2.shared.screen2DataReceive()
     tableViewContainer.performBatchUpdates({
       let newRowIndex = statusEditContainer == true ?
-      (delegateScreen2?.returnDataArrayOfCategory().count)! + 1 :
-      (delegateScreen2?.returnDataArrayOfCategory().count)!
+      ViewModelScreen2.shared.returnDataArrayOfCategory().count + 1 :
+      ViewModelScreen2.shared.returnDataArrayOfCategory().count
       tableViewContainer.insertRows(at: [IndexPath(row: newRowIndex, section: 0)], with: .automatic)
     }, completion: { _ in self.tableViewContainer.reloadData() })
   }
 
 
   func screen2ContainerDeleteCategory(index: Int) {
-    delegateScreen2!.screen2DataReceiveUpdate()
+    ViewModelScreen2.shared.screen2DataReceive()
     tableViewContainer.performBatchUpdates({
       print("ZZZ2")
       tableViewContainer.deleteRows(at: [IndexPath(row: index + 2, section: 0)], with: .left)
@@ -153,7 +153,7 @@ extension VCScreen2Container: protocolScreen2ContainerDelegate {
 //
 //        var newRowIndex = statusEditContainer == true ? (delegateScreen2?.returnDataArrayOfCategory().count)! + 1 : (delegateScreen2?.returnDataArrayOfCategory().count)!
 //
-//        delegateScreen2!.screen2DataReceiveUpdate()
+//        ViewModelScreen2.shared.screen2DataReceive()
 //        tableViewContainer.reloadData()
 //    }
 
@@ -184,15 +184,15 @@ extension VCScreen2Container: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if let value = delegateScreen2?.returnDataArrayOfCategory(), value.isEmpty {
+    if ViewModelScreen2.shared.returnDataArrayOfCategory().isEmpty {
       statusEditContainer = true
       return 2
     } else if statusEditContainer == true {
-      print("returnDataArrayOfCategory().count 111= \(String(describing: delegateScreen2?.returnDataArrayOfCategory().count))")
-      return (delegateScreen2?.returnDataArrayOfCategory().count)! + 2
+      print("returnDataArrayOfCategory().count 111= \(String(describing: ViewModelScreen2.shared.returnDataArrayOfCategory().count))")
+      return ViewModelScreen2.shared.returnDataArrayOfCategory().count + 2
     } else {
-      print("returnDataArrayOfCategory().count 222= \(String(describing: delegateScreen2?.returnDataArrayOfCategory().count))")
-      return (delegateScreen2?.returnDataArrayOfCategory().count)! + 1
+      print("returnDataArrayOfCategory().count 222= \(String(describing: ViewModelScreen2.shared.returnDataArrayOfCategory().count))")
+      return ViewModelScreen2.shared.returnDataArrayOfCategory().count + 1
     }
   }
 

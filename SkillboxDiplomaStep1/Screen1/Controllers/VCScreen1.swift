@@ -21,12 +21,14 @@ protocol protocolScreen1Delegate {
   func returnMonthOfDate(_ dateInternal: Date) -> String
   func returnDelegateScreen1GraphContainer() -> protocolScreen1ContainerGraph
   func returnIncomesExpenses() -> [String: Double]
-  // interface update
-  func tableViewReloadData()
+  // // interface update
+  // func tableViewReloadData()
 }
 
 
 class VCScreen1: UIViewController {
+  static let shared = VCScreen1()
+
   // MARK: - объявление аутлетов
   @IBOutlet var tableViewScreen1: UITableView!
   @IBOutlet var buttonDaily: UIView!
@@ -90,11 +92,11 @@ class VCScreen1: UIViewController {
       viewController.delegateScreen1 = self
       delegateScreen2 = viewController
       let dataArrayOfOperations = ViewModelScreen1.shared.returnDataArrayOfOperations()
-      delegateScreen2?.setAmountInNewOperation(amount: dataArrayOfOperations[tagForEdit].amount)
-      delegateScreen2?.setCategoryInNewOperation(category: dataArrayOfOperations[tagForEdit].category)
-      delegateScreen2?.setDateInNewOperation(date: dataArrayOfOperations[tagForEdit].date)
-      delegateScreen2?.setNoteInNewOperation(note: dataArrayOfOperations[tagForEdit].note)
-      delegateScreen2?.setIDInNewOperation(id: dataArrayOfOperations[tagForEdit].id)
+      ViewModelScreen2.shared.setAmountInNewOperation(amount: dataArrayOfOperations[tagForEdit].amount)
+      ViewModelScreen2.shared.setCategoryInNewOperation(category: dataArrayOfOperations[tagForEdit].category)
+      ViewModelScreen2.shared.setDateInNewOperation(date: dataArrayOfOperations[tagForEdit].date)
+      ViewModelScreen2.shared.setNoteInNewOperation(note: dataArrayOfOperations[tagForEdit].note)
+      ViewModelScreen2.shared.setIDInNewOperation(id: dataArrayOfOperations[tagForEdit].id)
     }
   }
 
@@ -149,6 +151,7 @@ class VCScreen1: UIViewController {
   func changeDaysForSorting() {
     borderLineForMenu(days: ViewModelScreen1.shared.returnDaysForSorting())
     ViewModelScreen1.shared.screen1TableUpdateSorting()
+    tableViewScreen1.reloadData()
     ViewModelScreen1.shared.daysForSortingRealmUpdate()
     countingIncomesAndExpensive()
     delegateScreen1GraphContainer?.containerGraphUpdate()
@@ -280,6 +283,7 @@ class VCScreen1: UIViewController {
     super.viewDidAppear(animated)
     borderLineForMenu(days: ViewModelScreen1.shared.returnDaysForSorting())
     ViewModelScreen1.shared.screen1TableUpdateSorting()
+    tableViewScreen1.reloadData()
     self.view.layoutIfNeeded()
   }
 
@@ -346,6 +350,7 @@ extension VCScreen1: protocolScreen1Delegate {
   func screen1AllUpdate() {
     ViewModelScreen1.shared.screen1DataReceive()
     ViewModelScreen1.shared.screen1TableUpdateSorting()
+    tableViewScreen1.reloadData()
     countingIncomesAndExpensive()
     changeDaysForSorting()
     screen1MiniGraph.setNeedsDisplay()

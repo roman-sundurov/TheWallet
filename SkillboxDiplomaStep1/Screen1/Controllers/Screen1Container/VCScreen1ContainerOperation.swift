@@ -42,8 +42,8 @@ class VCScreen1ContainerOperation: UIViewController {
 
 
   @IBAction func buttonActionToDeleteOperation(_ sender: Any) {
-    delegateScreen1?.deleteOperationInRealm(tag: specVar)
     delegateScreen1?.actionsOperationsClosePopUpScreen1()
+    ViewModelScreen1.shared.deleteOperationInRealm(tag: specVar)
     delegateScreen1?.screen1AllUpdate()
   }
 
@@ -62,28 +62,28 @@ class VCScreen1ContainerOperation: UIViewController {
 extension VCScreen1ContainerOperation: protocolScreen1ContainerOperation {
   func startCell(tag: Int) {
     print(tag)
-    print(delegateScreen1!.returnArrayForIncrease()[tag])
+    print(ViewModelScreen1.shared.returnArrayForIncrease()[tag])
 
     specCellTag = tag
-    specVar = specCellTag - delegateScreen1!.returnArrayForIncrease()[specCellTag]
+    specVar = specCellTag - ViewModelScreen1.shared.returnArrayForIncrease()[specCellTag]
 
     // Отображения category
-    labelCategory.text = delegateScreen1!.returnDataArrayOfOperations()[specVar].category
+    labelCategory.text = ViewModelScreen1.shared.returnDataArrayOfOperations()[specVar].category
 
     // Отображения date
     let formatterPrint = DateFormatter()
     formatterPrint.dateFormat = "d MMMM YYYY"
-    labelDate.text = formatterPrint.string(from: delegateScreen1!.returnDataArrayOfOperations()[specVar].date)
+    labelDate.text = formatterPrint.string(from: ViewModelScreen1.shared.returnDataArrayOfOperations()[specVar].date)
 
     // Отображения amount
-    if delegateScreen1!.returnDataArrayOfOperations()[specVar].amount.truncatingRemainder(dividingBy: 1) == 0 {
-      labelAmount.text = String(format: "%.0f", delegateScreen1!.returnDataArrayOfOperations()[specVar].amount)
+    if ViewModelScreen1.shared.returnDataArrayOfOperations()[specVar].amount.truncatingRemainder(dividingBy: 1) == 0 {
+      labelAmount.text = String(format: "%.0f", ViewModelScreen1.shared.returnDataArrayOfOperations()[specVar].amount)
     } else {
-      labelAmount.text = String(format: "%.2f", delegateScreen1!.returnDataArrayOfOperations()[specVar].amount)
+      labelAmount.text = String(format: "%.2f", ViewModelScreen1.shared.returnDataArrayOfOperations()[specVar].amount)
     }
 
     // Отображения currencyStatus
-    if delegateScreen1!.returnDataArrayOfOperations()[specVar].amount < 0 {
+    if ViewModelScreen1.shared.returnDataArrayOfOperations()[specVar].amount < 0 {
       labelAmount.textColor = UIColor.red
       currencyStatus.textColor = UIColor.red
     } else {
@@ -92,6 +92,6 @@ extension VCScreen1ContainerOperation: protocolScreen1ContainerOperation {
     }
 
     // Отображение textViewNotes
-    textViewNotes.text = delegateScreen1!.returnDataArrayOfOperations()[specVar].note
+    textViewNotes.text = ViewModelScreen1.shared.returnDataArrayOfOperations()[specVar].note
   }
 }

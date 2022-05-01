@@ -53,10 +53,9 @@ class Screen2ContainerTableVCChangeCategory: UITableViewCell, UITextFieldDelegat
       buttonEditNameCategory.tintColor = UIColor.red
       buttonEditNameCategory.isHidden = true
       buttonConfirmNewName.isHidden = false
-      delegateScreen2Container?.setCurrentActiveEditingCell(categoryID: (delegateScreen2Container?
-        .returnDelegateScreen2()
+      delegateScreen2Container?.setCurrentActiveEditingCell(categoryID: ViewModelScreen2.shared
         .returnDataArrayOfCategory()[specCellTag]
-        .id)!)
+        .id)
     } else {
       closeEditing()
     }
@@ -71,9 +70,7 @@ class Screen2ContainerTableVCChangeCategory: UITableViewCell, UITextFieldDelegat
     if permitionToSetCategory == false { return }
 
     // запись выбранной категории во временную переменную
-    delegateScreen2Container?
-      .returnDelegateScreen2()
-      .setCategoryInNewOperation(category: textFieldNameCategory.text!)
+    ViewModelScreen2.shared.setCategoryInNewOperation(category: textFieldNameCategory.text!)
     delegateScreen2Container?.closeWindows(specCellTag) // закрытие PopUp-окна
     delegateScreen2Container?.setCurrentActiveEditingCell(categoryID: 100)
     print("ClosePopup from ContainerCell")
@@ -88,9 +85,7 @@ class Screen2ContainerTableVCChangeCategory: UITableViewCell, UITextFieldDelegat
   }
 
   func startCell() {
-    textFieldNameCategory.text = delegateScreen2Container?
-      .returnDelegateScreen2()
-      .returnDataArrayOfCategory()[specCellTag]
+    textFieldNameCategory.text = ViewModelScreen2.shared.returnDataArrayOfCategory()[specCellTag]
       .name
     gestureCell = UITapGestureRecognizer(target: self, action: #selector(closeWindows))
     gestureCheckBox = UITapGestureRecognizer(target: self, action: #selector(closeWindows))
@@ -106,9 +101,7 @@ class Screen2ContainerTableVCChangeCategory: UITableViewCell, UITextFieldDelegat
 
     textFieldNameCategory.layer.cornerRadius = 10
 
-    if delegateScreen2Container?.returnDelegateScreen2().returnNewOperation().category == delegateScreen2Container?
-      .returnDelegateScreen2()
-      .returnDataArrayOfCategory()[specCellTag]
+    if ViewModelScreen2.shared.returnNewOperation().category == ViewModelScreen2.shared.returnDataArrayOfCategory()[specCellTag]
       .name {
         checkBoxObject.isChecked = true
     } else {
@@ -140,7 +133,7 @@ extension Screen2ContainerTableVCChangeCategory: protocolScreen2ContainerTableVC
   }
 
   func returnCategryIdOfCell() -> Int {
-    return (delegateScreen2Container?.returnDelegateScreen2().returnDataArrayOfCategory()[specCellTag].id)!
+    return ViewModelScreen2.shared.returnDataArrayOfCategory()[specCellTag].id
   }
 
   func closeEditing() {

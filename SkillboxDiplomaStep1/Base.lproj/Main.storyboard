@@ -399,8 +399,8 @@
                                                             </tableViewCell>
                                                         </prototypes>
                                                         <connections>
-                                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="wZE-lE-eqo"/>
-                                                            <outlet property="delegate" destination="BYZ-38-t0r" id="tWJ-vm-qja"/>
+                                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="cIn-vl-adQ"/>
+                                                            <outlet property="delegate" destination="BYZ-38-t0r" id="4S6-Xd-6a4"/>
                                                         </connections>
                                                     </tableView>
                                                 </subviews>
@@ -545,7 +545,7 @@
                         <outlet property="buttonScreen1ShowList" destination="JfS-mQ-pnU" id="g0R-8s-TDz"/>
                         <outlet property="buttonWeekly" destination="8SJ-cy-bxx" id="ToP-qQ-eFo"/>
                         <outlet property="buttonYearly" destination="EZM-zD-IXz" id="E8R-Fi-wgz"/>
-                        <outlet property="constraintContainerBottomPoint" destination="b36-Hu-7yN" id="rCz-ZS-vHX"/>
+                        <outlet property="constraintContainerBottomPoint" destination="b36-Hu-7yN" id="K8R-k7-o20"/>
                         <outlet property="constraintTopMenuBottomStrip" destination="ir3-TU-DOM" id="GQC-hc-fDq"/>
                         <outlet property="containerBottomOperationScreen1" destination="uY8-5i-7qy" id="6De-Oc-bYF"/>
                         <outlet property="graphFromBottomPopInView" destination="Tkb-Y7-beV" id="zNv-SR-FWv"/>
@@ -559,7 +559,7 @@
                         <outlet property="screen1BottomMenu" destination="0a3-ee-7ce" id="jJA-4P-ogQ"/>
                         <outlet property="screen1MiniGraph" destination="Ths-aj-OB7" id="48E-LS-ize"/>
                         <outlet property="scrollViewFromBottomPopInView" destination="T9E-30-cZk" id="dXl-Jy-uf3"/>
-                        <outlet property="tableViewScreen1" destination="Ahz-zl-teV" id="5qR-17-tBk"/>
+                        <outlet property="tableViewScreen1" destination="Ahz-zl-teV" id="yV2-vw-Z6j"/>
                         <outlet property="topMenuButtonStrip" destination="oin-I9-C2d" id="qjh-6t-lyy"/>
                         <segue destination="fcp-GB-FKl" kind="presentation" identifier="segueToScreen2" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="ABz-lk-sfP"/>
                         <segue destination="fcp-GB-FKl" kind="presentation" identifier="segueToScreen2ForEdit" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="lIe-L2-7Ib"/>

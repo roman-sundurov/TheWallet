@@ -48,7 +48,7 @@ class Screen2TableVCNote: UITableViewCell, UITextViewDelegate {
   }
 
   func startCell() {
-    textViewNotes.text = delegateScreen2?.returnScreen2MenuArray()[specCellTag].text
+    textViewNotes.text = ViewModelScreen2.shared.returnScreen2MenuArray()[specCellTag].text
 
     textViewNotes.textContainer.lineBreakMode = .byTruncatingTail
     textViewNotes.layer.borderColor = UIColor.gray.cgColor

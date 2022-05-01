@@ -43,15 +43,15 @@ class Screen2TableVCDate: UITableViewCell {
     dateFormatter.dateStyle = .medium
     dateFormatter.timeStyle = .none
 
-    if delegateScreen2?.returnNewOperation().date != Date.init(timeIntervalSince1970: TimeInterval(0)) {
-      labelSelectDate.text = dateFormatter.string(from: delegateScreen2!.returnNewOperation().date)
+    if ViewModelScreen2.shared.returnNewOperation().date != Date.init(timeIntervalSince1970: TimeInterval(0)) {
+      labelSelectDate.text = dateFormatter.string(from: ViewModelScreen2.shared.returnNewOperation().date)
       labelSelectDate.textColor = .black
     } else {
-      labelSelectDate.text = delegateScreen2?.returnScreen2MenuArray()[specCellTag].text
+      labelSelectDate.text = ViewModelScreen2.shared.returnScreen2MenuArray()[specCellTag].text
     }
 
     // textFieldSelectDate.tintColor = UIColor.clear //делает курсор бесцветным, но не убирает его
-    labelDate.text = delegateScreen2?.returnScreen2MenuArray()[specCellTag].name
+    labelDate.text = ViewModelScreen2.shared.returnScreen2MenuArray()[specCellTag].name
     self.isUserInteractionEnabled = true
 
     let gesture = UITapGestureRecognizer(target: self, action: #selector(startEditing))

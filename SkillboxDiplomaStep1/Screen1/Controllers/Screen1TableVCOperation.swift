@@ -33,15 +33,15 @@ class Screen1TableVCOperation: UITableViewCell {
 
   func startCell() {
     print("Simple Cell: ---")
-    let specVar: Int = specCellTag - delegateScreen1!.returnArrayForIncrease()[specCellTag]
-    labelCategory.text = delegateScreen1!.returnDataArrayOfOperations()[specVar].category
+    let specVar: Int = specCellTag - ViewModelScreen1.shared.returnArrayForIncrease()[specCellTag]
+    labelCategory.text = ViewModelScreen1.shared.returnDataArrayOfOperations()[specVar].category
 
-    if delegateScreen1!.returnDataArrayOfOperations()[specVar].amount.truncatingRemainder(dividingBy: 1) == 0 {
-      labelAmount.text = String(format: "%.0f", delegateScreen1!.returnDataArrayOfOperations()[specVar].amount)
+    if ViewModelScreen1.shared.returnDataArrayOfOperations()[specVar].amount.truncatingRemainder(dividingBy: 1) == 0 {
+      labelAmount.text = String(format: "%.0f", ViewModelScreen1.shared.returnDataArrayOfOperations()[specVar].amount)
     } else {
-      labelAmount.text = String(format: "%.2f", delegateScreen1!.returnDataArrayOfOperations()[specVar].amount)
+      labelAmount.text = String(format: "%.2f", ViewModelScreen1.shared.returnDataArrayOfOperations()[specVar].amount)
     }
-    if delegateScreen1!.returnDataArrayOfOperations()[specVar].amount < 0 {
+    if ViewModelScreen1.shared.returnDataArrayOfOperations()[specVar].amount < 0 {
       labelAmount.textColor = UIColor.init(named: "InterfaceColorRed")
       currencyStatus.textColor = UIColor.init(named: "InterfaceColorRed")
     } else {

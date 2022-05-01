@@ -75,11 +75,11 @@ class ViewModelScreen1 {
   }
 
   func deleteCategoryInRealm(id: Int) {
-    Persistence.shared.deleteCategory(idOfObject: delegateScreen2!.returnDataArrayOfCategory()[id].id)
+    Persistence.shared.deleteCategory(idOfObject: ViewModelScreen2.shared.returnDataArrayOfCategory()[id].id)
   }
 
   func deleteOperationInRealm(tag: Int) {
-    actionsOperationsClosePopUpScreen1()
+    // VCScreen1.shared.actionsOperationsClosePopUpScreen1()
     Persistence.shared.deleteOperation(idOfObject: returnDataArrayOfOperations()[tag].id)
   }
 
@@ -102,9 +102,8 @@ class ViewModelScreen1 {
     Persistence.shared.updateCategory(
       name: newName,
       icon: newIcon,
-      idOfObject: delegateScreen2!.returnDataArrayOfCategory()[id].id)
+      idOfObject: ViewModelScreen2.shared.returnDataArrayOfCategory()[id].id)
   }
-
 
 
   // MARK: - data calculating
@@ -169,14 +168,13 @@ class ViewModelScreen1 {
     let newTime = Date() - TimeInterval.init(86400 * returnDaysForSorting())
     dataArrayOfOperations = dataArrayOfOperationsOriginal
     dataArrayOfOperations.sort { $0.date > $1.date }
-
+  
     graphDataArray = graphDataArray
       .sorted { $0.date > $1.date }
       .filter { $0.date >= newTime }
     print("graphDataArray when sort: \(graphDataArray)")
-
+  
     let temporarilyDate = dataArrayOfOperations.filter { $0.date >= newTime }
     dataArrayOfOperations = temporarilyDate
-    instanceVCScreen1.tableViewReloadData()
   }
 }
