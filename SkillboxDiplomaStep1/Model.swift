@@ -52,6 +52,7 @@ class Category: Object {
 
 class Persistence {
   static let shared = Persistence()
+  private init() {}
   private let realm = try! Realm()
 
   // MARK: - категории
