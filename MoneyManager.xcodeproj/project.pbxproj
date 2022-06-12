@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		470869D627FD6875003EEF7D /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 470869D527FD6875003EEF7D /* Realm */; };
-		470869D827FD6875003EEF7D /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 470869D727FD6875003EEF7D /* RealmSwift */; };
-		470869DB27FD68F2003EEF7D /* SimpleCheckbox in Frameworks */ = {isa = PBXBuildFile; productRef = 470869DA27FD68F2003EEF7D /* SimpleCheckbox */; };
 		4715215025F3A8E600FE585C /* Screen2TableVCDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4715214F25F3A8E600FE585C /* Screen2TableVCDate.swift */; };
 		4715819325B6FE310047C5D0 /* Screen2TableVCHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4715819225B6FE310047C5D0 /* Screen2TableVCHeader.swift */; };
 		4729DC40263DA3AB00CA8B66 /* VCScreen1ContainerGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4729DC3F263DA3AB00CA8B66 /* VCScreen1ContainerGraph.swift */; };
@@ -19,8 +16,8 @@
 		472F288E25A7319500CE1481 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472F288C25A7319500CE1481 /* Main.storyboard */; };
 		472F289025A7319500CE1481 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 472F288F25A7319500CE1481 /* Assets.xcassets */; };
 		472F289325A7319500CE1481 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472F289125A7319500CE1481 /* LaunchScreen.storyboard */; };
-		472F289E25A7319600CE1481 /* SkillboxDiplomaStep1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F289D25A7319600CE1481 /* SkillboxDiplomaStep1Tests.swift */; };
-		472F28A925A7319600CE1481 /* SkillboxDiplomaStep1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F28A825A7319600CE1481 /* SkillboxDiplomaStep1UITests.swift */; };
+		472F289E25A7319600CE1481 /* MoneyManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F289D25A7319600CE1481 /* MoneyManagerTests.swift */; };
+		472F28A925A7319600CE1481 /* MoneyManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F28A825A7319600CE1481 /* MoneyManagerUITests.swift */; };
 		473549BB2819636200E87139 /* ViewModelScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549BA2819636200E87139 /* ViewModelScreen1.swift */; };
 		473549BD2819CFD600E87139 /* VCScreen1+TableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549BC2819CFD600E87139 /* VCScreen1+TableExtension.swift */; };
 		473549C1281A89E200E87139 /* ViewModelVCScreen2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549C0281A89E200E87139 /* ViewModelVCScreen2.swift */; };
@@ -38,6 +35,8 @@
 		47C4FF3525B38B0F00F97498 /* VCScreen2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4FF3425B38B0F00F97498 /* VCScreen2.swift */; };
 		47CB73C325B4364700638185 /* Screen2TableVCCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB73C225B4364700638185 /* Screen2TableVCCategory.swift */; };
 		47F1759925BA2D320044BD30 /* VCScreen2Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F1759825BA2D320044BD30 /* VCScreen2Container.swift */; };
+		47F5F9D42855D9450042F2D5 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 47F5F9D32855D9450042F2D5 /* RealmSwift */; };
+		47F5F9D72855D99B0042F2D5 /* SimpleCheckbox in Frameworks */ = {isa = PBXBuildFile; productRef = 47F5F9D62855D99B0042F2D5 /* SimpleCheckbox */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +60,7 @@
 		4715214F25F3A8E600FE585C /* Screen2TableVCDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2TableVCDate.swift; sourceTree = "<group>"; };
 		4715819225B6FE310047C5D0 /* Screen2TableVCHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2TableVCHeader.swift; sourceTree = "<group>"; };
 		4729DC3F263DA3AB00CA8B66 /* VCScreen1ContainerGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCScreen1ContainerGraph.swift; sourceTree = "<group>"; };
-		472F288325A7319500CE1481 /* SkillboxDiplomaStep1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillboxDiplomaStep1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		472F288325A7319500CE1481 /* MoneyManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		472F288625A7319500CE1481 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		472F288825A7319500CE1481 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		472F288A25A7319500CE1481 /* VCScreen1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCScreen1.swift; sourceTree = "<group>"; };
@@ -69,11 +68,11 @@
 		472F288F25A7319500CE1481 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		472F289225A7319500CE1481 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		472F289425A7319500CE1481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		472F289925A7319600CE1481 /* SkillboxDiplomaStep1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkillboxDiplomaStep1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		472F289D25A7319600CE1481 /* SkillboxDiplomaStep1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillboxDiplomaStep1Tests.swift; sourceTree = "<group>"; };
+		472F289925A7319600CE1481 /* MoneyManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoneyManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		472F289D25A7319600CE1481 /* MoneyManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyManagerTests.swift; sourceTree = "<group>"; };
 		472F289F25A7319600CE1481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		472F28A425A7319600CE1481 /* SkillboxDiplomaStep1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkillboxDiplomaStep1UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		472F28A825A7319600CE1481 /* SkillboxDiplomaStep1UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillboxDiplomaStep1UITests.swift; sourceTree = "<group>"; };
+		472F28A425A7319600CE1481 /* MoneyManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoneyManagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		472F28A825A7319600CE1481 /* MoneyManagerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyManagerUITests.swift; sourceTree = "<group>"; };
 		472F28AA25A7319600CE1481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		473549BA2819636200E87139 /* ViewModelScreen1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelScreen1.swift; sourceTree = "<group>"; };
 		473549BC2819CFD600E87139 /* VCScreen1+TableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VCScreen1+TableExtension.swift"; sourceTree = "<group>"; };
@@ -84,8 +83,8 @@
 		475D711926509A0F009D917A /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		47621F9725B644BF0095A52F /* Screen2TableVCNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2TableVCNote.swift; sourceTree = "<group>"; };
 		4771587B262AB31E00F27D4B /* VCScreen1ContainerOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCScreen1ContainerOperation.swift; sourceTree = "<group>"; };
-		47AC1A9425C09AC9006E7817 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Model.swift; path = SkillboxDiplomaStep1/Model.swift; sourceTree = SOURCE_ROOT; };
-		47AC1AA525C0AE45006E7817 /* Screen1TableVCHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Screen1TableVCHeader.swift; path = SkillboxDiplomaStep1/Screen1/Controllers/Screen1TableVCHeader.swift; sourceTree = SOURCE_ROOT; };
+		47AC1A9425C09AC9006E7817 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Model.swift; path = MoneyManager/Model.swift; sourceTree = SOURCE_ROOT; };
+		47AC1AA525C0AE45006E7817 /* Screen1TableVCHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Screen1TableVCHeader.swift; path = MoneyManager/Screen1/Controllers/Screen1TableVCHeader.swift; sourceTree = SOURCE_ROOT; };
 		47AC1AB525C0B7CB006E7817 /* Screen1TableVCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen1TableVCOperation.swift; sourceTree = "<group>"; };
 		47B80F772667CA9500032678 /* Screen1RoundedGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen1RoundedGraph.swift; sourceTree = "<group>"; };
 		47BEBB42262F91D1006FF254 /* Screen2ContainerTableVCNewCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen2ContainerTableVCNewCategory.swift; sourceTree = "<group>"; };
@@ -99,9 +98,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				470869D827FD6875003EEF7D /* RealmSwift in Frameworks */,
-				470869DB27FD68F2003EEF7D /* SimpleCheckbox in Frameworks */,
-				470869D627FD6875003EEF7D /* Realm in Frameworks */,
+				47F5F9D42855D9450042F2D5 /* RealmSwift in Frameworks */,
+				47F5F9D72855D99B0042F2D5 /* SimpleCheckbox in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,9 +123,9 @@
 		472F287A25A7319500CE1481 = {
 			isa = PBXGroup;
 			children = (
-				472F288525A7319500CE1481 /* SkillboxDiplomaStep1 */,
-				472F289C25A7319600CE1481 /* SkillboxDiplomaStep1Tests */,
-				472F28A725A7319600CE1481 /* SkillboxDiplomaStep1UITests */,
+				472F288525A7319500CE1481 /* MoneyManager */,
+				472F289C25A7319600CE1481 /* MoneyManagerTests */,
+				472F28A725A7319600CE1481 /* MoneyManagerUITests */,
 				472F288425A7319500CE1481 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -135,14 +133,14 @@
 		472F288425A7319500CE1481 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				472F288325A7319500CE1481 /* SkillboxDiplomaStep1.app */,
-				472F289925A7319600CE1481 /* SkillboxDiplomaStep1Tests.xctest */,
-				472F28A425A7319600CE1481 /* SkillboxDiplomaStep1UITests.xctest */,
+				472F288325A7319500CE1481 /* MoneyManager.app */,
+				472F289925A7319600CE1481 /* MoneyManagerTests.xctest */,
+				472F28A425A7319600CE1481 /* MoneyManagerUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		472F288525A7319500CE1481 /* SkillboxDiplomaStep1 */ = {
+		472F288525A7319500CE1481 /* MoneyManager */ = {
 			isa = PBXGroup;
 			children = (
 				472F288625A7319500CE1481 /* AppDelegate.swift */,
@@ -155,25 +153,25 @@
 				472F289125A7319500CE1481 /* LaunchScreen.storyboard */,
 				472F289425A7319500CE1481 /* Info.plist */,
 			);
-			path = SkillboxDiplomaStep1;
+			path = MoneyManager;
 			sourceTree = "<group>";
 		};
-		472F289C25A7319600CE1481 /* SkillboxDiplomaStep1Tests */ = {
+		472F289C25A7319600CE1481 /* MoneyManagerTests */ = {
 			isa = PBXGroup;
 			children = (
-				472F289D25A7319600CE1481 /* SkillboxDiplomaStep1Tests.swift */,
+				472F289D25A7319600CE1481 /* MoneyManagerTests.swift */,
 				472F289F25A7319600CE1481 /* Info.plist */,
 			);
-			path = SkillboxDiplomaStep1Tests;
+			path = MoneyManagerTests;
 			sourceTree = "<group>";
 		};
-		472F28A725A7319600CE1481 /* SkillboxDiplomaStep1UITests */ = {
+		472F28A725A7319600CE1481 /* MoneyManagerUITests */ = {
 			isa = PBXGroup;
 			children = (
-				472F28A825A7319600CE1481 /* SkillboxDiplomaStep1UITests.swift */,
+				472F28A825A7319600CE1481 /* MoneyManagerUITests.swift */,
 				472F28AA25A7319600CE1481 /* Info.plist */,
 			);
-			path = SkillboxDiplomaStep1UITests;
+			path = MoneyManagerUITests;
 			sourceTree = "<group>";
 		};
 		473549B8281961A900E87139 /* ViewModel */ = {
@@ -261,9 +259,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		472F288225A7319500CE1481 /* SkillboxDiplomaStep1 */ = {
+		472F288225A7319500CE1481 /* MoneyManager */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 472F28AD25A7319600CE1481 /* Build configuration list for PBXNativeTarget "SkillboxDiplomaStep1" */;
+			buildConfigurationList = 472F28AD25A7319600CE1481 /* Build configuration list for PBXNativeTarget "MoneyManager" */;
 			buildPhases = (
 				4736308E27B692B3002D1426 /* ShellScript */,
 				472F287F25A7319500CE1481 /* Sources */,
@@ -274,19 +272,18 @@
 			);
 			dependencies = (
 			);
-			name = SkillboxDiplomaStep1;
+			name = MoneyManager;
 			packageProductDependencies = (
-				470869D527FD6875003EEF7D /* Realm */,
-				470869D727FD6875003EEF7D /* RealmSwift */,
-				470869DA27FD68F2003EEF7D /* SimpleCheckbox */,
+				47F5F9D32855D9450042F2D5 /* RealmSwift */,
+				47F5F9D62855D99B0042F2D5 /* SimpleCheckbox */,
 			);
 			productName = Skillbox_diploma_step1;
-			productReference = 472F288325A7319500CE1481 /* SkillboxDiplomaStep1.app */;
+			productReference = 472F288325A7319500CE1481 /* MoneyManager.app */;
 			productType = "com.apple.product-type.application";
 		};
-		472F289825A7319600CE1481 /* SkillboxDiplomaStep1Tests */ = {
+		472F289825A7319600CE1481 /* MoneyManagerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 472F28B025A7319600CE1481 /* Build configuration list for PBXNativeTarget "SkillboxDiplomaStep1Tests" */;
+			buildConfigurationList = 472F28B025A7319600CE1481 /* Build configuration list for PBXNativeTarget "MoneyManagerTests" */;
 			buildPhases = (
 				472F289525A7319600CE1481 /* Sources */,
 				472F289625A7319600CE1481 /* Frameworks */,
@@ -297,14 +294,14 @@
 			dependencies = (
 				472F289B25A7319600CE1481 /* PBXTargetDependency */,
 			);
-			name = SkillboxDiplomaStep1Tests;
+			name = MoneyManagerTests;
 			productName = Skillbox_diploma_step1Tests;
-			productReference = 472F289925A7319600CE1481 /* SkillboxDiplomaStep1Tests.xctest */;
+			productReference = 472F289925A7319600CE1481 /* MoneyManagerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		472F28A325A7319600CE1481 /* SkillboxDiplomaStep1UITests */ = {
+		472F28A325A7319600CE1481 /* MoneyManagerUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 472F28B325A7319600CE1481 /* Build configuration list for PBXNativeTarget "SkillboxDiplomaStep1UITests" */;
+			buildConfigurationList = 472F28B325A7319600CE1481 /* Build configuration list for PBXNativeTarget "MoneyManagerUITests" */;
 			buildPhases = (
 				472F28A025A7319600CE1481 /* Sources */,
 				472F28A125A7319600CE1481 /* Frameworks */,
@@ -315,9 +312,9 @@
 			dependencies = (
 				472F28A625A7319600CE1481 /* PBXTargetDependency */,
 			);
-			name = SkillboxDiplomaStep1UITests;
+			name = MoneyManagerUITests;
 			productName = Skillbox_diploma_step1UITests;
-			productReference = 472F28A425A7319600CE1481 /* SkillboxDiplomaStep1UITests.xctest */;
+			productReference = 472F28A425A7319600CE1481 /* MoneyManagerUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -342,7 +339,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 472F287E25A7319500CE1481 /* Build configuration list for PBXProject "SkillboxDiplomaStep1" */;
+			buildConfigurationList = 472F287E25A7319500CE1481 /* Build configuration list for PBXProject "MoneyManager" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -352,16 +349,16 @@
 			);
 			mainGroup = 472F287A25A7319500CE1481;
 			packageReferences = (
-				470869D427FD6875003EEF7D /* XCRemoteSwiftPackageReference "realm-swift" */,
-				470869D927FD68F2003EEF7D /* XCRemoteSwiftPackageReference "SimpleCheckbox" */,
+				47F5F9D22855D9450042F2D5 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				47F5F9D52855D99B0042F2D5 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */,
 			);
 			productRefGroup = 472F288425A7319500CE1481 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				472F288225A7319500CE1481 /* SkillboxDiplomaStep1 */,
-				472F289825A7319600CE1481 /* SkillboxDiplomaStep1Tests */,
-				472F28A325A7319600CE1481 /* SkillboxDiplomaStep1UITests */,
+				472F288225A7319500CE1481 /* MoneyManager */,
+				472F289825A7319600CE1481 /* MoneyManagerTests */,
+				472F28A325A7319600CE1481 /* MoneyManagerUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -448,7 +445,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				472F289E25A7319600CE1481 /* SkillboxDiplomaStep1Tests.swift in Sources */,
+				472F289E25A7319600CE1481 /* MoneyManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,7 +453,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				472F28A925A7319600CE1481 /* SkillboxDiplomaStep1UITests.swift in Sources */,
+				472F28A925A7319600CE1481 /* MoneyManagerUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,12 +462,12 @@
 /* Begin PBXTargetDependency section */
 		472F289B25A7319600CE1481 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 472F288225A7319500CE1481 /* SkillboxDiplomaStep1 */;
+			target = 472F288225A7319500CE1481 /* MoneyManager */;
 			targetProxy = 472F289A25A7319600CE1481 /* PBXContainerItemProxy */;
 		};
 		472F28A625A7319600CE1481 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 472F288225A7319500CE1481 /* SkillboxDiplomaStep1 */;
+			target = 472F288225A7319500CE1481 /* MoneyManager */;
 			targetProxy = 472F28A525A7319600CE1481 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -618,12 +615,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = SkillboxDiplomaStep1/Info.plist;
+				INFOPLIST_FILE = MoneyManager/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "roman.sundurov.work.Skillbox-diploma-step1";
+				PRODUCT_BUNDLE_IDENTIFIER = "roman.sundurov.work.Money-manager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -637,12 +634,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = SkillboxDiplomaStep1/Info.plist;
+				INFOPLIST_FILE = MoneyManager/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "roman.sundurov.work.Skillbox-diploma-step1";
+				PRODUCT_BUNDLE_IDENTIFIER = "roman.sundurov.work.Money-manager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -667,7 +664,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SkillboxDiplomaStep1.app/SkillboxDiplomaStep1";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MoneyManager.app/MoneyManager";
 			};
 			name = Debug;
 		};
@@ -689,7 +686,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SkillboxDiplomaStep1.app/SkillboxDiplomaStep1";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MoneyManager.app/MoneyManager";
 			};
 			name = Release;
 		};
@@ -736,7 +733,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		472F287E25A7319500CE1481 /* Build configuration list for PBXProject "SkillboxDiplomaStep1" */ = {
+		472F287E25A7319500CE1481 /* Build configuration list for PBXProject "MoneyManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				472F28AB25A7319600CE1481 /* Debug */,
@@ -745,7 +742,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		472F28AD25A7319600CE1481 /* Build configuration list for PBXNativeTarget "SkillboxDiplomaStep1" */ = {
+		472F28AD25A7319600CE1481 /* Build configuration list for PBXNativeTarget "MoneyManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				472F28AE25A7319600CE1481 /* Debug */,
@@ -754,7 +751,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		472F28B025A7319600CE1481 /* Build configuration list for PBXNativeTarget "SkillboxDiplomaStep1Tests" */ = {
+		472F28B025A7319600CE1481 /* Build configuration list for PBXNativeTarget "MoneyManagerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				472F28B125A7319600CE1481 /* Debug */,
@@ -763,7 +760,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		472F28B325A7319600CE1481 /* Build configuration list for PBXNativeTarget "SkillboxDiplomaStep1UITests" */ = {
+		472F28B325A7319600CE1481 /* Build configuration list for PBXNativeTarget "MoneyManagerUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				472F28B425A7319600CE1481 /* Debug */,
@@ -775,15 +772,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		470869D427FD6875003EEF7D /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+		47F5F9D22855D9450042F2D5 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.28.1;
 			};
 		};
-		470869D927FD68F2003EEF7D /* XCRemoteSwiftPackageReference "SimpleCheckbox" */ = {
+		47F5F9D52855D99B0042F2D5 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/BeauNouvelle/SimpleCheckbox";
 			requirement = {
@@ -794,19 +791,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		470869D527FD6875003EEF7D /* Realm */ = {
+		47F5F9D32855D9450042F2D5 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 470869D427FD6875003EEF7D /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		470869D727FD6875003EEF7D /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 470869D427FD6875003EEF7D /* XCRemoteSwiftPackageReference "realm-swift" */;
+			package = 47F5F9D22855D9450042F2D5 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
-		470869DA27FD68F2003EEF7D /* SimpleCheckbox */ = {
+		47F5F9D62855D99B0042F2D5 /* SimpleCheckbox */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 470869D927FD68F2003EEF7D /* XCRemoteSwiftPackageReference "SimpleCheckbox" */;
+			package = 47F5F9D52855D99B0042F2D5 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */;
 			productName = SimpleCheckbox;
 		};
 /* End XCSwiftPackageProductDependency section */

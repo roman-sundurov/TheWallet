@@ -1,14 +1,14 @@
 //
-//  SkillboxDiplomaStep1Tests.swift
-//  SkillboxDiplomaStep1Tests
+//  MoneyManagerTests.swift
+//  MoneyManagerTests
 //
 //  Created by Roman on 07.01.2021.
 //
 
 import XCTest
-@testable import SkillboxDiplomaStep1
+@testable import MoneyManager
 
-class SkillboxDiplomaStep1Tests: XCTestCase {
+class MoneyManagerTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
