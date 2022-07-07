@@ -1,6 +1,6 @@
 //
-//  ViewControllerScreen1Container.swift
-//  Skillbox_diploma_step1
+//  VCScreen1ContainerOperation.swift
+//  MoneyManager
 //
 //  Created by Roman on 17.04.2021.
 //

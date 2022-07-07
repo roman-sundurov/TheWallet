@@ -1,6 +1,6 @@
 //
 //  ViewModelVCScreen2.swift
-//  SkillboxDiplomaStep1
+//  MoneyManager
 //
 //  Created by Roman on 28.04.2022.
 //

@@ -1,6 +1,6 @@
 //
 //  Screen2ContainerTableVCNewCategory.swift
-//  Skillbox_diploma_step1
+//  MoneyManager
 //
 //  Created by Roman on 21.04.2021.
 //

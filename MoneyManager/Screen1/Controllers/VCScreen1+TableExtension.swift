@@ -1,6 +1,6 @@
 //
 //  VCScreen1+TableExtension.swift
-//  SkillboxDiplomaStep1
+//  MoneyManager
 //
 //  Created by Roman on 27.04.2022.
 //

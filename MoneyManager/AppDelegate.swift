@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  Skillbox_diploma_step1
+//  MoneyManager
 //
 //  Created by Roman on 07.01.2021.
 //

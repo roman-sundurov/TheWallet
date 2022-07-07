@@ -1,6 +1,6 @@
 //
-//  ViewScreen1ContainerGraph.swift
-//  Skillbox_diploma_step1
+//  VCScreen1ContainerGraph.swift
+//  MoneyManager
 //
 //  Created by Roman on 01.05.2021.
 //

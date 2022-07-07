@@ -1,6 +1,6 @@
 //
-//  TableViewCellNote.swift
-//  Skillbox_diploma_step1
+//  Screen2TableVCNote.swift
+//  MoneyManager
 //
 //  Created by Roman on 19.01.2021.
 //

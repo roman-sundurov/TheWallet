@@ -1,6 +1,6 @@
 //
 //  Screen1TableViewCellHeader.swift
-//  Skillbox_diploma_step1
+//  MoneyManager
 //
 //  Created by Roman on 26.01.2021.
 //

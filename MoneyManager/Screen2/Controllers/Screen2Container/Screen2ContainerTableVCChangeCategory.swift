@@ -1,6 +1,6 @@
 //
 //  TableViewCellChangeCategoryScreen2Container.swift
-//  Skillbox_diploma_step1
+//  MoneyManager
 //
 //  Created by Roman on 23.01.2021.
 //

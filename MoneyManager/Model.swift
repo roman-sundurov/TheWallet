@@ -1,6 +1,6 @@
 //
-//  Persistence.swift
-//  Skillbox_diploma_step1
+//  Model.swift
+//  MoneyManager
 //
 //  Created by Roman on 26.01.2021.
 //
