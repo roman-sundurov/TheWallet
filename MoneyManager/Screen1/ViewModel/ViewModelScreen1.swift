@@ -11,18 +11,18 @@ class ViewModelScreen1 {
   static let shared = ViewModelScreen1()
 
   private let instanceVCScreen1 = VCScreen1()
-  private var dataArrayOfOperations: [DataOfOperations] = []
+  private var dataArrayOfOperations: [Operation] = []
   // показывает количество заголовков с новой датой в таблице, которое предшествует конкретной операции
   private var arrayForIncrease: [Int] = [0]
   private var graphDataArray: [GraphData] = []
   private var daysForSorting: Int = 30
 
   // хранение оригинала данных из Realm
-  private var dataArrayOfOperationsOriginal: [DataOfOperations] = []
+  private var dataArrayOfOperationsOriginal: [Operation] = []
 
 
   // MARK: - функции возврата
-  func returnDataArrayOfOperations() -> [DataOfOperations] {
+  func returnDataArrayOfOperations() -> [Operation] {
     return dataArrayOfOperations
   }
 
@@ -57,7 +57,7 @@ class ViewModelScreen1 {
   func screen1DataReceive() {
     dataArrayOfOperationsOriginal = []
     for operation in Persistence.shared.getRealmDataOperations() {
-      dataArrayOfOperationsOriginal.append(DataOfOperations(
+      dataArrayOfOperationsOriginal.append(Operation(
         amount1: operation.amount,
         category1: operation.category,
         note1: operation.note,
@@ -107,7 +107,7 @@ class ViewModelScreen1 {
 
 
   // MARK: - data calculating
-  func graphDataArrayCalculating(dataArrayOfOperationsInternal: [DataOfOperations]) {
+  func graphDataArrayCalculating(dataArrayOfOperationsInternal: [Operation]) {
     // Данные для передачи в график
     // Cохраняет суммы операций по дням некуммулятивно
     graphDataArray = []

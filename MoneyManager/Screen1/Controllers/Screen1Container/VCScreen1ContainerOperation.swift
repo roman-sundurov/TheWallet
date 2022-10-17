@@ -28,7 +28,7 @@ class VCScreen1ContainerOperation: UIViewController {
   // MARK: - делегаты и переменные
 
   var delegateScreen1: protocolScreen1Delegate?
-  var newTableDataArray: [DataOfOperations] = []
+  var newTableDataArray: [Operation] = []
   var specCellTag: Int = 0
   var specVar: Int = 0
 
