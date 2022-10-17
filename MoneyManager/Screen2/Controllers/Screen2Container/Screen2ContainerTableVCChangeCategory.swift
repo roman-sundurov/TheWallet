@@ -37,7 +37,7 @@ class Screen2ContainerTableVCChangeCategory: UITableViewCell, UITextFieldDelegat
   // MARK: - переходы
 
   @IBAction func buttonDeleteCategoryAction(_ sender: Any) {
-    ViewModelScreen1.shared.deleteCategoryInRealm(id: specCellTag)
+    vmMain.shared.deleteCategoryInRealm(id: specCellTag)
     delegateScreen2Container?.screen2ContainerDeleteCategory(index: specCellTag)
   }
 
@@ -53,7 +53,7 @@ class Screen2ContainerTableVCChangeCategory: UITableViewCell, UITextFieldDelegat
       buttonEditNameCategory.tintColor = UIColor.red
       buttonEditNameCategory.isHidden = true
       buttonConfirmNewName.isHidden = false
-      delegateScreen2Container?.setCurrentActiveEditingCell(categoryID: ViewModelScreen2.shared
+      delegateScreen2Container?.setCurrentActiveEditingCell(categoryID: SettingViewModel.shared
         .returnDataArrayOfCategory()[specCellTag]
         .id)
     } else {
@@ -70,7 +70,7 @@ class Screen2ContainerTableVCChangeCategory: UITableViewCell, UITextFieldDelegat
     if permitionToSetCategory == false { return }
 
     // запись выбранной категории во временную переменную
-    ViewModelScreen2.shared.setCategoryInNewOperation(category: textFieldNameCategory.text!)
+    SettingViewModel.shared.setCategoryInNewOperation(category: textFieldNameCategory.text!)
     delegateScreen2Container?.closeWindows(specCellTag) // закрытие PopUp-окна
     delegateScreen2Container?.setCurrentActiveEditingCell(categoryID: 100)
     print("ClosePopup from ContainerCell")
@@ -85,7 +85,7 @@ class Screen2ContainerTableVCChangeCategory: UITableViewCell, UITextFieldDelegat
   }
 
   func startCell() {
-    textFieldNameCategory.text = ViewModelScreen2.shared.returnDataArrayOfCategory()[specCellTag]
+    textFieldNameCategory.text = SettingViewModel.shared.returnDataArrayOfCategory()[specCellTag]
       .name
     gestureCell = UITapGestureRecognizer(target: self, action: #selector(closeWindows))
     gestureCheckBox = UITapGestureRecognizer(target: self, action: #selector(closeWindows))
@@ -101,7 +101,7 @@ class Screen2ContainerTableVCChangeCategory: UITableViewCell, UITextFieldDelegat
 
     textFieldNameCategory.layer.cornerRadius = 10
 
-    if ViewModelScreen2.shared.returnNewOperation().category == ViewModelScreen2.shared.returnDataArrayOfCategory()[specCellTag]
+    if SettingViewModel.shared.returnNewOperation().category == SettingViewModel.shared.returnDataArrayOfCategory()[specCellTag]
       .name {
         checkBoxObject.isChecked = true
     } else {
@@ -133,7 +133,7 @@ extension Screen2ContainerTableVCChangeCategory: protocolScreen2ContainerTableVC
   }
 
   func returnCategryIdOfCell() -> Int {
-    return ViewModelScreen2.shared.returnDataArrayOfCategory()[specCellTag].id
+    return SettingViewModel.shared.returnDataArrayOfCategory()[specCellTag].id
   }
 
   func closeEditing() {
@@ -148,7 +148,7 @@ extension Screen2ContainerTableVCChangeCategory: protocolScreen2ContainerTableVC
     buttonEditNameCategory.isHidden = false
     buttonConfirmNewName.isHidden = true
 
-    ViewModelScreen1.shared.editCategoryInRealm(newName: textFieldNameCategory.text!, newIcon: "", id: specCellTag)
+    vmMain.shared.editCategoryInRealm(newName: textFieldNameCategory.text!, newIcon: "", id: specCellTag)
     delegateScreen2Container?.setCurrentActiveEditingCell(categoryID: 0)
   }
 }

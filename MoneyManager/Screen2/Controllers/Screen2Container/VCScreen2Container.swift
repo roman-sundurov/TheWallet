@@ -17,7 +17,7 @@ protocol protocolScreen2ContainerDelegate {
   func setCurrentActiveEditingCell(categoryID: Int)
 
   // функции возврата
-  func returnDelegateScreen2() -> protocolScreen2Delegate
+  func returnDelegateScreen2() -> protocolVCSetting
   func returnScreen2StatusEditContainer() -> Bool
   func returnDelegateScreen2ContainerTableVCNewCategory() -> protocolScreen2ContainerTableVCNewCategory
 }
@@ -30,7 +30,7 @@ class VCScreen2Container: UIViewController {
 
   // MARK: - делегаты и переменные
 
-  var delegateScreen2: protocolScreen2Delegate?
+  var delegateScreen2: protocolVCSetting?
   var delegateScreen2ContainerTableVCHeader: protocolScreen2ContainerTableVClHeader?
   var delegateScreen2ContainerTableVCNewCategory: protocolScreen2ContainerTableVCNewCategory?
   var statusEditContainer = false
@@ -106,9 +106,9 @@ extension VCScreen2Container: protocolScreen2ContainerDelegate {
 
 
   func screen2ContainerNewCategorySwicher() {
-    ViewModelScreen2.shared.screen2DataReceive()
+    SettingViewModel.shared.screen2DataReceive()
     print("AAAA")
-    if ViewModelScreen2.shared.returnDataArrayOfCategory().isEmpty == false {
+    if SettingViewModel.shared.returnDataArrayOfCategory().isEmpty == false {
       if statusEditContainer == true {
         statusEditContainer = false
         delegateScreen2ContainerTableVCHeader?.buttonOptionsSetColor(color: UIColor.white)
@@ -130,18 +130,18 @@ extension VCScreen2Container: protocolScreen2ContainerDelegate {
 
 
   func screen2ContainerAddNewCategory() {
-    ViewModelScreen2.shared.screen2DataReceive()
+    SettingViewModel.shared.screen2DataReceive()
     tableViewContainer.performBatchUpdates({
       let newRowIndex = statusEditContainer == true ?
-      ViewModelScreen2.shared.returnDataArrayOfCategory().count + 1 :
-      ViewModelScreen2.shared.returnDataArrayOfCategory().count
+      SettingViewModel.shared.returnDataArrayOfCategory().count + 1 :
+      SettingViewModel.shared.returnDataArrayOfCategory().count
       tableViewContainer.insertRows(at: [IndexPath(row: newRowIndex, section: 0)], with: .automatic)
     }, completion: { _ in self.tableViewContainer.reloadData() })
   }
 
 
   func screen2ContainerDeleteCategory(index: Int) {
-    ViewModelScreen2.shared.screen2DataReceive()
+    SettingViewModel.shared.screen2DataReceive()
     tableViewContainer.performBatchUpdates({
       print("ZZZ2")
       tableViewContainer.deleteRows(at: [IndexPath(row: index + 2, section: 0)], with: .left)
@@ -151,14 +151,14 @@ extension VCScreen2Container: protocolScreen2ContainerDelegate {
 
 //    func screen2ContainerEditNewCategory(index: Int){
 //
-//        var newRowIndex = statusEditContainer == true ? (delegateScreen2?.returnDataArrayOfCategory().count)! + 1 : (delegateScreen2?.returnDataArrayOfCategory().count)!
+//        var newRowIndex = statusEditContainer == true ? (vcSettingDelegate?.returnDataArrayOfCategory().count)! + 1 : (vcSettingDelegate?.returnDataArrayOfCategory().count)!
 //
 //        ViewModelScreen2.shared.screen2DataReceive()
 //        tableViewContainer.reloadData()
 //    }
 
 
-  func returnDelegateScreen2() -> protocolScreen2Delegate {
+  func returnDelegateScreen2() -> protocolVCSetting {
     return delegateScreen2!
   }
 
@@ -184,15 +184,15 @@ extension VCScreen2Container: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if ViewModelScreen2.shared.returnDataArrayOfCategory().isEmpty {
+    if SettingViewModel.shared.returnDataArrayOfCategory().isEmpty {
       statusEditContainer = true
       return 2
     } else if statusEditContainer == true {
-      print("returnDataArrayOfCategory().count 111= \(String(describing: ViewModelScreen2.shared.returnDataArrayOfCategory().count))")
-      return ViewModelScreen2.shared.returnDataArrayOfCategory().count + 2
+      print("returnDataArrayOfCategory().count 111= \(String(describing: SettingViewModel.shared.returnDataArrayOfCategory().count))")
+      return SettingViewModel.shared.returnDataArrayOfCategory().count + 2
     } else {
-      print("returnDataArrayOfCategory().count 222= \(String(describing: ViewModelScreen2.shared.returnDataArrayOfCategory().count))")
-      return ViewModelScreen2.shared.returnDataArrayOfCategory().count + 1
+      print("returnDataArrayOfCategory().count 222= \(String(describing: SettingViewModel.shared.returnDataArrayOfCategory().count))")
+      return SettingViewModel.shared.returnDataArrayOfCategory().count + 1
     }
   }
 

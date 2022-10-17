@@ -35,7 +35,7 @@ struct User: Codable, Identifiable, Equatable {
   var name: String = ""
   var surname: String = ""
   var email: String = ""
-  var daysForSorting: Int = 0
+  var daysForSorting: Int = 30
   var lastIdOfOperations: Int = -1
   var lastIdOfCategories: Int = -1
   var categories: [Category] = []
@@ -44,6 +44,7 @@ struct User: Codable, Identifiable, Equatable {
 }
 
 struct UserRepository {
+  var user: User?
   let documentReference = Firestore.firestore().collection("users")
   let userReference = Firestore.firestore().collection("users").document("9Nxk6SZmNr3o9ld5VZj1")
 
@@ -53,13 +54,13 @@ struct UserRepository {
         let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
         print("Document data: \(dataDescription)")
         print("aaa")
-        // if let userData = try? document.data(as: User.self) {
-        let userData = try! document.data(as: User.self)
-        inner(userData)
-          print("bbb")
-        // }
+          // if let user = try? document.data(as: User.self) {
+        self.userData = try! document.data(as: User.self)
+        inner(self.userData!)
+        print("bbb")
+          // }
       } else {
-          print("Document does not exist")
+        print("Document does not exist")
       }
     }
   }
@@ -107,27 +108,38 @@ struct UserRepository {
     }
   }
 
-
   func deleteCategory(idOfObject: Int) {
-    // User.shared.categories.removeAll(where: )
-    // let particularCategory = realm.objects(Category.self).filter("id == \(idOfObject)")
-    // print("idOfObject for deleteCategory= \(idOfObject)")
-    // try! realm.write {
-    //   realm.delete(particularCategory)
-    // }
+    userReference.updateData([
+      "categories": [
+        idOfObject.description: FieldValue.delete()
+      ]
+    ]) { error in
+      if let error = error {
+        print("deleteCategory Error writing document: \(error)")
+      } else {
+        print("deleteCategory Document successfully written!")
+      }
+    }
   }
 
   func deleteOperation(idOfObject: Int) {
-    // let particularOperations = realm.objects(ListOfOperations.self).filter("id == \(idOfObject)")
-    // print("idOfObject for delete= \(idOfObject)")
-    // try! realm.write {
-    //   realm.delete(particularOperations)
-    // }
+    userReference.updateData([
+      "operations": [
+        idOfObject.description: FieldValue.delete()
+      ]
+    ]) { error in
+      if let error = error {
+        print("deleteOperation Error writing document: \(error)")
+      } else {
+        print("deleteOperation Document successfully written!")
+      }
+    }
+
   }
 
   func updateCategory(name: String, icon: String, idOfObject: UUID) {
     let updCategory = Category(name: name, icon: icon, id: idOfObject)
-    try! userReference .setData([
+    userReference.setData([
       "categories": [
         idOfObject.description: [
           "name": updCategory.name,
@@ -145,11 +157,11 @@ struct UserRepository {
   }
 
 
-  // MARK: - операции
+    // MARK: - операции
   func addOperations(amount: Double, category: String, note: String, date: Date) {
     let newOperation = Operation(amount: amount, category: category, note: note, date: date)
-    try! userReference .setData([
-      "operation": [
+    userReference .setData([
+      "operations": [
         newOperation.id.description: [
           "amount": newOperation.amount,
           "category": newOperation.category,
@@ -170,7 +182,7 @@ struct UserRepository {
 
   func updateOperations(amount: Double, category: String, note: String, date: Date, idOfObject: UUID) {
     let updOperation = Operation(amount: amount, category: category, note: note, date: date)
-    try! userReference .setData([
+    userReference.setData([
       "operation": [
         idOfObject.description: [
           "amount": updOperation.amount,
@@ -187,6 +199,7 @@ struct UserRepository {
       }
     }
   }
+}
 
 class GraphData {
   var date: Date

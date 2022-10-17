@@ -7,10 +7,10 @@
 
 import UIKit
 
-class Screen1TableVCHeader: UITableViewCell {
+class VCMainTableVCHeader: UITableViewCell {
   @IBOutlet var labelHeaderDate: UILabel!
 
-  var delegateScreen1: protocolScreen1Delegate?
+  var vcMainDelegate: protocolVCMain?
   var specCellTag: Int = 0
 
   override func awakeFromNib() {
@@ -32,16 +32,16 @@ class Screen1TableVCHeader: UITableViewCell {
     let formatterPrint = DateFormatter()
     formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) // +3 час(Moscow)
     formatterPrint.dateFormat = "d MMMM YYYY"
-    labelHeaderDate.text = formatterPrint.string(from: ViewModelScreen1.shared.returnDataArrayOfOperations()[specCellTag].date)
+    labelHeaderDate.text = formatterPrint.string(from: vmMain.shared.returnDataArrayOfOperations()[specCellTag].date)
   }
 
   func startCell2() {
     print("Header2: ---")
     let formatterPrint = DateFormatter()
     formatterPrint.dateFormat = "d MMMM YYYY"
-    let specVar: Int = specCellTag - ViewModelScreen1.shared.returnArrayForIncrease()[specCellTag - 1]
-    print("222: \(formatterPrint.string(from: ViewModelScreen1.shared.returnDataArrayOfOperations()[specVar].date))")
-    labelHeaderDate.text = formatterPrint.string(from: ViewModelScreen1.shared.returnDataArrayOfOperations()[specVar].date)
+    let specVar: Int = specCellTag - vmMain.shared.returnArrayForIncrease()[specCellTag - 1]
+    print("222: \(formatterPrint.string(from: vmMain.shared.returnDataArrayOfOperations()[specVar].date))")
+    labelHeaderDate.text = formatterPrint.string(from: vmMain.shared.returnDataArrayOfOperations()[specVar].date)
   }
 
   func setTag(tag: Int) {

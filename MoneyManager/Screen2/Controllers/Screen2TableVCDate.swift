@@ -18,7 +18,7 @@ class Screen2TableVCDate: UITableViewCell {
   @IBOutlet var buttonSelectDate: UIButton!
 
   // MARK: - делегаты и переменные
-  var delegateScreen2: protocolScreen2Delegate?
+  var delegateScreen2: protocolVCSetting?
   var specCellTag: Int = 0
 
   // MARK: - переходы
@@ -43,15 +43,15 @@ class Screen2TableVCDate: UITableViewCell {
     dateFormatter.dateStyle = .medium
     dateFormatter.timeStyle = .none
 
-    if ViewModelScreen2.shared.returnNewOperation().date != Date.init(timeIntervalSince1970: TimeInterval(0)) {
-      labelSelectDate.text = dateFormatter.string(from: ViewModelScreen2.shared.returnNewOperation().date)
+    if SettingViewModel.shared.returnNewOperation().date != Date.init(timeIntervalSince1970: TimeInterval(0)) {
+      labelSelectDate.text = dateFormatter.string(from: SettingViewModel.shared.returnNewOperation().date)
       labelSelectDate.textColor = .black
     } else {
-      labelSelectDate.text = ViewModelScreen2.shared.returnScreen2MenuArray()[specCellTag].text
+      labelSelectDate.text = SettingViewModel.shared.returnScreen2MenuArray()[specCellTag].text
     }
 
     // textFieldSelectDate.tintColor = UIColor.clear //делает курсор бесцветным, но не убирает его
-    labelDate.text = ViewModelScreen2.shared.returnScreen2MenuArray()[specCellTag].name
+    labelDate.text = SettingViewModel.shared.returnScreen2MenuArray()[specCellTag].name
     self.isUserInteractionEnabled = true
 
     let gesture = UITapGestureRecognizer(target: self, action: #selector(startEditing))

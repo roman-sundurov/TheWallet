@@ -1,5 +1,5 @@
 //
-//  VCScreen2.swift
+//  VCSetting.swift
 //  MoneyManager
 //
 //  Created by Roman on 16.01.2021.
@@ -7,18 +7,20 @@
 
 import UIKit
 
-protocol protocolScreen2Delegate {
+protocol protocolVCSetting {
   func changeCategoryClosePopUpScreen2()
   func changeCategoryOpenPopUpScreen2(_ tag: Int)
   func tableViewScreen2Update(row: Int)
 
   // функции возврата
   func returnDelegateScreen2TableViewCellNote() -> protocolScreen2TableVCNoteDelegate
-  func returnDelegateScreen1() -> protocolScreen1Delegate
+  func returnDelegateScreen1() -> protocolVCMain
 
   // функции обновления newOperation
   func openAlertDatePicker()
   func screen2StatusIsEditingStart()
+
+  func setVCSetting(amount: Double, category: String, date: Date, note: String, id: UUID)
 }
 
 struct Screen2MenuData {
@@ -27,20 +29,7 @@ struct Screen2MenuData {
 }
 
 
-class DataOfCategories {
-  var name: String
-  var icon: String
-  var id: Int
-
-  init(name1: String, icon1: String, id1: Int) {
-    self.name = name1
-    self.icon = icon1
-    self.id = id1
-  }
-}
-
-
-class VCScreen2: UIViewController {
+class VCSetting: UIViewController {
   // MARK: - объявление аутлетов
 
   @IBOutlet var screen2SegmentControl: UISegmentedControl!
@@ -53,16 +42,19 @@ class VCScreen2: UIViewController {
   @IBOutlet var labelScreen2Header: UILabel!
 
   // MARK: - делегаты, переменные
-  var delegateScreen1: protocolScreen1Delegate?
+  var vcMainDelegate: protocolVCMain?
   private var delegateScreen2Container: protocolScreen2ContainerDelegate?
   var delegateScreen2TableViewCellCategory: protocolScreen2TableViewCellCategory?
   var delegateScreen2TableViewCellNote: protocolScreen2TableVCNoteDelegate?
   var delegateScreen2TableViewCellDate: protocolScreen2TableVCDateDelegate?
-  var screen2StatusEditing = false // показывает, создаётся ли новая операция, или редактируется предыдущая
+  var vcSettingStatusEditing = false // показывает, создаётся ли новая операция, или редактируется предыдущая
 
   var tapOfChangeCategoryOpenPopUp: UITapGestureRecognizer?
   var tapOutsideTextViewToGoFromTextView: UITapGestureRecognizer?
   var keyboardHeight: CGFloat = 0 // хранит высоту клавиатуры
+
+  var screen2MenuArray: [Screen2MenuData] = []
+  var newOperation: Operation?
 
   // MARK: - объекты
   let alertDatePicker = UIAlertController(title: "Select date", message: nil, preferredStyle: .actionSheet)
@@ -76,38 +68,38 @@ class VCScreen2: UIViewController {
 
   // MARK: - переходы
   @IBAction func buttonToAddNewOperation(_ sender: Any) {
-    let newOperation = ViewModelScreen2.shared.returnNewOperation()
+    let newOperation = SettingViewModel.shared.returnNewOperation()
     if !newOperation.category.isEmpty && textFieldAmount.text != "0" {
       // set Amount
       print("2. screen2SegmentControl.selectedSegmentIndex= \(screen2SegmentControl.selectedSegmentIndex)")
       if screen2SegmentControl.selectedSegmentIndex == 0 {
         print("textFieldAmount.text= \(textFieldAmount.text as Optional)")
-        ViewModelScreen2.shared.setAmountInNewOperation(amount: Double(textFieldAmount.text ?? "0")!)
+        SettingViewModel.shared.setAmountInNewOperation(amount: Double(textFieldAmount.text ?? "0")!)
       } else if screen2SegmentControl.selectedSegmentIndex == 1 {
-        ViewModelScreen2.shared.setAmountInNewOperation(amount: -Double(textFieldAmount.text ?? "0")!)
+        SettingViewModel.shared.setAmountInNewOperation(amount: -Double(textFieldAmount.text ?? "0")!)
       }
 
       // set Date
       if delegateScreen2TableViewCellDate?.returnDateTextField().text == "Today" {
         let dateNow = Date.init()
-        ViewModelScreen2.shared.setDateInNewOperation(date: dateNow)
+        SettingViewModel.shared.setDateInNewOperation(date: dateNow)
       } else {
-        ViewModelScreen2.shared.setDateInNewOperation(date: datePicker.date)
+        SettingViewModel.shared.setDateInNewOperation(date: datePicker.date)
       }
 
       // set Note
       if delegateScreen2TableViewCellNote?.returnNoteView().text! == "Placeholder" {
-        ViewModelScreen2.shared.setNoteInNewOperation(note: "")
+        SettingViewModel.shared.setNoteInNewOperation(note: "")
       } else {
-        ViewModelScreen2.shared.setNoteInNewOperation(note: (delegateScreen2TableViewCellNote?.returnNoteView().text!)!)
+        SettingViewModel.shared.setNoteInNewOperation(note: (delegateScreen2TableViewCellNote?.returnNoteView().text!)!)
       }
 
       print("newOperation.amount= \(newOperation.amount), newOperation.category= \(newOperation.category), newOperation.date= \(newOperation.date), newOperation.note= \(newOperation.note),")
 
-      if screen2StatusEditing == true {
+      if vcSettingStatusEditing == true {
         print("newOperation.amount222= \(newOperation.amount)")
         print("newOperation.date222= \(newOperation.date)")
-        ViewModelScreen1.shared.editOperationInRealm(
+        vmMain.shared.editOperationInRealm(
           newAmount: newOperation.amount,
           newCategory: newOperation.category,
           newNote: newOperation.note,
@@ -115,7 +107,7 @@ class VCScreen2: UIViewController {
           id: newOperation.id
         )
       } else {
-        ViewModelScreen1.shared.addOperationInRealm(
+        vmMain.shared.addOperationInRealm(
           newAmount: newOperation.amount,
           newCategory: newOperation.category,
           newNote: newOperation.note,
@@ -123,7 +115,7 @@ class VCScreen2: UIViewController {
         )
       }
 
-      delegateScreen1?.screen1AllUpdate()
+      vcMainDelegate?.updateScreen()
       dismiss(animated: true, completion: nil)
     } else {
       self.present(alertErrorAddNewOperation, animated: true, completion: nil)
@@ -246,7 +238,7 @@ class VCScreen2: UIViewController {
   }
 
   func donePressed() {
-    ViewModelScreen2.shared.setDateInNewOperation(date: datePicker.date)
+    SettingViewModel.shared.setDateInNewOperation(date: datePicker.date)
     tableViewScreen2Update(row: 2)
   }
 
@@ -348,7 +340,7 @@ class VCScreen2: UIViewController {
 
   // MARK: - viewWillAppear
   override func viewWillAppear(_ animated: Bool) {
-    if screen2StatusEditing == true {
+    if vcSettingStatusEditing == true {
       screen2StatusIsEditingStart()
     }
 
@@ -376,8 +368,8 @@ class VCScreen2: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    ViewModelScreen2.shared.screen2DataReceive()
-    ViewModelScreen2.shared.menuArrayCalculate()
+    SettingViewModel.shared.screen2DataReceive()
+    SettingViewModel.shared.menuArrayCalculate()
     self.view.insertSubview(self.blurViewScreen2, belowSubview: self.containerBottomScreen2)
     self.blurViewScreen2.backgroundColor = .clear
     self.blurViewScreen2.translatesAutoresizingMaskIntoConstraints = false
@@ -452,16 +444,16 @@ class VCScreen2: UIViewController {
 
 
 // MARK: - additional protocols
-extension VCScreen2: protocolScreen2Delegate {
-  func returnDelegateScreen1() -> protocolScreen1Delegate {
-    return delegateScreen1!
+extension VCSetting: protocolVCSetting {
+  func returnDelegateScreen1() -> protocolVCMain {
+    return vcMainDelegate!
   }
 
   func screen2StatusIsEditingStart() {
     print("1. screen2SegmentControl.selectedSegmentIndex= \(screen2SegmentControl.selectedSegmentIndex)")
 
     // set Amount
-    let newOperation = ViewModelScreen2.shared.returnNewOperation()
+    let newOperation = SettingViewModel.shared.returnNewOperation()
     if newOperation.amount > 0 {
       screen2SegmentControl.selectedSegmentIndex = 0
     } else if newOperation.amount < 0 {

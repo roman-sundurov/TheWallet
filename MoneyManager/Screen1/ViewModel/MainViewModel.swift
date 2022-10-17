@@ -1,5 +1,5 @@
 //
-//  ViewModelScreen1.swift
+//  vmMain.swift
 //  MoneyManager
 //
 //  Created by Roman on 27.04.2022.
@@ -7,24 +7,7 @@
 
 import Foundation
 
-class ViewModelScreen1 {
-  static let shared = ViewModelScreen1()
-
-  private let instanceVCScreen1 = VCScreen1()
-  private var dataArrayOfOperations: [Operation] = []
-  // показывает количество заголовков с новой датой в таблице, которое предшествует конкретной операции
-  private var arrayForIncrease: [Int] = [0]
-  private var graphDataArray: [GraphData] = []
-  private var daysForSorting: Int = 30
-
-  // хранение оригинала данных из Realm
-  private var dataArrayOfOperationsOriginal: [Operation] = []
-
-
-  // MARK: - функции возврата
-  func returnDataArrayOfOperations() -> [Operation] {
-    return dataArrayOfOperations
-  }
+extension VCMain {
 
   func returnArrayForIncrease() -> [Int] {
     return arrayForIncrease
@@ -33,7 +16,7 @@ class ViewModelScreen1 {
   func returnDayOfDate(_ dateInternal: Date) -> String {
     let formatterPrint = DateFormatter()
     formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) // +3 час(Moscow)
-    switch returnDaysForSorting() {
+    switch User.shared.daysForSorting {
     case 365:
       formatterPrint.dateFormat = "MMMM YYYY"
     default:
@@ -42,67 +25,11 @@ class ViewModelScreen1 {
     return formatterPrint.string(from: dateInternal)
   }
 
-  func returnDaysForSorting() -> Int {
-    return daysForSorting
-  }
-
 
   // MARK: - value set functions
   func setDaysForSorting(newValue: Int) {
+    UserRepository.shared.updateDaysForSorting(daysForSorting: newValue)
     daysForSorting = newValue
-  }
-
-
-  // MARK: - realm set functions
-  func screen1DataReceive() {
-    dataArrayOfOperationsOriginal = []
-    for operation in Persistence.shared.getRealmDataOperations() {
-      dataArrayOfOperationsOriginal.append(Operation(
-        amount1: operation.amount,
-        category1: operation.category,
-        note1: operation.note,
-        date1: operation.date,
-        id1: operation.id
-      ))
-    }
-    daysForSorting = Persistence.shared.returnDaysForSorting()
-    print("daysForSorting in screen1DataReceive= \(Persistence.shared.returnDaysForSorting())")
-    print("newTableDataArrayOriginal= \(dataArrayOfOperationsOriginal)")
-  }
-
-  func daysForSortingRealmUpdate() {
-    Persistence.shared.updateDaysForSorting(daysForSorting: daysForSorting)
-  }
-
-  func deleteCategoryInRealm(id: Int) {
-    Persistence.shared.deleteCategory(idOfObject: ViewModelScreen2.shared.returnDataArrayOfCategory()[id].id)
-  }
-
-  func deleteOperationInRealm(tag: Int) {
-    // VCScreen1.shared.actionsOperationsClosePopUpScreen1()
-    Persistence.shared.deleteOperation(idOfObject: returnDataArrayOfOperations()[tag].id)
-  }
-
-  func addOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date) {
-    Persistence.shared.addOperations(amount: newAmount, category: newCategory, note: newNote, date: newDate)
-  }
-
-  func editOperationInRealm(newAmount: Double, newCategory: String, newNote: String, newDate: Date, id: Int) {
-    print("editOperationInRealm")
-    Persistence.shared.updateOperations(
-      amount: newAmount,
-      category: newCategory,
-      note: newNote,
-      date: newDate,
-      idOfObject: id)
-  }
-
-  func editCategoryInRealm(newName: String, newIcon: String, id: Int) {
-    print("editCategoryInRealm")
-    Persistence.shared.updateCategory(
-      name: newName,
-      icon: newIcon,
-      idOfObject: ViewModelScreen2.shared.returnDataArrayOfCategory()[id].id)
   }
 
 

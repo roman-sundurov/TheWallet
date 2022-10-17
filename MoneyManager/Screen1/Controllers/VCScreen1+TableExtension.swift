@@ -1,5 +1,5 @@
 //
-//  VCScreen1+TableExtension.swift
+//  VCMain+TableExtension.swift
 //  MoneyManager
 //
 //  Created by Roman on 27.04.2022.
@@ -8,40 +8,40 @@
 import Foundation
 import UIKit
 
-extension VCScreen1: UITableViewDelegate, UITableViewDataSource {
+extension VCMain: UITableViewDelegate, UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    print("ViewModelScreen1.shared.tableNumberOfRowsInSection()= \(ViewModelScreen1.shared.tableNumberOfRowsInSection())")
-    return ViewModelScreen1.shared.tableNumberOfRowsInSection()
+    print("ViewModelScreen1.shared.tableNumberOfRowsInSection()= \(vmMain.shared.tableNumberOfRowsInSection())")
+    return vmMain.shared.tableNumberOfRowsInSection()
     // return 0
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     print("indexPath.row= \(indexPath.row)")
-    let arrayForIncrease = ViewModelScreen1.shared.returnArrayForIncrease()
-    if ViewModelScreen1.shared.returnDataArrayOfOperations().isEmpty {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableVCHeader
-      cell.delegateScreen1 = self
+    let arrayForIncrease = vmMain.shared.returnArrayForIncrease()
+    if vmMain.shared.returnDataArrayOfOperations().isEmpty {
+      let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! VCMainTableVCHeader
+      cell.vcMainDelegate = self
       cell.startCellEmpty()
       return cell
     } else {
       if indexPath.row == 0 {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableVCHeader
-        cell.delegateScreen1 = self
+        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! VCMainTableVCHeader
+        cell.vcMainDelegate = self
         cell.setTag(tag: indexPath.row)
         cell.startCell()
         return cell
       } else if arrayForIncrease[indexPath.row] != arrayForIncrease[indexPath.row - 1] {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableVCHeader
-        cell.delegateScreen1 = self
+        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! VCMainTableVCHeader
+        cell.vcMainDelegate = self
         cell.setTag(tag: indexPath.row)
         cell.startCell2()
         return cell
       } else if indexPath.row == arrayForIncrease.count {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! Screen1TableVCHeader
+        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! VCMainTableVCHeader
         cell.labelHeaderDate.isHidden = true
         return cell
       } else {

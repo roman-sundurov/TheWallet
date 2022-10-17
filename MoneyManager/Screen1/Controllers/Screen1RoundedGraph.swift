@@ -8,7 +8,7 @@
 import UIKit
 
 protocol protocolScreen1RoundedGraph {
-  func setDelegateScreen1RoundedGraph(delegate: protocolScreen1Delegate)
+  func setDelegateScreen1RoundedGraph(delegate: protocolVCMain)
 }
 
 @IBDesignable
@@ -21,7 +21,7 @@ class Screen1RoundedGraph: UIView {
 
   // MARK: - делегаты и переменные
 
-  var deligateScreen1: protocolScreen1Delegate?
+  var deligateScreen1: protocolVCMain?
 
   var incomesColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
   var expensesColor = UIColor.red
@@ -76,7 +76,7 @@ class Screen1RoundedGraph: UIView {
 
 
 extension Screen1RoundedGraph: protocolScreen1RoundedGraph {
-  func setDelegateScreen1RoundedGraph(delegate: protocolScreen1Delegate) {
+  func setDelegateScreen1RoundedGraph(delegate: protocolVCMain) {
     deligateScreen1 = delegate
   }
 }

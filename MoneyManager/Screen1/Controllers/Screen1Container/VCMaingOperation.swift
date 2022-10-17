@@ -1,5 +1,5 @@
 //
-//  VCScreen1ContainerOperation.swift
+//  VCMaingOperation.swift
 //  MoneyManager
 //
 //  Created by Roman on 17.04.2021.
@@ -11,7 +11,7 @@ protocol protocolScreen1ContainerOperation {
   func startCell(tag: Int)
 }
 
-class VCScreen1ContainerOperation: UIViewController {
+class VCMaingOperation: UIViewController {
   // MARK: - аутлеты
 
   @IBOutlet var labelCategory: UILabel!
@@ -27,7 +27,7 @@ class VCScreen1ContainerOperation: UIViewController {
 
   // MARK: - делегаты и переменные
 
-  var delegateScreen1: protocolScreen1Delegate?
+  var vcMainDelegate: protocolVCMain?
   var newTableDataArray: [Operation] = []
   var specCellTag: Int = 0
   var specVar: Int = 0
@@ -37,14 +37,14 @@ class VCScreen1ContainerOperation: UIViewController {
 
 
   @IBAction func buttonActionToEditOperation(_ sender: Any) {
-    delegateScreen1?.editOperation(tag: specVar)
+    vcMainDelegate?.editOperation(tag: specVar)
   }
 
 
   @IBAction func buttonActionToDeleteOperation(_ sender: Any) {
-    delegateScreen1?.actionsOperationsClosePopUpScreen1()
-    ViewModelScreen1.shared.deleteOperationInRealm(tag: specVar)
-    delegateScreen1?.screen1AllUpdate()
+    vcMainDelegate?.hideOperation()
+    vmMain.shared.deleteOperationInRealm(tag: specVar)
+    vcMainDelegate?.updateScreen()
   }
 
   override func viewDidLoad() {
@@ -59,31 +59,31 @@ class VCScreen1ContainerOperation: UIViewController {
 }
 
 
-extension VCScreen1ContainerOperation: protocolScreen1ContainerOperation {
+extension VCMaingOperation: protocolScreen1ContainerOperation {
   func startCell(tag: Int) {
     print(tag)
-    print(ViewModelScreen1.shared.returnArrayForIncrease()[tag])
+    print(vmMain.shared.returnArrayForIncrease()[tag])
 
     specCellTag = tag
-    specVar = specCellTag - ViewModelScreen1.shared.returnArrayForIncrease()[specCellTag]
+    specVar = specCellTag - vmMain.shared.returnArrayForIncrease()[specCellTag]
 
     // Отображения category
-    labelCategory.text = ViewModelScreen1.shared.returnDataArrayOfOperations()[specVar].category
+    labelCategory.text = vmMain.shared.returnDataArrayOfOperations()[specVar].category
 
     // Отображения date
     let formatterPrint = DateFormatter()
     formatterPrint.dateFormat = "d MMMM YYYY"
-    labelDate.text = formatterPrint.string(from: ViewModelScreen1.shared.returnDataArrayOfOperations()[specVar].date)
+    labelDate.text = formatterPrint.string(from: vmMain.shared.returnDataArrayOfOperations()[specVar].date)
 
     // Отображения amount
-    if ViewModelScreen1.shared.returnDataArrayOfOperations()[specVar].amount.truncatingRemainder(dividingBy: 1) == 0 {
-      labelAmount.text = String(format: "%.0f", ViewModelScreen1.shared.returnDataArrayOfOperations()[specVar].amount)
+    if vmMain.shared.returnDataArrayOfOperations()[specVar].amount.truncatingRemainder(dividingBy: 1) == 0 {
+      labelAmount.text = String(format: "%.0f", vmMain.shared.returnDataArrayOfOperations()[specVar].amount)
     } else {
-      labelAmount.text = String(format: "%.2f", ViewModelScreen1.shared.returnDataArrayOfOperations()[specVar].amount)
+      labelAmount.text = String(format: "%.2f", vmMain.shared.returnDataArrayOfOperations()[specVar].amount)
     }
 
     // Отображения currencyStatus
-    if ViewModelScreen1.shared.returnDataArrayOfOperations()[specVar].amount < 0 {
+    if vmMain.shared.returnDataArrayOfOperations()[specVar].amount < 0 {
       labelAmount.textColor = UIColor.red
       currencyStatus.textColor = UIColor.red
     } else {
@@ -92,6 +92,6 @@ extension VCScreen1ContainerOperation: protocolScreen1ContainerOperation {
     }
 
     // Отображение textViewNotes
-    textViewNotes.text = ViewModelScreen1.shared.returnDataArrayOfOperations()[specVar].note
+    textViewNotes.text = vmMain.shared.returnDataArrayOfOperations()[specVar].note
   }
 }

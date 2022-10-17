@@ -7,12 +7,7 @@
 
 import Foundation
 
-class ViewModelScreen2 {
-  static let shared = ViewModelScreen2()
-
-  private var dataArrayOfCategory: [DataOfCategories] = [] // хранение оригинала данных из Realm
-  private var screen2MenuArray: [Screen2MenuData] = []
-  private var newOperation = ListOfOperations()
+extension VCSetting {
 
   // MARK: - функции возврата
   func returnDataArrayOfCategory() -> [DataOfCategories] {
@@ -35,32 +30,20 @@ class ViewModelScreen2 {
 
   func screen2DataReceive() {
     dataArrayOfCategory = []
-    for category in Persistence.shared.returnRealmDataCategories() {
+    for category in User.shared.categories {
       dataArrayOfCategory.append(DataOfCategories(name1: category.name, icon1: category.icon, id1: category.id))
     }
   }
 
-  func setAmountInNewOperation(amount: Double) {
-    newOperation.amount = amount
+  func setVCSetting(amount: Double, category: String, date: Date, note: String, id: UUID) {
+    newOperation?.amount = amount
+    newOperation?.category = category
+    newOperation?.date = date
+    newOperation?.note = note
+    newOperation?.id = id
   }
 
-  func setCategoryInNewOperation(category: String) {
-    newOperation.category = category
-  }
-
-  func setDateInNewOperation(date: Date) {
-    newOperation.date = date
-  }
-
-  func setNoteInNewOperation(note: String) {
-    newOperation.note = note
-  }
-
-  func setIDInNewOperation(id: Int) {
-    newOperation.id = id
-  }
-
-  func returnNewOperation() -> ListOfOperations {
-    return newOperation
+  func returnNewOperation() -> Operation {
+    return newOperation!
   }
 }

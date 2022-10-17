@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-extension VCScreen2: UITableViewDelegate, UITableViewDataSource {
+extension VCSetting: UITableViewDelegate, UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }

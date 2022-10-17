@@ -15,7 +15,7 @@ class Screen2TableVCCategory: UITableViewCell {
   @IBOutlet var labelSelectCategory: UILabel!
   @IBOutlet var buttonSelectCategory: UIButton!
 
-  var delegateScreen2: protocolScreen2Delegate?
+  var delegateScreen2: protocolVCSetting?
   var specCellTag: Int = 0
 
 // Анимация
@@ -33,13 +33,13 @@ class Screen2TableVCCategory: UITableViewCell {
   }
 
   func startCell() {
-    if ViewModelScreen2.shared.returnNewOperation().category.isEmpty == false {
-      labelSelectCategory.text = ViewModelScreen2.shared.returnNewOperation().category
+    if SettingViewModel.shared.returnNewOperation().category.isEmpty == false {
+      labelSelectCategory.text = SettingViewModel.shared.returnNewOperation().category
       labelSelectCategory.textColor = .black
     } else {
-      labelSelectCategory.text = ViewModelScreen2.shared.returnScreen2MenuArray()[specCellTag].text
+      labelSelectCategory.text = SettingViewModel.shared.returnScreen2MenuArray()[specCellTag].text
     }
-    labelCategory.text = ViewModelScreen2.shared.returnScreen2MenuArray()[specCellTag].name
+    labelCategory.text = SettingViewModel.shared.returnScreen2MenuArray()[specCellTag].name
     let gesture = UITapGestureRecognizer(
       target: self,
       action: #selector(changeCategoryOpenPopUpScreen2FromCellCategory(_:))

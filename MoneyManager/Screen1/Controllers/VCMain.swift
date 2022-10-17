@@ -1,5 +1,5 @@
 //
-//  VCScreen1.swift
+//  VCMain.swift
 //  MoneyManager
 //
 //  Created by Roman on 07.01.2021.
@@ -8,11 +8,10 @@
 
 import UIKit
 
-protocol protocolScreen1Delegate {
-  func findAmountOfHeaders() // подсчёт заголовков с датами в основнй таблице экрана
-  func screen1AllUpdate() // обновление данных на всэм экрана
-  func actionsOperationsOpenPopUpScreen1(_ tag: Int) // открывает PopUp-окно конкретной операции
-  func actionsOperationsClosePopUpScreen1() // закрывает PopUp-окно конкретной операции
+protocol protocolVCMain {
+  func updateScreen() // обновление данных на всэм экрана
+  func showOperation(_ tag: Int) // открывает PopUp-окно конкретной операции
+  func hideOperation() // закрывает PopUp-окно конкретной операции
   func editOperation(tag: Int) // переход в редактирование выбранной операции на втором экране
   func miniGraphStarterBackground(status: Bool)
 
@@ -25,8 +24,8 @@ protocol protocolScreen1Delegate {
 }
 
 
-class VCScreen1: UIViewController {
-  static let shared = VCScreen1()
+class VCMain: UIViewController {
+  static let shared = VCMain()
 
   // MARK: - объявление аутлетов
   @IBOutlet var tableViewScreen1: UITableView!
@@ -43,9 +42,9 @@ class VCScreen1: UIViewController {
   @IBOutlet var labelAmountOfIncomes: UILabel!
   @IBOutlet var labelAmountOfExpenses: UILabel!
   @IBOutlet var constraintTopMenuBottomStrip: NSLayoutConstraint!
-  @IBOutlet var containerBottomOperationScreen1: UIView!
+  @IBOutlet var viewOperation: UIView!
   @IBOutlet var constraintContainerBottomPoint: NSLayoutConstraint!
-  @IBOutlet var screen1MiniGraph: Screen1RoundedGraph!
+  @IBOutlet var miniGraph: Screen1RoundedGraph!
   @IBOutlet var screen1BottomMenu: UIView!
   @IBOutlet var scrollViewFromBottomPopInView: UIScrollView!
   @IBOutlet var graphFromBottomPopInView: UIView!
@@ -58,59 +57,62 @@ class VCScreen1: UIViewController {
   var income: Double = 0
   var expensive: Double = 0
 
-  var tapOfActionsOperationsOpenPopUpScreen1: UITapGestureRecognizer?
-  var delegateScreen2: protocolScreen2Delegate?
-  private var delegateScreen1Container: protocolScreen1ContainerOperation?
-  private var delegateScreen1GraphContainer: protocolScreen1ContainerGraph?
+  var tapShowOperation: UITapGestureRecognizer?
+  var vcSettingDelegate: protocolVCSetting?
+  private var vcOperationDelegate: protocolScreen1ContainerOperation?
+  private var vcGraphDelegate: protocolScreen1ContainerGraph?
 
   // хранение модифицированных данных из Realm для конкретного режима отоборажения
   var tagForEdit: Int = 0
   var screen1StatusGrapjDisplay = false
 
+  // показывает количество заголовков с новой датой в таблице, которое предшествует конкретной операции
+  var arrayForIncrease: [Int] = [0]
+  var graphDataArray: [GraphData] = []
+
+  var userData = UserRepository()
+
   // MARK: - объекты
-  let blurViewScreen1 = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+  let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
 
 
   // MARK: - переходы
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let vewController = segue.destination as? VCScreen2, segue.identifier == "segueToScreen2" {
-      delegateScreen2 = vewController
-      vewController.delegateScreen1 = self
+    if let vewController = segue.destination as? VCSetting, segue.identifier == "segueToVCSetting" {
+      vcSettingDelegate = vewController
+      vewController.vcMainDelegate = self
     }
-    if let viewController = segue.destination as? VCScreen1ContainerOperation, segue.identifier == "segueToScreen1Container" {
-      delegateScreen1Container = viewController
-      viewController.delegateScreen1 = self
+    if let viewController = segue.destination as? VCMaingOperation, segue.identifier == "segueToScreen1Container" {
+      vcOperationDelegate = viewController
+      viewController.vcMainDelegate = self
     }
-    if let viewController = segue.destination as? VCScreen1ContainerGraph,
+    if let viewController = segue.destination as? VCMainContainerGraph,
        segue.identifier == "segueToScreen1GraphContainer" {
-      delegateScreen1GraphContainer = viewController
-      viewController.delegateScreen1 = self
+      vcGraphDelegate = viewController
+      viewController.vcMainDelegate = self
     }
-    if let viewController = segue.destination as? VCScreen2, segue.identifier == "segueToScreen2ForEdit"{
-      viewController.screen2StatusEditing = true
-      viewController.delegateScreen1 = self
-      delegateScreen2 = viewController
-      let dataArrayOfOperations = ViewModelScreen1.shared.returnDataArrayOfOperations()
-      ViewModelScreen2.shared.setAmountInNewOperation(amount: dataArrayOfOperations[tagForEdit].amount)
-      ViewModelScreen2.shared.setCategoryInNewOperation(category: dataArrayOfOperations[tagForEdit].category)
-      ViewModelScreen2.shared.setDateInNewOperation(date: dataArrayOfOperations[tagForEdit].date)
-      ViewModelScreen2.shared.setNoteInNewOperation(note: dataArrayOfOperations[tagForEdit].note)
-      ViewModelScreen2.shared.setIDInNewOperation(id: dataArrayOfOperations[tagForEdit].id)
+    if let viewController = segue.destination as? VCSetting, segue.identifier == "segueToVCSettingForEdit"{
+      viewController.vcSettingStatusEditing = true
+      viewController.vcMainDelegate = self
+      vcSettingDelegate = viewController
+      let dataArrayOfOperations = userData.user!.operations
+
+      vcSettingDelegate!.setVCSetting(amount: dataArrayOfOperations[tagForEdit].amount, category: dataArrayOfOperations[tagForEdit].category, date: dataArrayOfOperations[tagForEdit].date, note: dataArrayOfOperations[tagForEdit].note, id: dataArrayOfOperations[tagForEdit].id)
     }
   }
 
   // MARK: - клики
   @IBAction func buttonActionScreen1NewOperation(_ sender: Any) {
-    performSegue(withIdentifier: "segueToScreen2", sender: nil)
+    performSegue(withIdentifier: "segueToVCSetting", sender: nil)
   }
 
   @IBAction func buttonActionScreen1ShowGraph(_ sender: Any) {
     print("screen1StatusGrapjDisplay= \(screen1StatusGrapjDisplay)")
     if screen1StatusGrapjDisplay == false {
       // Блокировка показа данных за 1 день в режиме графика
-      var daysForSorting = ViewModelScreen1.shared.returnDaysForSorting()
+      var daysForSorting = userData.user!.daysForSorting
       if daysForSorting == 1 {
-        ViewModelScreen1.shared.setDaysForSorting(newValue: 30)
+        setDaysForSorting(newValue: 30)
         daysForSorting = 30
         buttonWeeklyGesture(self)
       }
@@ -147,33 +149,33 @@ class VCScreen1: UIViewController {
     }
   }
 
-  func changeDaysForSorting() {
-    borderLineForMenu(days: ViewModelScreen1.shared.returnDaysForSorting())
-    ViewModelScreen1.shared.screen1TableUpdateSorting()
+  func changeDaysForSorting(newValue: Int) {
+    borderLineForMenu(days: newValue)
+    screen1TableUpdateSorting()
     tableViewScreen1.reloadData()
-    ViewModelScreen1.shared.daysForSortingRealmUpdate()
+    userData.updateDaysForSorting(daysForSorting: newValue)
     countingIncomesAndExpensive()
-    delegateScreen1GraphContainer?.containerGraphUpdate()
+    vcGraphDelegate?.containerGraphUpdate()
   }
 
   @IBAction func buttonDailyGesture(_ sender: Any) {
-    ViewModelScreen1.shared.setDaysForSorting(newValue: 1)
-    changeDaysForSorting()
+    setDaysForSorting(newValue: 1)
+    changeDaysForSorting(newValue: 1)
   }
 
   @IBAction func buttonWeeklyGesture(_ sender: Any) {
-    ViewModelScreen1.shared.setDaysForSorting(newValue: 7)
-    changeDaysForSorting()
+    setDaysForSorting(newValue: 7)
+    changeDaysForSorting(newValue: 7)
   }
 
   @IBAction func buttonMonthlyGesture(_ sender: Any) {
-    ViewModelScreen1.shared.setDaysForSorting(newValue: 30)
-    changeDaysForSorting()
+    setDaysForSorting(newValue: 30)
+    changeDaysForSorting(newValue: 30)
   }
 
   @IBAction func buttonYearlyGesture(_ sender: Any) {
-    ViewModelScreen1.shared.setDaysForSorting(newValue: 365)
-    changeDaysForSorting()
+    setDaysForSorting(newValue: 365)
+    changeDaysForSorting(newValue: 365)
   }
 
   @objc func switchScreen1GraphContainer(tap: UITapGestureRecognizer) {
@@ -186,11 +188,11 @@ class VCScreen1: UIViewController {
     if tap.state == UIGestureRecognizer.State.ended {
       print("Tap ended")
       let pointOfTap = tap.location(in: self.view)
-      if containerBottomOperationScreen1.frame.contains(pointOfTap) {
+      if viewOperation.frame.contains(pointOfTap) {
         print("Tap inside Container")
       } else {
         print("Tap outside Container")
-        actionsOperationsClosePopUpScreen1()
+        hideOperation()
       }
     }
   }
@@ -256,13 +258,13 @@ class VCScreen1: UIViewController {
   }
 
   func countingIncomesAndExpensive() {
-    let dataArrayOfOperations = ViewModelScreen1.shared.returnDataArrayOfOperations()
+    let dataArrayOfOperations = userData.user?.operations
     income = 0
     expensive = 0
-    for data in dataArrayOfOperations.filter({ $0.amount > 0 }) {
+    for data in dataArrayOfOperations!.filter({ $0.amount > 0 }) {
       income += data.amount
     }
-    for data in dataArrayOfOperations.filter({ $0.amount < 0 }) {
+    for data in dataArrayOfOperations!.filter({ $0.amount < 0 }) {
       expensive += data.amount
     }
 
@@ -280,8 +282,8 @@ class VCScreen1: UIViewController {
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    borderLineForMenu(days: ViewModelScreen1.shared.returnDaysForSorting())
-    ViewModelScreen1.shared.screen1TableUpdateSorting()
+    borderLineForMenu(days: userData.user!.daysForSorting)
+    screen1TableUpdateSorting()
     tableViewScreen1.reloadData()
     self.view.layoutIfNeeded()
   }
@@ -289,8 +291,19 @@ class VCScreen1: UIViewController {
   // MARK: - viewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
-    screen1MiniGraph.setDelegateScreen1RoundedGraph(delegate: self)
-    screen1AllUpdate()
+
+    Task {
+      do {
+        try? await userData.getUserData() { data in
+          self.updateScreen()
+        }
+      } catch {
+        print("userRepositoryInstance Error")
+      }
+    }
+
+    miniGraph.setDelegateScreen1RoundedGraph(delegate: self)
+    updateScreen()
     // округление углов на первом экране
     bottomPopInView.layer.cornerRadius = 20
     bottomPopInView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -298,23 +311,23 @@ class VCScreen1: UIViewController {
     bottomPopInView.clipsToBounds = true
 
     // Добавление Blur-эффекта
-    self.view.insertSubview(self.blurViewScreen1, belowSubview: self.containerBottomOperationScreen1)
-    self.blurViewScreen1.backgroundColor = .clear
-    self.blurViewScreen1.translatesAutoresizingMaskIntoConstraints = false
+    self.view.insertSubview(self.blurView, belowSubview: self.viewOperation)
+    self.blurView.backgroundColor = .clear
+    self.blurView.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
-      self.blurViewScreen1.topAnchor.constraint(equalTo: self.view.topAnchor),
-      self.blurViewScreen1.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-      self.blurViewScreen1.heightAnchor.constraint(equalTo: self.view.heightAnchor),
-      self.blurViewScreen1.widthAnchor.constraint(equalTo: self.view.widthAnchor)
+      self.blurView.topAnchor.constraint(equalTo: self.view.topAnchor),
+      self.blurView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+      self.blurView.heightAnchor.constraint(equalTo: self.view.heightAnchor),
+      self.blurView.widthAnchor.constraint(equalTo: self.view.widthAnchor)
     ])
-    self.blurViewScreen1.isHidden = true
+    self.blurView.isHidden = true
 
     self.view.layoutIfNeeded()
   }
 }
 
 // MARK: - additional protocols
-extension VCScreen1: protocolScreen1Delegate {
+extension VCMain: protocolVCMain {
   func miniGraphStarterBackground(status: Bool) {
     miniGraphStarterBackground.isHidden = status
   }
@@ -336,23 +349,22 @@ extension VCScreen1: protocolScreen1Delegate {
   }
 
   func returnDelegateScreen1GraphContainer() -> protocolScreen1ContainerGraph {
-    return delegateScreen1GraphContainer!
+    return vcGraphDelegate!
   }
 
   func editOperation(tag: Int) {
-    actionsOperationsClosePopUpScreen1()
+    hideOperation()
     tagForEdit = tag
     performSegue(withIdentifier: "segueToScreen2ForEdit", sender: nil)
   }
 
 
-  func screen1AllUpdate() {
-    ViewModelScreen1.shared.screen1DataReceive()
-    ViewModelScreen1.shared.screen1TableUpdateSorting()
+  func updateScreen() {
+    screen1TableUpdateSorting()
     tableViewScreen1.reloadData()
     countingIncomesAndExpensive()
-    changeDaysForSorting()
-    screen1MiniGraph.setNeedsDisplay()
+    changeDaysForSorting(newValue: userData.user!.daysForSorting)
+    miniGraph.setNeedsDisplay()
   }
 
   func findAmountOfHeaders() {
@@ -360,9 +372,9 @@ extension VCScreen1: protocolScreen1Delegate {
   }
 
   // MARK: - PopUp-окно операции
-  func actionsOperationsOpenPopUpScreen1(_ tag: Int) {
-    containerBottomOperationScreen1.layer.cornerRadius = 20
-    delegateScreen1Container?.startCell(tag: tag)
+  func showOperation(_ tag: Int) {
+    viewOperation.layer.cornerRadius = 20
+    vcOperationDelegate?.startCell(tag: tag)
 
     UIView.animate(
       withDuration: 0.3,
@@ -372,18 +384,18 @@ extension VCScreen1: protocolScreen1Delegate {
       options: UIView.AnimationOptions(),
       animations: {
         self.constraintContainerBottomPoint.constant = 50
-        self.tapOfActionsOperationsOpenPopUpScreen1 = UITapGestureRecognizer(
+        self.tapShowOperation = UITapGestureRecognizer(
           target: self,
           action: #selector(self.handlerToHideContainerScreen1(tap:)))
-        self.view.addGestureRecognizer(self.tapOfActionsOperationsOpenPopUpScreen1!)
-        self.blurViewScreen1.isHidden = false
+        self.view.addGestureRecognizer(self.tapShowOperation!)
+        self.blurView.isHidden = false
         self.view.layoutIfNeeded()
       },
       completion: { _ in })
   }
 
 
-  func actionsOperationsClosePopUpScreen1() {
+  func hideOperation() {
     UIView.animate(
       withDuration: 0,
       delay: 0,
@@ -392,8 +404,8 @@ extension VCScreen1: protocolScreen1Delegate {
       options: UIView.AnimationOptions(),
       animations: {
         self.constraintContainerBottomPoint.constant = -311
-        self.blurViewScreen1.isHidden = true
-        self.view.removeGestureRecognizer(self.tapOfActionsOperationsOpenPopUpScreen1!)
+        self.blurView.isHidden = true
+        self.view.removeGestureRecognizer(self.tapShowOperation!)
         self.view.layoutIfNeeded()
       },
       completion: { _ in })
