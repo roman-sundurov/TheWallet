@@ -1,5 +1,5 @@
 //
-//  Screen2TableVCDate.swift
+//  SettingTableVCDate.swift
 //  MoneyManager
 //
 //  Created by Roman on 06.03.2021.
@@ -7,18 +7,18 @@
 
 import UIKit
 
-protocol protocolScreen2TableVCDateDelegate {
+protocol protocolSettingTableVCDate {
   func returnDateTextField() -> UILabel
 }
 
 
-class Screen2TableVCDate: UITableViewCell {
+class SettingTableVCDate: UITableViewCell {
   @IBOutlet var labelDate: UILabel!
   @IBOutlet var labelSelectDate: UILabel!
   @IBOutlet var buttonSelectDate: UIButton!
 
   // MARK: - делегаты и переменные
-  var delegateScreen2: protocolVCSetting?
+  var vcSettingDelegate: protocolVCSetting?
   var specCellTag: Int = 0
 
   // MARK: - переходы
@@ -33,7 +33,7 @@ class Screen2TableVCDate: UITableViewCell {
 
 
   @objc func startEditing() {
-    delegateScreen2?.openAlertDatePicker()
+    vcSettingDelegate?.openAlertDatePicker()
     print("startEditing")
   }
 
@@ -64,7 +64,7 @@ class Screen2TableVCDate: UITableViewCell {
 }
 
 
-extension Screen2TableVCDate: protocolScreen2TableVCDateDelegate {
+extension SettingTableVCDate: protocolSettingTableVCDate {
   func returnDateTextField() -> UILabel {
     print("textViewDeselect")
     return labelSelectDate

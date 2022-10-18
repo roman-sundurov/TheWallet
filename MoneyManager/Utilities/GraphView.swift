@@ -8,13 +8,13 @@
 import UIKit
 
 protocol protocolGraphView {
-  func setDelegateScreen1ContainerGraph(deligate: protocolScreen1ContainerGraph)
+  func setDelegateScreen1ContainerGraph(deligate: protocolVCGraph)
   func setGraphPoints(data: [GraphData])
 }
 
 @IBDesignable
 class GraphView: UIView {
-  var deligateScreen1ContainerGraph: protocolScreen1ContainerGraph?
+  var deligateScreen1ContainerGraph: protocolVCGraph?
 
   // Weekly sample data
   var graphPoints: [Double] = []
@@ -218,7 +218,7 @@ class GraphView: UIView {
 // MARK: - additional protocols
 
 extension GraphView: protocolGraphView {
-  func setDelegateScreen1ContainerGraph(deligate: protocolScreen1ContainerGraph) {
+  func setDelegateScreen1ContainerGraph(deligate: protocolVCGraph) {
     deligateScreen1ContainerGraph = deligate
   }
 

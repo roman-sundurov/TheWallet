@@ -7,18 +7,18 @@
 
 import UIKit
 
-class Screen1TableVCOperation: UITableViewCell {
+class MainTableVCOperation: UITableViewCell {
   @IBOutlet var viewPictureOfCategory: UIView!
   @IBOutlet var labelCategory: UILabel!
   @IBOutlet var labelAmount: UILabel!
   @IBOutlet var currencyStatus: UILabel!
 
-  var delegateScreen1: protocolVCMain?
+  var vcMainDelegate: protocolVCMain?
   var specCellTag: Int = 0
 
 // Анимация
-  @objc func actionsOperationsOpenPopUpScreen1(_ tag: Int) {
-    delegateScreen1?.showOperation(specCellTag)
+  @objc func showOperation(_ tag: Int) {
+    vcMainDelegate?.showOperation(specCellTag)
     print("ChangeCategory from Screen2")
   }
 
@@ -33,15 +33,15 @@ class Screen1TableVCOperation: UITableViewCell {
 
   func startCell() {
     print("Simple Cell: ---")
-    let specVar: Int = specCellTag - vmMain.shared.returnArrayForIncrease()[specCellTag]
-    labelCategory.text = vmMain.shared.returnDataArrayOfOperations()[specVar].category
+    let specVar: Int = specCellTag - vcMainDelegate!.returnArrayForIncrease()[specCellTag]
+    labelCategory.text = vcMainDelegate!.getUserData().operations[specVar].category
 
-    if vmMain.shared.returnDataArrayOfOperations()[specVar].amount.truncatingRemainder(dividingBy: 1) == 0 {
-      labelAmount.text = String(format: "%.0f", vmMain.shared.returnDataArrayOfOperations()[specVar].amount)
+    if vcMainDelegate!.getUserData().operations[specVar].amount.truncatingRemainder(dividingBy: 1) == 0 {
+      labelAmount.text = String(format: "%.0f", vcMainDelegate!.getUserData().operations[specVar].amount)
     } else {
-      labelAmount.text = String(format: "%.2f", vmMain.shared.returnDataArrayOfOperations()[specVar].amount)
+      labelAmount.text = String(format: "%.2f", vcMainDelegate!.getUserData().operations[specVar].amount)
     }
-    if vmMain.shared.returnDataArrayOfOperations()[specVar].amount < 0 {
+    if vcMainDelegate!.getUserData().operations[specVar].amount < 0 {
       labelAmount.textColor = UIColor.init(named: "InterfaceColorRed")
       currencyStatus.textColor = UIColor.init(named: "InterfaceColorRed")
     } else {

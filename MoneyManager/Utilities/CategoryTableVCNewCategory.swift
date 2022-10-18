@@ -1,5 +1,5 @@
 //
-//  Screen2ContainerTableVCNewCategory.swift
+//  CategoryTableVCNewCategory.swift
 //  MoneyManager
 //
 //  Created by Roman on 21.04.2021.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol protocolScreen2ContainerTableVCNewCategory {
+protocol protocolCategoryTableVCNewCategory {
   func textFieldNewCategoryClear()
 }
 
-class Screen2ContainerTableVCNewCategory: UITableViewCell {
+class CategoryTableVCNewCategory: UITableViewCell {
   // MARK: - объявление аутлетов
 
   @IBOutlet var textFieldNewCategory: UITextField!
@@ -24,19 +24,19 @@ class Screen2ContainerTableVCNewCategory: UITableViewCell {
     if let value = textFieldNewCategory.text?.isEmpty, value == false {
       Persistence.shared.addCategory(name: textFieldNewCategory.text!, icon: "")
 
-      delegateScreen2Container?.screen2ContainerAddNewCategory()
+      vcCategoryDelegate?.screen2ContainerAddNewCategory()
 
       textFieldNewCategoryClear()
       textFieldNewCategory.endEditing(true)
     } else {
-      delegateScreen2Container?.presentAlertErrorAddNewCategory()
+      vcCategoryDelegate?.presentAlertErrorAddNewCategory()
     }
   }
 
 
   // MARK: - делегаты и переменные
 
-  var delegateScreen2Container: protocolScreen2ContainerDelegate?
+  var vcCategoryDelegate: protocolVCCategory?
 
 
   override func awakeFromNib() {
@@ -52,7 +52,7 @@ class Screen2ContainerTableVCNewCategory: UITableViewCell {
 }
 
 
-extension Screen2ContainerTableVCNewCategory: protocolScreen2ContainerTableVCNewCategory {
+extension CategoryTableVCNewCategory: protocolCategoryTableVCNewCategory {
   func textFieldNewCategoryClear() {
     textFieldNewCategory.text = ""
   }

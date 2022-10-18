@@ -9,6 +9,15 @@ import Foundation
 
 extension VCMain {
 
+  func getUserRepository() -> UserRepository {
+    return userRepository
+  }
+
+  func getUserData() -> User {
+    return userData!
+  }
+
+
   func returnArrayForIncrease() -> [Int] {
     return arrayForIncrease
   }
@@ -28,8 +37,8 @@ extension VCMain {
 
   // MARK: - value set functions
   func setDaysForSorting(newValue: Int) {
-    UserRepository.shared.updateDaysForSorting(daysForSorting: newValue)
-    daysForSorting = newValue
+    userRepository.updateDaysForSorting(daysForSorting: newValue)
+    userData?.daysForSorting = newValue
   }
 
 
@@ -55,7 +64,6 @@ extension VCMain {
         }
       }
     }
-    print("dataArrayOfOperations before filter: \(dataArrayOfOperations)")
     graphDataArray.sort { $0.date > $1.date }
     print("graphDataArray after sort: \(graphDataArray)")
   }
@@ -67,12 +75,12 @@ extension VCMain {
 
   // MARK: - таблица списка операций
   func tableNumberOfRowsInSection() -> Int {
-    if dataArrayOfOperations.isEmpty { return 1 }
+    if userData!.operations.isEmpty { return 1 }
     arrayForIncrease = [1]
     var previousDay: Int = 0
     var counter: Int = 0
 
-    for x in dataArrayOfOperations {
+    for x in userData!.operations {
       if Calendar.current.component(.day, from: x.date) != previousDay {
         if counter != 0 {
           // Расчёт множителя, который компенсирует наличие header'ов в таблице
@@ -86,22 +94,21 @@ extension VCMain {
       counter += 1
     }
     arrayForIncrease.append(arrayForIncrease.last!)
-    graphDataArrayCalculating(dataArrayOfOperationsInternal: dataArrayOfOperations)
+    graphDataArrayCalculating(dataArrayOfOperationsInternal: userData!.operations)
     return arrayForIncrease.count
   }
 
   // MARK: - Обновление сортировки
   func screen1TableUpdateSorting() {
-    let newTime = Date() - TimeInterval.init(86400 * returnDaysForSorting())
-    dataArrayOfOperations = dataArrayOfOperationsOriginal
-    dataArrayOfOperations.sort { $0.date > $1.date }
+    let newTime = Date() - TimeInterval.init(86400 * userData!.daysForSorting)
+    userData!.operations.sort { $0.date > $1.date }
   
     graphDataArray = graphDataArray
       .sorted { $0.date > $1.date }
       .filter { $0.date >= newTime }
     print("graphDataArray when sort: \(graphDataArray)")
   
-    let temporarilyDate = dataArrayOfOperations.filter { $0.date >= newTime }
-    dataArrayOfOperations = temporarilyDate
+    let temporarilyDate = userData?.operations.filter { $0.date >= newTime }
+    userData?.operations = temporarilyDate!
   }
 }

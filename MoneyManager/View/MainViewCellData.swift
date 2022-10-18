@@ -7,7 +7,7 @@
 
 import UIKit
 
-class VCMainTableVCHeader: UITableViewCell {
+class MainViewCellData: UITableViewCell {
   @IBOutlet var labelHeaderDate: UILabel!
 
   var vcMainDelegate: protocolVCMain?
@@ -32,16 +32,16 @@ class VCMainTableVCHeader: UITableViewCell {
     let formatterPrint = DateFormatter()
     formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) // +3 час(Moscow)
     formatterPrint.dateFormat = "d MMMM YYYY"
-    labelHeaderDate.text = formatterPrint.string(from: vmMain.shared.returnDataArrayOfOperations()[specCellTag].date)
+    labelHeaderDate.text = formatterPrint.string(from: User.shared.operations[specCellTag].date)
   }
 
   func startCell2() {
     print("Header2: ---")
     let formatterPrint = DateFormatter()
     formatterPrint.dateFormat = "d MMMM YYYY"
-    let specVar: Int = specCellTag - vmMain.shared.returnArrayForIncrease()[specCellTag - 1]
-    print("222: \(formatterPrint.string(from: vmMain.shared.returnDataArrayOfOperations()[specVar].date))")
-    labelHeaderDate.text = formatterPrint.string(from: vmMain.shared.returnDataArrayOfOperations()[specVar].date)
+    let specVar: Int = specCellTag - vcMainDelegate!.returnArrayForIncrease()[specCellTag - 1]
+    print("222: \(formatterPrint.string(from: (vcMainDelegate!.getUserData().operations[specVar].date)))")
+    labelHeaderDate.text = formatterPrint.string(from: vcMainDelegate!.getUserData().operations[specVar].date)
   }
 
   func setTag(tag: Int) {

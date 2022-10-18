@@ -13,21 +13,21 @@ protocol protocolVCSetting {
   func tableViewScreen2Update(row: Int)
 
   // функции возврата
-  func returnDelegateScreen2TableViewCellNote() -> protocolScreen2TableVCNoteDelegate
-  func returnDelegateScreen1() -> protocolVCMain
+  func returnDelegateScreen2TableViewCellNote() -> protocolSettingTableVCNote
 
   // функции обновления newOperation
   func openAlertDatePicker()
-  func screen2StatusIsEditingStart()
+  func startEditing()
 
   func setVCSetting(amount: Double, category: String, date: Date, note: String, id: UUID)
+  func returnNewOperation() -> Operation
+  func returnScreen2MenuArray() -> [Screen2MenuData]
 }
 
 struct Screen2MenuData {
   let name: String
   let text: String
 }
-
 
 class VCSetting: UIViewController {
   // MARK: - объявление аутлетов
@@ -43,10 +43,10 @@ class VCSetting: UIViewController {
 
   // MARK: - делегаты, переменные
   var vcMainDelegate: protocolVCMain?
-  private var delegateScreen2Container: protocolScreen2ContainerDelegate?
-  var delegateScreen2TableViewCellCategory: protocolScreen2TableViewCellCategory?
-  var delegateScreen2TableViewCellNote: protocolScreen2TableVCNoteDelegate?
-  var delegateScreen2TableViewCellDate: protocolScreen2TableVCDateDelegate?
+  private var categoryViewDelefate: protocolVCCategory?
+  var settingTableVCCategoryDelegate: protocolSettingTableVCCategory?
+  var tableViewCellNoteDelegate: protocolSettingTableVCNote?
+  var tableViewCellDateDelegate: protocolSettingTableVCDate?
   var vcSettingStatusEditing = false // показывает, создаётся ли новая операция, или редактируется предыдущая
 
   var tapOfChangeCategoryOpenPopUp: UITapGestureRecognizer?
@@ -63,55 +63,62 @@ class VCSetting: UIViewController {
     message: nil,
     preferredStyle: .alert
   )
-  let blurViewScreen2 = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+  let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
   let datePicker = UIDatePicker()
 
   // MARK: - переходы
   @IBAction func buttonToAddNewOperation(_ sender: Any) {
-    let newOperation = SettingViewModel.shared.returnNewOperation()
+    var newOperation = returnNewOperation()
     if !newOperation.category.isEmpty && textFieldAmount.text != "0" {
+
+      // var newAnount: Double?
+      // var newDate: Date?
+      // var newNote: String?
+
       // set Amount
       print("2. screen2SegmentControl.selectedSegmentIndex= \(screen2SegmentControl.selectedSegmentIndex)")
       if screen2SegmentControl.selectedSegmentIndex == 0 {
         print("textFieldAmount.text= \(textFieldAmount.text as Optional)")
-        SettingViewModel.shared.setAmountInNewOperation(amount: Double(textFieldAmount.text ?? "0")!)
+        newOperation.amount = Double(textFieldAmount.text ?? "0")!
       } else if screen2SegmentControl.selectedSegmentIndex == 1 {
-        SettingViewModel.shared.setAmountInNewOperation(amount: -Double(textFieldAmount.text ?? "0")!)
+        newOperation.amount = -Double(textFieldAmount.text ?? "0")!
       }
 
       // set Date
-      if delegateScreen2TableViewCellDate?.returnDateTextField().text == "Today" {
+      if tableViewCellDateDelegate?.returnDateTextField().text == "Today" {
         let dateNow = Date.init()
-        SettingViewModel.shared.setDateInNewOperation(date: dateNow)
+        newOperation.date = dateNow
       } else {
-        SettingViewModel.shared.setDateInNewOperation(date: datePicker.date)
+        newOperation.date = datePicker.date
       }
 
       // set Note
-      if delegateScreen2TableViewCellNote?.returnNoteView().text! == "Placeholder" {
-        SettingViewModel.shared.setNoteInNewOperation(note: "")
+      if tableViewCellNote?.returnNoteView().text! == "Placeholder" {
+        newOperation.note = ""
       } else {
-        SettingViewModel.shared.setNoteInNewOperation(note: (delegateScreen2TableViewCellNote?.returnNoteView().text!)!)
+        newOperation.note = (tableViewCellNote?.returnNoteView().text)!
       }
+
+      setVCSetting(amount: newOperation.amount, category: newOperation.category, date: newOperation.date, note: newOperation.note, id: newOperation.id)
 
       print("newOperation.amount= \(newOperation.amount), newOperation.category= \(newOperation.category), newOperation.date= \(newOperation.date), newOperation.note= \(newOperation.note),")
 
       if vcSettingStatusEditing == true {
         print("newOperation.amount222= \(newOperation.amount)")
         print("newOperation.date222= \(newOperation.date)")
-        vmMain.shared.editOperationInRealm(
-          newAmount: newOperation.amount,
-          newCategory: newOperation.category,
-          newNote: newOperation.note,
-          newDate: newOperation.date,
-          id: newOperation.id
+        vcMainDelegate?.updateOperations(
+          amount: newOperation.amount,
+          category: newOperation.category,
+          note: newOperation.note,
+          date: newOperation.date,
+          idOfObject: newOperation.id
         )
       } else {
-        vmMain.shared.addOperationInRealm(
-          newAmount: newOperation.amount,
-          newCategory: newOperation.category,
-          newNote: newOperation.note,
-          newDate: newOperation.date
+        vcMainDelegate?.addOperations(
+          amount: newOperation.amount,
+          category: newOperation.category,
+          note: newOperation.note,
+          date: newOperation.date
         )
       }
 
@@ -122,14 +129,14 @@ class VCSetting: UIViewController {
     }
   }
 
-  @IBAction func buttonCloseScreen2(_ sender: Any) {
+  @IBAction func buttonCloseSetting(_ sender: Any) {
     dismiss(animated: true, completion: nil)
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let viewController = segue.destination as? VCScreen2Container, segue.identifier == "segueToScreen2Container" {
-      delegateScreen2Container = viewController
-      viewController.delegateScreen2 = self
+    if let viewController = segue.destination as? VCCategory, segue.identifier == "segueToScreen2Container" {
+      categoryViewDelefate = viewController
+      viewController.vcSettingDelegate = self
     }
   }
 
@@ -238,7 +245,7 @@ class VCSetting: UIViewController {
   }
 
   func donePressed() {
-    SettingViewModel.shared.setDateInNewOperation(date: datePicker.date)
+    newOperation?.date = datePicker.date
     tableViewScreen2Update(row: 2)
   }
 
@@ -268,9 +275,9 @@ class VCSetting: UIViewController {
     print("func textFieldAmountEditingDidEnd")
   }
 
-  @IBAction func screen2SegmentControlAction(_ sender: Any) {
+  @IBAction func segmentControl(_ sender: Any) {
     textFieldAmount.endEditing(true)
-    delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
+    tableViewCellNoteDelegate?.tapOutsideNoteTextViewEditToHide()
     switch screen2SegmentControl.selectedSegmentIndex {
     case 0:
       screen2CurrencyStatus.setTitle("+$", for: .normal)
@@ -293,32 +300,32 @@ class VCSetting: UIViewController {
     }
   }
 
-  @objc func screen2TapHandler(tap: UITapGestureRecognizer) {
+  @objc func tapHandler(tap: UITapGestureRecognizer) {
     if tap.state == UIGestureRecognizer.State.ended {
       print("Tap TextView ended")
       let pointOfTap = tap.location(in: self.view)
 
       // Tap inside noteTextView
-      if delegateScreen2TableViewCellNote!.returnNoteView().frame.contains(pointOfTap) {
+      if tableViewCellNoteDelegate!.returnNoteView().frame.contains(pointOfTap) {
         textFieldAmount.endEditing(true)
         print("Tap inside noteTextView")
       }
 
       // Tap inside in dateTextView
-      else if delegateScreen2TableViewCellDate!.returnDateTextField().frame.contains(pointOfTap) {
+      else if tableViewCellDateDelegate!.returnDateTextField().frame.contains(pointOfTap) {
         textFieldAmount.endEditing(true)
-        delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
+        tableViewCellNoteDelegate?.tapOutsideNoteTextViewEditToHide()
         print("Tap inside in dateTextView")
       }
 
       // Tap inside in textFieldAmount
       else if textFieldAmount.frame.contains(pointOfTap) {
         print("Tap inside in textFieldAmount")
-        delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
+        tableViewCellNoteDelegate?.tapOutsideNoteTextViewEditToHide()
       } else {
         // Tap outside noteTextView and dateTextView and textFieldAmount
         textFieldAmount.endEditing(true)
-        delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
+        tableViewCellNoteDelegate?.tapOutsideNoteTextViewEditToHide()
         print("Tap outside noteTextView and dateTextView and textFieldAmount")
       }
     }
@@ -341,7 +348,7 @@ class VCSetting: UIViewController {
   // MARK: - viewWillAppear
   override func viewWillAppear(_ animated: Bool) {
     if vcSettingStatusEditing == true {
-      screen2StatusIsEditingStart()
+      startEditing()
     }
 
     super.viewWillAppear(animated)
@@ -368,25 +375,24 @@ class VCSetting: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    SettingViewModel.shared.screen2DataReceive()
-    SettingViewModel.shared.menuArrayCalculate()
-    self.view.insertSubview(self.blurViewScreen2, belowSubview: self.containerBottomScreen2)
-    self.blurViewScreen2.backgroundColor = .clear
-    self.blurViewScreen2.translatesAutoresizingMaskIntoConstraints = false
+    menuArrayCalculate()
+    self.view.insertSubview(self.blurView, belowSubview: self.containerBottomScreen2)
+    self.blurView.backgroundColor = .clear
+    self.blurView.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
-      self.blurViewScreen2.topAnchor.constraint(equalTo: self.view.topAnchor),
-      self.blurViewScreen2.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-      self.blurViewScreen2.heightAnchor.constraint(equalTo: self.view.heightAnchor),
-      self.blurViewScreen2.widthAnchor.constraint(equalTo: self.view.widthAnchor)
+      self.blurView.topAnchor.constraint(equalTo: self.view.topAnchor),
+      self.blurView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+      self.blurView.heightAnchor.constraint(equalTo: self.view.heightAnchor),
+      self.blurView.widthAnchor.constraint(equalTo: self.view.widthAnchor)
     ])
-    self.blurViewScreen2.isHidden = true
+    self.blurView.isHidden = true
 
     self.view.layoutIfNeeded()
     // print("screen2MenuArray.count: \(screen2MenuArray.count)")
 
     self.tapOutsideTextViewToGoFromTextView = UITapGestureRecognizer(
       target: self,
-      action: #selector(self.screen2TapHandler(tap:))
+      action: #selector(self.tapHandler(tap:))
     )
     self.view.addGestureRecognizer(self.tapOutsideTextViewToGoFromTextView!)
 
@@ -445,15 +451,12 @@ class VCSetting: UIViewController {
 
 // MARK: - additional protocols
 extension VCSetting: protocolVCSetting {
-  func returnDelegateScreen1() -> protocolVCMain {
-    return vcMainDelegate!
-  }
 
-  func screen2StatusIsEditingStart() {
+  func startEditing() {
     print("1. screen2SegmentControl.selectedSegmentIndex= \(screen2SegmentControl.selectedSegmentIndex)")
 
     // set Amount
-    let newOperation = SettingViewModel.shared.returnNewOperation()
+    var newOperation = returnNewOperation()
     if newOperation.amount > 0 {
       screen2SegmentControl.selectedSegmentIndex = 0
     } else if newOperation.amount < 0 {
@@ -494,7 +497,7 @@ extension VCSetting: protocolVCSetting {
     datePicker.date = newOperation.date
 
     // set Note
-    delegateScreen2TableViewCellNote?.setNoteViewText(newText: newOperation.note)
+    tableViewCellNoteDelegate?.setNoteViewText(newText: newOperation.note)
     print("newOperation.note= \(newOperation.note)")
 
     labelScreen2Header.text = "Edit"
@@ -510,8 +513,8 @@ extension VCSetting: protocolVCSetting {
     tableViewScreen2.reloadRows(at: [indexPath], with: .fade)
   }
 
-  func returnDelegateScreen2TableViewCellNote() -> protocolScreen2TableVCNoteDelegate {
-    return delegateScreen2TableViewCellNote!
+  func returnDelegateScreen2TableViewCellNote() -> protocolSettingTableVCNote {
+    return tableViewCellNoteDelegate!
   }
 
 
@@ -521,7 +524,7 @@ extension VCSetting: protocolVCSetting {
     self.containerBottomScreen2.layer.cornerRadius = 20
     self.constraintContainerBottomHeight.constant = CGFloat(50 * 6)
     textFieldAmount.endEditing(true)
-    delegateScreen2TableViewCellNote?.tapOutsideNoteTextViewEditToHide()
+    tableViewCellNoteDelegate?.tapOutsideNoteTextViewEditToHide()
 
     UIView.animate(
       withDuration: 0.3,
@@ -536,7 +539,7 @@ extension VCSetting: protocolVCSetting {
           action: #selector(self.handlerToHideContainerScreen2(tap:))
         )
         self.view.addGestureRecognizer(self.tapOfChangeCategoryOpenPopUp!)
-        self.blurViewScreen2.isHidden = false
+        self.blurView.isHidden = false
         self.view.layoutIfNeeded()
       },
       completion: { _ in }
@@ -555,12 +558,12 @@ extension VCSetting: protocolVCSetting {
       options: UIView.AnimationOptions(),
       animations: {
         self.constraintContainerBottomPoint.constant = -515
-        self.blurViewScreen2.isHidden = true
+        self.blurView.isHidden = true
         self.view.endEditing(true)
         self.view.removeGestureRecognizer(self.tapOfChangeCategoryOpenPopUp!)
         self.view.layoutIfNeeded()
-        if self.delegateScreen2Container?.returnScreen2StatusEditContainer() == true {
-          self.delegateScreen2Container?
+        if self.categoryViewDelefate?.returnScreen2StatusEditContainer() == true {
+          self.categoryViewDelefate?
             .returnDelegateScreen2ContainerTableVCNewCategory()
             .textFieldNewCategoryClear()
         }

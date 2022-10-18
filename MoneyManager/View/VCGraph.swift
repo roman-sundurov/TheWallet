@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol protocolScreen1ContainerGraph {
+protocol protocolVCGraph {
   func containerGraphUpdate()
   func setGraphIndicators(min: String, middle: String, max: String)
 }
 
-class VCMainContainerGraph: UIViewController {
+class VCGraph: UIViewController {
   // MARK: - объявление аутлетов
 
   @IBOutlet var graphView: GraphView!
@@ -117,7 +117,7 @@ class VCMainContainerGraph: UIViewController {
 }
 
 
-extension VCMainContainerGraph: protocolScreen1ContainerGraph {
+extension VCGraph: protocolVCGraph {
   func setGraphIndicators(min: String, middle: String, max: String) {
     minIndicatorLabel.text = min
     middleIndicatorLabel.text = middle
@@ -128,7 +128,7 @@ extension VCMainContainerGraph: protocolScreen1ContainerGraph {
   func containerGraphUpdate() {
     countFullPointsArray()
 
-    switch vmMain.shared.returnDaysForSorting() {
+    switch vcMainDelegate?.getUserData().daysForSorting {
     case 365:
       weeklyStackView.isHidden = true
       monthlyStackView.isHidden = false

@@ -9,11 +9,6 @@ import Foundation
 
 extension VCSetting {
 
-  // MARK: - функции возврата
-  func returnDataArrayOfCategory() -> [DataOfCategories] {
-    return dataArrayOfCategory
-  }
-
 
   // MARK: - data
   func menuArrayCalculate() {
@@ -26,13 +21,6 @@ extension VCSetting {
 
   func returnScreen2MenuArray() -> [Screen2MenuData] {
     return screen2MenuArray
-  }
-
-  func screen2DataReceive() {
-    dataArrayOfCategory = []
-    for category in User.shared.categories {
-      dataArrayOfCategory.append(DataOfCategories(name1: category.name, icon1: category.icon, id1: category.id))
-    }
   }
 
   func setVCSetting(amount: Double, category: String, date: Date, note: String, id: UUID) {

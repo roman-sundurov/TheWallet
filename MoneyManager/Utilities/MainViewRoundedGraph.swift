@@ -1,5 +1,5 @@
 //
-//  Screen1RoundedGraph.swift
+//  MainViewRoundedGraph.swift
 //  MoneyManager
 //
 //  Created by Roman on 02.06.2021.
@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol protocolScreen1RoundedGraph {
+protocol protocolViewRoundedGraph {
   func setDelegateScreen1RoundedGraph(delegate: protocolVCMain)
 }
 
 @IBDesignable
-class Screen1RoundedGraph: UIView {
+class MainViewRoundedGraph: UIView {
   private enum Constants {
     static let lineWidth: CGFloat = 25.0
     static let arcWidth: CGFloat = 76
@@ -21,7 +21,7 @@ class Screen1RoundedGraph: UIView {
 
   // MARK: - делегаты и переменные
 
-  var deligateScreen1: protocolVCMain?
+  var vcMainDelegate: protocolVCMain?
 
   var incomesColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
   var expensesColor = UIColor.red
@@ -30,7 +30,7 @@ class Screen1RoundedGraph: UIView {
   // MARK: - draw()
 
   override func draw(_ rect: CGRect) {
-    let data = deligateScreen1?.returnIncomesExpenses()
+    let data = vcMainDelegate?.returnIncomesExpenses()
     var incomesExpensesRatio: Double = 1
 
     if data!["income"] == 0 && data!["expensive"] != 0 {
@@ -42,9 +42,9 @@ class Screen1RoundedGraph: UIView {
     print("incomesExpensesRatio= \(incomesExpensesRatio)")
 
     if data!.isEmpty {
-      deligateScreen1?.miniGraphStarterBackground(status: false)
+      vcMainDelegate?.miniGraphStarterBackground(status: false)
     } else {
-      deligateScreen1?.miniGraphStarterBackground(status: true)
+      vcMainDelegate?.miniGraphStarterBackground(status: true)
       let center = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
       let radius = max(bounds.width, bounds.height)
 
@@ -75,8 +75,8 @@ class Screen1RoundedGraph: UIView {
 }
 
 
-extension Screen1RoundedGraph: protocolScreen1RoundedGraph {
+extension MainViewRoundedGraph: protocolViewRoundedGraph {
   func setDelegateScreen1RoundedGraph(delegate: protocolVCMain) {
-    deligateScreen1 = delegate
+    vcMainDelegate = delegate
   }
 }

@@ -108,7 +108,7 @@ struct UserRepository {
     }
   }
 
-  func deleteCategory(idOfObject: Int) {
+  func deleteCategory(idOfObject: UUID) {
     userReference.updateData([
       "categories": [
         idOfObject.description: FieldValue.delete()

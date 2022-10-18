@@ -1,5 +1,5 @@
 //
-//  VCMaingOperation.swift
+//  VCOperation.swift
 //  MoneyManager
 //
 //  Created by Roman on 17.04.2021.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol protocolScreen1ContainerOperation {
+protocol protocolVCOperation {
   func startCell(tag: Int)
 }
 
-class VCMaingOperation: UIViewController {
+class VCOperation: UIViewController {
   // MARK: - аутлеты
 
   @IBOutlet var labelCategory: UILabel!
@@ -59,7 +59,7 @@ class VCMaingOperation: UIViewController {
 }
 
 
-extension VCMaingOperation: protocolScreen1ContainerOperation {
+extension VCOperation: protocolVCOperation {
   func startCell(tag: Int) {
     print(tag)
     print(vmMain.shared.returnArrayForIncrease()[tag])

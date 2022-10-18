@@ -1,5 +1,5 @@
 //
-//  Screen2TableVCNote.swift
+//  SettingTableVCNote.swift
 //  MoneyManager
 //
 //  Created by Roman on 19.01.2021.
@@ -7,17 +7,17 @@
 
 import UIKit
 
-protocol protocolScreen2TableVCNoteDelegate{
+protocol protocolSettingTableVCNote{
   func tapOutsideNoteTextViewEditToHide()
   func returnNoteView() -> UITextView
   func setNoteViewText(newText: String)
 }
 
-class Screen2TableVCNote: UITableViewCell, UITextViewDelegate {
+class SettingTableVCNote: UITableViewCell, UITextViewDelegate {
 //    @IBOutlet var textFieldNotes: UITextField!
   @IBOutlet var textViewNotes: UITextView!
 
-  var delegateScreen2: protocolVCSetting?
+  var vcSettingDelegate: protocolVCSetting?
   var specCellTag: Int = 0
 
 // MARK: - Работа с Placeholder
@@ -67,7 +67,7 @@ class Screen2TableVCNote: UITableViewCell, UITextViewDelegate {
 }
 
 
-extension Screen2TableVCNote: protocolScreen2TableVCNoteDelegate {
+extension SettingTableVCNote: protocolSettingTableVCNote {
   func setNoteViewText(newText: String) {
     textViewNotes.text = newText
     print("newText= \(newText)")

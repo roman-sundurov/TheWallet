@@ -17,10 +17,17 @@ protocol protocolVCMain {
 
   // // функции возврата
   func returnMonthOfDate(_ dateInternal: Date) -> String
-  func returnDelegateScreen1GraphContainer() -> protocolScreen1ContainerGraph
+  func returnDelegateScreen1GraphContainer() -> protocolVCGraph
   func returnIncomesExpenses() -> [String: Double]
   // // interface update
   // func tableViewReloadData()
+  func returnArrayForIncrease() -> [Int]
+  func getUserRepository() -> UserRepository
+  func getUserData() -> User
+  func updateOperations(amount: Double, category: String, note: String, date: Date, idOfObject: UUID)
+  func addOperations(amount: Double, category: String, note: String, date: Date)
+  func deleteCategory(idOfObject: UUID)
+  func updateCategory(name: String, icon: String, idOfObject: UUID)
 }
 
 
@@ -44,7 +51,7 @@ class VCMain: UIViewController {
   @IBOutlet var constraintTopMenuBottomStrip: NSLayoutConstraint!
   @IBOutlet var viewOperation: UIView!
   @IBOutlet var constraintContainerBottomPoint: NSLayoutConstraint!
-  @IBOutlet var miniGraph: Screen1RoundedGraph!
+  @IBOutlet var miniGraph: MainViewRoundedGraph!
   @IBOutlet var screen1BottomMenu: UIView!
   @IBOutlet var scrollViewFromBottomPopInView: UIScrollView!
   @IBOutlet var graphFromBottomPopInView: UIView!
@@ -59,8 +66,8 @@ class VCMain: UIViewController {
 
   var tapShowOperation: UITapGestureRecognizer?
   var vcSettingDelegate: protocolVCSetting?
-  private var vcOperationDelegate: protocolScreen1ContainerOperation?
-  private var vcGraphDelegate: protocolScreen1ContainerGraph?
+  private var vcOperationDelegate: protocolVCOperation?
+  private var vcGraphDelegate: protocolVCGraph?
 
   // хранение модифицированных данных из Realm для конкретного режима отоборажения
   var tagForEdit: Int = 0
@@ -70,7 +77,9 @@ class VCMain: UIViewController {
   var arrayForIncrease: [Int] = [0]
   var graphDataArray: [GraphData] = []
 
-  var userData = UserRepository()
+  var userRepository = UserRepository()
+  var userData: User?
+
 
   // MARK: - объекты
   let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
@@ -82,11 +91,11 @@ class VCMain: UIViewController {
       vcSettingDelegate = vewController
       vewController.vcMainDelegate = self
     }
-    if let viewController = segue.destination as? VCMaingOperation, segue.identifier == "segueToScreen1Container" {
+    if let viewController = segue.destination as? VCOperation, segue.identifier == "segueToScreen1Container" {
       vcOperationDelegate = viewController
       viewController.vcMainDelegate = self
     }
-    if let viewController = segue.destination as? VCMainContainerGraph,
+    if let viewController = segue.destination as? VCGraph,
        segue.identifier == "segueToScreen1GraphContainer" {
       vcGraphDelegate = viewController
       viewController.vcMainDelegate = self
@@ -95,7 +104,7 @@ class VCMain: UIViewController {
       viewController.vcSettingStatusEditing = true
       viewController.vcMainDelegate = self
       vcSettingDelegate = viewController
-      let dataArrayOfOperations = userData.user!.operations
+      let dataArrayOfOperations = userRepository.user!.operations
 
       vcSettingDelegate!.setVCSetting(amount: dataArrayOfOperations[tagForEdit].amount, category: dataArrayOfOperations[tagForEdit].category, date: dataArrayOfOperations[tagForEdit].date, note: dataArrayOfOperations[tagForEdit].note, id: dataArrayOfOperations[tagForEdit].id)
     }
@@ -110,7 +119,7 @@ class VCMain: UIViewController {
     print("screen1StatusGrapjDisplay= \(screen1StatusGrapjDisplay)")
     if screen1StatusGrapjDisplay == false {
       // Блокировка показа данных за 1 день в режиме графика
-      var daysForSorting = userData.user!.daysForSorting
+      var daysForSorting = userRepository.user!.daysForSorting
       if daysForSorting == 1 {
         setDaysForSorting(newValue: 30)
         daysForSorting = 30
@@ -153,7 +162,7 @@ class VCMain: UIViewController {
     borderLineForMenu(days: newValue)
     screen1TableUpdateSorting()
     tableViewScreen1.reloadData()
-    userData.updateDaysForSorting(daysForSorting: newValue)
+    userRepository.updateDaysForSorting(daysForSorting: newValue)
     countingIncomesAndExpensive()
     vcGraphDelegate?.containerGraphUpdate()
   }
@@ -258,7 +267,7 @@ class VCMain: UIViewController {
   }
 
   func countingIncomesAndExpensive() {
-    let dataArrayOfOperations = userData.user?.operations
+    let dataArrayOfOperations = userRepository.user?.operations
     income = 0
     expensive = 0
     for data in dataArrayOfOperations!.filter({ $0.amount > 0 }) {
@@ -282,7 +291,7 @@ class VCMain: UIViewController {
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    borderLineForMenu(days: userData.user!.daysForSorting)
+    borderLineForMenu(days: userRepository.user!.daysForSorting)
     screen1TableUpdateSorting()
     tableViewScreen1.reloadData()
     self.view.layoutIfNeeded()
@@ -294,7 +303,7 @@ class VCMain: UIViewController {
 
     Task {
       do {
-        try? await userData.getUserData() { data in
+        try? await userRepository.getUserData() { data in
           self.updateScreen()
         }
       } catch {
@@ -348,7 +357,7 @@ extension VCMain: protocolVCMain {
     return formatterPrint.string(from: dateInternal)
   }
 
-  func returnDelegateScreen1GraphContainer() -> protocolScreen1ContainerGraph {
+  func returnDelegateScreen1GraphContainer() -> protocolVCGraph {
     return vcGraphDelegate!
   }
 
@@ -363,7 +372,7 @@ extension VCMain: protocolVCMain {
     screen1TableUpdateSorting()
     tableViewScreen1.reloadData()
     countingIncomesAndExpensive()
-    changeDaysForSorting(newValue: userData.user!.daysForSorting)
+    changeDaysForSorting(newValue: userRepository.user!.daysForSorting)
     miniGraph.setNeedsDisplay()
   }
 

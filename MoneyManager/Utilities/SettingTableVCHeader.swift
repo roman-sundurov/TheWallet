@@ -1,5 +1,5 @@
 //
-//  Screen2TableVCHeader.swift
+//  SettingTableVCHeader.swift
 //  MoneyManager
 //
 //  Created by Roman on 19.01.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Screen2TableVCHeader: UITableViewCell {
+class SettingTableVCHeader: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
   }
