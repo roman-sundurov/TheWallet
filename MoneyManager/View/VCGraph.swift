@@ -29,7 +29,7 @@ class VCGraph: UIViewController {
   // MARK: - Functions
   func countFullPointsArray() {
     print("countFullPointsArray")
-    let graphData = vmMain.shared.returnGraphData()
+    let graphData = vcMainDelegate!.returnGraphData()
     print("graphData= \(graphData)")
     for data in graphData {
       print("graphData_n.cumulativeAmount= \(data.amount), graphData_n.date= \(data.date)")
@@ -48,12 +48,12 @@ class VCGraph: UIViewController {
       // Проверка заполнения оставшихся дней. Если запись пуста - ставим 0.
       var x: Int = 1
 
-      for amountOfDay in 1..<(vmMain.shared.returnDaysForSorting()) {
+      for amountOfDay in 1..<vcMainDelegate!.getUserData().daysForSorting {
         print("2222")
 
         if graphData.count >= x + 1 {
           print("3333")
-          if vmMain.shared.returnDayOfDate(graphData[x].date) != vmMain.shared.returnDayOfDate(
+          if vcMainDelegate!.returnDayOfDate(graphData[x].date) != vcMainDelegate!.returnDayOfDate(
             Calendar.current.date(
               byAdding: .day,
               value: -amountOfDay,

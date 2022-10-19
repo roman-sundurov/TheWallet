@@ -12,7 +12,7 @@ protocol protocolVCMain {
   func updateScreen() // обновление данных на всэм экрана
   func showOperation(_ tag: Int) // открывает PopUp-окно конкретной операции
   func hideOperation() // закрывает PopUp-окно конкретной операции
-  func editOperation(tag: Int) // переход в редактирование выбранной операции на втором экране
+  func editOperation(tag: UUID) // переход в редактирование выбранной операции на втором экране
   func miniGraphStarterBackground(status: Bool)
 
   // // функции возврата
@@ -24,10 +24,15 @@ protocol protocolVCMain {
   func returnArrayForIncrease() -> [Int]
   func getUserRepository() -> UserRepository
   func getUserData() -> User
+  func updateuserData(newData: User)
+  
   func updateOperations(amount: Double, category: String, note: String, date: Date, idOfObject: UUID)
   func addOperations(amount: Double, category: String, note: String, date: Date)
   func deleteCategory(idOfObject: UUID)
   func updateCategory(name: String, icon: String, idOfObject: UUID)
+  func returnGraphData() -> [GraphData]
+  func addCategory(name: String, icon: String)
+  func deleteOperation(idOfObject: UUID)
 }
 
 
@@ -65,12 +70,12 @@ class VCMain: UIViewController {
   var expensive: Double = 0
 
   var tapShowOperation: UITapGestureRecognizer?
-  var vcSettingDelegate: protocolVCSetting?
-  private var vcOperationDelegate: protocolVCOperation?
-  private var vcGraphDelegate: protocolVCGraph?
+  // var vcSettingDelegate: protocolVCSetting?
+  var vcOperationDelegate: protocolVCOperation?
+  var vcGraphDelegate: protocolVCGraph?
 
   // хранение модифицированных данных из Realm для конкретного режима отоборажения
-  var tagForEdit: Int = 0
+  var tagForEdit: UUID?
   var screen1StatusGrapjDisplay = false
 
   // показывает количество заголовков с новой датой в таблице, которое предшествует конкретной операции
@@ -87,27 +92,27 @@ class VCMain: UIViewController {
 
   // MARK: - переходы
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let vewController = segue.destination as? VCSetting, segue.identifier == "segueToVCSetting" {
-      vcSettingDelegate = vewController
-      vewController.vcMainDelegate = self
-    }
-    if let viewController = segue.destination as? VCOperation, segue.identifier == "segueToScreen1Container" {
-      vcOperationDelegate = viewController
-      viewController.vcMainDelegate = self
-    }
-    if let viewController = segue.destination as? VCGraph,
-       segue.identifier == "segueToScreen1GraphContainer" {
-      vcGraphDelegate = viewController
-      viewController.vcMainDelegate = self
-    }
-    if let viewController = segue.destination as? VCSetting, segue.identifier == "segueToVCSettingForEdit"{
-      viewController.vcSettingStatusEditing = true
-      viewController.vcMainDelegate = self
-      vcSettingDelegate = viewController
-      let dataArrayOfOperations = userRepository.user!.operations
-
-      vcSettingDelegate!.setVCSetting(amount: dataArrayOfOperations[tagForEdit].amount, category: dataArrayOfOperations[tagForEdit].category, date: dataArrayOfOperations[tagForEdit].date, note: dataArrayOfOperations[tagForEdit].note, id: dataArrayOfOperations[tagForEdit].id)
-    }
+    // if let vewController = segue.destination as? VCSetting, segue.identifier == "segueToVCSetting" {
+    //   // vcSettingDelegate = vewController
+    //   vewController.vcMainDelegate = self
+    // }
+    // if let viewController = segue.destination as? VCOperation, segue.identifier == "segueToScreen1Container" {
+    //   vcOperationDelegate = viewController
+    //   viewController.vcMainDelegate = self
+    // }
+    // if let viewController = segue.destination as? VCGraph,
+    //    segue.identifier == "segueToScreen1GraphContainer" {
+    //   vcGraphDelegate = viewController
+    //   viewController.vcMainDelegate = self
+    // }
+    // if let viewController = segue.destination as? VCSetting, segue.identifier == "segueToVCSettingForEdit"{
+    //   viewController.vcSettingStatusEditing = true
+    //   viewController.vcMainDelegate = self
+    //   vcSettingDelegate = viewController
+    //   let specialOperation = userRepository.user!.operations.filter({$0.id == tagForEdit}).first
+    // 
+    //   vcSettingDelegate!.setVCSetting(amount: specialOperation!.amount, category: specialOperation!.category, date: specialOperation!.date, note: specialOperation!.note, id: specialOperation!.id)
+    // }
   }
 
   // MARK: - клики
@@ -267,31 +272,32 @@ class VCMain: UIViewController {
   }
 
   func countingIncomesAndExpensive() {
-    let dataArrayOfOperations = userRepository.user?.operations
-    income = 0
-    expensive = 0
-    for data in dataArrayOfOperations!.filter({ $0.amount > 0 }) {
-      income += data.amount
-    }
-    for data in dataArrayOfOperations!.filter({ $0.amount < 0 }) {
-      expensive += data.amount
-    }
+    if let dataArrayOfOperations = userRepository.user?.operations {
+      income = 0
+      expensive = 0
+      for data in dataArrayOfOperations.filter({ $0.amount > 0 }) {
+        income += data.amount
+      }
+      for data in dataArrayOfOperations.filter({ $0.amount < 0 }) {
+        expensive += data.amount
+      }
 
-    if income.truncatingRemainder(dividingBy: 1) == 0 {
-      labelAmountOfIncomes.text = "$\(String(format: "%.0f", income))"
-    } else {
-      labelAmountOfIncomes.text = "$\(String(format: "%.2f", income))"
-    }
-    if expensive.truncatingRemainder(dividingBy: 1) == 0 {
-      labelAmountOfExpenses.text = "$\(String(format: "%.0f", expensive))"
-    } else {
-      labelAmountOfExpenses.text = "$\(String(format: "%.2f", expensive))"
+      if income.truncatingRemainder(dividingBy: 1) == 0 {
+        labelAmountOfIncomes.text = "$\(String(format: "%.0f", income))"
+      } else {
+        labelAmountOfIncomes.text = "$\(String(format: "%.2f", income))"
+      }
+      if expensive.truncatingRemainder(dividingBy: 1) == 0 {
+        labelAmountOfExpenses.text = "$\(String(format: "%.0f", expensive))"
+      } else {
+        labelAmountOfExpenses.text = "$\(String(format: "%.2f", expensive))"
+      }
     }
   }
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    borderLineForMenu(days: userRepository.user!.daysForSorting)
+    // borderLineForMenu(days: userRepository.user!.daysForSorting)
     screen1TableUpdateSorting()
     tableViewScreen1.reloadData()
     self.view.layoutIfNeeded()
@@ -304,7 +310,8 @@ class VCMain: UIViewController {
     Task {
       do {
         try? await userRepository.getUserData() { data in
-          self.updateScreen()
+          self.userData = data
+          print("userData= \(self.userData)")
         }
       } catch {
         print("userRepositoryInstance Error")
@@ -312,7 +319,7 @@ class VCMain: UIViewController {
     }
 
     miniGraph.setDelegateScreen1RoundedGraph(delegate: self)
-    updateScreen()
+    // updateScreen()
     // округление углов на первом экране
     bottomPopInView.layer.cornerRadius = 20
     bottomPopInView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -332,91 +339,5 @@ class VCMain: UIViewController {
     self.blurView.isHidden = true
 
     self.view.layoutIfNeeded()
-  }
-}
-
-// MARK: - additional protocols
-extension VCMain: protocolVCMain {
-  func miniGraphStarterBackground(status: Bool) {
-    miniGraphStarterBackground.isHidden = status
-  }
-
-  func returnIncomesExpenses() -> [String: Double] {
-    if income != 0 || expensive != 0 {
-      print("income= \(income), expensive= \(expensive)")
-      return ["income": income, "expensive": expensive]
-    } else {
-      return [:]
-    }
-  }
-
-  func returnMonthOfDate(_ dateInternal: Date) -> String {
-    let formatterPrint = DateFormatter()
-    formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) // +3 час(Moscow)
-    formatterPrint.dateFormat = "MMMM YYYY"
-    return formatterPrint.string(from: dateInternal)
-  }
-
-  func returnDelegateScreen1GraphContainer() -> protocolVCGraph {
-    return vcGraphDelegate!
-  }
-
-  func editOperation(tag: Int) {
-    hideOperation()
-    tagForEdit = tag
-    performSegue(withIdentifier: "segueToScreen2ForEdit", sender: nil)
-  }
-
-
-  func updateScreen() {
-    screen1TableUpdateSorting()
-    tableViewScreen1.reloadData()
-    countingIncomesAndExpensive()
-    changeDaysForSorting(newValue: userRepository.user!.daysForSorting)
-    miniGraph.setNeedsDisplay()
-  }
-
-  func findAmountOfHeaders() {
-    return
-  }
-
-  // MARK: - PopUp-окно операции
-  func showOperation(_ tag: Int) {
-    viewOperation.layer.cornerRadius = 20
-    vcOperationDelegate?.startCell(tag: tag)
-
-    UIView.animate(
-      withDuration: 0.3,
-      delay: 0,
-      usingSpringWithDamping: 0.8,
-      initialSpringVelocity: 0,
-      options: UIView.AnimationOptions(),
-      animations: {
-        self.constraintContainerBottomPoint.constant = 50
-        self.tapShowOperation = UITapGestureRecognizer(
-          target: self,
-          action: #selector(self.handlerToHideContainerScreen1(tap:)))
-        self.view.addGestureRecognizer(self.tapShowOperation!)
-        self.blurView.isHidden = false
-        self.view.layoutIfNeeded()
-      },
-      completion: { _ in })
-  }
-
-
-  func hideOperation() {
-    UIView.animate(
-      withDuration: 0,
-      delay: 0,
-      usingSpringWithDamping: 0,
-      initialSpringVelocity: 0,
-      options: UIView.AnimationOptions(),
-      animations: {
-        self.constraintContainerBottomPoint.constant = -311
-        self.blurView.isHidden = true
-        self.view.removeGestureRecognizer(self.tapShowOperation!)
-        self.view.layoutIfNeeded()
-      },
-      completion: { _ in })
   }
 }

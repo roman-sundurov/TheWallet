@@ -30,20 +30,20 @@ class VCOperation: UIViewController {
   var vcMainDelegate: protocolVCMain?
   var newTableDataArray: [Operation] = []
   var specCellTag: Int = 0
-  var specVar: Int = 0
+  var specVar: UUID?
 
 
   // MARK: - переходы
 
 
   @IBAction func buttonActionToEditOperation(_ sender: Any) {
-    vcMainDelegate?.editOperation(tag: specVar)
+    vcMainDelegate?.editOperation(tag: specVar!)
   }
 
 
   @IBAction func buttonActionToDeleteOperation(_ sender: Any) {
     vcMainDelegate?.hideOperation()
-    vmMain.shared.deleteOperationInRealm(tag: specVar)
+    vcMainDelegate?.deleteOperation(idOfObject: specVar!)
     vcMainDelegate?.updateScreen()
   }
 
@@ -61,37 +61,37 @@ class VCOperation: UIViewController {
 
 extension VCOperation: protocolVCOperation {
   func startCell(tag: Int) {
-    print(tag)
-    print(vmMain.shared.returnArrayForIncrease()[tag])
-
-    specCellTag = tag
-    specVar = specCellTag - vmMain.shared.returnArrayForIncrease()[specCellTag]
-
-    // Отображения category
-    labelCategory.text = vmMain.shared.returnDataArrayOfOperations()[specVar].category
-
-    // Отображения date
-    let formatterPrint = DateFormatter()
-    formatterPrint.dateFormat = "d MMMM YYYY"
-    labelDate.text = formatterPrint.string(from: vmMain.shared.returnDataArrayOfOperations()[specVar].date)
-
-    // Отображения amount
-    if vmMain.shared.returnDataArrayOfOperations()[specVar].amount.truncatingRemainder(dividingBy: 1) == 0 {
-      labelAmount.text = String(format: "%.0f", vmMain.shared.returnDataArrayOfOperations()[specVar].amount)
-    } else {
-      labelAmount.text = String(format: "%.2f", vmMain.shared.returnDataArrayOfOperations()[specVar].amount)
-    }
-
-    // Отображения currencyStatus
-    if vmMain.shared.returnDataArrayOfOperations()[specVar].amount < 0 {
-      labelAmount.textColor = UIColor.red
-      currencyStatus.textColor = UIColor.red
-    } else {
-      labelAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
-      currencyStatus.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
-    }
-
-    // Отображение textViewNotes
-    textViewNotes.text = vmMain.shared.returnDataArrayOfOperations()[specVar].note
+    // print(tag)
+    // print(vcMainDelegate!.returnArrayForIncrease()[tag])
+    // 
+    // specCellTag = tag
+    // specVar = specCellTag - vcMainDelegate!.returnArrayForIncrease()[specCellTag]
+    // 
+    // // Отображения category
+    // labelCategory.text = vcMainDelegate!.getUserData().operations[specVar].category
+    // 
+    // // Отображения date
+    // let formatterPrint = DateFormatter()
+    // formatterPrint.dateFormat = "d MMMM YYYY"
+    // labelDate.text = formatterPrint.string(from: vcMainDelegate!.getUserData().operations[specVar].date)
+    // 
+    // // Отображения amount
+    // if vmMain.shared.returnDataArrayOfOperations()[specVar].amount.truncatingRemainder(dividingBy: 1) == 0 {
+    //   labelAmount.text = String(format: "%.0f", vcMainDelegate!.getUserData().operations[specVar].amount)
+    // } else {
+    //   labelAmount.text = String(format: "%.2f", vcMainDelegate!.getUserData().operations[specVar].amount)
+    // }
+    // 
+    // // Отображения currencyStatus
+    // if vcMainDelegate!.getUserData().operations[specVar].amount < 0 {
+    //   labelAmount.textColor = UIColor.red
+    //   currencyStatus.textColor = UIColor.red
+    // } else {
+    //   labelAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
+    //   currencyStatus.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
+    // }
+    // 
+    // // Отображение textViewNotes
+    // textViewNotes.text = vcMainDelegate!.getUserData().operations[specVar].note
   }
 }

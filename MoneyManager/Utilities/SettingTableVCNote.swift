@@ -17,7 +17,7 @@ class SettingTableVCNote: UITableViewCell, UITextViewDelegate {
 //    @IBOutlet var textFieldNotes: UITextField!
   @IBOutlet var textViewNotes: UITextView!
 
-  var vcSettingDelegate: protocolVCSetting?
+  // var vcSettingDelegate: protocolVCSetting?
   var specCellTag: Int = 0
 
 // MARK: - Работа с Placeholder
@@ -48,7 +48,7 @@ class SettingTableVCNote: UITableViewCell, UITextViewDelegate {
   }
 
   func startCell() {
-    textViewNotes.text = SettingViewModel.shared.returnScreen2MenuArray()[specCellTag].text
+    // textViewNotes.text = vcSettingDelegate!.returnScreen2MenuArray()[specCellTag].text
 
     textViewNotes.textContainer.lineBreakMode = .byTruncatingTail
     textViewNotes.layer.borderColor = UIColor.gray.cgColor

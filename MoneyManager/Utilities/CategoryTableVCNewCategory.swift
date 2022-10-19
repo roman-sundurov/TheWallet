@@ -22,7 +22,7 @@ class CategoryTableVCNewCategory: UITableViewCell {
 
   @IBAction func buttonAddNewCategoryAction(_ sender: Any) {
     if let value = textFieldNewCategory.text?.isEmpty, value == false {
-      Persistence.shared.addCategory(name: textFieldNewCategory.text!, icon: "")
+      vcCategoryDelegate?.returnVCMainDelegate().addCategory(name: textFieldNewCategory.text!, icon: "")
 
       vcCategoryDelegate?.screen2ContainerAddNewCategory()
 

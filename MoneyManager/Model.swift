@@ -54,9 +54,8 @@ struct UserRepository {
         let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
         print("Document data: \(dataDescription)")
         print("aaa")
-          // if let user = try? document.data(as: User.self) {
-        self.userData = try! document.data(as: User.self)
-        inner(self.userData!)
+        let userData = try! document.data(as: User.self)
+        inner(userData)
         print("bbb")
           // }
       } else {
@@ -122,7 +121,7 @@ struct UserRepository {
     }
   }
 
-  func deleteOperation(idOfObject: Int) {
+  func deleteOperation(idOfObject: UUID) {
     userReference.updateData([
       "operations": [
         idOfObject.description: FieldValue.delete()

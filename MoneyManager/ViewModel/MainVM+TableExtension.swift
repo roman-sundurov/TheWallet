@@ -23,29 +23,29 @@ extension VCMain: UITableViewDelegate, UITableViewDataSource {
     print("indexPath.row= \(indexPath.row)")
     let arrayForIncrease = returnArrayForIncrease()
     if userData!.operations.isEmpty {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! ViewCellData
+      let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! MainViewCellData
       cell.vcMainDelegate = self
       cell.startCellEmpty()
       return cell
     } else {
       if indexPath.row == 0 {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! ViewCellData
+        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! MainViewCellData
         cell.vcMainDelegate = self
         cell.setTag(tag: indexPath.row)
         cell.startCell()
         return cell
       } else if arrayForIncrease[indexPath.row] != arrayForIncrease[indexPath.row - 1] {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! ViewCellData
+        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! MainViewCellData
         cell.vcMainDelegate = self
         cell.setTag(tag: indexPath.row)
         cell.startCell2()
         return cell
       } else if indexPath.row == arrayForIncrease.count {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! ViewCellData
+        let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! MainViewCellData
         cell.labelHeaderDate.isHidden = true
         return cell
       } else {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "operation") as! ViewCellOperation
+        let cell = tableView.dequeueReusableCell(withIdentifier: "operation") as! MainTableVCOperation
         cell.vcMainDelegate = self
         cell.setTag(tag: indexPath.row)
         cell.startCell()
