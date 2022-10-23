@@ -11,26 +11,25 @@ import FirebaseFirestoreSwift
 
 typealias nestedType = (User) -> Void
 
-struct Operation: Codable, Identifiable {
+struct Operation: Codable, Identifiable, Equatable, Hashable {
   var amount: Double
   var category: String
   var note: String
-  var date: Date
+  var date: Double
   var id = UUID()
 }
 
-struct Category: Codable, Identifiable, Equatable {
+struct Category: Codable, Identifiable, Equatable, Hashable {
   var name: String = ""
   var icon: String = ""
+  var date: Double = 0
   var id = UUID()
 }
 
-struct User: Codable, Identifiable, Equatable {
+struct User: Codable, Identifiable, Equatable, Hashable {
   static func == (lhs: User, rhs: User) -> Bool {
     lhs.id == rhs.id
   }
-
-  static let shared = User()
 
   var name: String = ""
   var surname: String = ""
@@ -38,35 +37,45 @@ struct User: Codable, Identifiable, Equatable {
   var daysForSorting: Int = 30
   var lastIdOfOperations: Int = -1
   var lastIdOfCategories: Int = -1
-  var categories: [Category] = []
-  var operations: [Operation] = []
+  var categories: [String: Category] = [:]
+  var operations: [String: Operation] = [:]
   var id = UUID()
 }
 
-struct UserRepository {
+class UserRepository {
+  static let shared = UserRepository()
   var user: User?
+
+  var mainDiffableSections: [String] = []
+  var mainDiffableSectionsSource: [String: [Operation]] = [:]
+  // var semaphore = DispatchSemaphore(value: 0)
+
   let documentReference = Firestore.firestore().collection("users")
-  let userReference = Firestore.firestore().collection("users").document("9Nxk6SZmNr3o9ld5VZj1")
+  var userReference = Firestore.firestore().collection("users").document("roman.sundurov.work@gmail.com")
 
   func getUserData(inner: @escaping nestedType) async throws {
     userReference.getDocument { (document, error) in
       if let document = document, document.exists {
         let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-        print("Document data: \(dataDescription)")
-        print("aaa")
+        print("getUserData Document data: \(dataDescription)")
+        print("getUserData aaa")
         let userData = try! document.data(as: User.self)
         inner(userData)
-        print("bbb")
+        print("getUserData bbb")
+        // semaphore.signal()
           // }
       } else {
-        print("Document does not exist")
+        print("getUserData Document does not exist")
       }
     }
   }
 
   func addNewUser(name: String, surname: String, email: String) {
 
-    let newUser = User(name: name, surname: surname, email: email, categories: [], operations: [])
+    let newCategory = Category(name: "newCategory", icon: "", date: 1666209106, id: UUID())
+    let newOperation = Operation(amount: 100, category: "newCategory", note: "Test note", date: 1666209105, id: UUID())
+
+    let newUser = User(name: name, surname: surname, email: email, categories: [newCategory.date.description: newCategory], operations: [newOperation.date.description: newOperation])
     try! documentReference.document(email).setData(from: newUser) { error in
       if let error = error {
         print("addNewUser Error writing document: \(error)")
@@ -74,11 +83,12 @@ struct UserRepository {
         print("addNewUser Document successfully written!")
       }
     }
+    user = newUser
   }
 
   func addCategory(name: String, icon: String) {
     let newCategory = Category(name: name, icon: icon, id: UUID())
-    try! userReference .setData([
+    try! userReference.setData([
       "categories": [
         newCategory.id.description: [
           "name": newCategory.name,
@@ -96,7 +106,7 @@ struct UserRepository {
   }
 
   func updateDaysForSorting(daysForSorting: Int) {
-    try! userReference .setData([
+    try! userReference.setData([
       "daysForSorting": daysForSorting
     ], merge: true) { error in
       if let error = error {
@@ -158,8 +168,8 @@ struct UserRepository {
 
     // MARK: - операции
   func addOperations(amount: Double, category: String, note: String, date: Date) {
-    let newOperation = Operation(amount: amount, category: category, note: note, date: date)
-    userReference .setData([
+    let newOperation = Operation(amount: amount, category: category, note: note, date: date.timeIntervalSince1970)
+    userReference.setData([
       "operations": [
         newOperation.id.description: [
           "amount": newOperation.amount,
@@ -180,7 +190,7 @@ struct UserRepository {
 
 
   func updateOperations(amount: Double, category: String, note: String, date: Date, idOfObject: UUID) {
-    let updOperation = Operation(amount: amount, category: category, note: note, date: date)
+    let updOperation = Operation(amount: amount, category: category, note: note, date: date.timeIntervalSince1970)
     userReference.setData([
       "operation": [
         idOfObject.description: [

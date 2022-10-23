@@ -39,7 +39,7 @@ protocol protocolVCMain {
 class VCMain: UIViewController {
   static let shared = VCMain()
 
-  // MARK: - объявление аутлетов
+    // MARK: - объявление аутлетов
   @IBOutlet var tableViewScreen1: UITableView!
   @IBOutlet var buttonDaily: UIView!
   @IBOutlet var buttonWeekly: UIView!
@@ -65,25 +65,35 @@ class VCMain: UIViewController {
   @IBOutlet var buttonScreen1ShowList: UIButton!
   @IBOutlet var miniGraphStarterBackground: UIView!
 
-  // MARK: - делегаты и переменные
+    // MARK: - делегаты и переменные
   var income: Double = 0
   var expensive: Double = 0
 
   var tapShowOperation: UITapGestureRecognizer?
-  // var vcSettingDelegate: protocolVCSetting?
+    // var vcSettingDelegate: protocolVCSetting?
   var vcOperationDelegate: protocolVCOperation?
   var vcGraphDelegate: protocolVCGraph?
 
-  // хранение модифицированных данных из Realm для конкретного режима отоборажения
+    // хранение модифицированных данных из Realm для конкретного режима отоборажения
   var tagForEdit: UUID?
   var screen1StatusGrapjDisplay = false
 
-  // показывает количество заголовков с новой датой в таблице, которое предшествует конкретной операции
+    // показывает количество заголовков с новой датой в таблице, которое предшествует конкретной операции
   var arrayForIncrease: [Int] = [0]
   var graphDataArray: [GraphData] = []
 
-  var userRepository = UserRepository()
-  var userData: User?
+  var datasource: MyDataSource?
+  var userRepository = UserRepository.shared
+  // var userData: User? {
+  //   get {
+  //     return userRepository.user
+  //   }
+  //   set(userData) {
+  //     userRepository.user = userData
+  //   }
+  // }
+
+  let dateFormatter = DateFormatter()
 
 
   // MARK: - объекты
@@ -118,6 +128,20 @@ class VCMain: UIViewController {
   // MARK: - клики
   @IBAction func buttonActionScreen1NewOperation(_ sender: Any) {
     performSegue(withIdentifier: "segueToVCSetting", sender: nil)
+  }
+
+  @IBAction func search(_ sender: Any) {
+    // Task {
+    //   do {
+    //     try? await userRepository.getUserData() { data in
+    //       self.userData = data
+    //       print("userData= \(self.userData)")
+    //     }
+    //   } catch {
+    //     print("userRepositoryInstance Error")
+    //   }
+    // }
+
   }
 
   @IBAction func buttonActionScreen1ShowGraph(_ sender: Any) {
@@ -272,27 +296,27 @@ class VCMain: UIViewController {
   }
 
   func countingIncomesAndExpensive() {
-    if let dataArrayOfOperations = userRepository.user?.operations {
-      income = 0
-      expensive = 0
-      for data in dataArrayOfOperations.filter({ $0.amount > 0 }) {
-        income += data.amount
-      }
-      for data in dataArrayOfOperations.filter({ $0.amount < 0 }) {
-        expensive += data.amount
-      }
-
-      if income.truncatingRemainder(dividingBy: 1) == 0 {
-        labelAmountOfIncomes.text = "$\(String(format: "%.0f", income))"
-      } else {
-        labelAmountOfIncomes.text = "$\(String(format: "%.2f", income))"
-      }
-      if expensive.truncatingRemainder(dividingBy: 1) == 0 {
-        labelAmountOfExpenses.text = "$\(String(format: "%.0f", expensive))"
-      } else {
-        labelAmountOfExpenses.text = "$\(String(format: "%.2f", expensive))"
-      }
-    }
+    // if let dataArrayOfOperations = userData?.operations {
+    //   income = 0
+    //   expensive = 0
+    //   for data in dataArrayOfOperations.filter({ $0.value.amount > 0 }) {
+    //     income += data.value.amount
+    //   }
+    //   for data in dataArrayOfOperations.filter({ $0.value.amount < 0 }) {
+    //     expensive += data.value.amount
+    //   }
+    //
+    //   if income.truncatingRemainder(dividingBy: 1) == 0 {
+    //     labelAmountOfIncomes.text = "$\(String(format: "%.0f", income))"
+    //   } else {
+    //     labelAmountOfIncomes.text = "$\(String(format: "%.2f", income))"
+    //   }
+    //   if expensive.truncatingRemainder(dividingBy: 1) == 0 {
+    //     labelAmountOfExpenses.text = "$\(String(format: "%.0f", expensive))"
+    //   } else {
+    //     labelAmountOfExpenses.text = "$\(String(format: "%.2f", expensive))"
+    //   }
+    // }
   }
 
   override func viewDidAppear(_ animated: Bool) {
@@ -303,20 +327,47 @@ class VCMain: UIViewController {
     self.view.layoutIfNeeded()
   }
 
-  // MARK: - viewDidLoad
-  override func viewDidLoad() {
-    super.viewDidLoad()
-
+  override func viewWillAppear(_ animated: Bool) {
     Task {
       do {
+        // userRepository.semaphore = DispatchSemaphore(value: 0)
         try? await userRepository.getUserData() { data in
-          self.userData = data
-          print("userData= \(self.userData)")
+          self.userRepository.user = data
+          print("userData= \(self.userRepository.user)")
+          // self.userRepository.semaphore.signal()
         }
+        // userRepository.semaphore.wait()
+        print("userData 111")
       } catch {
         print("userRepositoryInstance Error")
       }
     }
+
+  }
+
+  // MARK: - viewDidLoad
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    print("viewDidLoad")
+
+    dateFormatter.dateStyle = .medium
+    dateFormatter.timeStyle = .none
+    configureDataSource()
+    applySnapshot()
+
+    Task {
+      do {
+        try? await userRepository.getUserData() { data in
+          self.userRepository.user = data
+          print("NewData= \(self.userRepository.user)")
+          self.applySnapshot()
+        }
+        print("NewData2= \(userRepository.user)")
+      } catch {
+        print("Error22")
+      }
+    }
+
 
     miniGraph.setDelegateScreen1RoundedGraph(delegate: self)
     // updateScreen()
@@ -338,6 +389,6 @@ class VCMain: UIViewController {
     ])
     self.blurView.isHidden = true
 
-    self.view.layoutIfNeeded()
+    // self.view.layoutIfNeeded()
   }
 }
