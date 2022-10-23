@@ -14,11 +14,10 @@ protocol protocolSettingTableVCNote{
 }
 
 class SettingTableVCNote: UITableViewCell, UITextViewDelegate {
-//    @IBOutlet var textFieldNotes: UITextField!
   @IBOutlet var textViewNotes: UITextView!
 
-  // var vcSettingDelegate: protocolVCSetting?
-  var specCellTag: Int = 0
+  var vcSettingDelegate: protocolVCSetting?
+  var indexRow: Int = 0
 
 // MARK: - Работа с Placeholder
   func textViewDidBeginEditing(_ textView: UITextView) {
@@ -47,25 +46,20 @@ class SettingTableVCNote: UITableViewCell, UITextViewDelegate {
     super.setSelected(selected, animated: animated)
   }
 
-  func startCell() {
-    // textViewNotes.text = vcSettingDelegate!.returnScreen2MenuArray()[specCellTag].text
+  func startCell(indexRow: Int) {
+    self.indexRow = indexRow
+    // textViewNotes.text = vcSettingDelegate!.returnScreen2MenuArray()[indexRow].text
 
     textViewNotes.textContainer.lineBreakMode = .byTruncatingTail
     textViewNotes.layer.borderColor = UIColor.gray.cgColor
     textViewNotes.layer.borderWidth = 2
-
     textViewNotes.layer.cornerRadius = 10
 
     textViewNotes.text = "Placeholder"
 //    textViewNotes.textColor = UIColor.opaqueSeparator //цвет текста уже opaqueSeparator в Storyboard.
 
   }
-
-  func setTag(tag: Int) {
-    specCellTag = tag
-  }
 }
-
 
 extension SettingTableVCNote: protocolSettingTableVCNote {
   func setNoteViewText(newText: String) {
@@ -81,9 +75,7 @@ extension SettingTableVCNote: protocolSettingTableVCNote {
     return textViewNotes
   }
 
-
   // MARK: - Обработка касаний экрана
-
   func tapOutsideNoteTextViewEditToHide() {
     textViewNotes.endEditing(true)
     print("textViewDeselect")

@@ -70,7 +70,7 @@ class VCMain: UIViewController {
   var expensive: Double = 0
 
   var tapShowOperation: UITapGestureRecognizer?
-    // var vcSettingDelegate: protocolVCSetting?
+    var vcSettingDelegate: protocolVCSetting?
   var vcOperationDelegate: protocolVCOperation?
   var vcGraphDelegate: protocolVCGraph?
 
@@ -102,10 +102,10 @@ class VCMain: UIViewController {
 
   // MARK: - переходы
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    // if let vewController = segue.destination as? VCSetting, segue.identifier == "segueToVCSetting" {
-    //   // vcSettingDelegate = vewController
-    //   vewController.vcMainDelegate = self
-    // }
+    if let vewController = segue.destination as? VCSetting, segue.identifier == "segueToVCSetting" {
+      vcSettingDelegate = vewController
+      vewController.vcMainDelegate = self
+    }
     if let viewController = segue.destination as? VCOperation, segue.identifier == "segueToVCOperation" {
       vcOperationDelegate = viewController
       viewController.vcMainDelegate = self

@@ -592,7 +592,7 @@
                                             <color key="titleColor" red="0.53405213360000003" green="0.80733603239999996" blue="0.81979507210000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
                                         <connections>
-                                            <action selector="buttonCloseScreen2:" destination="fcp-GB-FKl" eventType="touchUpInside" id="5xK-pz-YnQ"/>
+                                            <action selector="buttonCloseSetting:" destination="fcp-GB-FKl" eventType="touchUpInside" id="s15-Y7-AuG"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxe-KE-Atx">
@@ -642,7 +642,7 @@
                                             <segment title="Expense"/>
                                         </segments>
                                         <connections>
-                                            <action selector="screen2SegmentControlAction:" destination="fcp-GB-FKl" eventType="valueChanged" id="fLa-3H-h2V"/>
+                                            <action selector="segmentControl:" destination="fcp-GB-FKl" eventType="valueChanged" id="20D-Sd-Dma"/>
                                         </connections>
                                     </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tao-7E-drY">
@@ -866,7 +866,7 @@
                                     <constraint firstAttribute="height" constant="515" id="WME-ku-wl2"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="vna-KF-Brs" kind="embed" identifier="segueToScreen2Container" id="Has-jM-W8K"/>
+                                    <segue destination="vna-KF-Brs" kind="embed" identifier="segueToVCCategory" id="Has-jM-W8K"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -895,11 +895,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="kgp-1m-6eG"/>
                     <connections>
-                        <outlet property="constraintContainerBottomHeight" destination="WME-ku-wl2" id="m95-ex-zIr"/>
-                        <outlet property="constraintContainerBottomPoint" destination="Lcv-jA-LAE" id="cZ1-5j-uZV"/>
-                        <outlet property="containerBottomScreen2" destination="5gB-3p-wM1" id="8RT-dm-Ih1"/>
+                        <outlet property="categoryChangeView" destination="5gB-3p-wM1" id="8RT-dm-Ih1"/>
+                        <outlet property="constraintCategoryChangeViewHeight" destination="m3n-sQ-AjH" id="2jG-jj-a8q"/>
+                        <outlet property="constraintCategoryChangeViewPoint" destination="Lcv-jA-LAE" id="cZ1-5j-uZV"/>
                         <outlet property="labelScreen2Header" destination="EHj-xF-Jnq" id="S7S-nN-QGB"/>
-                        <outlet property="screen2CurrencyStatus" destination="tao-7E-drY" id="ZEg-XT-f2x"/>
+                        <outlet property="screen2CurrencyDirection" destination="tao-7E-drY" id="ZEg-XT-f2x"/>
                         <outlet property="screen2SegmentControl" destination="TUb-4D-06u" id="QuM-zG-gXw"/>
                         <outlet property="tableViewScreen2" destination="afh-qC-NmX" id="ckJ-Ju-Qpn"/>
                         <outlet property="textFieldAmount" destination="TtF-Sw-fS5" id="qYS-Ti-trH"/>
