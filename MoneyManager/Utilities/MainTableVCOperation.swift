@@ -14,11 +14,11 @@ class MainTableVCOperation: UITableViewCell {
   @IBOutlet var currencyStatus: UILabel!
 
   var vcMainDelegate: protocolVCMain?
-  var specCellTag: Int = 0
+  var id: UUID?
 
 // Анимация
-  @objc func showOperation(_ tag: Int) {
-    // vcMainDelegate?.showOperation(specCellTag)
+  @objc func showOperation(_ sender: UITapGestureRecognizer) {
+    vcMainDelegate?.showOperation(id!)
     print("ChangeCategory from Screen2")
   }
 
@@ -34,12 +34,4 @@ class MainTableVCOperation: UITableViewCell {
     super.setSelected(selected, animated: animated)
   }
 
-  func startCell() {
-    print("Simple Cell: ---")
-
-  }
-
-  // func setTag(tag: Int) {
-  //   specCellTag = tag
-  // }
 }

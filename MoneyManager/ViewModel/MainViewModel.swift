@@ -34,8 +34,8 @@ extension VCMain: protocolVCMain {
     userRepository.addCategory(name: name, icon: icon)
   }
 
-  func deleteOperation(idOfObject: UUID) {
-    userRepository.deleteOperation(idOfObject: idOfObject)
+  func deleteOperation(uuid: UUID) {
+    userRepository.deleteOperation(idOfObject: uuid)
   }
 
   func miniGraphStarterBackground(status: Bool) {
@@ -62,9 +62,9 @@ extension VCMain: protocolVCMain {
     return vcGraphDelegate!
   }
 
-  func editOperation(tag: UUID) {
+  func editOperation(uuid: UUID) {
     hideOperation()
-    tagForEdit = tag
+    tagForEdit = uuid
     performSegue(withIdentifier: "segueToScreen2ForEdit", sender: nil)
   }
 
@@ -82,9 +82,9 @@ extension VCMain: protocolVCMain {
   }
 
     // MARK: - PopUp-окно операции
-  func showOperation(_ tag: Int) {
+  func showOperation(_ id: UUID) {
     viewOperation.layer.cornerRadius = 20
-    vcOperationDelegate?.startCell(tag: tag)
+    vcOperationDelegate?.prepareForStart(id: id)
 
     UIView.animate(
       withDuration: 0.3,

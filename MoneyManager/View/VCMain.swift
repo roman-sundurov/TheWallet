@@ -10,9 +10,9 @@ import UIKit
 
 protocol protocolVCMain {
   func updateScreen() // обновление данных на всэм экрана
-  func showOperation(_ tag: Int) // открывает PopUp-окно конкретной операции
+  func showOperation(_ id: UUID) // открывает PopUp-окно конкретной операции
   func hideOperation() // закрывает PopUp-окно конкретной операции
-  func editOperation(tag: UUID) // переход в редактирование выбранной операции на втором экране
+  func editOperation(uuid: UUID) // переход в редактирование выбранной операции на втором экране
   func miniGraphStarterBackground(status: Bool)
 
   // // функции возврата
@@ -32,7 +32,7 @@ protocol protocolVCMain {
   func updateCategory(name: String, icon: String, idOfObject: UUID)
   func returnGraphData() -> [GraphData]
   func addCategory(name: String, icon: String)
-  func deleteOperation(idOfObject: UUID)
+  func deleteOperation(uuid: UUID)
 }
 
 
@@ -106,10 +106,10 @@ class VCMain: UIViewController {
     //   // vcSettingDelegate = vewController
     //   vewController.vcMainDelegate = self
     // }
-    // if let viewController = segue.destination as? VCOperation, segue.identifier == "segueToScreen1Container" {
-    //   vcOperationDelegate = viewController
-    //   viewController.vcMainDelegate = self
-    // }
+    if let viewController = segue.destination as? VCOperation, segue.identifier == "segueToVCOperation" {
+      vcOperationDelegate = viewController
+      viewController.vcMainDelegate = self
+    }
     // if let viewController = segue.destination as? VCGraph,
     //    segue.identifier == "segueToScreen1GraphContainer" {
     //   vcGraphDelegate = viewController

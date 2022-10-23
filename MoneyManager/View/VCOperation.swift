@@ -8,7 +8,7 @@
 import UIKit
 
 protocol protocolVCOperation {
-  func startCell(tag: Int)
+  func prepareForStart(id: UUID)
 }
 
 class VCOperation: UIViewController {
@@ -28,23 +28,21 @@ class VCOperation: UIViewController {
   // MARK: - делегаты и переменные
 
   var vcMainDelegate: protocolVCMain?
-  var newTableDataArray: [Operation] = []
-  var specCellTag: Int = 0
-  var specVar: UUID?
+  var uuid: UUID?
 
 
   // MARK: - переходы
 
 
   @IBAction func buttonActionToEditOperation(_ sender: Any) {
-    vcMainDelegate?.editOperation(tag: specVar!)
+    // vcMainDelegate?.editOperation(uuid: uuid!)
   }
 
 
   @IBAction func buttonActionToDeleteOperation(_ sender: Any) {
-    vcMainDelegate?.hideOperation()
-    vcMainDelegate?.deleteOperation(idOfObject: specVar!)
-    vcMainDelegate?.updateScreen()
+    // vcMainDelegate?.hideOperation()
+    // vcMainDelegate?.deleteOperation(uuid: uuid!)
+    // vcMainDelegate?.updateScreen()
   }
 
   override func viewDidLoad() {
@@ -60,38 +58,36 @@ class VCOperation: UIViewController {
 
 
 extension VCOperation: protocolVCOperation {
-  func startCell(tag: Int) {
-    // print(tag)
-    // print(vcMainDelegate!.returnArrayForIncrease()[tag])
-    // 
-    // specCellTag = tag
-    // specVar = specCellTag - vcMainDelegate!.returnArrayForIncrease()[specCellTag]
-    // 
-    // // Отображения category
-    // labelCategory.text = vcMainDelegate!.getUserData().operations[specVar].category
-    // 
-    // // Отображения date
-    // let formatterPrint = DateFormatter()
-    // formatterPrint.dateFormat = "d MMMM YYYY"
-    // labelDate.text = formatterPrint.string(from: vcMainDelegate!.getUserData().operations[specVar].date)
-    // 
-    // // Отображения amount
-    // if vmMain.shared.returnDataArrayOfOperations()[specVar].amount.truncatingRemainder(dividingBy: 1) == 0 {
-    //   labelAmount.text = String(format: "%.0f", vcMainDelegate!.getUserData().operations[specVar].amount)
-    // } else {
-    //   labelAmount.text = String(format: "%.2f", vcMainDelegate!.getUserData().operations[specVar].amount)
-    // }
-    // 
-    // // Отображения currencyStatus
-    // if vcMainDelegate!.getUserData().operations[specVar].amount < 0 {
-    //   labelAmount.textColor = UIColor.red
-    //   currencyStatus.textColor = UIColor.red
-    // } else {
-    //   labelAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
-    //   currencyStatus.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
-    // }
-    // 
-    // // Отображение textViewNotes
-    // textViewNotes.text = vcMainDelegate!.getUserData().operations[specVar].note
+  func prepareForStart(id: UUID) {
+    uuid = id
+    print("id= \(id)")
+    let operation = UserRepository.shared.user?.operations.filter { $0.value.id == id }.first?.value
+
+    // Отображения category
+    labelCategory.text = operation?.category
+
+    // Отображения date
+    let formatterPrint = DateFormatter()
+    formatterPrint.dateFormat = "d MMMM YYYY"
+    labelDate.text = formatterPrint.string(from: Date.init(timeIntervalSince1970: operation!.date))
+
+    // Отображения amount
+    if operation?.amount.truncatingRemainder(dividingBy: 1) == 0 {
+      labelAmount.text = String(format: "%.0f", operation!.amount)
+    } else {
+      labelAmount.text = String(format: "%.2f", operation!.amount)
+    }
+
+    // Отображения currencyStatus
+    if operation!.amount < 0 {
+      labelAmount.textColor = UIColor.red
+      currencyStatus.textColor = UIColor.red
+    } else {
+      labelAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
+      currencyStatus.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
+    }
+
+    // Отображение textViewNotes
+    textViewNotes.text = operation?.note
   }
 }

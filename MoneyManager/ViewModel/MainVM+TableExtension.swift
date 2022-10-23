@@ -27,6 +27,8 @@ extension VCMain {
         cell?.labelAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
         cell?.currencyStatus.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
       }
+      cell?.id = model.id
+      cell?.vcMainDelegate = self
       return cell
     })
   }
