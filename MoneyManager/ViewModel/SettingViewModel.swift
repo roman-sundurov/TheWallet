@@ -228,8 +228,8 @@ extension VCSetting: protocolVCSetting {
         self.view.endEditing(true)
         self.view.removeGestureRecognizer(self.tapOfChangeCategoryOpenPopUp!)
         self.view.layoutIfNeeded()
-        if self.categoryViewDelefate?.returnScreen2StatusEditContainer() == true {
-          self.categoryViewDelefate?
+        if self.vcCategoryDelegate?.returnScreen2StatusEditContainer() == true {
+          self.vcCategoryDelegate?
             .returnDelegateScreen2ContainerTableVCNewCategory()
             .textFieldNewCategoryClear()
         }

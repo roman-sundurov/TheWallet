@@ -43,7 +43,7 @@ class VCSetting: UIViewController {
 
   // MARK: - делегаты, переменные
   var vcMainDelegate: protocolVCMain?
-  var categoryViewDelefate: protocolVCCategory?
+  var vcCategoryDelegate: VCCategory?
   var tableViewCellNoteDelegate: protocolSettingTableVCNote?
   var tableViewCellDateDelegate: protocolSettingTableVCDate?
   var vcSettingStatusEditing = false // показывает, создаётся ли новая операция, или редактируется предыдущая
@@ -133,7 +133,7 @@ class VCSetting: UIViewController {
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let viewController = segue.destination as? VCCategory, segue.identifier == "segueToVCCategory" {
-      categoryViewDelefate = viewController
+      vcCategoryDelegate = viewController
       viewController.vcSettingDelegate = self
     }
   }
