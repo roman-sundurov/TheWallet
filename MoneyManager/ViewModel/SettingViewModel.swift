@@ -10,6 +10,10 @@ import Foundation
 
 extension VCSetting: protocolVCSetting {
 
+  func setCategoryInNewOperation(category: String) {
+    newOperation?.category = category
+    }
+
   // MARK: - data
   func menuArrayCalculate() {
     let screen2MenuList0 = Screen2MenuData(name: "Header", text: "")

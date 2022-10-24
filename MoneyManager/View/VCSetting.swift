@@ -11,6 +11,7 @@ protocol protocolVCSetting {
   func changeCategoryClosePopUpScreen2()
   func changeCategoryOpenPopUpScreen2(_ tag: Int)
   func tableViewScreen2Update(row: Int)
+  func setCategoryInNewOperation(category: String)
 
   // функции возврата
   func returnDelegateScreen2TableViewCellNote() -> protocolSettingTableVCNote

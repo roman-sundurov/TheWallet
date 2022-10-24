@@ -1145,7 +1145,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tableViewContainer" destination="I0S-Bf-5wZ" id="hmG-qj-LkN"/>
+                        <outlet property="tableView" destination="I0S-Bf-5wZ" id="hmG-qj-LkN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fbV-wE-9e3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
