@@ -541,7 +541,6 @@
                         <outlet property="topMenuButtonStrip" destination="oin-I9-C2d" id="qjh-6t-lyy"/>
                         <outlet property="viewOperation" destination="uY8-5i-7qy" id="6De-Oc-bYF"/>
                         <segue destination="fcp-GB-FKl" kind="presentation" identifier="segueToVCSetting" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="ABz-lk-sfP"/>
-                        <segue destination="fcp-GB-FKl" kind="presentation" identifier="segueToVCSettingForEdit" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="lIe-L2-7Ib"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -1523,9 +1522,6 @@
             <point key="canvasLocation" x="-488" y="716"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="ABz-lk-sfP"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="Center" width="92" height="92"/>
         <image name="Left-Off" width="70" height="66"/>

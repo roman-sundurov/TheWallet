@@ -26,8 +26,8 @@ protocol protocolVCMain {
   func getUserData() -> User
   func updateuserData(newData: User)
   
-  func updateOperations(amount: Double, category: String, note: String, date: Date, idOfObject: UUID)
-  func addOperations(amount: Double, category: String, note: String, date: Date)
+  func updateOperations(amount: Double, categoryUUID: UUID, note: String, date: Date, idOfObject: UUID)
+  func addOperations(amount: Double, categoryUUID: UUID, note: String, date: Date)
   func deleteCategory(idOfObject: UUID)
   func updateCategory(name: String, icon: String, idOfObject: UUID)
   func returnGraphData() -> [GraphData]

@@ -9,9 +9,12 @@ import UIKit
 import Foundation
 
 extension VCSetting: protocolVCSetting {
+  func getUserData() -> User {
+    return vcMainDelegate!.getUserData()
+  }
 
-  func setCategoryInNewOperation(category: String) {
-    newOperation?.category = category
+  func setCategoryInNewOperation(categoryUUID: UUID) {
+    newOperation?.category = categoryUUID
     }
 
   // MARK: - data
@@ -27,9 +30,9 @@ extension VCSetting: protocolVCSetting {
     return screen2MenuArray
   }
 
-  func setVCSetting(amount: Double, category: String, date: Date, note: String, id: UUID) {
+  func setVCSetting(amount: Double, categoryUUID: UUID, date: Date, note: String, id: UUID) {
     newOperation?.amount = amount
-    newOperation?.category = category
+    newOperation?.category = categoryUUID
     newOperation?.date = date.timeIntervalSince1970
     newOperation?.note = note
     newOperation?.id = id

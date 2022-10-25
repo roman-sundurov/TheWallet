@@ -13,7 +13,7 @@ typealias nestedType = (User) -> Void
 
 struct Operation: Codable, Identifiable, Equatable, Hashable {
   var amount: Double
-  var category: String
+  var category: UUID
   var note: String
   var date: Double
   var id = UUID()
@@ -73,7 +73,7 @@ class UserRepository {
   func addNewUser(name: String, surname: String, email: String) {
 
     let newCategory = Category(name: "newCategory", icon: "", date: 1666209106, id: UUID())
-    let newOperation = Operation(amount: 100, category: "newCategory", note: "Test note", date: 1666209105, id: UUID())
+    let newOperation = Operation(amount: 100, category: newCategory.id, note: "Test note", date: 1666209105, id: UUID())
 
     let newUser = User(name: name, surname: surname, email: email, categories: [newCategory.date.description: newCategory], operations: [newOperation.date.description: newOperation])
     try! documentReference.document(email).setData(from: newUser) { error in
@@ -167,8 +167,8 @@ class UserRepository {
 
 
     // MARK: - операции
-  func addOperations(amount: Double, category: String, note: String, date: Date) {
-    let newOperation = Operation(amount: amount, category: category, note: note, date: date.timeIntervalSince1970)
+  func addOperations(amount: Double, categoryUUID: UUID, note: String, date: Date) {
+    let newOperation = Operation(amount: amount, category: categoryUUID, note: note, date: date.timeIntervalSince1970)
     userReference.setData([
       "operations": [
         newOperation.id.description: [
@@ -189,8 +189,8 @@ class UserRepository {
   }
 
 
-  func updateOperations(amount: Double, category: String, note: String, date: Date, idOfObject: UUID) {
-    let updOperation = Operation(amount: amount, category: category, note: note, date: date.timeIntervalSince1970)
+  func updateOperations(amount: Double, categoryUUID: UUID, note: String, date: Date, idOfObject: UUID) {
+    let updOperation = Operation(amount: amount, category: categoryUUID, note: note, date: date.timeIntervalSince1970)
     userReference.setData([
       "operation": [
         idOfObject.description: [

@@ -11,7 +11,7 @@ protocol protocolVCSetting {
   func changeCategoryClosePopUpScreen2()
   func changeCategoryOpenPopUpScreen2(_ tag: Int)
   func tableViewScreen2Update(row: Int)
-  func setCategoryInNewOperation(category: String)
+  func setCategoryInNewOperation(categoryUUID: UUID)
 
   // функции возврата
   func returnDelegateScreen2TableViewCellNote() -> protocolSettingTableVCNote
@@ -20,9 +20,10 @@ protocol protocolVCSetting {
   func openAlertDatePicker()
   func startEditing()
 
-  func setVCSetting(amount: Double, category: String, date: Date, note: String, id: UUID)
+  func setVCSetting(amount: Double, categoryUUID: UUID, date: Date, note: String, id: UUID)
   func returnNewOperation() -> Operation
   func returnScreen2MenuArray() -> [Screen2MenuData]
+  func getUserData() -> User
 }
 
 struct Screen2MenuData {
@@ -69,7 +70,7 @@ class VCSetting: UIViewController {
   // MARK: - переходы
   @IBAction func buttonToAddNewOperation(_ sender: Any) {
     var newOperation = returnNewOperation()
-    if !newOperation.category.isEmpty && textFieldAmount.text != "0" {
+    if newOperation.category != nil && textFieldAmount.text != "0" {
 
       // var newAnount: Double?
       // var newDate: Date?
@@ -98,7 +99,7 @@ class VCSetting: UIViewController {
         newOperation.note = (tableViewCellNoteDelegate?.returnNoteView().text)!
       }
 
-      setVCSetting(amount: newOperation.amount, category: newOperation.category, date: Date.init(timeIntervalSince1970: newOperation.date), note: newOperation.note, id: newOperation.id)
+      setVCSetting(amount: newOperation.amount, categoryUUID: newOperation.category, date: Date.init(timeIntervalSince1970: newOperation.date), note: newOperation.note, id: newOperation.id)
 
       print("newOperation.amount= \(newOperation.amount), newOperation.category= \(newOperation.category), newOperation.date= \(newOperation.date), newOperation.note= \(newOperation.note),")
 
@@ -107,7 +108,7 @@ class VCSetting: UIViewController {
         print("newOperation.date222= \(newOperation.date)")
         vcMainDelegate?.updateOperations(
           amount: newOperation.amount,
-          category: newOperation.category,
+          categoryUUID: newOperation.id,
           note: newOperation.note,
           date: Date.init(timeIntervalSince1970: newOperation.date),
           idOfObject: newOperation.id
@@ -115,7 +116,7 @@ class VCSetting: UIViewController {
       } else {
         vcMainDelegate?.addOperations(
           amount: newOperation.amount,
-          category: newOperation.category,
+          categoryUUID: newOperation.category,
           note: newOperation.note,
           date: Date.init(timeIntervalSince1970: newOperation.date)
         )

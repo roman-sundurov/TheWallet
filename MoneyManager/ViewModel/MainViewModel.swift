@@ -14,12 +14,12 @@ extension VCMain: protocolVCMain {
     userRepository.user = newData
   }
 
-  func updateOperations(amount: Double, category: String, note: String, date: Date, idOfObject: UUID) {
-    userRepository.updateOperations(amount: amount, category: category, note: note, date: date, idOfObject: idOfObject)
+  func updateOperations(amount: Double, categoryUUID: UUID, note: String, date: Date, idOfObject: UUID) {
+    userRepository.updateOperations(amount: amount, categoryUUID: categoryUUID, note: note, date: date, idOfObject: idOfObject)
   }
 
-  func addOperations(amount: Double, category: String, note: String, date: Date) {
-    userRepository.addOperations(amount: amount, category: category, note: note, date: date)
+  func addOperations(amount: Double, categoryUUID: UUID, note: String, date: Date) {
+    userRepository.addOperations(amount: amount, categoryUUID: categoryUUID, note: note, date: date)
   }
 
   func deleteCategory(idOfObject: UUID) {

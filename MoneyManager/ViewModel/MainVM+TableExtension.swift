@@ -18,7 +18,7 @@ extension VCMain {
       } else {
         cell?.labelAmount.text = String(format: "%.2f", model.amount)
       }
-      cell?.labelCategory.text = model.category
+      cell?.labelCategory.text = self.getUserData().categories[model.category.description]?.name
       if model.amount < 0 {
         cell?.labelAmount.textColor = UIColor.init(named: "InterfaceColorRed")
         cell?.currencyStatus.textColor = UIColor.init(named: "InterfaceColorRed")

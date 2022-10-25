@@ -31,8 +31,8 @@ class SettingTableVCCategory: UITableViewCell {
 
   func prepareCell(indexRow: Int) {
     self.indexRow = indexRow
-    if vcSettingDelegate!.returnNewOperation().category.isEmpty == false {
-      labelSelectCategory.text = vcSettingDelegate!.returnNewOperation().category
+    if vcSettingDelegate!.returnNewOperation().category == nil {
+      labelSelectCategory.text = vcSettingDelegate?.getUserData().categories[vcSettingDelegate!.returnNewOperation().category.description]?.name
       labelSelectCategory.textColor = .black
     } else {
       labelSelectCategory.text = vcSettingDelegate!.returnScreen2MenuArray()[indexRow].text

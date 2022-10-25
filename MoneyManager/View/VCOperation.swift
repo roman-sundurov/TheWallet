@@ -64,7 +64,7 @@ extension VCOperation: protocolVCOperation {
     let operation = UserRepository.shared.user?.operations.filter { $0.value.id == id }.first?.value
 
     // Отображения category
-    labelCategory.text = operation?.category
+    labelCategory.text = vcMainDelegate?.getUserData().categories[operation!.category.description]?.name
 
     // Отображения date
     let formatterPrint = DateFormatter()

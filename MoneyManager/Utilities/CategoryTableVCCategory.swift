@@ -27,22 +27,22 @@ class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
   // MARK: - делегаты и переменные
 
   var vcMainDelegate: protocolVCMain?
-  var vcSettingDelegate: protocolVCSetting
+  var vcSettingDelegate: protocolVCSetting?
   var vcCategoryDelegate: protocolVCCategory?
-  var cellID: Int?
-  var categoryID: UUID?
   var gestureCell: UIGestureRecognizer?
   var gestureCheckBox: UIGestureRecognizer?
   var editStatus = false
   var permitionToSetCategory = true
+  var category: Category?
+  var cellID: Int?
 
 
   // MARK: - переходы
 
   @IBAction func buttonDeleteCategoryAction(_ sender: Any) {
-    vcMainDelegate!.deleteCategory(idOfObject: categoryID!)
+    vcMainDelegate!.deleteCategory(idOfObject: category!.id)
 
-    vcCategoryDelegate?.screen2ContainerDeleteCategory(idOfObject: categoryID!)
+    vcCategoryDelegate?.screen2ContainerDeleteCategory(idOfObject: category!.id)
   }
 
   @IBAction func buttonsEditNameCategoryAction(_ sender: Any) {
@@ -57,7 +57,7 @@ class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
       buttonEditNameCategory.tintColor = UIColor.red
       buttonEditNameCategory.isHidden = true
       buttonConfirmNewName.isHidden = false
-      vcCategoryDelegate?.setCurrentActiveEditingCell(categoryID: categoryID!)
+      vcCategoryDelegate?.setCurrentActiveEditingCell(cellID: cellID!)
     } else {
       closeEditing()
     }
@@ -68,12 +68,12 @@ class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
     return true
   }
 
-  @objc func closeWindows() {
+  @objc func closeWindows(tap: UITapGestureRecognizer) {
     if permitionToSetCategory == false { return }
     // запись выбранной категории во временную переменную
-    vcSettingDelegate.setCategoryInNewOperation(category: textFieldNameCategory.text!)
+    vcSettingDelegate!.setCategoryInNewOperation(categoryUUID: category!.id)
     vcCategoryDelegate?.closeWindow() // закрытие PopUp-окна
-    vcCategoryDelegate?.setCurrentActiveEditingCell(categoryID: nil)
+    vcCategoryDelegate?.setCurrentActiveEditingCell(cellID: 100)
     print("ClosePopup from ContainerCell")
   }
 
@@ -85,15 +85,18 @@ class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
     super.setSelected(selected, animated: animated)
   }
 
-  func startCell(category: Category) {
-    textFieldNameCategory.text = SettingViewModel.shared.returnDataArrayOfCategory()[specCellTag]
-      .name
-    gestureCell = UITapGestureRecognizer(target: self, action: #selector(closeWindow))
-    gestureCheckBox = UITapGestureRecognizer(target: self, action: #selector(closeWindow))
+  func startCell(category: Category, cellID: Int) {
+    self.cellID = cellID
+    self.category = category
+    print("cellID ChangeCategory= \(cellID)")
+
+    textFieldNameCategory.text = category.name
+    gestureCell = UITapGestureRecognizer(target: self, action: #selector(self.closeWindows(tap:)))
+    gestureCheckBox = UITapGestureRecognizer(target: self, action: #selector(self.closeWindows(tap:)))
     isUserInteractionEnabled = true
     addGestureRecognizer(gestureCell!)
     checkBoxObject.addGestureRecognizer(gestureCheckBox!)
-    checkBoxObject.tag = specCellTag
+    checkBoxObject.tag = cellID
     checkBoxObject.checkmarkStyle = .tick
     checkBoxObject.borderLineWidth = 0
     checkBoxObject.borderStyle = .circle
@@ -102,8 +105,7 @@ class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
 
     textFieldNameCategory.layer.cornerRadius = 10
 
-    if vcSettingDelegate.returnNewOperation().category == vcSettingDelegate.returnDataArrayOfCategory()[specCellTag]
-      .name {
+    if vcSettingDelegate!.returnNewOperation().category == self.category!.id {
         checkBoxObject.isChecked = true
     } else {
       checkBoxObject.isChecked = false
@@ -120,11 +122,6 @@ class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
     textFieldNameCategory.returnKeyType = .done
     textFieldNameCategory.delegate = self
   }
-
-  func setTag(tag: Int) {
-    specCellTag = tag
-    print("cellID ChangeCategory= \(cellID)")
-  }
 }
 
 
@@ -134,7 +131,7 @@ extension CategoryTableVCCategory: protocolCategoryTableVCCategory {
   }
 
   func returnCategryIdOfCell() -> Int {
-    return vcSettingDelegate.returnDataArrayOfCategory()[specCellTag].id
+    return self.cellID!
   }
 
   func closeEditing() {
@@ -149,7 +146,7 @@ extension CategoryTableVCCategory: protocolCategoryTableVCCategory {
     buttonEditNameCategory.isHidden = false
     buttonConfirmNewName.isHidden = true
 
-    vcMainDelegate?.updateCategory(name: textFieldNameCategory.text!, icon: "", idOfObject: specCellTag)
-    vcCategoryDelegate?.setCurrentActiveEditingCell(categoryID: 0)
+    vcMainDelegate?.updateCategory(name: textFieldNameCategory.text!, icon: "", idOfObject: self.category!.id)
+    vcCategoryDelegate?.setCurrentActiveEditingCell(cellID: 0)
   }
 }
