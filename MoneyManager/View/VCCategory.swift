@@ -11,7 +11,7 @@ protocol protocolVCCategory {
   // func checkBoxStatus(_ tag: Int, _ type: Bool)
   func closeWindow()
   func screen2ContainerNewCategorySwicher()
-  func screen2ContainerAddNewCategory()
+  func addNewCategory(name: String, icon: String, date: Double)
   func screen2ContainerDeleteCategory(idOfObject: UUID)
   func showAlertErrorAddNewCategory()
   func setCurrentActiveEditingCell(cellID: Int)

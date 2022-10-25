@@ -13,7 +13,7 @@ typealias nestedType = (User) -> Void
 
 struct Operation: Codable, Identifiable, Equatable, Hashable {
   var amount: Double
-  var category: UUID
+  var category: UUID?
   var note: String
   var date: Double
   var id = UUID()
@@ -86,13 +86,15 @@ class UserRepository {
     user = newUser
   }
 
-  func addCategory(name: String, icon: String) {
-    let newCategory = Category(name: name, icon: icon, id: UUID())
+  func addCategory(name: String, icon: String, date: Double) {
+    let newCategory = Category(name: name, icon: icon, date: date, id: UUID())
+    UserRepository.shared.user?.categories[newCategory.id.description] = newCategory
     try! userReference.setData([
       "categories": [
         newCategory.id.description: [
           "name": newCategory.name,
           "icon": newCategory.icon,
+          "date": date,
           "id": newCategory.id.description
         ]
       ]
@@ -169,11 +171,12 @@ class UserRepository {
     // MARK: - операции
   func addOperations(amount: Double, categoryUUID: UUID, note: String, date: Date) {
     let newOperation = Operation(amount: amount, category: categoryUUID, note: note, date: date.timeIntervalSince1970)
+    UserRepository.shared.user?.operations[newOperation.id.description] = newOperation
     userReference.setData([
       "operations": [
         newOperation.id.description: [
           "amount": newOperation.amount,
-          "category": newOperation.category,
+          "category": newOperation.category!.description,
           "note": newOperation.note,
           "date": newOperation.date,
           "id": newOperation.id.description

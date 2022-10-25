@@ -10,6 +10,21 @@ import UIKit
 
 extension VCMain: protocolVCMain {
 
+  func fetchFirebase() {
+    Task {
+      do {
+        try? await userRepository.getUserData() { data in
+          self.userRepository.user = data
+          print("NewData= \(self.userRepository.user)")
+          self.applySnapshot()
+        }
+        print("NewData2= \(userRepository.user)")
+      } catch {
+        print("Error22")
+      }
+    }
+  }
+
   func updateuserData(newData: User) {
     userRepository.user = newData
   }
@@ -20,6 +35,7 @@ extension VCMain: protocolVCMain {
 
   func addOperations(amount: Double, categoryUUID: UUID, note: String, date: Date) {
     userRepository.addOperations(amount: amount, categoryUUID: categoryUUID, note: note, date: date)
+    applySnapshot()
   }
 
   func deleteCategory(idOfObject: UUID) {
@@ -30,8 +46,8 @@ extension VCMain: protocolVCMain {
     userRepository.updateCategory(name: name, icon: icon, idOfObject: idOfObject)
   }
 
-  func addCategory(name: String, icon: String) {
-    userRepository.addCategory(name: name, icon: icon)
+  func addCategory(name: String, icon: String, date: Double) {
+    userRepository.addCategory(name: name, icon: icon, date: date)
   }
 
   func deleteOperation(uuid: UUID) {

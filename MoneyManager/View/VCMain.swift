@@ -31,8 +31,9 @@ protocol protocolVCMain {
   func deleteCategory(idOfObject: UUID)
   func updateCategory(name: String, icon: String, idOfObject: UUID)
   func returnGraphData() -> [GraphData]
-  func addCategory(name: String, icon: String)
+  func addCategory(name: String, icon: String, date: Double)
   func deleteOperation(uuid: UUID)
+  func fetchFirebase()
 }
 
 
@@ -70,7 +71,7 @@ class VCMain: UIViewController {
   var expensive: Double = 0
 
   var tapShowOperation: UITapGestureRecognizer?
-    var vcSettingDelegate: protocolVCSetting?
+  var vcSettingDelegate: protocolVCSetting?
   var vcOperationDelegate: protocolVCOperation?
   var vcGraphDelegate: protocolVCGraph?
 

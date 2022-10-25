@@ -84,14 +84,18 @@ extension VCCategory: protocolVCCategory {
     }
   }
 
-
-  func screen2ContainerAddNewCategory() {
+  func addNewCategory(name: String, icon: String, date: Double) {
+    // vcMainDelegate?.fetchFirebase()
+    vcMainDelegate!.addCategory(name: name, icon: icon, date: date)
+    print("vcMainDelegate!.getUserData().categories.count = \(vcMainDelegate!.getUserData().categories.count)")
     tableView.performBatchUpdates({
-      let newRowIndex = statusEditContainer == true ? vcMainDelegate!.getUserData().operations.count + 1 : vcMainDelegate?.getUserData().operations.count
+      let newRowIndex = statusEditContainer == true ? vcMainDelegate!.getUserData().categories.count + 1 : vcMainDelegate?.getUserData().categories.count
       tableView.insertRows(at: [IndexPath(row: newRowIndex!, section: 0)], with: .automatic)
-    }, completion: { _ in self.tableView.reloadData() })
+    }, completion: { _ in
+      self.tableView.reloadData()
+      self.vcMainDelegate?.fetchFirebase()
+    })
   }
-
 
   func screen2ContainerDeleteCategory(cellID: Int) {
     tableView.performBatchUpdates({
@@ -173,6 +177,8 @@ extension VCCategory: UITableViewDelegate, UITableViewDataSource {
       print("3333")
       let cell = tableView.dequeueReusableCell(withIdentifier: "cellChangeCategory") as! CategoryTableVCCategory
       cell.vcCategoryDelegate = self
+      cell.vcSettingDelegate = vcSettingDelegate
+      cell.vcMainDelegate = vcMainDelegate
       cell.startCell(
         category: categoriesArray[statusEditContainer == true ? indexPath.row - 2 : indexPath.row - 1],
         cellID: statusEditContainer == true ? indexPath.row - 2 : indexPath.row - 1

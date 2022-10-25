@@ -195,11 +195,12 @@ extension VCSetting: protocolVCSetting {
 
   // MARK: - окрытие PopUp-окна
   func changeCategoryOpenPopUpScreen2(_ tag: Int) {
+    print("changeCategoryOpenPopUpScreen2")
     self.categoryChangeView.layer.cornerRadius = 20
     self.constraintCategoryChangeViewHeight.constant = CGFloat(50 * 6)
     textFieldAmount.endEditing(true)
     tableViewCellNoteDelegate?.tapOutsideNoteTextViewEditToHide()
-
+    
     UIView.animate(
       withDuration: 0.3,
       delay: 0,

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 protocol protocolVCSetting {
   func changeCategoryClosePopUpScreen2()
@@ -72,10 +73,6 @@ class VCSetting: UIViewController {
     var newOperation = returnNewOperation()
     if newOperation.category != nil && textFieldAmount.text != "0" {
 
-      // var newAnount: Double?
-      // var newDate: Date?
-      // var newNote: String?
-
       // set Amount
       print("2. screen2SegmentControl.selectedSegmentIndex= \(screen2SegmentControl.selectedSegmentIndex)")
       if screen2SegmentControl.selectedSegmentIndex == 0 {
@@ -99,7 +96,7 @@ class VCSetting: UIViewController {
         newOperation.note = (tableViewCellNoteDelegate?.returnNoteView().text)!
       }
 
-      setVCSetting(amount: newOperation.amount, categoryUUID: newOperation.category, date: Date.init(timeIntervalSince1970: newOperation.date), note: newOperation.note, id: newOperation.id)
+      setVCSetting(amount: newOperation.amount, categoryUUID: newOperation.category!, date: Date.init(timeIntervalSince1970: newOperation.date), note: newOperation.note, id: newOperation.id)
 
       print("newOperation.amount= \(newOperation.amount), newOperation.category= \(newOperation.category), newOperation.date= \(newOperation.date), newOperation.note= \(newOperation.note),")
 
@@ -108,7 +105,7 @@ class VCSetting: UIViewController {
         print("newOperation.date222= \(newOperation.date)")
         vcMainDelegate?.updateOperations(
           amount: newOperation.amount,
-          categoryUUID: newOperation.id,
+          categoryUUID: newOperation.category!,
           note: newOperation.note,
           date: Date.init(timeIntervalSince1970: newOperation.date),
           idOfObject: newOperation.id
@@ -116,7 +113,7 @@ class VCSetting: UIViewController {
       } else {
         vcMainDelegate?.addOperations(
           amount: newOperation.amount,
-          categoryUUID: newOperation.category,
+          categoryUUID: newOperation.category!,
           note: newOperation.note,
           date: Date.init(timeIntervalSince1970: newOperation.date)
         )
@@ -137,6 +134,7 @@ class VCSetting: UIViewController {
     if let viewController = segue.destination as? VCCategory, segue.identifier == "segueToVCCategory" {
       vcCategoryDelegate = viewController
       viewController.vcSettingDelegate = self
+      viewController.vcMainDelegate = vcMainDelegate
     }
   }
 
@@ -221,6 +219,7 @@ class VCSetting: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    newOperation = Operation(amount: 0, category: nil, note: "", date: Date.timeIntervalBetween1970AndReferenceDate, id: UUID())
     menuArrayCalculate()
     self.view.insertSubview(self.blurView, belowSubview: self.categoryChangeView)
     self.blurView.backgroundColor = .clear

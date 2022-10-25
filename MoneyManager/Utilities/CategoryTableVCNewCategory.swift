@@ -20,8 +20,8 @@ class CategoryTableVCNewCategory: UITableViewCell {
   // MARK: - переходы
   @IBAction func buttonAddNewCategoryAction(_ sender: Any) {
     if let value = textFieldNewCategory.text?.isEmpty, value == false {
-      vcCategoryDelegate?.returnVCMainDelegate().addCategory(name: textFieldNewCategory.text!, icon: "")
-      vcCategoryDelegate?.screen2ContainerAddNewCategory()
+      vcCategoryDelegate?.addNewCategory(name: textFieldNewCategory.text!, icon: "", date: Date().timeIntervalSince1970)
+
 
       textFieldNewCategoryClear()
       textFieldNewCategory.endEditing(true)
