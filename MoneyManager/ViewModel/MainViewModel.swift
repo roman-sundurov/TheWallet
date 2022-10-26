@@ -16,7 +16,7 @@ extension VCMain: protocolVCMain {
         try? await userRepository.getUserData() { data in
           self.userRepository.user = data
           print("NewData= \(self.userRepository.user)")
-          self.applySnapshot()
+          self.updateScreen()
         }
         print("NewData2= \(userRepository.user)")
       } catch {
@@ -25,17 +25,18 @@ extension VCMain: protocolVCMain {
     }
   }
 
-  func updateuserData(newData: User) {
+  func updateUserData(newData: User) {
     userRepository.user = newData
   }
 
   func updateOperations(amount: Double, categoryUUID: UUID, note: String, date: Date, idOfObject: UUID) {
     userRepository.updateOperations(amount: amount, categoryUUID: categoryUUID, note: note, date: date, idOfObject: idOfObject)
+    updateScreen()
   }
 
   func addOperations(amount: Double, categoryUUID: UUID, note: String, date: Date) {
     userRepository.addOperations(amount: amount, categoryUUID: categoryUUID, note: note, date: date)
-    applySnapshot()
+    updateScreen()
   }
 
   func deleteCategory(idOfObject: UUID) {
@@ -52,6 +53,7 @@ extension VCMain: protocolVCMain {
 
   func deleteOperation(uuid: UUID) {
     userRepository.deleteOperation(idOfObject: uuid)
+    updateScreen()
   }
 
   func miniGraphStarterBackground(status: Bool) {
@@ -87,7 +89,7 @@ extension VCMain: protocolVCMain {
 
   func updateScreen() {
       // screen1TableUpdateSorting()
-    tableViewScreen1.reloadData()
+    applySnapshot()
     countingIncomesAndExpensive()
     changeDaysForSorting(newValue: userRepository.user!.daysForSorting)
     miniGraph.setNeedsDisplay()

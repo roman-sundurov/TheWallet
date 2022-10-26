@@ -18,7 +18,11 @@ extension VCMain {
       } else {
         cell?.labelAmount.text = String(format: "%.2f", model.amount)
       }
-      cell?.labelCategory.text = self.getUserData().categories[model.category!.description]?.name
+      if let category = self.getUserData().categories[model.category!.description] {
+        cell?.labelCategory.text = category.name
+      } else {
+        cell?.labelCategory.text = "Category not found"
+      }
       // print("model.category.description= \(model.category.description)")
       // print("categoryname= \(self.getUserData().categories[model.category.description]?.name)")
       if model.amount < 0 {

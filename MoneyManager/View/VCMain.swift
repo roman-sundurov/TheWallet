@@ -24,7 +24,7 @@ protocol protocolVCMain {
   func returnArrayForIncrease() -> [Int]
   func getUserRepository() -> UserRepository
   func getUserData() -> User
-  func updateuserData(newData: User)
+  func updateUserData(newData: User)
   
   func updateOperations(amount: Double, categoryUUID: UUID, note: String, date: Date, idOfObject: UUID)
   func addOperations(amount: Double, categoryUUID: UUID, note: String, date: Date)

@@ -40,9 +40,8 @@ class VCOperation: UIViewController {
 
 
   @IBAction func buttonActionToDeleteOperation(_ sender: Any) {
-    // vcMainDelegate?.hideOperation()
-    // vcMainDelegate?.deleteOperation(uuid: uuid!)
-    // vcMainDelegate?.updateScreen()
+    vcMainDelegate?.hideOperation()
+    vcMainDelegate?.deleteOperation(uuid: uuid!)
   }
 
   override func viewDidLoad() {
@@ -64,7 +63,12 @@ extension VCOperation: protocolVCOperation {
     let operation = UserRepository.shared.user?.operations.filter { $0.value.id == id }.first?.value
 
     // Отображения category
-    labelCategory.text = vcMainDelegate?.getUserData().categories[operation!.category!.description]?.name
+    if let category = vcMainDelegate?.getUserData().categories[operation!.category!.description] {
+      labelCategory.text = category.name
+    } else {
+      labelCategory.text = "Category not found"
+    }
+
 
     // Отображения date
     let formatterPrint = DateFormatter()

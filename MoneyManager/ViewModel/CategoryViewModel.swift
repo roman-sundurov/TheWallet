@@ -12,6 +12,7 @@ extension VCCategory: protocolVCCategory {
 
   func screen2ContainerDeleteCategory(idOfObject: UUID) {
     vcMainDelegate?.deleteCategory(idOfObject: idOfObject)
+    tableView.reloadData()
   }
 
   func returnVCMainDelegate() -> protocolVCMain {

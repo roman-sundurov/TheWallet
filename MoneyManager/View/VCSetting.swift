@@ -219,7 +219,7 @@ class VCSetting: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    newOperation = Operation(amount: 0, category: nil, note: "", date: Date.timeIntervalBetween1970AndReferenceDate, id: UUID())
+    newOperation = Operation(amount: 0, category: nil, note: "", date: Date().timeIntervalSince1970, id: UUID())
     menuArrayCalculate()
     self.view.insertSubview(self.blurView, belowSubview: self.categoryChangeView)
     self.blurView.backgroundColor = .clear

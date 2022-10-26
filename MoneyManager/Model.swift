@@ -120,10 +120,9 @@ class UserRepository {
   }
 
   func deleteCategory(idOfObject: UUID) {
+    UserRepository.shared.user?.categories[idOfObject.description] = nil
     userReference.updateData([
-      "categories": [
-        idOfObject.description: FieldValue.delete()
-      ]
+      "categories.\(idOfObject.description)": FieldValue.delete()
     ]) { error in
       if let error = error {
         print("deleteCategory Error writing document: \(error)")
@@ -149,16 +148,10 @@ class UserRepository {
   }
 
   func updateCategory(name: String, icon: String, idOfObject: UUID) {
-    let updCategory = Category(name: name, icon: icon, id: idOfObject)
-    userReference.setData([
-      "categories": [
-        idOfObject.description: [
-          "name": updCategory.name,
-          "icon": updCategory.icon
-          // "id": updCategory.id.description
-        ]
-      ]
-    ], merge: true) { error in
+    userReference.updateData([
+      "categories.\(idOfObject).name": name,
+      "categories.\(idOfObject).icon": icon
+    ]) { error in
       if let error = error {
         print("updateCategory Error writing document: \(error)")
       } else {
