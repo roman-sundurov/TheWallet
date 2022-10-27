@@ -6,157 +6,201 @@
 //
 
 import Foundation
-import RealmSwift
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
-class DataOfOperations {
+typealias nestedType = (User) -> Void
+
+struct Operation: Codable, Identifiable, Equatable, Hashable {
   var amount: Double
-  var category: String
+  var category: UUID?
   var note: String
-  var date: Date
-  var id: Int
-
-  init(amount1: Double, category1: String, note1: String, date1: Date, id1: Int) {
-    self.amount = amount1
-    self.category = category1
-    self.note = note1
-    self.date = date1
-    self.id = id1
-  }
+  var date: Double
+  var id = UUID()
 }
 
-class Person: Object {
-  @objc dynamic var name: String = ""
-  @objc dynamic var surname: String = ""
-  @objc dynamic var daysForSorting: Int = 0
-  @objc dynamic var lastIdOfOperations: Int = -1
-  @objc dynamic var lastIdOfCategories: Int = -1
-  var listOfCategory = List<Category>()
+struct Category: Codable, Identifiable, Equatable, Hashable {
+  var name: String = ""
+  var icon: String = ""
+  var date: Double = 0
+  var id = UUID()
 }
 
-
-class ListOfOperations: Object {
-  @objc dynamic var amount: Double = 0
-  @objc dynamic var category: String = ""
-  @objc dynamic var note: String = ""
-  @objc dynamic var date = Date.init(timeIntervalSince1970: TimeInterval(0))
-  @objc dynamic var id: Int = 0
-}
-
-
-class Category: Object {
-  @objc dynamic var name: String = ""
-  @objc dynamic var icon: String = ""
-  @objc dynamic var id: Int = 0
-}
-
-
-class Persistence {
-  static let shared = Persistence()
-  private init() {}
-  private let realm = try! Realm()
-
-  // MARK: - категории
-  func returnRealmDataCategories() -> Results<Category> {
-    let allCategories = realm.objects(Category.self)
-    return allCategories
+struct User: Codable, Identifiable, Equatable, Hashable {
+  static func == (lhs: User, rhs: User) -> Bool {
+    lhs.id == rhs.id
   }
 
-  func addCategory(name: String, icon: String) {
-    let category = Category()
-    category.name = name
-    category.icon = icon
-    category.id = realm.objects(Person.self).first!.lastIdOfCategories + 1
-      try! realm.write {
-        realm.add(category)
-        realm.objects(Person.self).first!.lastIdOfCategories = category.id
+  var name: String = ""
+  var surname: String = ""
+  var email: String = ""
+  var daysForSorting: Int = 30
+  var lastIdOfOperations: Int = -1
+  var lastIdOfCategories: Int = -1
+  var categories: [String: Category] = [:]
+  var operations: [String: Operation] = [:]
+  var id = UUID()
+}
+
+class UserRepository {
+  static let shared = UserRepository()
+  var user: User?
+
+  var mainDiffableSections: [String] = []
+  var mainDiffableSectionsSource: [String: [Operation]] = [:]
+  // var semaphore = DispatchSemaphore(value: 0)
+
+  let documentReference = Firestore.firestore().collection("users")
+  var userReference = Firestore.firestore().collection("users").document("roman.sundurov.work@gmail.com")
+
+  func getUserData(inner: @escaping nestedType) async throws {
+    userReference.getDocument { (document, error) in
+      if let document = document, document.exists {
+        let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+        print("getUserData Document data: \(dataDescription)")
+        print("getUserData aaa")
+        let userData = try! document.data(as: User.self)
+        inner(userData)
+        print("getUserData bbb")
+        // semaphore.signal()
+          // }
+      } else {
+        print("getUserData Document does not exist")
+      }
+    }
+  }
+
+  func addNewUser(name: String, surname: String, email: String) {
+
+    let newCategory = Category(name: "newCategory", icon: "", date: 1666209106, id: UUID())
+    let newOperation = Operation(amount: 100, category: newCategory.id, note: "Test note", date: 1666209105, id: UUID())
+
+    let newUser = User(name: name, surname: surname, email: email, categories: [newCategory.date.description: newCategory], operations: [newOperation.date.description: newOperation])
+    try! documentReference.document(email).setData(from: newUser) { error in
+      if let error = error {
+        print("addNewUser Error writing document: \(error)")
+      } else {
+        print("addNewUser Document successfully written!")
+      }
+    }
+    user = newUser
+  }
+
+  func addCategory(name: String, icon: String, date: Double) {
+    let newCategory = Category(name: name, icon: icon, date: date, id: UUID())
+    UserRepository.shared.user?.categories[newCategory.id.description] = newCategory
+    try! userReference.setData([
+      "categories": [
+        newCategory.id.description: [
+          "name": newCategory.name,
+          "icon": newCategory.icon,
+          "date": date,
+          "id": newCategory.id.description
+        ]
+      ]
+    ], merge: true) { error in
+      if let error = error {
+        print("addCategory Error writing document: \(error)")
+      } else {
+        print("addCategory Document successfully written!")
+      }
+    }
+  }
+
+  func updateDaysForSorting(daysForSorting: Int) {
+    UserRepository.shared.user?.daysForSorting = daysForSorting
+    try! userReference.setData([
+      "daysForSorting": daysForSorting
+    ], merge: true) { error in
+      if let error = error {
+        print("updateDaysForSorting Error writing document: \(error)")
+      } else {
+        print("updateDaysForSorting Document successfully written!")
+      }
+    }
+  }
+
+  func deleteCategory(idOfObject: UUID) {
+    UserRepository.shared.user?.categories[idOfObject.description] = nil
+    userReference.updateData([
+      "categories.\(idOfObject.description)": FieldValue.delete()
+    ]) { error in
+      if let error = error {
+        print("deleteCategory Error writing document: \(error)")
+      } else {
+        print("deleteCategory Document successfully written!")
+      }
+    }
+  }
+
+  func deleteOperation(idOfObject: UUID) {
+    UserRepository.shared.user?.operations[idOfObject.description] = nil
+    userReference.updateData([
+      "operations.\(idOfObject.description)": FieldValue.delete()
+    ]) { error in
+      if let error = error {
+        print("deleteOperation Error writing document: \(error)")
+      } else {
+        print("deleteOperation Document successfully written!")
       }
     }
 
-
-  func deleteCategory(idOfObject: Int) {
-    let particularCategory = realm.objects(Category.self).filter("id == \(idOfObject)")
-    print("idOfObject for deleteCategory= \(idOfObject)")
-    try! realm.write {
-      realm.delete(particularCategory)
-    }
   }
 
-
-  func updateCategory(name: String, icon: String, idOfObject: Int) {
-    print("updateCategoy")
-    let particularCategory = realm.objects(Category.self).filter("id == \(idOfObject)")
-    try! realm.write {
-      print("particularOperations.text= \(particularCategory)")
-      particularCategory.setValue(name, forKey: "name")
+  func updateCategory(name: String, icon: String, idOfObject: UUID) {
+    userReference.updateData([
+      "categories.\(idOfObject).name": name,
+      "categories.\(idOfObject).icon": icon
+    ]) { error in
+      if let error = error {
+        print("updateCategory Error writing document: \(error)")
+      } else {
+        print("updateCategory Document successfully written!")
+      }
     }
   }
 
 
   // MARK: - операции
-  func addOperations(amount: Double, category: String, note: String, date: Date) {
-    let operation = ListOfOperations()
-    operation.category = category
-    operation.note = note
-    operation.amount = amount
-    operation.date = date
-    operation.id = realm.objects(Person.self).first!.lastIdOfOperations + 1
-    try! realm.write {
-      realm.add(operation)
-      realm.objects(Person.self).first!.lastIdOfOperations = operation.id
-    }
-  }
-
-
-  func updateOperations(amount: Double, category: String, note: String, date: Date, idOfObject: Int) {
-    print("updateOperations")
-    let particularOperations = realm.objects(ListOfOperations.self).filter("id == \(idOfObject)").first
-    try! realm.write {
-      print("particularOperations.text= \(String(describing: particularOperations))")
-      particularOperations?.setValue(category, forKey: "category")
-      particularOperations?.setValue(note, forKey: "note")
-      particularOperations?.setValue(amount, forKey: "amount")
-      particularOperations?.setValue(date, forKey: "date")
-    }
-  }
-
-
-  func getRealmDataOperations() -> Results<ListOfOperations> {
-    let allOperations = realm.objects(ListOfOperations.self)
-    return allOperations
-  }
-
-
-  func deleteOperation(idOfObject: Int) {
-    let particularOperations = realm.objects(ListOfOperations.self).filter("id == \(idOfObject)")
-    print("idOfObject for delete= \(idOfObject)")
-    try! realm.write {
-      realm.delete(particularOperations)
-    }
-  }
-
-
-  // MARK: - личные данные
-  func updateDaysForSorting(daysForSorting: Int) {
-    let person = realm.objects(Person.self).first
-    try! realm.write {
-      person!.daysForSorting = daysForSorting
-    }
-  }
-
-
-  func returnDaysForSorting() -> Int {
-    print("old person returned")
-    let person = realm.objects(Person.self).first
-    if person?.daysForSorting != nil {
-      return person!.daysForSorting
-    } else {
-      print("newPerson added")
-      let newPerson = Person()
-      newPerson.daysForSorting = 30
-      try! realm.write {
-        realm.add(newPerson)
+  func addOperations(amount: Double, categoryUUID: UUID, note: String, date: Date) {
+    let newOperation = Operation(amount: amount, category: categoryUUID, note: note, date: date.timeIntervalSince1970)
+    UserRepository.shared.user?.operations[categoryUUID.description] = newOperation
+    userReference.setData([
+      "operations": [
+        newOperation.id.description: [
+          "amount": newOperation.amount,
+          "category": newOperation.category!.description,
+          "note": newOperation.note,
+          "date": newOperation.date,
+          "id": newOperation.id.description
+        ]
+      ]
+    ], merge: true) { error in
+      if let error = error {
+        print("addCategory Error writing document: \(error)")
+      } else {
+        print("addCategory Document successfully written!")
       }
-      return newPerson.daysForSorting
+    }
+  }
+
+  func updateOperations(amount: Double, categoryUUID: UUID, note: String, date: Date, idOfObject: UUID) {
+    let updOperation = Operation(amount: amount, category: categoryUUID, note: note, date: date.timeIntervalSince1970, id: idOfObject)
+    print("idOfObject= \(idOfObject)")
+    UserRepository.shared.user?.operations[idOfObject.description] = updOperation
+    userReference.updateData([
+      "operations.\(idOfObject.description).amount": amount,
+      "operations.\(idOfObject.description).category": categoryUUID.description,
+      "operations.\(idOfObject.description).note": note,
+      "operations.\(idOfObject.description).date": date.timeIntervalSince1970
+      // "operations.\(idOfObject.description).id": idOfObject.description
+
+    ]) { error in
+      if let error = error {
+        print("addCategory Error writing document: \(error)")
+      } else {
+        print("addCategory Document successfully written!")
+      }
     }
   }
 }

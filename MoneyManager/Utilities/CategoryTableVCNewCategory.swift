@@ -1,5 +1,5 @@
 //
-//  Screen2ContainerTableVCNewCategory.swift
+//  CategoryTableVCNewCategory.swift
 //  MoneyManager
 //
 //  Created by Roman on 21.04.2021.
@@ -7,41 +7,33 @@
 
 import UIKit
 
-protocol protocolScreen2ContainerTableVCNewCategory {
+protocol protocolCategoryTableVCNewCategory {
   func textFieldNewCategoryClear()
 }
 
-class Screen2ContainerTableVCNewCategory: UITableViewCell {
-  // MARK: - объявление аутлетов
+class CategoryTableVCNewCategory: UITableViewCell {
 
+  // MARK: - объявление аутлетов
   @IBOutlet var textFieldNewCategory: UITextField!
   @IBOutlet var buttonAddNewCategory: UIButton!
 
-
   // MARK: - переходы
-
   @IBAction func buttonAddNewCategoryAction(_ sender: Any) {
     if let value = textFieldNewCategory.text?.isEmpty, value == false {
-      Persistence.shared.addCategory(name: textFieldNewCategory.text!, icon: "")
+      vcCategoryDelegate?.addNewCategory(name: textFieldNewCategory.text!, icon: "", date: Date().timeIntervalSince1970)
 
-      delegateScreen2Container?.screen2ContainerAddNewCategory()
 
       textFieldNewCategoryClear()
       textFieldNewCategory.endEditing(true)
     } else {
-      delegateScreen2Container?.presentAlertErrorAddNewCategory()
+      vcCategoryDelegate?.showAlertErrorAddNewCategory()
     }
   }
 
-
   // MARK: - делегаты и переменные
-
-  var delegateScreen2Container: protocolScreen2ContainerDelegate?
-
-
+  var vcCategoryDelegate: protocolVCCategory?
   override func awakeFromNib() {
     super.awakeFromNib()
-
     textFieldNewCategory.layer.cornerRadius = 10
     buttonAddNewCategory.layer.cornerRadius = 10
   }
@@ -51,8 +43,7 @@ class Screen2ContainerTableVCNewCategory: UITableViewCell {
   }
 }
 
-
-extension Screen2ContainerTableVCNewCategory: protocolScreen2ContainerTableVCNewCategory {
+extension CategoryTableVCNewCategory: protocolCategoryTableVCNewCategory {
   func textFieldNewCategoryClear() {
     textFieldNewCategory.text = ""
   }

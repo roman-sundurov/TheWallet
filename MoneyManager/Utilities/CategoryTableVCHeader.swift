@@ -6,18 +6,18 @@
 
 import UIKit
 
-protocol protocolScreen2ContainerTableVClHeader {
+protocol protocolCategoryTableVCHeader {
   func buttonOptionsSetColor(color: UIColor)
 }
 
-class Screen2ContainerTableVCHeader: UITableViewCell {
+class CategoryTableVCHeader: UITableViewCell {
   // MARK: - аутлеты
 
   @IBOutlet var buttonOptions: UIButton!
 
   // MARK: - делегаты и переменные
 
-  var delegateScreen2Container: protocolScreen2ContainerDelegate?
+  var delegateScreen2Container: protocolVCCategory?
 
   // MARK: - переходы
 
@@ -35,7 +35,7 @@ class Screen2ContainerTableVCHeader: UITableViewCell {
   }
 }
 
-extension Screen2ContainerTableVCHeader: protocolScreen2ContainerTableVClHeader {
+extension CategoryTableVCHeader: protocolCategoryTableVCHeader {
   func buttonOptionsSetColor(color: UIColor) {
     buttonOptions.tintColor = color
   }

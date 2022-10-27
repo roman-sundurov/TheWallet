@@ -1,5 +1,5 @@
 //
-//  VCScreen1ContainerGraph.swift
+//  VCMainContainerGraph.swift
 //  MoneyManager
 //
 //  Created by Roman on 01.05.2021.
@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol protocolScreen1ContainerGraph {
+protocol protocolVCGraph {
   func containerGraphUpdate()
   func setGraphIndicators(min: String, middle: String, max: String)
 }
 
-class VCScreen1ContainerGraph: UIViewController {
+class VCGraph: UIViewController {
   // MARK: - объявление аутлетов
 
   @IBOutlet var graphView: GraphView!
@@ -24,12 +24,12 @@ class VCScreen1ContainerGraph: UIViewController {
 
 
   // MARK: - делегаты и переменные
-  var delegateScreen1: VCScreen1?
+  var vcMainDelegate: VCMain?
 
   // MARK: - Functions
   func countFullPointsArray() {
     print("countFullPointsArray")
-    let graphData = ViewModelScreen1.shared.returnGraphData()
+    let graphData = vcMainDelegate!.returnGraphData()
     print("graphData= \(graphData)")
     for data in graphData {
       print("graphData_n.cumulativeAmount= \(data.amount), graphData_n.date= \(data.date)")
@@ -48,12 +48,12 @@ class VCScreen1ContainerGraph: UIViewController {
       // Проверка заполнения оставшихся дней. Если запись пуста - ставим 0.
       var x: Int = 1
 
-      for amountOfDay in 1..<(ViewModelScreen1.shared.returnDaysForSorting()) {
+      for amountOfDay in 1..<vcMainDelegate!.getUserData().daysForSorting {
         print("2222")
 
         if graphData.count >= x + 1 {
           print("3333")
-          if ViewModelScreen1.shared.returnDayOfDate(graphData[x].date) != ViewModelScreen1.shared.returnDayOfDate(
+          if vcMainDelegate!.returnDayOfDate(graphData[x].date) != vcMainDelegate!.returnDayOfDate(
             Calendar.current.date(
               byAdding: .day,
               value: -amountOfDay,
@@ -117,7 +117,7 @@ class VCScreen1ContainerGraph: UIViewController {
 }
 
 
-extension VCScreen1ContainerGraph: protocolScreen1ContainerGraph {
+extension VCGraph: protocolVCGraph {
   func setGraphIndicators(min: String, middle: String, max: String) {
     minIndicatorLabel.text = min
     middleIndicatorLabel.text = middle
@@ -128,7 +128,7 @@ extension VCScreen1ContainerGraph: protocolScreen1ContainerGraph {
   func containerGraphUpdate() {
     countFullPointsArray()
 
-    switch ViewModelScreen1.shared.returnDaysForSorting() {
+    switch vcMainDelegate?.getUserData().daysForSorting {
     case 365:
       weeklyStackView.isHidden = true
       monthlyStackView.isHidden = false

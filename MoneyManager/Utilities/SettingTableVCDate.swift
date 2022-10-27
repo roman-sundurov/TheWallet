@@ -1,5 +1,5 @@
 //
-//  Screen2TableVCDate.swift
+//  SettingTableVCDate.swift
 //  MoneyManager
 //
 //  Created by Roman on 06.03.2021.
@@ -7,19 +7,19 @@
 
 import UIKit
 
-protocol protocolScreen2TableVCDateDelegate {
+protocol protocolSettingTableVCDate {
   func returnDateTextField() -> UILabel
 }
 
 
-class Screen2TableVCDate: UITableViewCell {
+class SettingTableVCDate: UITableViewCell {
   @IBOutlet var labelDate: UILabel!
   @IBOutlet var labelSelectDate: UILabel!
   @IBOutlet var buttonSelectDate: UIButton!
 
   // MARK: - делегаты и переменные
-  var delegateScreen2: protocolScreen2Delegate?
-  var specCellTag: Int = 0
+  var vcSettingDelegate: protocolVCSetting?
+  var indexRow: Int = 0
 
   // MARK: - переходы
 
@@ -33,25 +33,26 @@ class Screen2TableVCDate: UITableViewCell {
 
 
   @objc func startEditing() {
-    delegateScreen2?.openAlertDatePicker()
+    vcSettingDelegate?.openAlertDatePicker()
     print("startEditing")
   }
 
 
-  func startCell() {
+  func startCell(indexRow: Int) {
+    self.indexRow = indexRow
     let dateFormatter = DateFormatter()
     dateFormatter.dateStyle = .medium
     dateFormatter.timeStyle = .none
 
-    if ViewModelScreen2.shared.returnNewOperation().date != Date.init(timeIntervalSince1970: TimeInterval(0)) {
-      labelSelectDate.text = dateFormatter.string(from: ViewModelScreen2.shared.returnNewOperation().date)
+    if vcSettingDelegate!.returnNewOperation().date != 0 {
+      labelSelectDate.text = dateFormatter.string(from: Date.init(timeIntervalSince1970: vcSettingDelegate!.returnNewOperation().date))
       labelSelectDate.textColor = .black
     } else {
-      labelSelectDate.text = ViewModelScreen2.shared.returnScreen2MenuArray()[specCellTag].text
+      labelSelectDate.text = vcSettingDelegate!.returnScreen2MenuArray()[indexRow].text
     }
 
     // textFieldSelectDate.tintColor = UIColor.clear //делает курсор бесцветным, но не убирает его
-    labelDate.text = ViewModelScreen2.shared.returnScreen2MenuArray()[specCellTag].name
+    labelDate.text = vcSettingDelegate!.returnScreen2MenuArray()[indexRow].name
     self.isUserInteractionEnabled = true
 
     let gesture = UITapGestureRecognizer(target: self, action: #selector(startEditing))
@@ -59,12 +60,12 @@ class Screen2TableVCDate: UITableViewCell {
   }
 
   func setTag(tag: Int) {
-    specCellTag = tag
+    indexRow = tag
   }
 }
 
 
-extension Screen2TableVCDate: protocolScreen2TableVCDateDelegate {
+extension SettingTableVCDate: protocolSettingTableVCDate {
   func returnDateTextField() -> UILabel {
     print("textViewDeselect")
     return labelSelectDate

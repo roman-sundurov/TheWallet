@@ -1,5 +1,5 @@
 //
-//  Screen2TableVCNote.swift
+//  SettingTableVCNote.swift
 //  MoneyManager
 //
 //  Created by Roman on 19.01.2021.
@@ -7,18 +7,17 @@
 
 import UIKit
 
-protocol protocolScreen2TableVCNoteDelegate{
+protocol protocolSettingTableVCNote{
   func tapOutsideNoteTextViewEditToHide()
   func returnNoteView() -> UITextView
   func setNoteViewText(newText: String)
 }
 
-class Screen2TableVCNote: UITableViewCell, UITextViewDelegate {
-//    @IBOutlet var textFieldNotes: UITextField!
+class SettingTableVCNote: UITableViewCell, UITextViewDelegate {
   @IBOutlet var textViewNotes: UITextView!
 
-  var delegateScreen2: protocolScreen2Delegate?
-  var specCellTag: Int = 0
+  var vcSettingDelegate: protocolVCSetting?
+  var indexRow: Int = 0
 
 // MARK: - Работа с Placeholder
   func textViewDidBeginEditing(_ textView: UITextView) {
@@ -47,27 +46,22 @@ class Screen2TableVCNote: UITableViewCell, UITextViewDelegate {
     super.setSelected(selected, animated: animated)
   }
 
-  func startCell() {
-    textViewNotes.text = ViewModelScreen2.shared.returnScreen2MenuArray()[specCellTag].text
+  func startCell(indexRow: Int) {
+    self.indexRow = indexRow
+    // textViewNotes.text = vcSettingDelegate!.returnScreen2MenuArray()[indexRow].text
 
     textViewNotes.textContainer.lineBreakMode = .byTruncatingTail
     textViewNotes.layer.borderColor = UIColor.gray.cgColor
     textViewNotes.layer.borderWidth = 2
-
     textViewNotes.layer.cornerRadius = 10
 
     textViewNotes.text = "Placeholder"
 //    textViewNotes.textColor = UIColor.opaqueSeparator //цвет текста уже opaqueSeparator в Storyboard.
 
   }
-
-  func setTag(tag: Int) {
-    specCellTag = tag
-  }
 }
 
-
-extension Screen2TableVCNote: protocolScreen2TableVCNoteDelegate {
+extension SettingTableVCNote: protocolSettingTableVCNote {
   func setNoteViewText(newText: String) {
     textViewNotes.text = newText
     print("newText= \(newText)")
@@ -81,9 +75,7 @@ extension Screen2TableVCNote: protocolScreen2TableVCNoteDelegate {
     return textViewNotes
   }
 
-
   // MARK: - Обработка касаний экрана
-
   func tapOutsideNoteTextViewEditToHide() {
     textViewNotes.endEditing(true)
     print("textViewDeselect")

@@ -1,5 +1,5 @@
 //
-//  Screen2TableVCCategory.swift
+//  SettingTableVCCategory.swift
 //  MoneyManager
 //
 //  Created by Roman on 17.01.2021.
@@ -7,20 +7,17 @@
 
 import UIKit
 
-protocol protocolScreen2TableViewCellCategory {
-}
-
-class Screen2TableVCCategory: UITableViewCell {
+class SettingTableVCCategory: UITableViewCell {
   @IBOutlet var labelCategory: UILabel!
   @IBOutlet var labelSelectCategory: UILabel!
   @IBOutlet var buttonSelectCategory: UIButton!
 
-  var delegateScreen2: protocolScreen2Delegate?
-  var specCellTag: Int = 0
+  var vcSettingDelegate: protocolVCSetting?
+  var indexRow: Int = 0
 
 // Анимация
   @objc func changeCategoryOpenPopUpScreen2FromCellCategory(_ tag: Int) {
-    delegateScreen2?.changeCategoryOpenPopUpScreen2(specCellTag)
+    vcSettingDelegate?.changeCategoryOpenPopUpScreen2(indexRow)
     print("ChangeCategory from Screen2")
   }
 
@@ -32,14 +29,16 @@ class Screen2TableVCCategory: UITableViewCell {
     super.setSelected(selected, animated: animated)
   }
 
-  func startCell() {
-    if ViewModelScreen2.shared.returnNewOperation().category.isEmpty == false {
-      labelSelectCategory.text = ViewModelScreen2.shared.returnNewOperation().category
+  func prepareCell(indexRow: Int) {
+    self.indexRow = indexRow
+    if vcSettingDelegate!.returnNewOperation().category != nil {
+
+      labelSelectCategory.text = vcSettingDelegate?.getUserData().categories[vcSettingDelegate!.returnNewOperation().category!.description]?.name
       labelSelectCategory.textColor = .black
     } else {
-      labelSelectCategory.text = ViewModelScreen2.shared.returnScreen2MenuArray()[specCellTag].text
+      labelSelectCategory.text = vcSettingDelegate!.returnScreen2MenuArray()[indexRow].text
     }
-    labelCategory.text = ViewModelScreen2.shared.returnScreen2MenuArray()[specCellTag].name
+    labelCategory.text = vcSettingDelegate!.returnScreen2MenuArray()[indexRow].name
     let gesture = UITapGestureRecognizer(
       target: self,
       action: #selector(changeCategoryOpenPopUpScreen2FromCellCategory(_:))
@@ -47,11 +46,4 @@ class Screen2TableVCCategory: UITableViewCell {
     self.isUserInteractionEnabled = true
     self.addGestureRecognizer(gesture)
   }
-
-  func setTag(tag: Int) {
-    specCellTag = tag
-  }
-}
-
-extension Screen2TableVCCategory: protocolScreen2TableViewCellCategory {
 }
