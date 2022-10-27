@@ -153,7 +153,7 @@ class VCMain: UIViewController {
       // Блокировка показа данных за 1 день в режиме графика
       var daysForSorting = userRepository.user!.daysForSorting
       if daysForSorting == 1 {
-        setDaysForSorting(newValue: 30)
+        changeDaysForSorting(newValue: 30)
         daysForSorting = 30
         buttonWeeklyGesture(self)
       }
@@ -192,30 +192,25 @@ class VCMain: UIViewController {
 
   func changeDaysForSorting(newValue: Int) {
     borderLineForMenu(days: newValue)
-    screen1TableUpdateSorting()
-    tableViewScreen1.reloadData()
     userRepository.updateDaysForSorting(daysForSorting: newValue)
     countingIncomesAndExpensive()
     vcGraphDelegate?.containerGraphUpdate()
+    applySnapshot()
   }
 
   @IBAction func buttonDailyGesture(_ sender: Any) {
-    setDaysForSorting(newValue: 1)
     changeDaysForSorting(newValue: 1)
   }
 
   @IBAction func buttonWeeklyGesture(_ sender: Any) {
-    setDaysForSorting(newValue: 7)
     changeDaysForSorting(newValue: 7)
   }
 
   @IBAction func buttonMonthlyGesture(_ sender: Any) {
-    setDaysForSorting(newValue: 30)
     changeDaysForSorting(newValue: 30)
   }
 
   @IBAction func buttonYearlyGesture(_ sender: Any) {
-    setDaysForSorting(newValue: 365)
     changeDaysForSorting(newValue: 365)
   }
 
@@ -299,33 +294,37 @@ class VCMain: UIViewController {
   }
 
   func countingIncomesAndExpensive() {
-    // if let dataArrayOfOperations = userData?.operations {
-    //   income = 0
-    //   expensive = 0
-    //   for data in dataArrayOfOperations.filter({ $0.value.amount > 0 }) {
-    //     income += data.value.amount
-    //   }
-    //   for data in dataArrayOfOperations.filter({ $0.value.amount < 0 }) {
-    //     expensive += data.value.amount
-    //   }
-    //
-    //   if income.truncatingRemainder(dividingBy: 1) == 0 {
-    //     labelAmountOfIncomes.text = "$\(String(format: "%.0f", income))"
-    //   } else {
-    //     labelAmountOfIncomes.text = "$\(String(format: "%.2f", income))"
-    //   }
-    //   if expensive.truncatingRemainder(dividingBy: 1) == 0 {
-    //     labelAmountOfExpenses.text = "$\(String(format: "%.0f", expensive))"
-    //   } else {
-    //     labelAmountOfExpenses.text = "$\(String(format: "%.2f", expensive))"
-    //   }
-    // }
+
+    if let operations = userRepository.user?.operations {
+      let freshHold = Date().timeIntervalSince1970 - Double(86400 * userRepository.user!.daysForSorting)
+
+      income = 0
+      expensive = 0
+      for data in operations.filter({ $0.value.amount > 0 && $0.value.date > freshHold }) {
+        income += data.value.amount
+      }
+      for data in operations.filter({ $0.value.amount < 0 && $0.value.date > freshHold  }) {
+        expensive += data.value.amount
+      }
+
+      if income.truncatingRemainder(dividingBy: 1) == 0 {
+        labelAmountOfIncomes.text = "$\(String(format: "%.0f", income))"
+      } else {
+        labelAmountOfIncomes.text = "$\(String(format: "%.2f", income))"
+      }
+
+      if expensive.truncatingRemainder(dividingBy: 1) == 0 {
+        labelAmountOfExpenses.text = "$\(String(format: "%.0f", expensive))"
+      } else {
+        labelAmountOfExpenses.text = "$\(String(format: "%.2f", expensive))"
+      }
+    }
   }
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     // borderLineForMenu(days: userRepository.user!.daysForSorting)
-    screen1TableUpdateSorting()
+    // screen1TableUpdateSorting()
     tableViewScreen1.reloadData()
     self.view.layoutIfNeeded()
   }
@@ -363,7 +362,7 @@ class VCMain: UIViewController {
         try? await userRepository.getUserData() { data in
           self.userRepository.user = data
           print("NewData= \(self.userRepository.user)")
-          self.applySnapshot()
+          self.updateScreen()
         }
         print("NewData2= \(userRepository.user)")
       } catch {
@@ -373,7 +372,6 @@ class VCMain: UIViewController {
 
 
     miniGraph.setDelegateScreen1RoundedGraph(delegate: self)
-    // updateScreen()
     // округление углов на первом экране
     bottomPopInView.layer.cornerRadius = 20
     bottomPopInView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]

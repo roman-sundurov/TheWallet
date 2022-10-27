@@ -108,6 +108,7 @@ class UserRepository {
   }
 
   func updateDaysForSorting(daysForSorting: Int) {
+    UserRepository.shared.user?.daysForSorting = daysForSorting
     try! userReference.setData([
       "daysForSorting": daysForSorting
     ], merge: true) { error in

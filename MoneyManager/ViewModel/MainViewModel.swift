@@ -164,13 +164,6 @@ extension VCMain: protocolVCMain {
   }
 
 
-    // MARK: - value set functions
-  func setDaysForSorting(newValue: Int) {
-    userRepository.updateDaysForSorting(daysForSorting: newValue)
-    userRepository.user!.daysForSorting = newValue
-  }
-
-
     // MARK: - data calculating
   func graphDataArrayCalculating(dataArrayOfOperationsInternal: [Operation]) {
       // Данные для передачи в график
@@ -201,20 +194,4 @@ extension VCMain: protocolVCMain {
     return graphDataArray
   }
 
-
-  // MARK: - Обновление сортировки
-  func screen1TableUpdateSorting() {
-      // if var userData = userData {
-      //   let newTime = Date() - TimeInterval.init(86400 * userData.daysForSorting)
-      //   userData.operations.sort { $0.date > $1.date }
-      //
-      //   graphDataArray = graphDataArray
-      //     .sorted { $0.date > $1.date }
-      //     .filter { $0.date >= newTime }
-      //   print("graphDataArray when sort: \(graphDataArray)")
-      //
-      //   let temporarilyDate = userData.operations.filter { $0.date >= newTime }
-      //   userData.operations = temporarilyDate
-      // }
-  }
 }

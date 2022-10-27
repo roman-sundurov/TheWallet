@@ -55,9 +55,13 @@ extension VCMain {
     var sectionsTemp: [String] = []
 
     if let userData = userRepository.user {
+      let freshHold = Date().timeIntervalSince1970 - Double(86400 * userData.daysForSorting)
+
       for oper in userData.operations {
-        sectionsDouble.append(oper.value.date)
-        sectionsDouble.sort() { $0 > $1 }
+        if oper.value.date >= freshHold {
+          sectionsDouble.append(oper.value.date)
+          sectionsDouble.sort() { $0 > $1 }
+        }
       }
 
       for double in sectionsDouble {
@@ -78,9 +82,27 @@ extension VCMain {
       }
 
       for oper in userData.operations {
-        let newStringDate = dateFormatter.string(from: Date.init(timeIntervalSince1970: oper.value.date))
-        UserRepository.shared.mainDiffableSectionsSource[newStringDate] = UserRepository.shared.mainDiffableSectionsSource[newStringDate] == nil ? [oper.value] : UserRepository.shared.mainDiffableSectionsSource[newStringDate]! + [oper.value]
+        if oper.value.date >= freshHold {
+          let newStringDate = dateFormatter.string(from: Date.init(timeIntervalSince1970: oper.value.date))
+          UserRepository.shared.mainDiffableSectionsSource[newStringDate] = UserRepository.shared.mainDiffableSectionsSource[newStringDate] == nil ? [oper.value] : UserRepository.shared.mainDiffableSectionsSource[newStringDate]! + [oper.value]
+        }
       }
+
+      // if var userData = userRepository.user {
+      //     let newTime = Date() - TimeInterval.init(86400 * userData.daysForSorting)
+      //     var operationsArray = userData.operations.map() { return $0.value }
+      //     operationsArray.sort { $0.date > $1.date }
+      //
+      //     graphDataArray = graphDataArray
+      //       .sorted { $0.date > $1.date }
+      //       .filter { $0.date >= newTime }
+      //     print("graphDataArray when sort: \(graphDataArray)")
+      //
+      //     let temporarilyDate = userData.operations.filter { $0.date >= newTime }
+      //     userData.operations = temporarilyDate
+      //   }
+      // }
+
 
       print("sectionsSource= \(UserRepository.shared.mainDiffableSectionsSource)")
       print("sections= \(UserRepository.shared.mainDiffableSections)")
