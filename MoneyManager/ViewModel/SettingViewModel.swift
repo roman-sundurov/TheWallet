@@ -14,7 +14,7 @@ extension VCSetting: protocolVCSetting {
   }
 
   func setCategoryInNewOperation(categoryUUID: UUID) {
-    newOperation?.category = categoryUUID
+    newOperation.category = categoryUUID
     }
 
   // MARK: - data
@@ -30,16 +30,16 @@ extension VCSetting: protocolVCSetting {
     return screen2MenuArray
   }
 
-  func setVCSetting(amount: Double, categoryUUID: UUID, date: Date, note: String, id: UUID) {
-    newOperation?.amount = amount
-    newOperation?.category = categoryUUID
-    newOperation?.date = date.timeIntervalSince1970
-    newOperation?.note = note
-    newOperation?.id = id
+  func setVCSetting(amount: Double, categoryUUID: UUID, date: Double, note: String, id: UUID) {
+    newOperation.amount = amount
+    newOperation.category = categoryUUID
+    newOperation.date = date
+    newOperation.note = note
+    newOperation.id = id
   }
 
   func returnNewOperation() -> Operation {
-    return newOperation!
+    return newOperation
   }
 
   @objc func keyboardWillAppear(_ notification: Notification) {
@@ -350,7 +350,7 @@ extension VCSetting: protocolVCSetting {
   }
 
   func donePressed() {
-    newOperation?.date = datePicker.date.timeIntervalSince1970
+    newOperation.date = datePicker.date.timeIntervalSince1970
     tableViewScreen2Update(row: 2)
   }
 

@@ -133,10 +133,9 @@ class UserRepository {
   }
 
   func deleteOperation(idOfObject: UUID) {
+    UserRepository.shared.user?.operations[idOfObject.description] = nil
     userReference.updateData([
-      "operations": [
-        idOfObject.description: FieldValue.delete()
-      ]
+      "operations.\(idOfObject.description)": FieldValue.delete()
     ]) { error in
       if let error = error {
         print("deleteOperation Error writing document: \(error)")
@@ -161,10 +160,10 @@ class UserRepository {
   }
 
 
-    // MARK: - операции
+  // MARK: - операции
   func addOperations(amount: Double, categoryUUID: UUID, note: String, date: Date) {
     let newOperation = Operation(amount: amount, category: categoryUUID, note: note, date: date.timeIntervalSince1970)
-    UserRepository.shared.user?.operations[newOperation.id.description] = newOperation
+    UserRepository.shared.user?.operations[categoryUUID.description] = newOperation
     userReference.setData([
       "operations": [
         newOperation.id.description: [
@@ -184,19 +183,18 @@ class UserRepository {
     }
   }
 
-
   func updateOperations(amount: Double, categoryUUID: UUID, note: String, date: Date, idOfObject: UUID) {
-    let updOperation = Operation(amount: amount, category: categoryUUID, note: note, date: date.timeIntervalSince1970)
-    userReference.setData([
-      "operation": [
-        idOfObject.description: [
-          "amount": updOperation.amount,
-          "category": updOperation.category,
-          "note": updOperation.note,
-          "date": updOperation.date
-        ]
-      ]
-    ], merge: true) { error in
+    let updOperation = Operation(amount: amount, category: categoryUUID, note: note, date: date.timeIntervalSince1970, id: idOfObject)
+    print("idOfObject= \(idOfObject)")
+    UserRepository.shared.user?.operations[idOfObject.description] = updOperation
+    userReference.updateData([
+      "operations.\(idOfObject.description).amount": amount,
+      "operations.\(idOfObject.description).category": categoryUUID.description,
+      "operations.\(idOfObject.description).note": note,
+      "operations.\(idOfObject.description).date": date.timeIntervalSince1970
+      // "operations.\(idOfObject.description).id": idOfObject.description
+
+    ]) { error in
       if let error = error {
         print("addCategory Error writing document: \(error)")
       } else {

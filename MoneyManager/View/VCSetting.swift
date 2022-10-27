@@ -21,7 +21,7 @@ protocol protocolVCSetting {
   func openAlertDatePicker()
   func startEditing()
 
-  func setVCSetting(amount: Double, categoryUUID: UUID, date: Date, note: String, id: UUID)
+  func setVCSetting(amount: Double, categoryUUID: UUID, date: Double, note: String, id: UUID)
   func returnNewOperation() -> Operation
   func returnScreen2MenuArray() -> [Screen2MenuData]
   func getUserData() -> User
@@ -56,7 +56,7 @@ class VCSetting: UIViewController {
   var keyboardHeight: CGFloat = 0 // хранит высоту клавиатуры
 
   var screen2MenuArray: [Screen2MenuData] = []
-  var newOperation: Operation?
+  var newOperation = Operation(amount: 0, category: nil, note: "", date: Date().timeIntervalSince1970, id: UUID())
 
   // MARK: - объекты
   let alertDatePicker = UIAlertController(title: "Select date", message: nil, preferredStyle: .actionSheet)
@@ -96,13 +96,9 @@ class VCSetting: UIViewController {
         newOperation.note = (tableViewCellNoteDelegate?.returnNoteView().text)!
       }
 
-      setVCSetting(amount: newOperation.amount, categoryUUID: newOperation.category!, date: Date.init(timeIntervalSince1970: newOperation.date), note: newOperation.note, id: newOperation.id)
-
       print("newOperation.amount= \(newOperation.amount), newOperation.category= \(newOperation.category), newOperation.date= \(newOperation.date), newOperation.note= \(newOperation.note),")
 
       if vcSettingStatusEditing == true {
-        print("newOperation.amount222= \(newOperation.amount)")
-        print("newOperation.date222= \(newOperation.date)")
         vcMainDelegate?.updateOperations(
           amount: newOperation.amount,
           categoryUUID: newOperation.category!,
@@ -137,8 +133,6 @@ class VCSetting: UIViewController {
       viewController.vcMainDelegate = vcMainDelegate
     }
   }
-
-
 
 
   // MARK: - клики
@@ -219,7 +213,6 @@ class VCSetting: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    newOperation = Operation(amount: 0, category: nil, note: "", date: Date().timeIntervalSince1970, id: UUID())
     menuArrayCalculate()
     self.view.insertSubview(self.blurView, belowSubview: self.categoryChangeView)
     self.blurView.backgroundColor = .clear

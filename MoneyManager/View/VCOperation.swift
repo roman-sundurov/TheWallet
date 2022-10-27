@@ -35,7 +35,7 @@ class VCOperation: UIViewController {
 
 
   @IBAction func buttonActionToEditOperation(_ sender: Any) {
-    // vcMainDelegate?.editOperation(uuid: uuid!)
+    vcMainDelegate?.editOperation(uuid: uuid!)
   }
 
 

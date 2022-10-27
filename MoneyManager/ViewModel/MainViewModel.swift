@@ -83,7 +83,7 @@ extension VCMain: protocolVCMain {
   func editOperation(uuid: UUID) {
     hideOperation()
     tagForEdit = uuid
-    performSegue(withIdentifier: "segueToScreen2ForEdit", sender: nil)
+    performSegue(withIdentifier: "segueToVCSettingForEdit", sender: nil)
   }
 
 

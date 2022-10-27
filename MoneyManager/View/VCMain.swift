@@ -107,23 +107,25 @@ class VCMain: UIViewController {
       vcSettingDelegate = vewController
       vewController.vcMainDelegate = self
     }
+
     if let viewController = segue.destination as? VCOperation, segue.identifier == "segueToVCOperation" {
       vcOperationDelegate = viewController
       viewController.vcMainDelegate = self
     }
+
     // if let viewController = segue.destination as? VCGraph,
     //    segue.identifier == "segueToScreen1GraphContainer" {
     //   vcGraphDelegate = viewController
     //   viewController.vcMainDelegate = self
     // }
-    // if let viewController = segue.destination as? VCSetting, segue.identifier == "segueToVCSettingForEdit"{
-    //   viewController.vcSettingStatusEditing = true
-    //   viewController.vcMainDelegate = self
-    //   vcSettingDelegate = viewController
-    //   let specialOperation = userRepository.user!.operations.filter({$0.id == tagForEdit}).first
-    // 
-    //   vcSettingDelegate!.setVCSetting(amount: specialOperation!.amount, category: specialOperation!.category, date: specialOperation!.date, note: specialOperation!.note, id: specialOperation!.id)
-    // }
+
+    if let viewController = segue.destination as? VCSetting, segue.identifier == "segueToVCSettingForEdit"{
+      viewController.vcSettingStatusEditing = true
+      viewController.vcMainDelegate = self
+      vcSettingDelegate = viewController
+      let specialOperation = userRepository.user!.operations.filter({$0.value.id == tagForEdit}).first?.value
+      vcSettingDelegate!.setVCSetting(amount: specialOperation!.amount, categoryUUID: specialOperation!.category!, date: specialOperation!.date, note: specialOperation!.note, id: specialOperation!.id)
+    }
   }
 
   // MARK: - клики
