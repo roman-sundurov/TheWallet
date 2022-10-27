@@ -57,7 +57,7 @@ class VCMain: UIViewController {
   @IBOutlet var constraintTopMenuBottomStrip: NSLayoutConstraint!
   @IBOutlet var viewOperation: UIView!
   @IBOutlet var constraintContainerBottomPoint: NSLayoutConstraint!
-  @IBOutlet var miniGraph: MainViewRoundedGraph!
+  @IBOutlet var miniGraph: RoundedGraphView!
   @IBOutlet var screen1BottomMenu: UIView!
   @IBOutlet var scrollViewFromBottomPopInView: UIScrollView!
   @IBOutlet var graphFromBottomPopInView: UIView!
@@ -151,10 +151,13 @@ class VCMain: UIViewController {
     print("screen1StatusGrapjDisplay= \(screen1StatusGrapjDisplay)")
     if screen1StatusGrapjDisplay == false {
       // Блокировка показа данных за 1 день в режиме графика
-      var daysForSorting = userRepository.user!.daysForSorting
-      if daysForSorting == 1 {
-        changeDaysForSorting(newValue: 30)
-        daysForSorting = 30
+      // var daysForSorting = userRepository.user!.daysForSorting
+      if userRepository.user!.daysForSorting == 1 {
+        // changeDaysForSorting(newValue: 30)
+        // daysForSorting = 30
+
+        userRepository.updateDaysForSorting(daysForSorting: 30)
+        updateScreen()
         buttonWeeklyGesture(self)
       }
       buttonDaily.isUserInteractionEnabled = false
@@ -190,28 +193,31 @@ class VCMain: UIViewController {
     }
   }
 
-  func changeDaysForSorting(newValue: Int) {
-    borderLineForMenu(days: newValue)
-    userRepository.updateDaysForSorting(daysForSorting: newValue)
-    countingIncomesAndExpensive()
-    vcGraphDelegate?.containerGraphUpdate()
-    applySnapshot()
-  }
+  // func changeDaysForSorting(newValue: Int) {
+  //   // borderLineForMenu(days: newValue)
+  //   // userRepository.updateDaysForSorting(daysForSorting: newValue)
+  //   // countingIncomesAndExpensive()
+  //   vcGraphDelegate?.containerGraphUpdate()
+  // }
 
   @IBAction func buttonDailyGesture(_ sender: Any) {
-    changeDaysForSorting(newValue: 1)
+    userRepository.updateDaysForSorting(daysForSorting: 1)
+    updateScreen()
   }
 
   @IBAction func buttonWeeklyGesture(_ sender: Any) {
-    changeDaysForSorting(newValue: 7)
+    userRepository.updateDaysForSorting(daysForSorting: 7)
+    updateScreen()
   }
 
   @IBAction func buttonMonthlyGesture(_ sender: Any) {
-    changeDaysForSorting(newValue: 30)
+    userRepository.updateDaysForSorting(daysForSorting: 30)
+    updateScreen()
   }
 
   @IBAction func buttonYearlyGesture(_ sender: Any) {
-    changeDaysForSorting(newValue: 365)
+    userRepository.updateDaysForSorting(daysForSorting: 365)
+    updateScreen()
   }
 
   @objc func switchScreen1GraphContainer(tap: UITapGestureRecognizer) {

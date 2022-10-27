@@ -88,11 +88,11 @@ extension VCMain: protocolVCMain {
 
 
   func updateScreen() {
-      // screen1TableUpdateSorting()
-    applySnapshot()
+    borderLineForMenu(days: userRepository.user!.daysForSorting)
     countingIncomesAndExpensive()
-    changeDaysForSorting(newValue: userRepository.user!.daysForSorting)
+    vcGraphDelegate?.containerGraphUpdate()
     miniGraph.setNeedsDisplay()
+    applySnapshot()
   }
 
   func findAmountOfHeaders() {

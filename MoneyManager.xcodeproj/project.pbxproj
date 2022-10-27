@@ -38,7 +38,7 @@
 		47B3D92928FC922B0022974A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47B3D92828FC922B0022974A /* GoogleService-Info.plist */; };
 		47B3D92A28FC922B0022974A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47B3D92828FC922B0022974A /* GoogleService-Info.plist */; };
 		47B3D92B28FC922B0022974A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47B3D92828FC922B0022974A /* GoogleService-Info.plist */; };
-		47B80F782667CA9500032678 /* MainViewRoundedGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B80F772667CA9500032678 /* MainViewRoundedGraph.swift */; };
+		47B80F782667CA9500032678 /* RoundedGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B80F772667CA9500032678 /* RoundedGraphView.swift */; };
 		47BEBB43262F91D1006FF254 /* CategoryTableVCNewCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BEBB42262F91D1006FF254 /* CategoryTableVCNewCategory.swift */; };
 		47C4FF3525B38B0F00F97498 /* VCSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4FF3425B38B0F00F97498 /* VCSetting.swift */; };
 		47CB73C325B4364700638185 /* SettingTableVCCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB73C225B4364700638185 /* SettingTableVCCategory.swift */; };
@@ -97,7 +97,7 @@
 		47AC1AA525C0AE45006E7817 /* MainViewCellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainViewCellHeader.swift; path = MoneyManager/View/MainViewCellHeader.swift; sourceTree = SOURCE_ROOT; };
 		47AC1AB525C0B7CB006E7817 /* MainTableVCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableVCOperation.swift; sourceTree = "<group>"; };
 		47B3D92828FC922B0022974A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		47B80F772667CA9500032678 /* MainViewRoundedGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewRoundedGraph.swift; sourceTree = "<group>"; };
+		47B80F772667CA9500032678 /* RoundedGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedGraphView.swift; sourceTree = "<group>"; };
 		47BEBB42262F91D1006FF254 /* CategoryTableVCNewCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableVCNewCategory.swift; sourceTree = "<group>"; };
 		47C4FF3425B38B0F00F97498 /* VCSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCSetting.swift; sourceTree = "<group>"; };
 		47CB73C225B4364700638185 /* SettingTableVCCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableVCCategory.swift; sourceTree = "<group>"; };
@@ -221,7 +221,7 @@
 			children = (
 				47AC1AA525C0AE45006E7817 /* MainViewCellHeader.swift */,
 				47AC1AB525C0B7CB006E7817 /* MainTableVCOperation.swift */,
-				47B80F772667CA9500032678 /* MainViewRoundedGraph.swift */,
+				47B80F772667CA9500032678 /* RoundedGraphView.swift */,
 				4715819225B6FE310047C5D0 /* SettingTableVCHeader.swift */,
 				47CB73C225B4364700638185 /* SettingTableVCCategory.swift */,
 				47621F9725B644BF0095A52F /* SettingTableVCNote.swift */,
@@ -414,7 +414,7 @@
 				4729DC40263DA3AB00CA8B66 /* VCGraph.swift in Sources */,
 				4771587C262AB31E00F27D4B /* VCOperation.swift in Sources */,
 				47BEBB43262F91D1006FF254 /* CategoryTableVCNewCategory.swift in Sources */,
-				47B80F782667CA9500032678 /* MainViewRoundedGraph.swift in Sources */,
+				47B80F782667CA9500032678 /* RoundedGraphView.swift in Sources */,
 				473549BD2819CFD600E87139 /* MainVM+TableExtension.swift in Sources */,
 				475D711A26509A0F009D917A /* GraphView.swift in Sources */,
 				47F1759925BA2D320044BD30 /* VCCategory.swift in Sources */,

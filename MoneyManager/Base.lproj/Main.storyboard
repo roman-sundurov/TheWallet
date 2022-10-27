@@ -23,13 +23,13 @@
                                 <rect key="frame" x="0.0" y="59" width="430" height="27"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All payment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uhc-J8-Rkm">
-                                        <rect key="frame" x="154.66666666666666" y="-0.3333333333333357" width="120.99999999999997" height="27.666666666666664"/>
+                                        <rect key="frame" x="154.66666666666666" y="-0.3333333333333357" width="120.99999999999997" height="27.666666666666668"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1rV-20-Bop">
-                                        <rect key="frame" x="389" y="0.6666666666666643" width="26" height="25.666666666666664"/>
+                                        <rect key="frame" x="389" y="0.6666666666666643" width="26" height="25.666666666666668"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal">
@@ -118,7 +118,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zd6-bW-CPK" userLabel="lefttPart">
                                         <rect key="frame" x="0.0" y="0.0" width="180" height="200"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ths-aj-OB7" customClass="MainViewRoundedGraph" customModule="MoneyManager" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ths-aj-OB7" customClass="RoundedGraphView" customModule="MoneyManager" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="10" width="180" height="180"/>
                                                 <color key="backgroundColor" name="InterfaceColorGreen"/>
                                                 <constraints>

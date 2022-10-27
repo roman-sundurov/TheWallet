@@ -1,5 +1,5 @@
 //
-//  MainViewRoundedGraph.swift
+//  RoundedGraphView.swift
 //  MoneyManager
 //
 //  Created by Roman on 02.06.2021.
@@ -12,7 +12,7 @@ protocol protocolViewRoundedGraph {
 }
 
 @IBDesignable
-class MainViewRoundedGraph: UIView {
+class RoundedGraphView: UIView {
   private enum Constants {
     static let lineWidth: CGFloat = 25.0
     static let arcWidth: CGFloat = 76
@@ -75,7 +75,7 @@ class MainViewRoundedGraph: UIView {
 }
 
 
-extension MainViewRoundedGraph: protocolViewRoundedGraph {
+extension RoundedGraphView: protocolViewRoundedGraph {
   func setDelegateScreen1RoundedGraph(delegate: protocolVCMain) {
     vcMainDelegate = delegate
   }
