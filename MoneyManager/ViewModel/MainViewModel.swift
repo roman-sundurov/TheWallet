@@ -76,7 +76,7 @@ extension VCMain: protocolVCMain {
     return formatterPrint.string(from: dateInternal)
   }
 
-  func returnDelegateScreen1GraphContainer() -> protocolVCGraph {
+  func returnVCGraphDelegate() -> protocolVCGraph {
     return vcGraphDelegate!
   }
 
@@ -144,11 +144,6 @@ extension VCMain: protocolVCMain {
 
   func getUserData() -> User {
     return userRepository.user!
-  }
-
-
-  func returnArrayForIncrease() -> [Int] {
-    return arrayForIncrease
   }
 
   func returnDayOfDate(_ dateInternal: Date) -> String {

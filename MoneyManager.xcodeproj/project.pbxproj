@@ -33,7 +33,6 @@
 		479990A72901892800ECD407 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 479990A62901892800ECD407 /* FirebaseFirestoreCombine-Community */; };
 		479990A92901892800ECD407 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 479990A82901892800ECD407 /* FirebaseFirestoreSwift */; };
 		47AC1A9525C09AC9006E7817 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1A9425C09AC9006E7817 /* Model.swift */; };
-		47AC1AA625C0AE45006E7817 /* MainViewCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1AA525C0AE45006E7817 /* MainViewCellHeader.swift */; };
 		47AC1AB625C0B7CB006E7817 /* MainTableVCOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1AB525C0B7CB006E7817 /* MainTableVCOperation.swift */; };
 		47B3D92928FC922B0022974A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47B3D92828FC922B0022974A /* GoogleService-Info.plist */; };
 		47B3D92A28FC922B0022974A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47B3D92828FC922B0022974A /* GoogleService-Info.plist */; };
@@ -94,7 +93,6 @@
 		47621F9725B644BF0095A52F /* SettingTableVCNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableVCNote.swift; sourceTree = "<group>"; };
 		4771587B262AB31E00F27D4B /* VCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCOperation.swift; sourceTree = "<group>"; };
 		47AC1A9425C09AC9006E7817 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Model.swift; path = MoneyManager/Model.swift; sourceTree = SOURCE_ROOT; };
-		47AC1AA525C0AE45006E7817 /* MainViewCellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainViewCellHeader.swift; path = MoneyManager/View/MainViewCellHeader.swift; sourceTree = SOURCE_ROOT; };
 		47AC1AB525C0B7CB006E7817 /* MainTableVCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableVCOperation.swift; sourceTree = "<group>"; };
 		47B3D92828FC922B0022974A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		47B80F772667CA9500032678 /* RoundedGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedGraphView.swift; sourceTree = "<group>"; };
@@ -219,7 +217,6 @@
 		47E9D49328FEAD3C00ACE97F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				47AC1AA525C0AE45006E7817 /* MainViewCellHeader.swift */,
 				47AC1AB525C0B7CB006E7817 /* MainTableVCOperation.swift */,
 				47B80F772667CA9500032678 /* RoundedGraphView.swift */,
 				4715819225B6FE310047C5D0 /* SettingTableVCHeader.swift */,
@@ -409,7 +406,6 @@
 				4750EFEC25BC2C7F00167A92 /* CategoryTableVCCategory.swift in Sources */,
 				4715819325B6FE310047C5D0 /* SettingTableVCHeader.swift in Sources */,
 				472F288B25A7319500CE1481 /* VCMain.swift in Sources */,
-				47AC1AA625C0AE45006E7817 /* MainViewCellHeader.swift in Sources */,
 				472F288725A7319500CE1481 /* AppDelegate.swift in Sources */,
 				4729DC40263DA3AB00CA8B66 /* VCGraph.swift in Sources */,
 				4771587C262AB31E00F27D4B /* VCOperation.swift in Sources */,

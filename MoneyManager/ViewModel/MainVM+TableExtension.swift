@@ -53,16 +53,20 @@ extension VCMain {
   func calculateSource() -> ([String], [String: [Operation]]) {
     var sectionsDouble: [Double] = []
     var sectionsTemp: [String] = []
+    var operationForGraph: [Operation] = []
 
     if let userData = userRepository.user {
       let freshHold = Date().timeIntervalSince1970 - Double(86400 * userData.daysForSorting)
 
       for oper in userData.operations {
         if oper.value.date >= freshHold {
+          operationForGraph.append(oper.value)
           sectionsDouble.append(oper.value.date)
           sectionsDouble.sort() { $0 > $1 }
         }
       }
+
+      graphDataArrayCalculating(dataArrayOfOperationsInternal: operationForGraph)
 
       for double in sectionsDouble {
         if !sectionsTemp.contains(dateFormatter.string(from: Date.init(timeIntervalSince1970: double))) {
@@ -87,22 +91,6 @@ extension VCMain {
           UserRepository.shared.mainDiffableSectionsSource[newStringDate] = UserRepository.shared.mainDiffableSectionsSource[newStringDate] == nil ? [oper.value] : UserRepository.shared.mainDiffableSectionsSource[newStringDate]! + [oper.value]
         }
       }
-
-      // if var userData = userRepository.user {
-      //     let newTime = Date() - TimeInterval.init(86400 * userData.daysForSorting)
-      //     var operationsArray = userData.operations.map() { return $0.value }
-      //     operationsArray.sort { $0.date > $1.date }
-      //
-      //     graphDataArray = graphDataArray
-      //       .sorted { $0.date > $1.date }
-      //       .filter { $0.date >= newTime }
-      //     print("graphDataArray when sort: \(graphDataArray)")
-      //
-      //     let temporarilyDate = userData.operations.filter { $0.date >= newTime }
-      //     userData.operations = temporarilyDate
-      //   }
-      // }
-
 
       print("sectionsSource= \(UserRepository.shared.mainDiffableSectionsSource)")
       print("sections= \(UserRepository.shared.mainDiffableSections)")

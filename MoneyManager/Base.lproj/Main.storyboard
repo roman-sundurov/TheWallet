@@ -406,7 +406,7 @@
                                     <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tkb-Y7-beV" userLabel="Container Bottom Graph">
                                         <rect key="frame" x="0.0" y="0.0" width="410" height="503"/>
                                         <connections>
-                                            <segue destination="cOd-yj-oTb" kind="embed" identifier="segueToScreen1GraphContainer" id="flP-cw-RZ3"/>
+                                            <segue destination="cOd-yj-oTb" kind="embed" identifier="segueToVCGraph" id="flP-cw-RZ3"/>
                                         </connections>
                                     </containerView>
                                 </subviews>

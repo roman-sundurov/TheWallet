@@ -17,11 +17,9 @@ protocol protocolVCMain {
 
   // // функции возврата
   func returnMonthOfDate(_ dateInternal: Date) -> String
-  func returnDelegateScreen1GraphContainer() -> protocolVCGraph
+  func returnVCGraphDelegate() -> protocolVCGraph
   func returnIncomesExpenses() -> [String: Double]
   // // interface update
-  // func tableViewReloadData()
-  func returnArrayForIncrease() -> [Int]
   func getUserRepository() -> UserRepository
   func getUserData() -> User
   func updateUserData(newData: User)
@@ -113,11 +111,11 @@ class VCMain: UIViewController {
       viewController.vcMainDelegate = self
     }
 
-    // if let viewController = segue.destination as? VCGraph,
-    //    segue.identifier == "segueToScreen1GraphContainer" {
-    //   vcGraphDelegate = viewController
-    //   viewController.vcMainDelegate = self
-    // }
+    if let viewController = segue.destination as? VCGraph,
+       segue.identifier == "segueToVCGraph" {
+      vcGraphDelegate = viewController
+      viewController.vcMainDelegate = self
+    }
 
     if let viewController = segue.destination as? VCSetting, segue.identifier == "segueToVCSettingForEdit"{
       viewController.vcSettingStatusEditing = true
@@ -153,11 +151,9 @@ class VCMain: UIViewController {
       // Блокировка показа данных за 1 день в режиме графика
       // var daysForSorting = userRepository.user!.daysForSorting
       if userRepository.user!.daysForSorting == 1 {
-        // changeDaysForSorting(newValue: 30)
-        // daysForSorting = 30
-
         userRepository.updateDaysForSorting(daysForSorting: 30)
         updateScreen()
+        vcGraphDelegate?.containerGraphUpdate()
         buttonWeeklyGesture(self)
       }
       buttonDaily.isUserInteractionEnabled = false
