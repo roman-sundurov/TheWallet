@@ -66,7 +66,7 @@ extension VCMain {
         }
       }
 
-      graphDataArrayCalculating(dataArrayOfOperationsInternal: operationForGraph)
+      // graphDataArrayCalculating(dataArrayOfOperationsInternal: operationForGraph)
 
       for double in sectionsDouble {
         if !sectionsTemp.contains(dateFormatter.string(from: Date.init(timeIntervalSince1970: double))) {

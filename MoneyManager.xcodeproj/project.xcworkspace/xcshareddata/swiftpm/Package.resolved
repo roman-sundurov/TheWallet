@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "aachartkit-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AAChartModel/AAChartKit-Swift",
+      "state" : {
+        "revision" : "78bb437d4fe667457b4885105a92de34e099c0c1",
+        "version" : "7.3.0"
+      }
+    },
+    {
       "identity" : "abseil-cpp-swiftpm",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/abseil-cpp-SwiftPM.git",

@@ -17,7 +17,6 @@ protocol protocolVCMain {
 
   // // функции возврата
   func returnMonthOfDate(_ dateInternal: Date) -> String
-  func returnVCGraphDelegate() -> protocolVCGraph
   func returnIncomesExpenses() -> [String: Double]
   // // interface update
   func getUserRepository() -> UserRepository
@@ -153,7 +152,7 @@ class VCMain: UIViewController {
       if userRepository.user!.daysForSorting == 1 {
         userRepository.updateDaysForSorting(daysForSorting: 30)
         updateScreen()
-        vcGraphDelegate?.containerGraphUpdate()
+        vcGraphDelegate?.dataUpdate()
         buttonWeeklyGesture(self)
       }
       buttonDaily.isUserInteractionEnabled = false

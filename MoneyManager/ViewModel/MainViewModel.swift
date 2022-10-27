@@ -76,10 +76,6 @@ extension VCMain: protocolVCMain {
     return formatterPrint.string(from: dateInternal)
   }
 
-  func returnVCGraphDelegate() -> protocolVCGraph {
-    return vcGraphDelegate!
-  }
-
   func editOperation(uuid: UUID) {
     hideOperation()
     tagForEdit = uuid
@@ -90,7 +86,7 @@ extension VCMain: protocolVCMain {
   func updateScreen() {
     borderLineForMenu(days: userRepository.user!.daysForSorting)
     countingIncomesAndExpensive()
-    vcGraphDelegate?.containerGraphUpdate()
+    vcGraphDelegate?.dataUpdate()
     miniGraph.setNeedsDisplay()
     applySnapshot()
   }
@@ -160,30 +156,30 @@ extension VCMain: protocolVCMain {
 
 
     // MARK: - data calculating
-  func graphDataArrayCalculating(dataArrayOfOperationsInternal: [Operation]) {
-      // Данные для передачи в график
-      // Cохраняет суммы операций по дням некуммулятивно
-    graphDataArray = []
-    for data in dataArrayOfOperationsInternal {
-      if graphDataArray.isEmpty {
-        graphDataArray.append(GraphData.init(newDate: Date.init(timeIntervalSince1970: data.date), newAmount: data.amount))
-      } else {
-        for x in graphDataArray {
-          if returnDayOfDate(x.date) == returnDayOfDate(Date.init(timeIntervalSince1970: data.date)) {
-            graphDataArray.first { returnDayOfDate($0.date) == returnDayOfDate(Date.init(timeIntervalSince1970: data.date)) }?
-              .amount += data.amount
-              // graphDataArray.filter { returnDayOfDate($0.date) == returnDayOfDate(data.date) }
-              //   .first?.amount += data.amount
-          }
-        }
-        if (graphDataArray.filter { returnDayOfDate($0.date) == returnDayOfDate(Date.init(timeIntervalSince1970: data.date)) }).isEmpty {
-          graphDataArray.append(GraphData.init(newDate: Date.init(timeIntervalSince1970: data.date), newAmount: data.amount))
-        }
-      }
-    }
-    graphDataArray.sort { $0.date > $1.date }
-    print("graphDataArray after sort: \(graphDataArray)")
-  }
+  // func graphDataArrayCalculating(dataArrayOfOperationsInternal: [Operation]) {
+  //     // Данные для передачи в график
+  //     // Cохраняет суммы операций по дням некуммулятивно
+  //   graphDataArray = []
+  //   for data in dataArrayOfOperationsInternal {
+  //     if graphDataArray.isEmpty {
+  //       graphDataArray.append(GraphData(newDate: Date.init(timeIntervalSince1970: data.date), newAmount: data.amount))
+  //     } else {
+  //       for x in graphDataArray {
+  //         if returnDayOfDate(x.date) == returnDayOfDate(Date.init(timeIntervalSince1970: data.date)) {
+  //           graphDataArray.first { returnDayOfDate($0.date) == returnDayOfDate(Date.init(timeIntervalSince1970: data.date)) }?
+  //             .amount += data.amount
+  //             // graphDataArray.filter { returnDayOfDate($0.date) == returnDayOfDate(data.date) }
+  //             //   .first?.amount += data.amount
+  //         }
+  //       }
+  //       if (graphDataArray.filter { returnDayOfDate($0.date) == returnDayOfDate(Date.init(timeIntervalSince1970: data.date)) }).isEmpty {
+  //         graphDataArray.append(GraphData.init(newDate: Date.init(timeIntervalSince1970: data.date), newAmount: data.amount))
+  //       }
+  //     }
+  //   }
+  //   graphDataArray.sort { $0.date > $1.date }
+  //   print("graphDataArray after sort: \(graphDataArray)")
+  // }
 
   func returnGraphData() -> [GraphData] {
     return graphDataArray

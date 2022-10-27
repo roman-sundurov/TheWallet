@@ -24,9 +24,9 @@
 		473549C3281B2BA500E87139 /* SettingVM+TableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549C2281B2BA500E87139 /* SettingVM+TableExtension.swift */; };
 		4750EFE725BC2C5C00167A92 /* CategoryTableVCHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EFE625BC2C5C00167A92 /* CategoryTableVCHeader.swift */; };
 		4750EFEC25BC2C7F00167A92 /* CategoryTableVCCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EFEB25BC2C7F00167A92 /* CategoryTableVCCategory.swift */; };
-		475D711A26509A0F009D917A /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475D711926509A0F009D917A /* GraphView.swift */; };
 		47621F9825B644BF0095A52F /* SettingTableVCNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47621F9725B644BF0095A52F /* SettingTableVCNote.swift */; };
 		4771587C262AB31E00F27D4B /* VCOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4771587B262AB31E00F27D4B /* VCOperation.swift */; };
+		477CC22A290ABB1F00EA671D /* AAInfographics in Frameworks */ = {isa = PBXBuildFile; productRef = 477CC229290ABB1F00EA671D /* AAInfographics */; };
 		479990A12901892800ECD407 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 479990A02901892800ECD407 /* FirebaseAuth */; };
 		479990A32901892800ECD407 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 479990A22901892800ECD407 /* FirebaseAuthCombine-Community */; };
 		479990A52901892800ECD407 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 479990A42901892800ECD407 /* FirebaseFirestore */; };
@@ -89,7 +89,6 @@
 		473549C2281B2BA500E87139 /* SettingVM+TableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingVM+TableExtension.swift"; sourceTree = "<group>"; };
 		4750EFE625BC2C5C00167A92 /* CategoryTableVCHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableVCHeader.swift; sourceTree = "<group>"; };
 		4750EFEB25BC2C7F00167A92 /* CategoryTableVCCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableVCCategory.swift; sourceTree = "<group>"; };
-		475D711926509A0F009D917A /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		47621F9725B644BF0095A52F /* SettingTableVCNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableVCNote.swift; sourceTree = "<group>"; };
 		4771587B262AB31E00F27D4B /* VCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCOperation.swift; sourceTree = "<group>"; };
 		47AC1A9425C09AC9006E7817 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Model.swift; path = MoneyManager/Model.swift; sourceTree = SOURCE_ROOT; };
@@ -110,6 +109,7 @@
 			files = (
 				47F5F9D72855D99B0042F2D5 /* SimpleCheckbox in Frameworks */,
 				479990A52901892800ECD407 /* FirebaseFirestore in Frameworks */,
+				477CC22A290ABB1F00EA671D /* AAInfographics in Frameworks */,
 				479990A32901892800ECD407 /* FirebaseAuthCombine-Community in Frameworks */,
 				479990A72901892800ECD407 /* FirebaseFirestoreCombine-Community in Frameworks */,
 				479990A12901892800ECD407 /* FirebaseAuth in Frameworks */,
@@ -226,7 +226,6 @@
 				4750EFE625BC2C5C00167A92 /* CategoryTableVCHeader.swift */,
 				47BEBB42262F91D1006FF254 /* CategoryTableVCNewCategory.swift */,
 				4750EFEB25BC2C7F00167A92 /* CategoryTableVCCategory.swift */,
-				475D711926509A0F009D917A /* GraphView.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -255,6 +254,7 @@
 				479990A42901892800ECD407 /* FirebaseFirestore */,
 				479990A62901892800ECD407 /* FirebaseFirestoreCombine-Community */,
 				479990A82901892800ECD407 /* FirebaseFirestoreSwift */,
+				477CC229290ABB1F00EA671D /* AAInfographics */,
 			);
 			productName = Skillbox_diploma_step1;
 			productReference = 472F288325A7319500CE1481 /* MoneyManager.app */;
@@ -330,6 +330,7 @@
 			packageReferences = (
 				47F5F9D52855D99B0042F2D5 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */,
 				4799909F2901892800ECD407 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				477CC228290ABB1E00EA671D /* XCRemoteSwiftPackageReference "AAChartKit-Swift" */,
 			);
 			productRefGroup = 472F288425A7319500CE1481 /* Products */;
 			projectDirPath = "";
@@ -412,7 +413,6 @@
 				47BEBB43262F91D1006FF254 /* CategoryTableVCNewCategory.swift in Sources */,
 				47B80F782667CA9500032678 /* RoundedGraphView.swift in Sources */,
 				473549BD2819CFD600E87139 /* MainVM+TableExtension.swift in Sources */,
-				475D711A26509A0F009D917A /* GraphView.swift in Sources */,
 				47F1759925BA2D320044BD30 /* VCCategory.swift in Sources */,
 				47CB73C325B4364700638185 /* SettingTableVCCategory.swift in Sources */,
 				47621F9825B644BF0095A52F /* SettingTableVCNote.swift in Sources */,
@@ -758,6 +758,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		477CC228290ABB1E00EA671D /* XCRemoteSwiftPackageReference "AAChartKit-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AAChartModel/AAChartKit-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		4799909F2901892800ECD407 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -777,6 +785,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		477CC229290ABB1F00EA671D /* AAInfographics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 477CC228290ABB1E00EA671D /* XCRemoteSwiftPackageReference "AAChartKit-Swift" */;
+			productName = AAInfographics;
+		};
 		479990A02901892800ECD407 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4799909F2901892800ECD407 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

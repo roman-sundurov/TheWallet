@@ -6,104 +6,109 @@
 //
 
 import UIKit
+import AAInfographics
 
 protocol protocolVCGraph {
-  func containerGraphUpdate()
-  func setGraphIndicators(min: String, middle: String, max: String)
+  func dataUpdate()
 }
 
 class VCGraph: UIViewController {
   // MARK: - объявление аутлетов
 
-  @IBOutlet var graphView: GraphView!
-  @IBOutlet var weeklyStackView: UIStackView!
-  @IBOutlet var monthlyStackView: UIStackView!
-  @IBOutlet var minIndicatorLabel: UILabel!
-  @IBOutlet var middleIndicatorLabel: UILabel!
-  @IBOutlet var maxIndicatorLabel: UILabel!
+  @IBOutlet var graphView: UIView!
 
-
-  // MARK: - делегаты и переменные
+    // MARK: - делегаты и переменные
   var vcMainDelegate: VCMain?
 
-  // MARK: - Functions
-  func countFullPointsArray() {
-    print("countFullPointsArray")
-    let graphData = vcMainDelegate!.returnGraphData()
-    print("graphData= \(graphData)")
-    for data in graphData {
-      print("graphData_n.cumulativeAmount= \(data.amount), graphData_n.date= \(data.date)")
-    }
+  let calendar = Calendar.current
+  var firstDate: Date?
+  var secondDate: Date?
 
-    var graphDataFinal: [GraphData] = []
-
-    // Заполнение дней, в которых не было операций
-    // Проверка наличия операция сегодня. Если нет проставляется 0.
-    if !graphData.isEmpty {
-      print("1111")
-      if graphDataFinal.isEmpty {
-        graphDataFinal.append(GraphData(newDate: Date(), newAmount: graphData.first!.amount))
-      }
-
-      // Проверка заполнения оставшихся дней. Если запись пуста - ставим 0.
-      var x: Int = 1
-
-      for amountOfDay in 1..<vcMainDelegate!.getUserData().daysForSorting {
-        print("2222")
-
-        if graphData.count >= x + 1 {
-          print("3333")
-          if vcMainDelegate!.returnDayOfDate(graphData[x].date) != vcMainDelegate!.returnDayOfDate(
-            Calendar.current.date(
-              byAdding: .day,
-              value: -amountOfDay,
-              to: Date()
-            )!) {
-            print("4444")
-            graphDataFinal.append(GraphData(
-              newDate: Calendar.current.date(
-                byAdding: .day,
-                value: -amountOfDay,
-                to: Date()
-              )!, newAmount: 0)
-            )
-          } else {
-            print("5555")
-            graphDataFinal.append(
-              GraphData(
-                newDate: Calendar.current.date(
-                  byAdding: .day,
-                  value: -amountOfDay,
-                  to: Date())!,
-                newAmount: graphData[x].amount
-              )
-            )
-            x += 1
-          }
-        } else {
-          print("5555")
-          graphDataFinal.append(GraphData(
-            newDate: Calendar.current.date(byAdding: .day, value: -amountOfDay, to: Date())!,
-            newAmount: 0))
-          x += 1
-        }
-      }
-    }
-
-    for data in graphDataFinal {
-      print("n.cumulativeAmount= \(data.amount), n.date= \(data.date)")
-    }
-
-    graphView.setGraphPoints(data: graphDataFinal)
-    graphView.setNeedsDisplay()
-  }
 
   // MARK: - viewDidLoad
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    graphView.setDelegateScreen1ContainerGraph(deligate: self)
+  }
+
+  func calculateDateArray() -> [Date] {
+    var dateArray: [Date] = []
+    let calendar = Calendar.current
+    let date = Date()
+    let today = calendar.dateInterval(of: .day, for: date)
+
+    for day in 0...31 {
+      let dateComponent = DateComponents(day: -day)
+      firstDate = calendar.dateInterval(of: .day, for: date)?.start
+      secondDate = calendar.date(byAdding: dateComponent, to: firstDate!)
+
+      if day == 0 {
+        dateArray.append(firstDate!)
+      } else {
+        dateArray.append(secondDate!)
+      }
+
+      let dateComponentTemp = DateComponents(month: -1)
+      let freshHoldDate = calendar.date(byAdding: dateComponentTemp, to: date)
+      if secondDate!.timeIntervalSince1970 < freshHoldDate!.timeIntervalSince1970 {
+        break
+      }
+    }
+    return dateArray
+  }
+
+  func calculateCumulativeAmount(dateArray: [Date]) -> [GraphData] {
+    var cumulativeArray: [GraphData] = []
+    var cumulativeAmount: Double = 0
+    let operations = UserRepository.shared.user!.operations
+
+    var firstDate = Date()
+    var secondDate = Date()
+
+    for day in 0..<dateArray.count {
+      secondDate = dateArray[day]
+      if day != 0 {
+        firstDate = dateArray[day - 1]
+      }
+      // print("StartDate= \()")
+      // print("UserRepository.shared.user!.operations= \(UserRepository.shared.user!.operations.values)")
+      for oper in UserRepository.shared.user!.operations {
+        if oper.value.date >= secondDate.timeIntervalSince1970 && oper.value.date < firstDate.timeIntervalSince1970 {
+          print("oper.value.amount \(oper.value.date )= \(oper.value.amount)")
+          cumulativeAmount += oper.value.amount
+          print("cumulativeAmount= \(cumulativeAmount)")
+        }
+      }
+      cumulativeArray.append(GraphData(date: dateArray[day], amount: cumulativeAmount))
+    }
+    return cumulativeArray
+  }
+
+}
+
+extension VCGraph: protocolVCGraph {
+
+  func dataUpdate() {
+
+    var dateArray = calculateDateArray()
+    let cumulativeGraphDataArray = calculateCumulativeAmount(dateArray: dateArray)
+
+    var cumulativeArray: [Double] = []
+    var numberOfDayArray: [String] = []
+
+    // print("dateArray= \(dateArray)")
+    // print("cumulativeArray= \(cumulativeGraphDataArray)")
+
+    for item in cumulativeGraphDataArray {
+      let components = calendar.dateComponents([.day], from: item.date)
+      let digitDay = components.day
+      
+      cumulativeArray.append(item.amount)
+      numberOfDayArray.append(digitDay!.description)
+    }
+    print("cumulativeArray= \(cumulativeArray)")
+    print("numberOfDayArray= \(numberOfDayArray)")
 
     graphView.layer.cornerRadius = 20
     graphView.layer.maskedCorners = [
@@ -113,31 +118,27 @@ class VCGraph: UIViewController {
       .layerMinXMaxYCorner
     ]
     graphView.clipsToBounds = true
+
+    let aaChartView = AAChartView()
+    aaChartView.frame = CGRect(x: 0, y: 10, width: graphView.frame.width, height: graphView.frame.height - 10)
+    graphView.addSubview(aaChartView)
+
+    let aaChartModel = AAChartModel()
+      .chartType(.area)//Can be any of the chart types listed under `AAChartType`.
+      .animationType(.bounce)
+      // .title("TITLE")//The chart title
+      // .subtitle("subtitle")//The chart subtitle
+      .dataLabelsEnabled(false) //Enable or disable the data labels. Defaults to false
+      .tooltipValueSuffix("$")//the value suffix of the chart tooltip
+      .categories(numberOfDayArray.reversed())
+      .colorsTheme(["#fe117c","#ffc069","#06caf4","#7dffc0"])
+      .series([
+        AASeriesElement()
+          .name("Balance")
+          .data(cumulativeArray.reversed()),
+      ])
+    aaChartView.aa_drawChartWithChartModel(aaChartModel)
+
   }
-}
 
-
-extension VCGraph: protocolVCGraph {
-  func setGraphIndicators(min: String, middle: String, max: String) {
-    minIndicatorLabel.text = min
-    middleIndicatorLabel.text = middle
-    maxIndicatorLabel.text = max
-  }
-
-
-  func containerGraphUpdate() {
-    countFullPointsArray()
-
-    switch vcMainDelegate?.getUserData().daysForSorting {
-    case 365:
-      weeklyStackView.isHidden = true
-      monthlyStackView.isHidden = false
-    case 30:
-      weeklyStackView.isHidden = true
-      monthlyStackView.isHidden = true
-    default:
-      weeklyStackView.isHidden = false
-      monthlyStackView.isHidden = true
-    }
-  }
 }

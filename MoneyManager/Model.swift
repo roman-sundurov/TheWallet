@@ -205,12 +205,7 @@ class UserRepository {
   }
 }
 
-class GraphData {
+struct GraphData {
   var date: Date
   var amount: Double
-
-  init(newDate: Date, newAmount: Double) {
-    date = newDate
-    amount = newAmount
-  }
 }
