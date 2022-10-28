@@ -53,7 +53,8 @@ extension VCOperation: protocolVCOperation {
   func prepareForStart(id: UUID) {
     uuid = id
     print("id= \(id)")
-    let operation = UserRepository.shared.user?.operations.filter { $0.value.id == id }.first?.value
+    // let operation = UserRepository.shared.user?.operations.filter { $0.value.id == id }.first?.value
+    let operation = UserRepository.shared.user?.operations.first { $0.value.id == id }?.value
     // display category
     if let category = vcMainDelegate?.getUserData().categories[operation!.category!.description] {
       labelCategory.text = category.name

@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-typealias nestedType = (User) -> Void
+typealias NestedType = (User) -> Void
 
 struct GraphData {
   var date: Date

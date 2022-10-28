@@ -9,19 +9,14 @@ import Foundation
 import UIKit
 
 extension VCMain: protocolVCMain {
-
   func fetchFirebase() {
     Task {
-      do {
-        try? await userRepository.getUserData() { data in
-          self.userRepository.user = data
-          print("NewData= \(self.userRepository.user)")
-          self.updateScreen()
-        }
-        print("NewData2= \(userRepository.user)")
-      } catch {
-        print("Error22")
+      try? await userRepository.getUserData { data in
+        self.userRepository.user = data
+        print("NewData= \(self.userRepository.user)")
+        self.updateScreen()
       }
+      print("NewData2= \(userRepository.user)")
     }
   }
 
@@ -30,7 +25,13 @@ extension VCMain: protocolVCMain {
   }
 
   func updateOperations(amount: Double, categoryUUID: UUID, note: String, date: Date, idOfObject: UUID) {
-    userRepository.updateOperations(amount: amount, categoryUUID: categoryUUID, note: note, date: date, idOfObject: idOfObject)
+    userRepository.updateOperations(
+      amount: amount,
+      categoryUUID: categoryUUID,
+      note: note,
+      date: date,
+      idOfObject: idOfObject
+    )
     updateScreen()
   }
 
@@ -145,10 +146,10 @@ extension VCMain: protocolVCMain {
     let formatterPrint = DateFormatter()
     formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) // +3 час(Moscow)
     switch userRepository.user!.daysForSorting {
-      case 365:
-        formatterPrint.dateFormat = "MMMM YYYY"
-      default:
-        formatterPrint.dateFormat = "d MMMM YYYY"
+    case 365:
+      formatterPrint.dateFormat = "MMMM YYYY"
+    default:
+      formatterPrint.dateFormat = "d MMMM YYYY"
     }
     return formatterPrint.string(from: dateInternal)
   }

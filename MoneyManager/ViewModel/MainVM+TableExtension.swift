@@ -9,9 +9,8 @@ import Foundation
 import UIKit
 
 extension VCMain {
-
-  func configureDataSource(){
-    datasource = MyDataSource(tableView: tableViewScreen1, cellProvider: { (tableview, indexpath, model) -> UITableViewCell? in
+  func configureDataSource() {
+    datasource = MyDataSource(tableView: tableViewScreen1) { tableview, indexpath, model -> UITableViewCell? in
       let cell = tableview.dequeueReusableCell(withIdentifier: "operation", for: indexpath) as? MainTableVCOperation
       if model.amount.truncatingRemainder(dividingBy: 1) == 0 {
         cell?.labelAmount.text = String(format: "%.0f", model.amount)
@@ -28,20 +27,23 @@ extension VCMain {
       if model.amount < 0 {
         cell?.labelAmount.textColor = UIColor.init(named: "InterfaceColorRed")
         cell?.currencyStatus.textColor = UIColor.init(named: "InterfaceColorRed")
-
       } else {
-        cell?.labelAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
-        cell?.currencyStatus.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
+        cell?.labelAmount.textColor = UIColor(
+          cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1)
+        )
+        cell?.currencyStatus.textColor = UIColor(
+          cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1)
+        )
       }
       cell?.id = model.id
       cell?.vcMainDelegate = self
       return cell
-    })
+    }
   }
 
   func applySnapshot(animatingDifferences: Bool = true) {
     var snapshot = NSDiffableDataSourceSnapshot<String, Operation>()
-    var (sections, sectionsSource) = calculateSource()
+    let (sections, sectionsSource) = calculateSource()
     snapshot.appendSections(sections)
     for section in sections {
       snapshot.appendItems(sectionsSource[section]!, toSection: section)
@@ -55,12 +57,10 @@ extension VCMain {
     var operationForGraph: [Operation] = []
     if let userData = userRepository.user {
       let freshHold = Date().timeIntervalSince1970 - Double(86400 * userData.daysForSorting)
-      for oper in userData.operations {
-        if oper.value.date >= freshHold {
-          operationForGraph.append(oper.value)
-          sectionsDouble.append(oper.value.date)
-          sectionsDouble.sort() { $0 > $1 }
-        }
+      for oper in userData.operations where oper.value.date >= freshHold {
+        operationForGraph.append(oper.value)
+        sectionsDouble.append(oper.value.date)
+        sectionsDouble.sort { $0 > $1 }
       }
       for double in sectionsDouble {
         if !sectionsTemp.contains(dateFormatter.string(from: Date.init(timeIntervalSince1970: double))) {
@@ -71,15 +71,15 @@ extension VCMain {
       }
       UserRepository.shared.mainDiffableSections = []
       UserRepository.shared.mainDiffableSectionsSource = [:]
-      for item in sectionsTemp {
-        if item != "" {
-          UserRepository.shared.mainDiffableSections.append(item)
-        }
+      for item in sectionsTemp where !item.isEmpty {
+        UserRepository.shared.mainDiffableSections.append(item)
       }
-      for oper in userData.operations {
-        if oper.value.date >= freshHold {
-          let newStringDate = dateFormatter.string(from: Date.init(timeIntervalSince1970: oper.value.date))
-          UserRepository.shared.mainDiffableSectionsSource[newStringDate] = UserRepository.shared.mainDiffableSectionsSource[newStringDate] == nil ? [oper.value] : UserRepository.shared.mainDiffableSectionsSource[newStringDate]! + [oper.value]
+      for oper in userData.operations where oper.value.date >= freshHold {
+        let newStringDate = dateFormatter.string(from: Date.init(timeIntervalSince1970: oper.value.date))
+        if let item = UserRepository.shared.mainDiffableSectionsSource[newStringDate] {
+          UserRepository.shared.mainDiffableSectionsSource[newStringDate] = item + [oper.value]
+        } else {
+          UserRepository.shared.mainDiffableSectionsSource[newStringDate] = [oper.value]
         }
       }
       print("sectionsSource= \(UserRepository.shared.mainDiffableSectionsSource)")
@@ -96,4 +96,3 @@ class MyDataSource: UITableViewDiffableDataSource<String, Operation> {
     return UserRepository.shared.mainDiffableSections[section]
   }
 }
-

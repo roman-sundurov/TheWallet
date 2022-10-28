@@ -21,7 +21,7 @@ extension VCSetting: UITableViewDelegate, UITableViewDataSource {
     print("indexPath.row= \(indexPath.row)")
     switch indexPath.row {
     case 0:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! SettingTableVCHeader
+      let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! UITableViewCell
       cell.selectionStyle = UITableViewCell.SelectionStyle.none
       return cell
     case 1:

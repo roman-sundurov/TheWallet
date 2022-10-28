@@ -98,7 +98,7 @@ class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
     checkBoxObject.checkmarkColor = .white
     textFieldNameCategory.layer.cornerRadius = 10
     if vcSettingDelegate!.returnNewOperation().category == self.category!.id {
-        checkBoxObject.isChecked = true
+      checkBoxObject.isChecked = true
     } else {
       checkBoxObject.isChecked = false
     }

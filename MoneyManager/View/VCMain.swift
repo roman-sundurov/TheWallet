@@ -96,7 +96,13 @@ class VCMain: UIViewController {
       viewController.vcMainDelegate = self
       vcSettingDelegate = viewController
       let specialOperation = userRepository.user!.operations.filter({$0.value.id == tagForEdit}).first?.value
-      vcSettingDelegate!.setVCSetting(amount: specialOperation!.amount, categoryUUID: specialOperation!.category!, date: specialOperation!.date, note: specialOperation!.note, id: specialOperation!.id)
+      vcSettingDelegate!.setVCSetting(
+        amount: specialOperation!.amount,
+        categoryUUID: specialOperation!.category!,
+        date: specialOperation!.date,
+        note: specialOperation!.note,
+        id: specialOperation!.id
+      )
     }
   }
 
@@ -251,7 +257,6 @@ class VCMain: UIViewController {
   }
 
   func countingIncomesAndExpensive() {
-
     if let operations = userRepository.user?.operations {
       let freshHold = Date().timeIntervalSince1970 - Double(86400 * userRepository.user!.daysForSorting)
 
@@ -260,7 +265,7 @@ class VCMain: UIViewController {
       for data in operations.filter({ $0.value.amount > 0 && $0.value.date > freshHold }) {
         income += data.value.amount
       }
-      for data in operations.filter({ $0.value.amount < 0 && $0.value.date > freshHold  }) {
+      for data in operations.filter({ $0.value.amount < 0 && $0.value.date > freshHold }) {
         expensive += data.value.amount
       }
 
@@ -286,34 +291,13 @@ class VCMain: UIViewController {
     self.view.layoutIfNeeded()
   }
 
-  override func viewWillAppear(_ animated: Bool) {
-    Task {
-      do {
-        try? await userRepository.getUserData() { data in
-          self.userRepository.user = data
-          print("userData= \(self.userRepository.user)")
-        }
-        print("userData 111")
-      } catch {
-        print("userRepositoryInstance Error")
-      }
-    }
-
-  }
-
   // MARK: - viewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
     print("viewDidLoad")
-
-    dateFormatter.dateStyle = .medium
-    dateFormatter.timeStyle = .none
-    configureDataSource()
-    applySnapshot()
-
     Task {
       do {
-        try? await userRepository.getUserData() { data in
+        try? await userRepository.getUserData { data in
           self.userRepository.user = data
           print("NewData= \(self.userRepository.user)")
           self.updateScreen()
@@ -323,6 +307,12 @@ class VCMain: UIViewController {
         print("Error22")
       }
     }
+
+    dateFormatter.dateStyle = .medium
+    dateFormatter.timeStyle = .none
+    configureDataSource()
+    applySnapshot()
+
     miniGraph.setDelegateScreen1RoundedGraph(delegate: self)
     bottomPopInView.layer.cornerRadius = 20
     bottomPopInView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]

@@ -42,14 +42,16 @@ class SettingTableVCDate: UITableViewCell {
     dateFormatter.timeStyle = .none
 
     if vcSettingDelegate!.returnNewOperation().date != 0 {
-      labelSelectDate.text = dateFormatter.string(from: Date.init(timeIntervalSince1970: vcSettingDelegate!.returnNewOperation().date))
+      labelSelectDate.text = dateFormatter.string(
+        from: Date.init(timeIntervalSince1970: vcSettingDelegate!.returnNewOperation().date)
+      )
       labelSelectDate.textColor = .black
     } else {
-      labelSelectDate.text = vcSettingDelegate!.returnScreen2MenuArray()[indexRow].text
+      labelSelectDate.text = vcSettingDelegate!.getSettingMenuArray()[indexRow].text
     }
 
     // textFieldSelectDate.tintColor = UIColor.clear //делает курсор бесцветным, но не убирает его
-    labelDate.text = vcSettingDelegate!.returnScreen2MenuArray()[indexRow].name
+    labelDate.text = vcSettingDelegate!.getSettingMenuArray()[indexRow].name
     self.isUserInteractionEnabled = true
 
     let gesture = UITapGestureRecognizer(target: self, action: #selector(startEditing))

@@ -11,9 +11,8 @@ protocol protocolCategoryTableVCHeader {
 }
 
 class CategoryTableVCHeader: UITableViewCell {
-
   @IBOutlet var buttonOptions: UIButton!
-  
+
   @IBAction func buttonOptionsAction(_ sender: Any) {
     delegateScreen2Container?.screen2ContainerNewCategorySwicher()
   }

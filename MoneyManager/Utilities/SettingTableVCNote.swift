@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol protocolSettingTableVCNote{
+protocol protocolSettingTableVCNote {
   func tapOutsideNoteTextViewEditToHide()
   func returnNoteView() -> UITextView
   func setNoteViewText(newText: String)

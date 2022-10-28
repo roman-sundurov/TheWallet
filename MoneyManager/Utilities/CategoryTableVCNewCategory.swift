@@ -12,7 +12,6 @@ protocol protocolCategoryTableVCNewCategory {
 }
 
 class CategoryTableVCNewCategory: UITableViewCell {
-
   // MARK: - outlets
   @IBOutlet var textFieldNewCategory: UITextField!
   @IBOutlet var buttonAddNewCategory: UIButton!

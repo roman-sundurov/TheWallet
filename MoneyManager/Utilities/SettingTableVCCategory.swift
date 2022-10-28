@@ -31,13 +31,13 @@ class SettingTableVCCategory: UITableViewCell {
 
   func prepareCell(indexRow: Int) {
     self.indexRow = indexRow
-    if vcSettingDelegate!.returnNewOperation().category != nil {
-      labelSelectCategory.text = vcSettingDelegate?.getUserData().categories[vcSettingDelegate!.returnNewOperation().category!.description]?.name
+    if let newCategory = vcSettingDelegate!.returnNewOperation().category {
+      labelSelectCategory.text = vcSettingDelegate?.getUserData().categories[newCategory.description]?.name
       labelSelectCategory.textColor = .black
     } else {
-      labelSelectCategory.text = vcSettingDelegate!.returnScreen2MenuArray()[indexRow].text
+      labelSelectCategory.text = vcSettingDelegate!.getSettingMenuArray()[indexRow].text
     }
-    labelCategory.text = vcSettingDelegate!.returnScreen2MenuArray()[indexRow].name
+    labelCategory.text = vcSettingDelegate!.getSettingMenuArray()[indexRow].name
     let gesture = UITapGestureRecognizer(
       target: self,
       action: #selector(changeCategoryOpenPopUpScreen2FromCellCategory(_:))

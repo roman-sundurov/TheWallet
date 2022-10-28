@@ -84,8 +84,11 @@ extension VCCategory: protocolVCCategory {
     vcMainDelegate!.addCategory(name: name, icon: icon, date: date)
     print("vcMainDelegate!.getUserData().categories.count = \(vcMainDelegate!.getUserData().categories.count)")
     tableView.performBatchUpdates({
-      let newRowIndex = statusEditContainer == true ? vcMainDelegate!.getUserData().categories.count + 1 : vcMainDelegate?.getUserData().categories.count
-      tableView.insertRows(at: [IndexPath(row: newRowIndex!, section: 0)], with: .automatic)
+      var newRowIndex: Int = 0
+      if let categories = vcMainDelegate?.getUserData().categories.count {
+        newRowIndex = statusEditContainer == true ? categories + 1 : categories
+      }
+      tableView.insertRows(at: [IndexPath(row: newRowIndex, section: 0)], with: .automatic)
     }, completion: { _ in
       self.tableView.reloadData()
       self.vcMainDelegate?.fetchFirebase()
@@ -99,12 +102,7 @@ extension VCCategory: protocolVCCategory {
     }, completion: { _ in self.tableView.reloadData() })
   }
 
-  func screen2ContainerEditNewCategory(cellID: Int){
-    var newRowIndex = statusEditContainer == true ? (vcMainDelegate?.getUserData().operations.count)! + 1 : (vcMainDelegate?.getUserData().operations.count)!
-    tableView.reloadData()
-  }
-
-  func returnDelegateScreen2() -> protocolVCSetting {
+  func getVCSettingDelegate() -> protocolVCSetting {
     return vcSettingDelegate!
   }
 
@@ -120,7 +118,7 @@ extension VCCategory: protocolVCCategory {
     if let userData = vcMainDelegate?.getUserData() {
       for oper in userData.categories {
         categoriesArray.append(oper.value)
-        categoriesArray.sort() { $0.date > $1.date }
+        categoriesArray.sort { $0.date > $1.date }
       }
       return categoriesArray
     }
@@ -151,7 +149,7 @@ extension VCCategory: UITableViewDelegate, UITableViewDataSource {
       print("1111")
       let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! CategoryTableVCHeader
       cell.delegateScreen2Container = self
-            categoryTableVCHeaderDelegate = cell
+      categoryTableVCHeaderDelegate = cell
       return cell
     } else if statusEditContainer == true && indexPath.row == 1 {
       print("2222")

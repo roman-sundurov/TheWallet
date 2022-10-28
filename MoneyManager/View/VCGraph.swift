@@ -31,7 +31,6 @@ class VCGraph: UIViewController {
     var dateArray: [Date] = []
     let calendar = Calendar.current
     let date = Date()
-    let today = calendar.dateInterval(of: .day, for: date)
     for day in 0...31 {
       let dateComponent = DateComponents(day: -day)
       firstDate = calendar.dateInterval(of: .day, for: date)?.start
@@ -75,7 +74,6 @@ class VCGraph: UIViewController {
 }
 
 extension VCGraph: protocolVCGraph {
-
   func dataUpdate() {
     var dateArray = calculateDateArray()
     let cumulativeGraphDataArray = calculateCumulativeAmount(dateArray: dateArray)
@@ -101,18 +99,18 @@ extension VCGraph: protocolVCGraph {
     aaChartView.frame = CGRect(x: 0, y: 0, width: graphView.frame.width, height: graphView.frame.height)
     graphView.addSubview(aaChartView)
     let aaChartModel = AAChartModel()
-      .chartType(.area)//Can be any of the chart types listed under `AAChartType`.
+      .chartType(.area) // Can be any of the chart types listed under `AAChartType`.
       .animationType(.bounce)
       // .title("TITLE")//The chart title
       // .subtitle("subtitle")//The chart subtitle
-      .dataLabelsEnabled(false) //Enable or disable the data labels. Defaults to false
-      .tooltipValueSuffix("$")//the value suffix of the chart tooltip
+      .dataLabelsEnabled(false) // enable or disable the data labels. Defaults to false
+      .tooltipValueSuffix("$")// the value suffix of the chart tooltip
       .categories(numberOfDayArray.reversed())
-      .colorsTheme(["#fe117c","#ffc069","#06caf4","#7dffc0"])
+      .colorsTheme(["#fe117c", "#ffc069", "#06caf4", "#7dffc0"])
       .series([
         AASeriesElement()
           .name("Balance")
-          .data(cumulativeArray.reversed()),
+          .data(cumulativeArray.reversed())
       ])
     aaChartView.aa_drawChartWithChartModel(aaChartModel)
   }

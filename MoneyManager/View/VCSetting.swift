@@ -18,11 +18,11 @@ protocol protocolVCSetting {
   func startEditing()
   func setVCSetting(amount: Double, categoryUUID: UUID, date: Double, note: String, id: UUID)
   func returnNewOperation() -> Operation
-  func returnScreen2MenuArray() -> [Screen2MenuData]
+  func getSettingMenuArray() -> [SettingMenuData]
   func getUserData() -> User
 }
 
-struct Screen2MenuData {
+struct SettingMenuData {
   let name: String
   let text: String
 }
@@ -47,7 +47,7 @@ class VCSetting: UIViewController {
   var tapOfChangeCategoryOpenPopUp: UITapGestureRecognizer?
   var tapOutsideTextViewToGoFromTextView: UITapGestureRecognizer?
   var keyboardHeight: CGFloat = 0 // хранит высоту клавиатуры
-  var screen2MenuArray: [Screen2MenuData] = []
+  var settingMenuArray: [SettingMenuData] = []
   var newOperation = Operation(amount: 0, category: nil, note: "", date: Date().timeIntervalSince1970, id: UUID())
 
   // MARK: - objects
@@ -219,5 +219,4 @@ class VCSetting: UIViewController {
     createAlertDatePicker()
     createAlertAddNewOperations()
   }
-
 }

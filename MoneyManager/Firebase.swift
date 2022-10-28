@@ -11,7 +11,7 @@ import FirebaseFirestoreSwift
 
 extension UserRepository {
 
-  func getUserData(inner: @escaping nestedType) async throws {
+  func getUserData(inner: @escaping NestedType) async throws {
     userReference.getDocument { (document, error) in
       if let document = document, document.exists {
         let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
