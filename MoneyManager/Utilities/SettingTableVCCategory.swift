@@ -15,7 +15,7 @@ class SettingTableVCCategory: UITableViewCell {
   var vcSettingDelegate: protocolVCSetting?
   var indexRow: Int = 0
 
-// Анимация
+// Animations
   @objc func changeCategoryOpenPopUpScreen2FromCellCategory(_ tag: Int) {
     vcSettingDelegate?.changeCategoryOpenPopUpScreen2(indexRow)
     print("ChangeCategory from Screen2")
@@ -32,7 +32,6 @@ class SettingTableVCCategory: UITableViewCell {
   func prepareCell(indexRow: Int) {
     self.indexRow = indexRow
     if vcSettingDelegate!.returnNewOperation().category != nil {
-
       labelSelectCategory.text = vcSettingDelegate?.getUserData().categories[vcSettingDelegate!.returnNewOperation().category!.description]?.name
       labelSelectCategory.textColor = .black
     } else {

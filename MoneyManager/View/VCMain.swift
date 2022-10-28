@@ -9,20 +9,18 @@
 import UIKit
 
 protocol protocolVCMain {
-  func updateScreen() // обновление данных на всэм экрана
-  func showOperation(_ id: UUID) // открывает PopUp-окно конкретной операции
-  func hideOperation() // закрывает PopUp-окно конкретной операции
-  func editOperation(uuid: UUID) // переход в редактирование выбранной операции на втором экране
+  func updateScreen() // full screen update
+  func showOperation(_ id: UUID) // opens a PopUp window for a specific operation
+  func hideOperation() // closes the PopUp window of a specific operation
+  func editOperation(uuid: UUID) // transition to editing the selected operation on the second screen
   func miniGraphStarterBackground(status: Bool)
 
-  // // функции возврата
   func returnMonthOfDate(_ dateInternal: Date) -> String
   func returnIncomesExpenses() -> [String: Double]
-  // // interface update
+
   func getUserRepository() -> UserRepository
   func getUserData() -> User
   func updateUserData(newData: User)
-  
   func updateOperations(amount: Double, categoryUUID: UUID, note: String, date: Date, idOfObject: UUID)
   func addOperations(amount: Double, categoryUUID: UUID, note: String, date: Date)
   func deleteCategory(idOfObject: UUID)
@@ -33,11 +31,10 @@ protocol protocolVCMain {
   func fetchFirebase()
 }
 
-
 class VCMain: UIViewController {
   static let shared = VCMain()
 
-    // MARK: - объявление аутлетов
+  // MARK: - outlets
   @IBOutlet var tableViewScreen1: UITableView!
   @IBOutlet var buttonDaily: UIView!
   @IBOutlet var buttonWeekly: UIView!
@@ -63,59 +60,37 @@ class VCMain: UIViewController {
   @IBOutlet var buttonScreen1ShowList: UIButton!
   @IBOutlet var miniGraphStarterBackground: UIView!
 
-    // MARK: - делегаты и переменные
+  // MARK: - delegates and variables
   var income: Double = 0
   var expensive: Double = 0
-
   var tapShowOperation: UITapGestureRecognizer?
   var vcSettingDelegate: protocolVCSetting?
   var vcOperationDelegate: protocolVCOperation?
   var vcGraphDelegate: protocolVCGraph?
-
-    // хранение модифицированных данных из Realm для конкретного режима отоборажения
   var tagForEdit: UUID?
   var screen1StatusGrapjDisplay = false
-
-    // показывает количество заголовков с новой датой в таблице, которое предшествует конкретной операции
   var arrayForIncrease: [Int] = [0]
   var graphDataArray: [GraphData] = []
-
   var datasource: MyDataSource?
   var userRepository = UserRepository.shared
-  // var userData: User? {
-  //   get {
-  //     return userRepository.user
-  //   }
-  //   set(userData) {
-  //     userRepository.user = userData
-  //   }
-  // }
-
   let dateFormatter = DateFormatter()
 
-
-  // MARK: - объекты
   let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
 
-
-  // MARK: - переходы
+  // MARK: - transitions
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let vewController = segue.destination as? VCSetting, segue.identifier == "segueToVCSetting" {
       vcSettingDelegate = vewController
       vewController.vcMainDelegate = self
     }
-
     if let viewController = segue.destination as? VCOperation, segue.identifier == "segueToVCOperation" {
       vcOperationDelegate = viewController
       viewController.vcMainDelegate = self
     }
-
-    if let viewController = segue.destination as? VCGraph,
-       segue.identifier == "segueToVCGraph" {
+    if let viewController = segue.destination as? VCGraph, segue.identifier == "segueToVCGraph" {
       vcGraphDelegate = viewController
       viewController.vcMainDelegate = self
     }
-
     if let viewController = segue.destination as? VCSetting, segue.identifier == "segueToVCSettingForEdit"{
       viewController.vcSettingStatusEditing = true
       viewController.vcMainDelegate = self
@@ -125,23 +100,12 @@ class VCMain: UIViewController {
     }
   }
 
-  // MARK: - клики
+  // MARK: - clicks
   @IBAction func buttonActionScreen1NewOperation(_ sender: Any) {
     performSegue(withIdentifier: "segueToVCSetting", sender: nil)
   }
 
   @IBAction func search(_ sender: Any) {
-    // Task {
-    //   do {
-    //     try? await userRepository.getUserData() { data in
-    //       self.userData = data
-    //       print("userData= \(self.userData)")
-    //     }
-    //   } catch {
-    //     print("userRepositoryInstance Error")
-    //   }
-    // }
-
   }
 
   @IBAction func buttonActionScreen1ShowGraph(_ sender: Any) {
@@ -157,7 +121,6 @@ class VCMain: UIViewController {
       }
       buttonDaily.isUserInteractionEnabled = false
       buttonDaily.alpha = 0.3
-
       UIView.transition(
       from: scrollViewFromBottomPopInView,
       to: graphFromBottomPopInView,
@@ -187,13 +150,6 @@ class VCMain: UIViewController {
       buttonDaily.alpha = 1
     }
   }
-
-  // func changeDaysForSorting(newValue: Int) {
-  //   // borderLineForMenu(days: newValue)
-  //   // userRepository.updateDaysForSorting(daysForSorting: newValue)
-  //   // countingIncomesAndExpensive()
-  //   vcGraphDelegate?.containerGraphUpdate()
-  // }
 
   @IBAction func buttonDailyGesture(_ sender: Any) {
     userRepository.updateDaysForSorting(daysForSorting: 1)
@@ -234,7 +190,7 @@ class VCMain: UIViewController {
     }
   }
 
-  // MARK: - верхнее меню
+  // MARK: - top Menu
   func topMenuHighliter(specifyLabel: UILabel) {
     specifyLabel.font = UIFont.systemFont(ofSize: specifyLabel.font.pointSize, weight: .bold)
     switch specifyLabel {
@@ -333,13 +289,10 @@ class VCMain: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     Task {
       do {
-        // userRepository.semaphore = DispatchSemaphore(value: 0)
         try? await userRepository.getUserData() { data in
           self.userRepository.user = data
           print("userData= \(self.userRepository.user)")
-          // self.userRepository.semaphore.signal()
         }
-        // userRepository.semaphore.wait()
         print("userData 111")
       } catch {
         print("userRepositoryInstance Error")
@@ -370,16 +323,12 @@ class VCMain: UIViewController {
         print("Error22")
       }
     }
-
-
     miniGraph.setDelegateScreen1RoundedGraph(delegate: self)
-    // округление углов на первом экране
     bottomPopInView.layer.cornerRadius = 20
     bottomPopInView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-
     bottomPopInView.clipsToBounds = true
 
-    // Добавление Blur-эффекта
+    // adding a blur effect
     self.view.insertSubview(self.blurView, belowSubview: self.viewOperation)
     self.blurView.backgroundColor = .clear
     self.blurView.translatesAutoresizingMaskIntoConstraints = false
@@ -390,7 +339,5 @@ class VCMain: UIViewController {
       self.blurView.widthAnchor.constraint(equalTo: self.view.widthAnchor)
     ])
     self.blurView.isHidden = true
-
-    // self.view.layoutIfNeeded()
   }
 }

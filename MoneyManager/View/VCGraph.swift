@@ -13,23 +13,18 @@ protocol protocolVCGraph {
 }
 
 class VCGraph: UIViewController {
-  // MARK: - объявление аутлетов
-
+  // MARK: - outlets
   @IBOutlet var graphView: UIView!
 
-    // MARK: - делегаты и переменные
+  // MARK: - delegates and variables
   var vcMainDelegate: VCMain?
-
   let calendar = Calendar.current
   var firstDate: Date?
   var secondDate: Date?
 
-
   // MARK: - viewDidLoad
-
   override func viewDidLoad() {
     super.viewDidLoad()
-
   }
 
   func calculateDateArray() -> [Date] {
@@ -37,18 +32,15 @@ class VCGraph: UIViewController {
     let calendar = Calendar.current
     let date = Date()
     let today = calendar.dateInterval(of: .day, for: date)
-
     for day in 0...31 {
       let dateComponent = DateComponents(day: -day)
       firstDate = calendar.dateInterval(of: .day, for: date)?.start
       secondDate = calendar.date(byAdding: dateComponent, to: firstDate!)
-
       if day == 0 {
         dateArray.append(firstDate!)
       } else {
         dateArray.append(secondDate!)
       }
-
       let dateComponentTemp = DateComponents(month: -1)
       let freshHoldDate = calendar.date(byAdding: dateComponentTemp, to: date)
       if secondDate!.timeIntervalSince1970 < freshHoldDate!.timeIntervalSince1970 {
@@ -62,17 +54,13 @@ class VCGraph: UIViewController {
     var cumulativeArray: [GraphData] = []
     var cumulativeAmount: Double = 0
     let operations = UserRepository.shared.user!.operations
-
     var firstDate = Date()
     var secondDate = Date()
-
     for day in 0..<dateArray.count {
       secondDate = dateArray[day]
       if day != 0 {
         firstDate = dateArray[day - 1]
       }
-      // print("StartDate= \()")
-      // print("UserRepository.shared.user!.operations= \(UserRepository.shared.user!.operations.values)")
       for oper in UserRepository.shared.user!.operations {
         if oper.value.date >= secondDate.timeIntervalSince1970 && oper.value.date < firstDate.timeIntervalSince1970 {
           print("oper.value.amount \(oper.value.date )= \(oper.value.amount)")
@@ -84,32 +72,23 @@ class VCGraph: UIViewController {
     }
     return cumulativeArray
   }
-
 }
 
 extension VCGraph: protocolVCGraph {
 
   func dataUpdate() {
-
     var dateArray = calculateDateArray()
     let cumulativeGraphDataArray = calculateCumulativeAmount(dateArray: dateArray)
-
     var cumulativeArray: [Double] = []
     var numberOfDayArray: [String] = []
-
-    // print("dateArray= \(dateArray)")
-    // print("cumulativeArray= \(cumulativeGraphDataArray)")
-
     for item in cumulativeGraphDataArray {
       let components = calendar.dateComponents([.day], from: item.date)
       let digitDay = components.day
-      
       cumulativeArray.append(item.amount)
       numberOfDayArray.append(digitDay!.description)
     }
     print("cumulativeArray= \(cumulativeArray)")
     print("numberOfDayArray= \(numberOfDayArray)")
-
     graphView.layer.cornerRadius = 20
     graphView.layer.maskedCorners = [
       .layerMaxXMaxYCorner,
@@ -118,11 +97,9 @@ extension VCGraph: protocolVCGraph {
       .layerMinXMaxYCorner
     ]
     graphView.clipsToBounds = true
-
     let aaChartView = AAChartView()
-    aaChartView.frame = CGRect(x: 0, y: 10, width: graphView.frame.width, height: graphView.frame.height - 10)
+    aaChartView.frame = CGRect(x: 0, y: 0, width: graphView.frame.width, height: graphView.frame.height)
     graphView.addSubview(aaChartView)
-
     let aaChartModel = AAChartModel()
       .chartType(.area)//Can be any of the chart types listed under `AAChartType`.
       .animationType(.bounce)
@@ -138,7 +115,5 @@ extension VCGraph: protocolVCGraph {
           .data(cumulativeArray.reversed()),
       ])
     aaChartView.aa_drawChartWithChartModel(aaChartModel)
-
   }
-
 }

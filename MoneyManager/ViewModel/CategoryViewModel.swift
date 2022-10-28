@@ -21,15 +21,11 @@ extension VCCategory: protocolVCCategory {
 
   func setCurrentActiveEditingCell(cellID: Int) {
     currentActiveCellID = cellID
-
     let cells = self.tableView.visibleCells
-
     var counter = 0
     for cell in cells {
       if counter >= 2 {
         let specCell = cell as! CategoryTableVCCategory
-
-          // Значение "-100" используется, чтобы дать сигнал всем ячейкам свернуть редактирование. Использую его, когда поступает команда свернуть PopUp-окно. Чтобы при следующем появлении оно было без редактирования.
         if cellID == -100 {
           specCell.closeEditing()
         } else {
@@ -43,13 +39,11 @@ extension VCCategory: protocolVCCategory {
               specCell.setPermitionToSetCategory(status: false)
             }
           }
-
         }
         counter += 1
       }
     }
   }
-
 
   func showAlertErrorAddNewCategory() {
     self.present(alertErrorAddNewCategory, animated: true, completion: nil)
@@ -132,12 +126,6 @@ extension VCCategory: protocolVCCategory {
     }
     return []
   }
-
-
-    // func checkBoxStatus(_ tag: Int, _ type: Bool) {
-    //   print("CheckBoxStatus, \(tag)")
-    //   closeWindow(tag)
-    // }
 }
 
 // MARK: - table Functionality
@@ -151,10 +139,8 @@ extension VCCategory: UITableViewDelegate, UITableViewDataSource {
       statusEditContainer = true
       return 2
     } else if statusEditContainer == true {
-      // print("returnDataArrayOfCategory().count 111= \(String(describing: vcMainDelegate?.getUserData().categories.count))")
       return calculateCategoryArray().count + 2
     } else {
-      // print("returnDataArrayOfCategory().count 222= \(String(describing: vcMainDelegate?.getUserData().categories.count))")
       return calculateCategoryArray().count + 1
     }
   }

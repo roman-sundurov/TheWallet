@@ -11,17 +11,16 @@ protocol protocolSettingTableVCDate {
   func returnDateTextField() -> UILabel
 }
 
-
 class SettingTableVCDate: UITableViewCell {
   @IBOutlet var labelDate: UILabel!
   @IBOutlet var labelSelectDate: UILabel!
   @IBOutlet var buttonSelectDate: UIButton!
 
-  // MARK: - делегаты и переменные
+  // MARK: - delegates and variables
   var vcSettingDelegate: protocolVCSetting?
   var indexRow: Int = 0
 
-  // MARK: - переходы
+  // MARK: - transitions
 
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -31,12 +30,10 @@ class SettingTableVCDate: UITableViewCell {
     super.setSelected(selected, animated: animated)
   }
 
-
   @objc func startEditing() {
     vcSettingDelegate?.openAlertDatePicker()
     print("startEditing")
   }
-
 
   func startCell(indexRow: Int) {
     self.indexRow = indexRow
@@ -63,7 +60,6 @@ class SettingTableVCDate: UITableViewCell {
     indexRow = tag
   }
 }
-
 
 extension SettingTableVCDate: protocolSettingTableVCDate {
   func returnDateTextField() -> UILabel {

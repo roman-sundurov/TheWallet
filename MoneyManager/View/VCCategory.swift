@@ -8,7 +8,6 @@
 import UIKit
 
 protocol protocolVCCategory {
-  // func checkBoxStatus(_ tag: Int, _ type: Bool)
   func closeWindow()
   func screen2ContainerNewCategorySwicher()
   func addNewCategory(name: String, icon: String, date: Double)
@@ -16,22 +15,16 @@ protocol protocolVCCategory {
   func showAlertErrorAddNewCategory()
   func setCurrentActiveEditingCell(cellID: Int)
   func calculateCategoryArray() -> [Category]
-
-  // функции возврата
-  // func returnDelegateScreen2() -> protocolVCSetting
   func returnScreen2StatusEditContainer() -> Bool
   func returnDelegateScreen2ContainerTableVCNewCategory() -> protocolCategoryTableVCNewCategory
   func returnVCMainDelegate() -> protocolVCMain
 }
 
 class VCCategory: UIViewController {
-  // MARK: - объявление аутлетов
-
+  // MARK: - outlets
   @IBOutlet var tableView: UITableView!
 
-
-  // MARK: - делегаты и переменные
-
+  // MARK: - delegates and variables
   var vcSettingDelegate: protocolVCSetting?
   var vcMainDelegate: protocolVCMain?
   var categoryTableVCHeaderDelegate: protocolCategoryTableVCHeader?
@@ -41,18 +34,14 @@ class VCCategory: UIViewController {
   var currentActiveCellID: Int?
   var categoriesArray: [Category] = []
 
-
-  // MARK: - объекты
-
+  // MARK: - objects
   let alertErrorAddNewCategory = UIAlertController(
     title: "Введите название категории",
     message: nil,
     preferredStyle: .alert
     )
 
-
   // MARK: - viewDidLoad
-
   override func viewDidLoad() {
     super.viewDidLoad()
     calculateCategoryArray()

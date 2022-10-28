@@ -15,7 +15,7 @@ protocol protocolCategoryTableVCCategory {
 }
 
 class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
-  // MARK: - объявление аутлетов
+  // MARK: - outlets
   @IBOutlet var textFieldNameCategory: UITextField!
   @IBOutlet var buttonDeleteCategory: UIButton!
   @IBOutlet var buttonEditNameCategory: UIButton!
@@ -23,9 +23,7 @@ class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
   @IBOutlet var checkBoxObject: Checkbox!
   @IBOutlet var constaraintCellChangeCategoryHeight: NSLayoutConstraint!
 
-
-  // MARK: - делегаты и переменные
-
+  // MARK: - delegates and variables
   var vcMainDelegate: protocolVCMain?
   var vcSettingDelegate: protocolVCSetting?
   var vcCategoryDelegate: protocolVCCategory?
@@ -36,12 +34,9 @@ class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
   var category: Category?
   var cellID: Int?
 
-
-  // MARK: - переходы
-
+  // MARK: - transitions
   @IBAction func buttonDeleteCategoryAction(_ sender: Any) {
     vcMainDelegate!.deleteCategory(idOfObject: category!.id)
-
     vcCategoryDelegate?.screen2ContainerDeleteCategory(idOfObject: category!.id)
   }
 
@@ -89,7 +84,6 @@ class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
     self.cellID = cellID
     self.category = category
     print("cellID ChangeCategory= \(cellID)")
-
     textFieldNameCategory.text = category.name
     gestureCell = UITapGestureRecognizer(target: self, action: #selector(self.closeWindows(tap:)))
     gestureCheckBox = UITapGestureRecognizer(target: self, action: #selector(self.closeWindows(tap:)))
@@ -102,15 +96,12 @@ class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
     checkBoxObject.borderStyle = .circle
     checkBoxObject.checkmarkSize = 1
     checkBoxObject.checkmarkColor = .white
-
     textFieldNameCategory.layer.cornerRadius = 10
-
     if vcSettingDelegate!.returnNewOperation().category == self.category!.id {
         checkBoxObject.isChecked = true
     } else {
       checkBoxObject.isChecked = false
     }
-
     if vcCategoryDelegate?.returnScreen2StatusEditContainer() == true {
     buttonDeleteCategory.isHidden = false
     buttonEditNameCategory.isHidden = false
@@ -118,12 +109,10 @@ class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
       buttonDeleteCategory.isHidden = true
       buttonEditNameCategory.isHidden = true
     }
-
     textFieldNameCategory.returnKeyType = .done
     textFieldNameCategory.delegate = self
   }
 }
-
 
 extension CategoryTableVCCategory: protocolCategoryTableVCCategory {
   func setPermitionToSetCategory(status: Bool) {
@@ -145,7 +134,6 @@ extension CategoryTableVCCategory: protocolCategoryTableVCCategory {
     buttonEditNameCategory.tintColor = UIColor.systemBlue
     buttonEditNameCategory.isHidden = false
     buttonConfirmNewName.isHidden = true
-
     vcMainDelegate?.updateCategory(name: textFieldNameCategory.text!, icon: "", idOfObject: self.category!.id)
     vcCategoryDelegate?.setCurrentActiveEditingCell(cellID: 0)
   }

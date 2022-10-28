@@ -99,7 +99,6 @@ extension VCMain: protocolVCMain {
   func showOperation(_ id: UUID) {
     viewOperation.layer.cornerRadius = 20
     vcOperationDelegate?.prepareForStart(id: id)
-
     UIView.animate(
       withDuration: 0.3,
       delay: 0,
@@ -154,35 +153,7 @@ extension VCMain: protocolVCMain {
     return formatterPrint.string(from: dateInternal)
   }
 
-
-    // MARK: - data calculating
-  // func graphDataArrayCalculating(dataArrayOfOperationsInternal: [Operation]) {
-  //     // Данные для передачи в график
-  //     // Cохраняет суммы операций по дням некуммулятивно
-  //   graphDataArray = []
-  //   for data in dataArrayOfOperationsInternal {
-  //     if graphDataArray.isEmpty {
-  //       graphDataArray.append(GraphData(newDate: Date.init(timeIntervalSince1970: data.date), newAmount: data.amount))
-  //     } else {
-  //       for x in graphDataArray {
-  //         if returnDayOfDate(x.date) == returnDayOfDate(Date.init(timeIntervalSince1970: data.date)) {
-  //           graphDataArray.first { returnDayOfDate($0.date) == returnDayOfDate(Date.init(timeIntervalSince1970: data.date)) }?
-  //             .amount += data.amount
-  //             // graphDataArray.filter { returnDayOfDate($0.date) == returnDayOfDate(data.date) }
-  //             //   .first?.amount += data.amount
-  //         }
-  //       }
-  //       if (graphDataArray.filter { returnDayOfDate($0.date) == returnDayOfDate(Date.init(timeIntervalSince1970: data.date)) }).isEmpty {
-  //         graphDataArray.append(GraphData.init(newDate: Date.init(timeIntervalSince1970: data.date), newAmount: data.amount))
-  //       }
-  //     }
-  //   }
-  //   graphDataArray.sort { $0.date > $1.date }
-  //   print("graphDataArray after sort: \(graphDataArray)")
-  // }
-
   func returnGraphData() -> [GraphData] {
     return graphDataArray
   }
-
 }

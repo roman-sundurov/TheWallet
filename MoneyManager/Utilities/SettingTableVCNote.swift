@@ -15,11 +15,10 @@ protocol protocolSettingTableVCNote{
 
 class SettingTableVCNote: UITableViewCell, UITextViewDelegate {
   @IBOutlet var textViewNotes: UITextView!
-
   var vcSettingDelegate: protocolVCSetting?
   var indexRow: Int = 0
 
-// MARK: - Работа с Placeholder
+// MARK: - Working with Placeholder
   func textViewDidBeginEditing(_ textView: UITextView) {
     if textViewNotes.textColor == UIColor.opaqueSeparator {
       textViewNotes.text = nil
@@ -37,7 +36,7 @@ class SettingTableVCNote: UITableViewCell, UITextViewDelegate {
     print("func textViewDidEndEditing")
   }
 
-  // MARK: - Стандартные функции
+  // MARK: - standard functions
   override func awakeFromNib() {
     super.awakeFromNib()
   }
@@ -48,16 +47,11 @@ class SettingTableVCNote: UITableViewCell, UITextViewDelegate {
 
   func startCell(indexRow: Int) {
     self.indexRow = indexRow
-    // textViewNotes.text = vcSettingDelegate!.returnScreen2MenuArray()[indexRow].text
-
     textViewNotes.textContainer.lineBreakMode = .byTruncatingTail
     textViewNotes.layer.borderColor = UIColor.gray.cgColor
     textViewNotes.layer.borderWidth = 2
     textViewNotes.layer.cornerRadius = 10
-
     textViewNotes.text = "Placeholder"
-//    textViewNotes.textColor = UIColor.opaqueSeparator //цвет текста уже opaqueSeparator в Storyboard.
-
   }
 }
 

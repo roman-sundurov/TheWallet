@@ -22,6 +22,9 @@
 		473549BD2819CFD600E87139 /* MainVM+TableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549BC2819CFD600E87139 /* MainVM+TableExtension.swift */; };
 		473549C1281A89E200E87139 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549C0281A89E200E87139 /* SettingViewModel.swift */; };
 		473549C3281B2BA500E87139 /* SettingVM+TableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549C2281B2BA500E87139 /* SettingVM+TableExtension.swift */; };
+		47431E5F290B4C8B00818E6E /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47431E5E290B4C8B00818E6E /* Firebase.swift */; };
+		47431E60290B4C8B00818E6E /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47431E5E290B4C8B00818E6E /* Firebase.swift */; };
+		47431E61290B4C8B00818E6E /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47431E5E290B4C8B00818E6E /* Firebase.swift */; };
 		4750EFE725BC2C5C00167A92 /* CategoryTableVCHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EFE625BC2C5C00167A92 /* CategoryTableVCHeader.swift */; };
 		4750EFEC25BC2C7F00167A92 /* CategoryTableVCCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EFEB25BC2C7F00167A92 /* CategoryTableVCCategory.swift */; };
 		47621F9825B644BF0095A52F /* SettingTableVCNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47621F9725B644BF0095A52F /* SettingTableVCNote.swift */; };
@@ -87,6 +90,7 @@
 		473549BC2819CFD600E87139 /* MainVM+TableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVM+TableExtension.swift"; sourceTree = "<group>"; };
 		473549C0281A89E200E87139 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		473549C2281B2BA500E87139 /* SettingVM+TableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingVM+TableExtension.swift"; sourceTree = "<group>"; };
+		47431E5E290B4C8B00818E6E /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		4750EFE625BC2C5C00167A92 /* CategoryTableVCHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableVCHeader.swift; sourceTree = "<group>"; };
 		4750EFEB25BC2C7F00167A92 /* CategoryTableVCCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableVCCategory.swift; sourceTree = "<group>"; };
 		47621F9725B644BF0095A52F /* SettingTableVCNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableVCNote.swift; sourceTree = "<group>"; };
@@ -160,6 +164,7 @@
 				472F288625A7319500CE1481 /* AppDelegate.swift */,
 				472F288825A7319500CE1481 /* SceneDelegate.swift */,
 				47AC1A9425C09AC9006E7817 /* Model.swift */,
+				47431E5E290B4C8B00818E6E /* Firebase.swift */,
 				473549B9281961C800E87139 /* View */,
 				473549B8281961A900E87139 /* ViewModel */,
 				47E9D49328FEAD3C00ACE97F /* Utilities */,
@@ -399,6 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				473549C1281A89E200E87139 /* SettingViewModel.swift in Sources */,
+				47431E5F290B4C8B00818E6E /* Firebase.swift in Sources */,
 				473549C3281B2BA500E87139 /* SettingVM+TableExtension.swift in Sources */,
 				4715215025F3A8E600FE585C /* SettingTableVCDate.swift in Sources */,
 				47AC1AB625C0B7CB006E7817 /* MainTableVCOperation.swift in Sources */,
@@ -427,6 +433,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47431E60290B4C8B00818E6E /* Firebase.swift in Sources */,
 				472F289E25A7319600CE1481 /* MoneyManagerTests.swift in Sources */,
 				47E87753290807B100B99C09 /* CategoryViewModel.swift in Sources */,
 			);
@@ -436,6 +443,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47431E61290B4C8B00818E6E /* Firebase.swift in Sources */,
 				472F28A925A7319600CE1481 /* MoneyManagerUITests.swift in Sources */,
 				47E87754290807B100B99C09 /* CategoryViewModel.swift in Sources */,
 			);

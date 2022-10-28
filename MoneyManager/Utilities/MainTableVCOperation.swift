@@ -16,7 +16,6 @@ class MainTableVCOperation: UITableViewCell {
   var vcMainDelegate: protocolVCMain?
   var id: UUID?
 
-// Анимация
   @objc func showOperation(_ sender: UITapGestureRecognizer) {
     vcMainDelegate?.showOperation(id!)
     print("ChangeCategory from Screen2")

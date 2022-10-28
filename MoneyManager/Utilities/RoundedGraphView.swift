@@ -18,17 +18,12 @@ class RoundedGraphView: UIView {
     static let arcWidth: CGFloat = 76
   }
 
-
-  // MARK: - делегаты и переменные
-
+  // MARK: - delegates and variables
   var vcMainDelegate: protocolVCMain?
-
   var incomesColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
   var expensesColor = UIColor.red
 
-
   // MARK: - draw()
-
   override func draw(_ rect: CGRect) {
     let data = vcMainDelegate?.returnIncomesExpenses()
     var incomesExpensesRatio: Double = 1

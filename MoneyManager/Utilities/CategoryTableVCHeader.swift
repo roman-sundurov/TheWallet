@@ -11,20 +11,14 @@ protocol protocolCategoryTableVCHeader {
 }
 
 class CategoryTableVCHeader: UITableViewCell {
-  // MARK: - аутлеты
 
   @IBOutlet var buttonOptions: UIButton!
-
-  // MARK: - делегаты и переменные
-
-  var delegateScreen2Container: protocolVCCategory?
-
-  // MARK: - переходы
-
+  
   @IBAction func buttonOptionsAction(_ sender: Any) {
     delegateScreen2Container?.screen2ContainerNewCategorySwicher()
   }
 
+  var delegateScreen2Container: protocolVCCategory?
 
   override func awakeFromNib() {
     super.awakeFromNib()

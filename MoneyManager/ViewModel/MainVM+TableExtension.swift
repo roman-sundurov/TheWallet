@@ -49,15 +49,12 @@ extension VCMain {
     datasource!.apply(snapshot, animatingDifferences: animatingDifferences)
   }
 
-
   func calculateSource() -> ([String], [String: [Operation]]) {
     var sectionsDouble: [Double] = []
     var sectionsTemp: [String] = []
     var operationForGraph: [Operation] = []
-
     if let userData = userRepository.user {
       let freshHold = Date().timeIntervalSince1970 - Double(86400 * userData.daysForSorting)
-
       for oper in userData.operations {
         if oper.value.date >= freshHold {
           operationForGraph.append(oper.value)
@@ -65,9 +62,6 @@ extension VCMain {
           sectionsDouble.sort() { $0 > $1 }
         }
       }
-
-      // graphDataArrayCalculating(dataArrayOfOperationsInternal: operationForGraph)
-
       for double in sectionsDouble {
         if !sectionsTemp.contains(dateFormatter.string(from: Date.init(timeIntervalSince1970: double))) {
           sectionsTemp.append(dateFormatter.string(from: Date.init(timeIntervalSince1970: double)))
@@ -75,23 +69,19 @@ extension VCMain {
           sectionsTemp.append("")
         }
       }
-
       UserRepository.shared.mainDiffableSections = []
       UserRepository.shared.mainDiffableSectionsSource = [:]
       for item in sectionsTemp {
         if item != "" {
           UserRepository.shared.mainDiffableSections.append(item)
-
         }
       }
-
       for oper in userData.operations {
         if oper.value.date >= freshHold {
           let newStringDate = dateFormatter.string(from: Date.init(timeIntervalSince1970: oper.value.date))
           UserRepository.shared.mainDiffableSectionsSource[newStringDate] = UserRepository.shared.mainDiffableSectionsSource[newStringDate] == nil ? [oper.value] : UserRepository.shared.mainDiffableSectionsSource[newStringDate]! + [oper.value]
         }
       }
-
       print("sectionsSource= \(UserRepository.shared.mainDiffableSectionsSource)")
       print("sections= \(UserRepository.shared.mainDiffableSections)")
       return (UserRepository.shared.mainDiffableSections, UserRepository.shared.mainDiffableSectionsSource)
@@ -101,9 +91,9 @@ extension VCMain {
   }
 }
 
-  class MyDataSource: UITableViewDiffableDataSource<String, Operation> {
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-      return UserRepository.shared.mainDiffableSections[section]
-    }
+class MyDataSource: UITableViewDiffableDataSource<String, Operation> {
+  override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    return UserRepository.shared.mainDiffableSections[section]
   }
+}
 

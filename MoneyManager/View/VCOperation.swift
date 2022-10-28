@@ -12,8 +12,7 @@ protocol protocolVCOperation {
 }
 
 class VCOperation: UIViewController {
-  // MARK: - аутлеты
-
+  // MARK: - outlets
   @IBOutlet var labelCategory: UILabel!
   @IBOutlet var labelDate: UILabel!
   @IBOutlet var labelAmount: UILabel!
@@ -24,20 +23,14 @@ class VCOperation: UIViewController {
   @IBOutlet var buttonToDeleteOperation: UIButton!
   @IBOutlet var viewLogoCategory: UIView!
 
-
-  // MARK: - делегаты и переменные
-
+  // MARK: - delegates and variables
   var vcMainDelegate: protocolVCMain?
   var uuid: UUID?
 
-
-  // MARK: - переходы
-
-
+  // MARK: - transitions
   @IBAction func buttonActionToEditOperation(_ sender: Any) {
     vcMainDelegate?.editOperation(uuid: uuid!)
   }
-
 
   @IBAction func buttonActionToDeleteOperation(_ sender: Any) {
     vcMainDelegate?.hideOperation()
@@ -61,28 +54,23 @@ extension VCOperation: protocolVCOperation {
     uuid = id
     print("id= \(id)")
     let operation = UserRepository.shared.user?.operations.filter { $0.value.id == id }.first?.value
-
-    // Отображения category
+    // display category
     if let category = vcMainDelegate?.getUserData().categories[operation!.category!.description] {
       labelCategory.text = category.name
     } else {
       labelCategory.text = "Category not found"
     }
-
-
-    // Отображения date
+    // display date
     let formatterPrint = DateFormatter()
     formatterPrint.dateFormat = "d MMMM YYYY"
     labelDate.text = formatterPrint.string(from: Date.init(timeIntervalSince1970: operation!.date))
-
-    // Отображения amount
+    // display amount
     if operation?.amount.truncatingRemainder(dividingBy: 1) == 0 {
       labelAmount.text = String(format: "%.0f", operation!.amount)
     } else {
       labelAmount.text = String(format: "%.2f", operation!.amount)
     }
-
-    // Отображения currencyStatus
+    // display currencyStatus
     if operation!.amount < 0 {
       labelAmount.textColor = UIColor.red
       currencyStatus.textColor = UIColor.red
@@ -90,8 +78,7 @@ extension VCOperation: protocolVCOperation {
       labelAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
       currencyStatus.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
     }
-
-    // Отображение textViewNotes
+    // display textViewNotes
     textViewNotes.text = operation?.note
   }
 }
