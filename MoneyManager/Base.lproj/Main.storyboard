@@ -537,7 +537,7 @@
                         <outlet property="miniGraphStarterBackground" destination="G5H-lD-gc3" id="YS7-ob-ixJ"/>
                         <outlet property="screen1BottomMenu" destination="0a3-ee-7ce" id="jJA-4P-ogQ"/>
                         <outlet property="scrollViewFromBottomPopInView" destination="T9E-30-cZk" id="dXl-Jy-uf3"/>
-                        <outlet property="tableViewScreen1" destination="Ahz-zl-teV" id="yV2-vw-Z6j"/>
+                        <outlet property="tableView" destination="Ahz-zl-teV" id="yV2-vw-Z6j"/>
                         <outlet property="topMenuButtonStrip" destination="oin-I9-C2d" id="qjh-6t-lyy"/>
                         <outlet property="viewOperation" destination="uY8-5i-7qy" id="6De-Oc-bYF"/>
                         <segue destination="fcp-GB-FKl" kind="presentation" identifier="segueToVCSetting" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="ABz-lk-sfP"/>

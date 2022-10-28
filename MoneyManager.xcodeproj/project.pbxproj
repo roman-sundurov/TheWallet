@@ -26,6 +26,9 @@
 		47431E61290B4C8B00818E6E /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47431E5E290B4C8B00818E6E /* Firebase.swift */; };
 		4750EFE725BC2C5C00167A92 /* CategoryTableVCHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EFE625BC2C5C00167A92 /* CategoryTableVCHeader.swift */; };
 		4750EFEC25BC2C7F00167A92 /* CategoryTableVCCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EFEB25BC2C7F00167A92 /* CategoryTableVCCategory.swift */; };
+		475342D7290C37EC006BE673 /* swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 475342D6290C37EC006BE673 /* swiftlint.yml */; };
+		475342D8290C37EC006BE673 /* swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 475342D6290C37EC006BE673 /* swiftlint.yml */; };
+		475342D9290C37EC006BE673 /* swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 475342D6290C37EC006BE673 /* swiftlint.yml */; };
 		47621F9825B644BF0095A52F /* SettingTableVCNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47621F9725B644BF0095A52F /* SettingTableVCNote.swift */; };
 		4771587C262AB31E00F27D4B /* VCOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4771587B262AB31E00F27D4B /* VCOperation.swift */; };
 		477CC22A290ABB1F00EA671D /* AAInfographics in Frameworks */ = {isa = PBXBuildFile; productRef = 477CC229290ABB1F00EA671D /* AAInfographics */; };
@@ -91,6 +94,7 @@
 		47431E5E290B4C8B00818E6E /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		4750EFE625BC2C5C00167A92 /* CategoryTableVCHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableVCHeader.swift; sourceTree = "<group>"; };
 		4750EFEB25BC2C7F00167A92 /* CategoryTableVCCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableVCCategory.swift; sourceTree = "<group>"; };
+		475342D6290C37EC006BE673 /* swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftlint.yml; sourceTree = "<group>"; };
 		47621F9725B644BF0095A52F /* SettingTableVCNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableVCNote.swift; sourceTree = "<group>"; };
 		4771587B262AB31E00F27D4B /* VCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCOperation.swift; sourceTree = "<group>"; };
 		47AC1A9425C09AC9006E7817 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Model.swift; path = MoneyManager/Model.swift; sourceTree = SOURCE_ROOT; };
@@ -139,6 +143,7 @@
 		472F287A25A7319500CE1481 = {
 			isa = PBXGroup;
 			children = (
+				475342D6290C37EC006BE673 /* swiftlint.yml */,
 				472F288525A7319500CE1481 /* MoneyManager */,
 				472F289C25A7319600CE1481 /* MoneyManagerTests */,
 				472F28A725A7319600CE1481 /* MoneyManagerUITests */,
@@ -239,7 +244,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 472F28AD25A7319600CE1481 /* Build configuration list for PBXNativeTarget "MoneyManager" */;
 			buildPhases = (
-				4736308E27B692B3002D1426 /* ShellScript */,
+				475342DA290C3864006BE673 /* Run Script */,
 				472F287F25A7319500CE1481 /* Sources */,
 				472F288025A7319500CE1481 /* Frameworks */,
 				472F288125A7319500CE1481 /* Resources */,
@@ -351,6 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				472F289325A7319500CE1481 /* LaunchScreen.storyboard in Resources */,
+				475342D7290C37EC006BE673 /* swiftlint.yml in Resources */,
 				472F289025A7319500CE1481 /* Assets.xcassets in Resources */,
 				47B3D92928FC922B0022974A /* GoogleService-Info.plist in Resources */,
 				472F288E25A7319500CE1481 /* Main.storyboard in Resources */,
@@ -362,6 +368,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				47B3D92A28FC922B0022974A /* GoogleService-Info.plist in Resources */,
+				475342D8290C37EC006BE673 /* swiftlint.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,28 +377,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				47B3D92B28FC922B0022974A /* GoogleService-Info.plist in Resources */,
+				475342D9290C37EC006BE673 /* swiftlint.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4736308E27B692B3002D1426 /* ShellScript */ = {
+		475342DA290C3864006BE673 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
+			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "PATH=/opt/homebrew/bin:$PATH\nif [ -f ~/com.raywenderlich.swiftlint.yml ]; then\n  if which swiftlint >/dev/null; then\n    swiftlint --no-cache --config ~/com.raywenderlich.swiftlint.yml\n  fi\nfi\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

@@ -10,7 +10,7 @@ import UIKit
 
 extension VCMain {
   func configureDataSource() {
-    datasource = MyDataSource(tableView: tableViewScreen1) { tableview, indexpath, model -> UITableViewCell? in
+    datasource = MyDataSource(tableView: tableView) { tableview, indexpath, model -> UITableViewCell? in
       let cell = tableview.dequeueReusableCell(withIdentifier: "operation", for: indexpath) as? MainTableVCOperation
       if model.amount.truncatingRemainder(dividingBy: 1) == 0 {
         cell?.labelAmount.text = String(format: "%.0f", model.amount)

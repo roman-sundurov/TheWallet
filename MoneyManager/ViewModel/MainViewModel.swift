@@ -83,7 +83,6 @@ extension VCMain: protocolVCMain {
     performSegue(withIdentifier: "segueToVCSettingForEdit", sender: nil)
   }
 
-
   func updateScreen() {
     borderLineForMenu(days: userRepository.user!.daysForSorting)
     countingIncomesAndExpensive()

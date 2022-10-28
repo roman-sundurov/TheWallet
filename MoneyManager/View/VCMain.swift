@@ -35,7 +35,7 @@ class VCMain: UIViewController {
   static let shared = VCMain()
 
   // MARK: - outlets
-  @IBOutlet var tableViewScreen1: UITableView!
+  @IBOutlet var tableView: UITableView!
   @IBOutlet var buttonDaily: UIView!
   @IBOutlet var buttonWeekly: UIView!
   @IBOutlet var buttonMonthly: UIView!
@@ -117,16 +117,22 @@ class VCMain: UIViewController {
   @IBAction func buttonActionScreen1ShowGraph(_ sender: Any) {
     print("screen1StatusGrapjDisplay= \(screen1StatusGrapjDisplay)")
     if screen1StatusGrapjDisplay == false {
-      // Блокировка показа данных за 1 день в режиме графика
-      // var daysForSorting = userRepository.user!.daysForSorting
-      if userRepository.user!.daysForSorting == 1 {
-        userRepository.updateDaysForSorting(daysForSorting: 30)
-        updateScreen()
-        vcGraphDelegate?.dataUpdate()
-        buttonWeeklyGesture(self)
-      }
+      userRepository.updateDaysForSorting(daysForSorting: 30)
+      borderLineForMenu(days: 30)
+      vcGraphDelegate?.dataUpdate()
+      buttonWeeklyGesture(self)
       buttonDaily.isUserInteractionEnabled = false
       buttonDaily.alpha = 0.3
+      buttonWeekly.isUserInteractionEnabled = false
+      buttonWeekly.alpha = 0.3
+      buttonYearly.isUserInteractionEnabled = false
+      buttonYearly.alpha = 0.3
+
+      countingIncomesAndExpensive()
+      vcGraphDelegate?.dataUpdate()
+      miniGraph.setNeedsDisplay()
+      applySnapshot()
+
       UIView.transition(
       from: scrollViewFromBottomPopInView,
       to: graphFromBottomPopInView,
@@ -283,14 +289,6 @@ class VCMain: UIViewController {
     }
   }
 
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    // borderLineForMenu(days: userRepository.user!.daysForSorting)
-    // screen1TableUpdateSorting()
-    tableViewScreen1.reloadData()
-    self.view.layoutIfNeeded()
-  }
-
   // MARK: - viewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -307,7 +305,6 @@ class VCMain: UIViewController {
         print("Error22")
       }
     }
-
     dateFormatter.dateStyle = .medium
     dateFormatter.timeStyle = .none
     configureDataSource()
