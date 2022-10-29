@@ -23,13 +23,13 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="27"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All payment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uhc-J8-Rkm">
-                                        <rect key="frame" x="136" y="-0.3333333333333357" width="121" height="27.666666666666664"/>
+                                        <rect key="frame" x="136" y="-0.3333333333333357" width="121" height="27.666666666666668"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1rV-20-Bop">
-                                        <rect key="frame" x="352" y="0.6666666666666643" width="26" height="25.666666666666664"/>
+                                        <rect key="frame" x="352" y="0.6666666666666643" width="26" height="25.666666666666668"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal">
@@ -129,7 +129,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G5H-lD-gc3">
                                                 <rect key="frame" x="0.0" y="30" width="180" height="140"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Добавьте операцию для отображения" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ir5-Vs-CdP">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no transactions." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ir5-Vs-CdP">
                                                         <rect key="frame" x="15" y="-5" width="150" height="150"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="150" id="Qzk-oi-kKg"/>
@@ -971,7 +971,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QbF-18-lnB">
                                                     <rect key="frame" x="10" y="0.0" width="353" height="43.666666666666664"/>
                                                     <subviews>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Новая категория" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oyD-2D-jVU">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New category" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oyD-2D-jVU">
                                                             <rect key="frame" x="0.0" y="5" width="273" height="34"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="34" id="OyL-Lt-6we"/>
@@ -1255,7 +1255,7 @@
                                             <constraint firstAttribute="height" constant="40" id="t7F-Ny-hSz"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
-                                        <state key="normal" title="Изменить">
+                                        <state key="normal" title="Change">
                                             <color key="titleColor" name="AccentColor"/>
                                         </state>
                                         <connections>
@@ -1270,7 +1270,7 @@
                                             <constraint firstAttribute="width" constant="130" id="hdE-xQ-HMl"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
-                                        <state key="normal" title="Удалить">
+                                        <state key="normal" title="Delete">
                                             <color key="titleColor" systemColor="systemPinkColor"/>
                                         </state>
                                         <connections>

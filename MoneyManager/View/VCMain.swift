@@ -119,7 +119,7 @@ class VCMain: UIViewController {
     if isButtonsActive == true {
       print("screen1StatusGrapjDisplay= \(screen1StatusGrapjDisplay)")
       if screen1StatusGrapjDisplay == false {
-        userRepository.updateDaysForSorting(daysForSorting: 30)
+        // userRepository.updateDaysForSorting(daysForSorting: 30)
         vcGraphDelegate?.dataUpdate()
         buttonWeeklyGesture(self)
         buttonDaily.isUserInteractionEnabled = false
@@ -128,13 +128,11 @@ class VCMain: UIViewController {
         buttonWeekly.alpha = 0.3
         buttonYearly.isUserInteractionEnabled = false
         buttonYearly.alpha = 0.3
-        
         countingIncomesAndExpensive()
         vcGraphDelegate?.dataUpdate()
         miniGraph.setNeedsDisplay()
         applySnapshot()
         borderLineForMenu(days: 30)
-        
         UIView.transition(
           from: scrollViewFromBottomPopInView,
           to: graphFromBottomPopInView,
@@ -174,7 +172,6 @@ class VCMain: UIViewController {
     }
     // configureDataSource()
     // applySnapshot()
-    userRepository.updateDaysForSorting(daysForSorting: 30)
     updateScreen()
   }
 

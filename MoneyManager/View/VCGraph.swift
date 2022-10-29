@@ -105,12 +105,12 @@ extension VCGraph: protocolVCGraph {
       // .subtitle("subtitle")//The chart subtitle
       .dataLabelsEnabled(false) // enable or disable the data labels. Defaults to false
       .tooltipValueSuffix("$")// the value suffix of the chart tooltip
-      .categories(numberOfDayArray.reversed())
+      .categories(numberOfDayArray)
       .colorsTheme(["#6FC3C6", "#fe117c", "#ffc069", "#06caf4", "#7dffc0"])
       .series([
         AASeriesElement()
           .name("Balance")
-          .data(cumulativeArray.reversed())
+          .data(cumulativeArray)
       ])
     aaChartView.aa_drawChartWithChartModel(aaChartModel)
   }
