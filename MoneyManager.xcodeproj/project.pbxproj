@@ -246,7 +246,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 472F28AD25A7319600CE1481 /* Build configuration list for PBXNativeTarget "MoneyManager" */;
 			buildPhases = (
-				475342DA290C3864006BE673 /* Run Script */,
+				475342DA290C3864006BE673 /* SwiftLint */,
 				472F287F25A7319500CE1481 /* Sources */,
 				472F288025A7319500CE1481 /* Frameworks */,
 				472F288125A7319500CE1481 /* Resources */,
@@ -388,7 +388,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		475342DA290C3864006BE673 /* Run Script */ = {
+		475342DA290C3864006BE673 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -397,7 +397,7 @@
 			);
 			inputPaths = (
 			);
-			name = "Run Script";
+			name = SwiftLint;
 			outputFileListPaths = (
 			);
 			outputPaths = (
