@@ -1,6 +1,5 @@
 # MoneyManager
-MoneyManager is a test project where I apply new knowledge and technologies.
-The application is a classic money manager. The user can save his money income/expenses. Each transaction can be assigned a date, a note, and a category.
+The project where I use UIKit skills. The application is a classic money manager. User can save his money income/expenses. Each transaction can be assigned a date, a note, and a category.
 
 I will be very grateful if you tell me about errors in the project, or suggest improvements.
 
