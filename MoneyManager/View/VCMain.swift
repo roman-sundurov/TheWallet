@@ -5,8 +5,8 @@
 //  Created by Roman on 07.01.2021.
 //
 
-
 import UIKit
+import JGProgressHUD
 
 protocol protocolVCMain {
   func updateScreen() // full screen update
@@ -55,9 +55,9 @@ class VCMain: UIViewController {
   @IBOutlet var screen1BottomMenu: UIView!
   @IBOutlet var scrollViewFromBottomPopInView: UIScrollView!
   @IBOutlet var graphFromBottomPopInView: UIView!
-  @IBOutlet var buttonScreen1NewOperation: UIButton!
-  @IBOutlet var buttonScreen1ShowGraph: UIButton!
-  @IBOutlet var buttonScreen1ShowList: UIButton!
+  @IBOutlet var buttonNewOperation: UIButton!
+  @IBOutlet var buttonShowGraph: UIButton!
+  @IBOutlet var buttonShowList: UIButton!
   @IBOutlet var miniGraphStarterBackground: UIView!
 
   // MARK: - delegates and variables
@@ -74,8 +74,9 @@ class VCMain: UIViewController {
   var datasource: MyDataSource?
   var userRepository = UserRepository.shared
   let dateFormatter = DateFormatter()
-
   let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+  let hud = JGProgressHUD()
+  var isButtonsActive = false
 
   // MARK: - transitions
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -115,38 +116,41 @@ class VCMain: UIViewController {
   }
 
   @IBAction func buttonActionScreen1ShowGraph(_ sender: Any) {
-    print("screen1StatusGrapjDisplay= \(screen1StatusGrapjDisplay)")
-    if screen1StatusGrapjDisplay == false {
-      userRepository.updateDaysForSorting(daysForSorting: 30)
-      borderLineForMenu(days: 30)
-      vcGraphDelegate?.dataUpdate()
-      buttonWeeklyGesture(self)
-      buttonDaily.isUserInteractionEnabled = false
-      buttonDaily.alpha = 0.3
-      buttonWeekly.isUserInteractionEnabled = false
-      buttonWeekly.alpha = 0.3
-      buttonYearly.isUserInteractionEnabled = false
-      buttonYearly.alpha = 0.3
-
-      countingIncomesAndExpensive()
-      vcGraphDelegate?.dataUpdate()
-      miniGraph.setNeedsDisplay()
-      applySnapshot()
-
-      UIView.transition(
-      from: scrollViewFromBottomPopInView,
-      to: graphFromBottomPopInView,
-      duration: 1.0,
-      options: [.transitionFlipFromLeft, .showHideTransitionViews],
-      completion: nil
-    )
-      screen1StatusGrapjDisplay = true
-      buttonScreen1ShowGraph.setImage(UIImage.init(named: "Left-On"), for: .normal)
-      buttonScreen1ShowList.setImage(UIImage.init(named: "Right-Off"), for: .normal)
+    if isButtonsActive == true {
+      print("screen1StatusGrapjDisplay= \(screen1StatusGrapjDisplay)")
+      if screen1StatusGrapjDisplay == false {
+        userRepository.updateDaysForSorting(daysForSorting: 30)
+        vcGraphDelegate?.dataUpdate()
+        buttonWeeklyGesture(self)
+        buttonDaily.isUserInteractionEnabled = false
+        buttonDaily.alpha = 0.3
+        buttonWeekly.isUserInteractionEnabled = false
+        buttonWeekly.alpha = 0.3
+        buttonYearly.isUserInteractionEnabled = false
+        buttonYearly.alpha = 0.3
+        
+        countingIncomesAndExpensive()
+        vcGraphDelegate?.dataUpdate()
+        miniGraph.setNeedsDisplay()
+        applySnapshot()
+        borderLineForMenu(days: 30)
+        
+        UIView.transition(
+          from: scrollViewFromBottomPopInView,
+          to: graphFromBottomPopInView,
+          duration: 1.0,
+          options: [.transitionFlipFromLeft, .showHideTransitionViews],
+          completion: nil
+        )
+        screen1StatusGrapjDisplay = true
+        buttonShowGraph.setImage(UIImage.init(named: "Left-On"), for: .normal)
+        buttonShowList.setImage(UIImage.init(named: "Right-Off"), for: .normal)
+      }
     }
   }
 
   @IBAction func buttonActionScreen1ShowList(_ sender: Any) {
+    isButtonsActive = true
     if screen1StatusGrapjDisplay == true {
       UIView.transition(
       from: graphFromBottomPopInView,
@@ -155,32 +159,51 @@ class VCMain: UIViewController {
       options: [.transitionFlipFromRight, .showHideTransitionViews],
       completion: nil
       )
+      buttonDaily.isUserInteractionEnabled = true
+      buttonDaily.alpha = 1
+      buttonWeekly.isUserInteractionEnabled = true
+      buttonWeekly.alpha = 1
+      buttonYearly.isUserInteractionEnabled = true
+      buttonYearly.alpha = 1
+
       screen1StatusGrapjDisplay = false
-      buttonScreen1ShowGraph.setImage(UIImage.init(named: "Left-Off"), for: .normal)
-      buttonScreen1ShowList.setImage(UIImage.init(named: "Right-On"), for: .normal)
+      buttonShowGraph.setImage(UIImage.init(named: "Left-Off"), for: .normal)
+      buttonShowList.setImage(UIImage.init(named: "Right-On"), for: .normal)
       buttonDaily.isUserInteractionEnabled = true
       buttonDaily.alpha = 1
     }
-  }
-
-  @IBAction func buttonDailyGesture(_ sender: Any) {
-    userRepository.updateDaysForSorting(daysForSorting: 1)
-    updateScreen()
-  }
-
-  @IBAction func buttonWeeklyGesture(_ sender: Any) {
-    userRepository.updateDaysForSorting(daysForSorting: 7)
-    updateScreen()
-  }
-
-  @IBAction func buttonMonthlyGesture(_ sender: Any) {
+    // configureDataSource()
+    // applySnapshot()
     userRepository.updateDaysForSorting(daysForSorting: 30)
     updateScreen()
   }
 
+  @IBAction func buttonDailyGesture(_ sender: Any) {
+    if isButtonsActive == true {
+      userRepository.updateDaysForSorting(daysForSorting: 1)
+      updateScreen()
+    }
+  }
+
+  @IBAction func buttonWeeklyGesture(_ sender: Any) {
+    if isButtonsActive == true {
+      userRepository.updateDaysForSorting(daysForSorting: 7)
+      updateScreen()
+    }
+  }
+
+  @IBAction func buttonMonthlyGesture(_ sender: Any) {
+    if isButtonsActive == true {
+      userRepository.updateDaysForSorting(daysForSorting: 30)
+      updateScreen()
+    }
+  }
+
   @IBAction func buttonYearlyGesture(_ sender: Any) {
-    userRepository.updateDaysForSorting(daysForSorting: 365)
-    updateScreen()
+    if isButtonsActive == true {
+      userRepository.updateDaysForSorting(daysForSorting: 365)
+      updateScreen()
+    }
   }
 
   @objc func switchScreen1GraphContainer(tap: UITapGestureRecognizer) {
@@ -294,15 +317,12 @@ class VCMain: UIViewController {
     super.viewDidLoad()
     print("viewDidLoad")
     Task {
-      do {
-        try? await userRepository.getUserData { data in
-          self.userRepository.user = data
-          print("NewData= \(self.userRepository.user)")
-          self.updateScreen()
-        }
-        print("NewData2= \(userRepository.user)")
-      } catch {
-        print("Error22")
+      hudAppear()
+      try? await userRepository.getUserData { data in
+        self.userRepository.user = data
+        print("NewData= \(String(describing: self.userRepository.user))")
+        self.updateScreen()
+        self.hudDisapper()
       }
     }
     dateFormatter.dateStyle = .medium

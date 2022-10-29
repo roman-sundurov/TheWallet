@@ -48,7 +48,6 @@ class VCOperation: UIViewController {
   }
 }
 
-
 extension VCOperation: protocolVCOperation {
   func prepareForStart(id: UUID) {
     uuid = id

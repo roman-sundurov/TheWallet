@@ -9,6 +9,11 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+enum ErrorTypes: Error {
+  case cellError
+  case  modelError
+}
+
 typealias NestedType = (User) -> Void
 
 struct GraphData {

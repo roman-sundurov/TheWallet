@@ -21,28 +21,28 @@ extension VCSetting: UITableViewDelegate, UITableViewDataSource {
     print("indexPath.row= \(indexPath.row)")
     switch indexPath.row {
     case 0:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! UITableViewCell
-      cell.selectionStyle = UITableViewCell.SelectionStyle.none
-      return cell
+      let cell = tableView.dequeueReusableCell(withIdentifier: "header")
+      cell?.selectionStyle = UITableViewCell.SelectionStyle.none
+      return cell!
     case 1:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cellCategory") as! SettingTableVCCategory
-      cell.vcSettingDelegate = self
-      cell.prepareCell(indexRow: indexPath.row)
-      return cell
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cellCategory") as? SettingTableVCCategory
+      cell?.vcSettingDelegate = self
+      cell?.prepareCell(indexRow: indexPath.row)
+      return cell!
     case 2:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cellDate") as! SettingTableVCDate
-      cell.vcSettingDelegate = self
-      cell.startCell(indexRow: indexPath.row)
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cellDate") as? SettingTableVCDate
+      cell?.vcSettingDelegate = self
+      cell?.startCell(indexRow: indexPath.row)
       self.tableViewCellDateDelegate = cell
-      return cell
+      return cell!
     default:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cellNote") as! SettingTableVCNote
-      cell.vcSettingDelegate = self
-      cell.startCell(indexRow: indexPath.row)
-      cell.textViewNotes.delegate = cell
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cellNote") as? SettingTableVCNote
+      cell?.vcSettingDelegate = self
+      cell?.startCell(indexRow: indexPath.row)
+      cell?.textViewNotes.delegate = cell
 
       self.tableViewCellNoteDelegate = cell
-      return cell
+      return cell!
     }
   }
 

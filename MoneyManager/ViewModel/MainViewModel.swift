@@ -9,6 +9,24 @@ import Foundation
 import UIKit
 
 extension VCMain: protocolVCMain {
+
+  func hudAppear() {
+    hud.show(in: bottomPopInView)
+    buttonShowList.isEnabled = false
+    buttonShowGraph.isEnabled = false
+    buttonNewOperation.isEnabled = false
+    print("hudAppear")
+  }
+
+  func hudDisapper() {
+    hud.dismiss(animated: true)
+    buttonShowList.isEnabled = true
+    buttonShowGraph.isEnabled = true
+    buttonNewOperation.isEnabled = true
+    isButtonsActive = true
+    print("hudDisapper")
+  }
+
   func fetchFirebase() {
     Task {
       try? await userRepository.getUserData { data in
@@ -88,6 +106,7 @@ extension VCMain: protocolVCMain {
     countingIncomesAndExpensive()
     vcGraphDelegate?.dataUpdate()
     miniGraph.setNeedsDisplay()
+    configureDataSource()
     applySnapshot()
   }
 

@@ -44,7 +44,7 @@ class VCCategory: UIViewController {
   // MARK: - viewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
-    calculateCategoryArray()
+    _ = calculateCategoryArray()
     alertErrorAddNewCategory.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
   }
 }

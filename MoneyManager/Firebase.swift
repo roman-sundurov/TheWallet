@@ -12,13 +12,13 @@ import FirebaseFirestoreSwift
 extension UserRepository {
 
   func getUserData(inner: @escaping NestedType) async throws {
-    userReference.getDocument { (document, error) in
+    userReference.getDocument { (document, _) in
       if let document = document, document.exists {
         let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
         print("getUserData Document data: \(dataDescription)")
         print("getUserData aaa")
-        let userData = try! document.data(as: User.self)
-        inner(userData)
+        let userData = try? document.data(as: User.self)
+        inner(userData!)
         print("getUserData bbb")
       } else {
         print("getUserData Document does not exist")
@@ -29,8 +29,14 @@ extension UserRepository {
   func addNewUser(name: String, surname: String, email: String) {
     let newCategory = Category(name: "newCategory", icon: "", date: 1666209106, id: UUID())
     let newOperation = Operation(amount: 100, category: newCategory.id, note: "Test note", date: 1666209105, id: UUID())
-    let newUser = User(name: name, surname: surname, email: email, categories: [newCategory.date.description: newCategory], operations: [newOperation.date.description: newOperation])
-    try! documentReference.document(email).setData(from: newUser) { error in
+    let newUser = User(
+      name: name,
+      surname: surname,
+      email: email,
+      categories: [newCategory.date.description: newCategory],
+      operations: [newOperation.date.description: newOperation]
+    )
+    try? documentReference.document(email).setData(from: newUser) { error in
       if let error = error {
         print("addNewUser Error writing document: \(error)")
       } else {
@@ -43,7 +49,7 @@ extension UserRepository {
   func addCategory(name: String, icon: String, date: Double) {
     let newCategory = Category(name: name, icon: icon, date: date, id: UUID())
     UserRepository.shared.user?.categories[newCategory.id.description] = newCategory
-    try! userReference.setData([
+    userReference.setData([
       "categories": [
         newCategory.id.description: [
           "name": newCategory.name,
@@ -63,7 +69,7 @@ extension UserRepository {
 
   func updateDaysForSorting(daysForSorting: Int) {
     UserRepository.shared.user?.daysForSorting = daysForSorting
-    try! userReference.setData([
+    userReference.setData([
       "daysForSorting": daysForSorting
     ], merge: true) { error in
       if let error = error {
@@ -138,7 +144,13 @@ extension UserRepository {
   }
 
   func updateOperations(amount: Double, categoryUUID: UUID, note: String, date: Date, idOfObject: UUID) {
-    let updOperation = Operation(amount: amount, category: categoryUUID, note: note, date: date.timeIntervalSince1970, id: idOfObject)
+    let updOperation = Operation(
+      amount: amount,
+      category: categoryUUID,
+      note: note,
+      date: date.timeIntervalSince1970,
+      id: idOfObject
+    )
     print("idOfObject= \(idOfObject)")
     UserRepository.shared.user?.operations[idOfObject.description] = updOperation
     userReference.updateData([

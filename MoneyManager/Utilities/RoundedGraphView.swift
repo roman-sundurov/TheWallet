@@ -69,7 +69,6 @@ class RoundedGraphView: UIView {
   }
 }
 
-
 extension RoundedGraphView: protocolViewRoundedGraph {
   func setDelegateScreen1RoundedGraph(delegate: protocolVCMain) {
     vcMainDelegate = delegate

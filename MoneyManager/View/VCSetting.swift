@@ -84,7 +84,6 @@ class VCSetting: UIViewController {
       } else {
         newOperation.note = (tableViewCellNoteDelegate?.returnNoteView().text)!
       }
-      print("newOperation.amount= \(newOperation.amount), newOperation.category= \(newOperation.category), newOperation.date= \(newOperation.date), newOperation.note= \(newOperation.note),")
       if vcSettingStatusEditing == true {
         vcMainDelegate?.updateOperations(
           amount: newOperation.amount,
@@ -119,7 +118,6 @@ class VCSetting: UIViewController {
       viewController.vcMainDelegate = vcMainDelegate
     }
   }
-
 
   // MARK: - clicks
   @IBAction func textFieldAmountEditingDidBegin(_ sender: Any) {
@@ -193,7 +191,7 @@ class VCSetting: UIViewController {
 
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    NotificationCenter.default.removeObserver(self)
+    // NotificationCenter.default.removeObserver(self)
   }
 
   override func viewDidLoad() {

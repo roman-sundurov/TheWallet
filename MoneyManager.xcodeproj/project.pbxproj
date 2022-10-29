@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		47082777290C9E500092246E /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 47082776290C9E500092246E /* JGProgressHUD */; };
 		4715215025F3A8E600FE585C /* SettingTableVCDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4715214F25F3A8E600FE585C /* SettingTableVCDate.swift */; };
 		4729DC40263DA3AB00CA8B66 /* VCGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4729DC3F263DA3AB00CA8B66 /* VCGraph.swift */; };
 		472F288725A7319500CE1481 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F288625A7319500CE1481 /* AppDelegate.swift */; };
@@ -117,6 +118,7 @@
 				479990A52901892800ECD407 /* FirebaseFirestore in Frameworks */,
 				477CC22A290ABB1F00EA671D /* AAInfographics in Frameworks */,
 				479990A32901892800ECD407 /* FirebaseAuthCombine-Community in Frameworks */,
+				47082777290C9E500092246E /* JGProgressHUD in Frameworks */,
 				479990A72901892800ECD407 /* FirebaseFirestoreCombine-Community in Frameworks */,
 				479990A12901892800ECD407 /* FirebaseAuth in Frameworks */,
 				479990A92901892800ECD407 /* FirebaseFirestoreSwift in Frameworks */,
@@ -262,6 +264,7 @@
 				479990A62901892800ECD407 /* FirebaseFirestoreCombine-Community */,
 				479990A82901892800ECD407 /* FirebaseFirestoreSwift */,
 				477CC229290ABB1F00EA671D /* AAInfographics */,
+				47082776290C9E500092246E /* JGProgressHUD */,
 			);
 			productName = Skillbox_diploma_step1;
 			productReference = 472F288325A7319500CE1481 /* MoneyManager.app */;
@@ -338,6 +341,7 @@
 				47F5F9D52855D99B0042F2D5 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */,
 				4799909F2901892800ECD407 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				477CC228290ABB1E00EA671D /* XCRemoteSwiftPackageReference "AAChartKit-Swift" */,
+				47082775290C9E500092246E /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
 			);
 			productRefGroup = 472F288425A7319500CE1481 /* Products */;
 			projectDirPath = "";
@@ -771,6 +775,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		47082775290C9E500092246E /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		477CC228290ABB1E00EA671D /* XCRemoteSwiftPackageReference "AAChartKit-Swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AAChartModel/AAChartKit-Swift";
@@ -798,6 +810,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		47082776290C9E500092246E /* JGProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47082775290C9E500092246E /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
+			productName = JGProgressHUD;
+		};
 		477CC229290ABB1F00EA671D /* AAInfographics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 477CC228290ABB1E00EA671D /* XCRemoteSwiftPackageReference "AAChartKit-Swift" */;

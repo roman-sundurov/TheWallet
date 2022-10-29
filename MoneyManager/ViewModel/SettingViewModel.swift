@@ -240,7 +240,6 @@ extension VCSetting: protocolVCSetting {
     datePicker.frame.origin.y = 25
   }
 
-
   // MARK: - DatePicker
   func createDatePicker() {
     datePicker.preferredDatePickerStyle = .wheels

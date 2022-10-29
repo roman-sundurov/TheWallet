@@ -50,7 +50,7 @@ class SettingTableVCDate: UITableViewCell {
       labelSelectDate.text = vcSettingDelegate!.getSettingMenuArray()[indexRow].text
     }
 
-    // textFieldSelectDate.tintColor = UIColor.clear //делает курсор бесцветным, но не убирает его
+    // textFieldSelectDate.tintColor = UIColor.clear // makes the cursor colorless, but does not remove it
     labelDate.text = vcSettingDelegate!.getSettingMenuArray()[indexRow].name
     self.isUserInteractionEnabled = true
 

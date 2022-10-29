@@ -23,13 +23,13 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="27"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All payment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uhc-J8-Rkm">
-                                        <rect key="frame" x="136" y="-0.3333333333333357" width="121" height="27.666666666666668"/>
+                                        <rect key="frame" x="136" y="-0.3333333333333357" width="121" height="27.666666666666664"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1rV-20-Bop">
-                                        <rect key="frame" x="352" y="0.6666666666666643" width="26" height="25.666666666666668"/>
+                                        <rect key="frame" x="352" y="0.6666666666666643" width="26" height="25.666666666666664"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal">
@@ -519,9 +519,9 @@
                         <outlet property="bottomPopInView" destination="7MB-m0-6NI" id="n4q-qN-Zk7"/>
                         <outlet property="buttonDaily" destination="M6c-Oi-MPB" id="Ka0-cd-mQZ"/>
                         <outlet property="buttonMonthly" destination="cnN-uv-yOB" id="C7n-Bv-d96"/>
-                        <outlet property="buttonScreen1NewOperation" destination="Vzc-gn-PN8" id="rkr-1p-oxv"/>
-                        <outlet property="buttonScreen1ShowGraph" destination="JOY-f1-nxB" id="DcA-b0-zmg"/>
-                        <outlet property="buttonScreen1ShowList" destination="JfS-mQ-pnU" id="g0R-8s-TDz"/>
+                        <outlet property="buttonNewOperation" destination="Vzc-gn-PN8" id="rkr-1p-oxv"/>
+                        <outlet property="buttonShowGraph" destination="JOY-f1-nxB" id="DcA-b0-zmg"/>
+                        <outlet property="buttonShowList" destination="JfS-mQ-pnU" id="g0R-8s-TDz"/>
                         <outlet property="buttonWeekly" destination="8SJ-cy-bxx" id="ToP-qQ-eFo"/>
                         <outlet property="buttonYearly" destination="EZM-zD-IXz" id="E8R-Fi-wgz"/>
                         <outlet property="constraintContainerBottomPoint" destination="b36-Hu-7yN" id="K8R-k7-o20"/>

@@ -25,18 +25,18 @@ extension VCCategory: protocolVCCategory {
     var counter = 0
     for cell in cells {
       if counter >= 2 {
-        let specCell = cell as! CategoryTableVCCategory
+        let specCell = cell as? CategoryTableVCCategory
         if cellID == -100 {
-          specCell.closeEditing()
+          specCell?.closeEditing()
         } else {
           if cellID == 0 {
-            specCell.setPermitionToSetCategory(status: true)
+            specCell?.setPermitionToSetCategory(status: true)
           } else {
-            if specCell.returnCategryIdOfCell() != cellID {
-              specCell.closeEditing()
-              specCell.setPermitionToSetCategory(status: true)
+            if specCell?.returnCategryIdOfCell() != cellID {
+              specCell?.closeEditing()
+              specCell?.setPermitionToSetCategory(status: true)
             } else {
-              specCell.setPermitionToSetCategory(status: false)
+              specCell?.setPermitionToSetCategory(status: false)
             }
           }
         }
@@ -147,28 +147,28 @@ extension VCCategory: UITableViewDelegate, UITableViewDataSource {
     print("indexPath.rowScreen2= \(indexPath.row)")
     if indexPath.row == 0 {
       print("1111")
-      let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! CategoryTableVCHeader
-      cell.delegateScreen2Container = self
+      let cell = tableView.dequeueReusableCell(withIdentifier: "header") as? CategoryTableVCHeader
+      cell?.delegateScreen2Container = self
       categoryTableVCHeaderDelegate = cell
-      return cell
+      return cell!
     } else if statusEditContainer == true && indexPath.row == 1 {
       print("2222")
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cellNewCategory") as! CategoryTableVCNewCategory
-      cell.vcCategoryDelegate = self
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cellNewCategory") as? CategoryTableVCNewCategory
+      cell?.vcCategoryDelegate = self
       categoryTableVCHeaderDelegate?.buttonOptionsSetColor(color: UIColor.systemBlue)
       categoryTableVCNewCategoryDelegate = cell
-      return cell
+      return cell!
     } else {
       print("3333")
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cellChangeCategory") as! CategoryTableVCCategory
-      cell.vcCategoryDelegate = self
-      cell.vcSettingDelegate = vcSettingDelegate
-      cell.vcMainDelegate = vcMainDelegate
-      cell.startCell(
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cellChangeCategory") as? CategoryTableVCCategory
+      cell?.vcCategoryDelegate = self
+      cell?.vcSettingDelegate = vcSettingDelegate
+      cell?.vcMainDelegate = vcMainDelegate
+      cell?.startCell(
         category: categoriesArray[statusEditContainer == true ? indexPath.row - 2 : indexPath.row - 1],
         cellID: statusEditContainer == true ? indexPath.row - 2 : indexPath.row - 1
       )
-      return cell
+      return cell!
     }
   }
 
