@@ -9,6 +9,7 @@ The application is a classic money manager. The user can save his money income/e
 - Architecture - MVVM
 - Database - Firebase
 - Package dependencies - SPM
+- Frameworks - SwiftLint
 
 
 ## Main screen
