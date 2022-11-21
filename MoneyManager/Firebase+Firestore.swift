@@ -13,7 +13,7 @@ import FirebaseFirestoreSwift
 extension UserRepository {
 
   func getUserData(inner: @escaping NestedType) async throws {
-    userReference.getDocument { (document, _) in
+    userReference!.getDocument { (document, _) in
       if let document = document, document.exists {
         let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
         print("getUserData Document data: \(dataDescription)")
@@ -50,7 +50,7 @@ extension UserRepository {
   func addCategory(name: String, icon: String, date: Double) {
     let newCategory = Category(name: name, icon: icon, date: date, id: UUID())
     UserRepository.shared.user?.categories[newCategory.id.description] = newCategory
-    userReference.setData([
+    userReference!.setData([
       "categories": [
         newCategory.id.description: [
           "name": newCategory.name,
@@ -70,7 +70,7 @@ extension UserRepository {
 
   func updateDaysForSorting(daysForSorting: Int) {
     UserRepository.shared.user?.daysForSorting = daysForSorting
-    userReference.setData([
+    userReference!.setData([
       "daysForSorting": daysForSorting
     ], merge: true) { error in
       if let error = error {
@@ -83,7 +83,7 @@ extension UserRepository {
 
   func deleteCategory(idOfObject: UUID) {
     UserRepository.shared.user?.categories[idOfObject.description] = nil
-    userReference.updateData([
+    userReference!.updateData([
       "categories.\(idOfObject.description)": FieldValue.delete()
     ]) { error in
       if let error = error {
@@ -96,7 +96,7 @@ extension UserRepository {
 
   func deleteOperation(idOfObject: UUID) {
     UserRepository.shared.user?.operations[idOfObject.description] = nil
-    userReference.updateData([
+    userReference!.updateData([
       "operations.\(idOfObject.description)": FieldValue.delete()
     ]) { error in
       if let error = error {
@@ -109,7 +109,7 @@ extension UserRepository {
   }
 
   func updateCategory(name: String, icon: String, idOfObject: UUID) {
-    userReference.updateData([
+    userReference!.updateData([
       "categories.\(idOfObject).name": name,
       "categories.\(idOfObject).icon": icon
     ]) { error in
@@ -125,7 +125,7 @@ extension UserRepository {
   func addOperations(amount: Double, categoryUUID: UUID, note: String, date: Date) {
     let newOperation = Operation(amount: amount, category: categoryUUID, note: note, date: date.timeIntervalSince1970)
     UserRepository.shared.user?.operations[categoryUUID.description] = newOperation
-    userReference.setData([
+    userReference!.setData([
       "operations": [
         newOperation.id.description: [
           "amount": newOperation.amount,
@@ -154,7 +154,7 @@ extension UserRepository {
     )
     print("idOfObject= \(idOfObject)")
     UserRepository.shared.user?.operations[idOfObject.description] = updOperation
-    userReference.updateData([
+    userReference!.updateData([
       "operations.\(idOfObject.description).amount": amount,
       "operations.\(idOfObject.description).category": categoryUUID.description,
       "operations.\(idOfObject.description).note": note,

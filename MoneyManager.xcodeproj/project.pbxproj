@@ -51,9 +51,12 @@
 		47EBDDF4292AFABF009BF1B6 /* Firebase+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EBDDF3292AFABF009BF1B6 /* Firebase+Auth.swift */; };
 		47EBDDF5292AFABF009BF1B6 /* Firebase+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EBDDF3292AFABF009BF1B6 /* Firebase+Auth.swift */; };
 		47EBDDF6292AFABF009BF1B6 /* Firebase+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EBDDF3292AFABF009BF1B6 /* Firebase+Auth.swift */; };
-		47EBDDF8292B0F43009BF1B6 /* VCLogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EBDDF7292B0F43009BF1B6 /* VCLogIn.swift */; };
-		47EBDDF9292B0F43009BF1B6 /* VCLogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EBDDF7292B0F43009BF1B6 /* VCLogIn.swift */; };
-		47EBDDFA292B0F43009BF1B6 /* VCLogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EBDDF7292B0F43009BF1B6 /* VCLogIn.swift */; };
+		47EBDDF8292B0F43009BF1B6 /* VCSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EBDDF7292B0F43009BF1B6 /* VCSignIn.swift */; };
+		47EBDDF9292B0F43009BF1B6 /* VCSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EBDDF7292B0F43009BF1B6 /* VCSignIn.swift */; };
+		47EBDDFA292B0F43009BF1B6 /* VCSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EBDDF7292B0F43009BF1B6 /* VCSignIn.swift */; };
+		47EBDDFC292C117E009BF1B6 /* VCSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EBDDFB292C117E009BF1B6 /* VCSignUp.swift */; };
+		47EBDDFD292C117E009BF1B6 /* VCSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EBDDFB292C117E009BF1B6 /* VCSignUp.swift */; };
+		47EBDDFE292C117E009BF1B6 /* VCSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EBDDFB292C117E009BF1B6 /* VCSignUp.swift */; };
 		47F1759925BA2D320044BD30 /* VCCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F1759825BA2D320044BD30 /* VCCategory.swift */; };
 		47F5F9D72855D99B0042F2D5 /* SimpleCheckbox in Frameworks */ = {isa = PBXBuildFile; productRef = 47F5F9D62855D99B0042F2D5 /* SimpleCheckbox */; };
 /* End PBXBuildFile section */
@@ -111,7 +114,8 @@
 		47CB73C225B4364700638185 /* SettingTableVCCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableVCCategory.swift; sourceTree = "<group>"; };
 		47E87751290807B100B99C09 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		47EBDDF3292AFABF009BF1B6 /* Firebase+Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase+Auth.swift"; sourceTree = "<group>"; };
-		47EBDDF7292B0F43009BF1B6 /* VCLogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCLogIn.swift; sourceTree = "<group>"; };
+		47EBDDF7292B0F43009BF1B6 /* VCSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCSignIn.swift; sourceTree = "<group>"; };
+		47EBDDFB292C117E009BF1B6 /* VCSignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCSignUp.swift; sourceTree = "<group>"; };
 		47F1759825BA2D320044BD30 /* VCCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCCategory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -221,7 +225,8 @@
 		473549B9281961C800E87139 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				47EBDDF7292B0F43009BF1B6 /* VCLogIn.swift */,
+				47EBDDF7292B0F43009BF1B6 /* VCSignIn.swift */,
+				47EBDDFB292C117E009BF1B6 /* VCSignUp.swift */,
 				472F288A25A7319500CE1481 /* VCMain.swift */,
 				47C4FF3425B38B0F00F97498 /* VCSetting.swift */,
 				47F1759825BA2D320044BD30 /* VCCategory.swift */,
@@ -443,7 +448,8 @@
 				473549BD2819CFD600E87139 /* MainVM+TableExtension.swift in Sources */,
 				47F1759925BA2D320044BD30 /* VCCategory.swift in Sources */,
 				47CB73C325B4364700638185 /* SettingTableVCCategory.swift in Sources */,
-				47EBDDF8292B0F43009BF1B6 /* VCLogIn.swift in Sources */,
+				47EBDDFC292C117E009BF1B6 /* VCSignUp.swift in Sources */,
+				47EBDDF8292B0F43009BF1B6 /* VCSignIn.swift in Sources */,
 				47621F9825B644BF0095A52F /* SettingTableVCNote.swift in Sources */,
 				4750EFE725BC2C5C00167A92 /* CategoryTableVCHeader.swift in Sources */,
 				472F288925A7319500CE1481 /* SceneDelegate.swift in Sources */,
@@ -460,7 +466,8 @@
 				47431E60290B4C8B00818E6E /* Firebase+Firestore.swift in Sources */,
 				472F289E25A7319600CE1481 /* MoneyManagerTests.swift in Sources */,
 				47E87753290807B100B99C09 /* CategoryViewModel.swift in Sources */,
-				47EBDDF9292B0F43009BF1B6 /* VCLogIn.swift in Sources */,
+				47EBDDFD292C117E009BF1B6 /* VCSignUp.swift in Sources */,
+				47EBDDF9292B0F43009BF1B6 /* VCSignIn.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,7 +479,8 @@
 				47431E61290B4C8B00818E6E /* Firebase+Firestore.swift in Sources */,
 				472F28A925A7319600CE1481 /* MoneyManagerUITests.swift in Sources */,
 				47E87754290807B100B99C09 /* CategoryViewModel.swift in Sources */,
-				47EBDDFA292B0F43009BF1B6 /* VCLogIn.swift in Sources */,
+				47EBDDFE292C117E009BF1B6 /* VCSignUp.swift in Sources */,
+				47EBDDFA292B0F43009BF1B6 /* VCSignIn.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

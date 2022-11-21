@@ -59,7 +59,7 @@ class UserRepository {
   var mainDiffableSections: [String] = []
   var mainDiffableSectionsSource: [String: [Operation]] = [:]
   let documentReference = Firestore.firestore().collection("users")
-  var userReference = Firestore.firestore().collection("users").document("roman.sundurov.work@gmail.com")
+  var userReference: DocumentReference?
 
   let auth = Auth.auth()
   var listener: AuthStateDidChangeListenerHandle?
