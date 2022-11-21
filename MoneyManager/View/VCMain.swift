@@ -108,6 +108,9 @@ class VCMain: UIViewController {
   }
 
   // MARK: - clicks
+
+
+
   @IBAction func buttonActionScreen1NewOperation(_ sender: Any) {
     performSegue(withIdentifier: "segueToVCSetting", sender: nil)
   }

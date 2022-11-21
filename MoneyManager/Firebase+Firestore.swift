@@ -9,6 +9,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+
 extension UserRepository {
 
   func getUserData(inner: @escaping NestedType) async throws {

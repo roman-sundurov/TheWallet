@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import FirebaseAuth
 
 enum ErrorTypes: Error {
   case cellError
@@ -59,4 +60,7 @@ class UserRepository {
   var mainDiffableSectionsSource: [String: [Operation]] = [:]
   let documentReference = Firestore.firestore().collection("users")
   var userReference = Firestore.firestore().collection("users").document("roman.sundurov.work@gmail.com")
+
+  let auth = Auth.auth()
+  var listener: AuthStateDidChangeListenerHandle?
 }
