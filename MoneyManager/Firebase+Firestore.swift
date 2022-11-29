@@ -28,14 +28,14 @@ extension UserRepository {
   }
 
   func addNewUser(name: String, surname: String, email: String) {
-    let newCategory = Category(name: "newCategory", icon: "", date: 1666209106, id: UUID())
-    let newOperation = Operation(amount: 100, category: newCategory.id, note: "Test note", date: 1666209105, id: UUID())
+    // let newCategory = Category(name: "newCategory", icon: "", date: 1666209106, id: UUID())
+    // let newOperation = Operation(amount: 100, category: newCategory.id, note: "Test note", date: 1666209105, id: UUID())
     let newUser = User(
       name: name,
       surname: surname,
       email: email,
-      categories: [newCategory.date.description: newCategory],
-      operations: [newOperation.date.description: newOperation]
+      categories: [:],
+      operations: [:]
     )
     try? documentReference.document(email).setData(from: newUser) { error in
       if let error = error {

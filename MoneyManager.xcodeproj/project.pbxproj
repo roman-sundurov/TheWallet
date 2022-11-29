@@ -30,6 +30,9 @@
 		475342D7290C37EC006BE673 /* swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 475342D6290C37EC006BE673 /* swiftlint.yml */; };
 		475342D8290C37EC006BE673 /* swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 475342D6290C37EC006BE673 /* swiftlint.yml */; };
 		475342D9290C37EC006BE673 /* swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 475342D6290C37EC006BE673 /* swiftlint.yml */; };
+		475431D3292CF0B30028D240 /* VCAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475431D2292CF0B30028D240 /* VCAccount.swift */; };
+		475431D4292CF0B40028D240 /* VCAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475431D2292CF0B30028D240 /* VCAccount.swift */; };
+		475431D5292CF0B40028D240 /* VCAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475431D2292CF0B30028D240 /* VCAccount.swift */; };
 		47621F9825B644BF0095A52F /* SettingTableVCNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47621F9725B644BF0095A52F /* SettingTableVCNote.swift */; };
 		4771587C262AB31E00F27D4B /* VCOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4771587B262AB31E00F27D4B /* VCOperation.swift */; };
 		477CC22A290ABB1F00EA671D /* AAInfographics in Frameworks */ = {isa = PBXBuildFile; productRef = 477CC229290ABB1F00EA671D /* AAInfographics */; };
@@ -103,6 +106,7 @@
 		4750EFE625BC2C5C00167A92 /* CategoryTableVCHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableVCHeader.swift; sourceTree = "<group>"; };
 		4750EFEB25BC2C7F00167A92 /* CategoryTableVCCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableVCCategory.swift; sourceTree = "<group>"; };
 		475342D6290C37EC006BE673 /* swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftlint.yml; sourceTree = "<group>"; };
+		475431D2292CF0B30028D240 /* VCAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCAccount.swift; sourceTree = "<group>"; };
 		47621F9725B644BF0095A52F /* SettingTableVCNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableVCNote.swift; sourceTree = "<group>"; };
 		4771587B262AB31E00F27D4B /* VCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCOperation.swift; sourceTree = "<group>"; };
 		47AC1A9425C09AC9006E7817 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Model.swift; path = MoneyManager/Model.swift; sourceTree = SOURCE_ROOT; };
@@ -227,6 +231,7 @@
 			children = (
 				47EBDDF7292B0F43009BF1B6 /* VCSignIn.swift */,
 				47EBDDFB292C117E009BF1B6 /* VCSignUp.swift */,
+				475431D2292CF0B30028D240 /* VCAccount.swift */,
 				472F288A25A7319500CE1481 /* VCMain.swift */,
 				47C4FF3425B38B0F00F97498 /* VCSetting.swift */,
 				47F1759825BA2D320044BD30 /* VCCategory.swift */,
@@ -430,6 +435,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				475431D3292CF0B30028D240 /* VCAccount.swift in Sources */,
 				473549C1281A89E200E87139 /* SettingViewModel.swift in Sources */,
 				47431E5F290B4C8B00818E6E /* Firebase+Firestore.swift in Sources */,
 				473549C3281B2BA500E87139 /* SettingVM+TableExtension.swift in Sources */,
@@ -464,6 +470,7 @@
 			files = (
 				47EBDDF5292AFABF009BF1B6 /* Firebase+Auth.swift in Sources */,
 				47431E60290B4C8B00818E6E /* Firebase+Firestore.swift in Sources */,
+				475431D4292CF0B40028D240 /* VCAccount.swift in Sources */,
 				472F289E25A7319600CE1481 /* MoneyManagerTests.swift in Sources */,
 				47E87753290807B100B99C09 /* CategoryViewModel.swift in Sources */,
 				47EBDDFD292C117E009BF1B6 /* VCSignUp.swift in Sources */,
@@ -477,6 +484,7 @@
 			files = (
 				47EBDDF6292AFABF009BF1B6 /* Firebase+Auth.swift in Sources */,
 				47431E61290B4C8B00818E6E /* Firebase+Firestore.swift in Sources */,
+				475431D5292CF0B40028D240 /* VCAccount.swift in Sources */,
 				472F28A925A7319600CE1481 /* MoneyManagerUITests.swift in Sources */,
 				47E87754290807B100B99C09 /* CategoryViewModel.swift in Sources */,
 				47EBDDFE292C117E009BF1B6 /* VCSignUp.swift in Sources */,

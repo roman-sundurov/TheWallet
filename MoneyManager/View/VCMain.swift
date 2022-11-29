@@ -109,12 +109,16 @@ class VCMain: UIViewController {
 
   // MARK: - clicks
 
+  @IBAction func settingPage(_ sender: Any) {
+    performSegue(withIdentifier: "segueToVCAccount", sender: nil)
+  }
+
+
   @IBAction func buttonActionScreen1NewOperation(_ sender: Any) {
     performSegue(withIdentifier: "segueToVCSetting", sender: nil)
   }
 
-  @IBAction func search(_ sender: Any) {
-  }
+
 
   @IBAction func buttonActionScreen1ShowGraph(_ sender: Any) {
     if isButtonsActive == true {
