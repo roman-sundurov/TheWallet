@@ -12,6 +12,9 @@ import FirebaseFirestoreSwift
 
 class VCSignIn: UIViewController {
 
+  @IBOutlet var logInGroup: UIView!
+  @IBOutlet var topConstraint: NSLayoutConstraint!
+
   @IBOutlet var signInButton: UIButton!
   @IBOutlet var signUpButton: UIButton!
 
@@ -43,9 +46,17 @@ class VCSignIn: UIViewController {
     performSegue(withIdentifier: "segueToVCSignIn", sender: nil)
   }
 
+  func showLogInInformation() {
+    UIView.animate(withDuration: 2, delay: 0) {
+      self.topConstraint.constant = 100
+      self.logInGroup.isHidden = false
+    }
+  }
+
 
   override func viewDidLoad() {
-      super.viewDidLoad()
+    super.viewDidLoad()
+
     let defaults = UserDefaults.standard
     // var email = defaults.object(forKey: "email") as? String
     // let password = defaults.object(forKey: "password") as? String
@@ -53,7 +64,7 @@ class VCSignIn: UIViewController {
     if let email = defaults.object(forKey: "email") as? String, let password = defaults.object(forKey: "password") as? String {
       guard !email.isEmpty || !password.isEmpty else {
         return
-
+        showLogInInformation()
       }
       print("email= \(email), password= \(password)")
       Task {
@@ -72,11 +83,13 @@ class VCSignIn: UIViewController {
           }
         } catch {
           print("LogIn Error = \(error)")
+          showLogInInformation()
         }
       }
 
     } else {
       print("No login data")
+      showLogInInformation()
     }
   }
 
