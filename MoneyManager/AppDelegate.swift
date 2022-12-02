@@ -7,6 +7,8 @@
 
 import UIKit
 import FirebaseCore
+import GoogleSignIn
+import FirebaseAuth
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,4 +24,10 @@ func application(_ application: UIApplication, configurationForConnecting connec
 
   func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
   }
+
+  @available(iOS 9.0, *)
+  func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
+    return GIDSignIn.sharedInstance.handle(url)
+  }
+
 }

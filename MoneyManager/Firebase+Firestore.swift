@@ -14,6 +14,9 @@ extension UserRepository {
 
   func getUserData(inner: @escaping NestedType) async throws {
     userReference!.getDocument { (document, _) in
+      if let document = document, !document.exists {
+        UserRepository.shared.addNewUser(name: "", surname: "", email: UserDefaults.standard.object(forKey: "email") as! String)
+      }
       if let document = document, document.exists {
         let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
         print("getUserData Document data: \(dataDescription)")

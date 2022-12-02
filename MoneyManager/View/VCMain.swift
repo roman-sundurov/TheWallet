@@ -319,8 +319,9 @@ class VCMain: UIViewController {
     super.viewDidLoad()
     print("viewDidLoad")
     Task {
-      hudAppear()
+      // hudAppear()
       try? await userRepository.getUserData { data in
+        self.hudAppear()
         self.userRepository.user = data
         print("NewData= \(String(describing: self.userRepository.user))")
         self.updateScreen()

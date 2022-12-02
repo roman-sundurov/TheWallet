@@ -33,7 +33,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2kJ-x0-4KG">
-                                <rect key="frame" x="60" y="516" width="273" height="166.66666666666663"/>
+                                <rect key="frame" x="60" y="516" width="273" height="321"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="youremail@email.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ccl-1K-FBD">
                                         <rect key="frame" x="0.0" y="0.0" width="273" height="34"/>
@@ -68,13 +68,39 @@
                                             <action selector="logUpButton:" destination="ffQ-Ml-Vgj" eventType="touchUpInside" id="6KK-av-8TE"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kda-UL-3hd">
+                                        <rect key="frame" x="0.0" y="176.66666666666663" width="273" height="30"/>
+                                        <color key="backgroundColor" name="InterfaceColorRed"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Goolge"/>
+                                        <connections>
+                                            <action selector="signInButton:" destination="ffQ-Ml-Vgj" eventType="touchUpInside" id="oP1-RD-sPj"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iCY-N6-t7n" customClass="GIDSignInButton">
+                                        <rect key="frame" x="0.0" y="216.66666666666663" width="273" height="44"/>
+                                        <color key="backgroundColor" red="0.39607843139999999" green="0.36862745099999999" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="Kpb-rL-Iu5"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="googleignInViewButton:" destination="ffQ-Ml-Vgj" eventType="touchUpInside" id="f7M-6m-DTk"/>
+                                        </connections>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="3lH-0W-1as" secondAttribute="trailing" id="9E6-eB-elL"/>
                                     <constraint firstItem="3lH-0W-1as" firstAttribute="top" secondItem="Ccl-1K-FBD" secondAttribute="bottom" constant="10" id="Dd7-xE-ALt"/>
                                     <constraint firstItem="Ccl-1K-FBD" firstAttribute="leading" secondItem="2kJ-x0-4KG" secondAttribute="leading" id="If2-ND-Sby"/>
-                                    <constraint firstAttribute="bottom" secondItem="QSM-l9-i07" secondAttribute="bottom" id="bCx-Gl-VOx"/>
+                                    <constraint firstAttribute="trailing" secondItem="kda-UL-3hd" secondAttribute="trailing" id="Knn-Lx-L56"/>
+                                    <constraint firstItem="kda-UL-3hd" firstAttribute="top" secondItem="QSM-l9-i07" secondAttribute="bottom" constant="10" id="OMp-lp-AkA"/>
+                                    <constraint firstItem="iCY-N6-t7n" firstAttribute="top" secondItem="kda-UL-3hd" secondAttribute="bottom" constant="10" id="Q71-eJ-jqW"/>
+                                    <constraint firstAttribute="trailing" secondItem="iCY-N6-t7n" secondAttribute="trailing" id="ex4-bP-WHB"/>
+                                    <constraint firstAttribute="height" constant="321" id="fy3-1C-Tcg"/>
                                     <constraint firstItem="QSM-l9-i07" firstAttribute="centerX" secondItem="2kJ-x0-4KG" secondAttribute="centerX" id="gAL-zh-icQ"/>
+                                    <constraint firstItem="kda-UL-3hd" firstAttribute="leading" secondItem="2kJ-x0-4KG" secondAttribute="leading" id="iAR-EL-yUR"/>
+                                    <constraint firstItem="iCY-N6-t7n" firstAttribute="leading" secondItem="2kJ-x0-4KG" secondAttribute="leading" id="jqa-88-Xfp"/>
                                     <constraint firstItem="Ccl-1K-FBD" firstAttribute="top" secondItem="2kJ-x0-4KG" secondAttribute="top" id="oYY-kl-eRx"/>
                                     <constraint firstItem="TWp-xv-wQb" firstAttribute="centerX" secondItem="2kJ-x0-4KG" secondAttribute="centerX" id="ov6-W6-WP5"/>
                                     <constraint firstAttribute="trailing" secondItem="Ccl-1K-FBD" secondAttribute="trailing" id="pnu-gI-fHc"/>
@@ -112,7 +138,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wYb-jM-tl9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2002.2900763358778" y="112.67605633802818"/>
+            <point key="canvasLocation" x="-1793.1297709923663" y="112.67605633802818"/>
         </scene>
         <!--Main-->
         <scene sceneID="tne-QT-ifu">
@@ -696,7 +722,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" role="destructive" translatesAutoresizingMaskIntoConstraints="NO" id="e1M-5h-MoX">
-                                <rect key="frame" x="50" y="79" width="293" height="35"/>
+                                <rect key="frame" x="50" y="70" width="293" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Log out" cornerStyle="large"/>
                                 <connections>
@@ -711,7 +737,7 @@
                             <constraint firstItem="zll-9H-J2i" firstAttribute="trailing" secondItem="1wZ-ig-oFm" secondAttribute="trailing" constant="10" id="I3X-yy-gq3"/>
                             <constraint firstItem="zll-9H-J2i" firstAttribute="trailing" secondItem="e1M-5h-MoX" secondAttribute="trailing" constant="50" id="Lrq-l6-bnO"/>
                             <constraint firstItem="e1M-5h-MoX" firstAttribute="leading" secondItem="zll-9H-J2i" secondAttribute="leading" constant="50" id="Zei-NX-cuj"/>
-                            <constraint firstItem="e1M-5h-MoX" firstAttribute="top" secondItem="zll-9H-J2i" secondAttribute="top" constant="20" id="h7m-OH-v3S"/>
+                            <constraint firstItem="e1M-5h-MoX" firstAttribute="top" secondItem="1wZ-ig-oFm" secondAttribute="bottom" constant="20" id="pAf-Mv-dmf"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4KR-oY-Gug"/>
@@ -1527,7 +1553,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jB0-x9-WfP">
-                                <rect key="frame" x="60" y="415.99999999999994" width="273" height="210.33333333333331"/>
+                                <rect key="frame" x="60" y="416.00000000000006" width="273" height="254.66666666666669"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="youremail@email.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lAh-En-vEs">
                                         <rect key="frame" x="0.0" y="88" width="273" height="34"/>
@@ -1560,10 +1586,24 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" textContentType="email"/>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LS8-Vb-QMc">
+                                        <rect key="frame" x="86.666666666666657" y="220.33333333333337" width="100" height="34.333333333333343"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="39U-6e-ram"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Sign In" cornerStyle="large"/>
+                                        <connections>
+                                            <action selector="signInButton:" destination="3on-RV-oi6" eventType="touchUpInside" id="Vfh-JI-q2r"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="EqW-X0-BB7" firstAttribute="top" secondItem="lAh-En-vEs" secondAttribute="bottom" constant="10" id="09L-D4-KxF"/>
+                                    <constraint firstAttribute="bottom" secondItem="LS8-Vb-QMc" secondAttribute="bottom" id="7op-Zc-Pgl"/>
                                     <constraint firstItem="wME-C5-KYo" firstAttribute="top" secondItem="EqW-X0-BB7" secondAttribute="bottom" constant="10" id="9tE-LZ-RU5"/>
+                                    <constraint firstItem="LS8-Vb-QMc" firstAttribute="top" secondItem="wME-C5-KYo" secondAttribute="bottom" constant="10" id="Bzg-LA-f3G"/>
                                     <constraint firstItem="lAh-En-vEs" firstAttribute="top" secondItem="ylX-IM-Zv5" secondAttribute="bottom" constant="10" id="D3D-np-M17"/>
                                     <constraint firstAttribute="trailing" secondItem="Ijf-bR-NEb" secondAttribute="trailing" id="FID-TG-m9f"/>
                                     <constraint firstAttribute="trailing" secondItem="EqW-X0-BB7" secondAttribute="trailing" id="Itq-mD-xRW"/>
@@ -1574,23 +1614,11 @@
                                     <constraint firstItem="Ijf-bR-NEb" firstAttribute="leading" secondItem="jB0-x9-WfP" secondAttribute="leading" id="kii-R6-ean"/>
                                     <constraint firstItem="wME-C5-KYo" firstAttribute="centerX" secondItem="jB0-x9-WfP" secondAttribute="centerX" id="sjE-Vn-4oj"/>
                                     <constraint firstItem="ylX-IM-Zv5" firstAttribute="leading" secondItem="jB0-x9-WfP" secondAttribute="leading" id="vxN-ob-RYn"/>
-                                    <constraint firstAttribute="bottom" secondItem="wME-C5-KYo" secondAttribute="bottom" id="xLh-KQ-yQa"/>
+                                    <constraint firstItem="LS8-Vb-QMc" firstAttribute="centerX" secondItem="jB0-x9-WfP" secondAttribute="centerX" id="w5r-6F-oYM"/>
                                     <constraint firstItem="Ijf-bR-NEb" firstAttribute="top" secondItem="jB0-x9-WfP" secondAttribute="top" id="yWb-3b-Gbg"/>
                                     <constraint firstAttribute="trailing" secondItem="ylX-IM-Zv5" secondAttribute="trailing" id="zF0-Tn-xKj"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LS8-Vb-QMc">
-                                <rect key="frame" x="146.66666666666666" y="646.33333333333337" width="100" height="34.333333333333371"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="39U-6e-ram"/>
-                                </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Sign In" cornerStyle="large"/>
-                                <connections>
-                                    <action selector="signInButton:" destination="3on-RV-oi6" eventType="touchUpInside" id="Vfh-JI-q2r"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Rug-hD-KH0"/>
                         <color key="backgroundColor" red="0.51188951729999999" green="0.75652402640000005" blue="0.77255433799999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1598,9 +1626,7 @@
                             <constraint firstItem="jB0-x9-WfP" firstAttribute="top" secondItem="rXX-cU-H23" secondAttribute="bottom" constant="40" id="5Q2-QE-kXg"/>
                             <constraint firstItem="Rug-hD-KH0" firstAttribute="trailing" secondItem="jB0-x9-WfP" secondAttribute="trailing" constant="60" id="RbF-EH-V6v"/>
                             <constraint firstItem="rXX-cU-H23" firstAttribute="centerX" secondItem="ytN-DA-QF8" secondAttribute="centerX" id="cpu-BS-eBP"/>
-                            <constraint firstItem="LS8-Vb-QMc" firstAttribute="centerX" secondItem="ytN-DA-QF8" secondAttribute="centerX" id="dkK-Ac-hN1"/>
                             <constraint firstItem="u33-b4-ep1" firstAttribute="top" secondItem="Rug-hD-KH0" secondAttribute="top" constant="100" id="gV1-Ia-y5a"/>
-                            <constraint firstItem="LS8-Vb-QMc" firstAttribute="top" secondItem="jB0-x9-WfP" secondAttribute="bottom" constant="20" id="h5T-xq-1fU"/>
                             <constraint firstItem="jB0-x9-WfP" firstAttribute="leading" secondItem="Rug-hD-KH0" secondAttribute="leading" constant="60" id="she-UB-CqB"/>
                             <constraint firstItem="rXX-cU-H23" firstAttribute="top" secondItem="u33-b4-ep1" secondAttribute="bottom" constant="20" id="wlL-y7-BG5"/>
                             <constraint firstItem="u33-b4-ep1" firstAttribute="centerX" secondItem="ytN-DA-QF8" secondAttribute="centerX" id="yBK-7I-xYh"/>

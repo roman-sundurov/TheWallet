@@ -39,6 +39,8 @@
 		479990A12901892800ECD407 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 479990A02901892800ECD407 /* FirebaseAuth */; };
 		479990A52901892800ECD407 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 479990A42901892800ECD407 /* FirebaseFirestore */; };
 		479990A92901892800ECD407 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 479990A82901892800ECD407 /* FirebaseFirestoreSwift */; };
+		479A1B802936DF8C009D5520 /* FirebaseAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = 479A1B7F2936DF8C009D5520 /* FirebaseAuthUI */; };
+		47A94F55293824BE00076666 /* FirebaseGoogleAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = 47A94F54293824BE00076666 /* FirebaseGoogleAuthUI */; };
 		47AC1A9525C09AC9006E7817 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1A9425C09AC9006E7817 /* Model.swift */; };
 		47AC1AB625C0B7CB006E7817 /* MainTableVCOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1AB525C0B7CB006E7817 /* MainTableVCOperation.swift */; };
 		47B3D92928FC922B0022974A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47B3D92828FC922B0022974A /* GoogleService-Info.plist */; };
@@ -129,6 +131,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				47F5F9D72855D99B0042F2D5 /* SimpleCheckbox in Frameworks */,
+				479A1B802936DF8C009D5520 /* FirebaseAuthUI in Frameworks */,
+				47A94F55293824BE00076666 /* FirebaseGoogleAuthUI in Frameworks */,
 				479990A52901892800ECD407 /* FirebaseFirestore in Frameworks */,
 				477CC22A290ABB1F00EA671D /* AAInfographics in Frameworks */,
 				47082777290C9E500092246E /* JGProgressHUD in Frameworks */,
@@ -287,6 +291,8 @@
 				479990A82901892800ECD407 /* FirebaseFirestoreSwift */,
 				477CC229290ABB1F00EA671D /* AAInfographics */,
 				47082776290C9E500092246E /* JGProgressHUD */,
+				479A1B7F2936DF8C009D5520 /* FirebaseAuthUI */,
+				47A94F54293824BE00076666 /* FirebaseGoogleAuthUI */,
 			);
 			productName = Skillbox_diploma_step1;
 			productReference = 472F288325A7319500CE1481 /* MoneyManager.app */;
@@ -364,6 +370,7 @@
 				4799909F2901892800ECD407 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				477CC228290ABB1E00EA671D /* XCRemoteSwiftPackageReference "AAChartKit-Swift" */,
 				47082775290C9E500092246E /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
+				479A1B7E2936DF8C009D5520 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */,
 			);
 			productRefGroup = 472F288425A7319500CE1481 /* Products */;
 			projectDirPath = "";
@@ -839,6 +846,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		479A1B7E2936DF8C009D5520 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/FirebaseUI-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.0.0;
+			};
+		};
 		47F5F9D52855D99B0042F2D5 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/BeauNouvelle/SimpleCheckbox";
@@ -874,6 +889,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4799909F2901892800ECD407 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
+		};
+		479A1B7F2936DF8C009D5520 /* FirebaseAuthUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 479A1B7E2936DF8C009D5520 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */;
+			productName = FirebaseAuthUI;
+		};
+		47A94F54293824BE00076666 /* FirebaseGoogleAuthUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 479A1B7E2936DF8C009D5520 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */;
+			productName = FirebaseGoogleAuthUI;
 		};
 		47F5F9D62855D99B0042F2D5 /* SimpleCheckbox */ = {
 			isa = XCSwiftPackageProductDependency;
