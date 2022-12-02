@@ -68,21 +68,12 @@
                                             <action selector="logUpButton:" destination="ffQ-Ml-Vgj" eventType="touchUpInside" id="6KK-av-8TE"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kda-UL-3hd">
-                                        <rect key="frame" x="0.0" y="176.66666666666663" width="273" height="30"/>
-                                        <color key="backgroundColor" name="InterfaceColorRed"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Goolge"/>
-                                        <connections>
-                                            <action selector="signInButton:" destination="ffQ-Ml-Vgj" eventType="touchUpInside" id="oP1-RD-sPj"/>
-                                        </connections>
-                                    </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iCY-N6-t7n" customClass="GIDSignInButton">
-                                        <rect key="frame" x="0.0" y="216.66666666666663" width="273" height="44"/>
+                                        <rect key="frame" x="0.0" y="176.66666666666663" width="273" height="30"/>
                                         <color key="backgroundColor" red="0.39607843139999999" green="0.36862745099999999" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="Kpb-rL-Iu5"/>
+                                            <constraint firstAttribute="height" constant="30" id="Kpb-rL-Iu5"/>
                                         </constraints>
                                         <connections>
                                             <action selector="googleignInViewButton:" destination="ffQ-Ml-Vgj" eventType="touchUpInside" id="f7M-6m-DTk"/>
@@ -91,15 +82,12 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="3lH-0W-1as" secondAttribute="trailing" id="9E6-eB-elL"/>
+                                    <constraint firstItem="iCY-N6-t7n" firstAttribute="top" secondItem="QSM-l9-i07" secondAttribute="bottom" constant="10" id="BOA-iL-mGQ"/>
                                     <constraint firstItem="3lH-0W-1as" firstAttribute="top" secondItem="Ccl-1K-FBD" secondAttribute="bottom" constant="10" id="Dd7-xE-ALt"/>
                                     <constraint firstItem="Ccl-1K-FBD" firstAttribute="leading" secondItem="2kJ-x0-4KG" secondAttribute="leading" id="If2-ND-Sby"/>
-                                    <constraint firstAttribute="trailing" secondItem="kda-UL-3hd" secondAttribute="trailing" id="Knn-Lx-L56"/>
-                                    <constraint firstItem="kda-UL-3hd" firstAttribute="top" secondItem="QSM-l9-i07" secondAttribute="bottom" constant="10" id="OMp-lp-AkA"/>
-                                    <constraint firstItem="iCY-N6-t7n" firstAttribute="top" secondItem="kda-UL-3hd" secondAttribute="bottom" constant="10" id="Q71-eJ-jqW"/>
                                     <constraint firstAttribute="trailing" secondItem="iCY-N6-t7n" secondAttribute="trailing" id="ex4-bP-WHB"/>
                                     <constraint firstAttribute="height" constant="321" id="fy3-1C-Tcg"/>
                                     <constraint firstItem="QSM-l9-i07" firstAttribute="centerX" secondItem="2kJ-x0-4KG" secondAttribute="centerX" id="gAL-zh-icQ"/>
-                                    <constraint firstItem="kda-UL-3hd" firstAttribute="leading" secondItem="2kJ-x0-4KG" secondAttribute="leading" id="iAR-EL-yUR"/>
                                     <constraint firstItem="iCY-N6-t7n" firstAttribute="leading" secondItem="2kJ-x0-4KG" secondAttribute="leading" id="jqa-88-Xfp"/>
                                     <constraint firstItem="Ccl-1K-FBD" firstAttribute="top" secondItem="2kJ-x0-4KG" secondAttribute="top" id="oYY-kl-eRx"/>
                                     <constraint firstItem="TWp-xv-wQb" firstAttribute="centerX" secondItem="2kJ-x0-4KG" secondAttribute="centerX" id="ov6-W6-WP5"/>
@@ -1645,12 +1633,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xOk-wf-Ifw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-970" y="-349"/>
+            <point key="canvasLocation" x="-844" y="-366"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="ABz-lk-sfP"/>
-        <segue reference="KLB-fZ-o4m"/>
+        <segue reference="pwL-YE-yKT"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="App Icon_Final_1024" width="1024" height="1024"/>

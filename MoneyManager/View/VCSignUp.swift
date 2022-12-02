@@ -37,7 +37,8 @@ class VCSignUp: UIViewController {
   }
 
   @IBAction func signInButton(_ sender: Any) {
-    performSegue(withIdentifier: "segueToVCSignIn", sender: nil)
+    // performSegue(withIdentifier: "segueToVCSignIn", sender: nil)
+    dismiss(animated: true)
   }
 
   override func viewDidLoad() {
