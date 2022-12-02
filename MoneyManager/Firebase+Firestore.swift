@@ -13,7 +13,7 @@ import FirebaseFirestoreSwift
 extension UserRepository {
 
   func getUserData(inner: @escaping NestedType) async throws {
-    userReference!.getDocument { (document, _) in
+    UserRepository.shared.userReference!.getDocument { (document, _) in
       if let document = document, !document.exists {
         UserRepository.shared.addNewUser(name: "", surname: "", email: UserDefaults.standard.object(forKey: "email") as! String)
       }
