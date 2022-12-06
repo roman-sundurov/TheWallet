@@ -107,14 +107,14 @@
 		475342D6290C37EC006BE673 /* swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftlint.yml; sourceTree = "<group>"; };
 		475431D2292CF0B30028D240 /* VCAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCAccount.swift; sourceTree = "<group>"; };
 		47621F9725B644BF0095A52F /* SettingTableVCNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableVCNote.swift; sourceTree = "<group>"; };
+		476DD230293F9B860018ED45 /* MManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = MManager.app; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/MManager/build/Debug-iphoneos/MManager.app"; sourceTree = "<absolute>"; };
+		476DD231293F9B860018ED45 /* MManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = MManagerTests.xctest; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/MManager/build/Debug-iphoneos/MManagerTests.xctest"; sourceTree = "<absolute>"; };
+		476DD232293F9B860018ED45 /* MManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = MManagerUITests.xctest; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/MManager/build/Debug-iphoneos/MManagerUITests.xctest"; sourceTree = "<absolute>"; };
 		4771587B262AB31E00F27D4B /* VCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCOperation.swift; sourceTree = "<group>"; };
 		47AC1A9425C09AC9006E7817 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Model.swift; path = MManager/Model.swift; sourceTree = SOURCE_ROOT; };
 		47AC1AB525C0B7CB006E7817 /* MainTableVCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableVCOperation.swift; sourceTree = "<group>"; };
 		47B80F772667CA9500032678 /* RoundedGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedGraphView.swift; sourceTree = "<group>"; };
 		47BEBB42262F91D1006FF254 /* CategoryTableVCNewCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableVCNewCategory.swift; sourceTree = "<group>"; };
-		47C09C03293F6EFC000B149E /* MManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = MManager.app; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/MManager/build/Debug-iphoneos/MManager.app"; sourceTree = "<absolute>"; };
-		47C09C04293F6F25000B149E /* MManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = MManagerTests.xctest; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/MManager/build/Debug-iphoneos/MManagerTests.xctest"; sourceTree = "<absolute>"; };
-		47C09C05293F6F37000B149E /* MManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = MManagerUITests.xctest; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/MManager/build/Debug-iphoneos/MManagerUITests.xctest"; sourceTree = "<absolute>"; };
 		47C09C06293F9442000B149E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		47C4FF3425B38B0F00F97498 /* VCSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCSetting.swift; sourceTree = "<group>"; };
 		47CB73C225B4364700638185 /* SettingTableVCCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableVCCategory.swift; sourceTree = "<group>"; };
@@ -276,7 +276,7 @@
 				47A94F54293824BE00076666 /* FirebaseGoogleAuthUI */,
 			);
 			productName = Skillbox_diploma_step1;
-			productReference = 47C09C03293F6EFC000B149E /* MManager.app */;
+			productReference = 476DD230293F9B860018ED45 /* MManager.app */;
 			productType = "com.apple.product-type.application";
 		};
 		472F289825A7319600CE1481 /* MManagerTests */ = {
@@ -294,7 +294,7 @@
 			);
 			name = MManagerTests;
 			productName = Skillbox_diploma_step1Tests;
-			productReference = 47C09C04293F6F25000B149E /* MManagerTests.xctest */;
+			productReference = 476DD231293F9B860018ED45 /* MManagerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		472F28A325A7319600CE1481 /* MManagerUITests */ = {
@@ -312,7 +312,7 @@
 			);
 			name = MManagerUITests;
 			productName = Skillbox_diploma_step1UITests;
-			productReference = 47C09C05293F6F37000B149E /* MManagerUITests.xctest */;
+			productReference = 476DD232293F9B860018ED45 /* MManagerUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
