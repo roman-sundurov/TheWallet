@@ -659,14 +659,14 @@
 				DEVELOPMENT_ASSET_PATHS = "MoneyManager/GoogleService-Info.plist";
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
 				INFOPLIST_FILE = MoneyManager/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Money Manager";
+				INFOPLIST_KEY_CFBundleDisplayName = MManager;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "roman.sundurov.Money-manager";
+				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.mmanager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -682,14 +682,14 @@
 				DEVELOPMENT_ASSET_PATHS = "MoneyManager/GoogleService-Info.plist";
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
 				INFOPLIST_FILE = MoneyManager/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Money Manager";
+				INFOPLIST_KEY_CFBundleDisplayName = MManager;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "roman.sundurov.Money-manager";
+				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.mmanager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
