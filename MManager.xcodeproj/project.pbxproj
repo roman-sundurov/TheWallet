@@ -16,8 +16,8 @@
 		472F288E25A7319500CE1481 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472F288C25A7319500CE1481 /* Main.storyboard */; };
 		472F289025A7319500CE1481 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 472F288F25A7319500CE1481 /* Assets.xcassets */; };
 		472F289325A7319500CE1481 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472F289125A7319500CE1481 /* LaunchScreen.storyboard */; };
-		472F289E25A7319600CE1481 /* MoneyManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F289D25A7319600CE1481 /* MoneyManagerTests.swift */; };
-		472F28A925A7319600CE1481 /* MoneyManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F28A825A7319600CE1481 /* MoneyManagerUITests.swift */; };
+		472F289E25A7319600CE1481 /* MManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F289D25A7319600CE1481 /* MManagerTests.swift */; };
+		472F28A925A7319600CE1481 /* MManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F28A825A7319600CE1481 /* MManagerUITests.swift */; };
 		473549BB2819636200E87139 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549BA2819636200E87139 /* MainViewModel.swift */; };
 		473549BD2819CFD600E87139 /* MainVM+TableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549BC2819CFD600E87139 /* MainVM+TableExtension.swift */; };
 		473549C1281A89E200E87139 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549C0281A89E200E87139 /* SettingViewModel.swift */; };
@@ -43,11 +43,11 @@
 		47A94F55293824BE00076666 /* FirebaseGoogleAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = 47A94F54293824BE00076666 /* FirebaseGoogleAuthUI */; };
 		47AC1A9525C09AC9006E7817 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1A9425C09AC9006E7817 /* Model.swift */; };
 		47AC1AB625C0B7CB006E7817 /* MainTableVCOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1AB525C0B7CB006E7817 /* MainTableVCOperation.swift */; };
-		47B3D92928FC922B0022974A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47B3D92828FC922B0022974A /* GoogleService-Info.plist */; };
-		47B3D92A28FC922B0022974A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47B3D92828FC922B0022974A /* GoogleService-Info.plist */; };
-		47B3D92B28FC922B0022974A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47B3D92828FC922B0022974A /* GoogleService-Info.plist */; };
 		47B80F782667CA9500032678 /* RoundedGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B80F772667CA9500032678 /* RoundedGraphView.swift */; };
 		47BEBB43262F91D1006FF254 /* CategoryTableVCNewCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BEBB42262F91D1006FF254 /* CategoryTableVCNewCategory.swift */; };
+		47C09C07293F9443000B149E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47C09C06293F9442000B149E /* GoogleService-Info.plist */; };
+		47C09C08293F9443000B149E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47C09C06293F9442000B149E /* GoogleService-Info.plist */; };
+		47C09C09293F9443000B149E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47C09C06293F9442000B149E /* GoogleService-Info.plist */; };
 		47C4FF3525B38B0F00F97498 /* VCSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4FF3425B38B0F00F97498 /* VCSetting.swift */; };
 		47CB73C325B4364700638185 /* SettingTableVCCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB73C225B4364700638185 /* SettingTableVCCategory.swift */; };
 		47E87752290807B100B99C09 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E87751290807B100B99C09 /* CategoryViewModel.swift */; };
@@ -86,7 +86,6 @@
 /* Begin PBXFileReference section */
 		4715214F25F3A8E600FE585C /* SettingTableVCDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableVCDate.swift; sourceTree = "<group>"; };
 		4729DC3F263DA3AB00CA8B66 /* VCGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCGraph.swift; sourceTree = "<group>"; };
-		472F288325A7319500CE1481 /* MoneyManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		472F288625A7319500CE1481 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		472F288825A7319500CE1481 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		472F288A25A7319500CE1481 /* VCMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCMain.swift; sourceTree = "<group>"; };
@@ -94,11 +93,9 @@
 		472F288F25A7319500CE1481 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		472F289225A7319500CE1481 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		472F289425A7319500CE1481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		472F289925A7319600CE1481 /* MoneyManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoneyManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		472F289D25A7319600CE1481 /* MoneyManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyManagerTests.swift; sourceTree = "<group>"; };
+		472F289D25A7319600CE1481 /* MManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MManagerTests.swift; sourceTree = "<group>"; };
 		472F289F25A7319600CE1481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		472F28A425A7319600CE1481 /* MoneyManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoneyManagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		472F28A825A7319600CE1481 /* MoneyManagerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyManagerUITests.swift; sourceTree = "<group>"; };
+		472F28A825A7319600CE1481 /* MManagerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MManagerUITests.swift; sourceTree = "<group>"; };
 		472F28AA25A7319600CE1481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		473549BA2819636200E87139 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		473549BC2819CFD600E87139 /* MainVM+TableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVM+TableExtension.swift"; sourceTree = "<group>"; };
@@ -111,11 +108,14 @@
 		475431D2292CF0B30028D240 /* VCAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCAccount.swift; sourceTree = "<group>"; };
 		47621F9725B644BF0095A52F /* SettingTableVCNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableVCNote.swift; sourceTree = "<group>"; };
 		4771587B262AB31E00F27D4B /* VCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCOperation.swift; sourceTree = "<group>"; };
-		47AC1A9425C09AC9006E7817 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Model.swift; path = MoneyManager/Model.swift; sourceTree = SOURCE_ROOT; };
+		47AC1A9425C09AC9006E7817 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Model.swift; path = MManager/Model.swift; sourceTree = SOURCE_ROOT; };
 		47AC1AB525C0B7CB006E7817 /* MainTableVCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableVCOperation.swift; sourceTree = "<group>"; };
-		47B3D92828FC922B0022974A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		47B80F772667CA9500032678 /* RoundedGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedGraphView.swift; sourceTree = "<group>"; };
 		47BEBB42262F91D1006FF254 /* CategoryTableVCNewCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableVCNewCategory.swift; sourceTree = "<group>"; };
+		47C09C03293F6EFC000B149E /* MManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = MManager.app; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/MManager/build/Debug-iphoneos/MManager.app"; sourceTree = "<absolute>"; };
+		47C09C04293F6F25000B149E /* MManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = MManagerTests.xctest; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/MManager/build/Debug-iphoneos/MManagerTests.xctest"; sourceTree = "<absolute>"; };
+		47C09C05293F6F37000B149E /* MManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = MManagerUITests.xctest; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/MManager/build/Debug-iphoneos/MManagerUITests.xctest"; sourceTree = "<absolute>"; };
+		47C09C06293F9442000B149E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		47C4FF3425B38B0F00F97498 /* VCSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCSetting.swift; sourceTree = "<group>"; };
 		47CB73C225B4364700638185 /* SettingTableVCCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableVCCategory.swift; sourceTree = "<group>"; };
 		47E87751290807B100B99C09 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
@@ -162,31 +162,20 @@
 			isa = PBXGroup;
 			children = (
 				475342D6290C37EC006BE673 /* swiftlint.yml */,
-				472F288525A7319500CE1481 /* MoneyManager */,
-				472F289C25A7319600CE1481 /* MoneyManagerTests */,
-				472F28A725A7319600CE1481 /* MoneyManagerUITests */,
-				472F288425A7319500CE1481 /* Products */,
-				47EBDDF2292AD29A009BF1B6 /* Frameworks */,
+				472F288525A7319500CE1481 /* MManager */,
+				472F289C25A7319600CE1481 /* MManagerTests */,
+				472F28A725A7319600CE1481 /* MManagerUITests */,
 			);
 			sourceTree = "<group>";
 		};
-		472F288425A7319500CE1481 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				472F288325A7319500CE1481 /* MoneyManager.app */,
-				472F289925A7319600CE1481 /* MoneyManagerTests.xctest */,
-				472F28A425A7319600CE1481 /* MoneyManagerUITests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		472F288525A7319500CE1481 /* MoneyManager */ = {
+		472F288525A7319500CE1481 /* MManager */ = {
 			isa = PBXGroup;
 			children = (
 				472F288625A7319500CE1481 /* AppDelegate.swift */,
 				472F288825A7319500CE1481 /* SceneDelegate.swift */,
 				47AC1A9425C09AC9006E7817 /* Model.swift */,
 				47431E5E290B4C8B00818E6E /* Firebase+Firestore.swift */,
+				47EBDDF3292AFABF009BF1B6 /* Firebase+Auth.swift */,
 				473549B9281961C800E87139 /* View */,
 				473549B8281961A900E87139 /* ViewModel */,
 				47E9D49328FEAD3C00ACE97F /* Utilities */,
@@ -194,28 +183,27 @@
 				472F288F25A7319500CE1481 /* Assets.xcassets */,
 				472F289125A7319500CE1481 /* LaunchScreen.storyboard */,
 				472F289425A7319500CE1481 /* Info.plist */,
-				47B3D92828FC922B0022974A /* GoogleService-Info.plist */,
-				47EBDDF3292AFABF009BF1B6 /* Firebase+Auth.swift */,
+				47C09C06293F9442000B149E /* GoogleService-Info.plist */,
 			);
-			path = MoneyManager;
+			path = MManager;
 			sourceTree = "<group>";
 		};
-		472F289C25A7319600CE1481 /* MoneyManagerTests */ = {
+		472F289C25A7319600CE1481 /* MManagerTests */ = {
 			isa = PBXGroup;
 			children = (
-				472F289D25A7319600CE1481 /* MoneyManagerTests.swift */,
+				472F289D25A7319600CE1481 /* MManagerTests.swift */,
 				472F289F25A7319600CE1481 /* Info.plist */,
 			);
-			path = MoneyManagerTests;
+			path = MManagerTests;
 			sourceTree = "<group>";
 		};
-		472F28A725A7319600CE1481 /* MoneyManagerUITests */ = {
+		472F28A725A7319600CE1481 /* MManagerUITests */ = {
 			isa = PBXGroup;
 			children = (
-				472F28A825A7319600CE1481 /* MoneyManagerUITests.swift */,
+				472F28A825A7319600CE1481 /* MManagerUITests.swift */,
 				472F28AA25A7319600CE1481 /* Info.plist */,
 			);
-			path = MoneyManagerUITests;
+			path = MManagerUITests;
 			sourceTree = "<group>";
 		};
 		473549B8281961A900E87139 /* ViewModel */ = {
@@ -260,19 +248,12 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		47EBDDF2292AD29A009BF1B6 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		472F288225A7319500CE1481 /* MoneyManager */ = {
+		472F288225A7319500CE1481 /* MManager */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 472F28AD25A7319600CE1481 /* Build configuration list for PBXNativeTarget "MoneyManager" */;
+			buildConfigurationList = 472F28AD25A7319600CE1481 /* Build configuration list for PBXNativeTarget "MManager" */;
 			buildPhases = (
 				475342DA290C3864006BE673 /* SwiftLint */,
 				472F287F25A7319500CE1481 /* Sources */,
@@ -283,7 +264,7 @@
 			);
 			dependencies = (
 			);
-			name = MoneyManager;
+			name = MManager;
 			packageProductDependencies = (
 				47F5F9D62855D99B0042F2D5 /* SimpleCheckbox */,
 				479990A02901892800ECD407 /* FirebaseAuth */,
@@ -295,12 +276,12 @@
 				47A94F54293824BE00076666 /* FirebaseGoogleAuthUI */,
 			);
 			productName = Skillbox_diploma_step1;
-			productReference = 472F288325A7319500CE1481 /* MoneyManager.app */;
+			productReference = 47C09C03293F6EFC000B149E /* MManager.app */;
 			productType = "com.apple.product-type.application";
 		};
-		472F289825A7319600CE1481 /* MoneyManagerTests */ = {
+		472F289825A7319600CE1481 /* MManagerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 472F28B025A7319600CE1481 /* Build configuration list for PBXNativeTarget "MoneyManagerTests" */;
+			buildConfigurationList = 472F28B025A7319600CE1481 /* Build configuration list for PBXNativeTarget "MManagerTests" */;
 			buildPhases = (
 				472F289525A7319600CE1481 /* Sources */,
 				472F289625A7319600CE1481 /* Frameworks */,
@@ -311,14 +292,14 @@
 			dependencies = (
 				472F289B25A7319600CE1481 /* PBXTargetDependency */,
 			);
-			name = MoneyManagerTests;
+			name = MManagerTests;
 			productName = Skillbox_diploma_step1Tests;
-			productReference = 472F289925A7319600CE1481 /* MoneyManagerTests.xctest */;
+			productReference = 47C09C04293F6F25000B149E /* MManagerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		472F28A325A7319600CE1481 /* MoneyManagerUITests */ = {
+		472F28A325A7319600CE1481 /* MManagerUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 472F28B325A7319600CE1481 /* Build configuration list for PBXNativeTarget "MoneyManagerUITests" */;
+			buildConfigurationList = 472F28B325A7319600CE1481 /* Build configuration list for PBXNativeTarget "MManagerUITests" */;
 			buildPhases = (
 				472F28A025A7319600CE1481 /* Sources */,
 				472F28A125A7319600CE1481 /* Frameworks */,
@@ -329,9 +310,9 @@
 			dependencies = (
 				472F28A625A7319600CE1481 /* PBXTargetDependency */,
 			);
-			name = MoneyManagerUITests;
+			name = MManagerUITests;
 			productName = Skillbox_diploma_step1UITests;
-			productReference = 472F28A425A7319600CE1481 /* MoneyManagerUITests.xctest */;
+			productReference = 47C09C05293F6F37000B149E /* MManagerUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -356,7 +337,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 472F287E25A7319500CE1481 /* Build configuration list for PBXProject "MoneyManager" */;
+			buildConfigurationList = 472F287E25A7319500CE1481 /* Build configuration list for PBXProject "MManager" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -372,13 +353,13 @@
 				47082775290C9E500092246E /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
 				479A1B7E2936DF8C009D5520 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */,
 			);
-			productRefGroup = 472F288425A7319500CE1481 /* Products */;
+			productRefGroup = 472F287A25A7319500CE1481;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				472F288225A7319500CE1481 /* MoneyManager */,
-				472F289825A7319600CE1481 /* MoneyManagerTests */,
-				472F28A325A7319600CE1481 /* MoneyManagerUITests */,
+				472F288225A7319500CE1481 /* MManager */,
+				472F289825A7319600CE1481 /* MManagerTests */,
+				472F28A325A7319600CE1481 /* MManagerUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -390,8 +371,8 @@
 			files = (
 				472F289325A7319500CE1481 /* LaunchScreen.storyboard in Resources */,
 				475342D7290C37EC006BE673 /* swiftlint.yml in Resources */,
+				47C09C07293F9443000B149E /* GoogleService-Info.plist in Resources */,
 				472F289025A7319500CE1481 /* Assets.xcassets in Resources */,
-				47B3D92928FC922B0022974A /* GoogleService-Info.plist in Resources */,
 				472F288E25A7319500CE1481 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -400,7 +381,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47B3D92A28FC922B0022974A /* GoogleService-Info.plist in Resources */,
+				47C09C08293F9443000B149E /* GoogleService-Info.plist in Resources */,
 				475342D8290C37EC006BE673 /* swiftlint.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,7 +390,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47B3D92B28FC922B0022974A /* GoogleService-Info.plist in Resources */,
+				47C09C09293F9443000B149E /* GoogleService-Info.plist in Resources */,
 				475342D9290C37EC006BE673 /* swiftlint.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,7 +459,7 @@
 				47EBDDF5292AFABF009BF1B6 /* Firebase+Auth.swift in Sources */,
 				47431E60290B4C8B00818E6E /* Firebase+Firestore.swift in Sources */,
 				475431D4292CF0B40028D240 /* VCAccount.swift in Sources */,
-				472F289E25A7319600CE1481 /* MoneyManagerTests.swift in Sources */,
+				472F289E25A7319600CE1481 /* MManagerTests.swift in Sources */,
 				47E87753290807B100B99C09 /* CategoryViewModel.swift in Sources */,
 				47EBDDFD292C117E009BF1B6 /* VCSignUp.swift in Sources */,
 				47EBDDF9292B0F43009BF1B6 /* VCSignIn.swift in Sources */,
@@ -492,7 +473,7 @@
 				47EBDDF6292AFABF009BF1B6 /* Firebase+Auth.swift in Sources */,
 				47431E61290B4C8B00818E6E /* Firebase+Firestore.swift in Sources */,
 				475431D5292CF0B40028D240 /* VCAccount.swift in Sources */,
-				472F28A925A7319600CE1481 /* MoneyManagerUITests.swift in Sources */,
+				472F28A925A7319600CE1481 /* MManagerUITests.swift in Sources */,
 				47E87754290807B100B99C09 /* CategoryViewModel.swift in Sources */,
 				47EBDDFE292C117E009BF1B6 /* VCSignUp.swift in Sources */,
 				47EBDDFA292B0F43009BF1B6 /* VCSignIn.swift in Sources */,
@@ -504,12 +485,12 @@
 /* Begin PBXTargetDependency section */
 		472F289B25A7319600CE1481 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 472F288225A7319500CE1481 /* MoneyManager */;
+			target = 472F288225A7319500CE1481 /* MManager */;
 			targetProxy = 472F289A25A7319600CE1481 /* PBXContainerItemProxy */;
 		};
 		472F28A625A7319600CE1481 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 472F288225A7319500CE1481 /* MoneyManager */;
+			target = 472F288225A7319500CE1481 /* MManager */;
 			targetProxy = 472F28A525A7319600CE1481 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -656,9 +637,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "MoneyManager/GoogleService-Info.plist";
+				DEVELOPMENT_ASSET_PATHS = "MManager/GoogleService-Info.plist";
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = MoneyManager/Info.plist;
+				INFOPLIST_FILE = MManager/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MManager;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -679,9 +660,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "MoneyManager/GoogleService-Info.plist";
+				DEVELOPMENT_ASSET_PATHS = "MManager/GoogleService-Info.plist";
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = MoneyManager/Info.plist;
+				INFOPLIST_FILE = MManager/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MManager;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -703,18 +684,18 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = MoneyManagerTests/Info.plist;
+				INFOPLIST_FILE = MManagerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.work.MoneyManagerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.work.MManagerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MoneyManager.app/MoneyManager";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MManager.app/MManager";
 			};
 			name = Debug;
 		};
@@ -725,18 +706,18 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = MoneyManagerTests/Info.plist;
+				INFOPLIST_FILE = MManagerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.work.MoneyManagerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.work.MManagerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MoneyManager.app/MoneyManager";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MManager.app/MManager";
 			};
 			name = Release;
 		};
@@ -746,17 +727,17 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = MoneyManagerUITests/Info.plist;
+				INFOPLIST_FILE = MManagerUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.work.MoneyManagerUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.work.MManagerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = MoneyManager;
+				TEST_TARGET_NAME = MManager;
 			};
 			name = Debug;
 		};
@@ -766,24 +747,24 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = MoneyManagerUITests/Info.plist;
+				INFOPLIST_FILE = MManagerUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.work.MoneyManagerUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.work.MManagerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = MoneyManager;
+				TEST_TARGET_NAME = MManager;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		472F287E25A7319500CE1481 /* Build configuration list for PBXProject "MoneyManager" */ = {
+		472F287E25A7319500CE1481 /* Build configuration list for PBXProject "MManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				472F28AB25A7319600CE1481 /* Debug */,
@@ -792,7 +773,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		472F28AD25A7319600CE1481 /* Build configuration list for PBXNativeTarget "MoneyManager" */ = {
+		472F28AD25A7319600CE1481 /* Build configuration list for PBXNativeTarget "MManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				472F28AE25A7319600CE1481 /* Debug */,
@@ -801,7 +782,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		472F28B025A7319600CE1481 /* Build configuration list for PBXNativeTarget "MoneyManagerTests" */ = {
+		472F28B025A7319600CE1481 /* Build configuration list for PBXNativeTarget "MManagerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				472F28B125A7319600CE1481 /* Debug */,
@@ -810,7 +791,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		472F28B325A7319600CE1481 /* Build configuration list for PBXNativeTarget "MoneyManagerUITests" */ = {
+		472F28B325A7319600CE1481 /* Build configuration list for PBXNativeTarget "MManagerUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				472F28B425A7319600CE1481 /* Debug */,

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "472F288225A7319500CE1481"
-               BuildableName = "MoneyManager.app"
-               BlueprintName = "MoneyManager"
-               ReferencedContainer = "container:MoneyManager.xcodeproj">
+               BuildableName = "MManager.app"
+               BlueprintName = "MManager"
+               ReferencedContainer = "container:MManager.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "472F289825A7319600CE1481"
-               BuildableName = "MoneyManagerTests.xctest"
-               BlueprintName = "MoneyManagerTests"
-               ReferencedContainer = "container:MoneyManager.xcodeproj">
+               BuildableName = "MManagerTests.xctest"
+               BlueprintName = "MManagerTests"
+               ReferencedContainer = "container:MManager.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "472F28A325A7319600CE1481"
-               BuildableName = "MoneyManagerUITests.xctest"
-               BlueprintName = "MoneyManagerUITests"
-               ReferencedContainer = "container:MoneyManager.xcodeproj">
+               BuildableName = "MManagerUITests.xctest"
+               BlueprintName = "MManagerUITests"
+               ReferencedContainer = "container:MManager.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -65,9 +65,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "472F288225A7319500CE1481"
-            BuildableName = "MoneyManager.app"
-            BlueprintName = "MoneyManager"
-            ReferencedContainer = "container:MoneyManager.xcodeproj">
+            BuildableName = "MManager.app"
+            BlueprintName = "MManager"
+            ReferencedContainer = "container:MManager.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -82,9 +82,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "472F288225A7319500CE1481"
-            BuildableName = "MoneyManager.app"
-            BlueprintName = "MoneyManager"
-            ReferencedContainer = "container:MoneyManager.xcodeproj">
+            BuildableName = "MManager.app"
+            BlueprintName = "MManager"
+            ReferencedContainer = "container:MManager.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

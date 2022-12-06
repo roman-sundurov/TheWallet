@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>362649743163-5e6ikp270v0lh55sispqb0mcju3g6fsb.apps.googleusercontent.com</string>
+	<string>362649743163-uvi9hop0222njrmubt3jmqnmamtbvhn5.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.362649743163-5e6ikp270v0lh55sispqb0mcju3g6fsb</string>
+	<string>com.googleusercontent.apps.362649743163-uvi9hop0222njrmubt3jmqnmamtbvhn5</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDzv9bd3LG4Pi9y_8k8vbnK2yKS8BCm2jw</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>roman.sundurov.work.Money-manager</string>
+	<string>roman.sundurov.mmanager</string>
 	<key>PROJECT_ID</key>
 	<string>new-firebase-project-2b51e</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:362649743163:ios:23ba8d8ba7d372c0d9111e</string>
+	<string>1:362649743163:ios:94360f0391b66008d9111e</string>
 </dict>
 </plist>
