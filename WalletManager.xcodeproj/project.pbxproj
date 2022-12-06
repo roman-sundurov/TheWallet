@@ -16,8 +16,8 @@
 		472F288E25A7319500CE1481 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472F288C25A7319500CE1481 /* Main.storyboard */; };
 		472F289025A7319500CE1481 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 472F288F25A7319500CE1481 /* Assets.xcassets */; };
 		472F289325A7319500CE1481 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472F289125A7319500CE1481 /* LaunchScreen.storyboard */; };
-		472F289E25A7319600CE1481 /* MManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F289D25A7319600CE1481 /* MManagerTests.swift */; };
-		472F28A925A7319600CE1481 /* MManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F28A825A7319600CE1481 /* MManagerUITests.swift */; };
+		472F289E25A7319600CE1481 /* WalletManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F289D25A7319600CE1481 /* WalletManagerTests.swift */; };
+		472F28A925A7319600CE1481 /* WalletManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F28A825A7319600CE1481 /* WalletManagerUITests.swift */; };
 		473549BB2819636200E87139 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549BA2819636200E87139 /* MainViewModel.swift */; };
 		473549BD2819CFD600E87139 /* MainVM+TableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549BC2819CFD600E87139 /* MainVM+TableExtension.swift */; };
 		473549C1281A89E200E87139 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549C0281A89E200E87139 /* SettingViewModel.swift */; };
@@ -33,6 +33,9 @@
 		475431D3292CF0B30028D240 /* VCAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475431D2292CF0B30028D240 /* VCAccount.swift */; };
 		475431D4292CF0B40028D240 /* VCAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475431D2292CF0B30028D240 /* VCAccount.swift */; };
 		475431D5292CF0B40028D240 /* VCAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475431D2292CF0B30028D240 /* VCAccount.swift */; };
+		475D5B09293FE71F00929D47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 475D5B08293FE71D00929D47 /* GoogleService-Info.plist */; };
+		475D5B0A293FE71F00929D47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 475D5B08293FE71D00929D47 /* GoogleService-Info.plist */; };
+		475D5B0B293FE71F00929D47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 475D5B08293FE71D00929D47 /* GoogleService-Info.plist */; };
 		47621F9825B644BF0095A52F /* SettingTableVCNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47621F9725B644BF0095A52F /* SettingTableVCNote.swift */; };
 		4771587C262AB31E00F27D4B /* VCOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4771587B262AB31E00F27D4B /* VCOperation.swift */; };
 		477CC22A290ABB1F00EA671D /* AAInfographics in Frameworks */ = {isa = PBXBuildFile; productRef = 477CC229290ABB1F00EA671D /* AAInfographics */; };
@@ -45,9 +48,6 @@
 		47AC1AB625C0B7CB006E7817 /* MainTableVCOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1AB525C0B7CB006E7817 /* MainTableVCOperation.swift */; };
 		47B80F782667CA9500032678 /* RoundedGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B80F772667CA9500032678 /* RoundedGraphView.swift */; };
 		47BEBB43262F91D1006FF254 /* CategoryTableVCNewCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BEBB42262F91D1006FF254 /* CategoryTableVCNewCategory.swift */; };
-		47C09C07293F9443000B149E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47C09C06293F9442000B149E /* GoogleService-Info.plist */; };
-		47C09C08293F9443000B149E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47C09C06293F9442000B149E /* GoogleService-Info.plist */; };
-		47C09C09293F9443000B149E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47C09C06293F9442000B149E /* GoogleService-Info.plist */; };
 		47C4FF3525B38B0F00F97498 /* VCSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4FF3425B38B0F00F97498 /* VCSetting.swift */; };
 		47CB73C325B4364700638185 /* SettingTableVCCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB73C225B4364700638185 /* SettingTableVCCategory.swift */; };
 		47E87752290807B100B99C09 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E87751290807B100B99C09 /* CategoryViewModel.swift */; };
@@ -93,9 +93,9 @@
 		472F288F25A7319500CE1481 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		472F289225A7319500CE1481 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		472F289425A7319500CE1481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		472F289D25A7319600CE1481 /* MManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MManagerTests.swift; sourceTree = "<group>"; };
+		472F289D25A7319600CE1481 /* WalletManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletManagerTests.swift; sourceTree = "<group>"; };
 		472F289F25A7319600CE1481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		472F28A825A7319600CE1481 /* MManagerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MManagerUITests.swift; sourceTree = "<group>"; };
+		472F28A825A7319600CE1481 /* WalletManagerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletManagerUITests.swift; sourceTree = "<group>"; };
 		472F28AA25A7319600CE1481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		473549BA2819636200E87139 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		473549BC2819CFD600E87139 /* MainVM+TableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVM+TableExtension.swift"; sourceTree = "<group>"; };
@@ -106,16 +106,16 @@
 		4750EFEB25BC2C7F00167A92 /* CategoryTableVCCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableVCCategory.swift; sourceTree = "<group>"; };
 		475342D6290C37EC006BE673 /* swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftlint.yml; sourceTree = "<group>"; };
 		475431D2292CF0B30028D240 /* VCAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCAccount.swift; sourceTree = "<group>"; };
+		475D5B04293FA49100929D47 /* WalletManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = WalletManager.app; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/WalletManager/build/Debug-iphoneos/WalletManager.app"; sourceTree = "<absolute>"; };
+		475D5B05293FA49100929D47 /* WalletManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = WalletManagerTests.xctest; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/WalletManager/build/Debug-iphoneos/WalletManagerTests.xctest"; sourceTree = "<absolute>"; };
+		475D5B07293FA78F00929D47 /* WalletManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = WalletManagerUITests.xctest; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/WalletManager/build/Debug-iphoneos/WalletManagerUITests.xctest"; sourceTree = "<absolute>"; };
+		475D5B08293FE71D00929D47 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		47621F9725B644BF0095A52F /* SettingTableVCNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableVCNote.swift; sourceTree = "<group>"; };
-		476DD230293F9B860018ED45 /* MManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = MManager.app; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/MManager/build/Debug-iphoneos/MManager.app"; sourceTree = "<absolute>"; };
-		476DD231293F9B860018ED45 /* MManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = MManagerTests.xctest; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/MManager/build/Debug-iphoneos/MManagerTests.xctest"; sourceTree = "<absolute>"; };
-		476DD232293F9B860018ED45 /* MManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = MManagerUITests.xctest; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/MManager/build/Debug-iphoneos/MManagerUITests.xctest"; sourceTree = "<absolute>"; };
 		4771587B262AB31E00F27D4B /* VCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCOperation.swift; sourceTree = "<group>"; };
-		47AC1A9425C09AC9006E7817 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Model.swift; path = MManager/Model.swift; sourceTree = SOURCE_ROOT; };
+		47AC1A9425C09AC9006E7817 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Model.swift; path = WalletManager/Model.swift; sourceTree = SOURCE_ROOT; };
 		47AC1AB525C0B7CB006E7817 /* MainTableVCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableVCOperation.swift; sourceTree = "<group>"; };
 		47B80F772667CA9500032678 /* RoundedGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedGraphView.swift; sourceTree = "<group>"; };
 		47BEBB42262F91D1006FF254 /* CategoryTableVCNewCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableVCNewCategory.swift; sourceTree = "<group>"; };
-		47C09C06293F9442000B149E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		47C4FF3425B38B0F00F97498 /* VCSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCSetting.swift; sourceTree = "<group>"; };
 		47CB73C225B4364700638185 /* SettingTableVCCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableVCCategory.swift; sourceTree = "<group>"; };
 		47E87751290807B100B99C09 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
@@ -162,13 +162,13 @@
 			isa = PBXGroup;
 			children = (
 				475342D6290C37EC006BE673 /* swiftlint.yml */,
-				472F288525A7319500CE1481 /* MManager */,
-				472F289C25A7319600CE1481 /* MManagerTests */,
-				472F28A725A7319600CE1481 /* MManagerUITests */,
+				472F288525A7319500CE1481 /* WalletManager */,
+				472F289C25A7319600CE1481 /* WalletManagerTests */,
+				472F28A725A7319600CE1481 /* WalletManagerUITests */,
 			);
 			sourceTree = "<group>";
 		};
-		472F288525A7319500CE1481 /* MManager */ = {
+		472F288525A7319500CE1481 /* WalletManager */ = {
 			isa = PBXGroup;
 			children = (
 				472F288625A7319500CE1481 /* AppDelegate.swift */,
@@ -183,27 +183,27 @@
 				472F288F25A7319500CE1481 /* Assets.xcassets */,
 				472F289125A7319500CE1481 /* LaunchScreen.storyboard */,
 				472F289425A7319500CE1481 /* Info.plist */,
-				47C09C06293F9442000B149E /* GoogleService-Info.plist */,
+				475D5B08293FE71D00929D47 /* GoogleService-Info.plist */,
 			);
-			path = MManager;
+			path = WalletManager;
 			sourceTree = "<group>";
 		};
-		472F289C25A7319600CE1481 /* MManagerTests */ = {
+		472F289C25A7319600CE1481 /* WalletManagerTests */ = {
 			isa = PBXGroup;
 			children = (
-				472F289D25A7319600CE1481 /* MManagerTests.swift */,
+				472F289D25A7319600CE1481 /* WalletManagerTests.swift */,
 				472F289F25A7319600CE1481 /* Info.plist */,
 			);
-			path = MManagerTests;
+			path = WalletManagerTests;
 			sourceTree = "<group>";
 		};
-		472F28A725A7319600CE1481 /* MManagerUITests */ = {
+		472F28A725A7319600CE1481 /* WalletManagerUITests */ = {
 			isa = PBXGroup;
 			children = (
-				472F28A825A7319600CE1481 /* MManagerUITests.swift */,
+				472F28A825A7319600CE1481 /* WalletManagerUITests.swift */,
 				472F28AA25A7319600CE1481 /* Info.plist */,
 			);
-			path = MManagerUITests;
+			path = WalletManagerUITests;
 			sourceTree = "<group>";
 		};
 		473549B8281961A900E87139 /* ViewModel */ = {
@@ -251,9 +251,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		472F288225A7319500CE1481 /* MManager */ = {
+		472F288225A7319500CE1481 /* WalletManager */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 472F28AD25A7319600CE1481 /* Build configuration list for PBXNativeTarget "MManager" */;
+			buildConfigurationList = 472F28AD25A7319600CE1481 /* Build configuration list for PBXNativeTarget "WalletManager" */;
 			buildPhases = (
 				475342DA290C3864006BE673 /* SwiftLint */,
 				472F287F25A7319500CE1481 /* Sources */,
@@ -264,7 +264,7 @@
 			);
 			dependencies = (
 			);
-			name = MManager;
+			name = WalletManager;
 			packageProductDependencies = (
 				47F5F9D62855D99B0042F2D5 /* SimpleCheckbox */,
 				479990A02901892800ECD407 /* FirebaseAuth */,
@@ -276,12 +276,12 @@
 				47A94F54293824BE00076666 /* FirebaseGoogleAuthUI */,
 			);
 			productName = Skillbox_diploma_step1;
-			productReference = 476DD230293F9B860018ED45 /* MManager.app */;
+			productReference = 475D5B04293FA49100929D47 /* WalletManager.app */;
 			productType = "com.apple.product-type.application";
 		};
-		472F289825A7319600CE1481 /* MManagerTests */ = {
+		472F289825A7319600CE1481 /* WalletManagerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 472F28B025A7319600CE1481 /* Build configuration list for PBXNativeTarget "MManagerTests" */;
+			buildConfigurationList = 472F28B025A7319600CE1481 /* Build configuration list for PBXNativeTarget "WalletManagerTests" */;
 			buildPhases = (
 				472F289525A7319600CE1481 /* Sources */,
 				472F289625A7319600CE1481 /* Frameworks */,
@@ -292,14 +292,14 @@
 			dependencies = (
 				472F289B25A7319600CE1481 /* PBXTargetDependency */,
 			);
-			name = MManagerTests;
+			name = WalletManagerTests;
 			productName = Skillbox_diploma_step1Tests;
-			productReference = 476DD231293F9B860018ED45 /* MManagerTests.xctest */;
+			productReference = 475D5B05293FA49100929D47 /* WalletManagerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		472F28A325A7319600CE1481 /* MManagerUITests */ = {
+		472F28A325A7319600CE1481 /* WalletManagerUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 472F28B325A7319600CE1481 /* Build configuration list for PBXNativeTarget "MManagerUITests" */;
+			buildConfigurationList = 472F28B325A7319600CE1481 /* Build configuration list for PBXNativeTarget "WalletManagerUITests" */;
 			buildPhases = (
 				472F28A025A7319600CE1481 /* Sources */,
 				472F28A125A7319600CE1481 /* Frameworks */,
@@ -310,9 +310,9 @@
 			dependencies = (
 				472F28A625A7319600CE1481 /* PBXTargetDependency */,
 			);
-			name = MManagerUITests;
+			name = WalletManagerUITests;
 			productName = Skillbox_diploma_step1UITests;
-			productReference = 476DD232293F9B860018ED45 /* MManagerUITests.xctest */;
+			productReference = 475D5B07293FA78F00929D47 /* WalletManagerUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -337,7 +337,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 472F287E25A7319500CE1481 /* Build configuration list for PBXProject "MManager" */;
+			buildConfigurationList = 472F287E25A7319500CE1481 /* Build configuration list for PBXProject "WalletManager" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -357,9 +357,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				472F288225A7319500CE1481 /* MManager */,
-				472F289825A7319600CE1481 /* MManagerTests */,
-				472F28A325A7319600CE1481 /* MManagerUITests */,
+				472F288225A7319500CE1481 /* WalletManager */,
+				472F289825A7319600CE1481 /* WalletManagerTests */,
+				472F28A325A7319600CE1481 /* WalletManagerUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -371,9 +371,9 @@
 			files = (
 				472F289325A7319500CE1481 /* LaunchScreen.storyboard in Resources */,
 				475342D7290C37EC006BE673 /* swiftlint.yml in Resources */,
-				47C09C07293F9443000B149E /* GoogleService-Info.plist in Resources */,
 				472F289025A7319500CE1481 /* Assets.xcassets in Resources */,
 				472F288E25A7319500CE1481 /* Main.storyboard in Resources */,
+				475D5B09293FE71F00929D47 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,8 +381,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47C09C08293F9443000B149E /* GoogleService-Info.plist in Resources */,
 				475342D8290C37EC006BE673 /* swiftlint.yml in Resources */,
+				475D5B0A293FE71F00929D47 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,8 +390,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47C09C09293F9443000B149E /* GoogleService-Info.plist in Resources */,
 				475342D9290C37EC006BE673 /* swiftlint.yml in Resources */,
+				475D5B0B293FE71F00929D47 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,7 +459,7 @@
 				47EBDDF5292AFABF009BF1B6 /* Firebase+Auth.swift in Sources */,
 				47431E60290B4C8B00818E6E /* Firebase+Firestore.swift in Sources */,
 				475431D4292CF0B40028D240 /* VCAccount.swift in Sources */,
-				472F289E25A7319600CE1481 /* MManagerTests.swift in Sources */,
+				472F289E25A7319600CE1481 /* WalletManagerTests.swift in Sources */,
 				47E87753290807B100B99C09 /* CategoryViewModel.swift in Sources */,
 				47EBDDFD292C117E009BF1B6 /* VCSignUp.swift in Sources */,
 				47EBDDF9292B0F43009BF1B6 /* VCSignIn.swift in Sources */,
@@ -473,7 +473,7 @@
 				47EBDDF6292AFABF009BF1B6 /* Firebase+Auth.swift in Sources */,
 				47431E61290B4C8B00818E6E /* Firebase+Firestore.swift in Sources */,
 				475431D5292CF0B40028D240 /* VCAccount.swift in Sources */,
-				472F28A925A7319600CE1481 /* MManagerUITests.swift in Sources */,
+				472F28A925A7319600CE1481 /* WalletManagerUITests.swift in Sources */,
 				47E87754290807B100B99C09 /* CategoryViewModel.swift in Sources */,
 				47EBDDFE292C117E009BF1B6 /* VCSignUp.swift in Sources */,
 				47EBDDFA292B0F43009BF1B6 /* VCSignIn.swift in Sources */,
@@ -485,12 +485,12 @@
 /* Begin PBXTargetDependency section */
 		472F289B25A7319600CE1481 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 472F288225A7319500CE1481 /* MManager */;
+			target = 472F288225A7319500CE1481 /* WalletManager */;
 			targetProxy = 472F289A25A7319600CE1481 /* PBXContainerItemProxy */;
 		};
 		472F28A625A7319600CE1481 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 472F288225A7319500CE1481 /* MManager */;
+			target = 472F288225A7319500CE1481 /* WalletManager */;
 			targetProxy = 472F28A525A7319600CE1481 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -637,17 +637,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "MManager/GoogleService-Info.plist";
+				DEVELOPMENT_ASSET_PATHS = "WalletManager/GoogleService-Info.plist";
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = MManager/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = MManager;
+				INFOPLIST_FILE = WalletManager/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Wallet Manager";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.mmanager;
+				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.walletmanager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -660,17 +660,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "MManager/GoogleService-Info.plist";
+				DEVELOPMENT_ASSET_PATHS = "WalletManager/GoogleService-Info.plist";
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = MManager/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = MManager;
+				INFOPLIST_FILE = WalletManager/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Wallet Manager";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.mmanager;
+				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.walletmanager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -684,18 +684,18 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = MManagerTests/Info.plist;
+				INFOPLIST_FILE = WalletManagerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.work.MManagerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.work.walletmanagerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MManager.app/MManager";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WalletManager.app/WalletManager";
 			};
 			name = Debug;
 		};
@@ -706,18 +706,18 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = MManagerTests/Info.plist;
+				INFOPLIST_FILE = WalletManagerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.work.MManagerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.work.walletmanagerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MManager.app/MManager";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WalletManager.app/WalletManager";
 			};
 			name = Release;
 		};
@@ -727,17 +727,17 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = MManagerUITests/Info.plist;
+				INFOPLIST_FILE = WalletManagerUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.work.MManagerUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.work.walletmanagerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = MManager;
+				TEST_TARGET_NAME = WalletManager;
 			};
 			name = Debug;
 		};
@@ -747,24 +747,24 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = MManagerUITests/Info.plist;
+				INFOPLIST_FILE = WalletManagerUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.work.MManagerUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.work.walletmanagerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = MManager;
+				TEST_TARGET_NAME = WalletManager;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		472F287E25A7319500CE1481 /* Build configuration list for PBXProject "MManager" */ = {
+		472F287E25A7319500CE1481 /* Build configuration list for PBXProject "WalletManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				472F28AB25A7319600CE1481 /* Debug */,
@@ -773,7 +773,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		472F28AD25A7319600CE1481 /* Build configuration list for PBXNativeTarget "MManager" */ = {
+		472F28AD25A7319600CE1481 /* Build configuration list for PBXNativeTarget "WalletManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				472F28AE25A7319600CE1481 /* Debug */,
@@ -782,7 +782,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		472F28B025A7319600CE1481 /* Build configuration list for PBXNativeTarget "MManagerTests" */ = {
+		472F28B025A7319600CE1481 /* Build configuration list for PBXNativeTarget "WalletManagerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				472F28B125A7319600CE1481 /* Debug */,
@@ -791,7 +791,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		472F28B325A7319600CE1481 /* Build configuration list for PBXNativeTarget "MManagerUITests" */ = {
+		472F28B325A7319600CE1481 /* Build configuration list for PBXNativeTarget "WalletManagerUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				472F28B425A7319600CE1481 /* Debug */,
