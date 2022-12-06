@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "472F288225A7319500CE1481"
-               BuildableName = "WalletManager.app"
-               BlueprintName = "WalletManager"
-               ReferencedContainer = "container:WalletManager.xcodeproj">
+               BuildableName = "WalletThatNeverWas.app"
+               BlueprintName = "WalletThatNeverWas"
+               ReferencedContainer = "container:WalletThatNeverWas.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "472F289825A7319600CE1481"
-               BuildableName = "WalletManagerTests.xctest"
-               BlueprintName = "WalletManagerTests"
-               ReferencedContainer = "container:WalletManager.xcodeproj">
+               BuildableName = "WalletThatNeverWasTests.xctest"
+               BlueprintName = "WalletThatNeverWasTests"
+               ReferencedContainer = "container:WalletThatNeverWas.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "472F28A325A7319600CE1481"
-               BuildableName = "WalletManagerUITests.xctest"
-               BlueprintName = "WalletManagerUITests"
-               ReferencedContainer = "container:WalletManager.xcodeproj">
+               BuildableName = "WalletThatNeverWasUITests.xctest"
+               BlueprintName = "WalletThatNeverWasUITests"
+               ReferencedContainer = "container:WalletThatNeverWas.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -65,9 +65,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "472F288225A7319500CE1481"
-            BuildableName = "WalletManager.app"
-            BlueprintName = "WalletManager"
-            ReferencedContainer = "container:WalletManager.xcodeproj">
+            BuildableName = "WalletThatNeverWas.app"
+            BlueprintName = "WalletThatNeverWas"
+            ReferencedContainer = "container:WalletThatNeverWas.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -82,9 +82,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "472F288225A7319500CE1481"
-            BuildableName = "WalletManager.app"
-            BlueprintName = "WalletManager"
-            ReferencedContainer = "container:WalletManager.xcodeproj">
+            BuildableName = "WalletThatNeverWas.app"
+            BlueprintName = "WalletThatNeverWas"
+            ReferencedContainer = "container:WalletThatNeverWas.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
