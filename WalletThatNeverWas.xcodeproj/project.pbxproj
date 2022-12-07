@@ -102,15 +102,15 @@
 		473549C0281A89E200E87139 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		473549C2281B2BA500E87139 /* SettingVM+TableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingVM+TableExtension.swift"; sourceTree = "<group>"; };
 		47431E5E290B4C8B00818E6E /* Firebase+Firestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase+Firestore.swift"; sourceTree = "<group>"; };
-		4744CD44293FEE99004762AE /* WalletThatNeverWas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = WalletThatNeverWas.app; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/WalletThatNeverWas/build/Debug-iphoneos/WalletThatNeverWas.app"; sourceTree = "<absolute>"; };
-		4744CD45293FEE99004762AE /* WalletThatNeverWasTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = WalletThatNeverWasTests.xctest; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/WalletThatNeverWas/build/Debug-iphoneos/WalletThatNeverWasTests.xctest"; sourceTree = "<absolute>"; };
-		4744CD46293FEE99004762AE /* WalletThatNeverWasUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = WalletThatNeverWasUITests.xctest; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/WalletThatNeverWas/build/Debug-iphoneos/WalletThatNeverWasUITests.xctest"; sourceTree = "<absolute>"; };
 		4744CD47293FFC9C004762AE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4750EFE625BC2C5C00167A92 /* CategoryTableVCHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableVCHeader.swift; sourceTree = "<group>"; };
 		4750EFEB25BC2C7F00167A92 /* CategoryTableVCCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableVCCategory.swift; sourceTree = "<group>"; };
 		475342D6290C37EC006BE673 /* swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftlint.yml; sourceTree = "<group>"; };
 		475431D2292CF0B30028D240 /* VCAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCAccount.swift; sourceTree = "<group>"; };
 		47621F9725B644BF0095A52F /* SettingTableVCNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableVCNote.swift; sourceTree = "<group>"; };
+		4766798529403D6900B1228C /* WalletThatNeverWas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalletThatNeverWas.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4766798629403D6900B1228C /* WalletThatNeverWasTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = WalletThatNeverWasTests.xctest; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/WalletThatNeverWas/build/Debug-iphoneos/WalletThatNeverWasTests.xctest"; sourceTree = "<absolute>"; };
+		4766798729403D6900B1228C /* WalletThatNeverWasUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = WalletThatNeverWasUITests.xctest; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/WalletThatNeverWas/build/Debug-iphoneos/WalletThatNeverWasUITests.xctest"; sourceTree = "<absolute>"; };
 		4771587B262AB31E00F27D4B /* VCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCOperation.swift; sourceTree = "<group>"; };
 		47AC1A9425C09AC9006E7817 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Model.swift; path = WalletThatNeverWas/Model.swift; sourceTree = SOURCE_ROOT; };
 		47AC1AB525C0B7CB006E7817 /* MainTableVCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableVCOperation.swift; sourceTree = "<group>"; };
@@ -165,6 +165,7 @@
 				472F288525A7319500CE1481 /* WalletThatNeverWas */,
 				472F289C25A7319600CE1481 /* WalletThatNeverWasTests */,
 				472F28A725A7319600CE1481 /* WalletThatNeverWasUITests */,
+				4766798529403D6900B1228C /* WalletThatNeverWas.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -276,7 +277,7 @@
 				47A94F54293824BE00076666 /* FirebaseGoogleAuthUI */,
 			);
 			productName = Skillbox_diploma_step1;
-			productReference = 4744CD44293FEE99004762AE /* WalletThatNeverWas.app */;
+			productReference = 4766798529403D6900B1228C /* WalletThatNeverWas.app */;
 			productType = "com.apple.product-type.application";
 		};
 		472F289825A7319600CE1481 /* WalletThatNeverWasTests */ = {
@@ -294,7 +295,7 @@
 			);
 			name = WalletThatNeverWasTests;
 			productName = Skillbox_diploma_step1Tests;
-			productReference = 4744CD45293FEE99004762AE /* WalletThatNeverWasTests.xctest */;
+			productReference = 4766798629403D6900B1228C /* WalletThatNeverWasTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		472F28A325A7319600CE1481 /* WalletThatNeverWasUITests */ = {
@@ -312,7 +313,7 @@
 			);
 			name = WalletThatNeverWasUITests;
 			productName = Skillbox_diploma_step1UITests;
-			productReference = 4744CD46293FEE99004762AE /* WalletThatNeverWasUITests.xctest */;
+			productReference = 4766798729403D6900B1228C /* WalletThatNeverWasUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
