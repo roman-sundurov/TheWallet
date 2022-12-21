@@ -8,7 +8,7 @@
 import UIKit
 import AAInfographics
 
-protocol protocolVCGraph {
+protocol ProtocolVCGraph {
   func dataUpdate()
 }
 
@@ -73,7 +73,7 @@ class VCGraph: UIViewController {
   }
 }
 
-extension VCGraph: protocolVCGraph {
+extension VCGraph: ProtocolVCGraph {
   func dataUpdate() {
     var dateArray = calculateDateArray()
     let cumulativeGraphDataArray = calculateCumulativeAmount(dateArray: dateArray)

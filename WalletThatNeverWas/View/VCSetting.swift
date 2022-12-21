@@ -8,12 +8,12 @@
 import UIKit
 import Foundation
 
-protocol protocolVCSetting {
+protocol ProtocolVCSetting {
   func changeCategoryClosePopUpScreen2()
   func changeCategoryOpenPopUpScreen2(_ tag: Int)
   func tableViewScreen2Update(row: Int)
   func setCategoryInNewOperation(categoryUUID: UUID)
-  func returnDelegateScreen2TableViewCellNote() -> protocolSettingTableVCNote
+  func returnDelegateScreen2TableViewCellNote() -> ProtocolSettingTableVCNote
   func openAlertDatePicker()
   func startEditing()
   func setVCSetting(amount: Double, categoryUUID: UUID, date: Double, note: String, id: UUID)
@@ -39,10 +39,10 @@ class VCSetting: UIViewController {
   @IBOutlet var labelScreen2Header: UILabel!
 
   // MARK: - delegates and variables
-  var vcMainDelegate: protocolVCMain?
+  var vcMainDelegate: ProtocolVCMain?
   var vcCategoryDelegate: VCCategory?
-  var tableViewCellNoteDelegate: protocolSettingTableVCNote?
-  var tableViewCellDateDelegate: protocolSettingTableVCDate?
+  var tableViewCellNoteDelegate: ProtocolSettingTableVCNote?
+  var tableViewCellDateDelegate: ProtocolSettingTableVCDate?
   var vcSettingStatusEditing = false // показывает, создаётся ли новая операция, или редактируется предыдущая
   var tapOfChangeCategoryOpenPopUp: UITapGestureRecognizer?
   var tapOutsideTextViewToGoFromTextView: UITapGestureRecognizer?

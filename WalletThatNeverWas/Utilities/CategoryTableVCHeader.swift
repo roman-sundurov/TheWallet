@@ -6,7 +6,7 @@
 
 import UIKit
 
-protocol protocolCategoryTableVCHeader {
+protocol ProtocolCategoryTableVCHeader {
   func buttonOptionsSetColor(color: UIColor)
 }
 
@@ -17,7 +17,7 @@ class CategoryTableVCHeader: UITableViewCell {
     delegateScreen2Container?.screen2ContainerNewCategorySwicher()
   }
 
-  var delegateScreen2Container: protocolVCCategory?
+  var delegateScreen2Container: ProtocolVCCategory?
 
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -28,7 +28,7 @@ class CategoryTableVCHeader: UITableViewCell {
   }
 }
 
-extension CategoryTableVCHeader: protocolCategoryTableVCHeader {
+extension CategoryTableVCHeader: ProtocolCategoryTableVCHeader {
   func buttonOptionsSetColor(color: UIColor) {
     buttonOptions.tintColor = color
   }

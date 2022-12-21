@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol protocolVCOperation {
+protocol ProtocolVCOperation {
   func prepareForStart(id: UUID)
 }
 
@@ -24,7 +24,7 @@ class VCOperation: UIViewController {
   @IBOutlet var viewLogoCategory: UIView!
 
   // MARK: - delegates and variables
-  var vcMainDelegate: protocolVCMain?
+  var vcMainDelegate: ProtocolVCMain?
   var uuid: UUID?
 
   // MARK: - transitions
@@ -48,7 +48,7 @@ class VCOperation: UIViewController {
   }
 }
 
-extension VCOperation: protocolVCOperation {
+extension VCOperation: ProtocolVCOperation {
   func prepareForStart(id: UUID) {
     uuid = id
     print("id= \(id)")

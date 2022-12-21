@@ -7,8 +7,8 @@
 
 import UIKit
 
-protocol protocolViewRoundedGraph {
-  func setDelegateScreen1RoundedGraph(delegate: protocolVCMain)
+protocol ProtocolViewRoundedGraph {
+  func setDelegateScreen1RoundedGraph(delegate: ProtocolVCMain)
 }
 
 @IBDesignable
@@ -19,7 +19,7 @@ class RoundedGraphView: UIView {
   }
 
   // MARK: - delegates and variables
-  var vcMainDelegate: protocolVCMain?
+  var vcMainDelegate: ProtocolVCMain?
   var incomesColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
   var expensesColor = UIColor.red
 
@@ -69,8 +69,8 @@ class RoundedGraphView: UIView {
   }
 }
 
-extension RoundedGraphView: protocolViewRoundedGraph {
-  func setDelegateScreen1RoundedGraph(delegate: protocolVCMain) {
+extension RoundedGraphView: ProtocolViewRoundedGraph {
+  func setDelegateScreen1RoundedGraph(delegate: ProtocolVCMain) {
     vcMainDelegate = delegate
   }
 }

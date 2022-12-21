@@ -8,7 +8,7 @@
 import UIKit
 import SimpleCheckbox
 
-protocol protocolCategoryTableVCCategory {
+protocol ProtocolCategoryTableVCCategory {
   func returnCategryIdOfCell() -> Int
   func closeEditing()
   func setPermitionToSetCategory(status: Bool)
@@ -24,9 +24,9 @@ class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
   @IBOutlet var constaraintCellChangeCategoryHeight: NSLayoutConstraint!
 
   // MARK: - delegates and variables
-  var vcMainDelegate: protocolVCMain?
-  var vcSettingDelegate: protocolVCSetting?
-  var vcCategoryDelegate: protocolVCCategory?
+  var vcMainDelegate: ProtocolVCMain?
+  var vcSettingDelegate: ProtocolVCSetting?
+  var vcCategoryDelegate: ProtocolVCCategory?
   var gestureCell: UIGestureRecognizer?
   var gestureCheckBox: UIGestureRecognizer?
   var editStatus = false
@@ -114,7 +114,7 @@ class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
   }
 }
 
-extension CategoryTableVCCategory: protocolCategoryTableVCCategory {
+extension CategoryTableVCCategory: ProtocolCategoryTableVCCategory {
   func setPermitionToSetCategory(status: Bool) {
     permitionToSetCategory = status
   }

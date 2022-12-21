@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol protocolSettingTableVCNote {
+protocol ProtocolSettingTableVCNote {
   func tapOutsideNoteTextViewEditToHide()
   func returnNoteView() -> UITextView
   func setNoteViewText(newText: String)
@@ -15,7 +15,7 @@ protocol protocolSettingTableVCNote {
 
 class SettingTableVCNote: UITableViewCell, UITextViewDelegate {
   @IBOutlet var textViewNotes: UITextView!
-  var vcSettingDelegate: protocolVCSetting?
+  var vcSettingDelegate: ProtocolVCSetting?
   var indexRow: Int = 0
 
 // MARK: - Working with Placeholder
@@ -55,7 +55,7 @@ class SettingTableVCNote: UITableViewCell, UITextViewDelegate {
   }
 }
 
-extension SettingTableVCNote: protocolSettingTableVCNote {
+extension SettingTableVCNote: ProtocolSettingTableVCNote {
   func setNoteViewText(newText: String) {
     textViewNotes.text = newText
     print("newText= \(newText)")

@@ -8,9 +8,11 @@
 import Foundation
 import UIKit
 
-extension VCMain: protocolVCMain {
+extension VCMain: ProtocolVCMain {
 
   func hudAppear() {
+
+
     hud.show(in: bottomPopInView)
     buttonShowList.isEnabled = false
     buttonShowGraph.isEnabled = false

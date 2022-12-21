@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol protocolSettingTableVCDate {
+protocol ProtocolSettingTableVCDate {
   func returnDateTextField() -> UILabel
 }
 
@@ -17,7 +17,7 @@ class SettingTableVCDate: UITableViewCell {
   @IBOutlet var buttonSelectDate: UIButton!
 
   // MARK: - delegates and variables
-  var vcSettingDelegate: protocolVCSetting?
+  var vcSettingDelegate: ProtocolVCSetting?
   var indexRow: Int = 0
 
   // MARK: - transitions
@@ -63,7 +63,7 @@ class SettingTableVCDate: UITableViewCell {
   }
 }
 
-extension SettingTableVCDate: protocolSettingTableVCDate {
+extension SettingTableVCDate: ProtocolSettingTableVCDate {
   func returnDateTextField() -> UILabel {
     print("textViewDeselect")
     return labelSelectDate

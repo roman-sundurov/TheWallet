@@ -8,14 +8,14 @@
 import Foundation
 import UIKit
 
-extension VCCategory: protocolVCCategory {
+extension VCCategory: ProtocolVCCategory {
 
   func screen2ContainerDeleteCategory(idOfObject: UUID) {
     vcMainDelegate?.deleteCategory(idOfObject: idOfObject)
     tableView.reloadData()
   }
 
-  func returnVCMainDelegate() -> protocolVCMain {
+  func returnVCMainDelegate() -> ProtocolVCMain {
     return vcMainDelegate!
   }
 
@@ -49,7 +49,7 @@ extension VCCategory: protocolVCCategory {
     self.present(alertErrorAddNewCategory, animated: true, completion: nil)
   }
 
-  func returnDelegateScreen2ContainerTableVCNewCategory() -> protocolCategoryTableVCNewCategory {
+  func returnDelegateScreen2ContainerTableVCNewCategory() -> ProtocolCategoryTableVCNewCategory {
     return categoryTableVCNewCategoryDelegate!
   }
 
@@ -102,7 +102,7 @@ extension VCCategory: protocolVCCategory {
     }, completion: { _ in self.tableView.reloadData() })
   }
 
-  func getVCSettingDelegate() -> protocolVCSetting {
+  func getVCSettingDelegate() -> ProtocolVCSetting {
     return vcSettingDelegate!
   }
 

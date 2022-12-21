@@ -8,7 +8,7 @@
 import UIKit
 import JGProgressHUD
 
-protocol protocolVCMain {
+protocol ProtocolVCMain {
   func updateScreen() // full screen update
   func showOperation(_ id: UUID) // opens a PopUp window for a specific operation
   func hideOperation() // closes the PopUp window of a specific operation
@@ -64,9 +64,9 @@ class VCMain: UIViewController {
   var income: Double = 0
   var expensive: Double = 0
   var tapShowOperation: UITapGestureRecognizer?
-  var vcSettingDelegate: protocolVCSetting?
-  var vcOperationDelegate: protocolVCOperation?
-  var vcGraphDelegate: protocolVCGraph?
+  var vcSettingDelegate: ProtocolVCSetting?
+  var vcOperationDelegate: ProtocolVCOperation?
+  var vcGraphDelegate: ProtocolVCGraph?
   var tagForEdit: UUID?
   var screen1StatusGrapjDisplay = false
   var arrayForIncrease: [Int] = [0]

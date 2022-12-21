@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol protocolVCCategory {
+protocol ProtocolVCCategory {
   func closeWindow()
   func screen2ContainerNewCategorySwicher()
   func addNewCategory(name: String, icon: String, date: Double)
@@ -16,8 +16,8 @@ protocol protocolVCCategory {
   func setCurrentActiveEditingCell(cellID: Int)
   func calculateCategoryArray() -> [Category]
   func returnScreen2StatusEditContainer() -> Bool
-  func returnDelegateScreen2ContainerTableVCNewCategory() -> protocolCategoryTableVCNewCategory
-  func returnVCMainDelegate() -> protocolVCMain
+  func returnDelegateScreen2ContainerTableVCNewCategory() -> ProtocolCategoryTableVCNewCategory
+  func returnVCMainDelegate() -> ProtocolVCMain
 }
 
 class VCCategory: UIViewController {
@@ -25,10 +25,10 @@ class VCCategory: UIViewController {
   @IBOutlet var tableView: UITableView!
 
   // MARK: - delegates and variables
-  var vcSettingDelegate: protocolVCSetting?
-  var vcMainDelegate: protocolVCMain?
-  var categoryTableVCHeaderDelegate: protocolCategoryTableVCHeader?
-  var categoryTableVCNewCategoryDelegate: protocolCategoryTableVCNewCategory?
+  var vcSettingDelegate: ProtocolVCSetting?
+  var vcMainDelegate: ProtocolVCMain?
+  var categoryTableVCHeaderDelegate: ProtocolCategoryTableVCHeader?
+  var categoryTableVCNewCategoryDelegate: ProtocolCategoryTableVCNewCategory?
   var statusEditContainer = false
   var animationNewCategoryInCell = false
   var currentActiveCellID: Int?

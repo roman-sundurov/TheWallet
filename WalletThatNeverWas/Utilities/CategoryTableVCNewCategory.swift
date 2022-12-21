@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol protocolCategoryTableVCNewCategory {
+protocol ProtocolCategoryTableVCNewCategory {
   func textFieldNewCategoryClear()
 }
 
@@ -28,7 +28,7 @@ class CategoryTableVCNewCategory: UITableViewCell {
   }
 
   // MARK: - delegates and variables
-  var vcCategoryDelegate: protocolVCCategory?
+  var vcCategoryDelegate: ProtocolVCCategory?
   override func awakeFromNib() {
     super.awakeFromNib()
     textFieldNewCategory.layer.cornerRadius = 10
@@ -40,7 +40,7 @@ class CategoryTableVCNewCategory: UITableViewCell {
   }
 }
 
-extension CategoryTableVCNewCategory: protocolCategoryTableVCNewCategory {
+extension CategoryTableVCNewCategory: ProtocolCategoryTableVCNewCategory {
   func textFieldNewCategoryClear() {
     textFieldNewCategory.text = ""
   }

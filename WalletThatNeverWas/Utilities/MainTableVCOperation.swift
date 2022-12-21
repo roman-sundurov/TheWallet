@@ -13,7 +13,7 @@ class MainTableVCOperation: UITableViewCell {
   @IBOutlet var labelAmount: UILabel!
   @IBOutlet var currencyStatus: UILabel!
 
-  var vcMainDelegate: protocolVCMain?
+  var vcMainDelegate: ProtocolVCMain?
   var id: UUID?
 
   @objc func showOperation(_ sender: UITapGestureRecognizer) {

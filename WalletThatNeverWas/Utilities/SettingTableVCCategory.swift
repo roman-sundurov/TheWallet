@@ -12,7 +12,7 @@ class SettingTableVCCategory: UITableViewCell {
   @IBOutlet var labelSelectCategory: UILabel!
   @IBOutlet var buttonSelectCategory: UIButton!
 
-  var vcSettingDelegate: protocolVCSetting?
+  var vcSettingDelegate: ProtocolVCSetting?
   var indexRow: Int = 0
 
 // Animations

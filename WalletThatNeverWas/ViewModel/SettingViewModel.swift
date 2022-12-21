@@ -8,7 +8,7 @@
 import UIKit
 import Foundation
 
-extension VCSetting: protocolVCSetting {
+extension VCSetting: ProtocolVCSetting {
   func getUserData() -> User {
     return vcMainDelegate!.getUserData()
   }
@@ -97,7 +97,7 @@ extension VCSetting: protocolVCSetting {
     tableViewScreen2.reloadRows(at: [indexPath], with: .fade)
   }
 
-  func returnDelegateScreen2TableViewCellNote() -> protocolSettingTableVCNote {
+  func returnDelegateScreen2TableViewCellNote() -> ProtocolSettingTableVCNote {
     return tableViewCellNoteDelegate!
   }
 
