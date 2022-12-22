@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		47082777290C9E500092246E /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 47082776290C9E500092246E /* JGProgressHUD */; };
 		4715215025F3A8E600FE585C /* SettingTableVCDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4715214F25F3A8E600FE585C /* SettingTableVCDate.swift */; };
 		4729DC40263DA3AB00CA8B66 /* VCGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4729DC3F263DA3AB00CA8B66 /* VCGraph.swift */; };
 		472F288725A7319500CE1481 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F288625A7319500CE1481 /* AppDelegate.swift */; };
@@ -38,12 +37,12 @@
 		475431D5292CF0B40028D240 /* VCAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475431D2292CF0B30028D240 /* VCAccount.swift */; };
 		47621F9825B644BF0095A52F /* SettingTableVCNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47621F9725B644BF0095A52F /* SettingTableVCNote.swift */; };
 		4771587C262AB31E00F27D4B /* VCOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4771587B262AB31E00F27D4B /* VCOperation.swift */; };
-		477CC22A290ABB1F00EA671D /* AAInfographics in Frameworks */ = {isa = PBXBuildFile; productRef = 477CC229290ABB1F00EA671D /* AAInfographics */; };
-		479990A12901892800ECD407 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 479990A02901892800ECD407 /* FirebaseAuth */; };
-		479990A52901892800ECD407 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 479990A42901892800ECD407 /* FirebaseFirestore */; };
-		479990A92901892800ECD407 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 479990A82901892800ECD407 /* FirebaseFirestoreSwift */; };
-		479A1B802936DF8C009D5520 /* FirebaseAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = 479A1B7F2936DF8C009D5520 /* FirebaseAuthUI */; };
-		47A94F55293824BE00076666 /* FirebaseGoogleAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = 47A94F54293824BE00076666 /* FirebaseGoogleAuthUI */; };
+		478E92A7295446E800EDFA26 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 478E92A6295446E800EDFA26 /* FirebaseAuth */; };
+		478E92A9295446E800EDFA26 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 478E92A8295446E800EDFA26 /* FirebaseFirestoreSwift */; };
+		478E92AC2954492C00EDFA26 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 478E92AB2954492C00EDFA26 /* JGProgressHUD */; };
+		478E92AF29544CC000EDFA26 /* FirebaseGoogleAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = 478E92AE29544CC000EDFA26 /* FirebaseGoogleAuthUI */; };
+		478E92B229544E1400EDFA26 /* AAInfographics in Frameworks */ = {isa = PBXBuildFile; productRef = 478E92B129544E1400EDFA26 /* AAInfographics */; };
+		478E92B529544F2C00EDFA26 /* SimpleCheckbox in Frameworks */ = {isa = PBXBuildFile; productRef = 478E92B429544F2C00EDFA26 /* SimpleCheckbox */; };
 		47AC1A9525C09AC9006E7817 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1A9425C09AC9006E7817 /* Model.swift */; };
 		47AC1AB625C0B7CB006E7817 /* MainTableVCOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1AB525C0B7CB006E7817 /* MainTableVCOperation.swift */; };
 		47B80F782667CA9500032678 /* RoundedGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B80F772667CA9500032678 /* RoundedGraphView.swift */; };
@@ -63,7 +62,6 @@
 		47EBDDFD292C117E009BF1B6 /* VCSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EBDDFB292C117E009BF1B6 /* VCSignUp.swift */; };
 		47EBDDFE292C117E009BF1B6 /* VCSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EBDDFB292C117E009BF1B6 /* VCSignUp.swift */; };
 		47F1759925BA2D320044BD30 /* VCCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F1759825BA2D320044BD30 /* VCCategory.swift */; };
-		47F5F9D72855D99B0042F2D5 /* SimpleCheckbox in Frameworks */ = {isa = PBXBuildFile; productRef = 47F5F9D62855D99B0042F2D5 /* SimpleCheckbox */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,9 +107,9 @@
 		475431D2292CF0B30028D240 /* VCAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCAccount.swift; sourceTree = "<group>"; };
 		47621F9725B644BF0095A52F /* SettingTableVCNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableVCNote.swift; sourceTree = "<group>"; };
 		4771587B262AB31E00F27D4B /* VCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCOperation.swift; sourceTree = "<group>"; };
-		478E928F2952C9EF00EDFA26 /* TheWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		478E92912953DD1700EDFA26 /* TheWalletTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWalletTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		478E929229540E6F00EDFA26 /* TheWalletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWalletUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		478E92A2295442CA00EDFA26 /* TheWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		478E92A3295442CA00EDFA26 /* TheWalletTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWalletTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		478E92A4295442CA00EDFA26 /* TheWalletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWalletUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		47AC1A9425C09AC9006E7817 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Model.swift; path = TheWallet/Model.swift; sourceTree = SOURCE_ROOT; };
 		47AC1AB525C0B7CB006E7817 /* MainTableVCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableVCOperation.swift; sourceTree = "<group>"; };
 		47B80F772667CA9500032678 /* RoundedGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedGraphView.swift; sourceTree = "<group>"; };
@@ -130,14 +128,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47F5F9D72855D99B0042F2D5 /* SimpleCheckbox in Frameworks */,
-				479A1B802936DF8C009D5520 /* FirebaseAuthUI in Frameworks */,
-				47A94F55293824BE00076666 /* FirebaseGoogleAuthUI in Frameworks */,
-				479990A52901892800ECD407 /* FirebaseFirestore in Frameworks */,
-				477CC22A290ABB1F00EA671D /* AAInfographics in Frameworks */,
-				47082777290C9E500092246E /* JGProgressHUD in Frameworks */,
-				479990A12901892800ECD407 /* FirebaseAuth in Frameworks */,
-				479990A92901892800ECD407 /* FirebaseFirestoreSwift in Frameworks */,
+				478E92A7295446E800EDFA26 /* FirebaseAuth in Frameworks */,
+				478E92B529544F2C00EDFA26 /* SimpleCheckbox in Frameworks */,
+				478E92AC2954492C00EDFA26 /* JGProgressHUD in Frameworks */,
+				478E92B229544E1400EDFA26 /* AAInfographics in Frameworks */,
+				478E92AF29544CC000EDFA26 /* FirebaseGoogleAuthUI in Frameworks */,
+				478E92A9295446E800EDFA26 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,9 +161,9 @@
 				472F288525A7319500CE1481 /* TheWallet */,
 				472F289C25A7319600CE1481 /* TheWalletTests */,
 				472F28A725A7319600CE1481 /* TheWalletUITests */,
-				478E928F2952C9EF00EDFA26 /* TheWallet.app */,
-				478E92912953DD1700EDFA26 /* TheWalletTest.xctest */,
-				478E929229540E6F00EDFA26 /* TheWalletUITests.xctest */,
+				478E92A2295442CA00EDFA26 /* TheWallet.app */,
+				478E92A3295442CA00EDFA26 /* TheWalletTest.xctest */,
+				478E92A4295442CA00EDFA26 /* TheWalletUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -269,17 +265,15 @@
 			);
 			name = TheWallet;
 			packageProductDependencies = (
-				47F5F9D62855D99B0042F2D5 /* SimpleCheckbox */,
-				479990A02901892800ECD407 /* FirebaseAuth */,
-				479990A42901892800ECD407 /* FirebaseFirestore */,
-				479990A82901892800ECD407 /* FirebaseFirestoreSwift */,
-				477CC229290ABB1F00EA671D /* AAInfographics */,
-				47082776290C9E500092246E /* JGProgressHUD */,
-				479A1B7F2936DF8C009D5520 /* FirebaseAuthUI */,
-				47A94F54293824BE00076666 /* FirebaseGoogleAuthUI */,
+				478E92A6295446E800EDFA26 /* FirebaseAuth */,
+				478E92A8295446E800EDFA26 /* FirebaseFirestoreSwift */,
+				478E92AB2954492C00EDFA26 /* JGProgressHUD */,
+				478E92AE29544CC000EDFA26 /* FirebaseGoogleAuthUI */,
+				478E92B129544E1400EDFA26 /* AAInfographics */,
+				478E92B429544F2C00EDFA26 /* SimpleCheckbox */,
 			);
 			productName = Skillbox_diploma_step1;
-			productReference = 478E928F2952C9EF00EDFA26 /* TheWallet.app */;
+			productReference = 478E92A2295442CA00EDFA26 /* TheWallet.app */;
 			productType = "com.apple.product-type.application";
 		};
 		472F289825A7319600CE1481 /* TheWalletTest */ = {
@@ -297,7 +291,7 @@
 			);
 			name = TheWalletTest;
 			productName = Skillbox_diploma_step1Tests;
-			productReference = 478E92912953DD1700EDFA26 /* TheWalletTest.xctest */;
+			productReference = 478E92A3295442CA00EDFA26 /* TheWalletTest.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		472F28A325A7319600CE1481 /* TheWalletUITests */ = {
@@ -315,7 +309,7 @@
 			);
 			name = TheWalletUITests;
 			productName = Skillbox_diploma_step1UITests;
-			productReference = 478E929229540E6F00EDFA26 /* TheWalletUITests.xctest */;
+			productReference = 478E92A4295442CA00EDFA26 /* TheWalletUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -350,11 +344,11 @@
 			);
 			mainGroup = 472F287A25A7319500CE1481;
 			packageReferences = (
-				47F5F9D52855D99B0042F2D5 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */,
-				4799909F2901892800ECD407 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				477CC228290ABB1E00EA671D /* XCRemoteSwiftPackageReference "AAChartKit-Swift" */,
-				47082775290C9E500092246E /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
-				479A1B7E2936DF8C009D5520 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */,
+				478E92A5295446E800EDFA26 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				478E92AA2954492C00EDFA26 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
+				478E92AD29544CC000EDFA26 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */,
+				478E92B029544E1400EDFA26 /* XCRemoteSwiftPackageReference "AAChartKit-Swift" */,
+				478E92B329544F2C00EDFA26 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */,
 			);
 			productRefGroup = 472F287A25A7319500CE1481;
 			projectDirPath = "";
@@ -837,7 +831,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		47082775290C9E500092246E /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
+		478E92A5295446E800EDFA26 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+		478E92AA2954492C00EDFA26 /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD";
 			requirement = {
@@ -845,23 +847,7 @@
 				minimumVersion = 2.0.0;
 			};
 		};
-		477CC228290ABB1E00EA671D /* XCRemoteSwiftPackageReference "AAChartKit-Swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AAChartModel/AAChartKit-Swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
-			};
-		};
-		4799909F2901892800ECD407 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
-			};
-		};
-		479A1B7E2936DF8C009D5520 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */ = {
+		478E92AD29544CC000EDFA26 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/FirebaseUI-iOS";
 			requirement = {
@@ -869,7 +855,15 @@
 				minimumVersion = 12.0.0;
 			};
 		};
-		47F5F9D52855D99B0042F2D5 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */ = {
+		478E92B029544E1400EDFA26 /* XCRemoteSwiftPackageReference "AAChartKit-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AAChartModel/AAChartKit-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+		478E92B329544F2C00EDFA26 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/BeauNouvelle/SimpleCheckbox";
 			requirement = {
@@ -880,44 +874,34 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		47082776290C9E500092246E /* JGProgressHUD */ = {
+		478E92A6295446E800EDFA26 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 47082775290C9E500092246E /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
-			productName = JGProgressHUD;
-		};
-		477CC229290ABB1F00EA671D /* AAInfographics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 477CC228290ABB1E00EA671D /* XCRemoteSwiftPackageReference "AAChartKit-Swift" */;
-			productName = AAInfographics;
-		};
-		479990A02901892800ECD407 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4799909F2901892800ECD407 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 478E92A5295446E800EDFA26 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		479990A42901892800ECD407 /* FirebaseFirestore */ = {
+		478E92A8295446E800EDFA26 /* FirebaseFirestoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4799909F2901892800ECD407 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
-		};
-		479990A82901892800ECD407 /* FirebaseFirestoreSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4799909F2901892800ECD407 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 478E92A5295446E800EDFA26 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
 		};
-		479A1B7F2936DF8C009D5520 /* FirebaseAuthUI */ = {
+		478E92AB2954492C00EDFA26 /* JGProgressHUD */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 479A1B7E2936DF8C009D5520 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */;
-			productName = FirebaseAuthUI;
+			package = 478E92AA2954492C00EDFA26 /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
+			productName = JGProgressHUD;
 		};
-		47A94F54293824BE00076666 /* FirebaseGoogleAuthUI */ = {
+		478E92AE29544CC000EDFA26 /* FirebaseGoogleAuthUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 479A1B7E2936DF8C009D5520 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */;
+			package = 478E92AD29544CC000EDFA26 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */;
 			productName = FirebaseGoogleAuthUI;
 		};
-		47F5F9D62855D99B0042F2D5 /* SimpleCheckbox */ = {
+		478E92B129544E1400EDFA26 /* AAInfographics */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 47F5F9D52855D99B0042F2D5 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */;
+			package = 478E92B029544E1400EDFA26 /* XCRemoteSwiftPackageReference "AAChartKit-Swift" */;
+			productName = AAInfographics;
+		};
+		478E92B429544F2C00EDFA26 /* SimpleCheckbox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 478E92B329544F2C00EDFA26 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */;
 			productName = SimpleCheckbox;
 		};
 /* End XCSwiftPackageProductDependency section */
