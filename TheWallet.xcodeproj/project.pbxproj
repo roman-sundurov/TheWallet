@@ -24,9 +24,6 @@
 		47431E5F290B4C8B00818E6E /* Firebase+Firestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47431E5E290B4C8B00818E6E /* Firebase+Firestore.swift */; };
 		47431E60290B4C8B00818E6E /* Firebase+Firestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47431E5E290B4C8B00818E6E /* Firebase+Firestore.swift */; };
 		47431E61290B4C8B00818E6E /* Firebase+Firestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47431E5E290B4C8B00818E6E /* Firebase+Firestore.swift */; };
-		4744CD48293FFC9C004762AE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4744CD47293FFC9C004762AE /* GoogleService-Info.plist */; };
-		4744CD49293FFC9C004762AE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4744CD47293FFC9C004762AE /* GoogleService-Info.plist */; };
-		4744CD4A293FFC9C004762AE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4744CD47293FFC9C004762AE /* GoogleService-Info.plist */; };
 		4750EFE725BC2C5C00167A92 /* CategoryTableVCHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EFE625BC2C5C00167A92 /* CategoryTableVCHeader.swift */; };
 		4750EFEC25BC2C7F00167A92 /* CategoryTableVCCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EFEB25BC2C7F00167A92 /* CategoryTableVCCategory.swift */; };
 		475342D7290C37EC006BE673 /* swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 475342D6290C37EC006BE673 /* swiftlint.yml */; };
@@ -43,6 +40,10 @@
 		478E92AF29544CC000EDFA26 /* FirebaseGoogleAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = 478E92AE29544CC000EDFA26 /* FirebaseGoogleAuthUI */; };
 		478E92B229544E1400EDFA26 /* AAInfographics in Frameworks */ = {isa = PBXBuildFile; productRef = 478E92B129544E1400EDFA26 /* AAInfographics */; };
 		478E92B529544F2C00EDFA26 /* SimpleCheckbox in Frameworks */ = {isa = PBXBuildFile; productRef = 478E92B429544F2C00EDFA26 /* SimpleCheckbox */; };
+		478E92B72954DB6C00EDFA26 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 478E92B62954DB6B00EDFA26 /* GoogleService-Info.plist */; };
+		478E92B82954DB6C00EDFA26 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 478E92B62954DB6B00EDFA26 /* GoogleService-Info.plist */; };
+		478E92B92954DB6C00EDFA26 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 478E92B62954DB6B00EDFA26 /* GoogleService-Info.plist */; };
+		478E92BC2954DBB200EDFA26 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 478E92BB2954DBB200EDFA26 /* FirebaseAnalytics */; };
 		47AC1A9525C09AC9006E7817 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1A9425C09AC9006E7817 /* Model.swift */; };
 		47AC1AB625C0B7CB006E7817 /* MainTableVCOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1AB525C0B7CB006E7817 /* MainTableVCOperation.swift */; };
 		47B80F782667CA9500032678 /* RoundedGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B80F772667CA9500032678 /* RoundedGraphView.swift */; };
@@ -100,7 +101,6 @@
 		473549C0281A89E200E87139 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		473549C2281B2BA500E87139 /* SettingVM+TableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingVM+TableExtension.swift"; sourceTree = "<group>"; };
 		47431E5E290B4C8B00818E6E /* Firebase+Firestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase+Firestore.swift"; sourceTree = "<group>"; };
-		4744CD47293FFC9C004762AE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4750EFE625BC2C5C00167A92 /* CategoryTableVCHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableVCHeader.swift; sourceTree = "<group>"; };
 		4750EFEB25BC2C7F00167A92 /* CategoryTableVCCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableVCCategory.swift; sourceTree = "<group>"; };
 		475342D6290C37EC006BE673 /* swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftlint.yml; sourceTree = "<group>"; };
@@ -110,6 +110,7 @@
 		478E92A2295442CA00EDFA26 /* TheWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		478E92A3295442CA00EDFA26 /* TheWalletTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWalletTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		478E92A4295442CA00EDFA26 /* TheWalletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWalletUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		478E92B62954DB6B00EDFA26 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		47AC1A9425C09AC9006E7817 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Model.swift; path = TheWallet/Model.swift; sourceTree = SOURCE_ROOT; };
 		47AC1AB525C0B7CB006E7817 /* MainTableVCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableVCOperation.swift; sourceTree = "<group>"; };
 		47B80F772667CA9500032678 /* RoundedGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedGraphView.swift; sourceTree = "<group>"; };
@@ -128,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				478E92BC2954DBB200EDFA26 /* FirebaseAnalytics in Frameworks */,
 				478E92A7295446E800EDFA26 /* FirebaseAuth in Frameworks */,
 				478E92B529544F2C00EDFA26 /* SimpleCheckbox in Frameworks */,
 				478E92AC2954492C00EDFA26 /* JGProgressHUD in Frameworks */,
@@ -164,6 +166,7 @@
 				478E92A2295442CA00EDFA26 /* TheWallet.app */,
 				478E92A3295442CA00EDFA26 /* TheWalletTest.xctest */,
 				478E92A4295442CA00EDFA26 /* TheWalletUITests.xctest */,
+				478E92BA2954DBB200EDFA26 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -182,7 +185,7 @@
 				472F288F25A7319500CE1481 /* Assets.xcassets */,
 				472F289125A7319500CE1481 /* LaunchScreen.storyboard */,
 				472F289425A7319500CE1481 /* Info.plist */,
-				4744CD47293FFC9C004762AE /* GoogleService-Info.plist */,
+				478E92B62954DB6B00EDFA26 /* GoogleService-Info.plist */,
 			);
 			path = TheWallet;
 			sourceTree = "<group>";
@@ -232,6 +235,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		478E92BA2954DBB200EDFA26 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		47E9D49328FEAD3C00ACE97F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,6 +281,7 @@
 				478E92AE29544CC000EDFA26 /* FirebaseGoogleAuthUI */,
 				478E92B129544E1400EDFA26 /* AAInfographics */,
 				478E92B429544F2C00EDFA26 /* SimpleCheckbox */,
+				478E92BB2954DBB200EDFA26 /* FirebaseAnalytics */,
 			);
 			productName = Skillbox_diploma_step1;
 			productReference = 478E92A2295442CA00EDFA26 /* TheWallet.app */;
@@ -368,7 +379,7 @@
 			files = (
 				472F289325A7319500CE1481 /* LaunchScreen.storyboard in Resources */,
 				475342D7290C37EC006BE673 /* swiftlint.yml in Resources */,
-				4744CD48293FFC9C004762AE /* GoogleService-Info.plist in Resources */,
+				478E92B72954DB6C00EDFA26 /* GoogleService-Info.plist in Resources */,
 				472F289025A7319500CE1481 /* Assets.xcassets in Resources */,
 				472F288E25A7319500CE1481 /* Main.storyboard in Resources */,
 			);
@@ -378,8 +389,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4744CD49293FFC9C004762AE /* GoogleService-Info.plist in Resources */,
 				475342D8290C37EC006BE673 /* swiftlint.yml in Resources */,
+				478E92B82954DB6C00EDFA26 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,8 +398,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4744CD4A293FFC9C004762AE /* GoogleService-Info.plist in Resources */,
 				475342D9290C37EC006BE673 /* swiftlint.yml in Resources */,
+				478E92B92954DB6C00EDFA26 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,8 +653,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "TheWallet/GoogleService-Info.plist";
+				CURRENT_PROJECT_VERSION = 8;
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
 				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = YES;
@@ -673,8 +684,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "TheWallet/GoogleService-Info.plist";
+				CURRENT_PROJECT_VERSION = 8;
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = YES;
@@ -903,6 +914,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 478E92B329544F2C00EDFA26 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */;
 			productName = SimpleCheckbox;
+		};
+		478E92BB2954DBB200EDFA26 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 478E92A5295446E800EDFA26 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
