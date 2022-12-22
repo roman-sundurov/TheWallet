@@ -23,8 +23,8 @@ extension VCCategory: ProtocolVCCategory {
     currentActiveCellID = cellID
     let cells = self.tableView.visibleCells
     var counter = 0
-    for cell in cells {
-      if counter >= 2 {
+    for cell in cells where counter >= 2 {
+      // if counter >= 2 {
         let specCell = cell as? CategoryTableVCCategory
         if cellID == -100 {
           specCell?.closeEditing()
@@ -41,7 +41,7 @@ extension VCCategory: ProtocolVCCategory {
           }
         }
         counter += 1
-      }
+      // }
     }
   }
 
