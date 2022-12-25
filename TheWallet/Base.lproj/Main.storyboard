@@ -14,7 +14,7 @@
         <!--Sign In-->
         <scene sceneID="lb5-dG-Emg">
             <objects>
-                <viewController id="ffQ-Ml-Vgj" customClass="VCSignIn" customModule="MoneyManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ffQ-Ml-Vgj" customClass="VCSignIn" customModule="TheWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AhA-vE-Jb4">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -76,7 +76,7 @@
                                             <constraint firstAttribute="height" constant="30" id="Kpb-rL-Iu5"/>
                                         </constraints>
                                         <connections>
-                                            <action selector="googleignInViewButton:" destination="ffQ-Ml-Vgj" eventType="touchUpInside" id="f7M-6m-DTk"/>
+                                            <action selector="googleSignInViewButton:" destination="ffQ-Ml-Vgj" eventType="touchUpInside" id="UVM-H5-BmC"/>
                                         </connections>
                                     </view>
                                 </subviews>
@@ -114,11 +114,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="zeJ-CB-kxG"/>
                     <connections>
+                        <outlet property="emailSignInButton" destination="TWp-xv-wQb" id="7Sa-Lf-e20"/>
+                        <outlet property="emailSignUpButton" destination="QSM-l9-i07" id="J9M-0J-QVV"/>
                         <outlet property="emailTextField" destination="Ccl-1K-FBD" id="dZg-Ob-gZx"/>
+                        <outlet property="googleSignInView" destination="iCY-N6-t7n" id="hzM-uD-zcv"/>
                         <outlet property="logInGroup" destination="2kJ-x0-4KG" id="sds-L9-esx"/>
                         <outlet property="passwordTextField" destination="3lH-0W-1as" id="KTH-sq-J7C"/>
-                        <outlet property="signInButton" destination="TWp-xv-wQb" id="7Sa-Lf-e20"/>
-                        <outlet property="signUpButton" destination="QSM-l9-i07" id="J9M-0J-QVV"/>
                         <outlet property="topConstraint" destination="jl2-lw-hSF" id="xr9-Ro-SKd"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="segueToVCMain" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="KLB-fZ-o4m"/>
                         <segue destination="3on-RV-oi6" kind="presentation" identifier="segueToVCSignIn" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="b31-m7-iTg"/>
@@ -131,7 +132,7 @@
         <!--Main-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="VCMain" customModule="MoneyManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="VCMain" customModule="TheWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" userLabel="ScreenMain">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -237,7 +238,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zd6-bW-CPK" userLabel="lefttPart">
                                         <rect key="frame" x="0.0" y="0.0" width="180" height="200"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ths-aj-OB7" customClass="RoundedGraphView" customModule="MoneyManager" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ths-aj-OB7" customClass="RoundedGraphView" customModule="TheWallet" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="10" width="180" height="180"/>
                                                 <color key="backgroundColor" name="InterfaceColorGreen"/>
                                                 <constraints>
@@ -443,7 +444,7 @@
                                                         <rect key="frame" x="10" y="20" width="353" height="373"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <prototypes>
-                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="operation" id="ydW-iz-Upa" customClass="MainTableVCOperation" customModule="MoneyManager" customModuleProvider="target">
+                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="operation" id="ydW-iz-Upa" customClass="MainTableVCOperation" customModule="TheWallet" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="50" width="353" height="48"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ydW-iz-Upa" id="46B-Ab-Yrj">
@@ -691,7 +692,7 @@
         <!--Account-->
         <scene sceneID="N8P-d6-m2o">
             <objects>
-                <viewController id="O1a-5p-Jnz" customClass="VCAccount" customModule="MoneyManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="O1a-5p-Jnz" customClass="VCAccount" customModule="TheWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Lz-bV-Dg9">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -740,7 +741,7 @@
         <!--Setting-->
         <scene sceneID="RnT-g7-WBF">
             <objects>
-                <viewController modalTransitionStyle="flipHorizontal" id="fcp-GB-FKl" customClass="VCSetting" customModule="MoneyManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="flipHorizontal" id="fcp-GB-FKl" customClass="VCSetting" customModule="TheWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="L2w-sT-FME">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -882,7 +883,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="InterfaceColorWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellCategory" id="VR3-F6-Huf" customClass="SettingTableVCCategory" customModule="MoneyManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellCategory" id="VR3-F6-Huf" customClass="SettingTableVCCategory" customModule="TheWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="94.333332061767578" width="393" height="44.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VR3-F6-Huf" id="hlz-XO-kPc">
@@ -936,7 +937,7 @@
                                             <outlet property="labelSelectCategory" destination="fZU-fI-Qjk" id="bf1-51-JwT"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellDate" rowHeight="44" id="zpz-xv-mHZ" customClass="SettingTableVCDate" customModule="MoneyManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellDate" rowHeight="44" id="zpz-xv-mHZ" customClass="SettingTableVCDate" customModule="TheWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="138.66666412353516" width="393" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zpz-xv-mHZ" id="4K5-hq-kUl">
@@ -990,7 +991,7 @@
                                             <outlet property="labelSelectDate" destination="gPm-mx-OQF" id="0cW-cj-QLg"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellNote" id="hmy-aS-YRO" customClass="SettingTableVCNote" customModule="MoneyManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellNote" id="hmy-aS-YRO" customClass="SettingTableVCNote" customModule="TheWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="182.66666412353516" width="393" height="108.33333587646484"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hmy-aS-YRO" id="Xfm-Y8-Isj">
@@ -1081,7 +1082,7 @@
         <!--Category-->
         <scene sceneID="dPn-nb-L4v">
             <objects>
-                <viewController id="vna-KF-Brs" customClass="VCCategory" customModule="MoneyManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vna-KF-Brs" customClass="VCCategory" customModule="TheWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QS4-AS-IaU">
                         <rect key="frame" x="0.0" y="0.0" width="373" height="515"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1091,7 +1092,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" red="0.39607843139999999" green="0.73725490199999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" id="1UK-TR-vO5" customClass="CategoryTableVCHeader" customModule="MoneyManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" id="1UK-TR-vO5" customClass="CategoryTableVCHeader" customModule="TheWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="373" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1UK-TR-vO5" id="MI3-kJ-n4M">
@@ -1130,7 +1131,7 @@
                                             <outlet property="buttonOptions" destination="8cL-6K-1Lx" id="ejo-6e-lRT"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellNewCategory" id="P69-De-spv" customClass="CategoryTableVCNewCategory" customModule="MoneyManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellNewCategory" id="P69-De-spv" customClass="CategoryTableVCNewCategory" customModule="TheWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="93.666667938232422" width="373" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P69-De-spv" id="Ffo-Ay-WXn">
@@ -1187,7 +1188,7 @@
                                             <outlet property="textFieldNewCategory" destination="oyD-2D-jVU" id="xzd-pw-Pfm"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellChangeCategory" id="UOL-6e-fL6" customClass="CategoryTableVCCategory" customModule="MoneyManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellChangeCategory" id="UOL-6e-fL6" customClass="CategoryTableVCCategory" customModule="TheWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="137.33333587646484" width="373" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UOL-6e-fL6" id="OJe-yl-j3b">
@@ -1324,7 +1325,7 @@
         <!--Operation-->
         <scene sceneID="0GC-mc-Lb7">
             <objects>
-                <viewController id="7HG-Be-bHj" customClass="VCOperation" customModule="MoneyManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7HG-Be-bHj" customClass="VCOperation" customModule="TheWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U6t-e2-vEc">
                         <rect key="frame" x="0.0" y="0.0" width="353" height="311"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1491,7 +1492,7 @@
         <!--Graph-->
         <scene sceneID="d6u-8h-3Ex">
             <objects>
-                <viewController id="cOd-yj-oTb" customClass="VCGraph" customModule="MoneyManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cOd-yj-oTb" customClass="VCGraph" customModule="TheWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" id="3Yv-NV-gd9">
                         <rect key="frame" x="0.0" y="0.0" width="373" height="373"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1522,7 +1523,7 @@
         <!--Sign Up-->
         <scene sceneID="uT1-sq-EcP">
             <objects>
-                <viewController id="3on-RV-oi6" customClass="VCSignUp" customModule="MoneyManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3on-RV-oi6" customClass="VCSignUp" customModule="TheWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ytN-DA-QF8">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1638,7 +1639,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="ABz-lk-sfP"/>
-        <segue reference="pwL-YE-yKT"/>
+        <segue reference="KLB-fZ-o4m"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="App Icon_Final_1024" width="1024" height="1024"/>

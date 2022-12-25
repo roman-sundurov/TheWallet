@@ -7,7 +7,6 @@
 
 import Foundation
 import FirebaseFirestore
-import FirebaseFirestoreSwift
 import FirebaseAuth
 
 enum ErrorTypes: Error {
@@ -61,6 +60,6 @@ class UserRepository {
   let documentReference = Firestore.firestore().collection("users")
   var userReference: DocumentReference?
 
-  let auth = Auth.auth()
+  // let auth = Auth.auth()
   var listener: AuthStateDidChangeListenerHandle?
 }

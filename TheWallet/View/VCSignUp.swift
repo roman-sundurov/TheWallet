@@ -7,7 +7,7 @@
 
 import UIKit
 import FirebaseFirestore
-import FirebaseFirestoreSwift
+import FirebaseAuth
 
 class VCSignUp: UIViewController {
 
@@ -23,7 +23,7 @@ class VCSignUp: UIViewController {
     Task {
       do {
         try await UserRepository.shared.createAccount(name: nameTextField.text!, email: emailTextField.text!, password: passwordTextField.text!)
-        UserRepository.shared.listener = UserRepository.shared.auth.addStateDidChangeListener { [weak self] _, user in
+        UserRepository.shared.listener = Auth.auth().addStateDidChangeListener { [weak self] _, user in
           if let user = user {
             UserRepository.shared.userReference = Firestore.firestore().collection("users").document(user.email!)
             UserRepository.shared.addNewUser(name: self!.nameTextField.text!, surname: self!.surnameTextField.text!, email: self!.emailTextField.text!)

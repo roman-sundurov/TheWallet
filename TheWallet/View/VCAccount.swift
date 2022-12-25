@@ -11,7 +11,7 @@ import FirebaseAuth
 class VCAccount: UIViewController {
 
   @IBAction func logOut(_ sender: Any) {
-    try? UserRepository.shared.auth.signOut()
+    try? Auth.auth().signOut()
     UserRepository.shared.user = nil
     let defaults = UserDefaults.standard
     defaults.removeObject(forKey: "email")
