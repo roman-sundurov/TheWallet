@@ -54,7 +54,7 @@ class VCSignIn: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    GIDSignIn.sharedInstance.restorePreviousSignIn()
+    // GIDSignIn.sharedInstance.restorePreviousSignIn()
     UserRepository.shared.listener = Auth.auth().addStateDidChangeListener() { (auth, user) in
       if let user = user {
         // MeasurementHelper.sendLoginEvent()

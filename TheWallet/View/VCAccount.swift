@@ -7,10 +7,12 @@
 
 import UIKit
 import FirebaseAuth
+import GoogleSignIn
 
 class VCAccount: UIViewController {
 
   @IBAction func logOut(_ sender: Any) {
+    GIDSignIn.sharedInstance.signOut()
     try? Auth.auth().signOut()
     UserRepository.shared.user = nil
     let defaults = UserDefaults.standard
