@@ -55,6 +55,9 @@
 		47CBC9102958356800EF849F /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 47CBC90F2958356800EF849F /* FirebaseFirestoreSwift */; };
 		47CBC91B29585DB000EF849F /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 47CBC91A29585DB000EF849F /* GoogleSignIn */; };
 		47CBC91D29585DB000EF849F /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 47CBC91C29585DB000EF849F /* GoogleSignInSwift */; };
+		47CBC9212958A00700EF849F /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 47CBC9202958A00700EF849F /* FacebookCore */; };
+		47CBC9232958AC4B00EF849F /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 47CBC9222958AC4B00EF849F /* FacebookLogin */; };
+		47CBC9252959691C00EF849F /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 47CBC9242959691C00EF849F /* FacebookShare */; };
 		47E87752290807B100B99C09 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E87751290807B100B99C09 /* CategoryViewModel.swift */; };
 		47E87753290807B100B99C09 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E87751290807B100B99C09 /* CategoryViewModel.swift */; };
 		47E87754290807B100B99C09 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E87751290807B100B99C09 /* CategoryViewModel.swift */; };
@@ -123,6 +126,7 @@
 		47CB73C225B4364700638185 /* SettingTableVCCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableVCCategory.swift; sourceTree = "<group>"; };
 		47CBC8FF295823CD00EF849F /* SignInVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVM.swift; sourceTree = "<group>"; };
 		47CBC90B2958326600EF849F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		47CBC91F29589FD700EF849F /* TheWallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TheWallet.entitlements; sourceTree = "<group>"; };
 		47E87751290807B100B99C09 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		47EBDDF3292AFABF009BF1B6 /* Firebase+Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase+Auth.swift"; sourceTree = "<group>"; };
 		47EBDDF7292B0F43009BF1B6 /* VCSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCSignIn.swift; sourceTree = "<group>"; };
@@ -136,9 +140,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				47CBC91D29585DB000EF849F /* GoogleSignInSwift in Frameworks */,
+				47CBC9212958A00700EF849F /* FacebookCore in Frameworks */,
+				47CBC9252959691C00EF849F /* FacebookShare in Frameworks */,
 				478E92BC2954DBB200EDFA26 /* FirebaseAnalytics in Frameworks */,
 				47CBC91B29585DB000EF849F /* GoogleSignIn in Frameworks */,
 				478E92A7295446E800EDFA26 /* FirebaseAuth in Frameworks */,
+				47CBC9232958AC4B00EF849F /* FacebookLogin in Frameworks */,
 				478E92B529544F2C00EDFA26 /* SimpleCheckbox in Frameworks */,
 				47CBC90A29582FA800EF849F /* FirebaseFirestore in Frameworks */,
 				478E92AC2954492C00EDFA26 /* JGProgressHUD in Frameworks */,
@@ -181,6 +188,7 @@
 		472F288525A7319500CE1481 /* TheWallet */ = {
 			isa = PBXGroup;
 			children = (
+				47CBC91F29589FD700EF849F /* TheWallet.entitlements */,
 				472F288625A7319500CE1481 /* AppDelegate.swift */,
 				472F288825A7319500CE1481 /* SceneDelegate.swift */,
 				47AC1A9425C09AC9006E7817 /* Model.swift */,
@@ -293,6 +301,9 @@
 				47CBC90F2958356800EF849F /* FirebaseFirestoreSwift */,
 				47CBC91A29585DB000EF849F /* GoogleSignIn */,
 				47CBC91C29585DB000EF849F /* GoogleSignInSwift */,
+				47CBC9202958A00700EF849F /* FacebookCore */,
+				47CBC9222958AC4B00EF849F /* FacebookLogin */,
+				47CBC9242959691C00EF849F /* FacebookShare */,
 			);
 			productName = Skillbox_diploma_step1;
 			productReference = 478E92A2295442CA00EDFA26 /* TheWallet.app */;
@@ -371,6 +382,7 @@
 				478E92B029544E1400EDFA26 /* XCRemoteSwiftPackageReference "AAChartKit-Swift" */,
 				478E92B329544F2C00EDFA26 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */,
 				47CBC91929585DB000EF849F /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				47CBC91E2958973E00EF849F /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = 472F287A25A7319500CE1481;
 			projectDirPath = "";
@@ -666,6 +678,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_ENTITLEMENTS = TheWallet/TheWallet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "TheWallet/GoogleService-Info.plist";
@@ -697,6 +710,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_ENTITLEMENTS = TheWallet/TheWallet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "TheWallet/GoogleService-Info.plist";
@@ -896,6 +910,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		47CBC91E2958973E00EF849F /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -943,6 +965,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 47CBC91929585DB000EF849F /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		47CBC9202958A00700EF849F /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47CBC91E2958973E00EF849F /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		47CBC9222958AC4B00EF849F /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47CBC91E2958973E00EF849F /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
+		47CBC9242959691C00EF849F /* FacebookShare */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47CBC91E2958973E00EF849F /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookShare;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

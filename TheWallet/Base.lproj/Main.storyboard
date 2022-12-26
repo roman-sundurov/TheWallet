@@ -79,18 +79,32 @@
                                             <action selector="googleSignInViewButton:" destination="ffQ-Ml-Vgj" eventType="touchUpInside" id="UVM-H5-BmC"/>
                                         </connections>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YU0-nM-CFK" customClass="FBSDKButton">
+                                        <rect key="frame" x="0.0" y="216.66666666666663" width="273" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="f5W-VW-AUc"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                        <connections>
+                                            <action selector="fbaction:" destination="ffQ-Ml-Vgj" eventType="touchUpInside" id="lfc-0W-ON3"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="3lH-0W-1as" secondAttribute="trailing" id="9E6-eB-elL"/>
                                     <constraint firstItem="iCY-N6-t7n" firstAttribute="top" secondItem="QSM-l9-i07" secondAttribute="bottom" constant="10" id="BOA-iL-mGQ"/>
                                     <constraint firstItem="3lH-0W-1as" firstAttribute="top" secondItem="Ccl-1K-FBD" secondAttribute="bottom" constant="10" id="Dd7-xE-ALt"/>
                                     <constraint firstItem="Ccl-1K-FBD" firstAttribute="leading" secondItem="2kJ-x0-4KG" secondAttribute="leading" id="If2-ND-Sby"/>
+                                    <constraint firstItem="YU0-nM-CFK" firstAttribute="top" secondItem="iCY-N6-t7n" secondAttribute="bottom" constant="10" id="Utd-kI-MzB"/>
+                                    <constraint firstItem="YU0-nM-CFK" firstAttribute="leading" secondItem="2kJ-x0-4KG" secondAttribute="leading" id="bSV-77-1xj"/>
                                     <constraint firstAttribute="trailing" secondItem="iCY-N6-t7n" secondAttribute="trailing" id="ex4-bP-WHB"/>
                                     <constraint firstAttribute="height" constant="321" id="fy3-1C-Tcg"/>
                                     <constraint firstItem="QSM-l9-i07" firstAttribute="centerX" secondItem="2kJ-x0-4KG" secondAttribute="centerX" id="gAL-zh-icQ"/>
                                     <constraint firstItem="iCY-N6-t7n" firstAttribute="leading" secondItem="2kJ-x0-4KG" secondAttribute="leading" id="jqa-88-Xfp"/>
                                     <constraint firstItem="Ccl-1K-FBD" firstAttribute="top" secondItem="2kJ-x0-4KG" secondAttribute="top" id="oYY-kl-eRx"/>
                                     <constraint firstItem="TWp-xv-wQb" firstAttribute="centerX" secondItem="2kJ-x0-4KG" secondAttribute="centerX" id="ov6-W6-WP5"/>
+                                    <constraint firstAttribute="trailing" secondItem="YU0-nM-CFK" secondAttribute="trailing" id="p6c-Rj-kbd"/>
                                     <constraint firstAttribute="trailing" secondItem="Ccl-1K-FBD" secondAttribute="trailing" id="pnu-gI-fHc"/>
                                     <constraint firstItem="QSM-l9-i07" firstAttribute="top" secondItem="TWp-xv-wQb" secondAttribute="bottom" constant="10" id="sgK-go-SA7"/>
                                     <constraint firstItem="3lH-0W-1as" firstAttribute="leading" secondItem="2kJ-x0-4KG" secondAttribute="leading" id="unn-Dy-4Ku"/>
