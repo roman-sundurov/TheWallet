@@ -26,6 +26,7 @@ class VCSignIn: UIViewController {
   @IBOutlet var emailSignInButton: UIButton!
   @IBOutlet var emailSignUpButton: UIButton!
 
+  @IBOutlet var testButton: UIView!
   @IBOutlet var googleSignInView: GIDSignInButton!
 
   @IBAction func signInButton(_ sender: Any) {
@@ -91,6 +92,10 @@ class VCSignIn: UIViewController {
   // MARK: viewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    let loginButton = FBLoginButton()
+    loginButton.center = view.center
+    testButton.addSubview(loginButton)
 
     if let token = AccessToken.current,
        !token.isExpired {
