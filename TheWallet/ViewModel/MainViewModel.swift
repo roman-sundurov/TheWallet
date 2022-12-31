@@ -81,12 +81,12 @@ extension VCMain: ProtocolVCMain {
     miniGraphStarterBackground.isHidden = status
   }
 
-  func returnIncomesExpenses() -> [String: Double] {
+  func returnIncomesExpenses() -> [String: Double]? {
     if income != 0 || expensive != 0 {
       print("income= \(income), expensive= \(expensive)")
       return ["income": income, "expensive": expensive]
     } else {
-      return [:]
+      return nil
     }
   }
 

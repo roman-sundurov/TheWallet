@@ -15,74 +15,43 @@ import FacebookCore
 import FacebookLogin
 import FacebookShare
 
+@IBDesignable
 class VCSignIn: UIViewController {
 
   @IBOutlet var logInGroup: UIView!
-  @IBOutlet var topConstraint: NSLayoutConstraint!
+  // @IBOutlet var topConstraint: NSLayoutConstraint!
 
+  @IBOutlet var emailTextView: RoundedView!
   @IBOutlet var emailTextField: UITextField!
+  @IBOutlet var passwordTextView: RoundedView!
   @IBOutlet var passwordTextField: UITextField!
-
+  
   @IBOutlet var emailSignInButton: UIButton!
   @IBOutlet var emailSignUpButton: UIButton!
-
-  @IBOutlet var testButton: UIView!
-  @IBOutlet var googleSignInView: GIDSignInButton!
 
   @IBAction func signInButton(_ sender: Any) {
     emailSignIn()
   }
 
-  @IBAction func logUpButton(_ sender: Any) {
+  @IBAction func signUpButton(_ sender: Any) {
     performSegue(withIdentifier: "segueToVCSignIn", sender: nil)
   }
 
-  @IBAction func googleSignInViewButton(_ sender: Any) {
+  @IBAction func googleSignInButton(_ sender: Any) {
     googleSignIn()
-    print("googleSignInViewButton")
+    print("googleSignInButton")
   }
 
-  @IBAction func fbaction(_ sender: Any) {
-
-    let loginManager = LoginManager()
-    loginManager.logIn(permissions: ["public_profile", "email"], from: self) { (result, error) in
-      if let error = error {
-        print("Failed to login: \(error.localizedDescription)")
-        return
-      }
-
-      guard let accessToken = AccessToken.current else {
-        print("Failed to get access token")
-        return
-      }
-
-      let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
-
-        // Perform login by calling Firebase APIs
-      Auth.auth().signIn(with: credential, completion: { (user, error) in
-        if let error = error {
-          print("Login error: \(error.localizedDescription)")
-          let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
-          let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-          alertController.addAction(okayAction)
-          self.present(alertController, animated: true, completion: nil)
-          return
-        }else {
-          // self.currentUserName()
-        }
-
-      })
-
-    }
-
+  @IBAction func facebookSignInButton(_ sender: Any) {
+    facebookSignIn()
   }
 
-  func showLogInInformation() {
-    UIView.animate(withDuration: 2, delay: 0) {
-      self.topConstraint.constant = 100
-      self.logInGroup.isHidden = false
-    }
-  }
+  // func showLogInInformation() {
+  //   UIView.animate(withDuration: 2, delay: 0) {
+  //     // self.topConstraint.constant = 100
+  //     self.logInGroup.isHidden = false
+  //   }
+  // }
 
   // MARK: viewWillDisapear
   func viewWillDisapear() {
@@ -93,9 +62,7 @@ class VCSignIn: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    let loginButton = FBLoginButton()
-    loginButton.center = view.center
-    testButton.addSubview(loginButton)
+    // emailTextView.layer.cornerRadius = 14
 
     if let token = AccessToken.current,
        !token.isExpired {

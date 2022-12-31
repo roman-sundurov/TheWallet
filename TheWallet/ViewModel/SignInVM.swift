@@ -18,7 +18,7 @@ extension VCSignIn {
     if let email = UserDefaults.standard.object(forKey: "email") as? String, let password = UserDefaults.standard.object(forKey: "password") as? String {
       guard !email.isEmpty || !password.isEmpty else {
         return
-        showLogInInformation()
+        // showLogInInformation()
       }
       print("email= \(email), password= \(password)")
       Task {
@@ -26,50 +26,18 @@ extension VCSignIn {
           try await UserRepository.shared.signIn(email: email, password: password)
         } catch {
           print("LogIn Error = \(error)")
-          showLogInInformation()
+          // showLogInInformation()
         }
       }
 
     } else {
       print("No login data")
-      showLogInInformation()
+      // showLogInInformation()
     }
-  }
-
-  func googleSignIn() {
-    guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-    GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, error in
-      guard error == nil else { return }
-      guard let signInResult = signInResult else { return }
-
-      signInResult.user.refreshTokensIfNeeded { user, error in
-        guard
-          let accessToken = user?.accessToken,
-          let idToken = user?.idToken
-        else {
-          return
-        }
-        let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: accessToken.tokenString)
-
-        Auth.auth().signIn(with: credential) { authResult, error in
-          if let error = error {
-            print("Login error: \(error.localizedDescription)")
-            let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
-            let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alertController.addAction(okayAction)
-            self.present(alertController, animated: true, completion: nil)
-            return
-              // User is signed in
-              // ...
-          }
-        }
-
-      }
-    }
-    
   }
 
   func emailSignIn() {
+    emailSignInButton.configuration?.showsActivityIndicator = true
       // if !emailTextField.text!.isEmpty && passwordTextField.text!.isEmpty {
       //   let actionCodeSettings = ActionCodeSettings()
       //   actionCodeSettings.url = URL(string: "https://www.example.com")
@@ -104,16 +72,84 @@ extension VCSignIn {
             let defaults = UserDefaults.standard
             defaults.set(self?.emailTextField.text!, forKey: "email")
             defaults.set(self?.passwordTextField.text!, forKey: "password")
-            
+
             UserRepository.shared.user?.email = user.email!
             UserRepository.shared.userReference = Firestore.firestore().collection("users").document(user.email!)
+            self!.emailSignInButton.configuration?.showsActivityIndicator = false
             self!.performSegue(withIdentifier: "segueToVCMain", sender: nil)
           }
         }
       } catch {
         print("LogIn Error = \(error)")
+        emailSignInButton.configuration?.showsActivityIndicator = false
       }
     }
+  }
+
+
+  func googleSignIn() {
+    guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+    GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, error in
+      guard error == nil else { return }
+      guard let signInResult = signInResult else { return }
+
+      signInResult.user.refreshTokensIfNeeded { user, error in
+        guard
+          let accessToken = user?.accessToken,
+          let idToken = user?.idToken
+        else {
+          return
+        }
+        let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: accessToken.tokenString)
+
+        Auth.auth().signIn(with: credential) { authResult, error in
+          if let error = error {
+            print("Login error: \(error.localizedDescription)")
+            let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
+            let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(okayAction)
+            self.present(alertController, animated: true, completion: nil)
+            return
+              // User is signed in
+              // ...
+          }
+        }
+
+      }
+    }
+    
+  }
+
+  func facebookSignIn() {
+    let loginManager = LoginManager()
+    loginManager.logIn(permissions: ["public_profile", "email"], from: self) { (result, error) in
+      if let error = error {
+        print("Failed to login: \(error.localizedDescription)")
+        return
+      }
+
+      guard let accessToken = AccessToken.current else {
+        print("Failed to get access token")
+        return
+      }
+
+      let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+
+        // Perform login by calling Firebase APIs
+      Auth.auth().signIn(with: credential, completion: { (user, error) in
+        if let error = error {
+          print("Login error: \(error.localizedDescription)")
+          let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
+          let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+          alertController.addAction(okayAction)
+          self.present(alertController, animated: true, completion: nil)
+          return
+        }else {
+          // self.currentUserName()
+        }
+      })
+    }
+
   }
 
 

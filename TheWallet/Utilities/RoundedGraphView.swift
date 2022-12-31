@@ -11,7 +11,7 @@ protocol ProtocolViewRoundedGraph {
   func setDelegateScreen1RoundedGraph(delegate: ProtocolVCMain)
 }
 
-@IBDesignable
+// @IBDesignable
 class RoundedGraphView: UIView {
   private enum Constants {
     static let lineWidth: CGFloat = 25.0
@@ -28,43 +28,45 @@ class RoundedGraphView: UIView {
     let data = vcMainDelegate?.returnIncomesExpenses()
     var incomesExpensesRatio: Double = 1
 
-    if data!["income"] == 0 && data!["expensive"] != 0 {
-      incomesExpensesRatio = -1
-    } else {
-      incomesExpensesRatio = data!.isEmpty ? 0 : data!["income"]! / (data!["income"]! - data!["expensive"]!)
-    }
+    if let data = data {
+      if data["income"] == 0 && data["expensive"] != 0 {
+        incomesExpensesRatio = -1
+      } else {
+        incomesExpensesRatio = data.isEmpty ? 0 : data["income"]! / (data["income"]! - data["expensive"]!)
+      }
 
-    print("incomesExpensesRatio= \(incomesExpensesRatio)")
+      print("incomesExpensesRatio= \(incomesExpensesRatio)")
 
-    if data!.isEmpty {
-      vcMainDelegate?.miniGraphStarterBackground(status: false)
-    } else {
-      vcMainDelegate?.miniGraphStarterBackground(status: true)
-      let center = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
-      let radius = max(bounds.width, bounds.height)
+      if data.isEmpty {
+        vcMainDelegate?.miniGraphStarterBackground(status: false)
+      } else {
+        vcMainDelegate?.miniGraphStarterBackground(status: true)
+        let center = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
+        let radius = max(bounds.width, bounds.height)
 
-      let startAngleIncome: CGFloat = .pi / 2
-      let startAngleExpenses: CGFloat = .pi * 2 * CGFloat(incomesExpensesRatio) + startAngleIncome
+        let startAngleIncome: CGFloat = .pi / 2
+        let startAngleExpenses: CGFloat = .pi * 2 * CGFloat(incomesExpensesRatio) + startAngleIncome
 
-      let pathIncome = UIBezierPath(
-        arcCenter: center,
-        radius: radius / 2 - Constants.arcWidth / 2,
-        startAngle: startAngleIncome,
-        endAngle: startAngleExpenses,
-        clockwise: true)
-      pathIncome.lineWidth = Constants.lineWidth
-      incomesColor.setStroke()
-      pathIncome.stroke()
+        let pathIncome = UIBezierPath(
+          arcCenter: center,
+          radius: radius / 2 - Constants.arcWidth / 2,
+          startAngle: startAngleIncome,
+          endAngle: startAngleExpenses,
+          clockwise: true)
+        pathIncome.lineWidth = Constants.lineWidth
+        incomesColor.setStroke()
+        pathIncome.stroke()
 
-      let pathExpenses = UIBezierPath(
-        arcCenter: center,
-        radius: radius / 2 - Constants.arcWidth / 2,
-        startAngle: startAngleExpenses,
-        endAngle: startAngleIncome,
-        clockwise: true)
-      pathExpenses.lineWidth = Constants.lineWidth
-      expensesColor.setStroke()
-      pathExpenses.stroke()
+        let pathExpenses = UIBezierPath(
+          arcCenter: center,
+          radius: radius / 2 - Constants.arcWidth / 2,
+          startAngle: startAngleExpenses,
+          endAngle: startAngleIncome,
+          clockwise: true)
+        pathExpenses.lineWidth = Constants.lineWidth
+        expensesColor.setStroke()
+        pathExpenses.stroke()
+      }
     }
   }
 }
