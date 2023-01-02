@@ -7,8 +7,10 @@
 
 // import UIKit
 import FirebaseCore
+import FirebaseAuth
+import FirebaseFirestore
 import GoogleSignIn
-import FacebookCore
+import FacebookLogin
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,19 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // Firebase setup
     FirebaseApp.configure()
-
-    // Google sign in setup
-    GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
-      if error != nil || user == nil {
-          // Show the app's signed-out state.
-      } else {
-          // Show the app's signed-in state.
-      }
-    }
-
     // Facebook sign in signIn setup
     ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
 
+    // autoSignIn()
     return true
   }
 
@@ -40,9 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   // func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
   // }
 
-  // @available(iOS 9.0, *)
   func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-
     let handled = GIDSignIn.sharedInstance.handle(url)
     if handled {
       return true
@@ -54,8 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
       annotation: options[UIApplication.OpenURLOptionsKey.annotation]
     )
-
     return false
   }
+
 
 }

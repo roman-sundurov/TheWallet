@@ -64,27 +64,25 @@ class VCSignIn: UIViewController {
 
     // emailTextView.layer.cornerRadius = 14
 
-    if let token = AccessToken.current,
-       !token.isExpired {
-        // User is logged in, do work such as go to next view controller.
-    }
-
-    // let loginButton = FBLoginButton()
-    // loginButton.center = facebookSignInView.center
-    // loginButton.permissions = ["public_profile", "email"]
-    // loginButton.addTarget(self, action: #selector(loginButton), for: .touchUpInside)
-    // facebookSignInView.addSubview(loginButton)
+    // if let token = AccessToken.current,
+    //    !token.isExpired {
+    //     // User is logged in, do work such as go to next view controller.
+    // }
 
     UserRepository.shared.listener = Auth.auth().addStateDidChangeListener() { (auth, user) in
       if let user = user {
         // MeasurementHelper.sendLoginEvent()
         UserRepository.shared.user?.email = user.email!
         UserRepository.shared.userReference = Firestore.firestore().collection("users").document(user.email!)
+        UserRepository.shared.signInMethod = user.providerID
+        UserDefaults.standard.set(user.providerID, forKey: "providerID")
+
+        print("signInMethod= \(user.providerID)")
         self.performSegue(withIdentifier: "segueToVCMain", sender: nil)
       }
     }
 
-    autoSignInEmail()
+    autoSignIn()
 
   }
 

@@ -59,7 +59,7 @@
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" backgroundImage="GoogleSignInButton"/>
                                         <connections>
-                                            <action selector="googleSignInButton:" destination="ffQ-Ml-Vgj" eventType="touchUpInside" id="Xbg-Or-ZJt"/>
+                                            <action selector="googleSignInButton:" destination="ffQ-Ml-Vgj" eventType="touchUpInside" id="MWN-hB-aUu"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -287,7 +287,7 @@
         <!--Main-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="VCMain" customModule="TheWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VCMain" id="BYZ-38-t0r" customClass="VCMain" customModule="TheWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" userLabel="ScreenMain">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -342,8 +342,8 @@
                                                                 <color key="textColor" name="InterfaceColorWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$9 821.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jce-a5-TXM">
-                                                                <rect key="frame" x="10" y="18" width="106" height="26.333333333333329"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jce-a5-TXM">
+                                                                <rect key="frame" x="10" y="18" width="29" height="26.333333333333329"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                                 <color key="textColor" name="InterfaceColorGreen2"/>
                                                                 <nil key="highlightedColor"/>
@@ -354,8 +354,8 @@
                                                                 <color key="textColor" name="InterfaceColorWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-$9 821.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MzC-5Z-ueh">
-                                                                <rect key="frame" x="10" y="77.333333333333314" width="116" height="26.333333333333329"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-$0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MzC-5Z-ueh">
+                                                                <rect key="frame" x="10" y="77.333333333333314" width="38.666666666666664" height="26.333333333333329"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                                 <color key="textColor" name="InterfaceColorRed"/>
                                                                 <nil key="highlightedColor"/>
@@ -1793,6 +1793,15 @@
         </scene>
     </scenes>
     <designables>
+        <designable name="FdM-FS-TQT">
+            <size key="intrinsicContentSize" width="350" height="53"/>
+        </designable>
+        <designable name="TWp-xv-wQb">
+            <size key="intrinsicContentSize" width="75.333333333333329" height="34.333333333333336"/>
+        </designable>
+        <designable name="YU0-nM-CFK">
+            <size key="intrinsicContentSize" width="350" height="53.333333333333336"/>
+        </designable>
         <designable name="ZKu-Ha-0sG">
             <size key="intrinsicContentSize" width="350" height="53"/>
         </designable>

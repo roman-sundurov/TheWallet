@@ -9,9 +9,16 @@ import Foundation
 import FirebaseFirestore
 import FirebaseAuth
 
+// enum SignInMethod {
+//   case email
+//   case apple
+//   case google
+//   case facebook
+// }
+
 enum ErrorTypes: Error {
   case cellError
-  case  modelError
+  case modelError
 }
 
 typealias NestedType = (User) -> Void
@@ -59,6 +66,7 @@ class UserRepository {
   var mainDiffableSectionsSource: [String: [Operation]] = [:]
   let documentReference = Firestore.firestore().collection("users")
   var userReference: DocumentReference?
+  var signInMethod: String?
 
   // let auth = Auth.auth()
   var listener: AuthStateDidChangeListenerHandle?

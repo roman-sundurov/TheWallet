@@ -14,26 +14,60 @@ import FacebookLogin
 
 extension VCSignIn {
 
-  func autoSignInEmail() {
-    if let email = UserDefaults.standard.object(forKey: "email") as? String, let password = UserDefaults.standard.object(forKey: "password") as? String {
-      guard !email.isEmpty || !password.isEmpty else {
-        return
-        // showLogInInformation()
-      }
-      print("email= \(email), password= \(password)")
-      Task {
-        do {
-          try await UserRepository.shared.signIn(email: email, password: password)
-        } catch {
-          print("LogIn Error = \(error)")
-          // showLogInInformation()
-        }
-      }
+  func autoSignIn() {
 
-    } else {
-      print("No login data")
-      // showLogInInformation()
-    }
+    // Не используется, потому что Firebase сам управляет переподключением к аккаунту при перезагрузке приложения
+
+    // let provider = UserDefaults.standard.object(forKey: "providerID") as? String
+    // 
+    // switch provider {
+    // case "password":
+    //   if let email = UserDefaults.standard.object(forKey: "email") as? String, let password = UserDefaults.standard.object(forKey: "password") as? String {
+    //     guard !email.isEmpty || !password.isEmpty else {
+    //       return
+    //         // showLogInInformation()
+    //     }
+    //     print("email= \(email), password= \(password)")
+    //     Task {
+    //       do {
+    //         try await UserRepository.shared.signIn(email: email, password: password)
+    //       } catch {
+    //         print("LogIn Error = \(error)")
+    //         showMessagePrompt(error.localizedDescription)
+    //           // showLogInInformation()
+    //       }
+    //     }
+    // 
+    //   } else {
+    //     print("No login data")
+    //       // showLogInInformation()
+    //   }
+    // case "google.com":
+    //   GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+    //     if error != nil || user == nil {
+    //         // Show the app's signed-out state.
+    //     } else {
+    //         // Show the app's signed-in state.
+    //     }
+    //   }
+    // case "facebook.com":
+    //   if let data = UserDefaults.standard.data(forKey: "facebookToken"),
+    //      let accessToken = NSKeyedUnarchiver.unarchiveObject(with: data) as? AccessToken {
+    //     let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+    //     Auth.auth().signIn(with: credential, completion: { (user, error) in
+    //       if let error = error {
+    //         print("Login error: \(error.localizedDescription)")
+    //         self.showMessagePrompt(error.localizedDescription)
+    //         return
+    //       } else {
+    //       }
+    //     })
+    //   }
+    // 
+    // // case "apple.com":
+    // default:
+    //   print("not autoSignIn")
+    // }
   }
 
   func emailSignIn() {
@@ -64,6 +98,11 @@ extension VCSignIn {
       //
       //
       // } else {
+    let credential = EmailAuthProvider.credential(withEmail: emailTextField.text!, password: passwordTextField.text!)
+    // Auth.auth().currentUser!.link(with: credential) { authResult, error in
+    //   print("email link(with: credential")
+    // }
+
     Task {
       do {
         try await UserRepository.shared.signIn(email: emailTextField.text!, password: passwordTextField.text!)
@@ -73,7 +112,7 @@ extension VCSignIn {
             defaults.set(self?.emailTextField.text!, forKey: "email")
             defaults.set(self?.passwordTextField.text!, forKey: "password")
 
-            UserRepository.shared.user?.email = user.email!
+            // UserRepository.shared.user?.email = user.email!
             UserRepository.shared.userReference = Firestore.firestore().collection("users").document(user.email!)
             self!.emailSignInButton.configuration?.showsActivityIndicator = false
             self!.performSegue(withIdentifier: "segueToVCMain", sender: nil)
@@ -82,6 +121,7 @@ extension VCSignIn {
       } catch {
         print("LogIn Error = \(error)")
         emailSignInButton.configuration?.showsActivityIndicator = false
+        showMessagePrompt(error.localizedDescription)
       }
     }
   }
@@ -90,7 +130,10 @@ extension VCSignIn {
   func googleSignIn() {
     guard let clientID = FirebaseApp.app()?.options.clientID else { return }
     GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, error in
-      guard error == nil else { return }
+      guard error == nil else {
+        self.showMessagePrompt(error!.localizedDescription)
+        return
+      }
       guard let signInResult = signInResult else { return }
 
       signInResult.user.refreshTokensIfNeeded { user, error in
@@ -101,17 +144,15 @@ extension VCSignIn {
           return
         }
         let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: accessToken.tokenString)
+        // Auth.auth().currentUser!.link(with: credential) { authResult, error in
+        //   print("Google link(with: credential")
+        // }
 
         Auth.auth().signIn(with: credential) { authResult, error in
           if let error = error {
             print("Login error: \(error.localizedDescription)")
-            let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
-            let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alertController.addAction(okayAction)
-            self.present(alertController, animated: true, completion: nil)
+            self.showMessagePrompt(error.localizedDescription)
             return
-              // User is signed in
-              // ...
           }
         }
 
@@ -125,27 +166,30 @@ extension VCSignIn {
     loginManager.logIn(permissions: ["public_profile", "email"], from: self) { (result, error) in
       if let error = error {
         print("Failed to login: \(error.localizedDescription)")
+        self.showMessagePrompt(error.localizedDescription)
         return
       }
 
       guard let accessToken = AccessToken.current else {
         print("Failed to get access token")
+        self.showMessagePrompt("Failed to get access token")
         return
       }
+      let data = NSKeyedArchiver.archivedData(withRootObject: accessToken)
+      UserDefaults.standard.set(data, forKey: "facebookToken")
 
       let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+      // Auth.auth().currentUser!.link(with: credential) { authResult, error in
+      //   print("Facebook link(with: credential")
+      // }
 
-        // Perform login by calling Firebase APIs
+      // Perform login by calling Firebase APIs
       Auth.auth().signIn(with: credential, completion: { (user, error) in
         if let error = error {
           print("Login error: \(error.localizedDescription)")
-          let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
-          let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-          alertController.addAction(okayAction)
-          self.present(alertController, animated: true, completion: nil)
+          self.showMessagePrompt(error.localizedDescription)
           return
-        }else {
-          // self.currentUserName()
+        } else {
         }
       })
     }
