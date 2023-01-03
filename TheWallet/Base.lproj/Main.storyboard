@@ -28,28 +28,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2kJ-x0-4KG">
-                                <rect key="frame" x="20" y="536" width="353" height="183.33333333333337"/>
+                                <rect key="frame" x="20" y="536" width="353" height="183"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YU0-nM-CFK" customClass="ShadowButton" customModule="TheWallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="130" width="353" height="53.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="130" width="353" height="53"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="53" id="ZFW-Nl-Nad"/>
+                                        </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" backgroundImage="FacebookSignInButton"/>
                                         <connections>
                                             <action selector="facebookSignInButton:" destination="ffQ-Ml-Vgj" eventType="touchUpInside" id="tzn-rM-PGg"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZKu-Ha-0sG" userLabel="AppleSignInButton" customClass="ShadowButton" customModule="TheWallet" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZKu-Ha-0sG" userLabel="AppleSignInButton" customClass="AppleSignInShadowButton" customModule="TheWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="353" height="53"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="53" id="BMA-wK-y3D"/>
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" backgroundImage="AppleSignInButton"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                <real key="value" value="-1"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FdM-FS-TQT" userLabel="AppleSignInButton" customClass="ShadowButton" customModule="TheWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="65" width="353" height="53"/>
@@ -64,12 +62,12 @@
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="ZKu-Ha-0sG" firstAttribute="top" secondItem="2kJ-x0-4KG" secondAttribute="top" id="0e0-HD-sQG"/>
                                     <constraint firstItem="FdM-FS-TQT" firstAttribute="leading" secondItem="2kJ-x0-4KG" secondAttribute="leading" id="7f0-Rt-l9h"/>
                                     <constraint firstAttribute="trailing" secondItem="ZKu-Ha-0sG" secondAttribute="trailing" id="Cwd-iX-Oqa"/>
-                                    <constraint firstItem="ZKu-Ha-0sG" firstAttribute="top" secondItem="2kJ-x0-4KG" secondAttribute="top" id="Oge-cJ-dFL"/>
+                                    <constraint firstAttribute="bottom" secondItem="YU0-nM-CFK" secondAttribute="bottom" id="T3j-r7-AUg"/>
                                     <constraint firstItem="FdM-FS-TQT" firstAttribute="top" secondItem="ZKu-Ha-0sG" secondAttribute="bottom" constant="12" id="aGg-Bh-QPK"/>
                                     <constraint firstItem="YU0-nM-CFK" firstAttribute="leading" secondItem="2kJ-x0-4KG" secondAttribute="leading" id="bSV-77-1xj"/>
-                                    <constraint firstAttribute="bottom" secondItem="YU0-nM-CFK" secondAttribute="bottom" id="eAd-rf-YuD"/>
                                     <constraint firstAttribute="trailing" secondItem="FdM-FS-TQT" secondAttribute="trailing" id="efG-pI-8Io"/>
                                     <constraint firstItem="ZKu-Ha-0sG" firstAttribute="leading" secondItem="2kJ-x0-4KG" secondAttribute="leading" id="fbL-4e-YOS"/>
                                     <constraint firstAttribute="trailing" secondItem="YU0-nM-CFK" secondAttribute="trailing" id="p6c-Rj-kbd"/>
@@ -269,6 +267,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="zeJ-CB-kxG"/>
                     <connections>
+                        <outlet property="appleSignInButton" destination="ZKu-Ha-0sG" id="VYT-u6-oK4"/>
                         <outlet property="emailSignInButton" destination="TWp-xv-wQb" id="7Sa-Lf-e20"/>
                         <outlet property="emailSignUpButton" destination="QSM-l9-i07" id="ckv-aJ-me5"/>
                         <outlet property="emailTextField" destination="Ccl-1K-FBD" id="dZg-Ob-gZx"/>
@@ -1801,9 +1800,6 @@
         </designable>
         <designable name="YU0-nM-CFK">
             <size key="intrinsicContentSize" width="350" height="53.333333333333336"/>
-        </designable>
-        <designable name="ZKu-Ha-0sG">
-            <size key="intrinsicContentSize" width="350" height="53"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>

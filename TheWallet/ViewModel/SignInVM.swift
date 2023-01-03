@@ -11,6 +11,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import GoogleSignIn
 import FacebookLogin
+import AuthenticationServices
 
 extension VCSignIn {
 
@@ -195,6 +196,5 @@ extension VCSignIn {
     }
 
   }
-
 
 }

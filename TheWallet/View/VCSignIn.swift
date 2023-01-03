@@ -9,15 +9,21 @@ import UIKit
 import FirebaseCore
 import FirebaseAuth
 import FirebaseFirestore
+
+// Google SignIn
 import GoogleSignIn
 
+// Facebok SignIn
 import FacebookCore
 import FacebookLogin
 import FacebookShare
 
-@IBDesignable
-class VCSignIn: UIViewController {
+// Apple SignIn
+import AuthenticationServices
 
+
+// @IBDesignable
+class VCSignIn: UIViewController {
   @IBOutlet var logInGroup: UIView!
   // @IBOutlet var topConstraint: NSLayoutConstraint!
 
@@ -28,6 +34,8 @@ class VCSignIn: UIViewController {
   
   @IBOutlet var emailSignInButton: UIButton!
   @IBOutlet var emailSignUpButton: UIButton!
+
+  @IBOutlet var appleSignInButton: AppleSignInShadowButton!
 
   @IBAction func signInButton(_ sender: Any) {
     emailSignIn()
@@ -58,16 +66,38 @@ class VCSignIn: UIViewController {
     Auth.auth().removeStateDidChangeListener(UserRepository.shared.listener!)
   }
 
+  @objc func appleIDStateRevoked() {
+      // log out user, change UI etc
+  }
+
   // MARK: viewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    // emailTextView.layer.cornerRadius = 14
-
-    // if let token = AccessToken.current,
-    //    !token.isExpired {
-    //     // User is logged in, do work such as go to next view controller.
+    // if let userID = UserDefaults.standard.string(forKey: "userID") {
+    //   ASAuthorizationAppleIDProvider().getCredentialState(forUserID: userID, completion: {
+    //     credentialState, error in
+    //
+    //     switch(credentialState){
+    //     case .authorized:
+    //       print("user remain logged in, proceed to another view")
+    //       self.performSegue(withIdentifier: "LoginToUserSegue", sender: nil)
+    //     case .revoked:
+    //       print("user logged in before but revoked")
+    //     case .notFound:
+    //       print("user haven't log in before")
+    //     default:
+    //       print("unknown state")
+    //     }
+    //   })
     // }
+
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(appleIDStateRevoked),
+      name: ASAuthorizationAppleIDProvider.credentialRevokedNotification,
+      object: nil
+      )
 
     UserRepository.shared.listener = Auth.auth().addStateDidChangeListener() { (auth, user) in
       if let user = user {
@@ -81,7 +111,8 @@ class VCSignIn: UIViewController {
         self.performSegue(withIdentifier: "segueToVCMain", sender: nil)
       }
     }
-
+    
+    appleSignInButtonPreparation()
     autoSignIn()
 
   }
