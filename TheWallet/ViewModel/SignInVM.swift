@@ -10,6 +10,7 @@ import FirebaseCore
 import FirebaseAuth
 import FirebaseFirestore
 import GoogleSignIn
+import FacebookCore
 import FacebookLogin
 import AuthenticationServices
 

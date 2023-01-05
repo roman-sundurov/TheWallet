@@ -295,7 +295,7 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="27"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All payment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uhc-J8-Rkm">
-                                        <rect key="frame" x="136" y="-0.3333333333333357" width="121" height="27.666666666666668"/>
+                                        <rect key="frame" x="136" y="-0.3333333333333357" width="121" height="27.666666666666664"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>

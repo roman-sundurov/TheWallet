@@ -7,6 +7,7 @@
 
 // import UIKit
 import FacebookCore
+import FacebookLogin
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   var window: UIWindow?

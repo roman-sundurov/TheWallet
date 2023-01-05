@@ -5,11 +5,13 @@
 //  Created by Roman on 07.01.2021.
 //
 
-// import UIKit
+import UIKit
 import FirebaseCore
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseDynamicLinks
 import GoogleSignIn
+import FacebookCore
 import FacebookLogin
 import AuthenticationServices
 
@@ -53,21 +55,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-    ApplicationDelegate.shared.application(
-      application,
-      open: url,
-      sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-      annotation: options[UIApplication.OpenURLOptionsKey.annotation]
-    )
+    if let scheme = url.scheme, scheme.hasPrefix("fb") {
+      // Facebook login
 
 
-    let handled = GIDSignIn.sharedInstance.handle(url)
-    if handled {
-      return true
+      // var dlHandler = false
+      //   if let link = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
+      //     // self.handleIncomingDynamicLink(link)
+      //     dlHandler = true
+      //   }
+      //   // let handled = GIDSignIn.sharedInstance().handle(url)
+      //   let fbHandler = ApplicationDelegate.shared.application(application, open: url,
+      //     sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+      //     annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+      //   )
+      //   // DynamicLinks.performDiagnostics(completion: nil)
+      //   return fbHandler || dlHandler
+
+
+      return ApplicationDelegate.shared.application(application, open: url, options: options)
+    } else if let scheme = url.scheme, scheme.hasPrefix("com.googleusercontent.apps.") {
+        // Google login
+      return GIDSignIn.sharedInstance.handle(url)
     }
-
     return false
   }
+
+  // func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+  //   ApplicationDelegate.shared.application(
+  //     application,
+  //     open: url,
+  //     sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+  //     annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+  //   )
+  //
+  //
+  //   let handled = GIDSignIn.sharedInstance.handle(url)
+  //   if handled {
+  //     return true
+  //   }
+  //
+  //   return false
+  // }
 
 
 }

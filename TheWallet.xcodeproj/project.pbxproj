@@ -63,6 +63,8 @@
 		47CBC9212958A00700EF849F /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 47CBC9202958A00700EF849F /* FacebookCore */; };
 		47CBC9232958AC4B00EF849F /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 47CBC9222958AC4B00EF849F /* FacebookLogin */; };
 		47CBC9252959691C00EF849F /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 47CBC9242959691C00EF849F /* FacebookShare */; };
+		47D8174D2966F12D00B4C418 /* FirebaseDynamicLinks in Frameworks */ = {isa = PBXBuildFile; productRef = 47D8174C2966F12D00B4C418 /* FirebaseDynamicLinks */; };
+		47D8174F2966F15F00B4C418 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 47D8174E2966F15F00B4C418 /* FirebaseAnalyticsSwift */; };
 		47E87752290807B100B99C09 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E87751290807B100B99C09 /* CategoryViewModel.swift */; };
 		47E87753290807B100B99C09 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E87751290807B100B99C09 /* CategoryViewModel.swift */; };
 		47E87754290807B100B99C09 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E87751290807B100B99C09 /* CategoryViewModel.swift */; };
@@ -153,6 +155,7 @@
 				47CBC9212958A00700EF849F /* FacebookCore in Frameworks */,
 				47CBC9252959691C00EF849F /* FacebookShare in Frameworks */,
 				478E92BC2954DBB200EDFA26 /* FirebaseAnalytics in Frameworks */,
+				47D8174F2966F15F00B4C418 /* FirebaseAnalyticsSwift in Frameworks */,
 				47CBC91B29585DB000EF849F /* GoogleSignIn in Frameworks */,
 				478E92A7295446E800EDFA26 /* FirebaseAuth in Frameworks */,
 				47CBC9232958AC4B00EF849F /* FacebookLogin in Frameworks */,
@@ -161,6 +164,7 @@
 				478E92AC2954492C00EDFA26 /* JGProgressHUD in Frameworks */,
 				478E92B229544E1400EDFA26 /* AAInfographics in Frameworks */,
 				47CBC9102958356800EF849F /* FirebaseFirestoreSwift in Frameworks */,
+				47D8174D2966F12D00B4C418 /* FirebaseDynamicLinks in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +339,8 @@
 				47CBC9202958A00700EF849F /* FacebookCore */,
 				47CBC9222958AC4B00EF849F /* FacebookLogin */,
 				47CBC9242959691C00EF849F /* FacebookShare */,
+				47D8174C2966F12D00B4C418 /* FirebaseDynamicLinks */,
+				47D8174E2966F15F00B4C418 /* FirebaseAnalyticsSwift */,
 			);
 			productName = Skillbox_diploma_step1;
 			productReference = 478E92A2295442CA00EDFA26 /* TheWallet.app */;
@@ -1016,6 +1022,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 47CBC91E2958973E00EF849F /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookShare;
+		};
+		47D8174C2966F12D00B4C418 /* FirebaseDynamicLinks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 478E92A5295446E800EDFA26 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDynamicLinks;
+		};
+		47D8174E2966F15F00B4C418 /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 478E92A5295446E800EDFA26 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
