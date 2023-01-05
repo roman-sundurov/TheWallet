@@ -181,7 +181,23 @@ extension AppleSignInShadowButton: ASAuthorizationControllerDelegate {
                                                         idToken: idTokenString,
                                                         rawNonce: nonce)
       Auth.auth().signIn(with: firebaseCredential) { [weak self] (authResult, error) in
-          // Do something after Firebase sign in completed
+        if let error = error {
+          print(error.localizedDescription)
+          return
+        }
+
+        // // Mak a request to set user's display name on Firebase
+        // let changeRequest = authResult?.user.createProfileChangeRequest()
+        // changeRequest?.displayName = appleIDCredential.fullName?.givenName
+        // changeRequest?.commitChanges(completion: { (error) in
+        // 
+        //   if let error = error {
+        //     print(error.localizedDescription)
+        //   } else {
+        //     print("Updated display name: \(Auth.auth().currentUser!.displayName!)")
+        //   }
+        // })
+
       }
 
 
@@ -191,34 +207,7 @@ extension AppleSignInShadowButton: ASAuthorizationControllerDelegate {
       let familyName = appleIDCredential.fullName?.familyName
       let nickName = appleIDCredential.fullName?.nickname
 
-      // /*
-      //  useful for server side, the app can send identityToken and authorizationCode
-      //  to the server for verification purpose
-      //  */
-      // var identityToken : String?
-      // if let token = appleIDCredential.identityToken {
-      //   identityToken = String(bytes: token, encoding: .utf8)
-      // }
-      //
-      // var authorizationCode : String?
-      // if let code = appleIDCredential.authorizationCode {
-      //   authorizationCode = String(bytes: code, encoding: .utf8)
-      // }
-      //
-      // // do what you want with the data here
-      // Auth.auth().signIn(with: appleIDCredential, completion: { (user, error) in
-      //   if let error = error {
-      //     print("Login error: \(error.localizedDescription)")
-      //
-      //     if let nextResponder = self.next as? VCSignIn {
-      //       nextResponder.showMessagePrompt(error.localizedDescription)
-      //     } else {
-      //       print("nextResponder didn't find")
-      //     }
-      //     return
-      //   } else {
-      //   }
-      // })
     }
   }
+
 }

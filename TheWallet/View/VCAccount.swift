@@ -12,14 +12,7 @@ import GoogleSignIn
 class VCAccount: UIViewController {
 
   @IBAction func logOut(_ sender: Any) {
-    print("signInMethod= \(UserRepository.shared.signInMethod)")
-    // GIDSignIn.sharedInstance.signOut()
-    try? Auth.auth().signOut()
-    UserRepository.shared.user = nil
-    let defaults = UserDefaults.standard
-    defaults.removeObject(forKey: "email")
-    defaults.removeObject(forKey: "password")
-    defaults.removeObject(forKey: "facebookToken")
+    UserRepository.shared.logOut()
     performSegue(withIdentifier: "segueToVCSignIn", sender: nil)
   }
   
@@ -27,9 +20,9 @@ class VCAccount: UIViewController {
     dismiss(animated: true)
   }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-    }
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+  }
 
 }

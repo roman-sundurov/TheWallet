@@ -11,6 +11,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import GoogleSignIn
 import FacebookLogin
+import AuthenticationServices
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,10 +19,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // Firebase setup
     FirebaseApp.configure()
+    print("provider1= \(Auth.auth().currentUser?.providerData.first?.providerID)")
     // Facebook sign in signIn setup
     ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
 
-    // autoSignIn()
+      // Retrieve user ID saved in UserDefaults
+    if let userID = UserDefaults.standard.string(forKey: "appleAuthorizedUserIdKey") {
+
+      // Check Apple ID credential state
+      ASAuthorizationAppleIDProvider().getCredentialState(forUserID: userID, completion: { [unowned self]
+        credentialState, error in
+
+        switch(credentialState) {
+        case .authorized:
+          break
+        case .notFound,
+            .transferred,
+            .revoked:
+            // Perform sign out
+          UserRepository.shared.logOut()
+          break
+        @unknown default:
+          break
+        }
+      })
+    }
     return true
   }
 
@@ -30,21 +52,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
   }
 
-  // func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-  // }
-
   func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-    let handled = GIDSignIn.sharedInstance.handle(url)
-    if handled {
-      return true
-    }
-
     ApplicationDelegate.shared.application(
       application,
       open: url,
       sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
       annotation: options[UIApplication.OpenURLOptionsKey.annotation]
     )
+
+
+    let handled = GIDSignIn.sharedInstance.handle(url)
+    if handled {
+      return true
+    }
+
     return false
   }
 

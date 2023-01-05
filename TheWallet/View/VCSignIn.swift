@@ -66,8 +66,26 @@ class VCSignIn: UIViewController {
     Auth.auth().removeStateDidChangeListener(UserRepository.shared.listener!)
   }
 
-  @objc func appleIDStateRevoked() {
-      // log out user, change UI etc
+  @objc func appleIDStateDidRevoked(_ notification: Notification) {
+      // Make sure user signed in with Apple
+    if let providerId =  Auth.auth().currentUser?.providerData.first?.providerID,
+       providerId == "apple.com" {
+      UserRepository.shared.logOut()
+    }
+  }
+
+  override func viewDidDisappear(_ animated: Bool) {
+    NotificationCenter.default.removeObserver(self, name: ASAuthorizationAppleIDProvider.credentialRevokedNotification, object: nil)
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    // Register to Apple ID credential revoke notification
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(appleIDStateDidRevoked(_:)),
+      name: ASAuthorizationAppleIDProvider.credentialRevokedNotification,
+      object: nil
+    )
   }
 
   // MARK: viewDidLoad
@@ -92,27 +110,17 @@ class VCSignIn: UIViewController {
     //   })
     // }
 
-    NotificationCenter.default.addObserver(
-      self,
-      selector: #selector(appleIDStateRevoked),
-      name: ASAuthorizationAppleIDProvider.credentialRevokedNotification,
-      object: nil
-      )
-
     UserRepository.shared.listener = Auth.auth().addStateDidChangeListener() { (auth, user) in
       if let user = user {
         // MeasurementHelper.sendLoginEvent()
         UserRepository.shared.user?.email = user.email!
         UserRepository.shared.userReference = Firestore.firestore().collection("users").document(user.email!)
-        UserRepository.shared.signInMethod = user.providerID
-        UserDefaults.standard.set(user.providerID, forKey: "providerID")
 
         print("signInMethod= \(user.providerID)")
         self.performSegue(withIdentifier: "segueToVCMain", sender: nil)
       }
     }
     
-    appleSignInButtonPreparation()
     autoSignIn()
 
   }
