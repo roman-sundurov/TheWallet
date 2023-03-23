@@ -11,38 +11,38 @@ import FirebaseAuth
 
 class VCSignUp: UIViewController {
 
-  @IBOutlet var nameTextField: UITextField!
-  @IBOutlet var surnameTextField: UITextField!
-  @IBOutlet var emailTextField: UITextField!
-  @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet var nameTextField: UITextField!
+    @IBOutlet var surnameTextField: UITextField!
+    @IBOutlet var emailTextField: UITextField!
+    @IBOutlet var passwordTextField: UITextField!
 
-  @IBOutlet var signUpButton: UIButton!
-  @IBOutlet var signInButton: UIButton!
+    @IBOutlet var signUpButton: UIButton!
+    @IBOutlet var signInButton: UIButton!
 
-  @IBAction func signUpButton(_ sender: Any) {
-    Task {
-      do {
-        try await UserRepository.shared.createAccount(name: nameTextField.text!, email: emailTextField.text!, password: passwordTextField.text!)
-        UserRepository.shared.listener = Auth.auth().addStateDidChangeListener { [weak self] _, user in
-          if let user = user {
-            UserRepository.shared.userReference = Firestore.firestore().collection("users").document(user.email!)
-            UserRepository.shared.addNewUser(name: self!.nameTextField.text!, surname: self!.surnameTextField.text!, email: self!.emailTextField.text!)
-            self!.performSegue(withIdentifier: "segueToVCMain", sender: nil)
-          }
+    @IBAction func signUpButton(_ sender: Any) {
+        Task {
+            do {
+                try await UserRepository.shared.createAccount(name: nameTextField.text!, email: emailTextField.text!, password: passwordTextField.text!)
+                UserRepository.shared.listener = Auth.auth().addStateDidChangeListener { [weak self] _, user in
+                    if let user = user {
+                        UserRepository.shared.userReference = Firestore.firestore().collection("users").document(user.email!)
+                        UserRepository.shared.addNewUser(name: self!.nameTextField.text!, surname: self!.surnameTextField.text!, email: self!.emailTextField.text!)
+                        self!.performSegue(withIdentifier: "segueToVCMain", sender: nil)
+                    }
+                }
+            } catch {
+                print("LogIn Error = \(error)")
+            }
         }
-      } catch {
-        print("LogIn Error = \(error)")
-      }
     }
-  }
 
-  @IBAction func signInButton(_ sender: Any) {
-    // performSegue(withIdentifier: "segueToVCSignIn", sender: nil)
-    dismiss(animated: true)
-  }
+    @IBAction func signInButton(_ sender: Any) {
+            // performSegue(withIdentifier: "segueToVCSignIn", sender: nil)
+        dismiss(animated: true)
+    }
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 
 }

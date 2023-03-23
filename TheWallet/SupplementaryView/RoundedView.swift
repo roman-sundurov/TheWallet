@@ -9,17 +9,17 @@ import UIKit
 
 @IBDesignable
 class RoundedView: UIView {
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    viewSetup()
-  }
-
-  required init?(coder: NSCoder) {
-    super.init(coder: coder)
-    viewSetup()
-  }
-
-  func viewSetup() {
-    self.layer.cornerRadius = 14
-  }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        viewSetup()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        viewSetup()
+    }
+    
+    func viewSetup() {
+        self.layer.cornerRadius = 14
+    }
 }
