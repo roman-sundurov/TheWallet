@@ -13,19 +13,38 @@ import FirebaseAuth
 //   case email
 //   case apple
 //   case google
-//   case facebook
 // }
 
-enum ErrorTypes: Error {
-    case cellError
-    case modelError
+enum ReusableCellIdentifier: String {
+    case operation
+    case header
+    case cellCategory
+    case cellDate
+    case cellNote
+    case cellNewCategory
+    case cellChangeCategory
+}
+
+enum PerformSegueIdentifiers: String {
+    case segueToVCSignIn
+    case segueToVCMain
+    case segueToVCAccount
+    case segueToVCSetting
+    case segueToVCSettingForEdit
+}
+
+enum ThrowError: Error {
+    case getUserDataError
+    case getUserReferenceError
+    case emptyInputFields
+    case customError(errorName: String)
 }
 
 typealias NestedType = (User) -> Void
 
 struct GraphData {
-    var date: Date
-    var amount: Double
+    let date: Date
+    let amount: Double
 }
 
 struct Operation: Codable, Identifiable, Equatable, Hashable {
@@ -59,7 +78,7 @@ struct User: Codable, Identifiable, Equatable, Hashable {
     var id = UUID()
 }
 
-class UserRepository {
+final class UserRepository {
     static let shared = UserRepository()
     var user: User?
     var mainDiffableSections: [String] = []
@@ -68,6 +87,6 @@ class UserRepository {
     var userReference: DocumentReference?
     var signInMethod: String?
 
-        // let auth = Auth.auth()
+    let auth = Auth.auth()
     var listener: AuthStateDidChangeListenerHandle?
 }

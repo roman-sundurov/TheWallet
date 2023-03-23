@@ -60,9 +60,6 @@
 		47CBC9102958356800EF849F /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 47CBC90F2958356800EF849F /* FirebaseFirestoreSwift */; };
 		47CBC91B29585DB000EF849F /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 47CBC91A29585DB000EF849F /* GoogleSignIn */; };
 		47CBC91D29585DB000EF849F /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 47CBC91C29585DB000EF849F /* GoogleSignInSwift */; };
-		47CBC9212958A00700EF849F /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 47CBC9202958A00700EF849F /* FacebookCore */; };
-		47CBC9232958AC4B00EF849F /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 47CBC9222958AC4B00EF849F /* FacebookLogin */; };
-		47CBC9252959691C00EF849F /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 47CBC9242959691C00EF849F /* FacebookShare */; };
 		47D8174D2966F12D00B4C418 /* FirebaseDynamicLinks in Frameworks */ = {isa = PBXBuildFile; productRef = 47D8174C2966F12D00B4C418 /* FirebaseDynamicLinks */; };
 		47D8174F2966F15F00B4C418 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 47D8174E2966F15F00B4C418 /* FirebaseAnalyticsSwift */; };
 		47E87752290807B100B99C09 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E87751290807B100B99C09 /* CategoryViewModel.swift */; };
@@ -152,13 +149,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				47CBC91D29585DB000EF849F /* GoogleSignInSwift in Frameworks */,
-				47CBC9212958A00700EF849F /* FacebookCore in Frameworks */,
-				47CBC9252959691C00EF849F /* FacebookShare in Frameworks */,
 				478E92BC2954DBB200EDFA26 /* FirebaseAnalytics in Frameworks */,
 				47D8174F2966F15F00B4C418 /* FirebaseAnalyticsSwift in Frameworks */,
 				47CBC91B29585DB000EF849F /* GoogleSignIn in Frameworks */,
 				478E92A7295446E800EDFA26 /* FirebaseAuth in Frameworks */,
-				47CBC9232958AC4B00EF849F /* FacebookLogin in Frameworks */,
 				478E92B529544F2C00EDFA26 /* SimpleCheckbox in Frameworks */,
 				47CBC90A29582FA800EF849F /* FirebaseFirestore in Frameworks */,
 				478E92AC2954492C00EDFA26 /* JGProgressHUD in Frameworks */,
@@ -336,9 +330,6 @@
 				47CBC90F2958356800EF849F /* FirebaseFirestoreSwift */,
 				47CBC91A29585DB000EF849F /* GoogleSignIn */,
 				47CBC91C29585DB000EF849F /* GoogleSignInSwift */,
-				47CBC9202958A00700EF849F /* FacebookCore */,
-				47CBC9222958AC4B00EF849F /* FacebookLogin */,
-				47CBC9242959691C00EF849F /* FacebookShare */,
 				47D8174C2966F12D00B4C418 /* FirebaseDynamicLinks */,
 				47D8174E2966F15F00B4C418 /* FirebaseAnalyticsSwift */,
 			);
@@ -419,7 +410,6 @@
 				478E92B029544E1400EDFA26 /* XCRemoteSwiftPackageReference "AAChartKit-Swift" */,
 				478E92B329544F2C00EDFA26 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */,
 				47CBC91929585DB000EF849F /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
-				47CBC91E2958973E00EF849F /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = 472F287A25A7319500CE1481;
 			projectDirPath = "";
@@ -953,14 +943,6 @@
 				minimumVersion = 7.0.0;
 			};
 		};
-		47CBC91E2958973E00EF849F /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 15.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1008,21 +990,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 47CBC91929585DB000EF849F /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
-		};
-		47CBC9202958A00700EF849F /* FacebookCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 47CBC91E2958973E00EF849F /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookCore;
-		};
-		47CBC9222958AC4B00EF849F /* FacebookLogin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 47CBC91E2958973E00EF849F /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookLogin;
-		};
-		47CBC9242959691C00EF849F /* FacebookShare */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 47CBC91E2958973E00EF849F /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookShare;
 		};
 		47D8174C2966F12D00B4C418 /* FirebaseDynamicLinks */ = {
 			isa = XCSwiftPackageProductDependency;

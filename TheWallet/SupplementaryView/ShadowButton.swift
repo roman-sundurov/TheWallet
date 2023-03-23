@@ -8,18 +8,18 @@
 import UIKit
 
 @IBDesignable
-class ShadowButton: UIButton {
-    
+final class ShadowButton: UIButton {
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         viewSetup()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         viewSetup()
     }
-    
+
     func viewSetup() {
         self.layer.cornerRadius = 14
         self.layer.shadowOpacity = 1

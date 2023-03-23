@@ -7,20 +7,20 @@
 
 import UIKit
 
-class MainTableVCOperation: UITableViewCell {
+final class MainTableVCOperation: UITableViewCell {
     @IBOutlet var viewPictureOfCategory: UIView!
     @IBOutlet var labelCategory: UILabel!
     @IBOutlet var labelAmount: UILabel!
     @IBOutlet var currencyStatus: UILabel!
-    
+
     var vcMainDelegate: ProtocolVCMain?
     var id: UUID?
-    
+
     @objc func showOperation(_ sender: UITapGestureRecognizer) {
         vcMainDelegate?.showOperation(id!)
         print("ChangeCategory from Screen2")
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
             // Initialization code
@@ -28,7 +28,7 @@ class MainTableVCOperation: UITableViewCell {
         self.isUserInteractionEnabled = true
         self.addGestureRecognizer(gesture)
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }

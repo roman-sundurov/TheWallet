@@ -11,7 +11,7 @@ protocol ProtocolSettingTableVCDate {
     func returnDateTextField() -> UILabel
 }
 
-class SettingTableVCDate: UITableViewCell {
+final class SettingTableVCDate: UITableViewCell {
     @IBOutlet var labelDate: UILabel!
     @IBOutlet var labelSelectDate: UILabel!
     @IBOutlet var buttonSelectDate: UIButton!

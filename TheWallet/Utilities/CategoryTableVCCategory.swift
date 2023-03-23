@@ -14,7 +14,7 @@ protocol ProtocolCategoryTableVCCategory {
     func setPermitionToSetCategory(status: Bool)
 }
 
-class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
+final class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
         // MARK: - outlets
     @IBOutlet var textFieldNameCategory: UITextField!
     @IBOutlet var buttonDeleteCategory: UIButton!
@@ -22,7 +22,7 @@ class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
     @IBOutlet var buttonConfirmNewName: UIButton!
     @IBOutlet var checkBoxObject: Checkbox!
     @IBOutlet var constaraintCellChangeCategoryHeight: NSLayoutConstraint!
-    
+
         // MARK: - delegates and variables
     var vcMainDelegate: ProtocolVCMain?
     var vcSettingDelegate: ProtocolVCSetting?
@@ -33,13 +33,13 @@ class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
     var permitionToSetCategory = true
     var category: Category?
     var cellID: Int?
-    
+
         // MARK: - transitions
     @IBAction func buttonDeleteCategoryAction(_ sender: Any) {
         vcMainDelegate!.deleteCategory(idOfObject: category!.id)
         vcCategoryDelegate?.screen2ContainerDeleteCategory(idOfObject: category!.id)
     }
-    
+
     @IBAction func buttonsEditNameCategoryAction(_ sender: Any) {
         if editStatus == false {
             editStatus = true
@@ -57,12 +57,12 @@ class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
             closeEditing()
         }
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         buttonsEditNameCategoryAction(buttonConfirmNewName!)
         return true
     }
-    
+
     @objc func closeWindows(tap: UITapGestureRecognizer) {
         if permitionToSetCategory == false { return }
             // запись выбранной категории во временную переменную
@@ -71,15 +71,15 @@ class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
         vcCategoryDelegate?.setCurrentActiveEditingCell(cellID: 100)
         print("ClosePopup from ContainerCell")
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     func startCell(category: Category, cellID: Int) {
         self.cellID = cellID
         self.category = category

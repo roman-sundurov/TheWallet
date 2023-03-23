@@ -21,10 +21,10 @@ protocol ProtocolVCCategory {
 }
 
 class VCCategory: UIViewController {
-        // MARK: - outlets
+    // MARK: - outlets
     @IBOutlet var tableView: UITableView!
-    
-        // MARK: - delegates and variables
+
+    // MARK: - delegates and variables
     var vcSettingDelegate: ProtocolVCSetting?
     var vcMainDelegate: ProtocolVCMain?
     var categoryTableVCHeaderDelegate: ProtocolCategoryTableVCHeader?
@@ -33,15 +33,15 @@ class VCCategory: UIViewController {
     var animationNewCategoryInCell = false
     var currentActiveCellID: Int?
     var categoriesArray: [Category] = []
-    
-        // MARK: - objects
+
+    // MARK: - objects
     let alertErrorAddNewCategory = UIAlertController(
         title: "Введите название категории",
         message: nil,
         preferredStyle: .alert
     )
-    
-        // MARK: - viewDidLoad
+
+    // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         _ = calculateCategoryArray()

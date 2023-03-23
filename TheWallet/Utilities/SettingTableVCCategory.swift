@@ -7,28 +7,28 @@
 
 import UIKit
 
-class SettingTableVCCategory: UITableViewCell {
+final class SettingTableVCCategory: UITableViewCell {
     @IBOutlet var labelCategory: UILabel!
     @IBOutlet var labelSelectCategory: UILabel!
     @IBOutlet var buttonSelectCategory: UIButton!
-    
+
     var vcSettingDelegate: ProtocolVCSetting?
     var indexRow: Int = 0
-    
-        // Animations
+
+    // Animations
     @objc func changeCategoryOpenPopUpScreen2FromCellCategory(_ tag: Int) {
         vcSettingDelegate?.changeCategoryOpenPopUpScreen2(indexRow)
         print("ChangeCategory from Screen2")
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     func prepareCell(indexRow: Int) {
         self.indexRow = indexRow
         if let newCategory = vcSettingDelegate!.returnNewOperation().category {

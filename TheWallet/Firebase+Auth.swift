@@ -8,7 +8,6 @@
 import UIKit
 import FirebaseAuth
 import GoogleSignIn
-import FacebookLogin
 
 extension UserRepository {
 
@@ -27,7 +26,7 @@ extension UserRepository {
             print("switch provider= \(provider.providerID)")
             switch provider.providerID {
             case "password":
-                    // try? Auth.auth().signOut()
+                    try? Auth.auth().signOut()
                 UserRepository.shared.user = nil
                 let defaults = UserDefaults.standard
                 defaults.removeObject(forKey: "email")
@@ -35,13 +34,6 @@ extension UserRepository {
 
             case "google.com":
                 GIDSignIn.sharedInstance.signOut()
-
-            case "facebook.com":
-                let loginManager = LoginManager()
-                loginManager.logOut()
-
-                let defaults = UserDefaults.standard
-                defaults.removeObject(forKey: "facebookToken")
 
             case "apple.com":
                 UserDefaults.standard.set(nil, forKey: "appleAuthorizedUserIdKey")
@@ -54,4 +46,5 @@ extension UserRepository {
                 // let defaults = U-serDefaults.standard
         }
     }
+
 }

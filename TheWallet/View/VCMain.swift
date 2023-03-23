@@ -28,7 +28,7 @@ protocol ProtocolVCMain {
   func returnGraphData() -> [GraphData]
   func addCategory(name: String, icon: String, date: Double)
   func deleteOperation(uuid: UUID)
-  func fetchFirebase()
+  func fetchFirebase() async
 }
 
 class VCMain: UIViewController {
@@ -110,13 +110,12 @@ class VCMain: UIViewController {
         // MARK: - clicks
 
     @IBAction func settingPage(_ sender: Any) {
-        performSegue(withIdentifier: "segueToVCAccount", sender: nil)
+        performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCAccount.rawValue, sender: nil)
     }
 
     @IBAction func buttonActionScreen1NewOperation(_ sender: Any) {
-        performSegue(withIdentifier: "segueToVCSetting", sender: nil)
+        performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCSetting.rawValue, sender: nil)
     }
-
 
     @IBAction func buttonActionScreen1ShowGraph(_ sender: Any) {
         if isButtonsActive == true {
@@ -180,28 +179,45 @@ class VCMain: UIViewController {
 
     @IBAction func buttonDailyGesture(_ sender: Any) {
         if isButtonsActive == true {
-            userRepository.updateDaysForSorting(daysForSorting: 1)
+            do {
+                try userRepository.updateDaysForSorting(daysForSorting: 1)
+            } catch {
+                showAlert(message: "Database connection error, missing userReference")
+            }
             updateScreen()
         }
     }
 
     @IBAction func buttonWeeklyGesture(_ sender: Any) {
         if isButtonsActive == true {
-            userRepository.updateDaysForSorting(daysForSorting: 7)
+            do {
+                try userRepository.updateDaysForSorting(daysForSorting: 7)
+            } catch {
+                showAlert(message: "Database connection error, missing userReference")
+            }
             updateScreen()
         }
     }
 
     @IBAction func buttonMonthlyGesture(_ sender: Any) {
         if isButtonsActive == true {
-            userRepository.updateDaysForSorting(daysForSorting: 30)
+            do {
+                try userRepository.updateDaysForSorting(daysForSorting: 30)
+            } catch {
+                showAlert(message: "Database connection error, missing userReference")
+            }
+
             updateScreen()
         }
     }
 
     @IBAction func buttonYearlyGesture(_ sender: Any) {
         if isButtonsActive == true {
-            userRepository.updateDaysForSorting(daysForSorting: 365)
+            do {
+                try userRepository.updateDaysForSorting(daysForSorting: 365)
+            } catch {
+                showAlert(message: "Database connection error, missing userReference")
+            }
             updateScreen()
         }
     }
@@ -225,8 +241,8 @@ class VCMain: UIViewController {
         }
     }
 
-        // MARK: - top Menu
-    func topMenuHighliter(specifyLabel: UILabel) {
+    // MARK: - top Menu
+    private func topMenuHighliter(specifyLabel: UILabel) {
         specifyLabel.font = UIFont.systemFont(ofSize: specifyLabel.font.pointSize, weight: .bold)
         switch specifyLabel {
         case labelDaily:
@@ -312,18 +328,23 @@ class VCMain: UIViewController {
         }
     }
 
-        // MARK: - viewDidLoad
+    // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         print("viewDidLoad")
         Task {
+            do {
                 // hudAppear()
-            try? await userRepository.getUserData { data in
-                self.hudAppear()
-                self.userRepository.user = data
-                print("NewData= \(String(describing: self.userRepository.user))")
-                self.updateScreen()
-                self.hudDisapper()
+                try await userRepository.fetchGetUserData { user in
+                    self.hudAppear()
+                    self.userRepository.user = user
+                    print("NewData= \(String(describing: self.userRepository.user))")
+                    self.updateScreen()
+                    self.hudDisapper()
+                    // self.showAlert(message: "Database connection success")
+                }
+            } catch ThrowError.getUserDataError {
+                showAlert(message: "Database connection error, missing userReference")
             }
         }
         dateFormatter.dateStyle = .medium
@@ -347,5 +368,15 @@ class VCMain: UIViewController {
             self.blurView.widthAnchor.constraint(equalTo: self.view.widthAnchor)
         ])
         self.blurView.isHidden = true
+    }
+
+    func showAlert(message: String) {
+        let alert = UIAlertController(
+          title: message,
+          message: nil,
+          preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil ))
+        self.present(alert, animated: true, completion: nil)
     }
 }

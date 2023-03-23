@@ -27,7 +27,7 @@ class VCSignUp: UIViewController {
                     if let user = user {
                         UserRepository.shared.userReference = Firestore.firestore().collection("users").document(user.email!)
                         UserRepository.shared.addNewUser(name: self!.nameTextField.text!, surname: self!.surnameTextField.text!, email: self!.emailTextField.text!)
-                        self!.performSegue(withIdentifier: "segueToVCMain", sender: nil)
+                        self!.performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCMain.rawValue, sender: nil)
                     }
                 }
             } catch {
@@ -37,10 +37,11 @@ class VCSignUp: UIViewController {
     }
 
     @IBAction func signInButton(_ sender: Any) {
-            // performSegue(withIdentifier: "segueToVCSignIn", sender: nil)
+        // performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCSignIn.rawValue, sender: nil)
         dismiss(animated: true)
     }
 
+    // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }

@@ -12,11 +12,11 @@ extension VCSetting: ProtocolVCSetting {
     func getUserData() -> User {
         return vcMainDelegate!.getUserData()
     }
-    
+
     func setCategoryInNewOperation(categoryUUID: UUID) {
         newOperation.category = categoryUUID
     }
-    
+
     func menuArrayCalculate() {
         let screen2MenuList0 = SettingMenuData(name: "Header", text: "")
         let screen2MenuList1 = SettingMenuData(name: "Category", text: "Select category")
@@ -24,11 +24,11 @@ extension VCSetting: ProtocolVCSetting {
         let screen2MenuList3 = SettingMenuData(name: "Notes", text: "")
         settingMenuArray = [screen2MenuList0, screen2MenuList1, screen2MenuList2, screen2MenuList3]
     }
-    
+
     func getSettingMenuArray() -> [SettingMenuData] {
         return settingMenuArray
     }
-    
+
     func setVCSetting(amount: Double, categoryUUID: UUID, date: Double, note: String, id: UUID) {
         newOperation.amount = amount
         newOperation.category = categoryUUID
@@ -36,11 +36,11 @@ extension VCSetting: ProtocolVCSetting {
         newOperation.note = note
         newOperation.id = id
     }
-    
+
     func returnNewOperation() -> Operation {
         return newOperation
     }
-    
+
     func startEditing() {
         print("1. screen2SegmentControl.selectedSegmentIndex= \(screen2SegmentControl.selectedSegmentIndex)")
         var newOperation = returnNewOperation()
@@ -77,31 +77,31 @@ extension VCSetting: ProtocolVCSetting {
         default:
             break
         }
-        
+
             // display Date
         datePicker.date = Date.init(timeIntervalSince1970: newOperation.date)
-        
+
             // display Note
         tableViewCellNoteDelegate?.setNoteViewText(newText: newOperation.note)
         print("newOperation.note= \(newOperation.note)")
         labelScreen2Header.text = "Edit"
     }
-    
+
     func openAlertDatePicker() {
         self.present(alertDatePicker, animated: true, completion: nil)
     }
-    
+
     func tableViewScreen2Update(row: Int) {
         print("tableViewScreen2Update activated")
         let indexPath = IndexPath.init(row: row, section: 0)
         tableViewScreen2.reloadRows(at: [indexPath], with: .fade)
     }
-    
+
     func returnDelegateScreen2TableViewCellNote() -> ProtocolSettingTableVCNote {
         return tableViewCellNoteDelegate!
     }
-    
-        // MARK: - open a PopUp window
+
+    // MARK: - open a PopUp window
     func changeCategoryOpenPopUpScreen2(_ tag: Int) {
         print("changeCategoryOpenPopUpScreen2")
         self.categoryChangeView.layer.cornerRadius = 20
@@ -127,8 +127,8 @@ extension VCSetting: ProtocolVCSetting {
             completion: { _ in }
         )
     }
-    
-        // MARK: - close a PopUp window
+
+    // MARK: - close a PopUp window
     func changeCategoryClosePopUpScreen2() {
         tableViewScreen2Update(row: 1)
         UIView.animate(
@@ -151,8 +151,8 @@ extension VCSetting: ProtocolVCSetting {
             },
             completion: { _ in })
     }
-    
-        // MARK: - alerts
+
+    // MARK: - alerts
     func createAlertAddNewOperations() {
         alertErrorAddNewOperation.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil ))
         let labelAlertAddNewOperations = UILabel.init(frame: CGRect(x: 0, y: 0, width: 180, height: 50))
@@ -218,7 +218,7 @@ extension VCSetting: ProtocolVCSetting {
         print(alertErrorAddNewOperation.view.frame.width)
         print(labelAlertAddNewOperations.frame.width)
     }
-    
+
     func createAlertDatePicker() {
         alertDatePicker.addAction(UIAlertAction(
             title: "Установить дату",
@@ -226,7 +226,7 @@ extension VCSetting: ProtocolVCSetting {
         )
         alertDatePicker.addAction(UIAlertAction(title: "Cancell", style: .cancel, handler: nil ))
         alertDatePicker.view.addSubview(datePicker)
-        
+
         let alertHeightConstraint = NSLayoutConstraint(
             item: alertDatePicker.view!,
             attribute: .height,
@@ -239,21 +239,21 @@ extension VCSetting: ProtocolVCSetting {
         datePicker.frame.origin.x = (alertDatePicker.view.frame.width - datePicker.frame.width) / 2
         datePicker.frame.origin.y = 25
     }
-    
-        // MARK: - DatePicker
+
+    // MARK: - DatePickers
     func createDatePicker() {
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .date
         datePicker.timeZone = TimeZone(secondsFromGMT: 10800) // +3 час(Moscow)
         datePicker.maximumDate = Date.init()
     }
-    
+
     func donePressed() {
         newOperation.date = datePicker.date.timeIntervalSince1970
         tableViewScreen2Update(row: 2)
     }
-    
-        // MARK: - @objc functions
+
+    // MARK: - @objc functions
     @objc func keyboardWillAppear(_ notification: Notification) {
         print("keyboardWillAppear")
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
@@ -275,7 +275,7 @@ extension VCSetting: ProtocolVCSetting {
             completion: { _ in }
         )
     }
-    
+
     @objc func keyboardWillDisappear(_ notification: Notification) {
         if keyboardHeight != 0 {
             print("keyboardWillDisappear")
@@ -296,7 +296,7 @@ extension VCSetting: ProtocolVCSetting {
             )
         }
     }
-    
+
     @objc func tapHandler(tap: UITapGestureRecognizer) {
         if tap.state == UIGestureRecognizer.State.ended {
             print("Tap TextView ended")
@@ -324,7 +324,7 @@ extension VCSetting: ProtocolVCSetting {
             }
         }
     }
-    
+
     @objc func handlerToHideContainerScreen2(tap: UITapGestureRecognizer) {
         if tap.state == UIGestureRecognizer.State.ended {
             print("Tap ended")

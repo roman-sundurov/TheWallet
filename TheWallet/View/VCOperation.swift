@@ -12,7 +12,7 @@ protocol ProtocolVCOperation {
 }
 
 class VCOperation: UIViewController {
-        // MARK: - outlets
+    // MARK: - outlets
     @IBOutlet var labelCategory: UILabel!
     @IBOutlet var labelDate: UILabel!
     @IBOutlet var labelAmount: UILabel!
@@ -23,11 +23,11 @@ class VCOperation: UIViewController {
     @IBOutlet var buttonToDeleteOperation: UIButton!
     @IBOutlet var viewLogoCategory: UIView!
 
-        // MARK: - delegates and variables
+    // MARK: - delegates and variables
     var vcMainDelegate: ProtocolVCMain?
     var uuid: UUID?
 
-        // MARK: - transitions
+    // MARK: - transitions
     @IBAction func buttonActionToEditOperation(_ sender: Any) {
         vcMainDelegate?.editOperation(uuid: uuid!)
     }
@@ -37,6 +37,7 @@ class VCOperation: UIViewController {
         vcMainDelegate?.deleteOperation(uuid: uuid!)
     }
 
+    // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,6 +49,7 @@ class VCOperation: UIViewController {
     }
 }
 
+// MARK: - extension
 extension VCOperation: ProtocolVCOperation {
     func prepareForStart(id: UUID) {
         uuid = id
@@ -60,7 +62,7 @@ extension VCOperation: ProtocolVCOperation {
         } else {
             labelCategory.text = "Category not found"
         }
-            // display date
+        // display date
         let formatterPrint = DateFormatter()
         formatterPrint.dateFormat = "d MMMM YYYY"
         labelDate.text = formatterPrint.string(from: Date.init(timeIntervalSince1970: operation!.date))

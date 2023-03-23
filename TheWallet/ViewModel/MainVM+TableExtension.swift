@@ -11,7 +11,7 @@ import UIKit
 extension VCMain {
     func configureDataSource() {
         datasource = MyDataSource(tableView: tableView) { tableview, indexpath, model -> UITableViewCell? in
-            let cell = tableview.dequeueReusableCell(withIdentifier: "operation", for: indexpath) as? MainTableVCOperation
+            let cell = tableview.dequeueReusableCell(withIdentifier: ReusableCellIdentifier.operation.rawValue, for: indexpath) as? MainTableVCOperation
             if model.amount.truncatingRemainder(dividingBy: 1) == 0 {
                 cell?.labelAmount.text = String(format: "%.0f", model.amount)
             } else {
@@ -40,7 +40,7 @@ extension VCMain {
             return cell
         }
     }
-    
+
     func applySnapshot(animatingDifferences: Bool = true) {
         var snapshot = NSDiffableDataSourceSnapshot<String, Operation>()
         let (sections, sectionsSource) = calculateSource()

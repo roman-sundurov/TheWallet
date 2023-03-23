@@ -9,16 +9,16 @@ import Foundation
 import UIKit
 
 extension VCMain: ProtocolVCMain {
-    
+
     func hudAppear() {
-        
+
         hud.show(in: bottomPopInView)
         buttonShowList.isEnabled = false
         buttonShowGraph.isEnabled = false
         buttonNewOperation.isEnabled = false
         print("hudAppear")
     }
-    
+
     func hudDisapper() {
         hud.dismiss(animated: true)
         buttonShowList.isEnabled = true
@@ -27,22 +27,25 @@ extension VCMain: ProtocolVCMain {
         isButtonsActive = true
         print("hudDisapper")
     }
-    
-    func fetchFirebase() {
+
+    func fetchFirebase() async {
         Task {
-            try? await userRepository.getUserData { data in
-                self.userRepository.user = data
-                print("NewData= \(self.userRepository.user)")
-                self.updateScreen()
+            do {
+                try await userRepository.fetchGetUserData { user in
+                    self.userRepository.user = user
+                    print("NewData= \(String(describing: self.userRepository.user))")
+                    self.updateScreen()
+                }
+            } catch ThrowError.getUserDataError {
+                showAlert(message: "Database connection error, missing userReference")
             }
-            print("NewData2= \(userRepository.user)")
         }
     }
-    
+
     func updateUserData(newData: User) {
         userRepository.user = newData
     }
-    
+
     func updateOperations(amount: Double, categoryUUID: UUID, note: String, date: Date, idOfObject: UUID) {
         userRepository.updateOperations(
             amount: amount,
@@ -53,33 +56,45 @@ extension VCMain: ProtocolVCMain {
         )
         updateScreen()
     }
-    
+
     func addOperations(amount: Double, categoryUUID: UUID, note: String, date: Date) {
-        userRepository.addOperations(amount: amount, categoryUUID: categoryUUID, note: note, date: date)
+        do {
+            try userRepository.addOperations(amount: amount, categoryUUID: categoryUUID, note: note, date: date)
+        } catch ThrowError.getUserReferenceError {
+            showAlert(message: "Database connection error, missing userReference")
+        } catch {
+            showAlert(message: "Database connection error")
+        }
         updateScreen()
     }
-    
+
     func deleteCategory(idOfObject: UUID) {
         userRepository.deleteCategory(idOfObject: idOfObject)
     }
-    
+
     func updateCategory(name: String, icon: String, idOfObject: UUID) {
         userRepository.updateCategory(name: name, icon: icon, idOfObject: idOfObject)
     }
-    
+
     func addCategory(name: String, icon: String, date: Double) {
-        userRepository.addCategory(name: name, icon: icon, date: date)
+        do {
+            try userRepository.addCategory(name: name, icon: icon, date: date)
+        } catch ThrowError.getUserDataError {
+            showAlert(message: "Database connection error, missing userReference")
+        } catch {
+            showAlert(message: "Database connection error")
+        }
     }
-    
+
     func deleteOperation(uuid: UUID) {
         userRepository.deleteOperation(idOfObject: uuid)
         updateScreen()
     }
-    
+
     func miniGraphStarterBackground(status: Bool) {
         miniGraphStarterBackground.isHidden = status
     }
-    
+
     func returnIncomesExpenses() -> [String: Double]? {
         if income != 0 || expensive != 0 {
             print("income= \(income), expensive= \(expensive)")
@@ -88,20 +103,20 @@ extension VCMain: ProtocolVCMain {
             return nil
         }
     }
-    
+
     func returnMonthOfDate(_ dateInternal: Date) -> String {
         let formatterPrint = DateFormatter()
         formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) // +3 час(Moscow)
         formatterPrint.dateFormat = "MMMM YYYY"
         return formatterPrint.string(from: dateInternal)
     }
-    
+
     func editOperation(uuid: UUID) {
         hideOperation()
         tagForEdit = uuid
-        performSegue(withIdentifier: "segueToVCSettingForEdit", sender: nil)
+        performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCSettingForEdit.rawValue, sender: nil)
     }
-    
+
     func updateScreen() {
         borderLineForMenu(days: userRepository.user!.daysForSorting)
         countingIncomesAndExpensive()
@@ -110,12 +125,12 @@ extension VCMain: ProtocolVCMain {
         configureDataSource()
         applySnapshot()
     }
-    
+
     func findAmountOfHeaders() {
         return
     }
-    
-        // MARK: - PopUp-окно операции
+
+    // MARK: - PopUp-окно операции
     func showOperation(_ id: UUID) {
         viewOperation.layer.cornerRadius = 20
         vcOperationDelegate?.prepareForStart(id: id)
@@ -136,7 +151,7 @@ extension VCMain: ProtocolVCMain {
             },
             completion: { _ in })
     }
-    
+
     func hideOperation() {
         UIView.animate(
             withDuration: 0,
@@ -152,15 +167,15 @@ extension VCMain: ProtocolVCMain {
             },
             completion: { _ in })
     }
-    
+
     func getUserRepository() -> UserRepository {
         return userRepository
     }
-    
+
     func getUserData() -> User {
         return userRepository.user!
     }
-    
+
     func returnDayOfDate(_ dateInternal: Date) -> String {
         let formatterPrint = DateFormatter()
         formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) // +3 час(Moscow)
@@ -172,7 +187,7 @@ extension VCMain: ProtocolVCMain {
         }
         return formatterPrint.string(from: dateInternal)
     }
-    
+
     func returnGraphData() -> [GraphData] {
         return graphDataArray
     }

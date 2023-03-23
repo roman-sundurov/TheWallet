@@ -13,7 +13,7 @@ import AuthenticationServices
 import CryptoKit
 
 // @IBDesignable
-class AppleSignInShadowButton: ASAuthorizationAppleIDButton {
+final class AppleSignInShadowButton: ASAuthorizationAppleIDButton {
 
   var currentNonce: String?
 

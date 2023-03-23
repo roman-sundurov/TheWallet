@@ -13,21 +13,22 @@ protocol ProtocolVCGraph {
 }
 
 class VCGraph: UIViewController {
-        // MARK: - outlets
+    // MARK: - outlets
     @IBOutlet var graphView: UIView!
-    
+
         // MARK: - delegates and variables
     var vcMainDelegate: VCMain?
-    let calendar = Calendar.current
+    private let calendar = Calendar.current
     var firstDate: Date?
     var secondDate: Date?
-    
-        // MARK: - viewDidLoad
+
+    // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    func calculateDateArray() -> [Date] {
+
+    // MARK: - other functions
+    private func calculateDateArray() -> [Date] {
         var dateArray: [Date] = []
         let calendar = Calendar.current
         let date = Date()
@@ -48,8 +49,8 @@ class VCGraph: UIViewController {
         }
         return dateArray
     }
-    
-    func calculateCumulativeAmount(dateArray: [Date]) -> [GraphData] {
+
+    private func calculateCumulativeAmount(dateArray: [Date]) -> [GraphData] {
         var cumulativeArray: [GraphData] = []
         var cumulativeAmount: Double = 0
         let operations = UserRepository.shared.user!.operations
@@ -73,6 +74,7 @@ class VCGraph: UIViewController {
     }
 }
 
+// MARK: - extension
 extension VCGraph: ProtocolVCGraph {
     func dataUpdate() {
         var dateArray = calculateDateArray()

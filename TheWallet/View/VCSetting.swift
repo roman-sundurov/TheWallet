@@ -28,7 +28,7 @@ struct SettingMenuData {
 }
 
 class VCSetting: UIViewController {
-        // MARK: - outlets
+    // MARK: - outlets
     @IBOutlet var screen2SegmentControl: UISegmentedControl!
     @IBOutlet var tableViewScreen2: UITableView!
     @IBOutlet var screen2CurrencyDirection: UIButton!
@@ -37,8 +37,8 @@ class VCSetting: UIViewController {
     @IBOutlet var constraintCategoryChangeViewHeight: NSLayoutConstraint!
     @IBOutlet var textFieldAmount: UITextField!
     @IBOutlet var labelScreen2Header: UILabel!
-    
-        // MARK: - delegates and variables
+
+    // MARK: - delegates and variables
     var vcMainDelegate: ProtocolVCMain?
     var vcCategoryDelegate: VCCategory?
     var tableViewCellNoteDelegate: ProtocolSettingTableVCNote?
@@ -49,8 +49,8 @@ class VCSetting: UIViewController {
     var keyboardHeight: CGFloat = 0 // хранит высоту клавиатуры
     var settingMenuArray: [SettingMenuData] = []
     var newOperation = Operation(amount: 0, category: nil, note: "", date: Date().timeIntervalSince1970, id: UUID())
-    
-        // MARK: - objects
+
+    // MARK: - objects
     let alertDatePicker = UIAlertController(title: "Select date", message: nil, preferredStyle: .actionSheet)
     let alertErrorAddNewOperation = UIAlertController(
         title: "Добавьте обязательные данные",
@@ -59,8 +59,8 @@ class VCSetting: UIViewController {
     )
     let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     let datePicker = UIDatePicker()
-    
-        // MARK: - transitions
+
+    // MARK: - transitions
     @IBAction func buttonToAddNewOperation(_ sender: Any) {
         var newOperation = returnNewOperation()
         if newOperation.category != nil && textFieldAmount.text != "0" {
@@ -106,11 +106,11 @@ class VCSetting: UIViewController {
             self.present(alertErrorAddNewOperation, animated: true, completion: nil)
         }
     }
-    
+
     @IBAction func buttonCloseSetting(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let viewController = segue.destination as? VCCategory, segue.identifier == "segueToVCCategory" {
             vcCategoryDelegate = viewController
@@ -118,8 +118,8 @@ class VCSetting: UIViewController {
             viewController.vcMainDelegate = vcMainDelegate
         }
     }
-    
-        // MARK: - clicks
+
+    // MARK: - clicks
     @IBAction func textFieldAmountEditingDidBegin(_ sender: Any) {
         if textFieldAmount.textColor == UIColor.opaqueSeparator {
             textFieldAmount.text = nil
@@ -134,7 +134,7 @@ class VCSetting: UIViewController {
         }
         print("func textViewDidBeginEditing")
     }
-    
+
     @IBAction func textFieldAmountEditingDidEnd(_ sender: Any) {
         if let textFieldAmountText = textFieldAmount.text, textFieldAmountText.isEmpty {
             textFieldAmount.text = "0"
@@ -143,7 +143,7 @@ class VCSetting: UIViewController {
         textFieldAmount.resignFirstResponder()
         print("func textFieldAmountEditingDidEnd")
     }
-    
+
     @IBAction func segmentControl(_ sender: Any) {
         textFieldAmount.endEditing(true)
         tableViewCellNoteDelegate?.tapOutsideNoteTextViewEditToHide()
@@ -168,8 +168,8 @@ class VCSetting: UIViewController {
             break
         }
     }
-    
-        // MARK: - viewWillAppear
+
+    // MARK: - lifecycle
     override func viewWillAppear(_ animated: Bool) {
         if vcSettingStatusEditing == true {
             startEditing()
@@ -188,12 +188,12 @@ class VCSetting: UIViewController {
             object: nil
         )
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
             // NotificationCenter.default.removeObserver(self)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         menuArrayCalculate()

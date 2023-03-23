@@ -9,16 +9,15 @@ import Foundation
 import UIKit
 
 extension VCCategory: ProtocolVCCategory {
-    
     func screen2ContainerDeleteCategory(idOfObject: UUID) {
         vcMainDelegate?.deleteCategory(idOfObject: idOfObject)
         tableView.reloadData()
     }
-    
+
     func returnVCMainDelegate() -> ProtocolVCMain {
         return vcMainDelegate!
     }
-    
+
     func setCurrentActiveEditingCell(cellID: Int) {
         currentActiveCellID = cellID
         let cells = self.tableView.visibleCells
@@ -44,19 +43,19 @@ extension VCCategory: ProtocolVCCategory {
                 // }
         }
     }
-    
+
     func showAlertErrorAddNewCategory() {
         self.present(alertErrorAddNewCategory, animated: true, completion: nil)
     }
-    
+
     func returnDelegateScreen2ContainerTableVCNewCategory() -> ProtocolCategoryTableVCNewCategory {
         return categoryTableVCNewCategoryDelegate!
     }
-    
+
     func returnScreen2StatusEditContainer() -> Bool {
         return statusEditContainer
     }
-    
+
     func screen2ContainerNewCategorySwicher() {
         print("AAAA")
         if vcMainDelegate?.getUserData().operations.isEmpty == false {
@@ -78,7 +77,7 @@ extension VCCategory: ProtocolVCCategory {
             }
         }
     }
-    
+
     func addNewCategory(name: String, icon: String, date: Double) {
             // vcMainDelegate?.fetchFirebase()
         vcMainDelegate!.addCategory(name: name, icon: icon, date: date)
@@ -91,28 +90,30 @@ extension VCCategory: ProtocolVCCategory {
             tableView.insertRows(at: [IndexPath(row: newRowIndex, section: 0)], with: .automatic)
         }, completion: { _ in
             self.tableView.reloadData()
-            self.vcMainDelegate?.fetchFirebase()
+            Task {
+                await self.vcMainDelegate?.fetchFirebase()
+            }
         })
     }
-    
+
     func screen2ContainerDeleteCategory(cellID: Int) {
         tableView.performBatchUpdates({
             print("ZZZ2")
             tableView.deleteRows(at: [IndexPath(row: cellID + 2, section: 0)], with: .left)
         }, completion: { _ in self.tableView.reloadData() })
     }
-    
+
     func getVCSettingDelegate() -> ProtocolVCSetting {
         return vcSettingDelegate!
     }
-    
+
     func closeWindow() {
         vcSettingDelegate?.changeCategoryClosePopUpScreen2()
         tableView.reloadData()
         categoryTableVCNewCategoryDelegate?.textFieldNewCategoryClear()
         print("ClosePopup from Container")
     }
-    
+
     func calculateCategoryArray() -> [Category] {
         categoriesArray = []
         if let userData = vcMainDelegate?.getUserData() {
@@ -127,11 +128,21 @@ extension VCCategory: ProtocolVCCategory {
 }
 
 // MARK: - table Functionality
-extension VCCategory: UITableViewDelegate, UITableViewDataSource {
+extension VCCategory: UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension VCCategory: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if vcMainDelegate!.getUserData().categories.isEmpty {
             statusEditContainer = true
@@ -147,20 +158,20 @@ extension VCCategory: UITableViewDelegate, UITableViewDataSource {
         print("indexPath.rowScreen2= \(indexPath.row)")
         if indexPath.row == 0 {
             print("1111")
-            let cell = tableView.dequeueReusableCell(withIdentifier: "header") as? CategoryTableVCHeader
+            let cell = tableView.dequeueReusableCell(withIdentifier: ReusableCellIdentifier.header.rawValue) as? CategoryTableVCHeader
             cell?.delegateScreen2Container = self
             categoryTableVCHeaderDelegate = cell
             return cell!
         } else if statusEditContainer == true && indexPath.row == 1 {
             print("2222")
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellNewCategory") as? CategoryTableVCNewCategory
+            let cell = tableView.dequeueReusableCell(withIdentifier: ReusableCellIdentifier.cellNewCategory.rawValue) as? CategoryTableVCNewCategory
             cell?.vcCategoryDelegate = self
             categoryTableVCHeaderDelegate?.buttonOptionsSetColor(color: UIColor.systemBlue)
             categoryTableVCNewCategoryDelegate = cell
             return cell!
         } else {
             print("3333")
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellChangeCategory") as? CategoryTableVCCategory
+            let cell = tableView.dequeueReusableCell(withIdentifier: ReusableCellIdentifier.cellChangeCategory.rawValue) as? CategoryTableVCCategory
             cell?.vcCategoryDelegate = self
             cell?.vcSettingDelegate = vcSettingDelegate
             cell?.vcMainDelegate = vcMainDelegate
@@ -172,11 +183,4 @@ extension VCCategory: UITableViewDelegate, UITableViewDataSource {
         }
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
 }

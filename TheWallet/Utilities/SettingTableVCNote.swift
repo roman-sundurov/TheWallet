@@ -13,7 +13,7 @@ protocol ProtocolSettingTableVCNote {
     func setNoteViewText(newText: String)
 }
 
-class SettingTableVCNote: UITableViewCell, UITextViewDelegate {
+final class SettingTableVCNote: UITableViewCell, UITextViewDelegate {
     @IBOutlet var textViewNotes: UITextView!
     var vcSettingDelegate: ProtocolVCSetting?
     var indexRow: Int = 0
