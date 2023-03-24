@@ -9,17 +9,17 @@ import UIKit
 import AAInfographics
 
 protocol ProtocolVCGraph {
-    func dataUpdate()
+    func dataUpdate() throws
 }
 
 class VCGraph: UIViewController {
     // MARK: - outlets
     @IBOutlet var graphView: UIView!
 
-        // MARK: - delegates and variables
+    // MARK: - delegates and variables
     var vcMainDelegate: VCMain?
     private let calendar = Calendar.current
-    var firstDate: Date?
+    // var firstDate: Date?
     var secondDate: Date?
 
     // MARK: - lifecycle
@@ -28,47 +28,56 @@ class VCGraph: UIViewController {
     }
 
     // MARK: - other functions
-    private func calculateDateArray() -> [Date] {
+    private func calculateDateArray() throws -> [Date] {
         var dateArray: [Date] = []
         let calendar = Calendar.current
         let date = Date()
-        for day in 0...31 {
-            let dateComponent = DateComponents(day: -day)
-            firstDate = calendar.dateInterval(of: .day, for: date)?.start
-            secondDate = calendar.date(byAdding: dateComponent, to: firstDate!)
-            if day == 0 {
-                dateArray.append(firstDate!)
-            } else {
-                dateArray.append(secondDate!)
+        if let freshHoldDate = calendar.date(byAdding: DateComponents(month: -1), to: date) {
+            for day in 0...31 {
+                let dateComponent = DateComponents(day: -day)
+                if let firstDate = calendar.dateInterval(of: .day, for: date)?.start,
+                   let secondDate = calendar.date(byAdding: dateComponent, to: firstDate) {
+                    if day == 0 {
+                        dateArray.append(firstDate)
+                    } else {
+                        dateArray.append(secondDate)
+                    }
+                    if secondDate.timeIntervalSince1970 < freshHoldDate.timeIntervalSince1970 {
+                        break
+                        self.secondDate = secondDate
+                    }
+                } else {
+                    throw ThrowError.calculateDateArrayError
+                }
             }
-            let dateComponentTemp = DateComponents(month: -1)
-            let freshHoldDate = calendar.date(byAdding: dateComponentTemp, to: date)
-            if secondDate!.timeIntervalSince1970 < freshHoldDate!.timeIntervalSince1970 {
-                break
-            }
+        } else {
+            throw ThrowError.calculateDateArrayFreshHoldDateError
         }
         return dateArray
     }
 
-    private func calculateCumulativeAmount(dateArray: [Date]) -> [GraphData] {
+    private func calculateCumulativeAmount(dateArray: [Date]) throws -> [GraphData] {
         var cumulativeArray: [GraphData] = []
         var cumulativeAmount: Double = 0
-        let operations = UserRepository.shared.user!.operations
-        var firstDate = Date()
-        var secondDate = Date()
-        for day in 0..<dateArray.count {
-            secondDate = dateArray[day]
-            if day != 0 {
-                firstDate = dateArray[day - 1]
-            }
-            for oper in UserRepository.shared.user!.operations {
-                if oper.value.date >= secondDate.timeIntervalSince1970 && oper.value.date < firstDate.timeIntervalSince1970 {
-                    print("oper.value.amount \(oper.value.date )= \(oper.value.amount)")
-                    cumulativeAmount += oper.value.amount
-                    print("cumulativeAmount= \(cumulativeAmount)")
+        if let user = UserRepository.shared.user {
+            var firstDate = Date()
+            var secondDate = Date()
+            for day in 0..<dateArray.count {
+                secondDate = dateArray[day]
+                if day != 0 {
+                    firstDate = dateArray[day - 1]
                 }
+                for oper in user.operations {
+                    if oper.value.date >= secondDate.timeIntervalSince1970 && oper.value.date < firstDate.timeIntervalSince1970 {
+                        print("oper.value.amount \(oper.value.date )= \(oper.value.amount)")
+                        cumulativeAmount += oper.value.amount
+                        print("cumulativeAmount= \(cumulativeAmount)")
+                    }
+                }
+                cumulativeArray.append(GraphData(date: dateArray[day], amount: cumulativeAmount))
             }
-            cumulativeArray.append(GraphData(date: dateArray[day], amount: cumulativeAmount))
+        } else {
+            throw ThrowError.calculateCumulativeAmountError
         }
         return cumulativeArray
     }
@@ -76,16 +85,24 @@ class VCGraph: UIViewController {
 
 // MARK: - extension
 extension VCGraph: ProtocolVCGraph {
-    func dataUpdate() {
-        var dateArray = calculateDateArray()
-        let cumulativeGraphDataArray = calculateCumulativeAmount(dateArray: dateArray)
+    func dataUpdate() throws {
+        var cumulativeGraphDataArray: [GraphData] = []
+        do {
+            let dateArray = try calculateDateArray()
+            cumulativeGraphDataArray = try calculateCumulativeAmount(dateArray: dateArray)
+        } catch {
+            showAlert(message: "Calculation error")
+        }
         var cumulativeArray: [Double] = []
         var numberOfDayArray: [String] = []
         for item in cumulativeGraphDataArray {
             let components = calendar.dateComponents([.day], from: item.date)
-            let digitDay = components.day
-            cumulativeArray.append(item.amount)
-            numberOfDayArray.append(digitDay!.description)
+            if let digitDay = components.day {
+                cumulativeArray.append(item.amount)
+                numberOfDayArray.append(digitDay.description)
+            } else {
+                throw ThrowError.vcGraphDataUpdate
+            }
         }
         print("cumulativeArray= \(cumulativeArray)")
         print("numberOfDayArray= \(numberOfDayArray)")
@@ -115,5 +132,15 @@ extension VCGraph: ProtocolVCGraph {
                     .data(cumulativeArray)
             ])
         aaChartView.aa_drawChartWithChartModel(aaChartModel)
+    }
+
+    func showAlert(message: String) {
+        let alert = UIAlertController(
+          title: message,
+          message: nil,
+          preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil ))
+        self.present(alert, animated: true, completion: nil)
     }
 }

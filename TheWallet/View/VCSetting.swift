@@ -63,8 +63,10 @@ class VCSetting: UIViewController {
     // MARK: - transitions
     @IBAction func buttonToAddNewOperation(_ sender: Any) {
         var newOperation = returnNewOperation()
-        if newOperation.category != nil && textFieldAmount.text != "0" {
-                // set Amount
+        if let newOperationCategory = newOperation.category,
+           let returnNoteViewText = tableViewCellNoteDelegate?.returnNoteView().text,
+           textFieldAmount.text != "0" {
+            // set Amount
             print("2. screen2SegmentControl.selectedSegmentIndex= \(screen2SegmentControl.selectedSegmentIndex)")
             if screen2SegmentControl.selectedSegmentIndex == 0 {
                 print("textFieldAmount.text= \(textFieldAmount.text as Optional)")
@@ -79,15 +81,15 @@ class VCSetting: UIViewController {
                 newOperation.date = datePicker.date.timeIntervalSince1970
             }
                 // set Note
-            if tableViewCellNoteDelegate?.returnNoteView().text! == "Placeholder" {
+            if returnNoteViewText == "Placeholder" {
                 newOperation.note = ""
             } else {
-                newOperation.note = (tableViewCellNoteDelegate?.returnNoteView().text)!
+                newOperation.note = returnNoteViewText
             }
             if vcSettingStatusEditing == true {
                 vcMainDelegate?.updateOperations(
                     amount: newOperation.amount,
-                    categoryUUID: newOperation.category!,
+                    categoryUUID: newOperationCategory,
                     note: newOperation.note,
                     date: Date.init(timeIntervalSince1970: newOperation.date),
                     idOfObject: newOperation.id
@@ -95,12 +97,16 @@ class VCSetting: UIViewController {
             } else {
                 vcMainDelegate?.addOperations(
                     amount: newOperation.amount,
-                    categoryUUID: newOperation.category!,
+                    categoryUUID: newOperationCategory,
                     note: newOperation.note,
                     date: Date.init(timeIntervalSince1970: newOperation.date)
                 )
             }
-            vcMainDelegate?.updateScreen()
+            do {
+                try vcMainDelegate?.updateScreen()
+            } catch {
+                showAlert(message: "Screen update error")
+            }
             dismiss(animated: true, completion: nil)
         } else {
             self.present(alertErrorAddNewOperation, animated: true, completion: nil)
@@ -212,9 +218,23 @@ class VCSetting: UIViewController {
             target: self,
             action: #selector(self.tapHandler(tap:))
         )
-        self.view.addGestureRecognizer(self.tapOutsideTextViewToGoFromTextView!)
+        if let tapOutsideTextViewToGoFromTextView = tapOutsideTextViewToGoFromTextView {
+            self.view.addGestureRecognizer(tapOutsideTextViewToGoFromTextView)
+        } else {
+            showAlert(message: "Error addGestureRecognizer")
+        }
         createDatePicker()
         createAlertDatePicker()
         createAlertAddNewOperations()
+    }
+
+    func showAlert(message: String) {
+        let alert = UIAlertController(
+          title: message,
+          message: nil,
+          preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil ))
+        self.present(alert, animated: true, completion: nil)
     }
 }

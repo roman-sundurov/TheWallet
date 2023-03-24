@@ -9,26 +9,27 @@ import UIKit
 import JGProgressHUD
 
 protocol ProtocolVCMain {
-  func updateScreen() // full screen update
-  func showOperation(_ id: UUID) // opens a PopUp window for a specific operation
-  func hideOperation() // closes the PopUp window of a specific operation
-  func editOperation(uuid: UUID) // transition to editing the selected operation on the second screen
-  func miniGraphStarterBackground(status: Bool)
+    func updateScreen() throws // full screen update
+    func showOperation(_ id: UUID) throws // opens a PopUp window for a specific operation
+    func hideOperation() // closes the PopUp window of a specific operation
+    func editOperation(uuid: UUID) // transition to editing the selected operation on the second screen
+    func miniGraphStarterBackground(status: Bool)
 
-  func returnMonthOfDate(_ dateInternal: Date) -> String
-  func returnIncomesExpenses() -> [String: Double]?
+    func returnMonthOfDate(_ dateInternal: Date) -> String
+    func returnIncomesExpenses() -> [String: Double]?
 
-  func getUserRepository() -> UserRepository
-  func getUserData() -> User
-  func updateUserData(newData: User)
-  func updateOperations(amount: Double, categoryUUID: UUID, note: String, date: Date, idOfObject: UUID)
-  func addOperations(amount: Double, categoryUUID: UUID, note: String, date: Date)
-  func deleteCategory(idOfObject: UUID)
-  func updateCategory(name: String, icon: String, idOfObject: UUID)
-  func returnGraphData() -> [GraphData]
-  func addCategory(name: String, icon: String, date: Double)
-  func deleteOperation(uuid: UUID)
-  func fetchFirebase() async
+    func getUserRepository() -> UserRepository
+    func getUserData() -> User
+    func updateUserData(newData: User)
+    func updateOperations(amount: Double, categoryUUID: UUID, note: String, date: Date, idOfObject: UUID)
+    func addOperations(amount: Double, categoryUUID: UUID, note: String, date: Date)
+    func deleteCategory(idOfObject: UUID)
+    func updateCategory(name: String, icon: String, idOfObject: UUID)
+    func returnGraphData() -> [GraphData]
+    func addCategory(name: String, icon: String, date: Double)
+    func deleteOperation(uuid: UUID)
+    func fetchFirebase() async
+    func showAlert(message: String)
 }
 
 class VCMain: UIViewController {
@@ -92,18 +93,33 @@ class VCMain: UIViewController {
             vcGraphDelegate = viewController
             viewController.vcMainDelegate = self
         }
-        if let viewController = segue.destination as? VCSetting, segue.identifier == "segueToVCSettingForEdit"{
+        if let viewController = segue.destination as? VCSetting,
+           let userRepositoryUser = userRepository.user,
+           segue.identifier == "segueToVCSettingForEdit" {
             viewController.vcSettingStatusEditing = true
             viewController.vcMainDelegate = self
             vcSettingDelegate = viewController
-            let specialOperation = userRepository.user!.operations.filter({$0.value.id == tagForEdit}).first?.value
-            vcSettingDelegate!.setVCSetting(
-                amount: specialOperation!.amount,
-                categoryUUID: specialOperation!.category!,
-                date: specialOperation!.date,
-                note: specialOperation!.note,
-                id: specialOperation!.id
-            )
+            if let specialOperation = userRepositoryUser.operations.filter({$0.value.id == tagForEdit}).first?.value {
+                if let vcSettingDelegate = vcSettingDelegate {
+                    if let specialOperationCategory = specialOperation.category {
+                        vcSettingDelegate.setVCSetting(
+                            amount: specialOperation.amount,
+                            categoryUUID: specialOperationCategory,
+                            date: specialOperation.date,
+                            note: specialOperation.note,
+                            id: specialOperation.id
+                        )
+                    } else {
+                        showAlert(message: "Error specialOperationCategory")
+                    }
+                } else {
+                    showAlert(message: "Error vcSettingDelegate == nil")
+                }
+            } else {
+                showAlert(message: "Error specialOperation")
+            }
+        } else {
+            showAlert(message: "Error segue.destination as? VCSetting")
         }
     }
 
@@ -122,7 +138,7 @@ class VCMain: UIViewController {
             print("screen1StatusGrapjDisplay= \(screen1StatusGrapjDisplay)")
             if screen1StatusGrapjDisplay == false {
                     // userRepository.updateDaysForSorting(daysForSorting: 30)
-                vcGraphDelegate?.dataUpdate()
+                // vcGraphDelegate?.dataUpdate()
                 buttonWeeklyGesture(self)
                 buttonDaily.isUserInteractionEnabled = false
                 buttonDaily.alpha = 0.3
@@ -131,7 +147,11 @@ class VCMain: UIViewController {
                 buttonYearly.isUserInteractionEnabled = false
                 buttonYearly.alpha = 0.3
                 countingIncomesAndExpensive()
-                vcGraphDelegate?.dataUpdate()
+                do {
+                    try vcGraphDelegate?.dataUpdate()
+                } catch {
+                    showAlert(message: "Error updating VCGraph")
+                }
                 miniGraph.setNeedsDisplay()
                 applySnapshot()
                 borderLineForMenu(days: 30)
@@ -174,17 +194,23 @@ class VCMain: UIViewController {
         }
             // configureDataSource()
             // applySnapshot()
-        updateScreen()
+        do {
+            try updateScreen()
+        } catch {
+            showAlert(message: "Screen update error")
+        }
     }
 
     @IBAction func buttonDailyGesture(_ sender: Any) {
         if isButtonsActive == true {
             do {
                 try userRepository.updateDaysForSorting(daysForSorting: 1)
+                try updateScreen()
+            } catch ThrowError.mainViewUpdateScreen {
+                showAlert(message: "Screen update error")
             } catch {
                 showAlert(message: "Database connection error, missing userReference")
             }
-            updateScreen()
         }
     }
 
@@ -192,10 +218,12 @@ class VCMain: UIViewController {
         if isButtonsActive == true {
             do {
                 try userRepository.updateDaysForSorting(daysForSorting: 7)
+                try updateScreen()
+            } catch ThrowError.mainViewUpdateScreen {
+                showAlert(message: "Screen update error")
             } catch {
                 showAlert(message: "Database connection error, missing userReference")
             }
-            updateScreen()
         }
     }
 
@@ -203,11 +231,12 @@ class VCMain: UIViewController {
         if isButtonsActive == true {
             do {
                 try userRepository.updateDaysForSorting(daysForSorting: 30)
+                try updateScreen()
+            } catch ThrowError.mainViewUpdateScreen {
+                showAlert(message: "Screen update error")
             } catch {
                 showAlert(message: "Database connection error, missing userReference")
             }
-
-            updateScreen()
         }
     }
 
@@ -215,10 +244,12 @@ class VCMain: UIViewController {
         if isButtonsActive == true {
             do {
                 try userRepository.updateDaysForSorting(daysForSorting: 365)
+                try updateScreen()
+            } catch ThrowError.mainViewUpdateScreen {
+                showAlert(message: "Screen update error")
             } catch {
                 showAlert(message: "Database connection error, missing userReference")
             }
-            updateScreen()
         }
     }
 
@@ -302,8 +333,9 @@ class VCMain: UIViewController {
     }
 
     func countingIncomesAndExpensive() {
-        if let operations = userRepository.user?.operations {
-            let freshHold = Date().timeIntervalSince1970 - Double(86400 * userRepository.user!.daysForSorting)
+        if let operations = userRepository.user?.operations,
+        let userRepositoryUser = userRepository.user {
+            let freshHold = Date().timeIntervalSince1970 - Double(86400 * userRepositoryUser.daysForSorting)
 
             income = 0
             expensive = 0
@@ -325,6 +357,8 @@ class VCMain: UIViewController {
             } else {
                 labelAmountOfExpenses.text = "$\(String(format: "%.2f", expensive))"
             }
+        } else {
+            showAlert(message: "Error countingIncomesAndExpensive")
         }
     }
 
@@ -339,7 +373,11 @@ class VCMain: UIViewController {
                     self.hudAppear()
                     self.userRepository.user = user
                     print("NewData= \(String(describing: self.userRepository.user))")
-                    self.updateScreen()
+                    do {
+                        try self.updateScreen()
+                    } catch {
+                        self.showAlert(message: "Screen update error")
+                    }
                     self.hudDisapper()
                     // self.showAlert(message: "Database connection success")
                 }

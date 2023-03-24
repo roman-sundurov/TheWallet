@@ -17,7 +17,11 @@ final class MainTableVCOperation: UITableViewCell {
     var id: UUID?
 
     @objc func showOperation(_ sender: UITapGestureRecognizer) {
-        vcMainDelegate?.showOperation(id!)
+        do {
+            try vcMainDelegate?.showOperation(id!)
+        } catch {
+            vcMainDelegate?.showAlert(message: "showOperation error")
+        }
         print("ChangeCategory from Screen2")
     }
 

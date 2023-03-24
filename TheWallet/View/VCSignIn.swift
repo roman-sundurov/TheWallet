@@ -49,7 +49,9 @@ class VCSignIn: UIViewController {
 
     // MARK: - lifecycle
     func viewWillDisapear() {
-        Auth.auth().removeStateDidChangeListener(UserRepository.shared.listener!)
+        if let firebaseAuthListener = UserRepository.shared.listener {
+            Auth.auth().removeStateDidChangeListener(firebaseAuthListener)
+        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -74,10 +76,11 @@ class VCSignIn: UIViewController {
         super.viewDidLoad()
 
         UserRepository.shared.listener = Auth.auth().addStateDidChangeListener() { (auth, user) in
-            if let user = user {
-                    // MeasurementHelper.sendLoginEvent()
-                UserRepository.shared.user?.email = user.email!
-                UserRepository.shared.userReference = Firestore.firestore().collection("users").document(user.email!)
+            if let user = user,
+               let email = user.email {
+                // MeasurementHelper.sendLoginEvent()
+                // UserRepository.shared.user?.email = email
+                UserRepository.shared.userReference = Firestore.firestore().collection("users").document(email)
 
                 print("signInMethod= \(user.providerID)")
                 self.performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCMain.rawValue, sender: nil)

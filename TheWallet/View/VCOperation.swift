@@ -29,12 +29,22 @@ class VCOperation: UIViewController {
 
     // MARK: - transitions
     @IBAction func buttonActionToEditOperation(_ sender: Any) {
-        vcMainDelegate?.editOperation(uuid: uuid!)
+        if let vcMainDelegate = vcMainDelegate,
+           let uuid = uuid {
+            vcMainDelegate.editOperation(uuid: uuid)
+        } else {
+            print("Error buttonActionToEditOperation")
+        }
     }
 
     @IBAction func buttonActionToDeleteOperation(_ sender: Any) {
-        vcMainDelegate?.hideOperation()
-        vcMainDelegate?.deleteOperation(uuid: uuid!)
+        if let vcMainDelegate = vcMainDelegate,
+           let uuid = uuid {
+            vcMainDelegate.hideOperation()
+            vcMainDelegate.deleteOperation(uuid: uuid)
+        } else {
+            print("Error buttonActionToDeleteOperation")
+        }
     }
 
     // MARK: - lifecycle
@@ -54,33 +64,39 @@ extension VCOperation: ProtocolVCOperation {
     func prepareForStart(id: UUID) {
         uuid = id
         print("id= \(id)")
-            // let operation = UserRepository.shared.user?.operations.filter { $0.value.id == id }.first?.value
-        let operation = UserRepository.shared.user?.operations.first { $0.value.id == id }?.value
+        // let operation = UserRepository.shared.user?.operations.filter { $0.value.id == id }.first?.value
+        if let operation = UserRepository.shared.user?.operations.first { $0.value.id == id }?.value,
+        let categoryUUID = operation.category {
+            
             // display category
-        if let category = vcMainDelegate?.getUserData().categories[operation!.category!.description] {
-            labelCategory.text = category.name
-        } else {
-            labelCategory.text = "Category not found"
-        }
-        // display date
-        let formatterPrint = DateFormatter()
-        formatterPrint.dateFormat = "d MMMM YYYY"
-        labelDate.text = formatterPrint.string(from: Date.init(timeIntervalSince1970: operation!.date))
+            if let category = vcMainDelegate?.getUserData().categories[categoryUUID.description] {
+                labelCategory.text = category.name
+            } else {
+                labelCategory.text = "Category not found"
+            }
+            // display date
+            let formatterPrint = DateFormatter()
+            formatterPrint.dateFormat = "d MMMM YYYY"
+            labelDate.text = formatterPrint.string(from: Date.init(timeIntervalSince1970: operation.date))
             // display amount
-        if operation?.amount.truncatingRemainder(dividingBy: 1) == 0 {
-            labelAmount.text = String(format: "%.0f", operation!.amount)
-        } else {
-            labelAmount.text = String(format: "%.2f", operation!.amount)
-        }
+            if operation.amount.truncatingRemainder(dividingBy: 1) == 0 {
+                labelAmount.text = String(format: "%.0f", operation.amount)
+            } else {
+                labelAmount.text = String(format: "%.2f", operation.amount)
+            }
             // display currencyStatus
-        if operation!.amount < 0 {
-            labelAmount.textColor = UIColor.red
-            currencyStatus.textColor = UIColor.red
-        } else {
-            labelAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
-            currencyStatus.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
-        }
+            if operation.amount < 0 {
+                labelAmount.textColor = UIColor.red
+                currencyStatus.textColor = UIColor.red
+            } else {
+                labelAmount.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
+                currencyStatus.textColor = UIColor(cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1))
+            }
             // display textViewNotes
-        textViewNotes.text = operation?.note
+            textViewNotes.text = operation.note
+        } else {
+            vcMainDelegate?.showAlert(message: "Error operation no found")
+            print("message: Error operation no found")
+        }
     }
 }

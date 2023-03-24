@@ -34,7 +34,11 @@ extension VCMain: ProtocolVCMain {
                 try await userRepository.fetchGetUserData { user in
                     self.userRepository.user = user
                     print("NewData= \(String(describing: self.userRepository.user))")
-                    self.updateScreen()
+                    do {
+                        try self.updateScreen()
+                    } catch {
+                        self.showAlert(message: "Screen update error")
+                    }
                 }
             } catch ThrowError.getUserDataError {
                 showAlert(message: "Database connection error, missing userReference")
@@ -54,7 +58,11 @@ extension VCMain: ProtocolVCMain {
             date: date,
             idOfObject: idOfObject
         )
-        updateScreen()
+        do {
+            try updateScreen()
+        } catch {
+            showAlert(message: "Screen update error")
+        }
     }
 
     func addOperations(amount: Double, categoryUUID: UUID, note: String, date: Date) {
@@ -65,15 +73,31 @@ extension VCMain: ProtocolVCMain {
         } catch {
             showAlert(message: "Database connection error")
         }
-        updateScreen()
+        do {
+            try updateScreen()
+        } catch {
+            showAlert(message: "Screen update error")
+        }
     }
 
     func deleteCategory(idOfObject: UUID) {
-        userRepository.deleteCategory(idOfObject: idOfObject)
+        do {
+            try userRepository.deleteCategory(idOfObject: idOfObject)
+        } catch ThrowError.getUserReferenceError {
+            showAlert(message: "Database connection error, missing userReference")
+        } catch {
+            showAlert(message: "Database connection error")
+        }
     }
 
     func updateCategory(name: String, icon: String, idOfObject: UUID) {
-        userRepository.updateCategory(name: name, icon: icon, idOfObject: idOfObject)
+        do {
+            try userRepository.updateCategory(name: name, icon: icon, idOfObject: idOfObject)
+        } catch ThrowError.getUserReferenceError {
+            showAlert(message: "Database connection error, missing userReference")
+        } catch {
+            showAlert(message: "Database connection error")
+        }
     }
 
     func addCategory(name: String, icon: String, date: Double) {
@@ -87,8 +111,18 @@ extension VCMain: ProtocolVCMain {
     }
 
     func deleteOperation(uuid: UUID) {
-        userRepository.deleteOperation(idOfObject: uuid)
-        updateScreen()
+        do {
+            try userRepository.deleteOperation(idOfObject: uuid)
+        } catch ThrowError.getUserDataError {
+            showAlert(message: "Database connection error, missing userReference")
+        } catch {
+            showAlert(message: "Database connection error")
+        }
+        do {
+            try updateScreen()
+        } catch {
+            showAlert(message: "Screen update error")
+        }
     }
 
     func miniGraphStarterBackground(status: Bool) {
@@ -117,13 +151,21 @@ extension VCMain: ProtocolVCMain {
         performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCSettingForEdit.rawValue, sender: nil)
     }
 
-    func updateScreen() {
-        borderLineForMenu(days: userRepository.user!.daysForSorting)
-        countingIncomesAndExpensive()
-        vcGraphDelegate?.dataUpdate()
-        miniGraph.setNeedsDisplay()
-        configureDataSource()
-        applySnapshot()
+    func updateScreen() throws {
+        if let userRepositoryUser = userRepository.user {
+            borderLineForMenu(days: userRepositoryUser.daysForSorting)
+            countingIncomesAndExpensive()
+            do {
+                try vcGraphDelegate?.dataUpdate()
+            } catch {
+                showAlert(message: "Error updating VCGraph")
+            }
+            miniGraph.setNeedsDisplay()
+            configureDataSource()
+            applySnapshot()
+        } else {
+            throw ThrowError.mainViewUpdateScreen
+        }
     }
 
     func findAmountOfHeaders() {
@@ -131,9 +173,13 @@ extension VCMain: ProtocolVCMain {
     }
 
     // MARK: - PopUp-окно операции
-    func showOperation(_ id: UUID) {
+    func showOperation(_ id: UUID) throws {
         viewOperation.layer.cornerRadius = 20
         vcOperationDelegate?.prepareForStart(id: id)
+        self.tapShowOperation = UITapGestureRecognizer(
+            target: self,
+            action: #selector(self.handlerToHideContainerScreen1(tap:)))
+        if let tapShowOperation = self.tapShowOperation {
         UIView.animate(
             withDuration: 0.3,
             delay: 0,
@@ -142,14 +188,14 @@ extension VCMain: ProtocolVCMain {
             options: UIView.AnimationOptions(),
             animations: {
                 self.constraintContainerBottomPoint.constant = 50
-                self.tapShowOperation = UITapGestureRecognizer(
-                    target: self,
-                    action: #selector(self.handlerToHideContainerScreen1(tap:)))
-                self.view.addGestureRecognizer(self.tapShowOperation!)
+                self.view.addGestureRecognizer(tapShowOperation)
                 self.blurView.isHidden = false
                 self.view.layoutIfNeeded()
             },
             completion: { _ in })
+        } else {
+            throw ThrowError.tapShowOperationError
+        }
     }
 
     func hideOperation() {

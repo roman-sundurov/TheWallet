@@ -96,66 +96,87 @@ extension UserRepository {
         }
     }
 
-    func deleteCategory(idOfObject: UUID) {
+    func deleteCategory(idOfObject: UUID) throws {
         UserRepository.shared.user?.categories[idOfObject.description] = nil
-        userReference!.updateData([
-            "categories.\(idOfObject.description)": FieldValue.delete()
-        ]) { error in
-            if let error = error {
-                print("deleteCategory Error writing document: \(error)")
-            } else {
-                print("deleteCategory Document successfully written!")
+        if let userReference = userReference {
+            userReference.updateData([
+                "categories.\(idOfObject.description)": FieldValue.delete()
+            ]) { error in
+                if let error = error {
+                    print("deleteCategory Error writing document: \(error)")
+                } else {
+                    print("deleteCategory Document successfully written!")
+                }
             }
+        } else {
+            throw ThrowError.getUserReferenceError
         }
     }
 
-    func updateCategory(name: String, icon: String, idOfObject: UUID) {
-        userReference!.updateData([
-            "categories.\(idOfObject).name": name,
-            "categories.\(idOfObject).icon": icon
-        ]) { error in
-            if let error = error {
-                print("updateCategory Error writing document: \(error)")
-            } else {
-                print("updateCategory Document successfully written!")
+    func updateCategory(name: String, icon: String, idOfObject: UUID) throws {
+        if let userReference = userReference {
+            userReference.updateData([
+                "categories.\(idOfObject).name": name,
+                "categories.\(idOfObject).icon": icon
+            ]) { error in
+                if let error = error {
+                    print("updateCategory Error writing document: \(error)")
+                } else {
+                    print("updateCategory Document successfully written!")
+                }
             }
+        } else {
+            throw ThrowError.getUserReferenceError
         }
     }
 
     // MARK: - operations
-    func deleteOperation(idOfObject: UUID) {
+    func deleteOperation(idOfObject: UUID) throws {
         UserRepository.shared.user?.operations[idOfObject.description] = nil
-        userReference!.updateData([
-            "operations.\(idOfObject.description)": FieldValue.delete()
-        ]) { error in
-            if let error = error {
-                print("deleteOperation Error writing document: \(error)")
-            } else {
-                print("deleteOperation Document successfully written!")
+        if let userReference = userReference {
+            userReference.updateData([
+                "operations.\(idOfObject.description)": FieldValue.delete()
+            ]) { error in
+                if let error = error {
+                    print("deleteOperation Error writing document: \(error)")
+                } else {
+                    print("deleteOperation Document successfully written!")
+                }
             }
+        } else {
+            throw ThrowError.getUserReferenceError
         }
     }
 
     func addOperations(amount: Double, categoryUUID: UUID, note: String, date: Date) throws {
-        let newOperation = Operation(amount: amount, category: categoryUUID, note: note, date: date.timeIntervalSince1970)
+        let newOperation = Operation(
+            amount: amount,
+            category: categoryUUID,
+            note: note,
+            date: date.timeIntervalSince1970
+        )
         UserRepository.shared.user?.operations[categoryUUID.description] = newOperation
         if let userReference = userReference {
-            userReference.setData([
-                "operations": [
-                    newOperation.id.description: [
-                        "amount": newOperation.amount,
-                        "category": newOperation.category!.description,
-                        "note": newOperation.note,
-                        "date": newOperation.date,
-                        "id": newOperation.id.description
+            if let newOperationCategory = newOperation.category {
+                userReference.setData([
+                    "operations": [
+                        newOperation.id.description: [
+                            "amount": newOperation.amount,
+                            "category": newOperationCategory.description,
+                            "note": newOperation.note,
+                            "date": newOperation.date,
+                            "id": newOperation.id.description
+                        ]
                     ]
-                ]
-            ], merge: true) { error in
-                if let error = error {
-                    print("addCategory Error writing document: \(error)")
-                } else {
-                    print("addCategory Document successfully written!")
+                ], merge: true) { error in
+                    if let error = error {
+                        print("addCategory Error writing document: \(error)")
+                    } else {
+                        print("addCategory Document successfully written!")
+                    }
                 }
+            } else {
+                throw ThrowError.newOperationCategoryError
             }
         } else {
             throw ThrowError.getUserReferenceError

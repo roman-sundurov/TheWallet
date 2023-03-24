@@ -38,6 +38,14 @@ enum ThrowError: Error {
     case getUserReferenceError
     case emptyInputFields
     case customError(errorName: String)
+    case newOperationCategoryError
+    // VCGraph errors
+    case calculateDateArrayFreshHoldDateError
+    case calculateDateArrayError
+    case calculateCumulativeAmountError
+    case vcGraphDataUpdate
+    case mainViewUpdateScreen
+    case tapShowOperationError
 }
 
 typealias NestedType = (User) -> Void

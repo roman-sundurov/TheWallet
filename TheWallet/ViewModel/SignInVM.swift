@@ -28,13 +28,14 @@ extension VCSignIn {
                 do {
                     try await UserRepository.shared.signIn(email: emailText, password: passwordText)
                     UserRepository.shared.listener = Auth.auth().addStateDidChangeListener { [weak self] _, user in
-                        if let user = user {
+                        if let user = user,
+                           let userEmail = user.email {
                             let defaults = UserDefaults.standard
-                            defaults.set(self?.emailTextField.text!, forKey: "email")
-                            defaults.set(self?.passwordTextField.text!, forKey: "password")
+                            defaults.set(emailText, forKey: "email")
+                            defaults.set(passwordText, forKey: "password")
 
                             // UserRepository.shared.user?.email = user.email!
-                            UserRepository.shared.userReference = Firestore.firestore().collection("users").document(user.email!)
+                            UserRepository.shared.userReference = Firestore.firestore().collection("users").document(userEmail)
                             self!.emailSignInButton.configuration?.showsActivityIndicator = false
                             self!.performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCMain.rawValue, sender: nil)
                         }
