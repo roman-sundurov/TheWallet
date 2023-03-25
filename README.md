@@ -13,6 +13,8 @@ I will be very grateful if you tell me about errors in the project, or suggest i
 - Package dependencies - SPM
 - Frameworks - SwiftLint, AAInfographics, SimpleCheckbox
 
+## SignIn/SignUp screens
+Built using Firebase Auth, Apple Sign In button and Google Sign In button.
 
 ## Main screen
 Table built using Diffable DataSource.
