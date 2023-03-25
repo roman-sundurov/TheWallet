@@ -1,5 +1,7 @@
 # MoneyManager
-The project where I experement with UIKit, Firebase and other frameworks. The application is a classic money manager. User can save his money income/expenses. Each transaction can be assigned a date, a note, and a category.
+The project where I experiment with UIKit, Firebase, and other frameworks. The application is a classic money manager. Users can save their income/expenses money. Each transaction can be assigned a date, a note, and a category.
+
+The project was created in 2021, the refactoring was in 2023.
 
 I will be very grateful if you tell me about errors in the project, or suggest improvements.
 
