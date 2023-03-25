@@ -19,7 +19,8 @@ protocol ProtocolVCSetting {
     func setVCSetting(amount: Double, categoryUUID: UUID, date: Double, note: String, id: UUID)
     func returnNewOperation() -> Operation
     func getSettingMenuArray() -> [SettingMenuData]
-    func getUserData() -> User
+    func getUserData() throws -> User
+    func showAlert(message: String)
 }
 
 struct SettingMenuData {

@@ -58,7 +58,8 @@ extension VCCategory: ProtocolVCCategory {
 
     func screen2ContainerNewCategorySwicher() {
         print("AAAA")
-        if vcMainDelegate?.getUserData().operations.isEmpty == false {
+        if let userDataOperations = try? vcMainDelegate?.getUserData().operations,
+           userDataOperations.isEmpty == false {
             if statusEditContainer == true {
                 statusEditContainer = false
                 categoryTableVCHeaderDelegate?.buttonOptionsSetColor(color: UIColor.white)
@@ -79,21 +80,25 @@ extension VCCategory: ProtocolVCCategory {
     }
 
     func addNewCategory(name: String, icon: String, date: Double) {
-            // vcMainDelegate?.fetchFirebase()
+        // vcMainDelegate?.fetchFirebase()
         vcMainDelegate!.addCategory(name: name, icon: icon, date: date)
-        print("vcMainDelegate!.getUserData().categories.count = \(vcMainDelegate!.getUserData().categories.count)")
-        tableView.performBatchUpdates({
-            var newRowIndex: Int = 0
-            if let categories = vcMainDelegate?.getUserData().categories.count {
-                newRowIndex = statusEditContainer == true ? categories + 1 : categories
-            }
-            tableView.insertRows(at: [IndexPath(row: newRowIndex, section: 0)], with: .automatic)
-        }, completion: { _ in
-            self.tableView.reloadData()
-            Task {
-                await self.vcMainDelegate?.fetchFirebase()
-            }
-        })
+        if let userCategoriesCount = try? vcMainDelegate!.getUserData().categories.count {
+            print("vcMainDelegate!.getUserData().categories.count = \(userCategoriesCount)")
+            tableView.performBatchUpdates({
+                var newRowIndex: Int = 0
+                // if let categories = try? vcMainDelegate?.getUserData().categories.count {
+                newRowIndex = statusEditContainer == true ? userCategoriesCount + 1 : userCategoriesCount
+                // }
+                tableView.insertRows(at: [IndexPath(row: newRowIndex, section: 0)], with: .automatic)
+            }, completion: { _ in
+                self.tableView.reloadData()
+                Task {
+                    await self.vcMainDelegate?.fetchFirebase()
+                }
+            })
+        } else {
+            vcSettingDelegate?.showAlert(message: "addNewCategory error")
+        }
     }
 
     func screen2ContainerDeleteCategory(cellID: Int) {
@@ -116,7 +121,7 @@ extension VCCategory: ProtocolVCCategory {
 
     func calculateCategoryArray() -> [Category] {
         categoriesArray = []
-        if let userData = vcMainDelegate?.getUserData() {
+        if let userData = try? vcMainDelegate?.getUserData() {
             for oper in userData.categories {
                 categoriesArray.append(oper.value)
                 categoriesArray.sort { $0.date > $1.date }
@@ -144,13 +149,18 @@ extension VCCategory: UITableViewDelegate {
 
 extension VCCategory: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if vcMainDelegate!.getUserData().categories.isEmpty {
+        if let userCategories = try? vcMainDelegate!.getUserData().categories {
+            if userCategories.isEmpty {
+                statusEditContainer = true
+                return 2
+            } else if statusEditContainer == true {
+                return calculateCategoryArray().count + 2
+            } else {
+                return calculateCategoryArray().count + 1
+            }
+        } else {
             statusEditContainer = true
             return 2
-        } else if statusEditContainer == true {
-            return calculateCategoryArray().count + 2
-        } else {
-            return calculateCategoryArray().count + 1
         }
     }
 

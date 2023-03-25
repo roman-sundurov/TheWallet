@@ -9,8 +9,12 @@ import UIKit
 import Foundation
 
 extension VCSetting: ProtocolVCSetting {
-    func getUserData() -> User {
-        return vcMainDelegate!.getUserData()
+    func getUserData() throws -> User {
+        do {
+            return try vcMainDelegate!.getUserData()
+        } catch {
+            throw ThrowError.vcSettingGetUserDataError
+        }
     }
 
     func setCategoryInNewOperation(categoryUUID: UUID) {

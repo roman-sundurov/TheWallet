@@ -32,7 +32,12 @@ final class SettingTableVCCategory: UITableViewCell {
     func prepareCell(indexRow: Int) {
         self.indexRow = indexRow
         if let newCategory = vcSettingDelegate!.returnNewOperation().category {
-            labelSelectCategory.text = vcSettingDelegate?.getUserData().categories[newCategory.description]?.name
+            do {
+                labelSelectCategory.text = try vcSettingDelegate?.getUserData().categories[newCategory.description]?.name
+            } catch {
+                labelSelectCategory.text = "Error data"
+                vcSettingDelegate?.showAlert(message: "labelSelectCategory error")
+            }
             labelSelectCategory.textColor = .black
         } else {
             labelSelectCategory.text = vcSettingDelegate!.getSettingMenuArray()[indexRow].text

@@ -40,7 +40,11 @@ class VCOperation: UIViewController {
     @IBAction func buttonActionToDeleteOperation(_ sender: Any) {
         if let vcMainDelegate = vcMainDelegate,
            let uuid = uuid {
-            vcMainDelegate.hideOperation()
+            do {
+                try vcMainDelegate.hideOperation()
+            } catch {
+                vcMainDelegate.showAlert(message: "hideOperation error")
+            }
             vcMainDelegate.deleteOperation(uuid: uuid)
         } else {
             print("Error buttonActionToDeleteOperation")
@@ -69,7 +73,7 @@ extension VCOperation: ProtocolVCOperation {
         let categoryUUID = operation.category {
             
             // display category
-            if let category = vcMainDelegate?.getUserData().categories[categoryUUID.description] {
+            if let category = try? vcMainDelegate?.getUserData().categories[categoryUUID.description] {
                 labelCategory.text = category.name
             } else {
                 labelCategory.text = "Category not found"

@@ -11,7 +11,7 @@ import JGProgressHUD
 protocol ProtocolVCMain {
     func updateScreen() throws // full screen update
     func showOperation(_ id: UUID) throws // opens a PopUp window for a specific operation
-    func hideOperation() // closes the PopUp window of a specific operation
+    func hideOperation() throws // closes the PopUp window of a specific operation
     func editOperation(uuid: UUID) // transition to editing the selected operation on the second screen
     func miniGraphStarterBackground(status: Bool)
 
@@ -19,7 +19,7 @@ protocol ProtocolVCMain {
     func returnIncomesExpenses() -> [String: Double]?
 
     func getUserRepository() -> UserRepository
-    func getUserData() -> User
+    func getUserData() throws -> User
     func updateUserData(newData: User)
     func updateOperations(amount: Double, categoryUUID: UUID, note: String, date: Date, idOfObject: UUID)
     func addOperations(amount: Double, categoryUUID: UUID, note: String, date: Date)
@@ -32,7 +32,9 @@ protocol ProtocolVCMain {
     func showAlert(message: String)
 }
 
+// swiftlint:disable all
 class VCMain: UIViewController {
+// swiftlint:enable all
     static let shared = VCMain()
 
         // MARK: - outlets
@@ -81,45 +83,49 @@ class VCMain: UIViewController {
 
         // MARK: - transitions
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vewController = segue.destination as? VCSetting, segue.identifier == "segueToVCSetting" {
+        if let vewController = segue.destination as? VCSetting,
+           segue.identifier == PerformSegueIdentifiers.segueToVCSetting.rawValue {
             vcSettingDelegate = vewController
             vewController.vcMainDelegate = self
         }
-        if let viewController = segue.destination as? VCOperation, segue.identifier == "segueToVCOperation" {
+        if let viewController = segue.destination as? VCOperation,
+           segue.identifier == PerformSegueIdentifiers.segueToVCOperation.rawValue {
             vcOperationDelegate = viewController
             viewController.vcMainDelegate = self
         }
-        if let viewController = segue.destination as? VCGraph, segue.identifier == "segueToVCGraph" {
+        if let viewController = segue.destination as? VCGraph,
+           segue.identifier == PerformSegueIdentifiers.segueToVCGraph.rawValue {
             vcGraphDelegate = viewController
             viewController.vcMainDelegate = self
         }
         if let viewController = segue.destination as? VCSetting,
-           let userRepositoryUser = userRepository.user,
-           segue.identifier == "segueToVCSettingForEdit" {
-            viewController.vcSettingStatusEditing = true
-            viewController.vcMainDelegate = self
-            vcSettingDelegate = viewController
-            if let specialOperation = userRepositoryUser.operations.filter({$0.value.id == tagForEdit}).first?.value {
-                if let vcSettingDelegate = vcSettingDelegate {
-                    if let specialOperationCategory = specialOperation.category {
-                        vcSettingDelegate.setVCSetting(
-                            amount: specialOperation.amount,
-                            categoryUUID: specialOperationCategory,
-                            date: specialOperation.date,
-                            note: specialOperation.note,
-                            id: specialOperation.id
-                        )
+           segue.identifier == PerformSegueIdentifiers.segueToVCSettingForEdit.rawValue {
+            if let userRepositoryUser = userRepository.user {
+                viewController.vcSettingStatusEditing = true
+                viewController.vcMainDelegate = self
+                vcSettingDelegate = viewController
+                if let specialOperation = userRepositoryUser.operations.filter({$0.value.id == tagForEdit}).first?.value {
+                    if let vcSettingDelegate = vcSettingDelegate {
+                        if let specialOperationCategory = specialOperation.category {
+                            vcSettingDelegate.setVCSetting(
+                                amount: specialOperation.amount,
+                                categoryUUID: specialOperationCategory,
+                                date: specialOperation.date,
+                                note: specialOperation.note,
+                                id: specialOperation.id
+                            )
+                        } else {
+                            showAlert(message: "Error specialOperationCategory")
+                        }
                     } else {
-                        showAlert(message: "Error specialOperationCategory")
+                        showAlert(message: "Error vcSettingDelegate == nil")
                     }
                 } else {
-                    showAlert(message: "Error vcSettingDelegate == nil")
+                    showAlert(message: "Error specialOperation")
                 }
             } else {
-                showAlert(message: "Error specialOperation")
+                showAlert(message: "Error VCSetting destination: userRepository.user")
             }
-        } else {
-            showAlert(message: "Error segue.destination as? VCSetting")
         }
     }
 
@@ -267,7 +273,11 @@ class VCMain: UIViewController {
                 print("Tap inside Container")
             } else {
                 print("Tap outside Container")
-                hideOperation()
+                do {
+                    try hideOperation()
+                } catch {
+                    showAlert(message: "hideOperation error")
+                }
             }
         }
     }

@@ -31,6 +31,8 @@ enum PerformSegueIdentifiers: String {
     case segueToVCAccount
     case segueToVCSetting
     case segueToVCSettingForEdit
+    case segueToVCGraph
+    case segueToVCOperation
 }
 
 enum ThrowError: Error {
@@ -45,7 +47,9 @@ enum ThrowError: Error {
     case calculateCumulativeAmountError
     case vcGraphDataUpdate
     case mainViewUpdateScreen
-    case tapShowOperationError
+    case showOperation
+    case hideOperation
+    case vcSettingGetUserDataError
 }
 
 typealias NestedType = (User) -> Void

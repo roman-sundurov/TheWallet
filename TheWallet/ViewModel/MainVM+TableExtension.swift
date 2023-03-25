@@ -17,7 +17,16 @@ extension VCMain {
             } else {
                 cell?.labelAmount.text = String(format: "%.2f", model.amount)
             }
-            if let category = self.getUserData().categories[model.category!.description] {
+            // do {
+            //     if let category = try self.getUserData().categories[model.category!.description] {
+            //         cell?.labelCategory.text = category.name
+            //     } else {
+            //         cell?.labelCategory.text = "Category not found"
+            //     }
+            // } catch {
+            //     cell?.labelCategory.text = "Category not found"
+            // }
+            if let category = try? self.getUserData().categories[model.category!.description] {
                 cell?.labelCategory.text = category.name
             } else {
                 cell?.labelCategory.text = "Category not found"

@@ -146,7 +146,11 @@ extension VCMain: ProtocolVCMain {
     }
 
     func editOperation(uuid: UUID) {
-        hideOperation()
+        do {
+            try hideOperation()
+        } catch {
+            showAlert(message: "hideOperation error")
+        }
         tagForEdit = uuid
         performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCSettingForEdit.rawValue, sender: nil)
     }
@@ -194,11 +198,12 @@ extension VCMain: ProtocolVCMain {
             },
             completion: { _ in })
         } else {
-            throw ThrowError.tapShowOperationError
+            throw ThrowError.showOperation
         }
     }
 
-    func hideOperation() {
+    func hideOperation() throws {
+        if let tapShowOperation = self.tapShowOperation {
         UIView.animate(
             withDuration: 0,
             delay: 0,
@@ -208,18 +213,25 @@ extension VCMain: ProtocolVCMain {
             animations: {
                 self.constraintContainerBottomPoint.constant = -311
                 self.blurView.isHidden = true
-                self.view.removeGestureRecognizer(self.tapShowOperation!)
+                self.view.removeGestureRecognizer(tapShowOperation)
                 self.view.layoutIfNeeded()
             },
             completion: { _ in })
+        } else {
+            throw ThrowError.hideOperation
+        }
     }
 
     func getUserRepository() -> UserRepository {
         return userRepository
     }
 
-    func getUserData() -> User {
-        return userRepository.user!
+    func getUserData() throws -> User {
+        if let userRepositoryUser = userRepository.user {
+            return userRepositoryUser
+        } else {
+            throw ThrowError.getUserDataError
+        }
     }
 
     func returnDayOfDate(_ dateInternal: Date) -> String {
