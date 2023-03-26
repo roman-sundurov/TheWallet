@@ -14,8 +14,12 @@ extension VCCategory: ProtocolVCCategory {
         tableView.reloadData()
     }
 
-    func returnVCMainDelegate() -> ProtocolVCMain {
-        return vcMainDelegate!
+    func returnVCMainDelegate() throws -> ProtocolVCMain {
+        if let vcMainDelegate = vcMainDelegate {
+            return vcMainDelegate
+        } else {
+            throw ThrowError.vcCategoryReturnVCMainDelegate
+        }
     }
 
     func setCurrentActiveEditingCell(cellID: Int) {
@@ -26,21 +30,26 @@ extension VCCategory: ProtocolVCCategory {
                 // if counter >= 2 {
             let specCell = cell as? CategoryTableVCCategory
             if cellID == -100 {
-                specCell?.closeEditing()
+                try? specCell?.closeEditing()
             } else {
                 if cellID == 0 {
                     specCell?.setPermitionToSetCategory(status: true)
                 } else {
-                    if specCell?.returnCategryIdOfCell() != cellID {
-                        specCell?.closeEditing()
-                        specCell?.setPermitionToSetCategory(status: true)
-                    } else {
-                        specCell?.setPermitionToSetCategory(status: false)
+                    do {
+                        let categoryIDOfCell = try specCell?.returnCategryIdOfCell()
+                        if categoryIDOfCell != cellID {
+                            try? specCell?.closeEditing()
+                            specCell?.setPermitionToSetCategory(status: true)
+                        } else {
+                            specCell?.setPermitionToSetCategory(status: false)
+                        }
+                    } catch {
+                        vcSettingDelegate?.showAlert(message: "Error: CategoryViewModel setCurrentActiveEditingCell")
+                        print("Error: CategoryViewModel setCurrentActiveEditingCell")
                     }
                 }
             }
             counter += 1
-                // }
         }
     }
 
@@ -48,8 +57,12 @@ extension VCCategory: ProtocolVCCategory {
         self.present(alertErrorAddNewCategory, animated: true, completion: nil)
     }
 
-    func returnDelegateScreen2ContainerTableVCNewCategory() -> ProtocolCategoryTableVCNewCategory {
-        return categoryTableVCNewCategoryDelegate!
+    func returnDelegateScreen2ContainerTableVCNewCategory() throws -> ProtocolCategoryTableVCNewCategory {
+        if let categoryTableVCNewCategoryDelegate = categoryTableVCNewCategoryDelegate {
+            return categoryTableVCNewCategoryDelegate
+        } else {
+            throw ThrowError.vcCategoryReturnDelegateScreen2ContainerTableVCNewCategory
+        }
     }
 
     func returnScreen2StatusEditContainer() -> Bool {
@@ -81,9 +94,13 @@ extension VCCategory: ProtocolVCCategory {
 
     func addNewCategory(name: String, icon: String, date: Double) {
         // vcMainDelegate?.fetchFirebase()
-        vcMainDelegate!.addCategory(name: name, icon: icon, date: date)
-        if let userCategoriesCount = try? vcMainDelegate!.getUserData().categories.count {
-            print("vcMainDelegate!.getUserData().categories.count = \(userCategoriesCount)")
+        if let vcMainDelegate = vcMainDelegate {
+            vcMainDelegate.addCategory(name: name, icon: icon, date: date)
+        } else {
+            print("addNewCategory vcMainDelegate error")
+        }
+        if let userCategoriesCount = try? vcMainDelegate?.getUserData().categories.count {
+            print("vcMainDelegate?.getUserData().categories.count = \(userCategoriesCount)")
             tableView.performBatchUpdates({
                 var newRowIndex: Int = 0
                 // if let categories = try? vcMainDelegate?.getUserData().categories.count {
@@ -108,15 +125,23 @@ extension VCCategory: ProtocolVCCategory {
         }, completion: { _ in self.tableView.reloadData() })
     }
 
-    func getVCSettingDelegate() -> ProtocolVCSetting {
-        return vcSettingDelegate!
-    }
+    // func getVCSettingDelegate() throws -> ProtocolVCSetting {
+    //     if let vcSettingDelegate = vcSettingDelegate {
+    //         return vcSettingDelegate
+    //     } else {
+    //         throw ThrowError.vcCategorygetVCSettingDelegate
+    //     }
+    // }
 
     func closeWindow() {
-        vcSettingDelegate?.changeCategoryClosePopUpScreen2()
-        tableView.reloadData()
-        categoryTableVCNewCategoryDelegate?.textFieldNewCategoryClear()
-        print("ClosePopup from Container")
+        do {
+            try vcSettingDelegate?.changeCategoryClosePopUpScreen2()
+            tableView.reloadData()
+            categoryTableVCNewCategoryDelegate?.textFieldNewCategoryClear()
+            print("ClosePopup from Container")
+        } catch {
+            vcSettingDelegate?.showAlert(message: "CloseWindow error")
+        }
     }
 
     func calculateCategoryArray() -> [Category] {
@@ -149,7 +174,7 @@ extension VCCategory: UITableViewDelegate {
 
 extension VCCategory: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let userCategories = try? vcMainDelegate!.getUserData().categories {
+        if let userCategories = try? vcMainDelegate?.getUserData().categories {
             if userCategories.isEmpty {
                 statusEditContainer = true
                 return 2
@@ -171,14 +196,18 @@ extension VCCategory: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: ReusableCellIdentifier.header.rawValue) as? CategoryTableVCHeader
             cell?.delegateScreen2Container = self
             categoryTableVCHeaderDelegate = cell
-            return cell!
+            if let cell = cell {
+                return cell
+            }
         } else if statusEditContainer == true && indexPath.row == 1 {
             print("2222")
             let cell = tableView.dequeueReusableCell(withIdentifier: ReusableCellIdentifier.cellNewCategory.rawValue) as? CategoryTableVCNewCategory
             cell?.vcCategoryDelegate = self
             categoryTableVCHeaderDelegate?.buttonOptionsSetColor(color: UIColor.systemBlue)
             categoryTableVCNewCategoryDelegate = cell
-            return cell!
+            if let cell = cell {
+                return cell
+            }
         } else {
             print("3333")
             let cell = tableView.dequeueReusableCell(withIdentifier: ReusableCellIdentifier.cellChangeCategory.rawValue) as? CategoryTableVCCategory
@@ -189,8 +218,11 @@ extension VCCategory: UITableViewDataSource {
                 category: categoriesArray[statusEditContainer == true ? indexPath.row - 2 : indexPath.row - 1],
                 cellID: statusEditContainer == true ? indexPath.row - 2 : indexPath.row - 1
             )
-            return cell!
+            if let cell = cell {
+                return cell
+            }
         }
+        return UITableViewCell()
     }
 
 }

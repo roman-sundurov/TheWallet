@@ -161,12 +161,12 @@ extension VCMain: ProtocolVCMain {
             countingIncomesAndExpensive()
             do {
                 try vcGraphDelegate?.dataUpdate()
+                miniGraph.setNeedsDisplay()
+                configureDataSource()
+                try applySnapshot()
             } catch {
                 showAlert(message: "Error updating VCGraph")
             }
-            miniGraph.setNeedsDisplay()
-            configureDataSource()
-            applySnapshot()
         } else {
             throw ThrowError.mainViewUpdateScreen
         }
@@ -237,10 +237,14 @@ extension VCMain: ProtocolVCMain {
     func returnDayOfDate(_ dateInternal: Date) -> String {
         let formatterPrint = DateFormatter()
         formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) // +3 час(Moscow)
-        switch userRepository.user!.daysForSorting {
-        case 365:
-            formatterPrint.dateFormat = "MMMM YYYY"
-        default:
+        if let userRepositoryUser = userRepository.user {
+            switch userRepositoryUser.daysForSorting {
+            case 365:
+                formatterPrint.dateFormat = "MMMM YYYY"
+            default:
+                formatterPrint.dateFormat = "d MMMM YYYY"
+            }
+        } else {
             formatterPrint.dateFormat = "d MMMM YYYY"
         }
         return formatterPrint.string(from: dateInternal)

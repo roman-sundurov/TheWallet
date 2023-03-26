@@ -9,8 +9,8 @@ import UIKit
 import SimpleCheckbox
 
 protocol ProtocolCategoryTableVCCategory {
-    func returnCategryIdOfCell() -> Int
-    func closeEditing()
+    func returnCategryIdOfCell() throws -> Int
+    func closeEditing() throws
     func setPermitionToSetCategory(status: Bool)
 }
 
@@ -36,40 +36,62 @@ final class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
 
         // MARK: - transitions
     @IBAction func buttonDeleteCategoryAction(_ sender: Any) {
-        vcMainDelegate!.deleteCategory(idOfObject: category!.id)
-        vcCategoryDelegate?.screen2ContainerDeleteCategory(idOfObject: category!.id)
-    }
-
-    @IBAction func buttonsEditNameCategoryAction(_ sender: Any) {
-        if editStatus == false {
-            editStatus = true
-            textFieldNameCategory.backgroundColor = UIColor.white
-            textFieldNameCategory.textColor = UIColor.systemGray
-            textFieldNameCategory.isEnabled = true
-            textFieldNameCategory.becomeFirstResponder()
-            checkBoxObject.isUserInteractionEnabled = false
-            print("buttonEditNameCategoryAction1")
-            buttonEditNameCategory.tintColor = UIColor.red
-            buttonEditNameCategory.isHidden = true
-            buttonConfirmNewName.isHidden = false
-            vcCategoryDelegate?.setCurrentActiveEditingCell(cellID: cellID!)
+        if let vcMainDelegate = vcMainDelegate,
+           let vcCategoryDelegate = vcCategoryDelegate,
+           let category = category {
+            vcMainDelegate.deleteCategory(idOfObject: category.id)
+            vcCategoryDelegate.screen2ContainerDeleteCategory(idOfObject: category.id)
         } else {
-            closeEditing()
+            vcSettingDelegate?.showAlert(message: "Error: CategoryTableVCCategory buttonDeleteCategoryAction")
+            print("Error: CategoryTableVCCategory buttonDeleteCategoryAction")
         }
     }
 
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        buttonsEditNameCategoryAction(buttonConfirmNewName!)
-        return true
+    @IBAction func buttonsEditNameCategoryAction(_ sender: Any) {
+        if let vcCategoryDelegate = vcCategoryDelegate,
+           let cellID = cellID {
+            if editStatus == false {
+                editStatus = true
+                textFieldNameCategory.backgroundColor = UIColor.white
+                textFieldNameCategory.textColor = UIColor.systemGray
+                textFieldNameCategory.isEnabled = true
+                textFieldNameCategory.becomeFirstResponder()
+                checkBoxObject.isUserInteractionEnabled = false
+                print("buttonEditNameCategoryAction1")
+                buttonEditNameCategory.tintColor = UIColor.red
+                buttonEditNameCategory.isHidden = true
+                buttonConfirmNewName.isHidden = false
+                vcCategoryDelegate.setCurrentActiveEditingCell(cellID: cellID)
+            } else {
+                try? closeEditing()
+            }
+        } else {
+            vcSettingDelegate?.showAlert(message: "Error: CategoryTableVCCategory buttonDeleteCategoryAction")
+            print("Error: CategoryTableVCCategory buttonDeleteCategoryAction")
+        }
     }
+
+    // func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    //     if let buttonConfirmNewName = buttonConfirmNewName {
+    //         buttonsEditNameCategoryAction(buttonConfirmNewName!)
+    //         return true
+    //     }
+    // }
 
     @objc func closeWindows(tap: UITapGestureRecognizer) {
         if permitionToSetCategory == false { return }
             // запись выбранной категории во временную переменную
-        vcSettingDelegate!.setCategoryInNewOperation(categoryUUID: category!.id)
-        vcCategoryDelegate?.closeWindow() // закрытие PopUp-окна
-        vcCategoryDelegate?.setCurrentActiveEditingCell(cellID: 100)
-        print("ClosePopup from ContainerCell")
+        if let vcSettingDelegate = vcSettingDelegate,
+           let vcCategoryDelegate = vcCategoryDelegate,
+           let category = category {
+                vcSettingDelegate.setCategoryInNewOperation(categoryUUID: category.id)
+                vcCategoryDelegate.closeWindow() // закрытие PopUp-окна
+                vcCategoryDelegate.setCurrentActiveEditingCell(cellID: 100)
+                print("ClosePopup from ContainerCell")
+        } else {
+            vcSettingDelegate?.showAlert(message: "Error: CategoryTableVCCategory closeWindows")
+            print("Error: CategoryTableVCCategory closeWindows")
+        }
     }
 
     override func awakeFromNib() {
@@ -88,8 +110,31 @@ final class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
         gestureCell = UITapGestureRecognizer(target: self, action: #selector(self.closeWindows(tap:)))
         gestureCheckBox = UITapGestureRecognizer(target: self, action: #selector(self.closeWindows(tap:)))
         isUserInteractionEnabled = true
-        addGestureRecognizer(gestureCell!)
-        checkBoxObject.addGestureRecognizer(gestureCheckBox!)
+        if let gestureCell = gestureCell,
+           let gestureCheckBox = gestureCheckBox,
+           let vcSettingDelegate = vcSettingDelegate,
+           let vcCategoryDelegate = vcCategoryDelegate,
+           let category = self.category {
+            addGestureRecognizer(gestureCell)
+            checkBoxObject.addGestureRecognizer(gestureCheckBox)
+
+            if vcSettingDelegate.returnNewOperation().category == category.id {
+                checkBoxObject.isChecked = true
+            } else {
+                checkBoxObject.isChecked = false
+            }
+            if vcCategoryDelegate.returnScreen2StatusEditContainer() == true {
+                buttonDeleteCategory.isHidden = false
+                buttonEditNameCategory.isHidden = false
+            } else {
+                buttonDeleteCategory.isHidden = true
+                buttonEditNameCategory.isHidden = true
+            }
+
+        } else {
+            vcSettingDelegate?.showAlert(message: "Error: CategoryTableVCCategory startCell")
+            print("Error: CategoryTableVCCategory startCell")
+        }
         checkBoxObject.tag = cellID
         checkBoxObject.checkmarkStyle = .tick
         checkBoxObject.borderLineWidth = 0
@@ -97,18 +142,6 @@ final class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
         checkBoxObject.checkmarkSize = 1
         checkBoxObject.checkmarkColor = .white
         textFieldNameCategory.layer.cornerRadius = 10
-        if vcSettingDelegate!.returnNewOperation().category == self.category!.id {
-            checkBoxObject.isChecked = true
-        } else {
-            checkBoxObject.isChecked = false
-        }
-        if vcCategoryDelegate?.returnScreen2StatusEditContainer() == true {
-            buttonDeleteCategory.isHidden = false
-            buttonEditNameCategory.isHidden = false
-        } else {
-            buttonDeleteCategory.isHidden = true
-            buttonEditNameCategory.isHidden = true
-        }
         textFieldNameCategory.returnKeyType = .done
         textFieldNameCategory.delegate = self
     }
@@ -119,11 +152,15 @@ extension CategoryTableVCCategory: ProtocolCategoryTableVCCategory {
         permitionToSetCategory = status
     }
 
-    func returnCategryIdOfCell() -> Int {
-        return self.cellID!
+    func returnCategryIdOfCell() throws -> Int {
+        if let cellID = cellID {
+            return cellID
+        } else {
+            throw ThrowError.categoryTableVCCategoryReturnCategryIdOfCell
+        }
     }
 
-    func closeEditing() {
+    func closeEditing() throws {
         editStatus = false
         textFieldNameCategory.backgroundColor = UIColor.clear
         textFieldNameCategory.textColor = UIColor.white
@@ -134,7 +171,13 @@ extension CategoryTableVCCategory: ProtocolCategoryTableVCCategory {
         buttonEditNameCategory.tintColor = UIColor.systemBlue
         buttonEditNameCategory.isHidden = false
         buttonConfirmNewName.isHidden = true
-        vcMainDelegate?.updateCategory(name: textFieldNameCategory.text!, icon: "", idOfObject: self.category!.id)
-        vcCategoryDelegate?.setCurrentActiveEditingCell(cellID: 0)
+        if let textFieldNameCategoryText = textFieldNameCategory.text,
+           let category = self.category {
+            vcMainDelegate?.updateCategory(name: textFieldNameCategoryText, icon: "", idOfObject: category.id)
+            vcCategoryDelegate?.setCurrentActiveEditingCell(cellID: 0)
+        } else {
+            print("Error: CategoryTableVCCategory closeEditing")
+            throw ThrowError.categoryTableVCCategoryCloseEditing
+        }
     }
 }

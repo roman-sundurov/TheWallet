@@ -101,59 +101,77 @@ extension VCSetting: ProtocolVCSetting {
         tableViewScreen2.reloadRows(at: [indexPath], with: .fade)
     }
 
-    func returnDelegateScreen2TableViewCellNote() -> ProtocolSettingTableVCNote {
-        return tableViewCellNoteDelegate!
+    func returnDelegateScreen2TableViewCellNote() throws -> ProtocolSettingTableVCNote {
+        if let tableViewCellNoteDelegate = tableViewCellNoteDelegate {
+            return tableViewCellNoteDelegate
+        } else {
+            throw ThrowError.returnDelegateScreen2TableViewCellNote
+        }
     }
 
     // MARK: - open a PopUp window
-    func changeCategoryOpenPopUpScreen2(_ tag: Int) {
+    func changeCategoryOpenPopUpScreen2(_ tag: Int) throws {
         print("changeCategoryOpenPopUpScreen2")
         self.categoryChangeView.layer.cornerRadius = 20
         self.constraintCategoryChangeViewHeight.constant = CGFloat(50 * 6)
         textFieldAmount.endEditing(true)
         tableViewCellNoteDelegate?.tapOutsideNoteTextViewEditToHide()
-        UIView.animate(
-            withDuration: 0.3,
-            delay: 0,
-            usingSpringWithDamping: 0.8,
-            initialSpringVelocity: 0,
-            options: UIView.AnimationOptions(),
-            animations: {
-                self.constraintCategoryChangeViewPoint.constant = 50
-                self.tapOfChangeCategoryOpenPopUp = UITapGestureRecognizer(
-                    target: self,
-                    action: #selector(self.handlerToHideContainerScreen2(tap:))
-                )
-                self.view.addGestureRecognizer(self.tapOfChangeCategoryOpenPopUp!)
-                self.blurView.isHidden = false
-                self.view.layoutIfNeeded()
-            },
-            completion: { _ in }
+        self.tapOfChangeCategoryOpenPopUp = UITapGestureRecognizer(
+            target: self,
+            action: #selector(self.handlerToHideContainerScreen2(tap:))
         )
+        if let tapOfChangeCategoryOpenPopUp = self.tapOfChangeCategoryOpenPopUp {
+            UIView.animate(
+                withDuration: 0.3,
+                delay: 0,
+                usingSpringWithDamping: 0.8,
+                initialSpringVelocity: 0,
+                options: UIView.AnimationOptions(),
+                animations: {
+                    self.constraintCategoryChangeViewPoint.constant = 50
+                    self.view.addGestureRecognizer(tapOfChangeCategoryOpenPopUp)
+                    self.blurView.isHidden = false
+                    self.view.layoutIfNeeded()
+                },
+                completion: { _ in }
+            )
+        } else {
+            throw ThrowError.changeCategoryOpenPopUpScreen2
+        }
     }
 
     // MARK: - close a PopUp window
-    func changeCategoryClosePopUpScreen2() {
+    func changeCategoryClosePopUpScreen2() throws {
         tableViewScreen2Update(row: 1)
-        UIView.animate(
-            withDuration: 0,
-            delay: 0,
-            usingSpringWithDamping: 0,
-            initialSpringVelocity: 0,
-            options: UIView.AnimationOptions(),
-            animations: {
-                self.constraintCategoryChangeViewPoint.constant = -515
-                self.blurView.isHidden = true
-                self.view.endEditing(true)
-                self.view.removeGestureRecognizer(self.tapOfChangeCategoryOpenPopUp!)
-                self.view.layoutIfNeeded()
-                if self.vcCategoryDelegate?.returnScreen2StatusEditContainer() == true {
-                    self.vcCategoryDelegate?
-                        .returnDelegateScreen2ContainerTableVCNewCategory()
-                        .textFieldNewCategoryClear()
-                }
-            },
-            completion: { _ in })
+        if let tapOfChangeCategoryOpenPopUp = self.tapOfChangeCategoryOpenPopUp {
+            UIView.animate(
+                withDuration: 0,
+                delay: 0,
+                usingSpringWithDamping: 0,
+                initialSpringVelocity: 0,
+                options: UIView.AnimationOptions(),
+                animations: {
+                    self.constraintCategoryChangeViewPoint.constant = -515
+                    self.blurView.isHidden = true
+                    self.view.endEditing(true)
+                    self.view.removeGestureRecognizer(tapOfChangeCategoryOpenPopUp)
+                    self.view.layoutIfNeeded()
+                    if let vcCategoryDelegate = self.vcCategoryDelegate,
+                       vcCategoryDelegate.returnScreen2StatusEditContainer() == true {
+                        do {
+                            try vcCategoryDelegate
+                                .returnDelegateScreen2ContainerTableVCNewCategory()
+                                .textFieldNewCategoryClear()
+                        } catch {
+                            self.showAlert(message: "Error changeCategoryClosePopUpScreen2")
+                        }
+                    }
+                },
+                completion: { _ in }
+            )
+        } else {
+            throw ThrowError.changeCategoryClosePopUpScreen2
+        }
     }
 
     // MARK: - alerts
@@ -306,12 +324,14 @@ extension VCSetting: ProtocolVCSetting {
             print("Tap TextView ended")
             let pointOfTap = tap.location(in: self.view)
                 // Tap inside noteTextView
-            if tableViewCellNoteDelegate!.returnNoteView().frame.contains(pointOfTap) {
+            if let tableViewCellNoteDelegate = tableViewCellNoteDelegate,
+               tableViewCellNoteDelegate.returnNoteView().frame.contains(pointOfTap) {
                 textFieldAmount.endEditing(true)
                 print("Tap inside noteTextView")
-            }
-                // Tap inside in dateTextView
-            else if tableViewCellDateDelegate!.returnDateTextField().frame.contains(pointOfTap) {
+
+            // Tap inside in dateTextView
+            } else if let tableViewCellDateDelegate = tableViewCellDateDelegate,
+                    tableViewCellDateDelegate.returnDateTextField().frame.contains(pointOfTap) {
                 textFieldAmount.endEditing(true)
                 tableViewCellNoteDelegate?.tapOutsideNoteTextViewEditToHide()
                 print("Tap inside in dateTextView")
@@ -337,7 +357,11 @@ extension VCSetting: ProtocolVCSetting {
                 print("Tap inside Container")
             } else {
                 print("Tap outside Container")
-                changeCategoryClosePopUpScreen2()
+                do {
+                    try changeCategoryClosePopUpScreen2()
+                } catch {
+                    showAlert(message: "Error handlerToHideContainerScreen2")
+                }
             }
         }
     }

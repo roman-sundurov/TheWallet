@@ -27,27 +27,40 @@ extension VCSetting: UITableViewDataSource {
         print("indexPath.row= \(indexPath.row)")
         switch indexPath.row {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ReusableCellIdentifier.header.rawValue)
-            cell?.selectionStyle = UITableViewCell.SelectionStyle.none
-            return cell!
+            if let cell = tableView.dequeueReusableCell(withIdentifier: ReusableCellIdentifier.header.rawValue) {
+                cell.selectionStyle = UITableViewCell.SelectionStyle.none
+                return cell
+            } else {
+                vcMainDelegate?.showAlert(message: "cell VCSetting_Header not found")
+            }
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ReusableCellIdentifier.cellCategory.rawValue) as? SettingTableVCCategory
-            cell?.vcSettingDelegate = self
-            cell?.prepareCell(indexRow: indexPath.row)
-            return cell!
+            if let cell = tableView.dequeueReusableCell(withIdentifier: ReusableCellIdentifier.cellCategory.rawValue) as? SettingTableVCCategory {
+                cell.vcSettingDelegate = self
+                cell.prepareCell(indexRow: indexPath.row)
+                return cell
+            } else {
+                vcMainDelegate?.showAlert(message: "cell SettingTableVCCategory not found")
+            }
         case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ReusableCellIdentifier.cellDate.rawValue) as? SettingTableVCDate
-            cell?.vcSettingDelegate = self
-            cell?.startCell(indexRow: indexPath.row)
-            self.tableViewCellDateDelegate = cell
-            return cell!
+            if let cell = tableView.dequeueReusableCell(withIdentifier: ReusableCellIdentifier.cellDate.rawValue) as? SettingTableVCDate {
+                cell.vcSettingDelegate = self
+                cell.startCell(indexRow: indexPath.row)
+                self.tableViewCellDateDelegate = cell
+                return cell
+            } else {
+                vcMainDelegate?.showAlert(message: "cell SettingTableVCDate not found")
+            }
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ReusableCellIdentifier.cellNote.rawValue) as? SettingTableVCNote
-            cell?.vcSettingDelegate = self
-            cell?.startCell(indexRow: indexPath.row)
-            cell?.textViewNotes.delegate = cell
-            self.tableViewCellNoteDelegate = cell
-            return cell!
+            if let cell = tableView.dequeueReusableCell(withIdentifier: ReusableCellIdentifier.cellNote.rawValue) as? SettingTableVCNote {
+                cell.vcSettingDelegate = self
+                cell.startCell(indexRow: indexPath.row)
+                cell.textViewNotes.delegate = cell
+                self.tableViewCellNoteDelegate = cell
+                return cell
+            } else {
+                vcMainDelegate?.showAlert(message: "cell SettingTableVCNote not found")
+            }
         }
+        return UITableViewCell()
     }
 }

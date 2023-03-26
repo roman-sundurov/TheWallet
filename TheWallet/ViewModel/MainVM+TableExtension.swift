@@ -26,7 +26,8 @@ extension VCMain {
             // } catch {
             //     cell?.labelCategory.text = "Category not found"
             // }
-            if let category = try? self.getUserData().categories[model.category!.description] {
+            if let modelCategory = model.category,
+               let category = try? self.getUserData().categories[modelCategory.description] {
                 cell?.labelCategory.text = category.name
             } else {
                 cell?.labelCategory.text = "Category not found"
@@ -50,16 +51,22 @@ extension VCMain {
         }
     }
 
-    func applySnapshot(animatingDifferences: Bool = true) {
+    func applySnapshot(animatingDifferences: Bool = true) throws {
         var snapshot = NSDiffableDataSourceSnapshot<String, Operation>()
         let (sections, sectionsSource) = calculateSource()
         snapshot.appendSections(sections)
         for section in sections {
-            snapshot.appendItems(sectionsSource[section]!, toSection: section)
+            if let sectionsSourceSection = sectionsSource[section] {
+                snapshot.appendItems(sectionsSourceSection, toSection: section)
+            }
         }
-        datasource!.apply(snapshot, animatingDifferences: animatingDifferences)
+        if let datasource = datasource {
+            datasource.apply(snapshot, animatingDifferences: animatingDifferences)
+        } else {
+            throw ThrowError.applySnapshot
+        }
     }
-    
+
     func calculateSource() -> ([String], [String: [Operation]]) {
         var sectionsDouble: [Double] = []
         var sectionsTemp: [String] = []

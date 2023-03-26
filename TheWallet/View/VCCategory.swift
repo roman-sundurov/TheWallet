@@ -16,8 +16,8 @@ protocol ProtocolVCCategory {
     func setCurrentActiveEditingCell(cellID: Int)
     func calculateCategoryArray() -> [Category]
     func returnScreen2StatusEditContainer() -> Bool
-    func returnDelegateScreen2ContainerTableVCNewCategory() -> ProtocolCategoryTableVCNewCategory
-    func returnVCMainDelegate() -> ProtocolVCMain
+    func returnDelegateScreen2ContainerTableVCNewCategory() throws -> ProtocolCategoryTableVCNewCategory
+    func returnVCMainDelegate() throws -> ProtocolVCMain
 }
 
 class VCCategory: UIViewController {

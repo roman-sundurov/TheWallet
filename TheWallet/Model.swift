@@ -50,6 +50,19 @@ enum ThrowError: Error {
     case showOperation
     case hideOperation
     case vcSettingGetUserDataError
+    // MainVM+TableExtension
+    case applySnapshot
+    // SettingViewModel
+    case returnDelegateScreen2TableViewCellNote
+    case changeCategoryOpenPopUpScreen2
+    case changeCategoryClosePopUpScreen2
+    // CategoryViewModel
+    case vcCategoryReturnVCMainDelegate
+    case vcCategoryReturnDelegateScreen2ContainerTableVCNewCategory
+    case vcCategorygetVCSettingDelegate
+    // CategoryTableVCCategory
+    case categoryTableVCCategoryReturnCategryIdOfCell
+    case categoryTableVCCategoryCloseEditing
 }
 
 typealias NestedType = (User) -> Void

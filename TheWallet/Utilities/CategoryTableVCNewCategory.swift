@@ -18,9 +18,10 @@ final class CategoryTableVCNewCategory: UITableViewCell {
 
         // MARK: - transitions
     @IBAction func buttonAddNewCategoryAction(_ sender: Any) {
-        if let value = textFieldNewCategory.text?.isEmpty, value == false {
+        if let textFieldNewCategoryText = textFieldNewCategory.text,
+           !textFieldNewCategoryText.isEmpty {
             vcCategoryDelegate?.addNewCategory(
-                name: textFieldNewCategory.text!,
+                name: textFieldNewCategoryText,
                 icon: "",
                 date: Date().timeIntervalSince1970
             )

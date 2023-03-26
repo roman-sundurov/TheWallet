@@ -155,12 +155,12 @@ class VCMain: UIViewController {
                 countingIncomesAndExpensive()
                 do {
                     try vcGraphDelegate?.dataUpdate()
+                    miniGraph.setNeedsDisplay()
+                    try applySnapshot()
+                    borderLineForMenu(days: 30)
                 } catch {
                     showAlert(message: "Error updating VCGraph")
                 }
-                miniGraph.setNeedsDisplay()
-                applySnapshot()
-                borderLineForMenu(days: 30)
                 UIView.transition(
                     from: scrollViewFromBottomPopInView,
                     to: graphFromBottomPopInView,
@@ -398,7 +398,11 @@ class VCMain: UIViewController {
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
         configureDataSource()
-        applySnapshot()
+        do {
+            try applySnapshot()
+        } catch {
+            showAlert(message: "Error updating VCGraph")
+        }
 
         miniGraph.setDelegateScreen1RoundedGraph(delegate: self)
         bottomPopInView.layer.cornerRadius = 20

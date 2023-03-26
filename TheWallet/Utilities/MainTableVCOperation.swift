@@ -17,12 +17,16 @@ final class MainTableVCOperation: UITableViewCell {
     var id: UUID?
 
     @objc func showOperation(_ sender: UITapGestureRecognizer) {
-        do {
-            try vcMainDelegate?.showOperation(id!)
-        } catch {
-            vcMainDelegate?.showAlert(message: "showOperation error")
+        if let id = id {
+            do {
+                try vcMainDelegate?.showOperation(id)
+            } catch {
+                vcMainDelegate?.showAlert(message: "showOperation error")
+            }
+            print("ChangeCategory from Screen2")
+        } else {
+            vcMainDelegate?.showAlert(message: "showOperation id error")
         }
-        print("ChangeCategory from Screen2")
     }
 
     override func awakeFromNib() {

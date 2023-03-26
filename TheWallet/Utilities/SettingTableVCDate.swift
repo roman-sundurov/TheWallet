@@ -40,18 +40,21 @@ final class SettingTableVCDate: UITableViewCell {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
-
-        if vcSettingDelegate!.returnNewOperation().date != 0 {
-            labelSelectDate.text = dateFormatter.string(
-                from: Date.init(timeIntervalSince1970: vcSettingDelegate!.returnNewOperation().date)
-            )
-            labelSelectDate.textColor = .black
-        } else {
-            labelSelectDate.text = vcSettingDelegate!.getSettingMenuArray()[indexRow].text
-        }
+        if let vcSettingDelegate = vcSettingDelegate {
+            if vcSettingDelegate.returnNewOperation().date != 0 {
+                labelSelectDate.text = dateFormatter.string(
+                    from: Date.init(timeIntervalSince1970: vcSettingDelegate.returnNewOperation().date)
+                )
+                labelSelectDate.textColor = .black
+            } else {
+                labelSelectDate.text = vcSettingDelegate.getSettingMenuArray()[indexRow].text
+            }
 
             // textFieldSelectDate.tintColor = UIColor.clear // makes the cursor colorless, but does not remove it
-        labelDate.text = vcSettingDelegate!.getSettingMenuArray()[indexRow].name
+            labelDate.text = vcSettingDelegate.getSettingMenuArray()[indexRow].name
+        } else {
+            print("Error: SettingTableVCDate startCell vcSettingDelegate")
+        }
         self.isUserInteractionEnabled = true
 
         let gesture = UITapGestureRecognizer(target: self, action: #selector(startEditing))

@@ -9,11 +9,11 @@ import UIKit
 import Foundation
 
 protocol ProtocolVCSetting {
-    func changeCategoryClosePopUpScreen2()
-    func changeCategoryOpenPopUpScreen2(_ tag: Int)
+    func changeCategoryClosePopUpScreen2() throws
+    func changeCategoryOpenPopUpScreen2(_ tag: Int) throws
     func tableViewScreen2Update(row: Int)
     func setCategoryInNewOperation(categoryUUID: UUID)
-    func returnDelegateScreen2TableViewCellNote() -> ProtocolSettingTableVCNote
+    func returnDelegateScreen2TableViewCellNote() throws -> ProtocolSettingTableVCNote
     func openAlertDatePicker()
     func startEditing()
     func setVCSetting(amount: Double, categoryUUID: UUID, date: Double, note: String, id: UUID)

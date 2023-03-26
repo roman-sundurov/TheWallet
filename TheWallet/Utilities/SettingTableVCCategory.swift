@@ -17,7 +17,11 @@ final class SettingTableVCCategory: UITableViewCell {
 
     // Animations
     @objc func changeCategoryOpenPopUpScreen2FromCellCategory(_ tag: Int) {
-        vcSettingDelegate?.changeCategoryOpenPopUpScreen2(indexRow)
+        do {
+            try vcSettingDelegate?.changeCategoryOpenPopUpScreen2(indexRow)
+        } catch {
+            vcSettingDelegate?.showAlert(message: "Error changeCategoryOpenPopUpScreen2FromCellCategory")
+        }
         print("ChangeCategory from Screen2")
     }
 
@@ -31,18 +35,23 @@ final class SettingTableVCCategory: UITableViewCell {
 
     func prepareCell(indexRow: Int) {
         self.indexRow = indexRow
-        if let newCategory = vcSettingDelegate!.returnNewOperation().category {
-            do {
-                labelSelectCategory.text = try vcSettingDelegate?.getUserData().categories[newCategory.description]?.name
-            } catch {
-                labelSelectCategory.text = "Error data"
-                vcSettingDelegate?.showAlert(message: "labelSelectCategory error")
+        if let vcSettingDelegate = vcSettingDelegate {
+            if let newCategory = vcSettingDelegate.returnNewOperation().category {
+                do {
+                    labelSelectCategory.text = try vcSettingDelegate.getUserData().categories[newCategory.description]?.name
+                } catch {
+                    labelSelectCategory.text = "Error data"
+                    vcSettingDelegate.showAlert(message: "labelSelectCategory error")
+                }
+                labelSelectCategory.textColor = .black
+            } else {
+                print("Error: SettingTableVCCategory prepareCell newCategory")
             }
-            labelSelectCategory.textColor = .black
+            labelSelectCategory.text = vcSettingDelegate.getSettingMenuArray()[indexRow].text
+            labelCategory.text = vcSettingDelegate.getSettingMenuArray()[indexRow].name
         } else {
-            labelSelectCategory.text = vcSettingDelegate!.getSettingMenuArray()[indexRow].text
+            print("Error: SettingTableVCCategory prepareCell vcSettingDelegate")
         }
-        labelCategory.text = vcSettingDelegate!.getSettingMenuArray()[indexRow].name
         let gesture = UITapGestureRecognizer(
             target: self,
             action: #selector(changeCategoryOpenPopUpScreen2FromCellCategory(_:))
