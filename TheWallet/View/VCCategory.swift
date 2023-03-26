@@ -36,7 +36,7 @@ class VCCategory: UIViewController {
 
     // MARK: - objects
     let alertErrorAddNewCategory = UIAlertController(
-        title: "Введите название категории",
+        title: "Enter category name",
         message: nil,
         preferredStyle: .alert
     )

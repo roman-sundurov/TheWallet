@@ -1467,11 +1467,11 @@
             <objects>
                 <viewController id="7HG-Be-bHj" customClass="VCOperation" customModule="TheWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U6t-e2-vEc">
-                        <rect key="frame" x="0.0" y="0.0" width="335" height="311"/>
+                        <rect key="frame" x="0.0" y="0.0" width="340" height="311"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qBi-z5-GjL">
-                                <rect key="frame" x="17.5" y="58" width="300" height="75"/>
+                                <rect key="frame" x="20" y="58" width="300" height="75"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YP9-wS-vBX" userLabel="LeftView">
                                         <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
@@ -1545,7 +1545,7 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" keyboardDismissMode="onDrag" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zyn-sc-BYz">
-                                <rect key="frame" x="15" y="148" width="305" height="88"/>
+                                <rect key="frame" x="15" y="148" width="310" height="88"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="88" id="SX2-0b-a9Y"/>
@@ -1555,7 +1555,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="JJT-fP-kPf">
-                                <rect key="frame" x="17.5" y="251" width="300" height="40"/>
+                                <rect key="frame" x="20" y="251" width="300" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fcM-3e-YAS">
                                         <rect key="frame" x="0.0" y="0.0" width="130" height="40"/>
@@ -1590,7 +1590,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJ8-ld-2Ua">
-                                <rect key="frame" x="120" y="15" width="95" height="28"/>
+                                <rect key="frame" x="122.5" y="15" width="95" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="qJJ-8f-KOK"/>
                                 </constraints>
@@ -1787,7 +1787,7 @@
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="ABz-lk-sfP"/>
-        <segue reference="pwL-YE-yKT"/>
+        <segue reference="KLB-fZ-o4m"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="App Icon_Final_1024" width="1024" height="1024"/>
