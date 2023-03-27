@@ -201,6 +201,8 @@ extension VCSignUp: UITextFieldDelegate {
     }
 
     @objc func doneButtonAction() {
+        nameTextField.resignFirstResponder()
+        surnameTextField.resignFirstResponder()
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
     }

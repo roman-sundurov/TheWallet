@@ -145,7 +145,9 @@ class VCMain: UIViewController {
             if screen1StatusGrapjDisplay == false {
                     // userRepository.updateDaysForSorting(daysForSorting: 30)
                 // vcGraphDelegate?.dataUpdate()
-                buttonWeeklyGesture(self)
+                DispatchQueue.main.async {
+                    self.buttonMonthlyGesture(self)
+                }
                 buttonDaily.isUserInteractionEnabled = false
                 buttonDaily.alpha = 0.3
                 buttonWeekly.isUserInteractionEnabled = false
@@ -211,6 +213,7 @@ class VCMain: UIViewController {
         if isButtonsActive == true {
             do {
                 try userRepository.updateDaysForSorting(daysForSorting: 1)
+                print("updateDaysForSorting 1= \(userRepository.user?.daysForSorting)")
                 try updateScreen()
             } catch ThrowError.mainViewUpdateScreen {
                 showAlert(message: "Screen update error")
@@ -224,6 +227,7 @@ class VCMain: UIViewController {
         if isButtonsActive == true {
             do {
                 try userRepository.updateDaysForSorting(daysForSorting: 7)
+                print("updateDaysForSorting 7= \(userRepository.user?.daysForSorting)")
                 try updateScreen()
             } catch ThrowError.mainViewUpdateScreen {
                 showAlert(message: "Screen update error")
@@ -237,6 +241,7 @@ class VCMain: UIViewController {
         if isButtonsActive == true {
             do {
                 try userRepository.updateDaysForSorting(daysForSorting: 30)
+                print("updateDaysForSorting 30= \(userRepository.user?.daysForSorting)")
                 try updateScreen()
             } catch ThrowError.mainViewUpdateScreen {
                 showAlert(message: "Screen update error")
@@ -250,6 +255,7 @@ class VCMain: UIViewController {
         if isButtonsActive == true {
             do {
                 try userRepository.updateDaysForSorting(daysForSorting: 365)
+                print("updateDaysForSorting 365= \(userRepository.user?.daysForSorting)")
                 try updateScreen()
             } catch ThrowError.mainViewUpdateScreen {
                 showAlert(message: "Screen update error")

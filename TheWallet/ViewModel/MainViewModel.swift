@@ -157,6 +157,7 @@ extension VCMain: ProtocolVCMain {
 
     func updateScreen() throws {
         if let userRepositoryUser = userRepository.user {
+            print("UpdateScreen daysForSorting= \(userRepositoryUser.daysForSorting)")
             borderLineForMenu(days: userRepositoryUser.daysForSorting)
             countingIncomesAndExpensive()
             do {
