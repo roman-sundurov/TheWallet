@@ -46,6 +46,9 @@ class VCOperation: UIViewController {
                 vcMainDelegate.showAlert(message: "hideOperation error")
             }
             vcMainDelegate.deleteOperation(uuid: uuid)
+            Task {
+                await vcMainDelegate.fetchFirebase()
+            }
         } else {
             print("Error buttonActionToDeleteOperation")
         }
@@ -71,7 +74,7 @@ extension VCOperation: ProtocolVCOperation {
         // let operation = UserRepository.shared.user?.operations.filter { $0.value.id == id }.first?.value
         if let operation = UserRepository.shared.user?.operations.first { $0.value.id == id }?.value,
         let categoryUUID = operation.category {
-            
+
             // display category
             if let category = try? vcMainDelegate?.getUserData().categories[categoryUUID.description] {
                 labelCategory.text = category.name
