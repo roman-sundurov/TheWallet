@@ -18,7 +18,6 @@ import AuthenticationServices
 // @IBDesignable
 class VCSignIn: UIViewController {
     @IBOutlet var logInGroup: UIView!
-        // @IBOutlet var topConstraint: NSLayoutConstraint!
 
     @IBOutlet var emailTextView: RoundedView!
     @IBOutlet var emailTextField: UITextField!
@@ -65,7 +64,7 @@ class VCSignIn: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-            // Register to Apple ID credential revoke notification
+        // Register to Apple ID credential revoke notification
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(appleIDStateDidRevoked(_:)),
@@ -86,7 +85,6 @@ class VCSignIn: UIViewController {
             name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
-
     }
 
     override func viewDidLoad() {

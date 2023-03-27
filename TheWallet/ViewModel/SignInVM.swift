@@ -14,7 +14,7 @@ import AuthenticationServices
 
 extension VCSignIn {
 
-    //MARK: - signIn functions
+    // MARK: - signIn functions
     func emailSignIn() throws {
         emailSignInButton.configuration?.showsActivityIndicator = true
 
