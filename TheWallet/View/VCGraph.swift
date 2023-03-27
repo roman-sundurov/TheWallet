@@ -74,7 +74,7 @@ class VCGraph: UIViewController {
                         print("cumulativeAmount= \(cumulativeAmount)")
                     }
                 }
-                cumulativeArray.append(GraphData(date: dateArray[day], amount: cumulativeAmount))
+                cumulativeArray.insert(GraphData(date: dateArray[day], amount: cumulativeAmount), at: 0)
             }
         } else {
             throw ThrowError.calculateCumulativeAmountError
