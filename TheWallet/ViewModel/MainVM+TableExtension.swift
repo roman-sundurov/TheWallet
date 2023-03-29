@@ -112,3 +112,10 @@ class MyDataSource: UITableViewDiffableDataSource<String, Operation> {
         return UserRepository.shared.mainDiffableSections[section]
     }
 }
+
+extension VCMain: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let headerView = view as? UITableViewHeaderFooterView else { return }
+        headerView.textLabel?.textColor = UIColor(named: "DarkCustomTextColor")
+    }
+}

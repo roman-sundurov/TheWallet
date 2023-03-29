@@ -411,6 +411,10 @@ class VCMain: UIViewController {
         }
 
         miniGraph.setDelegateScreen1RoundedGraph(delegate: self)
+        // 
+        // bottomPopInView.textContainer.lineBreakMode = .byTruncatingTail
+        // bottomPopInView.layer.borderColor = UIColor.gray.cgColor
+        // bottomPopInView.layer.borderWidth = 2
         bottomPopInView.layer.cornerRadius = 20
         bottomPopInView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         bottomPopInView.clipsToBounds = true

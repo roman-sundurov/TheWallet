@@ -227,6 +227,11 @@ class VCSetting: UIViewController {
         createDatePicker()
         createAlertDatePicker()
         createAlertAddNewOperations()
+
+        textFieldAmount.layer.borderColor = UIColor.gray.cgColor
+        textFieldAmount.layer.borderWidth = 2
+        textFieldAmount.layer.cornerRadius = 10
+        textFieldAmount.clipsToBounds = true
     }
 
     func showAlert(message: String) {

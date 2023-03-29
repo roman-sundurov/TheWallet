@@ -21,7 +21,7 @@ class VCOperation: UIViewController {
     @IBOutlet var viewRightParth: UIView!
     @IBOutlet var buttonToEditOperation: UIButton!
     @IBOutlet var buttonToDeleteOperation: UIButton!
-    @IBOutlet var viewLogoCategory: UIView!
+    // @IBOutlet var viewLogoCategory: UIView!
 
     // MARK: - delegates and variables
     var vcMainDelegate: ProtocolVCMain?
@@ -62,7 +62,6 @@ class VCOperation: UIViewController {
         viewRightParth.layer.cornerRadius = 10
         buttonToEditOperation.layer.cornerRadius = 10
         buttonToDeleteOperation.layer.cornerRadius = 10
-        viewLogoCategory.layer.cornerRadius = 10
     }
 }
 

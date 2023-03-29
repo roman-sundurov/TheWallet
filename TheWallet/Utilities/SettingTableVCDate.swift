@@ -45,7 +45,7 @@ final class SettingTableVCDate: UITableViewCell {
                 labelSelectDate.text = dateFormatter.string(
                     from: Date.init(timeIntervalSince1970: vcSettingDelegate.returnNewOperation().date)
                 )
-                labelSelectDate.textColor = .black
+                labelSelectDate.textColor = UIColor(named: "CustomTextColor")
             } else {
                 labelSelectDate.text = vcSettingDelegate.getSettingMenuArray()[indexRow].text
             }
