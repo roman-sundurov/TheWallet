@@ -19,7 +19,6 @@ protocol ProtocolVCSetting {
     func setVCSetting(amount: Double, categoryUUID: UUID, date: Double, note: String, id: UUID)
     func returnNewOperation() -> Operation
     func getSettingMenuArray() -> [SettingMenuData]
-    func getUserData() throws -> User
     func showAlert(message: String)
 }
 
@@ -88,20 +87,28 @@ class VCSetting: UIViewController {
                 newOperation.note = returnNoteViewText
             }
             if vcSettingStatusEditing == true {
-                vcMainDelegate?.updateOperations(
-                    amount: newOperation.amount,
-                    categoryUUID: newOperationCategory,
-                    note: newOperation.note,
-                    date: Date.init(timeIntervalSince1970: newOperation.date),
-                    idOfObject: newOperation.id
-                )
+                do {
+                    try dataManager.updateOperations(
+                        amount: newOperation.amount,
+                        categoryUUID: newOperationCategory,
+                        note: newOperation.note,
+                        date: Date.init(timeIntervalSince1970: newOperation.date),
+                        idOfObject: newOperation.id
+                    )
+                } catch {
+                    showAlert(message: "Error updateOperations")
+                }
             } else {
-                vcMainDelegate?.addOperations(
-                    amount: newOperation.amount,
-                    categoryUUID: newOperationCategory,
-                    note: newOperation.note,
-                    date: Date.init(timeIntervalSince1970: newOperation.date)
-                )
+                do {
+                    try dataManager.addOperations(
+                        amount: newOperation.amount,
+                        categoryUUID: newOperationCategory,
+                        note: newOperation.note,
+                        date: Date.init(timeIntervalSince1970: newOperation.date)
+                    )
+                } catch {
+                    showAlert(message: "Error addOperations")
+                }
             }
             do {
                 try vcMainDelegate?.updateScreen()

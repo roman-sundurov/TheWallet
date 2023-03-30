@@ -36,10 +36,13 @@ final class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
 
         // MARK: - transitions
     @IBAction func buttonDeleteCategoryAction(_ sender: Any) {
-        if let vcMainDelegate = vcMainDelegate,
-           let vcCategoryDelegate = vcCategoryDelegate,
+        if let vcCategoryDelegate = vcCategoryDelegate,
            let category = category {
-            vcMainDelegate.deleteCategory(idOfObject: category.id)
+            do {
+                try dataManager.deleteCategory(idOfObject: category.id)
+            } catch {
+                vcSettingDelegate?.showAlert(message: "Error: buttonDeleteCategoryAction")
+            }
             vcCategoryDelegate.screen2ContainerDeleteCategory(idOfObject: category.id)
         } else {
             vcSettingDelegate?.showAlert(message: "Error: CategoryTableVCCategory buttonDeleteCategoryAction")
@@ -173,7 +176,11 @@ extension CategoryTableVCCategory: ProtocolCategoryTableVCCategory {
         buttonConfirmNewName.isHidden = true
         if let textFieldNameCategoryText = textFieldNameCategory.text,
            let category = self.category {
-            vcMainDelegate?.updateCategory(name: textFieldNameCategoryText, icon: "", idOfObject: category.id)
+            do {
+                try dataManager.updateCategory(name: textFieldNameCategoryText, icon: "", idOfObject: category.id)
+            } catch {
+                print("Error 3333")
+            }
             vcCategoryDelegate?.setCurrentActiveEditingCell(cellID: 0)
         } else {
             print("Error: CategoryTableVCCategory closeEditing")

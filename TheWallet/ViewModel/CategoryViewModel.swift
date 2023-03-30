@@ -10,7 +10,11 @@ import UIKit
 
 extension VCCategory: ProtocolVCCategory {
     func screen2ContainerDeleteCategory(idOfObject: UUID) {
-        vcMainDelegate?.deleteCategory(idOfObject: idOfObject)
+        do {
+            try dataManager.deleteCategory(idOfObject: idOfObject)
+        } catch {
+            vcSettingDelegate?.showAlert(message: "Error: deleteCategory")
+        }
         tableView.reloadData()
     }
 
@@ -71,7 +75,7 @@ extension VCCategory: ProtocolVCCategory {
 
     func screen2ContainerNewCategorySwicher() {
         print("AAAA")
-        if let userDataOperations = try? vcMainDelegate?.getUserData().operations,
+        if let userDataOperations = try? dataManager.getUserData().operations,
            userDataOperations.isEmpty == false {
             if statusEditContainer == true {
                 statusEditContainer = false
@@ -95,11 +99,15 @@ extension VCCategory: ProtocolVCCategory {
     func addNewCategory(name: String, icon: String, date: Double) {
         // vcMainDelegate?.fetchFirebase()
         if let vcMainDelegate = vcMainDelegate {
-            vcMainDelegate.addCategory(name: name, icon: icon, date: date)
+            do {
+                try dataManager.addCategory(name: name, icon: icon, date: date)
+            } catch {
+                vcSettingDelegate?.showAlert(message: "Error: addNewCategory")
+            }
         } else {
             print("addNewCategory vcMainDelegate error")
         }
-        if let userCategoriesCount = try? vcMainDelegate?.getUserData().categories.count {
+        if let userCategoriesCount = try? dataManager.getUserData().categories.count {
             print("vcMainDelegate?.getUserData().categories.count = \(userCategoriesCount)")
             tableView.performBatchUpdates({
                 var newRowIndex: Int = 0
@@ -109,9 +117,13 @@ extension VCCategory: ProtocolVCCategory {
                 tableView.insertRows(at: [IndexPath(row: newRowIndex, section: 0)], with: .automatic)
             }, completion: { _ in
                 self.tableView.reloadData()
-                Task {
-                    await self.vcMainDelegate?.fetchFirebase()
-                }
+                // Task {
+                //     do {
+                //         try await dataManager.fetchFirebase()
+                //     } catch {
+                //         self.vcSettingDelegate?.showAlert(message: "Error addNewCategory fetchFirebase")
+                //     }
+                // }
             })
         } else {
             vcSettingDelegate?.showAlert(message: "addNewCategory error")
@@ -146,7 +158,7 @@ extension VCCategory: ProtocolVCCategory {
 
     func calculateCategoryArray() -> [Category] {
         categoriesArray = []
-        if let userData = try? vcMainDelegate?.getUserData() {
+        if let userData = try? dataManager.getUserData() {
             for oper in userData.categories {
                 categoriesArray.append(oper.value)
                 categoriesArray.sort { $0.date > $1.date }
@@ -174,7 +186,7 @@ extension VCCategory: UITableViewDelegate {
 
 extension VCCategory: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let userCategories = try? vcMainDelegate?.getUserData().categories {
+        if let userCategories = try? dataManager.getUserData().categories {
             if userCategories.isEmpty {
                 statusEditContainer = true
                 return 2

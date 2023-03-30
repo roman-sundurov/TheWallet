@@ -5,7 +5,7 @@
 //  Created by Roman on 27.04.2022.
 //
 
-import Foundation
+// import Foundation
 import UIKit
 
 extension VCMain {
@@ -27,7 +27,7 @@ extension VCMain {
             //     cell?.labelCategory.text = "Category not found"
             // }
             if let modelCategory = model.category,
-               let category = try? self.getUserData().categories[modelCategory.description] {
+               let category = try? dataManager.getUserData().categories[modelCategory.description] {
                 cell?.labelCategory.text = category.name
             } else {
                 cell?.labelCategory.text = "Category not found"
@@ -71,7 +71,8 @@ extension VCMain {
         var sectionsDouble: [Double] = []
         var sectionsTemp: [String] = []
         var operationForGraph: [Operation] = []
-        if let userData = userRepository.user {
+        do {
+            let userData = try dataManager.getUserData()
             let freshHold = Date().timeIntervalSince1970 - Double(86400 * userData.daysForSorting)
             for oper in userData.operations where oper.value.date >= freshHold {
                 operationForGraph.append(oper.value)
@@ -101,7 +102,8 @@ extension VCMain {
             print("sectionsSource= \(UserRepository.shared.mainDiffableSectionsSource)")
             print("sections= \(UserRepository.shared.mainDiffableSections)")
             return (UserRepository.shared.mainDiffableSections, UserRepository.shared.mainDiffableSectionsSource)
-        } else {
+        } catch {
+            showAlert(message: "Error: calculateSource")
             return ([], [:])
         }
     }

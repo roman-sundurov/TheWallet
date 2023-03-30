@@ -8,23 +8,30 @@
 import UIKit
 import AAInfographics
 
-protocol ProtocolVCGraph {
-    func dataUpdate() throws
-}
-
 class VCGraph: UIViewController {
     // MARK: - outlets
-    @IBOutlet var graphView: UIView!
+    @IBOutlet var containerView: UIView!
+    // @IBOutlet var graphView: UIView!
+    @IBOutlet var secondMenu: UIView!
 
     // MARK: - delegates and variables
-    var vcMainDelegate: VCMain?
     private let calendar = Calendar.current
-    // var firstDate: Date?
     var secondDate: Date?
+    var aaChartView = AAChartView()
+
+    @IBAction func accoutPage(_ sender: Any) {
+        performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCAccount.rawValue, sender: nil)
+    }
 
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        do {
+            try dataUpdate()
+        } catch {
+            showAlert(message: "Error dataUpdate")
+        }
     }
 
     // MARK: - other functions
@@ -43,8 +50,8 @@ class VCGraph: UIViewController {
                         dateArray.append(secondDate)
                     }
                     if secondDate.timeIntervalSince1970 < freshHoldDate.timeIntervalSince1970 {
-                        break
                         self.secondDate = secondDate
+                        break
                     }
                 } else {
                     throw ThrowError.calculateDateArrayError
@@ -70,7 +77,7 @@ class VCGraph: UIViewController {
                 for oper in user.operations {
                     if oper.value.date >= secondDate.timeIntervalSince1970 && oper.value.date < firstDate.timeIntervalSince1970 {
                         print("oper.value.amount \(oper.value.date )= \(oper.value.amount)")
-                        cumulativeAmount += oper.value.amount
+                        cumulativeAmount -= oper.value.amount
                         print("cumulativeAmount= \(cumulativeAmount)")
                     }
                 }
@@ -81,18 +88,22 @@ class VCGraph: UIViewController {
         }
         return cumulativeArray
     }
-}
 
-// MARK: - extension
-extension VCGraph: ProtocolVCGraph {
     func dataUpdate() throws {
         var cumulativeGraphDataArray: [GraphData] = []
+        var dateArray: [Date] = []
         do {
-            let dateArray = try calculateDateArray()
+            dateArray = try calculateDateArray()
+        } catch {
+            showAlert(message: "Error: calculateDateArray")
+        }
+
+        do {
             cumulativeGraphDataArray = try calculateCumulativeAmount(dateArray: dateArray)
         } catch {
-            showAlert(message: "Calculation error")
+            showAlert(message: "Error: calculateCumulativeAmount")
         }
+
         var cumulativeArray: [Double] = []
         var numberOfDayArray: [String] = []
         for item in cumulativeGraphDataArray {
@@ -106,17 +117,23 @@ extension VCGraph: ProtocolVCGraph {
         }
         print("cumulativeArray= \(cumulativeArray)")
         print("numberOfDayArray= \(numberOfDayArray)")
-        graphView.layer.cornerRadius = 20
-        graphView.layer.maskedCorners = [
+        containerView.layer.cornerRadius = 20
+        containerView.layer.maskedCorners = [
             .layerMaxXMaxYCorner,
             .layerMinXMinYCorner,
             .layerMaxXMinYCorner,
             .layerMinXMaxYCorner
         ]
-        graphView.clipsToBounds = true
+        containerView.clipsToBounds = true
         let aaChartView = AAChartView()
-        aaChartView.frame = CGRect(x: 0, y: 0, width: graphView.frame.width, height: graphView.frame.height)
-        graphView.addSubview(aaChartView)
+        containerView.addSubview(aaChartView)
+
+        aaChartView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addConstraint(aaChartView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 0))
+        self.view.addConstraint(aaChartView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 0))
+        self.view.addConstraint(aaChartView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0))
+        self.view.addConstraint(aaChartView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 0))
+
         let aaChartModel = AAChartModel()
             .chartType(.area) // Can be any of the chart types listed under `AAChartType`.
             .animationType(.bounce)

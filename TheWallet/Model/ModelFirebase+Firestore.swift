@@ -54,7 +54,7 @@ extension UserRepository {
     }
 
     func updateDaysForSorting(daysForSorting: Int) throws {
-        UserRepository.shared.user?.daysForSorting = daysForSorting
+        user?.daysForSorting = daysForSorting
         if let userReference = userReference {
             userReference.setData([
                 "daysForSorting": daysForSorting
@@ -73,7 +73,7 @@ extension UserRepository {
     // MARK: - categories
     func addCategory(name: String, icon: String, date: Double) throws {
         let newCategory = Category(name: name, icon: icon, date: date, id: UUID())
-        UserRepository.shared.user?.categories[newCategory.id.description] = newCategory
+        user?.categories[newCategory.id.description] = newCategory
         if let userReference = userReference {
             userReference.setData([
                 "categories": [
@@ -97,7 +97,7 @@ extension UserRepository {
     }
 
     func deleteCategory(idOfObject: UUID) throws {
-        UserRepository.shared.user?.categories[idOfObject.description] = nil
+        user?.categories[idOfObject.description] = nil
         if let userReference = userReference {
             userReference.updateData([
                 "categories.\(idOfObject.description)": FieldValue.delete()
@@ -114,6 +114,13 @@ extension UserRepository {
     }
 
     func updateCategory(name: String, icon: String, idOfObject: UUID) throws {
+        if var category = user?.categories[idOfObject.description] {
+            category.name = name
+            category.icon = icon
+            user?.categories[idOfObject.description] = category
+        } else {
+            throw ThrowError.updateCategory
+        }
         if let userReference = userReference {
             userReference.updateData([
                 "categories.\(idOfObject).name": name,
@@ -183,7 +190,7 @@ extension UserRepository {
         }
     }
 
-    func updateOperations(amount: Double, categoryUUID: UUID, note: String, date: Date, idOfObject: UUID) {
+    func updateOperations(amount: Double, categoryUUID: UUID, note: String, date: Date, idOfObject: UUID) throws {
         let updOperation = Operation(
             amount: amount,
             category: categoryUUID,

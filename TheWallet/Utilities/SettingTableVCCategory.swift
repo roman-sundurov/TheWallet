@@ -38,7 +38,7 @@ final class SettingTableVCCategory: UITableViewCell {
         if let vcSettingDelegate = vcSettingDelegate {
             if let newCategory = vcSettingDelegate.returnNewOperation().category {
                 do {
-                    labelSelectCategory.text = try vcSettingDelegate.getUserData().categories[newCategory.description]?.name
+                    labelSelectCategory.text = try dataManager.getUserData().categories[newCategory.description]?.name
                 } catch {
                     labelSelectCategory.text = "Error data"
                     vcSettingDelegate.showAlert(message: "labelSelectCategory error")

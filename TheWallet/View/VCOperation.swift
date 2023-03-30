@@ -33,7 +33,7 @@ class VCOperation: UIViewController {
            let uuid = uuid {
             vcMainDelegate.editOperation(uuid: uuid)
         } else {
-            print("Error buttonActionToEditOperation")
+            print("Error: buttonActionToEditOperation")
         }
     }
 
@@ -43,14 +43,23 @@ class VCOperation: UIViewController {
             do {
                 try vcMainDelegate.hideOperation()
             } catch {
-                vcMainDelegate.showAlert(message: "hideOperation error")
+                vcMainDelegate.showAlert(message: "Error: hideOperation")
             }
-            vcMainDelegate.deleteOperation(uuid: uuid)
-            Task {
-                await vcMainDelegate.fetchFirebase()
+            do {
+                try dataManager.deleteOperation(uuid: uuid)
+            } catch {
+                vcMainDelegate.showAlert(message: "Error: deleteOperation")
             }
+            // Task {
+            //     do {
+            //         try await dataManager.fetchFirebase()
+            //     } catch {
+            //         vcMainDelegate.showAlert(message: "Error: fetchFirebase")
+            //     }
+            // }
         } else {
             print("Error buttonActionToDeleteOperation")
+            vcMainDelegate?.showAlert(message: "Error: buttonActionToDeleteOperation")
         }
     }
 
@@ -75,7 +84,7 @@ extension VCOperation: ProtocolVCOperation {
         let categoryUUID = operation.category {
 
             // display category
-            if let category = try? vcMainDelegate?.getUserData().categories[categoryUUID.description] {
+            if let category = try? dataManager.getUserData().categories[categoryUUID.description] {
                 labelCategory.text = category.name
             } else {
                 labelCategory.text = "Category not found"

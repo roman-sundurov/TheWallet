@@ -13,31 +13,18 @@ protocol ProtocolVCMain {
     func showOperation(_ id: UUID) throws // opens a PopUp window for a specific operation
     func hideOperation() throws // closes the PopUp window of a specific operation
     func editOperation(uuid: UUID) // transition to editing the selected operation on the second screen
-    func miniGraphStarterBackground(status: Bool)
-
+    // func miniGraphStarterBackground(status: Bool)
     func returnMonthOfDate(_ dateInternal: Date) -> String
-    func returnIncomesExpenses() -> [String: Double]?
-
-    func getUserRepository() -> UserRepository
-    func getUserData() throws -> User
-    func updateUserData(newData: User)
-    func updateOperations(amount: Double, categoryUUID: UUID, note: String, date: Date, idOfObject: UUID)
-    func addOperations(amount: Double, categoryUUID: UUID, note: String, date: Date)
-    func deleteCategory(idOfObject: UUID)
-    func updateCategory(name: String, icon: String, idOfObject: UUID)
     func returnGraphData() -> [GraphData]
-    func addCategory(name: String, icon: String, date: Double)
-    func deleteOperation(uuid: UUID)
-    func fetchFirebase() async
     func showAlert(message: String)
 }
 
 // swiftlint:disable all
 class VCMain: UIViewController {
-// swiftlint:enable all
+    // swiftlint:enable all
     static let shared = VCMain()
 
-        // MARK: - outlets
+    // MARK: - outlets
     @IBOutlet var tableView: UITableView!
     @IBOutlet var buttonDaily: UIView!
     @IBOutlet var buttonWeekly: UIView!
@@ -55,33 +42,26 @@ class VCMain: UIViewController {
     @IBOutlet var viewOperation: UIView!
     @IBOutlet var constraintContainerBottomPoint: NSLayoutConstraint!
     @IBOutlet var miniGraph: RoundedGraphView!
-    @IBOutlet var screen1BottomMenu: UIView!
     @IBOutlet var scrollViewFromBottomPopInView: UIScrollView!
-    @IBOutlet var graphFromBottomPopInView: UIView!
-    @IBOutlet var buttonNewOperation: UIButton!
-    @IBOutlet var buttonShowGraph: UIButton!
-    @IBOutlet var buttonShowList: UIButton!
     @IBOutlet var miniGraphStarterBackground: UIView!
+    @IBOutlet var graphNoTransactionView: UIView!
 
-        // MARK: - delegates and variables
-    var income: Double = 0
-    var expensive: Double = 0
+    // MARK: - delegates and variables
+
     var tapShowOperation: UITapGestureRecognizer?
     var vcSettingDelegate: ProtocolVCSetting?
     var vcOperationDelegate: ProtocolVCOperation?
-    var vcGraphDelegate: ProtocolVCGraph?
     var tagForEdit: UUID?
     var screen1StatusGrapjDisplay = false
     var arrayForIncrease: [Int] = [0]
     var graphDataArray: [GraphData] = []
     var datasource: MyDataSource?
-    var userRepository = UserRepository.shared
+
     let dateFormatter = DateFormatter()
     let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     let hud = JGProgressHUD()
-    var isButtonsActive = false
 
-        // MARK: - transitions
+    // MARK: - transitions
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vewController = segue.destination as? VCSetting,
            segue.identifier == PerformSegueIdentifiers.segueToVCSetting.rawValue {
@@ -93,14 +73,15 @@ class VCMain: UIViewController {
             vcOperationDelegate = viewController
             viewController.vcMainDelegate = self
         }
-        if let viewController = segue.destination as? VCGraph,
-           segue.identifier == PerformSegueIdentifiers.segueToVCGraph.rawValue {
-            vcGraphDelegate = viewController
-            viewController.vcMainDelegate = self
-        }
+        // if let viewController = segue.destination as? VCGraph,
+        //    segue.identifier == PerformSegueIdentifiers.segueToVCGraph.rawValue {
+        //     vcGraphDelegate = viewController
+        //     viewController.vcMainDelegate = self
+        // }
         if let viewController = segue.destination as? VCSetting,
            segue.identifier == PerformSegueIdentifiers.segueToVCSettingForEdit.rawValue {
-            if let userRepositoryUser = userRepository.user {
+            do {
+                let userRepositoryUser = try dataManager.getUserData()
                 viewController.vcSettingStatusEditing = true
                 viewController.vcMainDelegate = self
                 vcSettingDelegate = viewController
@@ -123,151 +104,63 @@ class VCMain: UIViewController {
                 } else {
                     showAlert(message: "Error specialOperation")
                 }
-            } else {
+            } catch {
                 showAlert(message: "Error VCSetting destination: userRepository.user")
             }
         }
     }
 
-        // MARK: - clicks
+    // MARK: - clicks
 
-    @IBAction func settingPage(_ sender: Any) {
+    @IBAction func accountPage(_ sender: Any) {
         performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCAccount.rawValue, sender: nil)
     }
 
-    @IBAction func buttonActionScreen1NewOperation(_ sender: Any) {
-        performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCSetting.rawValue, sender: nil)
-    }
-
-    @IBAction func buttonActionScreen1ShowGraph(_ sender: Any) {
-        if isButtonsActive == true {
-            print("screen1StatusGrapjDisplay= \(screen1StatusGrapjDisplay)")
-            if screen1StatusGrapjDisplay == false {
-                    // userRepository.updateDaysForSorting(daysForSorting: 30)
-                // vcGraphDelegate?.dataUpdate()
-                DispatchQueue.main.async {
-                    self.buttonMonthlyGesture(self)
-                }
-                buttonDaily.isUserInteractionEnabled = false
-                buttonDaily.alpha = 0.3
-                buttonWeekly.isUserInteractionEnabled = false
-                buttonWeekly.alpha = 0.3
-                buttonYearly.isUserInteractionEnabled = false
-                buttonYearly.alpha = 0.3
-                countingIncomesAndExpensive()
-                do {
-                    try vcGraphDelegate?.dataUpdate()
-                    miniGraph.setNeedsDisplay()
-                    try applySnapshot()
-                    borderLineForMenu(days: 30)
-                } catch {
-                    showAlert(message: "Error updating VCGraph")
-                }
-                UIView.transition(
-                    from: scrollViewFromBottomPopInView,
-                    to: graphFromBottomPopInView,
-                    duration: 1.0,
-                    options: [.transitionFlipFromLeft, .showHideTransitionViews],
-                    completion: nil
-                )
-                screen1StatusGrapjDisplay = true
-                buttonShowGraph.setImage(UIImage.init(named: "Left-On"), for: .normal)
-                buttonShowList.setImage(UIImage.init(named: "Right-Off"), for: .normal)
-            }
-        }
-    }
-
-    @IBAction func buttonActionScreen1ShowList(_ sender: Any) {
-        isButtonsActive = true
-        if screen1StatusGrapjDisplay == true {
-            UIView.transition(
-                from: graphFromBottomPopInView,
-                to: scrollViewFromBottomPopInView,
-                duration: 1.0,
-                options: [.transitionFlipFromRight, .showHideTransitionViews],
-                completion: nil
-            )
-            buttonDaily.isUserInteractionEnabled = true
-            buttonDaily.alpha = 1
-            buttonWeekly.isUserInteractionEnabled = true
-            buttonWeekly.alpha = 1
-            buttonYearly.isUserInteractionEnabled = true
-            buttonYearly.alpha = 1
-
-            screen1StatusGrapjDisplay = false
-            buttonShowGraph.setImage(UIImage.init(named: "Left-Off"), for: .normal)
-            buttonShowList.setImage(UIImage.init(named: "Right-On"), for: .normal)
-            buttonDaily.isUserInteractionEnabled = true
-            buttonDaily.alpha = 1
-        }
-            // configureDataSource()
-            // applySnapshot()
-        do {
-            try updateScreen()
-        } catch {
-            showAlert(message: "Screen update error")
-        }
-    }
-
     @IBAction func buttonDailyGesture(_ sender: Any) {
-        if isButtonsActive == true {
-            do {
-                try userRepository.updateDaysForSorting(daysForSorting: 1)
-                print("updateDaysForSorting 1= \(userRepository.user?.daysForSorting)")
-                try updateScreen()
-            } catch ThrowError.mainViewUpdateScreen {
-                showAlert(message: "Screen update error")
-            } catch {
-                showAlert(message: "Database connection error, missing userReference")
-            }
+        do {
+            try dataManager.getUserRepository().updateDaysForSorting(daysForSorting: 1)
+            print("updateDaysForSorting 1= \(dataManager.getUserRepository().user?.daysForSorting)")
+            try updateScreen()
+        } catch ThrowError.mainViewUpdateScreen {
+            showAlert(message: "Screen update error")
+        } catch {
+            showAlert(message: "Database connection error, missing userReference")
         }
     }
 
     @IBAction func buttonWeeklyGesture(_ sender: Any) {
-        if isButtonsActive == true {
-            do {
-                try userRepository.updateDaysForSorting(daysForSorting: 7)
-                print("updateDaysForSorting 7= \(userRepository.user?.daysForSorting)")
-                try updateScreen()
-            } catch ThrowError.mainViewUpdateScreen {
-                showAlert(message: "Screen update error")
-            } catch {
-                showAlert(message: "Database connection error, missing userReference")
-            }
+        do {
+            try dataManager.getUserRepository().updateDaysForSorting(daysForSorting: 7)
+            print("updateDaysForSorting 7= \(dataManager.getUserRepository().user?.daysForSorting)")
+            try updateScreen()
+        } catch ThrowError.mainViewUpdateScreen {
+            showAlert(message: "Screen update error")
+        } catch {
+            showAlert(message: "Database connection error, missing userReference")
         }
     }
 
     @IBAction func buttonMonthlyGesture(_ sender: Any) {
-        if isButtonsActive == true {
-            do {
-                try userRepository.updateDaysForSorting(daysForSorting: 30)
-                print("updateDaysForSorting 30= \(userRepository.user?.daysForSorting)")
-                try updateScreen()
-            } catch ThrowError.mainViewUpdateScreen {
-                showAlert(message: "Screen update error")
-            } catch {
-                showAlert(message: "Database connection error, missing userReference")
-            }
+        do {
+            try dataManager.getUserRepository().updateDaysForSorting(daysForSorting: 30)
+            print("updateDaysForSorting 30= \(dataManager.getUserRepository().user?.daysForSorting)")
+            try updateScreen()
+        } catch ThrowError.mainViewUpdateScreen {
+            showAlert(message: "Screen update error")
+        } catch {
+            showAlert(message: "Database connection error, missing userReference")
         }
     }
 
     @IBAction func buttonYearlyGesture(_ sender: Any) {
-        if isButtonsActive == true {
-            do {
-                try userRepository.updateDaysForSorting(daysForSorting: 365)
-                print("updateDaysForSorting 365= \(userRepository.user?.daysForSorting)")
-                try updateScreen()
-            } catch ThrowError.mainViewUpdateScreen {
-                showAlert(message: "Screen update error")
-            } catch {
-                showAlert(message: "Database connection error, missing userReference")
-            }
-        }
-    }
-
-    @objc func switchScreen1GraphContainer(tap: UITapGestureRecognizer) {
-        if tap.state == UIGestureRecognizer.State.ended {
-            print("Tap Graph ended")
+        do {
+            try dataManager.getUserRepository().updateDaysForSorting(daysForSorting: 365)
+            print("updateDaysForSorting 365= \(dataManager.getUserRepository().user?.daysForSorting)")
+            try updateScreen()
+        } catch ThrowError.mainViewUpdateScreen {
+            showAlert(message: "Screen update error")
+        } catch {
+            showAlert(message: "Database connection error, missing userReference")
         }
     }
 
@@ -348,33 +241,17 @@ class VCMain: UIViewController {
             }, completion: { _ in })
     }
 
-    func countingIncomesAndExpensive() {
-        if let operations = userRepository.user?.operations,
-        let userRepositoryUser = userRepository.user {
-            let freshHold = Date().timeIntervalSince1970 - Double(86400 * userRepositoryUser.daysForSorting)
-
-            income = 0
-            expensive = 0
-            for data in operations.filter({ $0.value.amount > 0 && $0.value.date > freshHold }) {
-                income += data.value.amount
-            }
-            for data in operations.filter({ $0.value.amount < 0 && $0.value.date > freshHold }) {
-                expensive += data.value.amount
-            }
-
-            if income.truncatingRemainder(dividingBy: 1) == 0 {
-                labelAmountOfIncomes.text = "$\(String(format: "%.0f", income))"
-            } else {
-                labelAmountOfIncomes.text = "$\(String(format: "%.2f", income))"
-            }
-
-            if expensive.truncatingRemainder(dividingBy: 1) == 0 {
-                labelAmountOfExpenses.text = "$\(String(format: "%.0f", expensive))"
-            } else {
-                labelAmountOfExpenses.text = "$\(String(format: "%.2f", expensive))"
-            }
+    func confugureIncomeExpensiveLabels() {
+        if dataManager.income.truncatingRemainder(dividingBy: 1) == 0 {
+            labelAmountOfIncomes.text = "$\(String(format: "%.0f", dataManager.income))"
         } else {
-            showAlert(message: "Error countingIncomesAndExpensive")
+            labelAmountOfIncomes.text = "$\(String(format: "%.2f", dataManager.income))"
+        }
+        
+        if dataManager.expensive.truncatingRemainder(dividingBy: 1) == 0 {
+            labelAmountOfExpenses.text = "$\(String(format: "%.0f", dataManager.expensive))"
+        } else {
+            labelAmountOfExpenses.text = "$\(String(format: "%.2f", dataManager.expensive))"
         }
     }
 
@@ -384,42 +261,32 @@ class VCMain: UIViewController {
         print("viewDidLoad")
         Task {
             do {
-                // hudAppear()
-                try await userRepository.fetchGetUserData { user in
-                    self.hudAppear()
-                    self.userRepository.user = user
-                    print("NewData= \(String(describing: self.userRepository.user))")
+                try await dataManager.fetchFirebase() {
+                    do {
+                        try self.applySnapshot()
+                    } catch {
+                        self.showAlert(message: "Error: applySnapshot")
+                    }
                     do {
                         try self.updateScreen()
                     } catch {
                         self.showAlert(message: "Screen update error")
                     }
-                    self.hudDisapper()
-                    // self.showAlert(message: "Database connection success")
                 }
             } catch ThrowError.getUserDataError {
                 showAlert(message: "Database connection error, missing userReference")
             }
         }
+
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
         configureDataSource()
-        do {
-            try applySnapshot()
-        } catch {
-            showAlert(message: "Error updating VCGraph")
-        }
 
-        miniGraph.setDelegateScreen1RoundedGraph(delegate: self)
-        // 
-        // bottomPopInView.textContainer.lineBreakMode = .byTruncatingTail
-        // bottomPopInView.layer.borderColor = UIColor.gray.cgColor
-        // bottomPopInView.layer.borderWidth = 2
         bottomPopInView.layer.cornerRadius = 20
         bottomPopInView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         bottomPopInView.clipsToBounds = true
 
-            // adding a blur effect
+        // adding a blur effect
         self.view.insertSubview(self.blurView, belowSubview: self.viewOperation)
         self.blurView.backgroundColor = .clear
         self.blurView.translatesAutoresizingMaskIntoConstraints = false

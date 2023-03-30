@@ -48,6 +48,12 @@ class VCSignIn: UIViewController {
         print("googleSignInButton")
     }
 
+    // override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //     if let rootTabController = segue.identifier == PerformSegueIdentifiers.segueToVCRootController.rawValue {//segue.destination as? VCCategory, segue.identifier == "segueToVCCategory" {
+    //         rootTabController.selectedIndex = 1
+    //     }
+    // }
+
     // MARK: - lifecycle
     func viewWillDisapear() {
         if let firebaseAuthListener = UserRepository.shared.listener {
@@ -113,7 +119,7 @@ class VCSignIn: UIViewController {
                 UserRepository.shared.userReference = Firestore.firestore().collection("users").document(email)
 
                 print("signInMethod= \(user.providerID)")
-                self.performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCMain.rawValue, sender: nil)
+                self.performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCRootController.rawValue, sender: nil)
             }
         }
     }

@@ -11,132 +11,18 @@ import UIKit
 extension VCMain: ProtocolVCMain {
 
     func hudAppear() {
-
         hud.show(in: bottomPopInView)
-        buttonShowList.isEnabled = false
-        buttonShowGraph.isEnabled = false
-        buttonNewOperation.isEnabled = false
         print("hudAppear")
     }
 
     func hudDisapper() {
         hud.dismiss(animated: true)
-        buttonShowList.isEnabled = true
-        buttonShowGraph.isEnabled = true
-        buttonNewOperation.isEnabled = true
-        isButtonsActive = true
         print("hudDisapper")
     }
 
-    func fetchFirebase() async {
-        Task {
-            do {
-                try await userRepository.fetchGetUserData { user in
-                    self.userRepository.user = user
-                    print("NewData= \(String(describing: self.userRepository.user))")
-                    do {
-                        try self.updateScreen()
-                    } catch {
-                        self.showAlert(message: "Screen update error")
-                    }
-                }
-            } catch ThrowError.getUserDataError {
-                showAlert(message: "Database connection error, missing userReference")
-            }
-        }
-    }
-
-    func updateUserData(newData: User) {
-        userRepository.user = newData
-    }
-
-    func updateOperations(amount: Double, categoryUUID: UUID, note: String, date: Date, idOfObject: UUID) {
-        userRepository.updateOperations(
-            amount: amount,
-            categoryUUID: categoryUUID,
-            note: note,
-            date: date,
-            idOfObject: idOfObject
-        )
-        do {
-            try updateScreen()
-        } catch {
-            showAlert(message: "Screen update error")
-        }
-    }
-
-    func addOperations(amount: Double, categoryUUID: UUID, note: String, date: Date) {
-        do {
-            try userRepository.addOperations(amount: amount, categoryUUID: categoryUUID, note: note, date: date)
-        } catch ThrowError.getUserReferenceError {
-            showAlert(message: "Database connection error, missing userReference")
-        } catch {
-            showAlert(message: "Database connection error")
-        }
-        do {
-            try updateScreen()
-        } catch {
-            showAlert(message: "Screen update error")
-        }
-    }
-
-    func deleteCategory(idOfObject: UUID) {
-        do {
-            try userRepository.deleteCategory(idOfObject: idOfObject)
-        } catch ThrowError.getUserReferenceError {
-            showAlert(message: "Database connection error, missing userReference")
-        } catch {
-            showAlert(message: "Database connection error")
-        }
-    }
-
-    func updateCategory(name: String, icon: String, idOfObject: UUID) {
-        do {
-            try userRepository.updateCategory(name: name, icon: icon, idOfObject: idOfObject)
-        } catch ThrowError.getUserReferenceError {
-            showAlert(message: "Database connection error, missing userReference")
-        } catch {
-            showAlert(message: "Database connection error")
-        }
-    }
-
-    func addCategory(name: String, icon: String, date: Double) {
-        do {
-            try userRepository.addCategory(name: name, icon: icon, date: date)
-        } catch ThrowError.getUserDataError {
-            showAlert(message: "Database connection error, missing userReference")
-        } catch {
-            showAlert(message: "Database connection error")
-        }
-    }
-
-    func deleteOperation(uuid: UUID) {
-        do {
-            try userRepository.deleteOperation(idOfObject: uuid)
-        } catch ThrowError.getUserDataError {
-            showAlert(message: "Database connection error, missing userReference")
-        } catch {
-            showAlert(message: "Database connection error")
-        }
-        do {
-            try updateScreen()
-        } catch {
-            showAlert(message: "Screen update error")
-        }
-    }
-
-    func miniGraphStarterBackground(status: Bool) {
-        miniGraphStarterBackground.isHidden = status
-    }
-
-    func returnIncomesExpenses() -> [String: Double]? {
-        if income != 0 || expensive != 0 {
-            print("income= \(income), expensive= \(expensive)")
-            return ["income": income, "expensive": expensive]
-        } else {
-            return nil
-        }
-    }
+    // func miniGraphStarterBackground(status: Bool) {
+    //     miniGraphStarterBackground.isHidden = status
+    // }
 
     func returnMonthOfDate(_ dateInternal: Date) -> String {
         let formatterPrint = DateFormatter()
@@ -156,29 +42,34 @@ extension VCMain: ProtocolVCMain {
     }
 
     func updateScreen() throws {
-        if let userRepositoryUser = userRepository.user {
-            print("UpdateScreen daysForSorting= \(userRepositoryUser.daysForSorting)")
-            borderLineForMenu(days: userRepositoryUser.daysForSorting)
-            countingIncomesAndExpensive()
-            do {
-                try vcGraphDelegate?.dataUpdate()
-                miniGraph.setNeedsDisplay()
-                configureDataSource()
-                try applySnapshot()
-            } catch {
-                showAlert(message: "Error updating VCGraph")
-            }
-        } else {
-            throw ThrowError.mainViewUpdateScreen
-        }
-    }
+        do {
+            let userData = try dataManager.getUserData()
+            print("UpdateScreen daysForSorting= \(userData.daysForSorting)")
+            borderLineForMenu(days: userData.daysForSorting)
+            try dataManager.countingIncomesAndExpensive()
 
-    func findAmountOfHeaders() {
-        return
+            miniGraph.setNeedsDisplay()
+            configureDataSource()
+            try applySnapshot()
+        } catch {
+            showAlert(message: "Error updateScreen")
+        }
+        confugureIncomeExpensiveLabels()
+        if dataManager.income != 0 || dataManager.expensive != 0 {
+            miniGraphStarterBackground.isHidden = true
+        } else {
+            miniGraphStarterBackground.isHidden = false
+        }
     }
 
     // MARK: - PopUp-окно операции
     func showOperation(_ id: UUID) throws {
+        if let tabBarController = tabBarController {
+            tabBarController.tabBar.isUserInteractionEnabled = false
+        } else {
+            print("Error: UITabBarController 1")
+        }
+
         viewOperation.layer.cornerRadius = 20
         vcOperationDelegate?.prepareForStart(id: id)
         self.tapShowOperation = UITapGestureRecognizer(
@@ -192,7 +83,7 @@ extension VCMain: ProtocolVCMain {
             initialSpringVelocity: 0,
             options: UIView.AnimationOptions(),
             animations: {
-                self.constraintContainerBottomPoint.constant = 50
+                self.constraintContainerBottomPoint.constant = 80
                 self.view.addGestureRecognizer(tapShowOperation)
                 self.blurView.isHidden = false
                 self.view.layoutIfNeeded()
@@ -205,6 +96,11 @@ extension VCMain: ProtocolVCMain {
 
     func hideOperation() throws {
         if let tapShowOperation = self.tapShowOperation {
+            if let tabBarController = tabBarController {
+                tabBarController.tabBar.isUserInteractionEnabled = true
+            } else {
+                print("Error: UITabBarController 1")
+            }
         UIView.animate(
             withDuration: 0,
             delay: 0,
@@ -223,29 +119,17 @@ extension VCMain: ProtocolVCMain {
         }
     }
 
-    func getUserRepository() -> UserRepository {
-        return userRepository
-    }
-
-    func getUserData() throws -> User {
-        if let userRepositoryUser = userRepository.user {
-            return userRepositoryUser
-        } else {
-            throw ThrowError.getUserDataError
-        }
-    }
-
     func returnDayOfDate(_ dateInternal: Date) -> String {
         let formatterPrint = DateFormatter()
         formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) // +3 час(Moscow)
-        if let userRepositoryUser = userRepository.user {
-            switch userRepositoryUser.daysForSorting {
+        do {
+            switch try dataManager.getUserData().daysForSorting {
             case 365:
                 formatterPrint.dateFormat = "MMMM YYYY"
             default:
                 formatterPrint.dateFormat = "d MMMM YYYY"
             }
-        } else {
+        } catch {
             formatterPrint.dateFormat = "d MMMM YYYY"
         }
         return formatterPrint.string(from: dateInternal)

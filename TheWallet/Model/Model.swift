@@ -33,6 +33,7 @@ enum PerformSegueIdentifiers: String {
     case segueToVCSettingForEdit
     case segueToVCGraph
     case segueToVCOperation
+    case segueToVCRootController
 }
 
 enum ThrowError: Error {
@@ -63,6 +64,10 @@ enum ThrowError: Error {
     // CategoryTableVCCategory
     case categoryTableVCCategoryReturnCategryIdOfCell
     case categoryTableVCCategoryCloseEditing
+
+    case updateCategory
+
+    case countingIncomesAndExpensive
 }
 
 typealias NestedType = (User) -> Void
