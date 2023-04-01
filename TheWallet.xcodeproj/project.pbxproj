@@ -275,12 +275,12 @@
 				47EBDDF7292B0F43009BF1B6 /* VCSignIn.swift */,
 				47EBDDFB292C117E009BF1B6 /* VCSignUp.swift */,
 				475431D2292CF0B30028D240 /* VCAccount.swift */,
+				47D72E3629D4A02D00D86735 /* MainTabBarController.swift */,
 				472F288A25A7319500CE1481 /* VCMain.swift */,
 				47C4FF3425B38B0F00F97498 /* VCSetting.swift */,
 				47F1759825BA2D320044BD30 /* VCCategory.swift */,
 				4771587B262AB31E00F27D4B /* VCOperation.swift */,
 				4729DC3F263DA3AB00CA8B66 /* VCGraph.swift */,
-				47D72E3629D4A02D00D86735 /* MainTabBarController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

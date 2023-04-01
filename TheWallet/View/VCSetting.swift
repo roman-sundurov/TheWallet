@@ -16,7 +16,6 @@ protocol ProtocolVCSetting {
     func returnDelegateScreen2TableViewCellNote() throws -> ProtocolSettingTableVCNote
     func openAlertDatePicker()
     func startEditing()
-    func setVCSetting(amount: Double, categoryUUID: UUID, date: Double, note: String, id: UUID)
     func returnNewOperation() -> Operation
     func getSettingMenuArray() -> [SettingMenuData]
     func showAlert(message: String)
@@ -37,13 +36,13 @@ class VCSetting: UIViewController {
     @IBOutlet var constraintCategoryChangeViewHeight: NSLayoutConstraint!
     @IBOutlet var textFieldAmount: UITextField!
     @IBOutlet var labelScreen2Header: UILabel!
+    @IBOutlet var closeButton: UIButton!
 
     // MARK: - delegates and variables
     var vcMainDelegate: ProtocolVCMain?
     var vcCategoryDelegate: VCCategory?
     var tableViewCellNoteDelegate: ProtocolSettingTableVCNote?
     var tableViewCellDateDelegate: ProtocolSettingTableVCDate?
-    var vcSettingStatusEditing = false // показывает, создаётся ли новая операция, или редактируется предыдущая
     var tapOfChangeCategoryOpenPopUp: UITapGestureRecognizer?
     var tapOutsideTextViewToGoFromTextView: UITapGestureRecognizer?
     var keyboardHeight: CGFloat = 0 // хранит высоту клавиатуры
@@ -86,7 +85,7 @@ class VCSetting: UIViewController {
             } else {
                 newOperation.note = returnNoteViewText
             }
-            if vcSettingStatusEditing == true {
+            if dataManager.operationForEditing != nil {
                 do {
                     try dataManager.updateOperations(
                         amount: newOperation.amount,
@@ -115,12 +114,24 @@ class VCSetting: UIViewController {
             } catch {
                 showAlert(message: "Screen update error")
             }
-            if let tabBarController = self.tabBarController {
-                tabBarController.selectedIndex = 2
+            dataManager.operationForEditing = nil
+            // if let tabBarController = self.tabBarController {
+            //     tabBarController.viewControllers
+            // }
+            if let tabBarController = self.tabBarController,
+               let childViewControllers = tabBarController.viewControllers,
+               let vcMain = childViewControllers[0] as? ProtocolVCMain {
+                do {
+                    try vcMain.updateScreen()
+                } catch {
+                    showAlert(message: "Error vcSettingVcMainUpdateScreen")
+                    print("Error vcSettingVcMainUpdateScreen")
+                }
             }
-            // dismiss(animated: true, completion: nil)
+            dismiss(animated: true, completion: nil)
         } else {
             self.present(alertErrorAddNewOperation, animated: true, completion: nil)
+            dataManager.operationForEditing = nil
         }
     }
 
@@ -188,8 +199,9 @@ class VCSetting: UIViewController {
 
     // MARK: - lifecycle
     override func viewWillAppear(_ animated: Bool) {
-        if vcSettingStatusEditing == true {
+        if dataManager.operationForEditing != nil {
             startEditing()
+            labelScreen2Header.text = "Edit operation"
         }
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(
@@ -213,6 +225,15 @@ class VCSetting: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let operationForEditing = dataManager.operationForEditing  {
+            newOperation.amount = operationForEditing.amount
+            newOperation.category = operationForEditing.category
+            newOperation.date = operationForEditing.date
+            newOperation.note = operationForEditing.note
+            newOperation.id = operationForEditing.id
+            closeButton.isHidden = false
+        }
+
         menuArrayCalculate()
         self.view.insertSubview(self.blurView, belowSubview: self.categoryChangeView)
         self.blurView.backgroundColor = .clear

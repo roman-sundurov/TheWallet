@@ -38,6 +38,9 @@ extension VCMain: ProtocolVCMain {
             showAlert(message: "hideOperation error")
         }
         tagForEdit = uuid
+        // if let tabBarController = self.tabBarController {
+        //     tabBarController.selectedIndex = 1
+        // }
         performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCSettingForEdit.rawValue, sender: nil)
     }
 

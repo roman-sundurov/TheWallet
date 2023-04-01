@@ -26,13 +26,13 @@ extension VCSetting: ProtocolVCSetting {
         return settingMenuArray
     }
 
-    func setVCSetting(amount: Double, categoryUUID: UUID, date: Double, note: String, id: UUID) {
-        newOperation.amount = amount
-        newOperation.category = categoryUUID
-        newOperation.date = date
-        newOperation.note = note
-        newOperation.id = id
-    }
+    // func setVCSetting(amount: Double, categoryUUID: UUID, date: Double, note: String, id: UUID) {
+    //     newOperation.amount = amount
+    //     newOperation.category = categoryUUID
+    //     newOperation.date = date
+    //     newOperation.note = note
+    //     newOperation.id = id
+    // }
 
     func returnNewOperation() -> Operation {
         return newOperation
@@ -85,6 +85,19 @@ extension VCSetting: ProtocolVCSetting {
     }
 
     func openAlertDatePicker() {
+        // UIView.animate(
+        //     withDuration: 0.3,
+        //     delay: 0,
+        //     usingSpringWithDamping: 0.8,
+        //     initialSpringVelocity: 0,
+        //     options: UIView.AnimationOptions(),
+        //     animations: {
+        //         self.blurView.isHidden = false
+        //         // self.view.layoutIfNeeded()
+        //     },
+        //     completion: { _ in }
+        // )
+
         self.present(alertDatePicker, animated: true, completion: nil)
     }
 

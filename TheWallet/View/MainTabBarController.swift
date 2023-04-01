@@ -7,12 +7,22 @@
 
 import UIKit
 
+// protocol MainTabBarControllerProtocol {
+//     func setVCMain(newValue: ProtocolVCMain)
+// }
+
 class MainTabBarController: UITabBarController {
+
+    var vcMainDelegate: ProtocolVCMain?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         selectedIndex = 2
+
+        // if let myChildViewController = self.tabBarController?.viewControllers?[0] as? VCMain {
+        //     vcMainDelegate = myChildViewController
+        // }
         // Do any additional setup after loading the view.
 
         // let childViewController = VCMain()

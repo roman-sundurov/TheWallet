@@ -45,6 +45,7 @@ class VCMain: UIViewController {
     @IBOutlet var scrollViewFromBottomPopInView: UIScrollView!
     @IBOutlet var miniGraphStarterBackground: UIView!
     @IBOutlet var graphNoTransactionView: UIView!
+    
 
     // MARK: - delegates and variables
 
@@ -63,11 +64,11 @@ class VCMain: UIViewController {
 
     // MARK: - transitions
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vewController = segue.destination as? VCSetting,
-           segue.identifier == PerformSegueIdentifiers.segueToVCSetting.rawValue {
-            vcSettingDelegate = vewController
-            vewController.vcMainDelegate = self
-        }
+        // if let vewController = segue.destination as? VCSetting,
+        //    segue.identifier == PerformSegueIdentifiers.segueToVCSetting.rawValue {
+        //     vcSettingDelegate = vewController
+        //     vewController.vcMainDelegate = self
+        // }
         if let viewController = segue.destination as? VCOperation,
            segue.identifier == PerformSegueIdentifiers.segueToVCOperation.rawValue {
             vcOperationDelegate = viewController
@@ -82,25 +83,10 @@ class VCMain: UIViewController {
            segue.identifier == PerformSegueIdentifiers.segueToVCSettingForEdit.rawValue {
             do {
                 let userRepositoryUser = try dataManager.getUserData()
-                viewController.vcSettingStatusEditing = true
                 viewController.vcMainDelegate = self
                 vcSettingDelegate = viewController
                 if let specialOperation = userRepositoryUser.operations.filter({$0.value.id == tagForEdit}).first?.value {
-                    if let vcSettingDelegate = vcSettingDelegate {
-                        if let specialOperationCategory = specialOperation.category {
-                            vcSettingDelegate.setVCSetting(
-                                amount: specialOperation.amount,
-                                categoryUUID: specialOperationCategory,
-                                date: specialOperation.date,
-                                note: specialOperation.note,
-                                id: specialOperation.id
-                            )
-                        } else {
-                            showAlert(message: "Error specialOperationCategory")
-                        }
-                    } else {
-                        showAlert(message: "Error vcSettingDelegate == nil")
-                    }
+                    dataManager.operationForEditing = specialOperation
                 } else {
                     showAlert(message: "Error specialOperation")
                 }
@@ -259,6 +245,13 @@ class VCMain: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("viewDidLoad")
+        // 
+        // if let tabBarController = self.tabBarController,
+        //    let destinationVC = tabBarController.viewControllers?[2] as? DestinationViewController {
+        //     destinationVC.delegate = self
+        //     tabBarController.selectedIndex = 2
+        // }
+
         Task {
             hudAppear()
             do {

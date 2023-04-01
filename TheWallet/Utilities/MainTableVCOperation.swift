@@ -8,7 +8,6 @@
 import UIKit
 
 final class MainTableVCOperation: UITableViewCell {
-    @IBOutlet var viewPictureOfCategory: UIView!
     @IBOutlet var labelCategory: UILabel!
     @IBOutlet var labelAmount: UILabel!
     @IBOutlet var currencyStatus: UILabel!

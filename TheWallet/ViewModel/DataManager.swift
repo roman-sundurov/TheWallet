@@ -14,6 +14,7 @@ final class DataManager {
 
     var income: Double = 0
     var expensive: Double = 0
+    var operationForEditing: Operation? = nil
 
     func countingIncomesAndExpensive() throws {
         if let operations = dataManager.getUserRepository().user?.operations,
