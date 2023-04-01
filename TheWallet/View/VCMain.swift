@@ -260,6 +260,7 @@ class VCMain: UIViewController {
         super.viewDidLoad()
         print("viewDidLoad")
         Task {
+            hudAppear()
             do {
                 try await dataManager.fetchFirebase() {
                     do {
@@ -272,8 +273,10 @@ class VCMain: UIViewController {
                     } catch {
                         self.showAlert(message: "Screen update error")
                     }
+                    self.hudDisapper()
                 }
             } catch ThrowError.getUserDataError {
+                hudDisapper()
                 showAlert(message: "Database connection error, missing userReference")
             }
         }

@@ -97,36 +97,42 @@ extension VCCategory: ProtocolVCCategory {
     }
 
     func addNewCategory(name: String, icon: String, date: Double) {
-        // vcMainDelegate?.fetchFirebase()
-        if let vcMainDelegate = vcMainDelegate {
-            do {
-                try dataManager.addCategory(name: name, icon: icon, date: date)
-            } catch {
-                vcSettingDelegate?.showAlert(message: "Error: addNewCategory")
-            }
-        } else {
-            print("addNewCategory vcMainDelegate error")
+        do {
+            try dataManager.addCategory(name: name, icon: icon, date: date)
+        } catch {
+            vcSettingDelegate?.showAlert(message: "Error: addNewCategory")
+            print("Error: addNewCategory")
         }
-        if let userCategoriesCount = try? dataManager.getUserData().categories.count {
-            print("vcMainDelegate?.getUserData().categories.count = \(userCategoriesCount)")
-            tableView.performBatchUpdates({
-                var newRowIndex: Int = 0
-                // if let categories = try? vcMainDelegate?.getUserData().categories.count {
-                newRowIndex = statusEditContainer == true ? userCategoriesCount + 1 : userCategoriesCount
-                // }
-                tableView.insertRows(at: [IndexPath(row: newRowIndex, section: 0)], with: .automatic)
-            }, completion: { _ in
-                self.tableView.reloadData()
-                // Task {
-                //     do {
-                //         try await dataManager.fetchFirebase()
-                //     } catch {
-                //         self.vcSettingDelegate?.showAlert(message: "Error addNewCategory fetchFirebase")
-                //     }
-                // }
-            })
-        } else {
-            vcSettingDelegate?.showAlert(message: "addNewCategory error")
+        print("222getUserData().categories= \(try? dataManager.getUserData().categories.description)")
+        Task {
+            do {
+                try await dataManager.fetchFirebase {
+                    if let userCategoriesCount = try? dataManager.getUserData().categories.count {
+                        print("vcMainDelegate?.getUserData().categories.count = \(userCategoriesCount)")
+                        self.tableView.performBatchUpdates({
+                            var newRowIndex: Int = 0
+                            // if let categories = try? vcMainDelegate?.getUserData().categories.count {
+                            newRowIndex = self.statusEditContainer == true ? userCategoriesCount + 1 : userCategoriesCount
+                            // }
+                            print("newRowIndex= \(newRowIndex)")
+                            self.tableView.insertRows(at: [IndexPath(row: newRowIndex, section: 0)], with: .automatic)
+                        }, completion: { _ in
+                            self.tableView.reloadData()
+                            // Task {
+                            //     do {
+                            //         try await dataManager.fetchFirebase()
+                            //     } catch {
+                            //         self.vcSettingDelegate?.showAlert(message: "Error addNewCategory fetchFirebase")
+                            //     }
+                            // }
+                        })
+                    } else {
+                        self.vcSettingDelegate?.showAlert(message: "addNewCategory error")
+                    }
+                }
+            } catch {
+                self.vcSettingDelegate?.showAlert(message: "Error: addNewCategory fetchFirebase")
+            }
         }
     }
 
@@ -136,14 +142,6 @@ extension VCCategory: ProtocolVCCategory {
             tableView.deleteRows(at: [IndexPath(row: cellID + 2, section: 0)], with: .left)
         }, completion: { _ in self.tableView.reloadData() })
     }
-
-    // func getVCSettingDelegate() throws -> ProtocolVCSetting {
-    //     if let vcSettingDelegate = vcSettingDelegate {
-    //         return vcSettingDelegate
-    //     } else {
-    //         throw ThrowError.vcCategorygetVCSettingDelegate
-    //     }
-    // }
 
     func closeWindow() {
         do {

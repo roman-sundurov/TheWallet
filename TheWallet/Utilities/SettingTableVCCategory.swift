@@ -46,9 +46,9 @@ final class SettingTableVCCategory: UITableViewCell {
                 labelSelectCategory.textColor = .black
             } else {
                 print("Error: SettingTableVCCategory prepareCell newCategory")
+                labelSelectCategory.text = vcSettingDelegate.getSettingMenuArray()[indexRow].text
+                labelCategory.text = vcSettingDelegate.getSettingMenuArray()[indexRow].name
             }
-            labelSelectCategory.text = vcSettingDelegate.getSettingMenuArray()[indexRow].text
-            labelCategory.text = vcSettingDelegate.getSettingMenuArray()[indexRow].name
         } else {
             print("Error: SettingTableVCCategory prepareCell vcSettingDelegate")
         }

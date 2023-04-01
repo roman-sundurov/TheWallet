@@ -20,6 +20,7 @@ final class CategoryTableVCNewCategory: UITableViewCell {
     @IBAction func buttonAddNewCategoryAction(_ sender: Any) {
         if let textFieldNewCategoryText = textFieldNewCategory.text,
            !textFieldNewCategoryText.isEmpty {
+            print("111getUserData().categories= \(try? dataManager.getUserData().categories.description)")
             vcCategoryDelegate?.addNewCategory(
                 name: textFieldNewCategoryText,
                 icon: "",

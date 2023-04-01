@@ -30,7 +30,7 @@ struct SettingMenuData {
 class VCSetting: UIViewController {
     // MARK: - outlets
     @IBOutlet var screen2SegmentControl: UISegmentedControl!
-    @IBOutlet var tableViewScreen2: UITableView!
+    @IBOutlet var settingTableView: UITableView!
     @IBOutlet var screen2CurrencyDirection: UIButton!
     @IBOutlet var categoryChangeView: UIView!
     @IBOutlet var constraintCategoryChangeViewPoint: NSLayoutConstraint!
@@ -115,7 +115,10 @@ class VCSetting: UIViewController {
             } catch {
                 showAlert(message: "Screen update error")
             }
-            dismiss(animated: true, completion: nil)
+            if let tabBarController = self.tabBarController {
+                tabBarController.selectedIndex = 2
+            }
+            // dismiss(animated: true, completion: nil)
         } else {
             self.present(alertErrorAddNewOperation, animated: true, completion: nil)
         }

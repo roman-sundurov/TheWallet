@@ -923,7 +923,7 @@
                                         </constraints>
                                         <color key="textColor" name="DarkCustomTextColor"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" spellCheckingType="no" keyboardType="numberPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                         <connections>
                                             <action selector="textFieldAmountEditingDidBegin:" destination="fcp-GB-FKl" eventType="editingDidBegin" id="1fb-Rb-cov"/>
                                             <action selector="textFieldAmountEditingDidEnd:" destination="fcp-GB-FKl" eventType="editingDidEnd" id="tk7-j3-43O"/>
@@ -1160,7 +1160,7 @@
                         <outlet property="labelScreen2Header" destination="EHj-xF-Jnq" id="S7S-nN-QGB"/>
                         <outlet property="screen2CurrencyDirection" destination="tao-7E-drY" id="ZEg-XT-f2x"/>
                         <outlet property="screen2SegmentControl" destination="TUb-4D-06u" id="QuM-zG-gXw"/>
-                        <outlet property="tableViewScreen2" destination="afh-qC-NmX" id="ckJ-Ju-Qpn"/>
+                        <outlet property="settingTableView" destination="afh-qC-NmX" id="ckJ-Ju-Qpn"/>
                         <outlet property="textFieldAmount" destination="TtF-Sw-fS5" id="qYS-Ti-trH"/>
                     </connections>
                 </viewController>

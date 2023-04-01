@@ -91,7 +91,7 @@ extension VCSetting: ProtocolVCSetting {
     func tableViewScreen2Update(row: Int) {
         print("tableViewScreen2Update activated")
         let indexPath = IndexPath.init(row: row, section: 0)
-        tableViewScreen2.reloadRows(at: [indexPath], with: .fade)
+        settingTableView.reloadRows(at: [indexPath], with: .fade)
     }
 
     func returnDelegateScreen2TableViewCellNote() throws -> ProtocolSettingTableVCNote {
