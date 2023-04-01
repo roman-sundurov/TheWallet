@@ -795,7 +795,6 @@
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
                                 <state key="normal" title="Close"/>
                                 <connections>
-                                    <action selector="buttonToAddNewOperation:" destination="fcp-GB-FKl" eventType="touchUpInside" id="HxS-z2-zix"/>
                                     <action selector="closeView:" destination="O1a-5p-Jnz" eventType="touchUpInside" id="diw-Ud-ENi"/>
                                 </connections>
                             </button>
@@ -838,8 +837,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kKJ-BS-QlT" userLabel="TopMenu">
                                 <rect key="frame" x="0.0" y="10" width="375" height="30"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Addition" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EHj-xF-Jnq">
-                                        <rect key="frame" x="144.5" y="1" width="86" height="28"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add operation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EHj-xF-Jnq">
+                                        <rect key="frame" x="115.5" y="1" width="144.5" height="28"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
                                         <color key="textColor" name="CustomTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -945,11 +944,8 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="27" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="afh-qC-NmX">
-                                <rect key="frame" x="0.0" y="175" width="375" height="252"/>
+                                <rect key="frame" x="0.0" y="175" width="375" height="492"/>
                                 <color key="backgroundColor" name="UpBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="252" id="0cK-ex-OdT"/>
-                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" id="W1S-3K-X9P">
                                         <rect key="frame" x="0.0" y="50" width="375" height="44.5"/>
@@ -1134,6 +1130,7 @@
                         <color key="backgroundColor" name="UpBackgroundColor"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="5gB-3p-wM1" firstAttribute="top" secondItem="afh-qC-NmX" secondAttribute="bottom" id="37R-9Y-Jvm"/>
                             <constraint firstItem="7hO-0B-VtP" firstAttribute="leading" secondItem="EOk-oA-Pj3" secondAttribute="leading" id="5Ob-2t-L3S"/>
                             <constraint firstItem="EOk-oA-Pj3" firstAttribute="trailing" secondItem="7hO-0B-VtP" secondAttribute="trailing" id="6n5-dA-3Yb"/>
                             <constraint firstItem="sPN-8l-rqe" firstAttribute="top" secondItem="kKJ-BS-QlT" secondAttribute="bottom" constant="10" id="9K2-jy-IeJ"/>

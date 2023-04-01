@@ -63,28 +63,41 @@ class VCGraph: UIViewController {
         return dateArray
     }
 
+    private func monthNumber(date: Date) -> Int {
+        return Calendar.current.component(.month, from: date)
+    }
+
+    private func dayOfMonth(date: Date) -> Int {
+        return Calendar.current.component(.day, from: date)
+    }
+
     private func calculateCumulativeAmount(dateArray: [Date]) throws -> [GraphData] {
         var cumulativeArray: [GraphData] = []
         var cumulativeAmount: Double = 0
-        if let user = UserRepository.shared.user {
-            var firstDate = Date()
-            var secondDate = Date()
-            for day in 0..<dateArray.count {
-                secondDate = dateArray[day]
-                if day != 0 {
-                    firstDate = dateArray[day - 1]
-                }
-                for oper in user.operations {
-                    if oper.value.date >= secondDate.timeIntervalSince1970 && oper.value.date < firstDate.timeIntervalSince1970 {
-                        print("oper.value.amount \(oper.value.date )= \(oper.value.amount)")
-                        cumulativeAmount -= oper.value.amount
-                        print("cumulativeAmount= \(cumulativeAmount)")
-                    }
-                }
-                cumulativeArray.insert(GraphData(date: dateArray[day], amount: cumulativeAmount), at: 0)
+        // if let user = dataManager.getUserData() {
+            // var firstDate = Date()
+            // var secondDate = Date()
+        let operationsArray = try? dataManager.getUserData().operations.compactMap { $0.value }
+        // print("operationsArray= \(operationsArray)")
+
+        for numberOfDay in stride(from: dateArray.count - 1, to: -1, by: -1) {
+            let calendar = Calendar.current
+
+            let operationsArrayFilter = operationsArray?.filter {
+                dayOfMonth(date: Date.init(timeIntervalSince1970: $0.date)) == dayOfMonth(date: dateArray[numberOfDay]) &&
+                monthNumber(date: Date.init(timeIntervalSince1970: $0.date)) == monthNumber(date: dateArray[numberOfDay])
             }
-        } else {
-            throw ThrowError.calculateCumulativeAmountError
+
+            if let operationsArrayFilter = operationsArrayFilter {
+                for oper in operationsArrayFilter {
+                    cumulativeAmount += oper.amount
+                    // print("oper.amount= \(oper.date )= \(oper.amount)")
+                }
+            }
+            // print("cumulativeAmount= \(cumulativeAmount)")
+
+            cumulativeArray.append(GraphData(date: dateArray[numberOfDay], amount: cumulativeAmount))
+            // .insert(GraphData(date: dateArray[numberOfDay], amount: cumulativeAmount), at: 0)
         }
         return cumulativeArray
     }
@@ -97,6 +110,7 @@ class VCGraph: UIViewController {
         } catch {
             showAlert(message: "Error: calculateDateArray")
         }
+        print("dateArray= \(dateArray)")
 
         do {
             cumulativeGraphDataArray = try calculateCumulativeAmount(dateArray: dateArray)
