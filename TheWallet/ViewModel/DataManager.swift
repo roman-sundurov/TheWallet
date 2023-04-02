@@ -82,8 +82,10 @@ final class DataManager {
         try userRepository.addCategory(name: name, icon: icon, date: date)
     }
 
-    func deleteOperation(uuid: UUID) throws {
-        try userRepository.deleteOperation(idOfObject: uuid)
+    func deleteOperation(uuid: UUID, inner: @escaping () -> Void) throws {
+        try userRepository.deleteOperation(idOfObject: uuid) {
+            inner()
+        }
     }
 
 }

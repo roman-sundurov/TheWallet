@@ -37,8 +37,13 @@ final class CategoryTableVCNewCategory: UITableViewCell {
     var vcCategoryDelegate: ProtocolVCCategory?
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        textFieldNewCategory.layer.borderColor = UIColor.gray.cgColor
+        textFieldNewCategory.layer.borderWidth = 2
         textFieldNewCategory.layer.cornerRadius = 10
-        buttonAddNewCategory.layer.cornerRadius = 10
+        textFieldNewCategory.clipsToBounds = true
+
+        // buttonAddNewCategory.layer.cornerRadius = 10
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

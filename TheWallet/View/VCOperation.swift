@@ -46,7 +46,9 @@ class VCOperation: UIViewController {
                 vcMainDelegate.showAlert(message: "Error: hideOperation")
             }
             do {
-                try dataManager.deleteOperation(uuid: uuid)
+                try dataManager.deleteOperation(uuid: uuid) {
+                    self.vcMainDelegate?.updateScreen()
+                }
             } catch {
                 vcMainDelegate.showAlert(message: "Error: deleteOperation")
             }

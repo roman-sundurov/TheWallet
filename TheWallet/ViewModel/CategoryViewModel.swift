@@ -79,7 +79,7 @@ extension VCCategory: ProtocolVCCategory {
            userDataOperations.isEmpty == false {
             if statusEditContainer == true {
                 statusEditContainer = false
-                categoryTableVCHeaderDelegate?.buttonOptionsSetColor(color: UIColor.white)
+                categoryTableVCHeaderDelegate?.buttonOptionsSetColor(color: UIColor(named: "DarkCustomTextColor")!)
                 tableView.performBatchUpdates({
                     print("AAAA2")
                     tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
@@ -145,7 +145,7 @@ extension VCCategory: ProtocolVCCategory {
 
     func closeWindow() {
         do {
-            try vcSettingDelegate?.changeCategoryClosePopUpScreen2()
+            try vcSettingDelegate?.hideChangeCategoryPopUpScreen2()
             tableView.reloadData()
             categoryTableVCNewCategoryDelegate?.textFieldNewCategoryClear()
             print("ClosePopup from Container")

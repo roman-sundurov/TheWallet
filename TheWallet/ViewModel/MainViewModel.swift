@@ -10,6 +10,10 @@ import UIKit
 
 extension VCMain: ProtocolVCMain {
 
+    func clearTagForEdit() {
+        tagForEdit = nil
+    }
+
     func hudAppear() {
         hud.show(in: bottomPopInView)
         print("hudAppear")
@@ -44,7 +48,7 @@ extension VCMain: ProtocolVCMain {
         performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCSettingForEdit.rawValue, sender: nil)
     }
 
-    func updateScreen() throws {
+    func updateScreen() {
         do {
             let userData = try dataManager.getUserData()
             print("UpdateScreen daysForSorting= \(userData.daysForSorting)")
@@ -66,7 +70,7 @@ extension VCMain: ProtocolVCMain {
     }
 
     // MARK: - PopUp-окно операции
-    func showOperation(_ id: UUID) throws {
+    func showOperation(_ id: UUID) {
         if let tabBarController = tabBarController {
             tabBarController.tabBar.isUserInteractionEnabled = false
         } else {
@@ -86,14 +90,14 @@ extension VCMain: ProtocolVCMain {
             initialSpringVelocity: 0,
             options: UIView.AnimationOptions(),
             animations: {
-                self.constraintContainerBottomPoint.constant = 80
+                self.constraintContainerBottomPoint.constant = 30
                 self.view.addGestureRecognizer(tapShowOperation)
                 self.blurView.isHidden = false
                 self.view.layoutIfNeeded()
             },
             completion: { _ in })
         } else {
-            throw ThrowError.showOperation
+            showAlert(message: "Error: showOperation")
         }
     }
 

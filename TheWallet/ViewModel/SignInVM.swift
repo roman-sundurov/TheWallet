@@ -48,6 +48,7 @@ extension VCSignIn {
                 }
             }
         } else {
+            emailSignInButton.configuration?.showsActivityIndicator = false
             throw ThrowError.emptyInputFields
         }
     }

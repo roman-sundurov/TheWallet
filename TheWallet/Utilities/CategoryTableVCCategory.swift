@@ -143,7 +143,7 @@ final class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
         checkBoxObject.borderLineWidth = 0
         checkBoxObject.borderStyle = .circle
         checkBoxObject.checkmarkSize = 1
-        checkBoxObject.checkmarkColor = .white
+        checkBoxObject.checkmarkColor = UIColor(named: "DarkCustomTextColor")
         textFieldNameCategory.layer.cornerRadius = 10
         textFieldNameCategory.returnKeyType = .done
         textFieldNameCategory.delegate = self

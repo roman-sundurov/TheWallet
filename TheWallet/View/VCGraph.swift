@@ -24,14 +24,17 @@ class VCGraph: UIViewController {
     }
 
     // MARK: - lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         do {
             try dataUpdate()
         } catch {
             showAlert(message: "Error dataUpdate")
         }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
 
     // MARK: - other functions

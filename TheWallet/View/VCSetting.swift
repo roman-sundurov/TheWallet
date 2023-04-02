@@ -9,8 +9,8 @@ import UIKit
 import Foundation
 
 protocol ProtocolVCSetting {
-    func changeCategoryClosePopUpScreen2() throws
-    func changeCategoryOpenPopUpScreen2(_ tag: Int) throws
+    func hideChangeCategoryPopUpScreen2() throws
+    func showChangeCategoryPopUpScreen2(_ tag: Int) throws
     func tableViewScreen2Update(row: Int)
     func setCategoryInNewOperation(categoryUUID: UUID)
     func returnDelegateScreen2TableViewCellNote() throws -> ProtocolSettingTableVCNote
@@ -109,26 +109,25 @@ class VCSetting: UIViewController {
                     showAlert(message: "Error addOperations")
                 }
             }
-            do {
-                try vcMainDelegate?.updateScreen()
-            } catch {
-                showAlert(message: "Screen update error")
-            }
-            dataManager.operationForEditing = nil
-            // if let tabBarController = self.tabBarController {
-            //     tabBarController.viewControllers
-            // }
-            if let tabBarController = self.tabBarController,
-               let childViewControllers = tabBarController.viewControllers,
-               let vcMain = childViewControllers[0] as? ProtocolVCMain {
-                do {
-                    try vcMain.updateScreen()
-                } catch {
+            newOperation = Operation(amount: 0, category: nil, note: "", date: Date().timeIntervalSince1970, id: UUID())
+
+            if dataManager.operationForEditing != nil {
+                vcMainDelegate?.updateScreen()
+                dataManager.operationForEditing = nil
+                dismiss(animated: true, completion: nil)
+            } else {
+
+                if let tabBarController = self.tabBarController,
+                   let childViewControllers = tabBarController.viewControllers,
+                   let vcMain = childViewControllers.first(where: { $0 is ProtocolVCMain }) as? ProtocolVCMain {
+                    tabBarController.selectedIndex = 2
+                    vcMain.updateScreen()
+                } else {
                     showAlert(message: "Error vcSettingVcMainUpdateScreen")
                     print("Error vcSettingVcMainUpdateScreen")
                 }
+
             }
-            dismiss(animated: true, completion: nil)
         } else {
             self.present(alertErrorAddNewOperation, animated: true, completion: nil)
             dataManager.operationForEditing = nil
@@ -239,13 +238,17 @@ class VCSetting: UIViewController {
         self.blurView.backgroundColor = .clear
         self.blurView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            self.blurView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            self.blurView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            self.blurView.heightAnchor.constraint(equalTo: self.view.heightAnchor),
-            self.blurView.widthAnchor.constraint(equalTo: self.view.widthAnchor)
+            self.blurView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            self.blurView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            self.blurView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            self.blurView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+
+            // self.blurView.heightAnchor.constraint(equalTo: self.view.heightAnchor),
+            // self.blurView.widthAnchor.constraint(equalTo: self.view.widthAnchor)
         ])
         self.blurView.isHidden = true
         self.view.layoutIfNeeded()
+
         self.tapOutsideTextViewToGoFromTextView = UITapGestureRecognizer(
             target: self,
             action: #selector(self.tapHandler(tap:))

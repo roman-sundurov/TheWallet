@@ -9,7 +9,7 @@ import UIKit
 import JGProgressHUD
 
 protocol ProtocolVCMain {
-    func updateScreen() throws // full screen update
+    func updateScreen() // full screen update
     func showOperation(_ id: UUID) throws // opens a PopUp window for a specific operation
     func hideOperation() throws // closes the PopUp window of a specific operation
     func editOperation(uuid: UUID) // transition to editing the selected operation on the second screen
@@ -17,6 +17,7 @@ protocol ProtocolVCMain {
     func returnMonthOfDate(_ dateInternal: Date) -> String
     func returnGraphData() -> [GraphData]
     func showAlert(message: String)
+    func clearTagForEdit()
 }
 
 // swiftlint:disable all
@@ -45,12 +46,10 @@ class VCMain: UIViewController {
     @IBOutlet var scrollViewFromBottomPopInView: UIScrollView!
     @IBOutlet var miniGraphStarterBackground: UIView!
     @IBOutlet var graphNoTransactionView: UIView!
-    
 
     // MARK: - delegates and variables
-
     var tapShowOperation: UITapGestureRecognizer?
-    var vcSettingDelegate: ProtocolVCSetting?
+    // var vcSettingDelegate: ProtocolVCSetting?
     var vcOperationDelegate: ProtocolVCOperation?
     var tagForEdit: UUID?
     var screen1StatusGrapjDisplay = false
@@ -64,11 +63,23 @@ class VCMain: UIViewController {
 
     // MARK: - transitions
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // if let vewController = segue.destination as? VCSetting,
-        //    segue.identifier == PerformSegueIdentifiers.segueToVCSetting.rawValue {
-        //     vcSettingDelegate = vewController
-        //     vewController.vcMainDelegate = self
-        // }
+
+        if let viewController = segue.destination as? VCSetting,
+           segue.identifier == PerformSegueIdentifiers.segueToVCSettingForEdit.rawValue {
+            do {
+                let userRepositoryUser = try dataManager.getUserData()
+                viewController.vcMainDelegate = self
+                // vcSettingDelegate = viewController
+                if let specialOperation = userRepositoryUser.operations.filter({$0.value.id == tagForEdit}).first?.value {
+                    dataManager.operationForEditing = specialOperation
+                } else {
+                    showAlert(message: "Error specialOperation")
+                }
+            } catch {
+                showAlert(message: "Error VCSetting destination: userRepository.user")
+            }
+        }
+
         if let viewController = segue.destination as? VCOperation,
            segue.identifier == PerformSegueIdentifiers.segueToVCOperation.rawValue {
             vcOperationDelegate = viewController
@@ -79,21 +90,6 @@ class VCMain: UIViewController {
         //     vcGraphDelegate = viewController
         //     viewController.vcMainDelegate = self
         // }
-        if let viewController = segue.destination as? VCSetting,
-           segue.identifier == PerformSegueIdentifiers.segueToVCSettingForEdit.rawValue {
-            do {
-                let userRepositoryUser = try dataManager.getUserData()
-                viewController.vcMainDelegate = self
-                vcSettingDelegate = viewController
-                if let specialOperation = userRepositoryUser.operations.filter({$0.value.id == tagForEdit}).first?.value {
-                    dataManager.operationForEditing = specialOperation
-                } else {
-                    showAlert(message: "Error specialOperation")
-                }
-            } catch {
-                showAlert(message: "Error VCSetting destination: userRepository.user")
-            }
-        }
     }
 
     // MARK: - clicks
@@ -106,7 +102,7 @@ class VCMain: UIViewController {
         do {
             try dataManager.getUserRepository().updateDaysForSorting(daysForSorting: 1)
             print("updateDaysForSorting 1= \(dataManager.getUserRepository().user?.daysForSorting)")
-            try updateScreen()
+            updateScreen()
         } catch ThrowError.mainViewUpdateScreen {
             showAlert(message: "Screen update error")
         } catch {
@@ -118,7 +114,7 @@ class VCMain: UIViewController {
         do {
             try dataManager.getUserRepository().updateDaysForSorting(daysForSorting: 7)
             print("updateDaysForSorting 7= \(dataManager.getUserRepository().user?.daysForSorting)")
-            try updateScreen()
+            updateScreen()
         } catch ThrowError.mainViewUpdateScreen {
             showAlert(message: "Screen update error")
         } catch {
@@ -130,7 +126,7 @@ class VCMain: UIViewController {
         do {
             try dataManager.getUserRepository().updateDaysForSorting(daysForSorting: 30)
             print("updateDaysForSorting 30= \(dataManager.getUserRepository().user?.daysForSorting)")
-            try updateScreen()
+            updateScreen()
         } catch ThrowError.mainViewUpdateScreen {
             showAlert(message: "Screen update error")
         } catch {
@@ -142,7 +138,7 @@ class VCMain: UIViewController {
         do {
             try dataManager.getUserRepository().updateDaysForSorting(daysForSorting: 365)
             print("updateDaysForSorting 365= \(dataManager.getUserRepository().user?.daysForSorting)")
-            try updateScreen()
+            updateScreen()
         } catch ThrowError.mainViewUpdateScreen {
             showAlert(message: "Screen update error")
         } catch {
@@ -287,12 +283,13 @@ class VCMain: UIViewController {
         self.blurView.backgroundColor = .clear
         self.blurView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            self.blurView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            self.blurView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            self.blurView.heightAnchor.constraint(equalTo: self.view.heightAnchor),
-            self.blurView.widthAnchor.constraint(equalTo: self.view.widthAnchor)
+            self.blurView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            self.blurView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            self.blurView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            self.blurView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         ])
         self.blurView.isHidden = true
+        self.view.layoutIfNeeded()
     }
 
     func showAlert(message: String) {

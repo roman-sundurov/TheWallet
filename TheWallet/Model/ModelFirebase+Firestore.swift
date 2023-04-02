@@ -138,7 +138,7 @@ extension UserRepository {
     }
 
     // MARK: - operations
-    func deleteOperation(idOfObject: UUID) throws {
+    func deleteOperation(idOfObject: UUID, inner: @escaping () -> Void) throws {
         UserRepository.shared.user?.operations[idOfObject.description] = nil
         if let userReference = userReference {
             userReference.updateData([
@@ -149,6 +149,7 @@ extension UserRepository {
                 } else {
                     print("deleteOperation Document successfully written!")
                 }
+                inner()
             }
         } else {
             throw ThrowError.getUserReferenceError

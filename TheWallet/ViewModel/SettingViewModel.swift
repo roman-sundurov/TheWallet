@@ -116,10 +116,15 @@ extension VCSetting: ProtocolVCSetting {
     }
 
     // MARK: - open a PopUp window
-    func changeCategoryOpenPopUpScreen2(_ tag: Int) throws {
+    func showChangeCategoryPopUpScreen2(_ tag: Int) throws {
+        if let tabBarController = tabBarController {
+            tabBarController.tabBar.isUserInteractionEnabled = false
+        } else {
+            print("Error: UITabBarController 1")
+        }
         print("changeCategoryOpenPopUpScreen2")
         self.categoryChangeView.layer.cornerRadius = 20
-        self.constraintCategoryChangeViewHeight.constant = CGFloat(50 * 6)
+        self.constraintCategoryChangeViewHeight.constant = CGFloat(311)
         textFieldAmount.endEditing(true)
         tableViewCellNoteDelegate?.tapOutsideNoteTextViewEditToHide()
         self.tapOfChangeCategoryOpenPopUp = UITapGestureRecognizer(
@@ -134,7 +139,7 @@ extension VCSetting: ProtocolVCSetting {
                 initialSpringVelocity: 0,
                 options: UIView.AnimationOptions(),
                 animations: {
-                    self.constraintCategoryChangeViewPoint.constant = 50
+                    self.constraintCategoryChangeViewPoint.constant = 30
                     self.view.addGestureRecognizer(tapOfChangeCategoryOpenPopUp)
                     self.blurView.isHidden = false
                     self.view.layoutIfNeeded()
@@ -147,7 +152,12 @@ extension VCSetting: ProtocolVCSetting {
     }
 
     // MARK: - close a PopUp window
-    func changeCategoryClosePopUpScreen2() throws {
+    func hideChangeCategoryPopUpScreen2() throws {
+        if let tabBarController = tabBarController {
+            tabBarController.tabBar.isUserInteractionEnabled = true
+        } else {
+            print("Error: UITabBarController 1")
+        }
         tableViewScreen2Update(row: 1)
         if let tapOfChangeCategoryOpenPopUp = self.tapOfChangeCategoryOpenPopUp {
             UIView.animate(
@@ -357,14 +367,14 @@ extension VCSetting: ProtocolVCSetting {
 
     @objc func handlerToHideContainerScreen2(tap: UITapGestureRecognizer) {
         if tap.state == UIGestureRecognizer.State.ended {
-            print("Tap ended")
+            print("Tap ended2")
             let pointOfTap = tap.location(in: self.view)
             if categoryChangeView.frame.contains(pointOfTap) {
-                print("Tap inside Container")
+                print("Tap inside Container2")
             } else {
-                print("Tap outside Container")
+                print("Tap outside Container2")
                 do {
-                    try changeCategoryClosePopUpScreen2()
+                    try hideChangeCategoryPopUpScreen2()
                 } catch {
                     showAlert(message: "Error handlerToHideContainerScreen2")
                 }
