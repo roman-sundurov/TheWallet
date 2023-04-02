@@ -95,6 +95,7 @@ class VCSignIn: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.tapOutsideTextViews = UITapGestureRecognizer(
             target: self,
             action: #selector(self.tapHandler(tap:))

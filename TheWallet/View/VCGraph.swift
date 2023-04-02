@@ -165,6 +165,11 @@ class VCGraph: UIViewController {
                     .name("Balance")
                     .data(cumulativeArray)
             ])
+        if self.traitCollection.userInterfaceStyle == .dark {
+            aaChartModel.backgroundColor("#D8D8D8")
+        } else {
+            aaChartModel.backgroundColor("#FCFAFA")
+        }
         aaChartView.aa_drawChartWithChartModel(aaChartModel)
     }
 

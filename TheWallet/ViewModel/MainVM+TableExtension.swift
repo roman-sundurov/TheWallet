@@ -35,8 +35,8 @@ extension VCMain {
                 // print("model.category.description= \(model.category.description)")
                 // print("categoryname= \(self.getUserData().categories[model.category.description]?.name)")
             if model.amount < 0 {
-                cell?.labelAmount.textColor = UIColor.init(named: "InterfaceColorRed")
-                cell?.currencyStatus.textColor = UIColor.init(named: "InterfaceColorRed")
+                cell?.labelAmount.textColor = UIColor.red
+                cell?.currencyStatus.textColor = UIColor.red
             } else {
                 cell?.labelAmount.textColor = UIColor(
                     cgColor: CGColor.init(srgbRed: 0.165, green: 0.671, blue: 0.014, alpha: 1)
@@ -118,6 +118,6 @@ class MyDataSource: UITableViewDiffableDataSource<String, Operation> {
 extension VCMain: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let headerView = view as? UITableViewHeaderFooterView else { return }
-        headerView.textLabel?.textColor = UIColor(named: "DarkCustomTextColor")
+        headerView.textLabel?.textColor = UIColor(named: "CustomTextColorDark")
     }
 }
