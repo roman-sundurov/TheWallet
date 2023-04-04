@@ -21,16 +21,6 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>Facebook</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb452323450447281</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.362649743163-9kkqdkp1i9mi494tf253aeicinkqgdlg</string>
@@ -39,17 +29,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>FacebookAppID</key>
-	<string>452323450447281</string>
-	<key>FacebookClientToken</key>
-	<string>d2da5469ee57202161c3abfa5a7814c7</string>
-	<key>FacebookDisplayName</key>
-	<string>TheWallet</string>
-  <key>LSApplicationQueriesSchemes</key>
-  <array>
-    <string>fbapi</string>
-    <string>fb-messenger-share-api</string>
-  </array>
 	<key>GIDClientID</key>
 	<string>362649743163-9kkqdkp1i9mi494tf253aeicinkqgdlg.apps.googleusercontent.com</string>
 	<key>ITSAppUsesNonExemptEncryption</key>

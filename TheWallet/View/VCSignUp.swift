@@ -91,7 +91,6 @@ class VCSignUp: UIViewController {
         if let tapOutsideTextViews = tapOutsideTextViews {
             self.view.addGestureRecognizer(tapOutsideTextViews)
         } else {
-            // showAlert(message: "Error addGestureRecognizer")
             print("Error: VCSignIn addGestureRecognizer")
         }
 

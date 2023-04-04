@@ -31,7 +31,6 @@ final class DataManager {
             }
         } else {
             throw ThrowError.countingIncomesAndExpensiveError
-            // showAlert(message: "Error countingIncomesAndExpensive")
         }
     }
 

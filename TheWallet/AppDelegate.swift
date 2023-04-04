@@ -5,6 +5,7 @@
 //  Created by Roman on 07.01.2021.
 //
 
+import Firebase
 import UIKit
 import FirebaseCore
 import FirebaseAuth
@@ -17,15 +18,15 @@ var dataManager = DataManager.shared
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // Firebase setup
         FirebaseApp.configure()
-        print("provider1= \(String(describing: Auth.auth().currentUser?.providerData.first?.providerID))")
+        // print("provider1= \(String(describing: Auth.auth().currentUser?.providerData.first?.providerID))")
 
         // Retrieve user ID saved in UserDefaults
         if let userID = UserDefaults.standard.string(forKey: "appleAuthorizedUserIdKey") {
-
             // Check Apple ID credential state
             ASAuthorizationAppleIDProvider().getCredentialState(forUserID: userID, completion: { [unowned self] credentialState, error in
 
@@ -42,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             })
         }
+
         return true
     }
 
