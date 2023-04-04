@@ -11,9 +11,11 @@ import GoogleSignIn
 
 class VCAccount: UIViewController {
 
-    @IBAction func logOut(_ sender: Any) {
+    @IBOutlet var logOut: UIButton!
+
+    @IBAction func logOutAction(_ sender: Any) {
         UserRepository.shared.logOut()
-        performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCSignIn.rawValue, sender: nil)
+        performSegue(withIdentifier: SegueIdentifiers.segueToVCSignIn.rawValue, sender: nil)
     }
 
     @IBAction func closeView(_ sender: Any) {
@@ -23,5 +25,6 @@ class VCAccount: UIViewController {
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        logOut.layer.cornerRadius = 10
     }
 }

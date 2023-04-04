@@ -45,12 +45,9 @@ final class SettingTableVCDate: UITableViewCell {
                 labelSelectDate.text = dateFormatter.string(
                     from: Date.init(timeIntervalSince1970: vcSettingDelegate.returnNewOperation().date)
                 )
-                // labelSelectDate.textColor = UIColor(named: "CustomTextColor")
             } else {
                 labelSelectDate.text = vcSettingDelegate.getSettingMenuArray()[indexRow].text
             }
-
-            // textFieldSelectDate.tintColor = UIColor.clear // makes the cursor colorless, but does not remove it
             labelDate.text = vcSettingDelegate.getSettingMenuArray()[indexRow].name
         } else {
             print("Error: SettingTableVCDate startCell vcSettingDelegate")

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension VCCategory: ProtocolVCCategory {
-    func screen2ContainerDeleteCategory(idOfObject: UUID) {
+    func deleteCategory(idOfObject: UUID) {
         do {
             try dataManager.deleteCategory(idOfObject: idOfObject)
         } catch {
@@ -22,7 +22,7 @@ extension VCCategory: ProtocolVCCategory {
         if let vcMainDelegate = vcMainDelegate {
             return vcMainDelegate
         } else {
-            throw ThrowError.vcCategoryReturnVCMainDelegate
+            throw ThrowError.vcMainDelegateError
         }
     }
 
@@ -31,7 +31,6 @@ extension VCCategory: ProtocolVCCategory {
         let cells = self.tableView.visibleCells
         var counter = 0
         for cell in cells where counter >= 2 {
-                // if counter >= 2 {
             let specCell = cell as? CategoryTableVCCategory
             if cellID == -100 {
                 try? specCell?.closeEditing()
@@ -65,7 +64,7 @@ extension VCCategory: ProtocolVCCategory {
         if let categoryTableVCNewCategoryDelegate = categoryTableVCNewCategoryDelegate {
             return categoryTableVCNewCategoryDelegate
         } else {
-            throw ThrowError.vcCategoryReturnDelegateScreen2ContainerTableVCNewCategory
+            throw ThrowError.categoryTableVCNewCategoryDelegateError
         }
     }
 
@@ -79,7 +78,9 @@ extension VCCategory: ProtocolVCCategory {
            userDataOperations.isEmpty == false {
             if statusEditContainer == true {
                 statusEditContainer = false
-                categoryTableVCHeaderDelegate?.buttonOptionsSetColor(color: UIColor(named: "DarkCustomTextColor")!)
+                if let color = UIColor(named: "CustomTextColorDark") {
+                    categoryTableVCHeaderDelegate?.buttonOptionsSetColor(color: color)
+                }
                 tableView.performBatchUpdates({
                     print("AAAA2")
                     tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
@@ -118,13 +119,6 @@ extension VCCategory: ProtocolVCCategory {
                             self.tableView.insertRows(at: [IndexPath(row: newRowIndex, section: 0)], with: .automatic)
                         }, completion: { _ in
                             self.tableView.reloadData()
-                            // Task {
-                            //     do {
-                            //         try await dataManager.fetchFirebase()
-                            //     } catch {
-                            //         self.vcSettingDelegate?.showAlert(message: "Error addNewCategory fetchFirebase")
-                            //     }
-                            // }
                         })
                     } else {
                         self.vcSettingDelegate?.showAlert(message: "addNewCategory error")
@@ -145,7 +139,7 @@ extension VCCategory: ProtocolVCCategory {
 
     func closeWindow() {
         do {
-            try vcSettingDelegate?.hideChangeCategoryPopUpScreen2()
+            try vcSettingDelegate?.hideChangeCategoryPopUp()
             tableView.reloadData()
             categoryTableVCNewCategoryDelegate?.textFieldNewCategoryClear()
             print("ClosePopup from Container")

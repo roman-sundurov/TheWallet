@@ -11,7 +11,7 @@ protocol ProtocolVCCategory {
     func closeWindow()
     func screen2ContainerNewCategorySwicher()
     func addNewCategory(name: String, icon: String, date: Double)
-    func screen2ContainerDeleteCategory(idOfObject: UUID)
+    func deleteCategory(idOfObject: UUID)
     func showAlertErrorAddNewCategory()
     func setCurrentActiveEditingCell(cellID: Int)
     func calculateCategoryArray() -> [Category]

@@ -9,11 +9,10 @@ import UIKit
 import Foundation
 
 protocol ProtocolVCSetting {
-    func hideChangeCategoryPopUpScreen2() throws
-    func showChangeCategoryPopUpScreen2(_ tag: Int) throws
+    func hideChangeCategoryPopUp() throws
+    func showChangeCategoryPopUp(_ tag: Int) throws
     func tableViewScreen2Update(row: Int)
     func setCategoryInNewOperation(categoryUUID: UUID)
-    func returnDelegateScreen2TableViewCellNote() throws -> ProtocolSettingTableVCNote
     func openAlertDatePicker()
     func startEditing()
     func returnNewOperation() -> Operation
@@ -32,8 +31,7 @@ class VCSetting: UIViewController {
     @IBOutlet var settingTableView: UITableView!
     @IBOutlet var screen2CurrencyDirection: UIButton!
     @IBOutlet var categoryChangeView: UIView!
-    @IBOutlet var constraintCategoryChangeViewPoint: NSLayoutConstraint!
-    @IBOutlet var constraintCategoryChangeViewHeight: NSLayoutConstraint!
+    @IBOutlet var categoryChangeViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var textFieldAmount: UITextField!
     @IBOutlet var labelScreen2Header: UILabel!
     @IBOutlet var closeButton: UIButton!
@@ -51,11 +49,6 @@ class VCSetting: UIViewController {
 
     // MARK: - objects
     let alertDatePicker = UIAlertController(title: "Select date", message: nil, preferredStyle: .actionSheet)
-    let alertErrorAddNewOperation = UIAlertController(
-        title: "Добавьте обязательные данные",
-        message: nil,
-        preferredStyle: .alert
-    )
     let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     let datePicker = UIDatePicker()
 
@@ -64,14 +57,16 @@ class VCSetting: UIViewController {
         var newOperation = returnNewOperation()
         if let newOperationCategory = newOperation.category,
            let returnNoteViewText = tableViewCellNoteDelegate?.returnNoteView().text,
+           let textFieldAmountText = textFieldAmount.text,
+           let textFieldAmountDouble = Double(textFieldAmountText),
            textFieldAmount.text != "0" {
             // set Amount
             print("2. screen2SegmentControl.selectedSegmentIndex= \(screen2SegmentControl.selectedSegmentIndex)")
             if screen2SegmentControl.selectedSegmentIndex == 0 {
                 print("textFieldAmount.text= \(textFieldAmount.text as Optional)")
-                newOperation.amount = Double(textFieldAmount.text ?? "0")!
+                newOperation.amount = textFieldAmountDouble
             } else if screen2SegmentControl.selectedSegmentIndex == 1 {
-                newOperation.amount = -Double(textFieldAmount.text ?? "0")!
+                newOperation.amount = -textFieldAmountDouble
             }
                 // set Date
             if tableViewCellDateDelegate?.returnDateTextField().text == "Today" {
@@ -129,7 +124,7 @@ class VCSetting: UIViewController {
 
             }
         } else {
-            self.present(alertErrorAddNewOperation, animated: true, completion: nil)
+            showAlert(message: "Add required data: select transaction category and amount.")
             dataManager.operationForEditing = nil
         }
     }
@@ -219,12 +214,11 @@ class VCSetting: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-            // NotificationCenter.default.removeObserver(self)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let operationForEditing = dataManager.operationForEditing  {
+        if let operationForEditing = dataManager.operationForEditing {
             newOperation.amount = operationForEditing.amount
             newOperation.category = operationForEditing.category
             newOperation.date = operationForEditing.date
@@ -238,13 +232,10 @@ class VCSetting: UIViewController {
         self.blurView.backgroundColor = .clear
         self.blurView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            self.blurView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            self.blurView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            self.blurView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-            self.blurView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-
-            // self.blurView.heightAnchor.constraint(equalTo: self.view.heightAnchor),
-            // self.blurView.widthAnchor.constraint(equalTo: self.view.widthAnchor)
+            self.blurView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.blurView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.blurView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.blurView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
         self.blurView.isHidden = true
         self.view.layoutIfNeeded()
@@ -260,21 +251,13 @@ class VCSetting: UIViewController {
         }
         createDatePicker()
         createAlertDatePicker()
-        createAlertAddNewOperations()
 
         textFieldAmount.layer.borderColor = UIColor.gray.cgColor
         textFieldAmount.layer.borderWidth = 2
         textFieldAmount.layer.cornerRadius = 10
         textFieldAmount.clipsToBounds = true
-    }
 
-    func showAlert(message: String) {
-        let alert = UIAlertController(
-          title: message,
-          message: nil,
-          preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil ))
-        self.present(alert, animated: true, completion: nil)
+        textFieldAmount.delegate = self
+        textFieldAmount.inputAccessoryView = createDoneButton()
     }
 }

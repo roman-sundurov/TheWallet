@@ -11,7 +11,6 @@ import AAInfographics
 class VCGraph: UIViewController {
     // MARK: - outlets
     @IBOutlet var containerView: UIView!
-    // @IBOutlet var graphView: UIView!
     @IBOutlet var secondMenu: UIView!
 
     // MARK: - delegates and variables
@@ -20,7 +19,7 @@ class VCGraph: UIViewController {
     var aaChartView = AAChartView()
 
     @IBAction func accoutPage(_ sender: Any) {
-        performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCAccount.rawValue, sender: nil)
+        performSegue(withIdentifier: SegueIdentifiers.segueToVCAccount.rawValue, sender: nil)
     }
 
     // MARK: - lifecycle
@@ -77,15 +76,9 @@ class VCGraph: UIViewController {
     private func calculateCumulativeAmount(dateArray: [Date]) throws -> [GraphData] {
         var cumulativeArray: [GraphData] = []
         var cumulativeAmount: Double = 0
-        // if let user = dataManager.getUserData() {
-            // var firstDate = Date()
-            // var secondDate = Date()
         let operationsArray = try? dataManager.getUserData().operations.compactMap { $0.value }
-        // print("operationsArray= \(operationsArray)")
 
         for numberOfDay in stride(from: dateArray.count - 1, to: -1, by: -1) {
-            let calendar = Calendar.current
-
             let operationsArrayFilter = operationsArray?.filter {
                 dayOfMonth(date: Date.init(timeIntervalSince1970: $0.date)) == dayOfMonth(date: dateArray[numberOfDay]) &&
                 monthNumber(date: Date.init(timeIntervalSince1970: $0.date)) == monthNumber(date: dateArray[numberOfDay])
@@ -94,13 +87,10 @@ class VCGraph: UIViewController {
             if let operationsArrayFilter = operationsArrayFilter {
                 for oper in operationsArrayFilter {
                     cumulativeAmount += oper.amount
-                    // print("oper.amount= \(oper.date )= \(oper.amount)")
                 }
             }
-            // print("cumulativeAmount= \(cumulativeAmount)")
 
             cumulativeArray.append(GraphData(date: dateArray[numberOfDay], amount: cumulativeAmount))
-            // .insert(GraphData(date: dateArray[numberOfDay], amount: cumulativeAmount), at: 0)
         }
         return cumulativeArray
     }
@@ -129,7 +119,7 @@ class VCGraph: UIViewController {
                 cumulativeArray.append(item.amount)
                 numberOfDayArray.append(digitDay.description)
             } else {
-                throw ThrowError.vcGraphDataUpdate
+                throw ThrowError.vcGraphDataUpdateError
             }
         }
         print("cumulativeArray= \(cumulativeArray)")

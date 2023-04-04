@@ -9,6 +9,15 @@ import UIKit
 import Foundation
 
 extension VCSetting: ProtocolVCSetting {
+    func showAlert(message: String) {
+        let alert = UIAlertController(
+          title: message,
+          message: nil,
+          preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil ))
+        self.present(alert, animated: true, completion: nil)
+    }
 
     func setCategoryInNewOperation(categoryUUID: UUID) {
         newOperation.category = categoryUUID
@@ -25,14 +34,6 @@ extension VCSetting: ProtocolVCSetting {
     func getSettingMenuArray() -> [SettingMenuData] {
         return settingMenuArray
     }
-
-    // func setVCSetting(amount: Double, categoryUUID: UUID, date: Double, note: String, id: UUID) {
-    //     newOperation.amount = amount
-    //     newOperation.category = categoryUUID
-    //     newOperation.date = date
-    //     newOperation.note = note
-    //     newOperation.id = id
-    // }
 
     func returnNewOperation() -> Operation {
         return newOperation
@@ -85,19 +86,6 @@ extension VCSetting: ProtocolVCSetting {
     }
 
     func openAlertDatePicker() {
-        // UIView.animate(
-        //     withDuration: 0.3,
-        //     delay: 0,
-        //     usingSpringWithDamping: 0.8,
-        //     initialSpringVelocity: 0,
-        //     options: UIView.AnimationOptions(),
-        //     animations: {
-        //         self.blurView.isHidden = false
-        //         // self.view.layoutIfNeeded()
-        //     },
-        //     completion: { _ in }
-        // )
-
         self.present(alertDatePicker, animated: true, completion: nil)
     }
 
@@ -107,16 +95,8 @@ extension VCSetting: ProtocolVCSetting {
         settingTableView.reloadRows(at: [indexPath], with: .fade)
     }
 
-    func returnDelegateScreen2TableViewCellNote() throws -> ProtocolSettingTableVCNote {
-        if let tableViewCellNoteDelegate = tableViewCellNoteDelegate {
-            return tableViewCellNoteDelegate
-        } else {
-            throw ThrowError.returnDelegateScreen2TableViewCellNote
-        }
-    }
-
     // MARK: - open a PopUp window
-    func showChangeCategoryPopUpScreen2(_ tag: Int) throws {
+    func showChangeCategoryPopUp(_ tag: Int) throws {
         if let tabBarController = tabBarController {
             tabBarController.tabBar.isUserInteractionEnabled = false
         } else {
@@ -124,7 +104,6 @@ extension VCSetting: ProtocolVCSetting {
         }
         print("changeCategoryOpenPopUpScreen2")
         self.categoryChangeView.layer.cornerRadius = 20
-        self.constraintCategoryChangeViewHeight.constant = CGFloat(311)
         textFieldAmount.endEditing(true)
         tableViewCellNoteDelegate?.tapOutsideNoteTextViewEditToHide()
         self.tapOfChangeCategoryOpenPopUp = UITapGestureRecognizer(
@@ -139,7 +118,7 @@ extension VCSetting: ProtocolVCSetting {
                 initialSpringVelocity: 0,
                 options: UIView.AnimationOptions(),
                 animations: {
-                    self.constraintCategoryChangeViewPoint.constant = 30
+                    self.categoryChangeViewBottomConstraint.constant = 30
                     self.view.addGestureRecognizer(tapOfChangeCategoryOpenPopUp)
                     self.blurView.isHidden = false
                     self.view.layoutIfNeeded()
@@ -147,12 +126,12 @@ extension VCSetting: ProtocolVCSetting {
                 completion: { _ in }
             )
         } else {
-            throw ThrowError.changeCategoryOpenPopUpScreen2
+            throw ThrowError.showChangeCategoryPopUpError
         }
     }
 
     // MARK: - close a PopUp window
-    func hideChangeCategoryPopUpScreen2() throws {
+    func hideChangeCategoryPopUp() throws {
         if let tabBarController = tabBarController {
             tabBarController.tabBar.isUserInteractionEnabled = true
         } else {
@@ -167,7 +146,8 @@ extension VCSetting: ProtocolVCSetting {
                 initialSpringVelocity: 0,
                 options: UIView.AnimationOptions(),
                 animations: {
-                    self.constraintCategoryChangeViewPoint.constant = -515
+                    self.vcCategoryDelegate?.screen2ContainerNewCategorySwicher()
+                    self.categoryChangeViewBottomConstraint.constant = -411
                     self.blurView.isHidden = true
                     self.view.endEditing(true)
                     self.view.removeGestureRecognizer(tapOfChangeCategoryOpenPopUp)
@@ -186,77 +166,11 @@ extension VCSetting: ProtocolVCSetting {
                 completion: { _ in }
             )
         } else {
-            throw ThrowError.changeCategoryClosePopUpScreen2
+            throw ThrowError.hideChangeCategoryPopUpError
         }
     }
 
     // MARK: - alerts
-    func createAlertAddNewOperations() {
-        alertErrorAddNewOperation.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil ))
-        let labelAlertAddNewOperations = UILabel.init(frame: CGRect(x: 0, y: 0, width: 180, height: 50))
-        labelAlertAddNewOperations.numberOfLines = 2
-        labelAlertAddNewOperations.text = "Выберите категорию операции и сумму."
-        alertErrorAddNewOperation.view.addSubview(labelAlertAddNewOperations)
-        labelAlertAddNewOperations.translatesAutoresizingMaskIntoConstraints = false
-        alertErrorAddNewOperation.view.translatesAutoresizingMaskIntoConstraints = false
-        alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(
-            item: labelAlertAddNewOperations,
-            attribute: .width,
-            relatedBy: .equal,
-            toItem: nil,
-            attribute: .notAnAttribute,
-            multiplier: 1.0,
-            constant: 180)
-        )
-        alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(
-            item: labelAlertAddNewOperations,
-            attribute: .height,
-            relatedBy: .equal,
-            toItem: nil,
-            attribute: .notAnAttribute,
-            multiplier: 1.0,
-            constant: 50)
-        )
-        alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(
-            item: labelAlertAddNewOperations,
-            attribute: .centerX,
-            relatedBy: .equal,
-            toItem: alertErrorAddNewOperation.view,
-            attribute: .centerX,
-            multiplier: 1,
-            constant: 0)
-        )
-        alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(
-            item: labelAlertAddNewOperations,
-            attribute: .top,
-            relatedBy: .equal,
-            toItem: alertErrorAddNewOperation.view,
-            attribute: .top,
-            multiplier: 1,
-            constant: 80)
-        )
-        alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(
-            item: labelAlertAddNewOperations,
-            attribute: .bottom,
-            relatedBy: .equal,
-            toItem: alertErrorAddNewOperation.view,
-            attribute: .bottom,
-            multiplier: 1,
-            constant: 40
-        ))
-        alertErrorAddNewOperation.view.addConstraint(NSLayoutConstraint(
-            item: alertErrorAddNewOperation.view!,
-            attribute: .height,
-            relatedBy: .equal,
-            toItem: nil,
-            attribute: .notAnAttribute,
-            multiplier: 1.0,
-            constant: labelAlertAddNewOperations.frame.height + 140
-        ))
-        print(alertErrorAddNewOperation.view.frame.width)
-        print(labelAlertAddNewOperations.frame.width)
-    }
-
     func createAlertDatePicker() {
         alertDatePicker.addAction(UIAlertAction(
             title: "Установить дату",
@@ -305,8 +219,8 @@ extension VCSetting: ProtocolVCSetting {
             initialSpringVelocity: 0,
             options: UIView.AnimationOptions(),
             animations: {
-                if self.constraintCategoryChangeViewPoint.constant == 50 {
-                    self.constraintCategoryChangeViewPoint.constant = self.keyboardHeight + CGFloat.init(20)
+                if self.categoryChangeViewBottomConstraint.constant == 30 {
+                    self.categoryChangeViewBottomConstraint.constant = self.keyboardHeight + CGFloat.init(30)
                 }
                 self.view.layoutIfNeeded()
             },
@@ -325,8 +239,8 @@ extension VCSetting: ProtocolVCSetting {
                 initialSpringVelocity: 0,
                 options: UIView.AnimationOptions(),
                 animations: {
-                    if self.constraintCategoryChangeViewPoint.constant > 50 {
-                        self.constraintCategoryChangeViewPoint.constant = CGFloat.init(50)
+                    if self.categoryChangeViewBottomConstraint.constant > 30 {
+                        self.categoryChangeViewBottomConstraint.constant = CGFloat.init(30)
                     }
                     self.view.layoutIfNeeded()
                 },
@@ -352,12 +266,12 @@ extension VCSetting: ProtocolVCSetting {
                 tableViewCellNoteDelegate?.tapOutsideNoteTextViewEditToHide()
                 print("Tap inside in dateTextView")
             }
-                // Tap inside in textFieldAmount
+            // Tap inside in textFieldAmount
             else if textFieldAmount.frame.contains(pointOfTap) {
                 print("Tap inside in textFieldAmount")
                 tableViewCellNoteDelegate?.tapOutsideNoteTextViewEditToHide()
             } else {
-                    // Tap outside noteTextView and dateTextView and textFieldAmount
+                // Tap outside noteTextView and dateTextView and textFieldAmount
                 textFieldAmount.endEditing(true)
                 tableViewCellNoteDelegate?.tapOutsideNoteTextViewEditToHide()
                 print("Tap outside noteTextView and dateTextView and textFieldAmount")
@@ -374,11 +288,40 @@ extension VCSetting: ProtocolVCSetting {
             } else {
                 print("Tap outside Container2")
                 do {
-                    try hideChangeCategoryPopUpScreen2()
+                    try hideChangeCategoryPopUp()
                 } catch {
                     showAlert(message: "Error handlerToHideContainerScreen2")
                 }
             }
         }
+    }
+}
+
+extension VCSetting: UITextFieldDelegate {
+    func createDoneButton() -> UIView {
+        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+        doneToolbar.barStyle = UIBarStyle.default
+
+        let flexSpace = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace,
+            target: nil,
+            action: nil
+        )
+        let done: UIBarButtonItem = UIBarButtonItem(
+            title: "Done",
+            style: UIBarButtonItem.Style.done,
+            target: self,
+            action: #selector(self.doneButtonAction)
+        )
+
+        let items = [flexSpace, done]
+        doneToolbar.items = items
+        doneToolbar.sizeToFit()
+
+        return doneToolbar
+    }
+
+    @objc func doneButtonAction() {
+        textFieldAmount.resignFirstResponder()
     }
 }

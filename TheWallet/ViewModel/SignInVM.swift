@@ -18,8 +18,6 @@ extension VCSignIn {
     func emailSignIn() throws {
         emailSignInButton.configuration?.showsActivityIndicator = true
 
-        // let credential = EmailAuthProvider.credential(withEmail: emailTextField.text!, password: passwordTextField.text!)
-
         if let emailText = emailTextField.text,
            let passwordText = passwordTextField.text,
            emailText != "",
@@ -38,7 +36,10 @@ extension VCSignIn {
                             // UserRepository.shared.user?.email = user.email!
                             UserRepository.shared.userReference = Firestore.firestore().collection("users").document(userEmail)
                             self!.emailSignInButton.configuration?.showsActivityIndicator = false
-                            self!.performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCMain.rawValue, sender: nil)
+                            self!.performSegue(
+                                withIdentifier: SegueIdentifiers.segueToVCRootController.rawValue,
+                                sender: nil
+                            )
                         }
                     }
                 } catch {
@@ -49,12 +50,12 @@ extension VCSignIn {
             }
         } else {
             emailSignInButton.configuration?.showsActivityIndicator = false
-            throw ThrowError.emptyInputFields
+            throw ThrowError.emptyInputFieldsError
         }
     }
 
     func googleSignIn() {
-        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        guard let _ = FirebaseApp.app()?.options.clientID else { return }
         GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, error in
             guard error == nil else {
                 self.showMessagePrompt(error!.localizedDescription)
@@ -69,10 +70,10 @@ extension VCSignIn {
                 else {
                     return
                 }
-                let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: accessToken.tokenString)
-                    // Auth.auth().currentUser!.link(with: credential) { authResult, error in
-                    //   print("Google link(with: credential")
-                    // }
+                let credential = GoogleAuthProvider.credential(
+                    withIDToken: idToken.tokenString,
+                    accessToken: accessToken.tokenString
+                )
                 Auth.auth().signIn(with: credential) { authResult, error in
                     if let error = error {
                         print("Login error: \(error.localizedDescription)")
@@ -86,7 +87,7 @@ extension VCSignIn {
     }
 
     @objc func appleIDStateDidRevoked(_ notification: Notification) {
-            // Make sure user signed in with Apple
+        // Make sure user signed in with Apple
         if let providerId =  Auth.auth().currentUser?.providerData.first?.providerID,
            providerId == "apple.com" {
             UserRepository.shared.logOut()
@@ -189,8 +190,17 @@ extension VCSignIn: UITextFieldDelegate {
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         doneToolbar.barStyle = UIBarStyle.default
 
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(self.doneButtonAction))
+        let flexSpace = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace,
+            target: nil,
+            action: nil
+        )
+        let done: UIBarButtonItem = UIBarButtonItem(
+            title: "Done",
+            style: UIBarButtonItem.Style.done,
+            target: self,
+            action: #selector(self.doneButtonAction)
+        )
 
         let items = [flexSpace, done]
         doneToolbar.items = items

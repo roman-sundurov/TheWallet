@@ -24,10 +24,6 @@ extension VCMain: ProtocolVCMain {
         print("hudDisapper")
     }
 
-    // func miniGraphStarterBackground(status: Bool) {
-    //     miniGraphStarterBackground.isHidden = status
-    // }
-
     func returnMonthOfDate(_ dateInternal: Date) -> String {
         let formatterPrint = DateFormatter()
         formatterPrint.timeZone = TimeZone(secondsFromGMT: 10800) // +3 час(Moscow)
@@ -42,10 +38,7 @@ extension VCMain: ProtocolVCMain {
             showAlert(message: "hideOperation error")
         }
         tagForEdit = uuid
-        // if let tabBarController = self.tabBarController {
-        //     tabBarController.selectedIndex = 1
-        // }
-        performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCSettingForEdit.rawValue, sender: nil)
+        performSegue(withIdentifier: SegueIdentifiers.segueToVCSettingForEdit.rawValue, sender: nil)
     }
 
     func updateScreen() {
@@ -59,7 +52,7 @@ extension VCMain: ProtocolVCMain {
             configureDataSource()
             try applySnapshot()
         } catch {
-            showAlert(message: "Error updateScreen")
+            showAlert(message: "Error: updateScreen")
         }
         confugureIncomeExpensiveLabels()
         if dataManager.income != 0 || dataManager.expensive != 0 {
@@ -122,7 +115,7 @@ extension VCMain: ProtocolVCMain {
             },
             completion: { _ in })
         } else {
-            throw ThrowError.hideOperation
+            throw ThrowError.hideOperationError
         }
     }
 

@@ -34,10 +34,7 @@ final class RoundedGraphView: UIView {
 
         print("incomesExpensesRatio= \(incomesExpensesRatio)")
 
-        if data.isEmpty {
-            // vcMainDelegate?.miniGraphStarterBackground(status: false)
-        } else {
-            // vcMainDelegate?.miniGraphStarterBackground(status: true)
+        if !data.isEmpty {
             let center = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
             let radius = max(bounds.width, bounds.height)
 
@@ -65,45 +62,5 @@ final class RoundedGraphView: UIView {
             pathExpenses.stroke()
         }
     }
-
-    // func countingIncomesAndExpensive() {
-    //     if let operations = dataManager.getUserRepository().user?.operations,
-    //     let userRepositoryUser = dataManager.getUserRepository().user {
-    //         let freshHold = Date().timeIntervalSince1970 - Double(86400 * userRepositoryUser.daysForSorting)
-    //
-    //         income = 0
-    //         expensive = 0
-    //         for data in operations.filter({ $0.value.amount > 0 && $0.value.date > freshHold }) {
-    //             income += data.value.amount
-    //         }
-    //         for data in operations.filter({ $0.value.amount < 0 && $0.value.date > freshHold }) {
-    //             expensive += data.value.amount
-    //         }
-    //
-    //         if income.truncatingRemainder(dividingBy: 1) == 0 {
-    //             labelAmountOfIncomes.text = "$\(String(format: "%.0f", income))"
-    //         } else {
-    //             labelAmountOfIncomes.text = "$\(String(format: "%.2f", income))"
-    //         }
-    //
-    //         if expensive.truncatingRemainder(dividingBy: 1) == 0 {
-    //             labelAmountOfExpenses.text = "$\(String(format: "%.0f", expensive))"
-    //         } else {
-    //             labelAmountOfExpenses.text = "$\(String(format: "%.2f", expensive))"
-    //         }
-    //     } else {
-    //         showAlert(message: "Error countingIncomesAndExpensive")
-    //     }
-    // }
-
-
-    // func returnIncomesExpenses() -> [String: Double]? {
-    //     if income != 0 || expensive != 0 {
-    //         print("income= \(income), expensive= \(expensive)")
-    //         return ["income": income, "expensive": expensive]
-    //     } else {
-    //         return nil
-    //     }
-    // }
 
 }

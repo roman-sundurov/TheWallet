@@ -11,7 +11,7 @@ import FirebaseFirestoreSwift
 
 extension UserRepository {
 
-    func fetchGetUserData(inner: @escaping NestedType) async throws {
+    func fetchUserData(inner: @escaping NestedType) async throws {
         if let userReference = UserRepository.shared.userReference {
             userReference.getDocument { (document, _) in
                 if let document = document,
@@ -29,13 +29,11 @@ extension UserRepository {
                 }
             }
         } else {
-            throw ThrowError.getUserDataError
+            throw ThrowError.fetchUserDataError
         }
     }
 
     func addNewUser(name: String, surname: String, email: String) {
-        // let newCategory = Category(name: "newCategory", icon: "", date: 1666209106, id: UUID())
-        // let newOperation = Operation(amount: 100, category: newCategory.id, note: "Test note", date: 1666209105, id: UUID())
         let newUser = User(
             name: name,
             surname: surname,
@@ -82,7 +80,7 @@ extension UserRepository {
                         "icon": newCategory.icon,
                         "date": date,
                         "id": newCategory.id.description
-                    ]
+                    ] as [String: Any]
                 ]
             ], merge: true) { error in
                 if let error = error {
@@ -119,7 +117,7 @@ extension UserRepository {
             category.icon = icon
             user?.categories[idOfObject.description] = category
         } else {
-            throw ThrowError.updateCategory
+            throw ThrowError.updateCategoryError
         }
         if let userReference = userReference {
             userReference.updateData([
@@ -174,7 +172,7 @@ extension UserRepository {
                             "note": newOperation.note,
                             "date": newOperation.date,
                             "id": newOperation.id.description
-                        ]
+                        ] as [String: Any]
                     ]
                 ], merge: true) { error in
                     if let error = error {
@@ -215,7 +213,7 @@ extension UserRepository {
                 }
             }
         } else {
-            ThrowError.getUserReferenceError
+            throw ThrowError.getUserReferenceError
         }
     }
 

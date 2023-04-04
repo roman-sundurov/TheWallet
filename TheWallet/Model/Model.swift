@@ -9,12 +9,6 @@ import Foundation
 import FirebaseFirestore
 import FirebaseAuth
 
-// enum SignInMethod {
-//   case email
-//   case apple
-//   case google
-// }
-
 enum ReusableCellIdentifier: String {
     case operation
     case header
@@ -25,9 +19,8 @@ enum ReusableCellIdentifier: String {
     case cellChangeCategory
 }
 
-enum PerformSegueIdentifiers: String {
+enum SegueIdentifiers: String {
     case segueToVCSignIn
-    case segueToVCMain
     case segueToVCAccount
     case segueToVCSetting
     case segueToVCSettingForEdit
@@ -37,37 +30,41 @@ enum PerformSegueIdentifiers: String {
 }
 
 enum ThrowError: Error {
+    // DataManager.swift
     case getUserDataError
+    case countingIncomesAndExpensiveError
+
+    // VCSignIn
+    case emptyInputFieldsError
+
+    // ModelFirebase+Firestore.swift
+    case fetchUserDataError
     case getUserReferenceError
-    case emptyInputFields
-    case customError(errorName: String)
     case newOperationCategoryError
+    case updateCategoryError
+
     // VCGraph errors
     case calculateDateArrayFreshHoldDateError
     case calculateDateArrayError
-    case calculateCumulativeAmountError
-    case vcGraphDataUpdate
-    case mainViewUpdateScreen
-    case showOperation
-    case hideOperation
-    case vcSettingGetUserDataError
+    case vcGraphDataUpdateError
+
+    // MainViewModel.swift
+    case hideOperationError
+
     // MainVM+TableExtension
-    case applySnapshot
+    case applySnapshotError
+
     // SettingViewModel
-    case returnDelegateScreen2TableViewCellNote
-    case changeCategoryOpenPopUpScreen2
-    case changeCategoryClosePopUpScreen2
+    case showChangeCategoryPopUpError
+    case hideChangeCategoryPopUpError
+
     // CategoryViewModel
-    case vcCategoryReturnVCMainDelegate
-    case vcCategoryReturnDelegateScreen2ContainerTableVCNewCategory
-    case vcCategorygetVCSettingDelegate
+    case vcMainDelegateError
+    case categoryTableVCNewCategoryDelegateError
+
     // CategoryTableVCCategory
-    case categoryTableVCCategoryReturnCategryIdOfCell
-    case categoryTableVCCategoryCloseEditing
-
-    case updateCategory
-
-    case countingIncomesAndExpensive
+    case categryIdOfCellError
+    case categoryCloseEditingError
 }
 
 typealias NestedType = (User) -> Void

@@ -20,8 +20,6 @@ final class RoundedView: UIView {
     }
 
     func viewSetup() {
-        // self.layer.borderColor = UIColor(named: "TextFieldBorderColor")?.cgColor
-        // self.layer.borderWidth = 2
         self.layer.cornerRadius = 10
     }
 }

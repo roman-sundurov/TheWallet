@@ -43,7 +43,6 @@ extension UserRepository {
 
             try? Auth.auth().signOut()
             UserRepository.shared.user = nil
-                // let defaults = U-serDefaults.standard
         }
     }
 

@@ -30,7 +30,7 @@ final class MainTableVCOperation: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-            // Initialization code
+        // Initialization code
         let gesture = UITapGestureRecognizer(target: self, action: #selector(showOperation(_:)))
         self.isUserInteractionEnabled = true
         self.addGestureRecognizer(gesture)

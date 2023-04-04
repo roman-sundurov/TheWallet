@@ -17,23 +17,12 @@ extension VCMain {
             } else {
                 cell?.labelAmount.text = String(format: "%.2f", model.amount)
             }
-            // do {
-            //     if let category = try self.getUserData().categories[model.category!.description] {
-            //         cell?.labelCategory.text = category.name
-            //     } else {
-            //         cell?.labelCategory.text = "Category not found"
-            //     }
-            // } catch {
-            //     cell?.labelCategory.text = "Category not found"
-            // }
             if let modelCategory = model.category,
                let category = try? dataManager.getUserData().categories[modelCategory.description] {
                 cell?.labelCategory.text = category.name
             } else {
                 cell?.labelCategory.text = "Category not found"
             }
-                // print("model.category.description= \(model.category.description)")
-                // print("categoryname= \(self.getUserData().categories[model.category.description]?.name)")
             if model.amount < 0 {
                 cell?.labelAmount.textColor = UIColor.red
                 cell?.currencyStatus.textColor = UIColor.red
@@ -63,7 +52,7 @@ extension VCMain {
         if let datasource = datasource {
             datasource.apply(snapshot, animatingDifferences: animatingDifferences)
         } else {
-            throw ThrowError.applySnapshot
+            throw ThrowError.applySnapshotError
         }
     }
 

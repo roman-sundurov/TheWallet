@@ -13,16 +13,13 @@ protocol ProtocolVCMain {
     func showOperation(_ id: UUID) throws // opens a PopUp window for a specific operation
     func hideOperation() throws // closes the PopUp window of a specific operation
     func editOperation(uuid: UUID) // transition to editing the selected operation on the second screen
-    // func miniGraphStarterBackground(status: Bool)
     func returnMonthOfDate(_ dateInternal: Date) -> String
     func returnGraphData() -> [GraphData]
     func showAlert(message: String)
     func clearTagForEdit()
 }
 
-// swiftlint:disable all
 class VCMain: UIViewController {
-    // swiftlint:enable all
     static let shared = VCMain()
 
     // MARK: - outlets
@@ -49,7 +46,6 @@ class VCMain: UIViewController {
 
     // MARK: - delegates and variables
     var tapShowOperation: UITapGestureRecognizer?
-    // var vcSettingDelegate: ProtocolVCSetting?
     var vcOperationDelegate: ProtocolVCOperation?
     var tagForEdit: UUID?
     var screen1StatusGrapjDisplay = false
@@ -65,11 +61,10 @@ class VCMain: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if let viewController = segue.destination as? VCSetting,
-           segue.identifier == PerformSegueIdentifiers.segueToVCSettingForEdit.rawValue {
+           segue.identifier == SegueIdentifiers.segueToVCSettingForEdit.rawValue {
             do {
                 let userRepositoryUser = try dataManager.getUserData()
                 viewController.vcMainDelegate = self
-                // vcSettingDelegate = viewController
                 if let specialOperation = userRepositoryUser.operations.filter({$0.value.id == tagForEdit}).first?.value {
                     dataManager.operationForEditing = specialOperation
                 } else {
@@ -81,30 +76,23 @@ class VCMain: UIViewController {
         }
 
         if let viewController = segue.destination as? VCOperation,
-           segue.identifier == PerformSegueIdentifiers.segueToVCOperation.rawValue {
+           segue.identifier == SegueIdentifiers.segueToVCOperation.rawValue {
             vcOperationDelegate = viewController
             viewController.vcMainDelegate = self
         }
-        // if let viewController = segue.destination as? VCGraph,
-        //    segue.identifier == PerformSegueIdentifiers.segueToVCGraph.rawValue {
-        //     vcGraphDelegate = viewController
-        //     viewController.vcMainDelegate = self
-        // }
     }
 
     // MARK: - clicks
 
     @IBAction func accountPage(_ sender: Any) {
-        performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCAccount.rawValue, sender: nil)
+        performSegue(withIdentifier: SegueIdentifiers.segueToVCAccount.rawValue, sender: nil)
     }
 
     @IBAction func buttonDailyGesture(_ sender: Any) {
         do {
             try dataManager.getUserRepository().updateDaysForSorting(daysForSorting: 1)
-            print("updateDaysForSorting 1= \(dataManager.getUserRepository().user?.daysForSorting)")
+            print("updateDaysForSorting 1= \(String(describing: dataManager.getUserRepository().user?.daysForSorting))")
             updateScreen()
-        } catch ThrowError.mainViewUpdateScreen {
-            showAlert(message: "Screen update error")
         } catch {
             showAlert(message: "Database connection error, missing userReference")
         }
@@ -113,10 +101,8 @@ class VCMain: UIViewController {
     @IBAction func buttonWeeklyGesture(_ sender: Any) {
         do {
             try dataManager.getUserRepository().updateDaysForSorting(daysForSorting: 7)
-            print("updateDaysForSorting 7= \(dataManager.getUserRepository().user?.daysForSorting)")
+            print("updateDaysForSorting 7= \(String(describing: dataManager.getUserRepository().user?.daysForSorting))")
             updateScreen()
-        } catch ThrowError.mainViewUpdateScreen {
-            showAlert(message: "Screen update error")
         } catch {
             showAlert(message: "Database connection error, missing userReference")
         }
@@ -125,10 +111,8 @@ class VCMain: UIViewController {
     @IBAction func buttonMonthlyGesture(_ sender: Any) {
         do {
             try dataManager.getUserRepository().updateDaysForSorting(daysForSorting: 30)
-            print("updateDaysForSorting 30= \(dataManager.getUserRepository().user?.daysForSorting)")
+            print("updateDaysForSorting 30= \(String(describing: dataManager.getUserRepository().user?.daysForSorting))")
             updateScreen()
-        } catch ThrowError.mainViewUpdateScreen {
-            showAlert(message: "Screen update error")
         } catch {
             showAlert(message: "Database connection error, missing userReference")
         }
@@ -137,10 +121,8 @@ class VCMain: UIViewController {
     @IBAction func buttonYearlyGesture(_ sender: Any) {
         do {
             try dataManager.getUserRepository().updateDaysForSorting(daysForSorting: 365)
-            print("updateDaysForSorting 365= \(dataManager.getUserRepository().user?.daysForSorting)")
+            print("updateDaysForSorting 365= \(String(describing: dataManager.getUserRepository().user?.daysForSorting))")
             updateScreen()
-        } catch ThrowError.mainViewUpdateScreen {
-            showAlert(message: "Screen update error")
         } catch {
             showAlert(message: "Database connection error, missing userReference")
         }
@@ -229,7 +211,7 @@ class VCMain: UIViewController {
         } else {
             labelAmountOfIncomes.text = "$\(String(format: "%.2f", dataManager.income))"
         }
-        
+
         if dataManager.expensive.truncatingRemainder(dividingBy: 1) == 0 {
             labelAmountOfExpenses.text = "$\(String(format: "%.0f", dataManager.expensive))"
         } else {
@@ -241,30 +223,20 @@ class VCMain: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("viewDidLoad")
-        // 
-        // if let tabBarController = self.tabBarController,
-        //    let destinationVC = tabBarController.viewControllers?[2] as? DestinationViewController {
-        //     destinationVC.delegate = self
-        //     tabBarController.selectedIndex = 2
-        // }
 
         Task {
             hudAppear()
             do {
-                try await dataManager.fetchFirebase() {
+                try await dataManager.fetchFirebase {
                     do {
                         try self.applySnapshot()
                     } catch {
                         self.showAlert(message: "Error: applySnapshot")
                     }
-                    do {
-                        try self.updateScreen()
-                    } catch {
-                        self.showAlert(message: "Screen update error")
-                    }
+                    self.updateScreen()
                     self.hudDisapper()
                 }
-            } catch ThrowError.getUserDataError {
+            } catch {
                 hudDisapper()
                 showAlert(message: "Database connection error, missing userReference")
             }

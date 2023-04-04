@@ -21,7 +21,6 @@ class VCOperation: UIViewController {
     @IBOutlet var viewRightParth: UIView!
     @IBOutlet var buttonToEditOperation: UIButton!
     @IBOutlet var buttonToDeleteOperation: UIButton!
-    // @IBOutlet var viewLogoCategory: UIView!
 
     // MARK: - delegates and variables
     var vcMainDelegate: ProtocolVCMain?
@@ -52,13 +51,6 @@ class VCOperation: UIViewController {
             } catch {
                 vcMainDelegate.showAlert(message: "Error: deleteOperation")
             }
-            // Task {
-            //     do {
-            //         try await dataManager.fetchFirebase()
-            //     } catch {
-            //         vcMainDelegate.showAlert(message: "Error: fetchFirebase")
-            //     }
-            // }
         } else {
             print("Error buttonActionToDeleteOperation")
             vcMainDelegate?.showAlert(message: "Error: buttonActionToDeleteOperation")
@@ -81,8 +73,7 @@ extension VCOperation: ProtocolVCOperation {
     func prepareForStart(id: UUID) {
         uuid = id
         print("id= \(id)")
-        // let operation = UserRepository.shared.user?.operations.filter { $0.value.id == id }.first?.value
-        if let operation = UserRepository.shared.user?.operations.first { $0.value.id == id }?.value,
+        if let operation = UserRepository.shared.user?.operations.first(where: { $0.value.id == id })?.value,
         let categoryUUID = operation.category {
 
             // display category

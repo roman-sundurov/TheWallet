@@ -31,50 +31,54 @@ final class AppleSignInShadowButton: ASAuthorizationAppleIDButton {
   }
 
   func viewSetup() {
-    // self.overrideUserInterfaceStyle = .dark
     self.layer.shadowOpacity = 1
     self.layer.shadowOffset = CGSize(width: 8.33, height: 8.33)
     self.layer.shadowRadius = 12
     self.layer.shadowColor = UIColor(red: 0.008, green: 0.008, blue: 0.275, alpha: 0.1).cgColor
 
-    self.layer.borderWidth = 2
-    self.layer.borderColor = UIColor(red: 0.937, green: 0.941, blue: 0.969, alpha: 1).cgColor
-    self.layer.cornerRadius = 14
+    // self.layer.borderWidth = 2
+    // self.layer.borderColor = UIColor(red: 0.937, green: 0.941, blue: 0.969, alpha: 1).cgColor
+    self.layer.cornerRadius = 10
     self.clipsToBounds = true
-    // self.layer.shadowPath
-    // self.layer.masksToBounds = true
 
-    self.addTarget(self, action: #selector(appleSignInTapped), for: .touchUpInside)
+    let gesture = UITapGestureRecognizer(
+          target: self,
+          action: #selector(self.appleSignInTapped(tap:))
+      )
+      self.addGestureRecognizer(gesture)
+
+    // self.addTarget(self, action: #selector(appleSignInTapped), for: .touchUpInside)
   }
 
-  @objc func appleSignInTapped() {
-    print("AppleSignInTouch")
+    @objc func appleSignInTapped(tap: UITapGestureRecognizer) {
+        print("AppleSignInTouch")
+        if tap.state == UIGestureRecognizer.State.ended {
 
-    let provider = ASAuthorizationAppleIDProvider()
-    let request = provider.createRequest()
-    // request full name and email from the user's Apple ID
-    request.requestedScopes = [.fullName, .email]
+            let provider = ASAuthorizationAppleIDProvider()
+            let request = provider.createRequest()
+            // request full name and email from the user's Apple ID
+            request.requestedScopes = [.fullName, .email]
 
-    // Generate nonce for validation after authentication successful
-    self.currentNonce = randomNonceString()
-    // Set the SHA256 hashed nonce to ASAuthorizationAppleIDRequest
-    request.nonce = sha256(currentNonce!)
+            // Generate nonce for validation after authentication successful
+            self.currentNonce = randomNonceString()
+            // Set the SHA256 hashed nonce to ASAuthorizationAppleIDRequest
+            request.nonce = sha256(currentNonce!)
 
-    // pass the request to the initializer of the controller
-    let authController = ASAuthorizationController(authorizationRequests: [request])
+            // pass the request to the initializer of the controller
+            let authController = ASAuthorizationController(authorizationRequests: [request])
 
-    // similar to delegate, this will ask the view controller
-    // which window to present the ASAuthorizationController
-    authController.presentationContextProvider = self
+            // similar to delegate, this will ask the view controller
+            // which window to present the ASAuthorizationController
+            authController.presentationContextProvider = self
 
-    // delegate functions will be called when user data is
-    // successfully retrieved or error occured
-    authController.delegate = self
+            // delegate functions will be called when user data is
+            // successfully retrieved or error occured
+            authController.delegate = self
 
-    // show the Sign-in with Apple dialog
-    authController.performRequests()
-
-  }
+            // show the Sign-in with Apple dialog
+            authController.performRequests()
+        }
+    }
 }
 
 extension AppleSignInShadowButton: ASAuthorizationControllerPresentationContextProviding {
@@ -158,25 +162,25 @@ extension AppleSignInShadowButton: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
 
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
-                // unique ID for each user, this uniqueID will always be returned
-                // let userID = appleIDCredential.user
+            // unique ID for each user, this uniqueID will always be returned
+            // let userID = appleIDCredential.user
             UserDefaults.standard.set(appleIDCredential.user, forKey: "appleAuthorizedUserIdKey")
 
-                // Retrieve the secure nonce generated during Apple sign in
+            // Retrieve the secure nonce generated during Apple sign in
             guard let nonce = currentNonce else {
                 fatalError("Invalid state: A login callback was received, but no login request was sent.")
             }
-                // Retrieve Apple identity token
+            // Retrieve Apple identity token
             guard let appleIDToken = appleIDCredential.identityToken else {
                 print("Failed to fetch identity token")
                 return
             }
-                // Convert Apple identity token to string
+            // Convert Apple identity token to string
             guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
                 print("Failed to decode identity token")
                 return
             }
-                // Initialize a Firebase credential using secure nonce and Apple identity token
+            // Initialize a Firebase credential using secure nonce and Apple identity token
             let firebaseCredential = OAuthProvider.credential(withProviderID: "apple.com",
                                                               idToken: idTokenString,
                                                               rawNonce: nonce)
@@ -185,26 +189,13 @@ extension AppleSignInShadowButton: ASAuthorizationControllerDelegate {
                     print(error.localizedDescription)
                     return
                 }
-
-                    // // Mak a request to set user's display name on Firebase
-                    // let changeRequest = authResult?.user.createProfileChangeRequest()
-                    // changeRequest?.displayName = appleIDCredential.fullName?.givenName
-                    // changeRequest?.commitChanges(completion: { (error) in
-                    //
-                    //   if let error = error {
-                    //     print(error.localizedDescription)
-                    //   } else {
-                    //     print("Updated display name: \(Auth.auth().currentUser!.displayName!)")
-                    //   }
-                    // })
-
             }
 
-                // optional, might be nil
-            let email = appleIDCredential.email
-            let givenName = appleIDCredential.fullName?.givenName
-            let familyName = appleIDCredential.fullName?.familyName
-            let nickName = appleIDCredential.fullName?.nickname
+            // optional, might be nil
+            // let email = appleIDCredential.email
+            // let givenName = appleIDCredential.fullName?.givenName
+            // let familyName = appleIDCredential.fullName?.familyName
+            // let nickName = appleIDCredential.fullName?.nickname
 
         }
     }

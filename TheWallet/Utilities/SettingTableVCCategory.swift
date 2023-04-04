@@ -18,7 +18,7 @@ final class SettingTableVCCategory: UITableViewCell {
     // Animations
     @objc func changeCategoryOpenPopUpScreen2FromCellCategory(_ tag: Int) {
         do {
-            try vcSettingDelegate?.showChangeCategoryPopUpScreen2(indexRow)
+            try vcSettingDelegate?.showChangeCategoryPopUp(indexRow)
         } catch {
             vcSettingDelegate?.showAlert(message: "Error changeCategoryOpenPopUpScreen2FromCellCategory")
         }

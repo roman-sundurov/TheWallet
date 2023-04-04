@@ -40,19 +40,13 @@ class VCSignIn: UIViewController {
     }
 
     @IBAction func signUpButton(_ sender: Any) {
-        performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCSignIn.rawValue, sender: nil)
+        performSegue(withIdentifier: SegueIdentifiers.segueToVCSignIn.rawValue, sender: nil)
     }
 
     @IBAction func googleSignInButton(_ sender: Any) {
         googleSignIn()
         print("googleSignInButton")
     }
-
-    // override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //     if let rootTabController = segue.identifier == PerformSegueIdentifiers.segueToVCRootController.rawValue {//segue.destination as? VCCategory, segue.identifier == "segueToVCCategory" {
-    //         rootTabController.selectedIndex = 1
-    //     }
-    // }
 
     // MARK: - lifecycle
     func viewWillDisapear() {
@@ -70,7 +64,6 @@ class VCSignIn: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        // Register to Apple ID credential revoke notification
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(appleIDStateDidRevoked(_:)),
@@ -103,7 +96,6 @@ class VCSignIn: UIViewController {
         if let tapOutsideTextViews = tapOutsideTextViews {
             self.view.addGestureRecognizer(tapOutsideTextViews)
         } else {
-            // showAlert(message: "Error addGestureRecognizer")
             print("Error: VCSignIn addGestureRecognizer")
         }
 
@@ -112,15 +104,13 @@ class VCSignIn: UIViewController {
         passwordTextField.delegate = self
         passwordTextField.inputAccessoryView = createDoneButton()
 
-        UserRepository.shared.listener = Auth.auth().addStateDidChangeListener() { (auth, user) in
+        UserRepository.shared.listener = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user,
                let email = user.email {
-                // MeasurementHelper.sendLoginEvent()
-                // UserRepository.shared.user?.email = email
                 UserRepository.shared.userReference = Firestore.firestore().collection("users").document(email)
 
                 print("signInMethod= \(user.providerID)")
-                self.performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCRootController.rawValue, sender: nil)
+                self.performSegue(withIdentifier: SegueIdentifiers.segueToVCRootController.rawValue, sender: nil)
             }
         }
     }

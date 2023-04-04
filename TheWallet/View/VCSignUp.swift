@@ -39,8 +39,12 @@ class VCSignUp: UIViewController {
                         if let user = user,
                            let firebaseUserEmail = user.email {
                             UserRepository.shared.userReference = Firestore.firestore().collection("users").document(firebaseUserEmail)
-                            UserRepository.shared.addNewUser(name: nameTextField, surname: surnameTextField, email: emailTextField)
-                            self!.performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCMain.rawValue, sender: nil)
+                            UserRepository.shared.addNewUser(
+                                name: nameTextField,
+                                surname: surnameTextField,
+                                email: emailTextField
+                            )
+                            self!.performSegue(withIdentifier: SegueIdentifiers.segueToVCRootController.rawValue, sender: nil)
                         } else {
                             self!.showAlert(message: "Firebase userReference error")
                         }
@@ -56,7 +60,6 @@ class VCSignUp: UIViewController {
     }
 
     @IBAction func signInButton(_ sender: Any) {
-        // performSegue(withIdentifier: PerformSegueIdentifiers.segueToVCSignIn.rawValue, sender: nil)
         dismiss(animated: true)
     }
 
@@ -190,8 +193,17 @@ extension VCSignUp: UITextFieldDelegate {
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         doneToolbar.barStyle = UIBarStyle.default
 
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(self.doneButtonAction))
+        let flexSpace = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace,
+            target: nil,
+            action: nil
+        )
+        let done: UIBarButtonItem = UIBarButtonItem(
+            title: "Done",
+            style: UIBarButtonItem.Style.done,
+            target: self,
+            action: #selector(self.doneButtonAction)
+        )
 
         let items = [flexSpace, done]
         doneToolbar.items = items

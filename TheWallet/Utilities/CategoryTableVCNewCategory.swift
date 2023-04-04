@@ -42,8 +42,6 @@ final class CategoryTableVCNewCategory: UITableViewCell {
         textFieldNewCategory.layer.borderWidth = 2
         textFieldNewCategory.layer.cornerRadius = 10
         textFieldNewCategory.clipsToBounds = true
-
-        // buttonAddNewCategory.layer.cornerRadius = 10
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

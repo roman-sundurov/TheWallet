@@ -52,6 +52,8 @@ final class SettingTableVCNote: UITableViewCell, UITextViewDelegate {
         textViewNotes.layer.borderWidth = 2
         textViewNotes.layer.cornerRadius = 10
         textViewNotes.text = "Placeholder"
+        textViewNotes.delegate = self
+        textViewNotes.inputAccessoryView = createDoneButton()
     }
 }
 
@@ -73,5 +75,34 @@ extension SettingTableVCNote: ProtocolSettingTableVCNote {
     func tapOutsideNoteTextViewEditToHide() {
         textViewNotes.endEditing(true)
         print("textViewDeselect")
+    }
+}
+
+extension SettingTableVCNote: UITextFieldDelegate {
+    func createDoneButton() -> UIView {
+        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+        doneToolbar.barStyle = UIBarStyle.default
+
+        let flexSpace = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace,
+            target: nil,
+            action: nil
+        )
+        let done: UIBarButtonItem = UIBarButtonItem(
+            title: "Done",
+            style: UIBarButtonItem.Style.done,
+            target: self,
+            action: #selector(self.doneButtonAction)
+        )
+
+        let items = [flexSpace, done]
+        doneToolbar.items = items
+        doneToolbar.sizeToFit()
+
+        return doneToolbar
+    }
+
+    @objc func doneButtonAction() {
+        textViewNotes.resignFirstResponder()
     }
 }

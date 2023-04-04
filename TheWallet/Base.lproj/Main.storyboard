@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ffQ-Ml-Vgj">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
@@ -142,7 +142,7 @@
                                                                     <constraint firstAttribute="height" constant="24" id="BrB-K1-Fqe"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
-                                                                <textInputTraits key="textInputTraits" textContentType="password"/>
+                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                             </textField>
                                                         </subviews>
                                                         <color key="backgroundColor" name="TextFieldColor"/>
@@ -800,14 +800,14 @@
                                     <action selector="closeView:" destination="O1a-5p-Jnz" eventType="touchUpInside" id="diw-Ud-ENi"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" role="destructive" translatesAutoresizingMaskIntoConstraints="NO" id="e1M-5h-MoX">
-                                <rect key="frame" x="50" y="70" width="275" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" role="destructive" translatesAutoresizingMaskIntoConstraints="NO" id="e1M-5h-MoX">
+                                <rect key="frame" x="50" y="68" width="275" height="35"/>
                                 <color key="backgroundColor" name="DownBackgroundColor"/>
                                 <color key="tintColor" name="CustomTextColorDark"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Log out" cornerStyle="large"/>
                                 <connections>
-                                    <action selector="logOut:" destination="O1a-5p-Jnz" eventType="touchUpInside" id="Cow-aw-AHP"/>
+                                    <action selector="logOutAction:" destination="O1a-5p-Jnz" eventType="touchUpInside" id="Cow-aw-AHP"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -823,6 +823,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="4KR-oY-Gug"/>
                     <connections>
+                        <outlet property="logOut" destination="e1M-5h-MoX" id="YkZ-aJ-Qff"/>
                         <segue destination="ffQ-Ml-Vgj" kind="presentation" identifier="segueToVCSignIn" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="OHN-dF-LLI"/>
                     </connections>
                 </viewController>
@@ -1155,9 +1156,9 @@
                                 </constraints>
                             </view>
                             <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5gB-3p-wM1" userLabel="Container Bottom 2">
-                                <rect key="frame" x="10" y="667" width="355" height="515"/>
+                                <rect key="frame" x="10" y="767" width="355" height="311"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="515" id="WME-ku-wl2"/>
+                                    <constraint firstAttribute="height" constant="311" id="j8G-kb-Hy4"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="vna-KF-Brs" kind="embed" identifier="segueToVCCategory" id="Has-jM-W8K"/>
@@ -1168,7 +1169,7 @@
                         <color key="backgroundColor" name="DownMenuColor"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="EOk-oA-Pj3" firstAttribute="bottom" secondItem="5gB-3p-wM1" secondAttribute="bottom" constant="-515" id="Lcv-jA-LAE"/>
+                            <constraint firstItem="EOk-oA-Pj3" firstAttribute="bottom" secondItem="5gB-3p-wM1" secondAttribute="bottom" constant="-411" id="Lcv-jA-LAE"/>
                             <constraint firstAttribute="bottom" secondItem="hWb-Qo-7dV" secondAttribute="bottom" id="N9T-a0-OWd"/>
                             <constraint firstItem="ase-NI-5RQ" firstAttribute="top" secondItem="EOk-oA-Pj3" secondAttribute="top" id="UmH-e1-mXP"/>
                             <constraint firstItem="hWb-Qo-7dV" firstAttribute="top" secondItem="ase-NI-5RQ" secondAttribute="bottom" id="XFq-DP-b51"/>
@@ -1184,9 +1185,8 @@
                     <navigationItem key="navigationItem" id="kgp-1m-6eG"/>
                     <connections>
                         <outlet property="categoryChangeView" destination="5gB-3p-wM1" id="8RT-dm-Ih1"/>
+                        <outlet property="categoryChangeViewBottomConstraint" destination="Lcv-jA-LAE" id="cZ1-5j-uZV"/>
                         <outlet property="closeButton" destination="th8-2E-ajO" id="mtd-f5-vpB"/>
-                        <outlet property="constraintCategoryChangeViewHeight" destination="WME-ku-wl2" id="EWS-Td-e3n"/>
-                        <outlet property="constraintCategoryChangeViewPoint" destination="Lcv-jA-LAE" id="cZ1-5j-uZV"/>
                         <outlet property="labelScreen2Header" destination="EHj-xF-Jnq" id="S7S-nN-QGB"/>
                         <outlet property="screen2CurrencyDirection" destination="tao-7E-drY" id="ZEg-XT-f2x"/>
                         <outlet property="screen2SegmentControl" destination="TUb-4D-06u" id="QuM-zG-gXw"/>
@@ -1203,11 +1203,11 @@
             <objects>
                 <viewController id="vna-KF-Brs" customClass="VCCategory" customModule="TheWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QS4-AS-IaU">
-                        <rect key="frame" x="0.0" y="0.0" width="355" height="515"/>
+                        <rect key="frame" x="0.0" y="0.0" width="355" height="311"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="I0S-Bf-5wZ">
-                                <rect key="frame" x="0.0" y="20" width="355" height="495"/>
+                                <rect key="frame" x="0.0" y="20" width="355" height="291"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" name="DownBackgroundColor"/>
                                 <prototypes>
@@ -1265,6 +1265,7 @@
                                                     <subviews>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New category" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oyD-2D-jVU">
                                                             <rect key="frame" x="0.0" y="5" width="255" height="34"/>
+                                                            <color key="backgroundColor" name="TextFieldColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="34" id="OyL-Lt-6we"/>
                                                             </constraints>
@@ -1796,20 +1797,20 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Money Manager" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u33-b4-ep1">
-                                                <rect key="frame" x="58" y="120.5" width="277" height="47"/>
+                                                <rect key="frame" x="49" y="115.5" width="277" height="47"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="39"/>
                                                 <color key="textColor" name="CustomTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="App Icon_Final_1024" translatesAutoresizingMaskIntoConstraints="NO" id="rXX-cU-H23">
-                                                <rect key="frame" x="121.5" y="187.5" width="150" height="150"/>
+                                                <rect key="frame" x="112.5" y="182.5" width="150" height="150"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="150" id="nb6-rT-kbu"/>
                                                     <constraint firstAttribute="width" constant="150" id="w03-Tx-n3n"/>
                                                 </constraints>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jB0-x9-WfP">
-                                                <rect key="frame" x="60" y="377.5" width="255" height="254.5"/>
+                                                <rect key="frame" x="60" y="372.5" width="255" height="259.5"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="youremail@email.com" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="lAh-En-vEs">
                                                         <rect key="frame" x="0.0" y="88" width="255" height="34"/>
@@ -1824,7 +1825,7 @@
                                                         <textInputTraits key="textInputTraits" textContentType="password"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wME-C5-KYo">
-                                                        <rect key="frame" x="77.5" y="176" width="100" height="34.5"/>
+                                                        <rect key="frame" x="77.5" y="181" width="100" height="34.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="100" id="ySn-kW-LWY"/>
                                                         </constraints>
@@ -1847,7 +1848,7 @@
                                                         <textInputTraits key="textInputTraits" returnKeyType="done" textContentType="email"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LS8-Vb-QMc">
-                                                        <rect key="frame" x="77.5" y="220.5" width="100" height="34"/>
+                                                        <rect key="frame" x="77.5" y="225.5" width="100" height="34"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="100" id="39U-6e-ram"/>
                                                         </constraints>
@@ -1862,7 +1863,7 @@
                                                 <constraints>
                                                     <constraint firstItem="EqW-X0-BB7" firstAttribute="top" secondItem="lAh-En-vEs" secondAttribute="bottom" constant="10" id="09L-D4-KxF"/>
                                                     <constraint firstAttribute="bottom" secondItem="LS8-Vb-QMc" secondAttribute="bottom" id="7op-Zc-Pgl"/>
-                                                    <constraint firstItem="wME-C5-KYo" firstAttribute="top" secondItem="EqW-X0-BB7" secondAttribute="bottom" constant="10" id="9tE-LZ-RU5"/>
+                                                    <constraint firstItem="wME-C5-KYo" firstAttribute="top" secondItem="EqW-X0-BB7" secondAttribute="bottom" constant="15" id="9tE-LZ-RU5"/>
                                                     <constraint firstItem="LS8-Vb-QMc" firstAttribute="top" secondItem="wME-C5-KYo" secondAttribute="bottom" constant="10" id="Bzg-LA-f3G"/>
                                                     <constraint firstItem="lAh-En-vEs" firstAttribute="top" secondItem="ylX-IM-Zv5" secondAttribute="bottom" constant="10" id="D3D-np-M17"/>
                                                     <constraint firstAttribute="trailing" secondItem="Ijf-bR-NEb" secondAttribute="trailing" id="FID-TG-m9f"/>
@@ -1883,12 +1884,12 @@
                                         <color key="backgroundColor" name="DownMenuColor"/>
                                         <constraints>
                                             <constraint firstItem="u33-b4-ep1" firstAttribute="top" relation="greaterThanOrEqual" secondItem="O9t-uM-x0h" secondAttribute="top" constant="20" id="3b1-uJ-dzb"/>
-                                            <constraint firstItem="u33-b4-ep1" firstAttribute="centerX" secondItem="O9t-uM-x0h" secondAttribute="centerX" constant="9" id="P7h-BH-xCO"/>
+                                            <constraint firstItem="u33-b4-ep1" firstAttribute="centerX" secondItem="O9t-uM-x0h" secondAttribute="centerX" id="P7h-BH-xCO"/>
                                             <constraint firstAttribute="bottom" secondItem="jB0-x9-WfP" secondAttribute="bottom" constant="35" id="R0S-0f-G6F"/>
                                             <constraint firstItem="rXX-cU-H23" firstAttribute="top" secondItem="u33-b4-ep1" secondAttribute="bottom" constant="20" id="SXF-lY-7zd"/>
                                             <constraint firstItem="jB0-x9-WfP" firstAttribute="leading" secondItem="O9t-uM-x0h" secondAttribute="leading" constant="60" id="VzF-M4-6i4"/>
                                             <constraint firstAttribute="trailing" secondItem="jB0-x9-WfP" secondAttribute="trailing" constant="60" id="lW2-9D-Wx7"/>
-                                            <constraint firstItem="rXX-cU-H23" firstAttribute="centerX" secondItem="O9t-uM-x0h" secondAttribute="centerX" constant="9" id="tkp-HI-3ae"/>
+                                            <constraint firstItem="rXX-cU-H23" firstAttribute="centerX" secondItem="O9t-uM-x0h" secondAttribute="centerX" id="tkp-HI-3ae"/>
                                             <constraint firstItem="jB0-x9-WfP" firstAttribute="top" secondItem="rXX-cU-H23" secondAttribute="bottom" constant="40" id="xY4-nb-Ngs"/>
                                         </constraints>
                                     </view>
@@ -1923,7 +1924,7 @@
                         <outlet property="signInButton" destination="LS8-Vb-QMc" id="1tQ-d6-oSJ"/>
                         <outlet property="signUpButton" destination="wME-C5-KYo" id="Yte-Mo-DcX"/>
                         <outlet property="surnameTextField" destination="ylX-IM-Zv5" id="V72-Hs-RjO"/>
-                        <segue destination="AD1-UX-I6U" kind="presentation" identifier="segueToVCMain" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="pwL-YE-yKT"/>
+                        <segue destination="AD1-UX-I6U" kind="presentation" identifier="segueToVCRootController" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="pwL-YE-yKT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xOk-wf-Ifw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1960,7 +1961,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="pwL-YE-yKT"/>
+        <segue reference="KLB-fZ-o4m"/>
         <segue reference="Jqe-8T-1PJ"/>
         <segue reference="EDk-bw-Ysc"/>
     </inferredMetricsTieBreakers>
@@ -1978,22 +1979,22 @@
         <image name="plus.circle" catalog="system" width="128" height="123"/>
         <image name="trash.fill" catalog="system" width="119" height="128"/>
         <namedColor name="CustomTextColor">
-            <color red="0.16862745098039217" green="0.17647058823529413" blue="0.25882352941176473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.16899999976158142" green="0.17599999904632568" blue="0.25900000333786011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="CustomTextColorDark">
-            <color red="0.16862745098039217" green="0.17647058823529413" blue="0.25882352941176473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.16899999976158142" green="0.17599999904632568" blue="0.25900000333786011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="CustomTextColorLight">
-            <color red="0.98823529481887817" green="0.98039215803146362" blue="0.98039215803146362" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.98800003528594971" green="0.98000001907348633" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="DarkCustomTextColor">
             <color red="0.16862745098039217" green="0.17647058823529413" blue="0.25882352941176473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="DownBackgroundColor">
-            <color red="0.9882352941176471" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.98799997568130493" green="0.98000001907348633" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="DownMenuColor">
-            <color red="0.64313725490196083" green="0.72156862745098038" blue="0.7686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.64300000667572021" green="0.72200000286102295" blue="0.76899999380111694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="InterfaceColorGreen2">
             <color red="0.25600001215934753" green="0.71200001239776611" blue="0.029999999329447746" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -2002,7 +2003,7 @@
             <color red="0.96799999475479126" green="0.25400000810623169" blue="0.22400000691413879" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="TextFieldColor">
-            <color red="0.9882352941176471" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.98799997568130493" green="0.98000001907348633" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="separatorColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>

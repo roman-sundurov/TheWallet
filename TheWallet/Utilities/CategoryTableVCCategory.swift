@@ -43,7 +43,7 @@ final class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
             } catch {
                 vcSettingDelegate?.showAlert(message: "Error: buttonDeleteCategoryAction")
             }
-            vcCategoryDelegate.screen2ContainerDeleteCategory(idOfObject: category.id)
+            vcCategoryDelegate.deleteCategory(idOfObject: category.id)
         } else {
             vcSettingDelegate?.showAlert(message: "Error: CategoryTableVCCategory buttonDeleteCategoryAction")
             print("Error: CategoryTableVCCategory buttonDeleteCategoryAction")
@@ -73,13 +73,6 @@ final class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
             print("Error: CategoryTableVCCategory buttonDeleteCategoryAction")
         }
     }
-
-    // func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    //     if let buttonConfirmNewName = buttonConfirmNewName {
-    //         buttonsEditNameCategoryAction(buttonConfirmNewName!)
-    //         return true
-    //     }
-    // }
 
     @objc func closeWindows(tap: UITapGestureRecognizer) {
         if permitionToSetCategory == false { return }
@@ -143,7 +136,7 @@ final class CategoryTableVCCategory: UITableViewCell, UITextFieldDelegate {
         checkBoxObject.borderLineWidth = 0
         checkBoxObject.borderStyle = .circle
         checkBoxObject.checkmarkSize = 1
-        checkBoxObject.checkmarkColor = UIColor(named: "DarkCustomTextColor")
+        checkBoxObject.checkmarkColor = UIColor(named: "CustomTextColorDark")
         textFieldNameCategory.layer.cornerRadius = 10
         textFieldNameCategory.returnKeyType = .done
         textFieldNameCategory.delegate = self
@@ -159,7 +152,7 @@ extension CategoryTableVCCategory: ProtocolCategoryTableVCCategory {
         if let cellID = cellID {
             return cellID
         } else {
-            throw ThrowError.categoryTableVCCategoryReturnCategryIdOfCell
+            throw ThrowError.categryIdOfCellError
         }
     }
 
@@ -184,7 +177,7 @@ extension CategoryTableVCCategory: ProtocolCategoryTableVCCategory {
             vcCategoryDelegate?.setCurrentActiveEditingCell(cellID: 0)
         } else {
             print("Error: CategoryTableVCCategory closeEditing")
-            throw ThrowError.categoryTableVCCategoryCloseEditing
+            throw ThrowError.categoryCloseEditingError
         }
     }
 }

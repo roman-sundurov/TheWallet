@@ -30,7 +30,7 @@ final class DataManager {
                 expensive += data.value.amount
             }
         } else {
-            throw ThrowError.countingIncomesAndExpensive
+            throw ThrowError.countingIncomesAndExpensiveError
             // showAlert(message: "Error countingIncomesAndExpensive")
         }
     }
@@ -47,9 +47,8 @@ final class DataManager {
         }
     }
 
-
     func fetchFirebase(inner: @escaping () -> Void) async throws {
-        try await userRepository.fetchGetUserData { user in
+        try await userRepository.fetchUserData { user in
             dataManager.userRepository.user = user
             print("fetchFirebase= \(String(describing: dataManager.userRepository.user))")
             inner()

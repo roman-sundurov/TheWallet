@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Firebase setup
         FirebaseApp.configure()
-        print("provider1= \(Auth.auth().currentUser?.providerData.first?.providerID)")
+        print("provider1= \(String(describing: Auth.auth().currentUser?.providerData.first?.providerID))")
 
         // Retrieve user ID saved in UserDefaults
         if let userID = UserDefaults.standard.string(forKey: "appleAuthorizedUserIdKey") {
