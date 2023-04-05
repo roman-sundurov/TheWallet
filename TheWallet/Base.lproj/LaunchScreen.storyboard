@@ -32,8 +32,8 @@
                                             <constraint firstAttribute="width" constant="200" id="cRY-Bp-q3F"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Wallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5n-lP-Gtx">
-                                        <rect key="frame" x="110.66666666666667" y="0.0" width="171.66666666666663" height="45"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TheWallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5n-lP-Gtx">
+                                        <rect key="frame" x="114.66666666666669" y="0.0" width="164" height="45"/>
                                         <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="32"/>
                                         <color key="textColor" name="CustomTextColorLight"/>
                                         <nil key="highlightedColor"/>

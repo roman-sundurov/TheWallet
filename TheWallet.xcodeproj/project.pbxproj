@@ -39,6 +39,7 @@
 		475431D5292CF0B40028D240 /* VCAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475431D2292CF0B30028D240 /* VCAccount.swift */; };
 		47621F9825B644BF0095A52F /* SettingTableVCNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47621F9725B644BF0095A52F /* SettingTableVCNote.swift */; };
 		4771587C262AB31E00F27D4B /* VCOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4771587B262AB31E00F27D4B /* VCOperation.swift */; };
+		4780E39129DE0A8E00B4A977 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4780E39029DE0A8E00B4A977 /* GoogleService-Info.plist */; };
 		478E92AC2954492C00EDFA26 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 478E92AB2954492C00EDFA26 /* JGProgressHUD */; };
 		478E92B529544F2C00EDFA26 /* SimpleCheckbox in Frameworks */ = {isa = PBXBuildFile; productRef = 478E92B429544F2C00EDFA26 /* SimpleCheckbox */; };
 		478EAE6329DCEBE6007760BD /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 478EAE6229DCEBE6007760BD /* FirebaseAuth */; };
@@ -54,9 +55,6 @@
 		47B80F782667CA9500032678 /* RoundedGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B80F772667CA9500032678 /* RoundedGraphView.swift */; };
 		47BEBB43262F91D1006FF254 /* CategoryTableVCNewCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BEBB42262F91D1006FF254 /* CategoryTableVCNewCategory.swift */; };
 		47C4FF3525B38B0F00F97498 /* VCSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4FF3425B38B0F00F97498 /* VCSetting.swift */; };
-		47C95CFF29DDBE0C00DCF2CA /* GoogleService-Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = 47C95CFC29DDBD0100DCF2CA /* GoogleService-Info.plist */; };
-		47C95D0329DDD11E00DCF2CA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47C95CFC29DDBD0100DCF2CA /* GoogleService-Info.plist */; };
-		47C95D0429DDD11F00DCF2CA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47C95CFC29DDBD0100DCF2CA /* GoogleService-Info.plist */; };
 		47CB73C325B4364700638185 /* SettingTableVCCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB73C225B4364700638185 /* SettingTableVCCategory.swift */; };
 		47CBC900295823CE00EF849F /* SignInVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBC8FF295823CD00EF849F /* SignInVM.swift */; };
 		47CBC901295823CE00EF849F /* SignInVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBC8FF295823CD00EF849F /* SignInVM.swift */; };
@@ -137,15 +135,15 @@
 		475431D2292CF0B30028D240 /* VCAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCAccount.swift; sourceTree = "<group>"; };
 		47621F9725B644BF0095A52F /* SettingTableVCNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableVCNote.swift; sourceTree = "<group>"; };
 		4771587B262AB31E00F27D4B /* VCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCOperation.swift; sourceTree = "<group>"; };
+		4780E39029DE0A8E00B4A977 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		478EAE6D29DCF2F4007760BD /* TheWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47AC1A9425C09AC9006E7817 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Model.swift; path = TheWallet/Model/Model.swift; sourceTree = SOURCE_ROOT; };
 		47AC1AB525C0B7CB006E7817 /* MainTableVCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableVCOperation.swift; sourceTree = "<group>"; };
 		47B80F772667CA9500032678 /* RoundedGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedGraphView.swift; sourceTree = "<group>"; };
 		47BEBB42262F91D1006FF254 /* CategoryTableVCNewCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableVCNewCategory.swift; sourceTree = "<group>"; };
 		47C4FF3425B38B0F00F97498 /* VCSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCSetting.swift; sourceTree = "<group>"; };
-		47C95CFA29DDBCBE00DCF2CA /* TheWalletTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWalletTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		47C95CFB29DDBCBE00DCF2CA /* TheWalletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWalletUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		47C95CFC29DDBD0100DCF2CA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		47C95CFA29DDBCBE00DCF2CA /* TheWalletTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = TheWalletTest.xctest; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/TheWallet/build/Debug-iphoneos/TheWalletTest.xctest"; sourceTree = "<absolute>"; };
+		47C95CFB29DDBCBE00DCF2CA /* TheWalletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = TheWalletUITests.xctest; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/TheWallet/build/Debug-iphoneos/TheWalletUITests.xctest"; sourceTree = "<absolute>"; };
 		47CB73C225B4364700638185 /* SettingTableVCCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableVCCategory.swift; sourceTree = "<group>"; };
 		47CBC8FF295823CD00EF849F /* SignInVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVM.swift; sourceTree = "<group>"; };
 		47CBC91F29589FD700EF849F /* TheWallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TheWallet.entitlements; sourceTree = "<group>"; };
@@ -216,14 +214,11 @@
 			isa = PBXGroup;
 			children = (
 				475342D6290C37EC006BE673 /* swiftlint.yml */,
-				47C95CFC29DDBD0100DCF2CA /* GoogleService-Info.plist */,
 				472F288525A7319500CE1481 /* TheWallet */,
 				472F289C25A7319600CE1481 /* TheWalletTests */,
 				472F28A725A7319600CE1481 /* TheWalletUITests */,
 				478E92BA2954DBB200EDFA26 /* Frameworks */,
 				478EAE6D29DCF2F4007760BD /* TheWallet.app */,
-				47C95CFA29DDBCBE00DCF2CA /* TheWalletTest.xctest */,
-				47C95CFB29DDBCBE00DCF2CA /* TheWalletUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -234,6 +229,7 @@
 				472F288625A7319500CE1481 /* AppDelegate.swift */,
 				472F288825A7319500CE1481 /* SceneDelegate.swift */,
 				472F289425A7319500CE1481 /* Info.plist */,
+				4780E39029DE0A8E00B4A977 /* GoogleService-Info.plist */,
 				47D72E3829D4DF0F00D86735 /* Model */,
 				473549B9281961C800E87139 /* View */,
 				47210D21296019C4008F8F75 /* SupplementaryView */,
@@ -457,6 +453,7 @@
 				47210D1D295E64C8008F8F75 /* Poppins-Regular.ttf in Resources */,
 				472F289025A7319500CE1481 /* Assets.xcassets in Resources */,
 				472F288E25A7319500CE1481 /* Main.storyboard in Resources */,
+				4780E39129DE0A8E00B4A977 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,7 +462,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				475342D8290C37EC006BE673 /* swiftlint.yml in Resources */,
-				47C95D0329DDD11E00DCF2CA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,7 +470,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				475342D9290C37EC006BE673 /* swiftlint.yml in Resources */,
-				47C95D0429DDD11F00DCF2CA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,7 +502,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47C95CFF29DDBE0C00DCF2CA /* GoogleService-Info.plist in Sources */,
 				475431D3292CF0B30028D240 /* VCAccount.swift in Sources */,
 				47D72E3A29D4E1D600D86735 /* DataManager.swift in Sources */,
 				47210D2629607BC2008F8F75 /* ShadowButton.swift in Sources */,
@@ -739,8 +733,8 @@
 				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CODE_SIGN_ENTITLEMENTS = TheWallet/TheWallet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
-				DEVELOPMENT_ASSET_PATHS = "GoogleService-Info.plist";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
 				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = YES;
@@ -752,7 +746,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.5;
+				MARKETING_VERSION = 2.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.walletthatneverwas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -774,8 +768,8 @@
 				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CODE_SIGN_ENTITLEMENTS = TheWallet/TheWallet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
-				DEVELOPMENT_ASSET_PATHS = "GoogleService-Info.plist";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = YES;
@@ -788,7 +782,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.5;
+				MARKETING_VERSION = 2.1.6;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.walletthatneverwas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
