@@ -25,4 +25,4 @@ Authentication takes place using the "SignIn with Apple" and GoogleSignIn button
 
 ## Other screens
 
-<img width="315" alt="Operation menu/Light appearance" src="https://user-images.githubusercontent.com/68818066/230626768-719ca990-640a-4c12-a009-ba7dcf748b98.png"><img width="315" alt="Add new operation screen/Light appearance" src="https://user-images.githubusercontent.com/68818066/230626789-ecb674a6-a267-474f-add8-92d56c49da1f.png"><img width="315" alt="Income-Expense Chart/Dark appearance" src="https://user-images.githubusercontent.com/68818066/230626803-6660243b-92f7-48a5-b7eb-d9a04a488d8b.png">
+<img width="265" alt="Operation menu/Light appearance" src="https://user-images.githubusercontent.com/68818066/230626768-719ca990-640a-4c12-a009-ba7dcf748b98.png"><img width="265" alt="Add new operation screen/Light appearance" src="https://user-images.githubusercontent.com/68818066/230626789-ecb674a6-a267-474f-add8-92d56c49da1f.png"><img width="265" alt="Income-Expense Chart/Dark appearance" src="https://user-images.githubusercontent.com/68818066/230626803-6660243b-92f7-48a5-b7eb-d9a04a488d8b.png">
