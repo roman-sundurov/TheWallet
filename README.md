@@ -3,7 +3,7 @@ The project where I experiment with UIKit, Firebase, and other frameworks. The a
 
 The project was created in 2021, the refactoring was in 2023.
 
-I will be very grateful if you tell me about errors in the project, or suggest improvements.
+I will be very grateful if you suggest me improvements, or tell about bugs in the project.
 
 ## Stack:
 - Language - Swift
@@ -13,28 +13,16 @@ I will be very grateful if you tell me about errors in the project, or suggest i
 - Package dependencies - SPM
 - Frameworks - SwiftLint, AAInfographics, SimpleCheckbox
 
-## SignIn/SignUp screens
-Built using Firebase Auth, Apple Sign In button and Google Sign In button.
-
 ## Main screen
-Table built using Diffable DataSource.
+The table displays data using a DiffableDataSource. The data is stored in Firebase.
 
-<img width="565" alt="Screenshot 2022-10-29 at 12 47 54" src="https://user-images.githubusercontent.com/68818066/198825177-de52f950-e17d-48e2-997b-24bbd1669648.png">
+<img width="415" alt="Main Screen/Light appearance" src="https://user-images.githubusercontent.com/68818066/230624489-5b663ff8-35ac-4aa9-a4e4-2e6373aa8505.png"><img width="415" alt="Main Screen/Dark appearance" src="https://user-images.githubusercontent.com/68818066/230624502-86a121de-443b-4b8e-8e76-0937c920382b.png">
 
-## Operation review screen
+## SignIn/SignUp screens
+Authentication takes place using the "SignIn with Apple" and GoogleSignIn buttons.
 
-<img width="565" alt="Screenshot 2022-10-29 at 12 49 45" src="https://user-images.githubusercontent.com/68818066/198825228-376a03b8-48aa-46a3-b19a-fd9ef6f712b2.png">
+<img width="415" alt="Login Screen/Light appearance" src="https://user-images.githubusercontent.com/68818066/230625275-611b6370-d005-4653-983c-78ce2bac0727.png"><img width="415" alt="Login Screen/Dark appearance" src="https://user-images.githubusercontent.com/68818066/230625290-e13f4365-1cf3-44e9-b1ff-fed6f6422418.png">
 
-## Add New Operation Screen
+## Other screens
 
-<img width="565" alt="Screenshot 2022-10-29 at 12 49 56" src="https://user-images.githubusercontent.com/68818066/198825186-5c40778b-576f-486b-8522-aec5a89c5685.png">
-
-## Popup window for working with categories
-It is possible to add new categories, edit category names and delete categories.
-
-<img width="565" alt="Screenshot 2022-10-29 at 12 49 45" src="https://user-images.githubusercontent.com/68818066/198825199-d4449d81-d0ef-44cf-aa3c-4bf9f671e7cd.png">
-
-## Balance Graph Screen
-Screen with balance chart. Built on the AAInfographics framework
-
-<img width="565" alt="Screenshot 2022-10-29 at 12 50 03" src="https://user-images.githubusercontent.com/68818066/198825203-4e2f7011-0cbd-4889-baad-2ab4b393b144.png">
+<img width="315" alt="Operation menu/Light appearance" src="https://user-images.githubusercontent.com/68818066/230626768-719ca990-640a-4c12-a009-ba7dcf748b98.png"><img width="315" alt="Add new operation screen/Light appearance" src="https://user-images.githubusercontent.com/68818066/230626789-ecb674a6-a267-474f-add8-92d56c49da1f.png"><img width="315" alt="Income-Expense Chart/Dark appearance" src="https://user-images.githubusercontent.com/68818066/230626803-6660243b-92f7-48a5-b7eb-d9a04a488d8b.png">
