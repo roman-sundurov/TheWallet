@@ -49,6 +49,36 @@
 		478EAE7029DCFB04007760BD /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 478EAE6F29DCFB04007760BD /* GoogleSignIn */; };
 		478EAE7229DCFB04007760BD /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 478EAE7129DCFB04007760BD /* GoogleSignInSwift */; };
 		478EAE7A29DD01BF007760BD /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 478EAE7929DD01BF007760BD /* FirebaseAnalytics */; };
+		478F71B429E121A30000CA16 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1A9425C09AC9006E7817 /* Model.swift */; };
+		478F71B529E121A70000CA16 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1A9425C09AC9006E7817 /* Model.swift */; };
+		478F71B629E121AB0000CA16 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D72E3629D4A02D00D86735 /* MainTabBarController.swift */; };
+		478F71B729E121AB0000CA16 /* VCCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F1759825BA2D320044BD30 /* VCCategory.swift */; };
+		478F71B829E121AB0000CA16 /* VCGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4729DC3F263DA3AB00CA8B66 /* VCGraph.swift */; };
+		478F71B929E121AB0000CA16 /* VCMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F288A25A7319500CE1481 /* VCMain.swift */; };
+		478F71BA29E121AB0000CA16 /* VCSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4FF3425B38B0F00F97498 /* VCSetting.swift */; };
+		478F71BB29E121AB0000CA16 /* VCOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4771587B262AB31E00F27D4B /* VCOperation.swift */; };
+		478F71BC29E121AC0000CA16 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D72E3629D4A02D00D86735 /* MainTabBarController.swift */; };
+		478F71BD29E121AC0000CA16 /* VCCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F1759825BA2D320044BD30 /* VCCategory.swift */; };
+		478F71BE29E121AC0000CA16 /* VCGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4729DC3F263DA3AB00CA8B66 /* VCGraph.swift */; };
+		478F71BF29E121AC0000CA16 /* VCMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F288A25A7319500CE1481 /* VCMain.swift */; };
+		478F71C029E121AC0000CA16 /* VCSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4FF3425B38B0F00F97498 /* VCSetting.swift */; };
+		478F71C129E121AC0000CA16 /* VCOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4771587B262AB31E00F27D4B /* VCOperation.swift */; };
+		478F71C229E121AF0000CA16 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47210D2329601A41008F8F75 /* RoundedView.swift */; };
+		478F71C329E121AF0000CA16 /* AppleSignInShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472AC69E2963699400B1CE04 /* AppleSignInShadowButton.swift */; };
+		478F71C429E121AF0000CA16 /* ShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47210D2529607BC2008F8F75 /* ShadowButton.swift */; };
+		478F71C529E121AF0000CA16 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47210D2329601A41008F8F75 /* RoundedView.swift */; };
+		478F71C629E121AF0000CA16 /* AppleSignInShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472AC69E2963699400B1CE04 /* AppleSignInShadowButton.swift */; };
+		478F71C729E121AF0000CA16 /* ShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47210D2529607BC2008F8F75 /* ShadowButton.swift */; };
+		478F71C829E121B20000CA16 /* SettingVM+TableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549C2281B2BA500E87139 /* SettingVM+TableExtension.swift */; };
+		478F71C929E121B20000CA16 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549BA2819636200E87139 /* MainViewModel.swift */; };
+		478F71CA29E121B20000CA16 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549C0281A89E200E87139 /* SettingViewModel.swift */; };
+		478F71CB29E121B20000CA16 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D72E3929D4E1D600D86735 /* DataManager.swift */; };
+		478F71CC29E121B20000CA16 /* MainVM+TableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549BC2819CFD600E87139 /* MainVM+TableExtension.swift */; };
+		478F71CD29E121B30000CA16 /* SettingVM+TableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549C2281B2BA500E87139 /* SettingVM+TableExtension.swift */; };
+		478F71CE29E121B30000CA16 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549BA2819636200E87139 /* MainViewModel.swift */; };
+		478F71CF29E121B30000CA16 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549C0281A89E200E87139 /* SettingViewModel.swift */; };
+		478F71D029E121B30000CA16 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D72E3929D4E1D600D86735 /* DataManager.swift */; };
+		478F71D129E121B30000CA16 /* MainVM+TableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473549BC2819CFD600E87139 /* MainVM+TableExtension.swift */; };
 		47A1EBAA29D660E70060C123 /* AAInfographics in Frameworks */ = {isa = PBXBuildFile; productRef = 47A1EBA929D660E70060C123 /* AAInfographics */; };
 		47AC1A9525C09AC9006E7817 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1A9425C09AC9006E7817 /* Model.swift */; };
 		47AC1AB625C0B7CB006E7817 /* MainTableVCOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC1AB525C0B7CB006E7817 /* MainTableVCOperation.swift */; };
@@ -137,13 +167,13 @@
 		4771587B262AB31E00F27D4B /* VCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCOperation.swift; sourceTree = "<group>"; };
 		4780E39029DE0A8E00B4A977 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		478EAE6D29DCF2F4007760BD /* TheWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		478F71B229E11CFE0000CA16 /* TheWalletTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWalletTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		478F71B329E11CFE0000CA16 /* TheWalletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWalletUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		47AC1A9425C09AC9006E7817 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Model.swift; path = TheWallet/Model/Model.swift; sourceTree = SOURCE_ROOT; };
 		47AC1AB525C0B7CB006E7817 /* MainTableVCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableVCOperation.swift; sourceTree = "<group>"; };
 		47B80F772667CA9500032678 /* RoundedGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedGraphView.swift; sourceTree = "<group>"; };
 		47BEBB42262F91D1006FF254 /* CategoryTableVCNewCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableVCNewCategory.swift; sourceTree = "<group>"; };
 		47C4FF3425B38B0F00F97498 /* VCSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCSetting.swift; sourceTree = "<group>"; };
-		47C95CFA29DDBCBE00DCF2CA /* TheWalletTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = TheWalletTest.xctest; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/TheWallet/build/Debug-iphoneos/TheWalletTest.xctest"; sourceTree = "<absolute>"; };
-		47C95CFB29DDBCBE00DCF2CA /* TheWalletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = TheWalletUITests.xctest; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/TheWallet/build/Debug-iphoneos/TheWalletUITests.xctest"; sourceTree = "<absolute>"; };
 		47CB73C225B4364700638185 /* SettingTableVCCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableVCCategory.swift; sourceTree = "<group>"; };
 		47CBC8FF295823CD00EF849F /* SignInVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVM.swift; sourceTree = "<group>"; };
 		47CBC91F29589FD700EF849F /* TheWallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TheWallet.entitlements; sourceTree = "<group>"; };
@@ -219,6 +249,8 @@
 				472F28A725A7319600CE1481 /* TheWalletUITests */,
 				478E92BA2954DBB200EDFA26 /* Frameworks */,
 				478EAE6D29DCF2F4007760BD /* TheWallet.app */,
+				478F71B229E11CFE0000CA16 /* TheWalletTest.xctest */,
+				478F71B329E11CFE0000CA16 /* TheWalletUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -372,7 +404,7 @@
 			);
 			name = TheWalletTest;
 			productName = Skillbox_diploma_step1Tests;
-			productReference = 47C95CFA29DDBCBE00DCF2CA /* TheWalletTest.xctest */;
+			productReference = 478F71B229E11CFE0000CA16 /* TheWalletTest.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		472F28A325A7319600CE1481 /* TheWalletUITests */ = {
@@ -390,7 +422,7 @@
 			);
 			name = TheWalletUITests;
 			productName = Skillbox_diploma_step1UITests;
-			productReference = 47C95CFB29DDBCBE00DCF2CA /* TheWalletUITests.xctest */;
+			productReference = 478F71B329E11CFE0000CA16 /* TheWalletUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -541,14 +573,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				478F71B429E121A30000CA16 /* Model.swift in Sources */,
+				478F71CA29E121B20000CA16 /* SettingViewModel.swift in Sources */,
+				478F71C429E121AF0000CA16 /* ShadowButton.swift in Sources */,
 				47EBDDF5292AFABF009BF1B6 /* ModelFirebase+Auth.swift in Sources */,
+				478F71B729E121AB0000CA16 /* VCCategory.swift in Sources */,
+				478F71BA29E121AB0000CA16 /* VCSetting.swift in Sources */,
+				478F71B629E121AB0000CA16 /* MainTabBarController.swift in Sources */,
+				478F71BB29E121AB0000CA16 /* VCOperation.swift in Sources */,
+				478F71CC29E121B20000CA16 /* MainVM+TableExtension.swift in Sources */,
 				47431E60290B4C8B00818E6E /* ModelFirebase+Firestore.swift in Sources */,
 				475431D4292CF0B40028D240 /* VCAccount.swift in Sources */,
+				478F71C229E121AF0000CA16 /* RoundedView.swift in Sources */,
+				478F71B929E121AB0000CA16 /* VCMain.swift in Sources */,
 				472F289E25A7319600CE1481 /* TheWalletTests.swift in Sources */,
+				478F71C329E121AF0000CA16 /* AppleSignInShadowButton.swift in Sources */,
 				47CBC901295823CE00EF849F /* SignInVM.swift in Sources */,
 				47E87753290807B100B99C09 /* CategoryViewModel.swift in Sources */,
+				478F71C929E121B20000CA16 /* MainViewModel.swift in Sources */,
 				47EBDDFD292C117E009BF1B6 /* VCSignUp.swift in Sources */,
 				47EBDDF9292B0F43009BF1B6 /* VCSignIn.swift in Sources */,
+				478F71CB29E121B20000CA16 /* DataManager.swift in Sources */,
+				478F71B829E121AB0000CA16 /* VCGraph.swift in Sources */,
+				478F71C829E121B20000CA16 /* SettingVM+TableExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,14 +603,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				478F71B529E121A70000CA16 /* Model.swift in Sources */,
+				478F71CF29E121B30000CA16 /* SettingViewModel.swift in Sources */,
+				478F71C729E121AF0000CA16 /* ShadowButton.swift in Sources */,
 				47EBDDF6292AFABF009BF1B6 /* ModelFirebase+Auth.swift in Sources */,
+				478F71BD29E121AC0000CA16 /* VCCategory.swift in Sources */,
+				478F71C029E121AC0000CA16 /* VCSetting.swift in Sources */,
+				478F71BC29E121AC0000CA16 /* MainTabBarController.swift in Sources */,
+				478F71C129E121AC0000CA16 /* VCOperation.swift in Sources */,
+				478F71D129E121B30000CA16 /* MainVM+TableExtension.swift in Sources */,
 				47431E61290B4C8B00818E6E /* ModelFirebase+Firestore.swift in Sources */,
 				475431D5292CF0B40028D240 /* VCAccount.swift in Sources */,
+				478F71C529E121AF0000CA16 /* RoundedView.swift in Sources */,
+				478F71BF29E121AC0000CA16 /* VCMain.swift in Sources */,
 				472F28A925A7319600CE1481 /* TheWalletUITests.swift in Sources */,
+				478F71C629E121AF0000CA16 /* AppleSignInShadowButton.swift in Sources */,
 				47CBC902295823CE00EF849F /* SignInVM.swift in Sources */,
 				47E87754290807B100B99C09 /* CategoryViewModel.swift in Sources */,
+				478F71CE29E121B30000CA16 /* MainViewModel.swift in Sources */,
 				47EBDDFE292C117E009BF1B6 /* VCSignUp.swift in Sources */,
 				47EBDDFA292B0F43009BF1B6 /* VCSignIn.swift in Sources */,
+				478F71D029E121B30000CA16 /* DataManager.swift in Sources */,
+				478F71BE29E121AC0000CA16 /* VCGraph.swift in Sources */,
+				478F71CD29E121B30000CA16 /* SettingVM+TableExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
