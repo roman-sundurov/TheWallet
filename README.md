@@ -1,5 +1,5 @@
 # TheWallet
-The project where I experiment with UIKit, Firebase, and other frameworks. The application is a classic money manager fro iOS. Users can save their income/expenses money. Each transaction can be assigned a date, a note, and a category.
+The project where I experiment with UIKit, Firebase, and other frameworks. The application is a classic money manager for iOS. Users can save their income/expenses money. Each transaction can be assigned a date, a note, and a category.
 
 The project was created in 2021, the refactoring was in 2023.
 
