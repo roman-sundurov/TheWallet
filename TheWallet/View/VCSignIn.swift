@@ -30,6 +30,7 @@ class VCSignIn: UIViewController {
     @IBOutlet var scrollViewBottomConstraint: NSLayoutConstraint!
     var keyboardHeight: CGFloat = 0 // хранит высоту клавиатуры
     var tapOutsideTextViews: UITapGestureRecognizer?
+    var isTesting = false
 
     @IBAction func signInButton(_ sender: Any) {
         do {
@@ -88,7 +89,6 @@ class VCSignIn: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.tapOutsideTextViews = UITapGestureRecognizer(
             target: self,
             action: #selector(self.tapHandler(tap:))
@@ -103,6 +103,10 @@ class VCSignIn: UIViewController {
         emailTextField.inputAccessoryView = createDoneButton()
         passwordTextField.delegate = self
         passwordTextField.inputAccessoryView = createDoneButton()
+
+        if ProcessInfo.processInfo.arguments.contains("UITest") {
+            dataManager.getUserRepository().logOut()
+        }
 
         UserRepository.shared.listener = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user,

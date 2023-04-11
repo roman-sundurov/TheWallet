@@ -14,7 +14,8 @@ class VCAccount: UIViewController {
     @IBOutlet var logOut: UIButton!
 
     @IBAction func logOutAction(_ sender: Any) {
-        UserRepository.shared.logOut()
+        dataManager.getUserRepository().logOut()
+        // UserRepository.shared.logOut()
         performSegue(withIdentifier: SegueIdentifiers.segueToVCSignIn.rawValue, sender: nil)
     }
 

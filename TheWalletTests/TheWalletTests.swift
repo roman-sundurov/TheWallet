@@ -10,24 +10,28 @@ import XCTest
 
 class TheWalletTests: XCTestCase {
 
+    var sut: VCMain!
+
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        sut = VCMain()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
+        try super.tearDownWithError()
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+    func testReturnDayOfDate() throws {
+        // 1. given
+        let date = Date.init(timeIntervalSince1970: 1681057901)
+        print("date1 = \(date.description)")
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+        // 2. when
+        let result = sut.returnDayOfDate(date)
+
+        // 3. then
+        XCTAssertEqual(result, "9 April 2023", "Error test. Result= \(result)")
     }
 
 }
