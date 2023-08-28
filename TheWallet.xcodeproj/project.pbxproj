@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -93,8 +93,6 @@
 
 /* Begin PBXFileReference section */
 		4715214F25F3A8E600FE585C /* SettingTableVCDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableVCDate.swift; sourceTree = "<group>"; };
-		47160DEB29E3B6780067DCF7 /* TheWalletTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWalletTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		47160DEC29E3B6C60067DCF7 /* TheWalletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWalletUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		47210D1C295E64C7008F8F75 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		47210D1E295E684D008F8F75 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		47210D2329601A41008F8F75 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
@@ -127,6 +125,8 @@
 		478EAE6D29DCF2F4007760BD /* TheWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47AC1A9425C09AC9006E7817 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Model.swift; path = TheWallet/Model/Model.swift; sourceTree = SOURCE_ROOT; };
 		47AC1AB525C0B7CB006E7817 /* MainTableVCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableVCOperation.swift; sourceTree = "<group>"; };
+		47AC3AAD29E508EA004908BF /* TheWalletTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = TheWalletTest.xctest; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/TheWallet/build/Debug-iphoneos/TheWalletTest.xctest"; sourceTree = "<absolute>"; };
+		47AC3AAE29E508EA004908BF /* TheWalletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = TheWalletUITests.xctest; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/TheWallet/build/Debug-iphoneos/TheWalletUITests.xctest"; sourceTree = "<absolute>"; };
 		47B80F772667CA9500032678 /* RoundedGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedGraphView.swift; sourceTree = "<group>"; };
 		47BEBB42262F91D1006FF254 /* CategoryTableVCNewCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableVCNewCategory.swift; sourceTree = "<group>"; };
 		47C4FF3425B38B0F00F97498 /* VCSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCSetting.swift; sourceTree = "<group>"; };
@@ -205,8 +205,6 @@
 				472F28A725A7319600CE1481 /* TheWalletUITests */,
 				478E92BA2954DBB200EDFA26 /* Frameworks */,
 				478EAE6D29DCF2F4007760BD /* TheWallet.app */,
-				47160DEB29E3B6780067DCF7 /* TheWalletTest.xctest */,
-				47160DEC29E3B6C60067DCF7 /* TheWalletUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -360,7 +358,7 @@
 			);
 			name = TheWalletTest;
 			productName = Skillbox_diploma_step1Tests;
-			productReference = 47160DEB29E3B6780067DCF7 /* TheWalletTest.xctest */;
+			productReference = 47AC3AAD29E508EA004908BF /* TheWalletTest.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		472F28A325A7319600CE1481 /* TheWalletUITests */ = {
@@ -378,7 +376,7 @@
 			);
 			name = TheWalletUITests;
 			productName = Skillbox_diploma_step1UITests;
-			productReference = 47160DEC29E3B6C60067DCF7 /* TheWalletUITests.xctest */;
+			productReference = 47AC3AAE29E508EA004908BF /* TheWalletUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -404,7 +402,7 @@
 				};
 			};
 			buildConfigurationList = 472F287E25A7319500CE1481 /* Build configuration list for PBXProject "TheWallet" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -629,7 +627,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -687,7 +685,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
