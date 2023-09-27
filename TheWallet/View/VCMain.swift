@@ -7,6 +7,7 @@
 
 import UIKit
 import JGProgressHUD
+import GoogleMobileAds
 
 protocol ProtocolVCMain {
     func updateScreen() // full screen update
@@ -43,7 +44,8 @@ class VCMain: UIViewController {
     @IBOutlet var scrollViewFromBottomPopInView: UIScrollView!
     @IBOutlet var miniGraphStarterBackground: UIView!
     @IBOutlet var graphNoTransactionView: UIView!
-
+    @IBOutlet weak var bannerView: GADBannerView!
+    
     // MARK: - delegates and variables
     var tapShowOperation: UITapGestureRecognizer?
     var vcOperationDelegate: ProtocolVCOperation?
@@ -219,7 +221,7 @@ class VCMain: UIViewController {
         }
     }
 
-    // MARK: - lifecycle
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         print("viewDidLoad")
@@ -261,8 +263,69 @@ class VCMain: UIViewController {
             self.blurView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         ])
         self.blurView.isHidden = true
+
+        // In this case, we instantiate the banner with desired ad size.
+//        bannerView = GADBannerView(adSize: GADAdSizeBanner)
+
+//           addBannerViewToView(bannerView)
+
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" // Real: ca-app-pub-1631070042993136/9057834651
+        bannerView.rootViewController = self
+
+        bannerView.delegate = self
+        loadBannerAd()
+
         self.view.layoutIfNeeded()
     }
+
+//    override func viewWillTransition(
+//      to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator
+//    ) {
+//      coordinator.animate(alongsideTransition: { _ in
+//        if GoogleMobileAdsConsentManager.shared.canRequestAds {
+//          self.loadBannerAd()
+//        }
+//      })
+//    }
+    
+//    func addBannerViewToView(_ bannerView: GADBannerView) {
+//        bannerView.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(bannerView)
+//        view.addConstraints(
+//          [NSLayoutConstraint(item: bannerView,
+//                              attribute: .bottom,
+//                              relatedBy: .equal,
+//                              toItem: view.safeAreaLayoutGuide,
+//                              attribute: .bottom,
+//                              multiplier: 1,
+//                              constant: 0),
+//           NSLayoutConstraint(item: bannerView,
+//                              attribute: .centerX,
+//                              relatedBy: .equal,
+//                              toItem: view,
+//                              attribute: .centerX,
+//                              multiplier: 1,
+//                              constant: 0)
+//          ])
+//       }
+
+    func loadBannerAd() {
+        // Here safe area is taken into account, hence the view frame is used after the
+        // view has been laid out.
+        let frame = { () -> CGRect in
+            return view.frame.inset(by: view.safeAreaInsets)
+        }()
+        let viewWidth = frame.size.width
+
+        // Here the current interface orientation is used. If the ad is being preloaded
+        // for a future orientation change or different orientation, the function for the
+        // relevant orientation should be used.
+        bannerView.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth)
+        bannerView.backgroundColor = UIColor.green// UIColor(named: "DownMenuColor")
+
+        bannerView.load(GADRequest())
+    }
+
 
     func showAlert(message: String) {
         let alert = UIAlertController(
@@ -272,5 +335,31 @@ class VCMain: UIViewController {
         )
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil ))
         self.present(alert, animated: true, completion: nil)
+    }
+}
+
+extension VCMain: GADBannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+      print("bannerViewDidReceiveAd")
+    }
+
+    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+      print("bannerView:didFailToReceiveAdWithError: \(error.localizedDescription)")
+    }
+
+    func bannerViewDidRecordImpression(_ bannerView: GADBannerView) {
+      print("bannerViewDidRecordImpression")
+    }
+
+    func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {
+      print("bannerViewWillPresentScreen")
+    }
+
+    func bannerViewWillDismissScreen(_ bannerView: GADBannerView) {
+      print("bannerViewWillDIsmissScreen")
+    }
+
+    func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {
+      print("bannerViewDidDismissScreen")
     }
 }

@@ -15,6 +15,7 @@
 		47210D2629607BC2008F8F75 /* ShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47210D2529607BC2008F8F75 /* ShadowButton.swift */; };
 		4729DC40263DA3AB00CA8B66 /* VCGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4729DC3F263DA3AB00CA8B66 /* VCGraph.swift */; };
 		472AC69F2963699400B1CE04 /* AppleSignInShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472AC69E2963699400B1CE04 /* AppleSignInShadowButton.swift */; };
+		472B74F82ABF225F0096DD80 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 472B74F72ABF225F0096DD80 /* GoogleMobileAds */; };
 		472F288725A7319500CE1481 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F288625A7319500CE1481 /* AppDelegate.swift */; };
 		472F288925A7319500CE1481 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F288825A7319500CE1481 /* SceneDelegate.swift */; };
 		472F288B25A7319500CE1481 /* VCMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F288A25A7319500CE1481 /* VCMain.swift */; };
@@ -99,6 +100,8 @@
 		47210D2529607BC2008F8F75 /* ShadowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowButton.swift; sourceTree = "<group>"; };
 		4729DC3F263DA3AB00CA8B66 /* VCGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCGraph.swift; sourceTree = "<group>"; };
 		472AC69E2963699400B1CE04 /* AppleSignInShadowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInShadowButton.swift; sourceTree = "<group>"; };
+		472B74F42ABF1F3D0096DD80 /* TheWalletTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWalletTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		472B74F52ABF1F3D0096DD80 /* TheWalletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWalletUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		472F288625A7319500CE1481 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		472F288825A7319500CE1481 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		472F288A25A7319500CE1481 /* VCMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCMain.swift; sourceTree = "<group>"; };
@@ -125,8 +128,6 @@
 		478EAE6D29DCF2F4007760BD /* TheWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47AC1A9425C09AC9006E7817 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Model.swift; path = TheWallet/Model/Model.swift; sourceTree = SOURCE_ROOT; };
 		47AC1AB525C0B7CB006E7817 /* MainTableVCOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableVCOperation.swift; sourceTree = "<group>"; };
-		47AC3AAD29E508EA004908BF /* TheWalletTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = TheWalletTest.xctest; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/TheWallet/build/Debug-iphoneos/TheWalletTest.xctest"; sourceTree = "<absolute>"; };
-		47AC3AAE29E508EA004908BF /* TheWalletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = TheWalletUITests.xctest; path = "/Users/R_Sundurov/Library/Mobile Documents/com~apple~CloudDocs/Development/Xcode Projects/Skillbox_part_1/Skillbox_diploma/TheWallet/build/Debug-iphoneos/TheWalletUITests.xctest"; sourceTree = "<absolute>"; };
 		47B80F772667CA9500032678 /* RoundedGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedGraphView.swift; sourceTree = "<group>"; };
 		47BEBB42262F91D1006FF254 /* CategoryTableVCNewCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableVCNewCategory.swift; sourceTree = "<group>"; };
 		47C4FF3425B38B0F00F97498 /* VCSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCSetting.swift; sourceTree = "<group>"; };
@@ -152,6 +153,7 @@
 				478EAE7029DCFB04007760BD /* GoogleSignIn in Frameworks */,
 				478EAE6729DCEC1B007760BD /* FirebaseDynamicLinks in Frameworks */,
 				478E92B529544F2C00EDFA26 /* SimpleCheckbox in Frameworks */,
+				472B74F82ABF225F0096DD80 /* GoogleMobileAds in Frameworks */,
 				478E92AC2954492C00EDFA26 /* JGProgressHUD in Frameworks */,
 				47A1EBAA29D660E70060C123 /* AAInfographics in Frameworks */,
 				478EAE6529DCEC04007760BD /* FirebaseFirestore in Frameworks */,
@@ -205,6 +207,8 @@
 				472F28A725A7319600CE1481 /* TheWalletUITests */,
 				478E92BA2954DBB200EDFA26 /* Frameworks */,
 				478EAE6D29DCF2F4007760BD /* TheWallet.app */,
+				472B74F42ABF1F3D0096DD80 /* TheWalletTest.xctest */,
+				472B74F52ABF1F3D0096DD80 /* TheWalletUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -338,6 +342,7 @@
 				478EAE6F29DCFB04007760BD /* GoogleSignIn */,
 				478EAE7129DCFB04007760BD /* GoogleSignInSwift */,
 				478EAE7929DD01BF007760BD /* FirebaseAnalytics */,
+				472B74F72ABF225F0096DD80 /* GoogleMobileAds */,
 			);
 			productName = Skillbox_diploma_step1;
 			productReference = 478EAE6D29DCF2F4007760BD /* TheWallet.app */;
@@ -358,7 +363,7 @@
 			);
 			name = TheWalletTest;
 			productName = Skillbox_diploma_step1Tests;
-			productReference = 47AC3AAD29E508EA004908BF /* TheWalletTest.xctest */;
+			productReference = 472B74F42ABF1F3D0096DD80 /* TheWalletTest.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		472F28A325A7319600CE1481 /* TheWalletUITests */ = {
@@ -376,7 +381,7 @@
 			);
 			name = TheWalletUITests;
 			productName = Skillbox_diploma_step1UITests;
-			productReference = 47AC3AAE29E508EA004908BF /* TheWalletUITests.xctest */;
+			productReference = 472B74F52ABF1F3D0096DD80 /* TheWalletUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -416,6 +421,7 @@
 				47A1EBA829D660E70060C123 /* XCRemoteSwiftPackageReference "AAChartKit-Swift" */,
 				478EAE6129DCEA30007760BD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				478EAE6E29DCFB04007760BD /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				472B74F62ABF225F0096DD80 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = 472F287A25A7319500CE1481;
 			projectDirPath = "";
@@ -719,6 +725,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.1.6;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.walletthatneverwas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -756,6 +763,7 @@
 				);
 				MARKETING_VERSION = 2.1.6;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.walletthatneverwas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -917,6 +925,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		472B74F62ABF225F0096DD80 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
 		478E92AA2954492C00EDFA26 /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD";
@@ -960,6 +976,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		472B74F72ABF225F0096DD80 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 472B74F62ABF225F0096DD80 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
 		478E92AB2954492C00EDFA26 /* JGProgressHUD */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 478E92AA2954492C00EDFA26 /* XCRemoteSwiftPackageReference "JGProgressHUD" */;

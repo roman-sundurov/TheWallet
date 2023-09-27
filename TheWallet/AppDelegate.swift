@@ -13,6 +13,7 @@ import FirebaseFirestore
 import FirebaseDynamicLinks
 import GoogleSignIn
 import AuthenticationServices
+import GoogleMobileAds
 
 var dataManager = DataManager.shared
 
@@ -20,10 +21,13 @@ var dataManager = DataManager.shared
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
+        
         // Firebase setup
         FirebaseApp.configure()
         // print("provider1= \(String(describing: Auth.auth().currentUser?.providerData.first?.providerID))")
+
+        // Initialize the Google Mobile Ads SDK.
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
 
         // Retrieve user ID saved in UserDefaults
         if let userID = UserDefaults.standard.string(forKey: "appleAuthorizedUserIdKey") {
